@@ -11,12 +11,14 @@ enum DiceExpressionError: Error {
 public class DiceExpression {
   var infixTokens: [String]
 
-  public init() {
-    infixTokens = [String]()
+  // MARK: - Initialization
+
+  init(_ infixTokens: [String]) {
+    self.infixTokens = infixTokens
   }
 
-  public init(_ infixTokens: [String]) {
-    self.infixTokens = infixTokens
+  public convenience init(_ infixTokens: String...) {
+    self.init(infixTokens)
   }
 
   func hasLowerOrEqualPrecedence(_ operator1: String,
