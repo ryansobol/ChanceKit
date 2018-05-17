@@ -7,8 +7,20 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		92CD300420AD0D89002462B3 /* Dice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92CD300320AD0D89002462B3 /* Dice.swift */; };
+		92CD300420AD0D89002462B3 /* DiceExpression.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92CD300320AD0D89002462B3 /* DiceExpression.swift */; };
+		92CD302420AD0E6C002462B3 /* libDice.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 92CD300020AD0D89002462B3 /* libDice.a */; };
+		92CD302B20AD0EBD002462B3 /* DiceExpressionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92CD302A20AD0EBD002462B3 /* DiceExpressionTests.swift */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		92CD302520AD0E6C002462B3 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 92CD2FF820AD0D89002462B3 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 92CD2FFF20AD0D89002462B3;
+			remoteInfo = Dice;
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
 		92CD2FFE20AD0D89002462B3 /* CopyFiles */ = {
@@ -23,8 +35,11 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		92A4CC7020AD143C0096AF98 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		92CD300020AD0D89002462B3 /* libDice.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libDice.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		92CD300320AD0D89002462B3 /* Dice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dice.swift; sourceTree = "<group>"; };
+		92CD300320AD0D89002462B3 /* DiceExpression.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiceExpression.swift; sourceTree = "<group>"; };
+		92CD301F20AD0E6C002462B3 /* libDice.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = libDice.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		92CD302A20AD0EBD002462B3 /* DiceExpressionTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiceExpressionTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -32,6 +47,14 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		92CD301C20AD0E6C002462B3 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				92CD302420AD0E6C002462B3 /* libDice.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -43,6 +66,7 @@
 			children = (
 				92CD300220AD0D89002462B3 /* Dice */,
 				92CD300120AD0D89002462B3 /* Products */,
+				92CD302020AD0E6C002462B3 /* Tests */,
 			);
 			sourceTree = "<group>";
 		};
@@ -50,6 +74,7 @@
 			isa = PBXGroup;
 			children = (
 				92CD300020AD0D89002462B3 /* libDice.a */,
+				92CD301F20AD0E6C002462B3 /* libDice.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -57,9 +82,18 @@
 		92CD300220AD0D89002462B3 /* Dice */ = {
 			isa = PBXGroup;
 			children = (
-				92CD300320AD0D89002462B3 /* Dice.swift */,
+				92CD300320AD0D89002462B3 /* DiceExpression.swift */,
 			);
 			path = Dice;
+			sourceTree = "<group>";
+		};
+		92CD302020AD0E6C002462B3 /* Tests */ = {
+			isa = PBXGroup;
+			children = (
+				92A4CC7020AD143C0096AF98 /* Info.plist */,
+				92CD302A20AD0EBD002462B3 /* DiceExpressionTests.swift */,
+			);
+			path = Tests;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -82,6 +116,24 @@
 			productReference = 92CD300020AD0D89002462B3 /* libDice.a */;
 			productType = "com.apple.product-type.library.static";
 		};
+		92CD301E20AD0E6C002462B3 /* libDice */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 92CD302720AD0E6C002462B3 /* Build configuration list for PBXNativeTarget "libDice" */;
+			buildPhases = (
+				92CD301B20AD0E6C002462B3 /* Sources */,
+				92CD301C20AD0E6C002462B3 /* Frameworks */,
+				92CD301D20AD0E6C002462B3 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				92CD302620AD0E6C002462B3 /* PBXTargetDependency */,
+			);
+			name = libDice;
+			productName = Tests;
+			productReference = 92CD301F20AD0E6C002462B3 /* libDice.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -94,6 +146,10 @@
 				TargetAttributes = {
 					92CD2FFF20AD0D89002462B3 = {
 						CreatedOnToolsVersion = 9.3.1;
+					};
+					92CD301E20AD0E6C002462B3 = {
+						CreatedOnToolsVersion = 9.3.1;
+						LastSwiftMigration = 0930;
 					};
 				};
 			};
@@ -110,20 +166,47 @@
 			projectRoot = "";
 			targets = (
 				92CD2FFF20AD0D89002462B3 /* Dice */,
+				92CD301E20AD0E6C002462B3 /* libDice */,
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		92CD301D20AD0E6C002462B3 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		92CD2FFC20AD0D89002462B3 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				92CD300420AD0D89002462B3 /* Dice.swift in Sources */,
+				92CD300420AD0D89002462B3 /* DiceExpression.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		92CD301B20AD0E6C002462B3 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				92CD302B20AD0EBD002462B3 /* DiceExpressionTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		92CD302620AD0E6C002462B3 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 92CD2FFF20AD0D89002462B3 /* Dice */;
+			targetProxy = 92CD302520AD0E6C002462B3 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		92CD300520AD0D89002462B3 /* Debug */ = {
@@ -266,6 +349,45 @@
 			};
 			name = Release;
 		};
+		92CD302820AD0E6C002462B3 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 6723MY98T4;
+				INFOPLIST_FILE = Tests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.ryansobol.Tests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		92CD302920AD0E6C002462B3 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 6723MY98T4;
+				INFOPLIST_FILE = Tests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.ryansobol.Tests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -283,6 +405,15 @@
 			buildConfigurations = (
 				92CD300820AD0D89002462B3 /* Debug */,
 				92CD300920AD0D89002462B3 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		92CD302720AD0E6C002462B3 /* Build configuration list for PBXNativeTarget "libDice" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				92CD302820AD0E6C002462B3 /* Debug */,
+				92CD302920AD0E6C002462B3 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
