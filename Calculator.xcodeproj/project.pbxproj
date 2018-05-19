@@ -7,9 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		92CD300420AD0D89002462B3 /* DiceExpression.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92CD300320AD0D89002462B3 /* DiceExpression.swift */; };
-		92CD302420AD0E6C002462B3 /* libDice.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 92CD300020AD0D89002462B3 /* libDice.a */; };
-		92CD302B20AD0EBD002462B3 /* DiceExpressionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92CD302A20AD0EBD002462B3 /* DiceExpressionTests.swift */; };
+		924105AA20B06B19009FC568 /* OperatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 924105A920B06B19009FC568 /* OperatorTests.swift */; };
+		92A4CC7420AF26530096AF98 /* Expression.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92A4CC7320AF26530096AF98 /* Expression.swift */; };
+		92A4CC7620AF270A0096AF98 /* Operator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92A4CC7520AF270A0096AF98 /* Operator.swift */; };
+		92A4CC7820AF2EE30096AF98 /* Operand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92A4CC7720AF2EE30096AF98 /* Operand.swift */; };
+		92A4CC7C20AF2F560096AF98 /* Tokenable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92A4CC7B20AF2F560096AF98 /* Tokenable.swift */; };
+		92A4CC7E20AF68D90096AF98 /* ExpressionError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92A4CC7D20AF68D90096AF98 /* ExpressionError.swift */; };
+		92CD302420AD0E6C002462B3 /* libCalculator.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 92CD300020AD0D89002462B3 /* libCalculator.a */; };
+		92CD302B20AD0EBD002462B3 /* ExpressionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92CD302A20AD0EBD002462B3 /* ExpressionTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -35,11 +40,16 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		924105A920B06B19009FC568 /* OperatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OperatorTests.swift; sourceTree = "<group>"; };
 		92A4CC7020AD143C0096AF98 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		92CD300020AD0D89002462B3 /* libDice.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libDice.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		92CD300320AD0D89002462B3 /* DiceExpression.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiceExpression.swift; sourceTree = "<group>"; };
-		92CD301F20AD0E6C002462B3 /* libDice.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = libDice.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		92CD302A20AD0EBD002462B3 /* DiceExpressionTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiceExpressionTests.swift; sourceTree = "<group>"; };
+		92A4CC7320AF26530096AF98 /* Expression.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Expression.swift; sourceTree = "<group>"; };
+		92A4CC7520AF270A0096AF98 /* Operator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Operator.swift; sourceTree = "<group>"; };
+		92A4CC7720AF2EE30096AF98 /* Operand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Operand.swift; sourceTree = "<group>"; };
+		92A4CC7B20AF2F560096AF98 /* Tokenable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tokenable.swift; sourceTree = "<group>"; };
+		92A4CC7D20AF68D90096AF98 /* ExpressionError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpressionError.swift; sourceTree = "<group>"; };
+		92CD300020AD0D89002462B3 /* libCalculator.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libCalculator.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		92CD301F20AD0E6C002462B3 /* libCalculator.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = libCalculator.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		92CD302A20AD0EBD002462B3 /* ExpressionTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExpressionTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,7 +64,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				92CD302420AD0E6C002462B3 /* libDice.a in Frameworks */,
+				92CD302420AD0E6C002462B3 /* libCalculator.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -64,7 +74,7 @@
 		92CD2FF720AD0D89002462B3 = {
 			isa = PBXGroup;
 			children = (
-				92CD300220AD0D89002462B3 /* Dice */,
+				92CD300220AD0D89002462B3 /* Calculator */,
 				92CD300120AD0D89002462B3 /* Products */,
 				92CD302020AD0E6C002462B3 /* Tests */,
 			);
@@ -73,25 +83,30 @@
 		92CD300120AD0D89002462B3 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				92CD300020AD0D89002462B3 /* libDice.a */,
-				92CD301F20AD0E6C002462B3 /* libDice.xctest */,
+				92CD300020AD0D89002462B3 /* libCalculator.a */,
+				92CD301F20AD0E6C002462B3 /* libCalculator.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		92CD300220AD0D89002462B3 /* Dice */ = {
+		92CD300220AD0D89002462B3 /* Calculator */ = {
 			isa = PBXGroup;
 			children = (
-				92CD300320AD0D89002462B3 /* DiceExpression.swift */,
+				92A4CC7320AF26530096AF98 /* Expression.swift */,
+				92A4CC7D20AF68D90096AF98 /* ExpressionError.swift */,
+				92A4CC7720AF2EE30096AF98 /* Operand.swift */,
+				92A4CC7520AF270A0096AF98 /* Operator.swift */,
+				92A4CC7B20AF2F560096AF98 /* Tokenable.swift */,
 			);
-			path = Dice;
+			path = Calculator;
 			sourceTree = "<group>";
 		};
 		92CD302020AD0E6C002462B3 /* Tests */ = {
 			isa = PBXGroup;
 			children = (
 				92A4CC7020AD143C0096AF98 /* Info.plist */,
-				92CD302A20AD0EBD002462B3 /* DiceExpressionTests.swift */,
+				92CD302A20AD0EBD002462B3 /* ExpressionTests.swift */,
+				924105A920B06B19009FC568 /* OperatorTests.swift */,
 			);
 			path = Tests;
 			sourceTree = "<group>";
@@ -99,9 +114,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		92CD2FFF20AD0D89002462B3 /* Dice */ = {
+		92CD2FFF20AD0D89002462B3 /* Calculator */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 92CD300720AD0D89002462B3 /* Build configuration list for PBXNativeTarget "Dice" */;
+			buildConfigurationList = 92CD300720AD0D89002462B3 /* Build configuration list for PBXNativeTarget "Calculator" */;
 			buildPhases = (
 				92CD2FFC20AD0D89002462B3 /* Sources */,
 				92CD2FFD20AD0D89002462B3 /* Frameworks */,
@@ -111,14 +126,14 @@
 			);
 			dependencies = (
 			);
-			name = Dice;
+			name = Calculator;
 			productName = Dice;
-			productReference = 92CD300020AD0D89002462B3 /* libDice.a */;
+			productReference = 92CD300020AD0D89002462B3 /* libCalculator.a */;
 			productType = "com.apple.product-type.library.static";
 		};
-		92CD301E20AD0E6C002462B3 /* libDice */ = {
+		92CD301E20AD0E6C002462B3 /* libCalculator */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 92CD302720AD0E6C002462B3 /* Build configuration list for PBXNativeTarget "libDice" */;
+			buildConfigurationList = 92CD302720AD0E6C002462B3 /* Build configuration list for PBXNativeTarget "libCalculator" */;
 			buildPhases = (
 				92CD301B20AD0E6C002462B3 /* Sources */,
 				92CD301C20AD0E6C002462B3 /* Frameworks */,
@@ -129,9 +144,9 @@
 			dependencies = (
 				92CD302620AD0E6C002462B3 /* PBXTargetDependency */,
 			);
-			name = libDice;
+			name = libCalculator;
 			productName = Tests;
-			productReference = 92CD301F20AD0E6C002462B3 /* libDice.xctest */;
+			productReference = 92CD301F20AD0E6C002462B3 /* libCalculator.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
@@ -146,6 +161,7 @@
 				TargetAttributes = {
 					92CD2FFF20AD0D89002462B3 = {
 						CreatedOnToolsVersion = 9.3.1;
+						LastSwiftMigration = 0930;
 					};
 					92CD301E20AD0E6C002462B3 = {
 						CreatedOnToolsVersion = 9.3.1;
@@ -153,7 +169,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 92CD2FFB20AD0D89002462B3 /* Build configuration list for PBXProject "Dice" */;
+			buildConfigurationList = 92CD2FFB20AD0D89002462B3 /* Build configuration list for PBXProject "Calculator" */;
 			compatibilityVersion = "Xcode 9.3";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -165,8 +181,8 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				92CD2FFF20AD0D89002462B3 /* Dice */,
-				92CD301E20AD0E6C002462B3 /* libDice */,
+				92CD2FFF20AD0D89002462B3 /* Calculator */,
+				92CD301E20AD0E6C002462B3 /* libCalculator */,
 			);
 		};
 /* End PBXProject section */
@@ -186,7 +202,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				92CD300420AD0D89002462B3 /* DiceExpression.swift in Sources */,
+				92A4CC7820AF2EE30096AF98 /* Operand.swift in Sources */,
+				92A4CC7E20AF68D90096AF98 /* ExpressionError.swift in Sources */,
+				92A4CC7420AF26530096AF98 /* Expression.swift in Sources */,
+				92A4CC7620AF270A0096AF98 /* Operator.swift in Sources */,
+				92A4CC7C20AF2F560096AF98 /* Tokenable.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -194,7 +214,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				92CD302B20AD0EBD002462B3 /* DiceExpressionTests.swift in Sources */,
+				92CD302B20AD0EBD002462B3 /* ExpressionTests.swift in Sources */,
+				924105AA20B06B19009FC568 /* OperatorTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -203,7 +224,7 @@
 /* Begin PBXTargetDependency section */
 		92CD302620AD0E6C002462B3 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 92CD2FFF20AD0D89002462B3 /* Dice */;
+			target = 92CD2FFF20AD0D89002462B3 /* Calculator */;
 			targetProxy = 92CD302520AD0E6C002462B3 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -326,11 +347,18 @@
 		92CD300820AD0D89002462B3 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 6723MY98T4;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -339,8 +367,14 @@
 		92CD300920AD0D89002462B3 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 6723MY98T4;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -352,6 +386,7 @@
 		92CD302820AD0E6C002462B3 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 6723MY98T4;
@@ -372,6 +407,7 @@
 		92CD302920AD0E6C002462B3 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 6723MY98T4;
@@ -391,7 +427,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		92CD2FFB20AD0D89002462B3 /* Build configuration list for PBXProject "Dice" */ = {
+		92CD2FFB20AD0D89002462B3 /* Build configuration list for PBXProject "Calculator" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				92CD300520AD0D89002462B3 /* Debug */,
@@ -400,7 +436,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		92CD300720AD0D89002462B3 /* Build configuration list for PBXNativeTarget "Dice" */ = {
+		92CD300720AD0D89002462B3 /* Build configuration list for PBXNativeTarget "Calculator" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				92CD300820AD0D89002462B3 /* Debug */,
@@ -409,7 +445,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		92CD302720AD0E6C002462B3 /* Build configuration list for PBXNativeTarget "libDice" */ = {
+		92CD302720AD0E6C002462B3 /* Build configuration list for PBXNativeTarget "libCalculator" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				92CD302820AD0E6C002462B3 /* Debug */,
