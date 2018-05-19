@@ -91,7 +91,7 @@ public struct Expression {
 
   // TODO: - What about testing the error cases?
   public func evaluate() throws -> Int {
-    var operands = [Int]()
+    var operands = [Operand]()
 
     let postfixTokens = try toPostfixTokens()
 
@@ -114,7 +114,7 @@ public struct Expression {
         }
 
       case let operandToken as Operand:
-        operands.append(operandToken.evaluate())
+        operands.append(operandToken)
 
       default:
         throw ExpressionError.invalidToken
@@ -125,6 +125,6 @@ public struct Expression {
       throw ExpressionError.missingOperator
     }
 
-    return operands[0]
+    return operands[0].value()
   }
 }

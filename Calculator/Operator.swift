@@ -24,7 +24,7 @@ enum Operator: String, Tokenable {
   }
 
   // TODO: - What about tests?
-  func evaluate(_ operand1: Int, _ operand2: Int) -> Int? {
+  func evaluate(_ operand1: Operand, _ operand2: Operand) -> Operand? {
     switch self {
     case .addition:
       return operand1 + operand2
