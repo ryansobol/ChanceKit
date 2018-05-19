@@ -2,7 +2,7 @@
 import XCTest
 
 class OperatorTests: XCTestCase {
-  func testHasLowerOrEqualPrecedence() {
+  func testHasPrecedence() {
     typealias Fixture = (
       operator1: String,
       operator2: String,
@@ -14,21 +14,43 @@ class OperatorTests: XCTestCase {
       ("+", "-", false),
       ("+", "×", false),
       ("+", "÷", false),
+      ("+", "(", false),
+      ("+", ")", false),
 
       ("-", "+", false),
       ("-", "-", false),
       ("-", "×", false),
       ("-", "÷", false),
+      ("-", "(", false),
+      ("-", ")", false),
 
       ("×", "+", true),
       ("×", "-", true),
       ("×", "×", false),
       ("×", "÷", false),
+      ("×", "(", false),
+      ("×", ")", false),
 
       ("÷", "+", true),
       ("÷", "-", true),
       ("÷", "×", false),
       ("÷", "÷", false),
+      ("÷", "(", false),
+      ("÷", ")", false),
+
+      ("(", "+", true),
+      ("(", "-", true),
+      ("(", "×", true),
+      ("(", "÷", true),
+      ("(", "(", false),
+      ("(", ")", false),
+
+      (")", "+", true),
+      (")", "-", true),
+      (")", "×", true),
+      (")", "÷", true),
+      (")", "(", false),
+      (")", ")", false),
     ]
 
     for test in operatorTests {
