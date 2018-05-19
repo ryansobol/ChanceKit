@@ -4,29 +4,6 @@
 <dict>
 	<key>classNames</key>
 	<dict>
-		<key>DiceExpressionTests</key>
-		<dict>
-			<key>testEvaluatePerformance()</key>
-			<dict>
-				<key>com.apple.XCTPerformanceMetric_WallClockTime</key>
-				<dict>
-					<key>baselineAverage</key>
-					<real>0.0019804</real>
-					<key>baselineIntegrationDisplayName</key>
-					<string>Local Baseline</string>
-				</dict>
-			</dict>
-			<key>testPerformanceExample()</key>
-			<dict>
-				<key>com.apple.XCTPerformanceMetric_WallClockTime</key>
-				<dict>
-					<key>baselineAverage</key>
-					<real>0.00199</real>
-					<key>baselineIntegrationDisplayName</key>
-					<string>Local Baseline</string>
-				</dict>
-			</dict>
-		</dict>
 		<key>ExpressionTests</key>
 		<dict>
 			<key>testEvaluatePerformance()</key>

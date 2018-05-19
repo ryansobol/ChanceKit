@@ -23,7 +23,7 @@
 			containerPortal = 92CD2FF820AD0D89002462B3 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = 92CD2FFF20AD0D89002462B3;
-			remoteInfo = Dice;
+			remoteInfo = Calculator;
 		};
 /* End PBXContainerItemProxy section */
 
@@ -127,7 +127,7 @@
 			dependencies = (
 			);
 			name = Calculator;
-			productName = Dice;
+			productName = Calculator;
 			productReference = 92CD300020AD0D89002462B3 /* libCalculator.a */;
 			productType = "com.apple.product-type.library.static";
 		};
