@@ -29,40 +29,40 @@ public struct Expression {
     var operators = [Operator]()
     var postfixTokens = [Tokenable]()
 
-    for token in infixTokens {
-      switch token {
+    for currentToken in infixTokens {
+      switch currentToken {
       case is Operand:
-        postfixTokens.append(token)
+        postfixTokens.append(currentToken)
 
-      case let operatorToken as Operator:
-        switch operatorToken {
+      case let currentOperator as Operator:
+        switch currentOperator {
         case .parenthesisOpen:
-          operators.append(operatorToken)
+          operators.append(currentOperator)
 
         case .parenthesisClose:
           while true {
-            guard let top = operators.popLast() else {
+            guard let topOperator = operators.popLast() else {
               throw ExpressionError.missingOpenParenthesis
             }
 
-            if top == .parenthesisOpen {
+            if topOperator == .parenthesisOpen {
               break
             }
 
-            postfixTokens.append(top)
+            postfixTokens.append(topOperator)
           }
 
         case .addition, .division, .multiplication, .subtraction:
-          while let top = operators.last {
-            if operatorToken.hasPrecedence(top) {
+          while let topOperator = operators.last {
+            if currentOperator.hasPrecedence(topOperator) {
               break
             }
 
-            postfixTokens.append(top)
+            postfixTokens.append(topOperator)
             operators.removeLast()
           }
 
-          operators.append(operatorToken)
+          operators.append(currentOperator)
         }
 
       default:
@@ -74,12 +74,12 @@ public struct Expression {
       return postfixTokens
     }
 
-    while let top = operators.popLast() {
-      if top == .parenthesisOpen {
+    while let topOperator = operators.popLast() {
+      if topOperator == .parenthesisOpen {
         throw ExpressionError.missingCloseParenthesis
       }
 
-      postfixTokens.append(top)
+      postfixTokens.append(topOperator)
     }
 
     return postfixTokens
@@ -91,9 +91,12 @@ public struct Expression {
 
     let postfixTokens = try toPostfixTokens()
 
-    for token in postfixTokens {
-      switch token {
-      case let operatorToken as Operator:
+    for currentToken in postfixTokens {
+      switch currentToken {
+      case let currentOperand as Operand:
+        operands.append(currentOperand)
+
+      case let currentOperator as Operator:
         guard let operand2 = operands.popLast() else {
           throw ExpressionError.missingOperand
         }
@@ -102,14 +105,11 @@ public struct Expression {
           throw ExpressionError.missingOperand
         }
 
-        guard let operand = operatorToken.evaluate(operand1, operand2) else {
+        guard let newOperand = currentOperator.evaluate(operand1, operand2) else {
           throw ExpressionError.invalidOperator
         }
 
-        operands.append(operand)
-
-      case let operandToken as Operand:
-        operands.append(operandToken)
+        operands.append(newOperand)
 
       default:
         throw ExpressionError.invalidToken
