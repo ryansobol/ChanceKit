@@ -6,26 +6,41 @@ enum Operator: String, Tokenable {
   case parenthesisOpen = "("
   case subtraction = "-"
 
-  // TODO: - What about parenthesis?
-  func hasLowerOrEqualPrecedence(_ other: Operator) -> Bool {
+  func hasPrecedence(_ other: Operator) -> Bool {
+    let precedenceSelf: Int
+    let precendenceOther: Int
+
     switch self {
+    case .parenthesisClose, .parenthesisOpen:
+      precedenceSelf = 2
+
     case .division, .multiplication:
-      switch other {
-      case .addition, .subtraction:
-        return false
+      precedenceSelf = 1
 
-      default:
-        return true
-      }
-
-    default:
-      return true
+    case .addition, .subtraction:
+      precedenceSelf = 0
     }
+
+    switch other {
+    case .parenthesisClose, .parenthesisOpen:
+      precendenceOther = 2
+
+    case .division, .multiplication:
+      precendenceOther = 1
+
+    case .addition, .subtraction:
+      precendenceOther = 0
+    }
+
+    return precedenceSelf > precendenceOther
   }
 
   // TODO: - What about tests?
   func evaluate(_ operand1: Operand, _ operand2: Operand) -> Operand? {
     switch self {
+    case .parenthesisClose, .parenthesisOpen:
+      return nil
+
     case .addition:
       return operand1 + operand2
 
@@ -37,9 +52,6 @@ enum Operator: String, Tokenable {
 
     case .subtraction:
       return operand1 - operand2
-
-    default:
-      return nil
     }
   }
 }

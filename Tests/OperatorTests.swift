@@ -10,32 +10,32 @@ class OperatorTests: XCTestCase {
     )
 
     let operatorTests: [Fixture] = [
-      ("+", "+", true),
-      ("+", "-", true),
-      ("+", "×", true),
-      ("+", "÷", true),
+      ("+", "+", false),
+      ("+", "-", false),
+      ("+", "×", false),
+      ("+", "÷", false),
 
-      ("-", "+", true),
-      ("-", "-", true),
-      ("-", "×", true),
-      ("-", "÷", true),
+      ("-", "+", false),
+      ("-", "-", false),
+      ("-", "×", false),
+      ("-", "÷", false),
 
-      ("×", "+", false),
-      ("×", "-", false),
-      ("×", "×", true),
-      ("×", "÷", true),
+      ("×", "+", true),
+      ("×", "-", true),
+      ("×", "×", false),
+      ("×", "÷", false),
 
-      ("÷", "+", false),
-      ("÷", "-", false),
-      ("÷", "×", true),
-      ("÷", "÷", true),
+      ("÷", "+", true),
+      ("÷", "-", true),
+      ("÷", "×", false),
+      ("÷", "÷", false),
     ]
 
     for test in operatorTests {
       let operator1 = Operator(rawValue: test.operator1)!
       let operator2 = Operator(rawValue: test.operator2)!
       let expected = test.value
-      let actual = operator1.hasLowerOrEqualPrecedence(operator2)
+      let actual = operator1.hasPrecedence(operator2)
 
       XCTAssert(expected == actual, "expected: \(expected) actual: \(actual) operator1: \(operator1) operator2: \(operator2)")
     }

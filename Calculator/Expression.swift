@@ -54,11 +54,7 @@ public struct Expression {
 
         case .addition, .division, .multiplication, .subtraction:
           while let top = operators.last {
-            if top == .parenthesisOpen {
-              break
-            }
-
-            guard operatorToken.hasLowerOrEqualPrecedence(top) else {
+            if operatorToken.hasPrecedence(top) {
               break
             }
 
@@ -106,12 +102,11 @@ public struct Expression {
           throw ExpressionError.missingOperand
         }
 
-        if let operand = operatorToken.evaluate(operand1, operand2) {
-          operands.append(operand)
-        }
-        else {
+        guard let operand = operatorToken.evaluate(operand1, operand2) else {
           throw ExpressionError.invalidOperator
         }
+
+        operands.append(operand)
 
       case let operandToken as Operand:
         operands.append(operandToken)
