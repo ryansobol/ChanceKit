@@ -1,4 +1,4 @@
-enum Operand : Tokenable {
+enum Operand : Tokenable, Equatable {
   case number(Int)
 
   // TODO: - What about tests?

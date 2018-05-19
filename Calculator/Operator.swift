@@ -35,12 +35,8 @@ enum Operator: String, Tokenable {
     return precedenceSelf > precendenceOther
   }
 
-  // TODO: - What about tests?
   func evaluate(_ operand1: Operand, _ operand2: Operand) -> Operand? {
     switch self {
-    case .parenthesisClose, .parenthesisOpen:
-      return nil
-
     case .addition:
       return operand1 + operand2
 
@@ -52,6 +48,9 @@ enum Operator: String, Tokenable {
 
     case .subtraction:
       return operand1 - operand2
+
+    default:
+      return nil
     }
   }
 }
