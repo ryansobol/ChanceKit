@@ -46,11 +46,11 @@ enum Operator: String, Tokenable {
     case .multiplication:
       return operand1 * operand2
 
+    case .parenthesisClose, .parenthesisOpen:
+      return nil
+
     case .subtraction:
       return operand1 - operand2
-
-    default:
-      return nil
     }
   }
 }
