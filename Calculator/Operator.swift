@@ -6,6 +6,7 @@ enum Operator: String, Tokenable {
   case parenthesisOpen = "("
   case subtraction = "-"
 
+  // TODO: - Remove parenthesis
   func hasPrecedence(_ other: Operator) -> Bool {
     let precedenceSelf: Int
     let precendenceOther: Int

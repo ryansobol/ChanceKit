@@ -54,6 +54,10 @@ public struct Expression {
 
         case .addition, .division, .multiplication, .subtraction:
           while let topOperator = operators.last {
+            if topOperator == .parenthesisOpen {
+              break
+            }
+
             if currentOperator.hasPrecedence(topOperator) {
               break
             }
