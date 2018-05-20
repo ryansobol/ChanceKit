@@ -50,7 +50,7 @@
 		92A4CC7B20AF2F560096AF98 /* Tokenable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tokenable.swift; sourceTree = "<group>"; };
 		92A4CC7D20AF68D90096AF98 /* ExpressionError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpressionError.swift; sourceTree = "<group>"; };
 		92CD300020AD0D89002462B3 /* libCalculator.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libCalculator.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		92CD301F20AD0E6C002462B3 /* libCalculator.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = libCalculator.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		92CD301F20AD0E6C002462B3 /* CalculatorTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CalculatorTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		92CD302A20AD0EBD002462B3 /* ExpressionTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExpressionTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -86,7 +86,7 @@
 			isa = PBXGroup;
 			children = (
 				92CD300020AD0D89002462B3 /* libCalculator.a */,
-				92CD301F20AD0E6C002462B3 /* libCalculator.xctest */,
+				92CD301F20AD0E6C002462B3 /* CalculatorTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -134,9 +134,9 @@
 			productReference = 92CD300020AD0D89002462B3 /* libCalculator.a */;
 			productType = "com.apple.product-type.library.static";
 		};
-		92CD301E20AD0E6C002462B3 /* libCalculator */ = {
+		92CD301E20AD0E6C002462B3 /* CalculatorTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 92CD302720AD0E6C002462B3 /* Build configuration list for PBXNativeTarget "libCalculator" */;
+			buildConfigurationList = 92CD302720AD0E6C002462B3 /* Build configuration list for PBXNativeTarget "CalculatorTests" */;
 			buildPhases = (
 				92CD301B20AD0E6C002462B3 /* Sources */,
 				92CD301C20AD0E6C002462B3 /* Frameworks */,
@@ -147,9 +147,9 @@
 			dependencies = (
 				92CD302620AD0E6C002462B3 /* PBXTargetDependency */,
 			);
-			name = libCalculator;
+			name = CalculatorTests;
 			productName = Tests;
-			productReference = 92CD301F20AD0E6C002462B3 /* libCalculator.xctest */;
+			productReference = 92CD301F20AD0E6C002462B3 /* CalculatorTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
@@ -185,7 +185,7 @@
 			projectRoot = "";
 			targets = (
 				92CD2FFF20AD0D89002462B3 /* Calculator */,
-				92CD301E20AD0E6C002462B3 /* libCalculator */,
+				92CD301E20AD0E6C002462B3 /* CalculatorTests */,
 			);
 		};
 /* End PBXProject section */
@@ -449,7 +449,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		92CD302720AD0E6C002462B3 /* Build configuration list for PBXNativeTarget "libCalculator" */ = {
+		92CD302720AD0E6C002462B3 /* Build configuration list for PBXNativeTarget "CalculatorTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				92CD302820AD0E6C002462B3 /* Debug */,
