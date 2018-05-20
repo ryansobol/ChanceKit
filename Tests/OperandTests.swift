@@ -7,7 +7,7 @@ class OperandTests: XCTestCase {
     let operand = Operand.number(expected)
     let actual = operand.value()
 
-    XCTAssert(expected == actual, "expected: \(expected) actual: \(actual) operand: \(operand)")
+    XCTAssertEqual(expected, actual)
   }
 
   func testAddition() {
@@ -16,7 +16,7 @@ class OperandTests: XCTestCase {
     let expected = Operand.number(3)
     let actual = operand1 + operand2
 
-    XCTAssert(expected == actual, "expected: \(expected) actual: \(actual) operand1: \(operand1) operand2: \(operand2)")
+    XCTAssertEqual(expected, actual)
   }
 
   func testDivision() {
@@ -25,7 +25,7 @@ class OperandTests: XCTestCase {
     let expected = Operand.number(0)
     let actual = operand1 / operand2
 
-    XCTAssert(expected == actual, "expected: \(expected) actual: \(actual) operand1: \(operand1) operand2: \(operand2)")
+    XCTAssertEqual(expected, actual)
   }
 
   func testMultiplication() {
@@ -34,7 +34,7 @@ class OperandTests: XCTestCase {
     let expected = Operand.number(42)
     let actual = operand1 * operand2
 
-    XCTAssert(expected == actual, "expected: \(expected) actual: \(actual) operand1: \(operand1) operand2: \(operand2)")
+    XCTAssertEqual(expected, actual)
   }
 
   func testSubtraction() {
@@ -43,6 +43,6 @@ class OperandTests: XCTestCase {
     let expected = Operand.number(-1)
     let actual = operand1 - operand2
 
-    XCTAssert(expected == actual, "expected: \(expected) actual: \(actual) operand1: \(operand1) operand2: \(operand2)")
+    XCTAssertEqual(expected, actual)
   }
 }

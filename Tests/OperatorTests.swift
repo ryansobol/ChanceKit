@@ -59,7 +59,7 @@ class OperatorTests: XCTestCase {
       let expected = fixture.value
       let actual = operator1.hasPrecedence(operator2)
 
-      XCTAssert(expected == actual, "expected: \(expected) actual: \(actual) operator1: \(operator1) operator2: \(operator2)")
+      XCTAssertEqual(expected, actual, "operator1: \(operator1) operator2: \(operator2)")
     }
   }
 
@@ -112,10 +112,10 @@ class OperatorTests: XCTestCase {
       let expected = fixture.value
 
       if let actual = operation.evaluate(operand1, operand2) {
-        XCTAssert(expected == actual, "expected: \(String(describing: expected)) actual: \(actual) operator: \(operation) operand1: \(operand1) operand2: \(operand2)")
+        XCTAssertEqual(expected, actual, "operator: \(operation) operand1: \(operand1) operand2: \(operand2)")
       }
       else {
-        XCTAssertNil(expected, "expected: \(String(describing: expected)) actual: nil operator: \(operation) operand1: \(operand1) operand2: \(operand2)")
+        XCTAssertNil(expected, "operator: \(operation) operand1: \(operand1) operand2: \(operand2)")
       }
     }
   }
