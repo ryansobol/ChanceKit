@@ -1,7 +1,6 @@
 enum Operand : Tokenable, Equatable {
   case number(Int)
 
-  // TODO: - What about tests?
   func value() -> Int {
     switch self {
     case .number(let value):
