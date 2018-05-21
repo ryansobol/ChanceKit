@@ -1,6 +1,5 @@
-enum ExpressionError: Error {
+public enum ExpressionError: Error {
   case divisionByZero
-  case invalidMark
   case invalidOperator
   case invalidToken
   case missingParenthesisClose

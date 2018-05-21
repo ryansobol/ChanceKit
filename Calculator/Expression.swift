@@ -5,7 +5,6 @@ public struct Expression {
 
   // MARK: - Initialization
 
-  // TODO: - What about testing the error cases?
   public init(_ infixTokens: [String]) throws {
     self.infixTokens = try infixTokens.map { infixToken in
       if let parenthesis = Parenthesis(rawValue: infixToken) {
@@ -24,7 +23,6 @@ public struct Expression {
     }
   }
 
-  // TODO: - What about testing the error cases?
   func toPostfixTokens() throws -> [Tokenable] {
     var markables = [Markable]()
     var postfixTokens = [Tokenable]()
@@ -59,9 +57,7 @@ public struct Expression {
             break
           }
 
-          guard let topOperator = topMarkable as? Operator else {
-            throw ExpressionError.invalidMark
-          }
+          let topOperator = topMarkable as! Operator
 
           if currentOperator.hasPrecedence(topOperator) {
             break
@@ -87,9 +83,7 @@ public struct Expression {
         throw ExpressionError.missingParenthesisClose
       }
 
-      guard let topOperator = topMarkable as? Operator else {
-        throw ExpressionError.invalidMark
-      }
+      let topOperator = topMarkable as! Operator
 
       postfixTokens.append(topOperator)
     }
@@ -97,7 +91,6 @@ public struct Expression {
     return postfixTokens
   }
 
-  // TODO: - What about testing the error cases?
   public func evaluate() throws -> Int {
     var operands = [Operand]()
 
@@ -126,7 +119,11 @@ public struct Expression {
       }
     }
 
-    guard operands.count == 1 else {
+    if operands.isEmpty {
+      return 0
+    }
+
+    if operands.count > 1 {
       throw ExpressionError.missingOperator
     }
 

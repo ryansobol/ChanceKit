@@ -8,6 +8,10 @@ class ExpressionTests : XCTestCase {
   )
 
   let fixtures: [Fixture] = [
+    // MARK: - A
+    ([], 0),
+    (["42"], 42),
+
     // MARK: - A + B
     (["1", "+", "2"], 3),
     (["4", "-", "3"], 1),
@@ -29,6 +33,10 @@ class ExpressionTests : XCTestCase {
     (["8", "-", "9", "×", "5", "÷", "1"], -37),
     (["4", "×", "1", "÷", "6", "+", "0"], 0),
     (["0", "÷", "5", "+", "4", "×", "7"], 28),
+
+    // MARK: - (A)
+    (["(", ")"], 0),
+    (["(", "42", ")"], 42),
 
     // MARK: - (A + B)
     (["(", "2", "+", "3", ")"], 5),
@@ -87,8 +95,54 @@ class ExpressionTests : XCTestCase {
     (["(", "4", "-", "(", "6", "÷", "5", ")", "×", "3", ")"], 1),
 
     // MARK: - (A + B / C × (D + E) - F)
-    (["(", "1", "+", "2", "÷", "3", "×", "(", "4", "+", "5", ")", "-", "6", ")"], -5)
+    (["(", "1", "+", "2", "÷", "3", "×", "(", "4", "+", "5", ")", "-", "6", ")"], -5),
   ]
+
+  func testInit() {
+    let fixtures: [[String]] = [
+      [],
+      ["("],
+      [")"],
+      ["+"],
+      ["÷"],
+      ["×"],
+      ["-"],
+      [String(Int.max)],
+      [String(Int.min)],
+    ]
+
+    for fixture in fixtures {
+      XCTAssertNoThrow(try Expression(fixture))
+    }
+  }
+
+  func testInitError() {
+    let fixtures = [
+      ["="],
+      ["["],
+      ["{"],
+      ["<"],
+      ["."],
+      [","],
+      ["^"],
+      ["**"],
+      ["&"],
+      ["|"],
+      ["!"],
+      ["~"],
+      ["..<"],
+      ["..."],
+      ["<<"],
+      [">>"],
+      ["%"],
+    ]
+
+    for fixture in fixtures {
+      XCTAssertThrowsError(try Expression(fixture)) { error in
+        XCTAssertEqual(ExpressionError.invalidToken, error as? ExpressionError)
+      }
+    }
+  }
 
   func testEvaluate() {
     for fixture in fixtures {
@@ -98,6 +152,30 @@ class ExpressionTests : XCTestCase {
 
       XCTAssertNoThrow(actual = try expression.evaluate())
       XCTAssertEqual(expected, actual, "infixTokens: \(fixture.infixTokens)")
+    }
+  }
+
+  func testEvaluateError() {
+    typealias Fixture = (
+      infixTokens: [String],
+      expressionError: ExpressionError
+    )
+
+    let fixtures: [Fixture] = [
+      ([")"], .missingParenthesisOpen),
+      (["("], .missingParenthesisClose),
+      (["+"], .missingOperand),
+      (["1", "+"], .missingOperand),
+      (["1", "1"], .missingOperator),
+      (["1", "0", "÷"], .divisionByZero),
+    ]
+
+    for fixture in fixtures {
+      let expression = try! Expression(fixture.infixTokens)
+
+      XCTAssertThrowsError(try expression.evaluate()) { error in
+        XCTAssertEqual(fixture.expressionError, error as? ExpressionError)
+      }
     }
   }
 
