@@ -23,9 +23,18 @@ class OperandTests: XCTestCase {
     let operand1 = Operand.number(4)
     let operand2 = Operand.number(5)
     let expected = Operand.number(0)
-    let actual = operand1 / operand2
+    let actual = try! operand1 / operand2
 
     XCTAssertEqual(expected, actual)
+  }
+
+  func testDivisionByZero() {
+    let operand1 = Operand.number(4)
+    let operand2 = Operand.number(0)
+
+    XCTAssertThrowsError(try operand1 / operand2) { error in
+      XCTAssertEqual(ExpressionError.divisionByZero, error as? ExpressionError)
+    }
   }
 
   func testMultiplication() {

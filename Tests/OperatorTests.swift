@@ -78,7 +78,7 @@ class OperatorTests: XCTestCase {
       let operand1 = fixture.operand1
       let operand2 = fixture.operand2
       let expected = fixture.value
-      let actual = operation.evaluate(operand1, operand2)
+      let actual = try! operation.evaluate(operand1, operand2)
 
       XCTAssertEqual(expected, actual, "operator: \(operation) operand1: \(operand1) operand2: \(operand2)")
     }

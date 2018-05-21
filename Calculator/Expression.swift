@@ -117,7 +117,7 @@ public struct Expression {
           throw ExpressionError.missingOperand
         }
 
-        let newOperand = currentOperator.evaluate(operand1, operand2)
+        let newOperand = try currentOperator.evaluate(operand1, operand2)
 
         operands.append(newOperand)
 

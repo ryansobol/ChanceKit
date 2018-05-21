@@ -1,4 +1,5 @@
 enum ExpressionError: Error {
+  case divisionByZero
   case invalidMark
   case invalidOperator
   case invalidToken

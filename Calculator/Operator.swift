@@ -28,13 +28,13 @@ enum Operator: String, Markable {
     return precedenceSelf > precendenceOther
   }
 
-  func evaluate(_ operand1: Operand, _ operand2: Operand) -> Operand {
+  func evaluate(_ operand1: Operand, _ operand2: Operand) throws -> Operand {
     switch self {
     case .addition:
       return operand1 + operand2
 
     case .division:
-      return operand1 / operand2
+      return try operand1 / operand2
 
     case .multiplication:
       return operand1 * operand2
