@@ -19,9 +19,11 @@ public struct Expression {
         return Operand.number(number)
       }
 
-      throw ExpressionError.invalidToken
+      throw ExpressionError.invalidToken(infixToken)
     }
   }
+
+  // MARK: - Evaluation
 
   func toPostfixTokens() throws -> [Tokenable] {
     var markables = [Markable]()
@@ -57,7 +59,10 @@ public struct Expression {
             break
           }
 
-          let topOperator = topMarkable as! Operator
+          guard let topOperator = topMarkable as? Operator else {
+            throw ExpressionError.internalError(#line, #function, #file)
+          }
+
 
           if currentOperator.hasPrecedence(topOperator) {
             break
@@ -70,7 +75,7 @@ public struct Expression {
         markables.append(currentOperator)
 
       default:
-        throw ExpressionError.invalidToken
+        throw ExpressionError.internalError(#line, #function, #file)
       }
     }
 
@@ -83,7 +88,9 @@ public struct Expression {
         throw ExpressionError.missingParenthesisClose
       }
 
-      let topOperator = topMarkable as! Operator
+      guard let topOperator = topMarkable as? Operator else {
+        throw ExpressionError.internalError(#line, #function, #file)
+      }
 
       postfixTokens.append(topOperator)
     }
@@ -115,7 +122,7 @@ public struct Expression {
         operands.append(newOperand)
 
       default:
-        throw ExpressionError.invalidToken
+        throw ExpressionError.internalError(#line, #function, #file)
       }
     }
 

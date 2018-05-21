@@ -139,7 +139,7 @@ class ExpressionTests : XCTestCase {
 
     for fixture in fixtures {
       XCTAssertThrowsError(try Expression(fixture)) { error in
-        XCTAssertEqual(ExpressionError.invalidToken, error as? ExpressionError)
+        XCTAssertEqual(ExpressionError.invalidToken(fixture[0]), error as? ExpressionError)
       }
     }
   }

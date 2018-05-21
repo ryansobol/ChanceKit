@@ -1,6 +1,7 @@
-public enum ExpressionError: Error {
+public enum ExpressionError: Error, Equatable {
   case divisionByZero
-  case invalidToken
+  case internalError(Int, String, String)
+  case invalidToken(String)
   case missingParenthesisClose
   case missingParenthesisOpen
   case missingOperand
