@@ -43,10 +43,10 @@ class OperatorTests: XCTestCase {
 
   func testEvaluate() {
     typealias Fixture = (
-      operator: Operator,
+      operation: Operator,
       operand1: Operand,
       operand2: Operand,
-      value: Operand?
+      value: Operand
     )
 
     let fixtures: [Fixture] = [
@@ -74,7 +74,7 @@ class OperatorTests: XCTestCase {
     ]
 
     for fixture in fixtures {
-      let operation = fixture.operator
+      let operation = fixture.operation
       let operand1 = fixture.operand1
       let operand2 = fixture.operand2
       let expected = fixture.value
