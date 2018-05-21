@@ -83,4 +83,14 @@ class OperatorTests: XCTestCase {
       XCTAssertEqual(expected, actual, "operator: \(operation) operand1: \(operand1) operand2: \(operand2)")
     }
   }
+
+  func testEvaluateDivisionByZero() {
+    let operation = Operator(rawValue: "÷")!
+    let operand1 = Operand.number(42)
+    let operand2 = Operand.number(0)
+
+    XCTAssertThrowsError(try operation.evaluate(operand1, operand2)) { error in
+      XCTAssertEqual(ExpressionError.divisionByZero, error as? ExpressionError)
+    }
+  }
 }

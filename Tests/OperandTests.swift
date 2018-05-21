@@ -29,7 +29,7 @@ class OperandTests: XCTestCase {
   }
 
   func testDivisionByZero() {
-    let operand1 = Operand.number(4)
+    let operand1 = Operand.number(42)
     let operand2 = Operand.number(0)
 
     XCTAssertThrowsError(try operand1 / operand2) { error in
