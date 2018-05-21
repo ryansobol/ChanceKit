@@ -1,9 +1,7 @@
-enum Operator: String, Tokenable {
+enum Operator: String, Markable {
   case addition = "+"
   case division = "÷"
   case multiplication = "×"
-  case parenthesisClose = ")"
-  case parenthesisOpen = "("
   case subtraction = "-"
 
   // TODO: - Remove parenthesis
@@ -12,9 +10,6 @@ enum Operator: String, Tokenable {
     let precendenceOther: Int
 
     switch self {
-    case .parenthesisClose, .parenthesisOpen:
-      precedenceSelf = 2
-
     case .division, .multiplication:
       precedenceSelf = 1
 
@@ -23,9 +18,6 @@ enum Operator: String, Tokenable {
     }
 
     switch other {
-    case .parenthesisClose, .parenthesisOpen:
-      precendenceOther = 2
-
     case .division, .multiplication:
       precendenceOther = 1
 
@@ -36,7 +28,7 @@ enum Operator: String, Tokenable {
     return precedenceSelf > precendenceOther
   }
 
-  func evaluate(_ operand1: Operand, _ operand2: Operand) -> Operand? {
+  func evaluate(_ operand1: Operand, _ operand2: Operand) -> Operand {
     switch self {
     case .addition:
       return operand1 + operand2
@@ -46,9 +38,6 @@ enum Operator: String, Tokenable {
 
     case .multiplication:
       return operand1 * operand2
-
-    case .parenthesisClose, .parenthesisOpen:
-      return nil
 
     case .subtraction:
       return operand1 - operand2

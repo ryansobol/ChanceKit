@@ -14,43 +14,21 @@ class OperatorTests: XCTestCase {
       ("+", "-", false),
       ("+", "×", false),
       ("+", "÷", false),
-      ("+", "(", false),
-      ("+", ")", false),
 
       ("-", "+", false),
       ("-", "-", false),
       ("-", "×", false),
       ("-", "÷", false),
-      ("-", "(", false),
-      ("-", ")", false),
 
       ("×", "+", true),
       ("×", "-", true),
       ("×", "×", false),
       ("×", "÷", false),
-      ("×", "(", false),
-      ("×", ")", false),
 
       ("÷", "+", true),
       ("÷", "-", true),
       ("÷", "×", false),
       ("÷", "÷", false),
-      ("÷", "(", false),
-      ("÷", ")", false),
-
-      ("(", "+", true),
-      ("(", "-", true),
-      ("(", "×", true),
-      ("(", "÷", true),
-      ("(", "(", false),
-      ("(", ")", false),
-
-      (")", "+", true),
-      (")", "-", true),
-      (")", "×", true),
-      (")", "÷", true),
-      (")", "(", false),
-      (")", ")", false),
     ]
 
     for fixture in fixtures {
@@ -92,16 +70,6 @@ class OperatorTests: XCTestCase {
         Operand.number(8),
         Operand.number(2),
         Operand.number(4)
-      ), (
-        Operator(rawValue: "(")!,
-        Operand.number(1),
-        Operand.number(1),
-        nil
-      ), (
-        Operator(rawValue: ")")!,
-        Operand.number(2),
-        Operand.number(2),
-        nil
       )
     ]
 
@@ -110,13 +78,9 @@ class OperatorTests: XCTestCase {
       let operand1 = fixture.operand1
       let operand2 = fixture.operand2
       let expected = fixture.value
+      let actual = operation.evaluate(operand1, operand2)
 
-      if let actual = operation.evaluate(operand1, operand2) {
-        XCTAssertEqual(expected, actual, "operator: \(operation) operand1: \(operand1) operand2: \(operand2)")
-      }
-      else {
-        XCTAssertNil(expected, "operator: \(operation) operand1: \(operand1) operand2: \(operand2)")
-      }
+      XCTAssertEqual(expected, actual, "operator: \(operation) operand1: \(operand1) operand2: \(operand2)")
     }
   }
 }

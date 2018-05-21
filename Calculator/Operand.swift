@@ -12,6 +12,7 @@ enum Operand : Tokenable, Equatable {
     return Operand.number(left.value() + right.value())
   }
 
+  // TODO: - Handle division by zero
   static func /(left: Operand, right: Operand) -> Operand {
     return Operand.number(left.value() / right.value())
   }

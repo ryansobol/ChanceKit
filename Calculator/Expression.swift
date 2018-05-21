@@ -8,8 +8,12 @@ public struct Expression {
   // TODO: - What about testing the error cases?
   public init(_ infixTokens: [String]) throws {
     self.infixTokens = try infixTokens.map { infixToken in
-      if let token = Operator(rawValue: infixToken) {
-        return token
+      if let parenthesis = Parenthesis(rawValue: infixToken) {
+        return parenthesis
+      }
+
+      if let operation = Operator(rawValue: infixToken) {
+        return operation
       }
 
       if let number = Int(infixToken) {
@@ -20,13 +24,9 @@ public struct Expression {
     }
   }
 
-//  public init(_ infixTokens: String...) throws {
-//    try self.init(infixTokens)
-//  }
-
   // TODO: - What about testing the error cases?
   func toPostfixTokens() throws -> [Tokenable] {
-    var operators = [Operator]()
+    var markables = [Markable]()
     var postfixTokens = [Tokenable]()
 
     for currentToken in infixTokens {
@@ -34,53 +34,61 @@ public struct Expression {
       case is Operand:
         postfixTokens.append(currentToken)
 
-      case let currentOperator as Operator:
-        switch currentOperator {
-        case .parenthesisOpen:
-          operators.append(currentOperator)
+      case let currentParenthesis as Parenthesis:
+        switch currentParenthesis {
+        case .open:
+          markables.append(currentParenthesis)
 
-        case .parenthesisClose:
+        case .close:
           while true {
-            guard let topOperator = operators.popLast() else {
-              throw ExpressionError.missingOpenParenthesis
+            guard let topMarkable = markables.popLast() else {
+              throw ExpressionError.missingParenthesisOpen
             }
 
-            if topOperator == .parenthesisOpen {
+            if let topParenthesis = topMarkable as? Parenthesis, topParenthesis == Parenthesis.open {
               break
             }
 
-            postfixTokens.append(topOperator)
+            postfixTokens.append(topMarkable)
           }
-
-        case .addition, .division, .multiplication, .subtraction:
-          while let topOperator = operators.last {
-            if topOperator == .parenthesisOpen {
-              break
-            }
-
-            if currentOperator.hasPrecedence(topOperator) {
-              break
-            }
-
-            postfixTokens.append(topOperator)
-            operators.removeLast()
-          }
-
-          operators.append(currentOperator)
         }
+
+      case let currentOperator as Operator:
+        while let topMarkable = markables.last {
+          if let topParenthesis = topMarkable as? Parenthesis, topParenthesis == .open {
+            break
+          }
+
+          guard let topOperator = topMarkable as? Operator else {
+            throw ExpressionError.invalidMark
+          }
+
+          if currentOperator.hasPrecedence(topOperator) {
+            break
+          }
+
+          postfixTokens.append(topOperator)
+          markables.removeLast()
+        }
+
+        markables.append(currentOperator)
 
       default:
         throw ExpressionError.invalidToken
       }
     }
 
-    if operators.isEmpty {
+    if markables.isEmpty {
       return postfixTokens
     }
 
-    while let topOperator = operators.popLast() {
-      if topOperator == .parenthesisOpen {
-        throw ExpressionError.missingCloseParenthesis
+    while let topMarkable = markables.popLast() {
+      if let topParenthesis = topMarkable as? Parenthesis, topParenthesis == .open {
+        throw ExpressionError.missingParenthesisClose
+      }
+
+      guard let topOperator = topMarkable as? Operator else {
+        throw ExpressionError.invalidMark
       }
 
       postfixTokens.append(topOperator)
@@ -109,9 +117,7 @@ public struct Expression {
           throw ExpressionError.missingOperand
         }
 
-        guard let newOperand = currentOperator.evaluate(operand1, operand2) else {
-          throw ExpressionError.invalidOperator
-        }
+        let newOperand = currentOperator.evaluate(operand1, operand2)
 
         operands.append(newOperand)
 
