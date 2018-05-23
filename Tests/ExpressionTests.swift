@@ -4,7 +4,7 @@ import XCTest
 class ExpressionTests : XCTestCase {
   typealias Fixture = (
     infixTokens: [String],
-    value: Int
+    expected: Int
   )
 
   let fixtures: [Fixture] = [
@@ -146,7 +146,7 @@ class ExpressionTests : XCTestCase {
 
   func testEvaluate() {
     for fixture in fixtures {
-      let expected = fixture.value
+      let expected = fixture.expected
       let expression = try! Expression(fixture.infixTokens)
       var actual: Int? = nil
 
@@ -168,6 +168,10 @@ class ExpressionTests : XCTestCase {
       (["1", "+"], .missingOperand),
       (["1", "1"], .missingOperator),
       (["1", "0", "÷"], .divisionByZero),
+      (["9223372036854775807", "1", "+"], .operationOverflow),
+      (["-9223372036854775808", "-1", "÷"], .operationOverflow),
+      (["-9223372036854775808", "-1", "×"], .operationOverflow),
+      (["9223372036854775807", "-1", "-"], .operationOverflow),
     ]
 
     for fixture in fixtures {
@@ -182,7 +186,7 @@ class ExpressionTests : XCTestCase {
   func testEvaluatePerformance() {
     self.measure {
       for fixture in fixtures {
-        let expected = fixture.value
+        let expected = fixture.expected
         let expression = try! Expression(fixture.infixTokens)
         let actual = try! expression.evaluate()
 

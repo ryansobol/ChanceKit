@@ -30,16 +30,16 @@ enum Operator: String, Markable {
   func evaluate(_ operand1: Operand, _ operand2: Operand) throws -> Operand {
     switch self {
     case .addition:
-      return operand1 + operand2
+      return try operand1 + operand2
 
     case .division:
       return try operand1 / operand2
 
     case .multiplication:
-      return operand1 * operand2
+      return try operand1 * operand2
 
     case .subtraction:
-      return operand1 - operand2
+      return try operand1 - operand2
     }
   }
 }

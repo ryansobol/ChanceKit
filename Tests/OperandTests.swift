@@ -11,47 +11,355 @@ class OperandTests: XCTestCase {
   }
 
   func testAddition() {
-    let operand1 = Operand.number(1)
-    let operand2 = Operand.number(2)
-    let expected = Operand.number(3)
-    let actual = operand1 + operand2
+    typealias Fixture = (
+      operand1: Int,
+      operand2: Int,
+      expected: Int
+    )
 
-    XCTAssertEqual(expected, actual)
+    let fixtures: [Fixture] = [
+      (operand1: 1, operand2: 2, expected: 3),
+      (operand1: -1, operand2: 2, expected: 1),
+      (operand1: 1, operand2: -2, expected: -1),
+      (operand1: -1, operand2: -2, expected: -3),
+
+      (operand1: 2, operand2: 1, expected: 3),
+      (operand1: -2, operand2: 1, expected: -1),
+      (operand1: 2, operand2: -1, expected: 1),
+      (operand1: -2, operand2: -1, expected: -3),
+
+      (operand1: 0, operand2: 2, expected: 2),
+      (operand1: -0, operand2: 2, expected: 2),
+      (operand1: 0, operand2: -2, expected: -2),
+      (operand1: -0, operand2: -2, expected: -2),
+
+      (operand1: 1, operand2: 0, expected: 1),
+      (operand1: -1, operand2: 0, expected: -1),
+      (operand1: 1, operand2: -0, expected: 1),
+      (operand1: -1, operand2: -0, expected: -1),
+
+      (operand1: 0, operand2: 0, expected: 0),
+      (operand1: -0, operand2: 0, expected: 0),
+      (operand1: 0, operand2: -0, expected: 0),
+      (operand1: -0, operand2: -0, expected: 0),
+
+      (operand1: Int.max, operand2: 0, expected: Int.max),
+      (operand1: -Int.max, operand2: 0, expected: Int.min + 1),
+      (operand1: Int.max, operand2: -0, expected: Int.max),
+      (operand1: -Int.max, operand2: -0, expected: Int.min + 1),
+
+      (operand1: 0, operand2: Int.max, expected: Int.max),
+      (operand1: -0, operand2: Int.max, expected: Int.max),
+      (operand1: 0, operand2: -Int.max, expected: Int.min + 1),
+      (operand1: -0, operand2: -Int.max, expected: Int.min + 1),
+
+      (operand1: Int.min, operand2: 0, expected: Int.min),
+      (operand1: Int.min, operand2: -0, expected: Int.min),
+
+      (operand1: 0, operand2: Int.min, expected: Int.min),
+      (operand1: -0, operand2: Int.min, expected: Int.min),
+    ]
+
+    for fixture in fixtures {
+      let operand1 = Operand.number(fixture.operand1)
+      let operand2 = Operand.number(fixture.operand2)
+      let expected = Operand.number(fixture.expected)
+      let actual = try! operand1 + operand2
+
+      XCTAssertEqual(expected, actual)
+    }
+  }
+
+  func testAdditionWithOverflow() {
+    typealias Fixture = (
+      operand1: Int,
+      operand2: Int
+    )
+
+    let fixtures: [Fixture] = [
+      (operand1: Int.max, operand2: 1),
+      (operand1: 1, operand2: Int.max),
+
+      (operand1: Int.min, operand2: -1),
+      (operand1: -1, operand2: Int.min),
+    ]
+
+    let expected = ExpressionError.operationOverflow
+
+    for fixture in fixtures {
+      let operand1 = Operand.number(fixture.operand1)
+      let operand2 = Operand.number(fixture.operand2)
+
+      XCTAssertThrowsError(try operand1 + operand2) { error in
+        XCTAssertEqual(expected, error as? ExpressionError)
+      }
+    }
   }
 
   func testDivision() {
-    let operand1 = Operand.number(4)
-    let operand2 = Operand.number(5)
-    let expected = Operand.number(0)
-    let actual = try! operand1 / operand2
+    typealias Fixture = (
+      operand1: Int,
+      operand2: Int,
+      expected: Int
+    )
 
-    XCTAssertEqual(expected, actual)
+    let fixtures: [Fixture] = [
+      (operand1: 1, operand2: 2, expected: 0),
+      (operand1: -1, operand2: 2, expected: 0),
+      (operand1: 1, operand2: -2, expected: 0),
+      (operand1: -1, operand2: -2, expected: 0),
+
+      (operand1: 2, operand2: 1, expected: 2),
+      (operand1: -2, operand2: 1, expected: -2),
+      (operand1: 2, operand2: -1, expected: -2),
+      (operand1: -2, operand2: -1, expected: 2),
+
+      (operand1: 0, operand2: 2, expected: 0),
+      (operand1: -0, operand2: 2, expected: 0),
+      (operand1: 0, operand2: -2, expected: 0),
+      (operand1: -0, operand2: -2, expected: 0),
+
+      (operand1: Int.max, operand2: 1, expected: Int.max),
+      (operand1: -Int.max, operand2: 1, expected: Int.min + 1),
+      (operand1: Int.max, operand2: -1, expected: Int.min + 1),
+      (operand1: -Int.max, operand2: -1, expected: Int.max),
+
+      (operand1: 1, operand2: Int.max, expected: 0),
+      (operand1: -1, operand2: Int.max, expected: 0),
+      (operand1: 1, operand2: -Int.max, expected: 0),
+      (operand1: -1, operand2: -Int.max, expected: 0),
+
+      (operand1: Int.min, operand2: 1, expected: Int.min),
+
+      (operand1: 1, operand2: Int.min, expected: 0),
+      (operand1: -1, operand2: Int.min, expected: 0),
+    ]
+
+    for fixture in fixtures {
+      let operand1 = Operand.number(fixture.operand1)
+      let operand2 = Operand.number(fixture.operand2)
+      let expected = Operand.number(fixture.expected)
+      let actual = try! operand1 / operand2
+
+      XCTAssertEqual(expected, actual)
+    }
   }
 
   func testDivisionByZero() {
-    let operand1 = Operand.number(42)
-    let operand2 = Operand.number(0)
+    typealias Fixture = (
+      operand1: Int,
+      operand2: Int
+    )
+
+    let fixtures: [Fixture] = [
+      (operand1: 1, operand2: 0),
+      (operand1: -1, operand2: 0),
+      (operand1: 1, operand2: -0),
+      (operand1: -1, operand2: -0),
+
+      (operand1: 0, operand2: 0),
+      (operand1: -0, operand2: 0),
+      (operand1: 0, operand2: -0),
+      (operand1: -0, operand2: -0),
+    ]
+
+    let expected = ExpressionError.divisionByZero
+
+    for fixture in fixtures {
+      let operand1 = Operand.number(fixture.operand1)
+      let operand2 = Operand.number(fixture.operand2)
+
+      XCTAssertThrowsError(try operand1 / operand2) { error in
+        XCTAssertEqual(expected, error as? ExpressionError)
+      }
+    }
+  }
+
+  func testDivisionWithOverflow() {
+    let operand1 = Operand.number(Int.min)
+    let operand2 = Operand.number(-1)
+    let expected = ExpressionError.operationOverflow
 
     XCTAssertThrowsError(try operand1 / operand2) { error in
-      XCTAssertEqual(ExpressionError.divisionByZero, error as? ExpressionError)
+      XCTAssertEqual(expected, error as? ExpressionError)
     }
   }
 
   func testMultiplication() {
-    let operand1 = Operand.number(6)
-    let operand2 = Operand.number(7)
-    let expected = Operand.number(42)
-    let actual = operand1 * operand2
+    typealias Fixture = (
+      operand1: Int,
+      operand2: Int,
+      expected: Int
+    )
 
-    XCTAssertEqual(expected, actual)
+    let fixtures: [Fixture] = [
+      (operand1: 6, operand2: 7, expected: 42),
+      (operand1: -6, operand2: 7, expected: -42),
+      (operand1: 6, operand2: -7, expected: -42),
+      (operand1: -6, operand2: -7, expected: 42),
+
+      (operand1: 7, operand2: 6, expected: 42),
+      (operand1: -7, operand2: 6, expected: -42),
+      (operand1: 7, operand2: -6, expected: -42),
+      (operand1: -7, operand2: -6, expected: 42),
+
+      (operand1: 0, operand2: 7, expected: 0),
+      (operand1: -0, operand2: 7, expected: 0),
+      (operand1: 0, operand2: -7, expected: 0),
+      (operand1: -0, operand2: -7, expected: 0),
+
+      (operand1: 6, operand2: 0, expected: 0),
+      (operand1: -6, operand2: 0, expected: 0),
+      (operand1: 6, operand2: -0, expected: 0),
+      (operand1: -6, operand2: -0, expected: 0),
+
+      (operand1: 0, operand2: 0, expected: 0),
+      (operand1: -0, operand2: 0, expected: 0),
+      (operand1: 0, operand2: -0, expected: 0),
+      (operand1: -0, operand2: -0, expected: 0),
+
+      (operand1: Int.max, operand2: 1, expected: Int.max),
+      (operand1: -Int.max, operand2: 1, expected: Int.min + 1),
+      (operand1: Int.max, operand2: -1, expected: Int.min + 1),
+      (operand1: -Int.max, operand2: -1, expected: Int.max),
+
+      (operand1: 1, operand2: Int.max, expected: Int.max),
+      (operand1: -1, operand2: Int.max, expected: Int.min + 1),
+      (operand1: 1, operand2: -Int.max, expected: Int.min + 1),
+      (operand1: -1, operand2: -Int.max, expected: Int.max),
+
+      (operand1: Int.min, operand2: 1, expected: Int.min),
+
+      (operand1: 1, operand2: Int.min, expected: Int.min),
+    ]
+
+    for fixture in fixtures {
+      let operand1 = Operand.number(fixture.operand1)
+      let operand2 = Operand.number(fixture.operand2)
+      let expected = Operand.number(fixture.expected)
+      let actual = try! operand1 * operand2
+
+      XCTAssertEqual(expected, actual)
+    }
+  }
+
+  func testMultiplicationWithOverflow() {
+    typealias Fixture = (
+      operand1: Int,
+      operand2: Int
+    )
+
+    let fixtures: [Fixture] = [
+      (operand1: Int.max, operand2: 2),
+      (operand1: -Int.max, operand2: 2),
+      (operand1: Int.max, operand2: -2),
+      (operand1: -Int.max, operand2: -2),
+
+      (operand1: 2, operand2: Int.max),
+      (operand1: -2, operand2: Int.max),
+      (operand1: 2, operand2: -Int.max),
+      (operand1: -2, operand2: -Int.max),
+
+      (operand1: Int.min, operand2: -1),
+      (operand1: -1, operand2: Int.min),
+    ]
+
+    let expected = ExpressionError.operationOverflow
+
+    for fixture in fixtures {
+      let operand1 = Operand.number(fixture.operand1)
+      let operand2 = Operand.number(fixture.operand2)
+
+      XCTAssertThrowsError(try operand1 * operand2) { error in
+        XCTAssertEqual(expected, error as? ExpressionError)
+      }
+    }
   }
 
   func testSubtraction() {
-    let operand1 = Operand.number(8)
-    let operand2 = Operand.number(9)
-    let expected = Operand.number(-1)
-    let actual = operand1 - operand2
+    typealias Fixture = (
+      operand1: Int,
+      operand2: Int,
+      expected: Int
+    )
 
-    XCTAssertEqual(expected, actual)
+    let fixtures: [Fixture] = [
+      (operand1: 1, operand2: 2, expected: -1),
+      (operand1: -1, operand2: 2, expected: -3),
+      (operand1: 1, operand2: -2, expected: 3),
+      (operand1: -1, operand2: -2, expected: 1),
+
+      (operand1: 2, operand2: 1, expected: 1),
+      (operand1: -2, operand2: 1, expected: -3),
+      (operand1: 2, operand2: -1, expected: 3),
+      (operand1: -2, operand2: -1, expected: -1),
+
+      (operand1: 0, operand2: 2, expected: -2),
+      (operand1: -0, operand2: 2, expected: -2),
+      (operand1: 0, operand2: -2, expected: 2),
+      (operand1: -0, operand2: -2, expected: 2),
+
+      (operand1: 1, operand2: 0, expected: 1),
+      (operand1: -1, operand2: 0, expected: -1),
+      (operand1: 1, operand2: -0, expected: 1),
+      (operand1: -1, operand2: -0, expected: -1),
+
+      (operand1: 0, operand2: 0, expected: 0),
+      (operand1: -0, operand2: 0, expected: 0),
+      (operand1: 0, operand2: -0, expected: 0),
+      (operand1: -0, operand2: -0, expected: 0),
+
+      (operand1: Int.max, operand2: 0, expected: Int.max),
+      (operand1: -Int.max, operand2: 0, expected: Int.min + 1),
+      (operand1: Int.max, operand2: -0, expected: Int.max),
+      (operand1: -Int.max, operand2: -0, expected: Int.min + 1),
+
+      (operand1: 0, operand2: Int.max, expected: Int.min + 1),
+      (operand1: -0, operand2: Int.max, expected: Int.min + 1),
+      (operand1: 0, operand2: -Int.max, expected: Int.max),
+      (operand1: -0, operand2: -Int.max, expected: Int.max),
+
+      (operand1: Int.min, operand2: 0, expected: Int.min),
+      (operand1: Int.min, operand2: -0, expected: Int.min),
+
+      (operand1: 0, operand2: Int.max, expected: Int.min + 1),
+      (operand1: -0, operand2: Int.max, expected: Int.min + 1),
+    ]
+
+    for fixture in fixtures {
+      let operand1 = Operand.number(fixture.operand1)
+      let operand2 = Operand.number(fixture.operand2)
+      let expected = Operand.number(fixture.expected)
+      let actual = try! operand1 - operand2
+
+      XCTAssertEqual(expected, actual)
+    }
+  }
+
+  func testSubtractionWithOverflow() {
+    typealias Fixture = (
+      operand1: Int,
+      operand2: Int
+    )
+
+    let fixtures: [Fixture] = [
+      (operand1: Int.max, operand2: -1),
+      (operand1: -2, operand2: Int.max),
+
+      (operand1: Int.min, operand2: 1),
+      (operand1: 0, operand2: Int.min),
+      (operand1: -0, operand2: Int.min),
+    ]
+
+    let expected = ExpressionError.operationOverflow
+
+    for fixture in fixtures {
+      let operand1 = Operand.number(fixture.operand1)
+      let operand2 = Operand.number(fixture.operand2)
+
+      XCTAssertThrowsError(try operand1 - operand2) { error in
+        XCTAssertEqual(expected, error as? ExpressionError)
+      }
+    }
   }
 }

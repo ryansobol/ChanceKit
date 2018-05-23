@@ -6,7 +6,7 @@ class OperatorTests: XCTestCase {
     typealias Fixture = (
       operator1: String,
       operator2: String,
-      value: Bool
+      expected: Bool
     )
 
     let fixtures: [Fixture] = [
@@ -34,7 +34,7 @@ class OperatorTests: XCTestCase {
     for fixture in fixtures {
       let operator1 = Operator(rawValue: fixture.operator1)!
       let operator2 = Operator(rawValue: fixture.operator2)!
-      let expected = fixture.value
+      let expected = fixture.expected
       let actual = operator1.hasPrecedence(operator2)
 
       XCTAssertEqual(expected, actual, "operator1: \(operator1) operator2: \(operator2)")
@@ -46,7 +46,7 @@ class OperatorTests: XCTestCase {
       operation: Operator,
       operand1: Operand,
       operand2: Operand,
-      value: Operand
+      expected: Operand
     )
 
     let fixtures: [Fixture] = [
@@ -77,7 +77,7 @@ class OperatorTests: XCTestCase {
       let operation = fixture.operation
       let operand1 = fixture.operand1
       let operand2 = fixture.operand2
-      let expected = fixture.value
+      let expected = fixture.expected
       let actual = try! operation.evaluate(operand1, operand2)
 
       XCTAssertEqual(expected, actual, "operator: \(operation) operand1: \(operand1) operand2: \(operand2)")
@@ -86,11 +86,52 @@ class OperatorTests: XCTestCase {
 
   func testEvaluateDivisionByZero() {
     let operation = Operator(rawValue: "÷")!
-    let operand1 = Operand.number(42)
+    let operand1 = Operand.number(1)
     let operand2 = Operand.number(0)
+    let expected = ExpressionError.divisionByZero
 
     XCTAssertThrowsError(try operation.evaluate(operand1, operand2)) { error in
-      XCTAssertEqual(ExpressionError.divisionByZero, error as? ExpressionError)
+      XCTAssertEqual(expected, error as? ExpressionError)
+    }
+  }
+
+  func testEvaluateOperationOverflow() {
+    typealias Fixture = (
+      operation: Operator,
+      operand1: Operand,
+      operand2: Operand
+    )
+
+    let fixtures: [Fixture] = [
+      (
+        operation: Operator(rawValue: "+")!,
+        operand1: Operand.number(Int.max),
+        operand2: Operand.number(1)
+      ), (
+        operation: Operator(rawValue: "÷")!,
+        operand1: Operand.number(Int.min),
+        operand2: Operand.number(-1)
+      ), (
+        operation: Operator(rawValue: "×")!,
+        operand1: Operand.number(Int.min),
+        operand2: Operand.number(-1)
+      ), (
+        operation: Operator(rawValue: "-")!,
+        operand1: Operand.number(Int.max),
+        operand2: Operand.number(-1)
+      )
+    ]
+
+    let expected = ExpressionError.operationOverflow
+
+    for fixture in fixtures {
+      let operation = fixture.operation
+      let operand1 = fixture.operand1
+      let operand2 = fixture.operand2
+
+      XCTAssertThrowsError(try operation.evaluate(operand1, operand2)) { error in
+        XCTAssertEqual(expected, error as? ExpressionError)
+      }
     }
   }
 }

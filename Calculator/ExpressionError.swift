@@ -6,4 +6,5 @@ public enum ExpressionError: Error, Equatable {
   case missingParenthesisOpen
   case missingOperand
   case missingOperator
+  case operationOverflow
 }
