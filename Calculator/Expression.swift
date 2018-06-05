@@ -134,6 +134,6 @@ public struct Expression {
       throw ExpressionError.missingOperator
     }
 
-    return operands[0].value()
+    return try operands[0].value()
   }
 }

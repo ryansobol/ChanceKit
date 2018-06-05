@@ -2,12 +2,145 @@
 import XCTest
 
 class OperandTests: XCTestCase {
-  func testValue() {
-    let expected = 42
-    let operand = Operand.number(expected)
-    let actual = operand.value()
+  func testNumberValue() {
+    typealias Fixture = (
+      number: Operand,
+      expected: Int
+    )
 
-    XCTAssertEqual(expected, actual)
+    let fixtures: [Fixture] = [
+      (.number(42), 42),
+      (.number(-42), -42),
+      (.number(0), 0),
+      (.number(-0), 0),
+      (.number(Int.max), Int.max),
+      (.number(Int.min), Int.min),
+    ]
+
+    for fixture in fixtures {
+      let number = fixture.number
+      let expected = fixture.expected
+      let actual = try! number.value()
+
+      XCTAssertEqual(expected, actual)
+    }
+  }
+
+  func testRollValue() {
+    typealias Fixture = (
+      times: Int,
+      sides: Int,
+      expected: CountableClosedRange<Int>
+    )
+
+    let fixtures: [Fixture] = [
+      (times: 1, sides: 3, expected: 1...3),
+      (times: 2, sides: 4, expected: 2...8),
+      (times: 3, sides: 6, expected: 3...18),
+      (times: 4, sides: 8, expected: 4...32),
+      (times: 5, sides: 10, expected: 5...50),
+      (times: 6, sides: 12, expected: 6...72),
+      (times: 7, sides: 20, expected: 7...140),
+
+      (times: -1, sides: 3, expected: -3...(-1)),
+      (times: -2, sides: 4, expected: -8...(-2)),
+      (times: -3, sides: 6, expected: -18...(-3)),
+      (times: -4, sides: 8, expected: -32...(-4)),
+      (times: -5, sides: 10, expected: -50...(-5)),
+      (times: -6, sides: 12, expected: -72...(-6)),
+      (times: -7, sides: 20, expected: -140...(-7)),
+
+      (times: 1, sides: -3, expected: -3...(-1)),
+      (times: 2, sides: -4, expected: -8...(-2)),
+      (times: 3, sides: -6, expected: -18...(-3)),
+      (times: 4, sides: -8, expected: -32...(-4)),
+      (times: 5, sides: -10, expected: -50...(-5)),
+      (times: 6, sides: -12, expected: -72...(-6)),
+      (times: 7, sides: -20, expected: -140...(-7)),
+
+      (times: -1, sides: -3, expected: 1...3),
+      (times: -2, sides: -4, expected: 2...8),
+      (times: -3, sides: -6, expected: 3...18),
+      (times: -4, sides: -8, expected: 4...32),
+      (times: -5, sides: -10, expected: 5...50),
+      (times: -6, sides: -12, expected: 6...72),
+      (times: -7, sides: -20, expected: 7...140),
+
+      (times: 0, sides: 3, expected: 0...0),
+      (times: 0, sides: 4, expected: 0...0),
+      (times: 0, sides: 6, expected: 0...0),
+      (times: 0, sides: 8, expected: 0...0),
+      (times: 0, sides: 10, expected: 0...0),
+      (times: 0, sides: 12, expected: 0...0),
+      (times: 0, sides: 20, expected: 0...0),
+
+      (times: -0, sides: 3, expected: 0...0),
+      (times: -0, sides: 4, expected: 0...0),
+      (times: -0, sides: 6, expected: 0...0),
+      (times: -0, sides: 8, expected: 0...0),
+      (times: -0, sides: 10, expected: 0...0),
+      (times: -0, sides: 12, expected: 0...0),
+      (times: -0, sides: 20, expected: 0...0),
+
+      (times: 1, sides: 0, expected: 0...0),
+      (times: 2, sides: 0, expected: 0...0),
+      (times: 3, sides: 0, expected: 0...0),
+      (times: 4, sides: 0, expected: 0...0),
+      (times: 5, sides: 0, expected: 0...0),
+      (times: 6, sides: 0, expected: 0...0),
+      (times: 7, sides: 0, expected: 0...0),
+
+      (times: 1, sides: -0, expected: 0...0),
+      (times: 2, sides: -0, expected: 0...0),
+      (times: 3, sides: -0, expected: 0...0),
+      (times: 4, sides: -0, expected: 0...0),
+      (times: 5, sides: -0, expected: 0...0),
+      (times: 6, sides: -0, expected: 0...0),
+      (times: 7, sides: -0, expected: 0...0),
+
+      (times: 0, sides: 0, expected: 0...0),
+      (times: -0, sides: 0, expected: 0...0),
+      (times: 0, sides: -0, expected: 0...0),
+      (times: -0, sides: -0, expected: 0...0),
+
+      (times: 1, sides: Int.max, expected: 1...Int.max),
+      (times: 1, sides: Int.min + 1, expected: (Int.min + 1)...(-1)),
+
+//      Near infinite loops
+//      (times: Int.max, sides: 1, expected: Int.max...Int.max),
+//      (times: Int.min + 1, sides: 1, expected: (Int.min + 1)...(Int.min + 1)),
+    ]
+
+    for fixture in fixtures {
+      let operand = Operand.roll(fixture.times, fixture.sides)
+      let expected = fixture.expected
+      let actual = try! operand.value()
+
+      XCTAssertTrue(expected.contains(actual), "expected: \(expected) actual: \(actual) operand: \(operand)")
+    }
+  }
+
+  func testRollValueWithOverflow() {
+    typealias Fixture = (
+      times: Int,
+      sides: Int
+    )
+
+    let fixtures: [Fixture] = [
+      (times: 1, sides: Int.min),
+      (times: Int.min, sides: 4),
+      (times: Int.min, sides: Int.min),
+    ]
+
+    let expected = ExpressionError.operationOverflow
+
+    for fixture in fixtures {
+      let operand = Operand.roll(fixture.times, fixture.sides)
+
+      XCTAssertThrowsError(try operand.value()) { error in
+        XCTAssertEqual(expected, error as? ExpressionError)
+      }
+    }
   }
 
   func testAddition() {
