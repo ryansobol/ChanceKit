@@ -26,16 +26,6 @@
 		92DA546F20B207270052CC65 /* Parenthesis.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92DA546E20B207270052CC65 /* Parenthesis.swift */; };
 /* End PBXBuildFile section */
 
-/* Begin PBXContainerItemProxy section */
-		92CD302520AD0E6C002462B3 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 92CD2FF820AD0D89002462B3 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 92CD2FFF20AD0D89002462B3;
-			remoteInfo = Calculator;
-		};
-/* End PBXContainerItemProxy section */
-
 /* Begin PBXCopyFilesBuildPhase section */
 		92CD2FFE20AD0D89002462B3 /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
@@ -185,7 +175,6 @@
 			buildRules = (
 			);
 			dependencies = (
-				92CD302620AD0E6C002462B3 /* PBXTargetDependency */,
 			);
 			name = CalculatorTests;
 			productName = Tests;
@@ -272,14 +261,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		92CD302620AD0E6C002462B3 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 92CD2FFF20AD0D89002462B3 /* Calculator */;
-			targetProxy = 92CD302520AD0E6C002462B3 /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		92CD300520AD0D89002462B3 /* Debug */ = {
