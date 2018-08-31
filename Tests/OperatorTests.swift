@@ -50,27 +50,10 @@ class OperatorTests: XCTestCase {
     )
 
     let fixtures: [Fixture] = [
-      (
-        Operator(rawValue: "+")!,
-        Operand.number(1),
-        Operand.number(2),
-        Operand.number(3)
-      ), (
-        Operator(rawValue: "-")!,
-        Operand.number(5),
-        Operand.number(4),
-        Operand.number(1)
-      ), (
-        Operator(rawValue: "×")!,
-        Operand.number(6),
-        Operand.number(7),
-        Operand.number(42)
-      ), (
-        Operator(rawValue: "÷")!,
-        Operand.number(8),
-        Operand.number(2),
-        Operand.number(4)
-      )
+      (Operator(rawValue: "+")!, .number(1), .number(2), .number(3)),
+      (Operator(rawValue: "-")!, .number(5), .number(4), .number(1)),
+      (Operator(rawValue: "×")!, .number(6), .number(7), .number(42)),
+      (Operator(rawValue: "÷")!, .number(8), .number(2), .number(4)),
     ]
 
     for fixture in fixtures {
@@ -103,23 +86,10 @@ class OperatorTests: XCTestCase {
     )
 
     let fixtures: [Fixture] = [
-      (
-        operation: Operator(rawValue: "+")!,
-        operand1: Operand.number(Int.max),
-        operand2: Operand.number(1)
-      ), (
-        operation: Operator(rawValue: "÷")!,
-        operand1: Operand.number(Int.min),
-        operand2: Operand.number(-1)
-      ), (
-        operation: Operator(rawValue: "×")!,
-        operand1: Operand.number(Int.min),
-        operand2: Operand.number(-1)
-      ), (
-        operation: Operator(rawValue: "-")!,
-        operand1: Operand.number(Int.max),
-        operand2: Operand.number(-1)
-      )
+      (Operator(rawValue: "+")!, .number(Int.max), .number(1)),
+      (Operator(rawValue: "÷")!, .number(Int.min), .number(-1)),
+      (Operator(rawValue: "×")!, .number(Int.min), .number(-1)),
+      (Operator(rawValue: "-")!, .number(Int.max), .number(-1)),
     ]
 
     let expected = ExpressionError.operationOverflow
