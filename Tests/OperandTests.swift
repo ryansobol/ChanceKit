@@ -216,7 +216,7 @@ class OperandTests: XCTestCase {
     }
   }
 
-  func testAdditionWithDice() {
+  func testAdditionWithRolls() {
     typealias Fixture = (
       operand1: Operand,
       operand2: Operand,
@@ -290,7 +290,7 @@ class OperandTests: XCTestCase {
     }
   }
 
-  func testAdditionWithDiceAndOverflow() {
+  func testAdditionWithRollsAndOverflow() {
     typealias Fixture = (
       operand1: Operand,
       operand2: Operand
