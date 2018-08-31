@@ -77,7 +77,6 @@ enum Operand : Tokenable, Equatable {
     }
   }
 
-  // TODO: - Test with .roll(Int, Int) cases
   static func +(left: Operand, right: Operand) throws -> Operand {
     let leftValue = try left.value()
     let rightValue = try right.value()
