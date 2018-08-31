@@ -4,23 +4,22 @@ import XCTest
 class OperandTests: XCTestCase {
   func testNumberValue() {
     typealias Fixture = (
-      number: Operand,
+      operand: Operand,
       expected: Int
     )
 
     let fixtures: [Fixture] = [
-      (.number(42), 42),
-      (.number(-42), -42),
-      (.number(0), 0),
-      (.number(-0), 0),
-      (.number(Int.max), Int.max),
-      (.number(Int.min), Int.min),
-    ]
+      (operand: .number(42), expected: 42),
+      (operand: .number(-42), expected: -42),
+      (operand: .number(0), expected: 0),
+      (operand: .number(-0), expected: 0),
+      (operand: .number(Int.max), expected: Int.max),
+      (operand: .number(Int.min), expected: Int.min),    ]
 
     for fixture in fixtures {
-      let number = fixture.number
+      let operand = fixture.operand
       let expected = fixture.expected
-      let actual = try! number.value()
+      let actual = try! operand.value()
 
       XCTAssertEqual(expected, actual)
     }
@@ -28,91 +27,90 @@ class OperandTests: XCTestCase {
 
   func testRollValue() {
     typealias Fixture = (
-      times: Int,
-      sides: Int,
+      operand: Operand,
       expected: CountableClosedRange<Int>
     )
 
     let fixtures: [Fixture] = [
-      (times: 1, sides: 3, expected: 1...3),
-      (times: 2, sides: 4, expected: 2...8),
-      (times: 3, sides: 6, expected: 3...18),
-      (times: 4, sides: 8, expected: 4...32),
-      (times: 5, sides: 10, expected: 5...50),
-      (times: 6, sides: 12, expected: 6...72),
-      (times: 7, sides: 20, expected: 7...140),
+      (operand: .roll(1, 3), expected: 1...3),
+      (operand: .roll(2, 4), expected: 2...8),
+      (operand: .roll(3, 6), expected: 3...18),
+      (operand: .roll(4, 8), expected: 4...32),
+      (operand: .roll(5, 10), expected: 5...50),
+      (operand: .roll(6, 12), expected: 6...72),
+      (operand: .roll(7, 20), expected: 7...140),
 
-      (times: -1, sides: 3, expected: -3...(-1)),
-      (times: -2, sides: 4, expected: -8...(-2)),
-      (times: -3, sides: 6, expected: -18...(-3)),
-      (times: -4, sides: 8, expected: -32...(-4)),
-      (times: -5, sides: 10, expected: -50...(-5)),
-      (times: -6, sides: 12, expected: -72...(-6)),
-      (times: -7, sides: 20, expected: -140...(-7)),
+      (operand: .roll(-1, 3), expected: -3...(-1)),
+      (operand: .roll(-2, 4), expected: -8...(-2)),
+      (operand: .roll(-3, 6), expected: -18...(-3)),
+      (operand: .roll(-4, 8), expected: -32...(-4)),
+      (operand: .roll(-5, 10), expected: -50...(-5)),
+      (operand: .roll(-6, 12), expected: -72...(-6)),
+      (operand: .roll(-7, 20), expected: -140...(-7)),
 
-      (times: 1, sides: -3, expected: -3...(-1)),
-      (times: 2, sides: -4, expected: -8...(-2)),
-      (times: 3, sides: -6, expected: -18...(-3)),
-      (times: 4, sides: -8, expected: -32...(-4)),
-      (times: 5, sides: -10, expected: -50...(-5)),
-      (times: 6, sides: -12, expected: -72...(-6)),
-      (times: 7, sides: -20, expected: -140...(-7)),
+      (operand: .roll(1, -3), expected: -3...(-1)),
+      (operand: .roll(2, -4), expected: -8...(-2)),
+      (operand: .roll(3, -6), expected: -18...(-3)),
+      (operand: .roll(4, -8), expected: -32...(-4)),
+      (operand: .roll(5, -10), expected: -50...(-5)),
+      (operand: .roll(6, -12), expected: -72...(-6)),
+      (operand: .roll(7, -20), expected: -140...(-7)),
 
-      (times: -1, sides: -3, expected: 1...3),
-      (times: -2, sides: -4, expected: 2...8),
-      (times: -3, sides: -6, expected: 3...18),
-      (times: -4, sides: -8, expected: 4...32),
-      (times: -5, sides: -10, expected: 5...50),
-      (times: -6, sides: -12, expected: 6...72),
-      (times: -7, sides: -20, expected: 7...140),
+      (operand: .roll(-1, -3), expected: 1...3),
+      (operand: .roll(-2, -4), expected: 2...8),
+      (operand: .roll(-3, -6), expected: 3...18),
+      (operand: .roll(-4, -8), expected: 4...32),
+      (operand: .roll(-5, -10), expected: 5...50),
+      (operand: .roll(-6, -12), expected: 6...72),
+      (operand: .roll(-7, -20), expected: 7...140),
 
-      (times: 0, sides: 3, expected: 0...0),
-      (times: 0, sides: 4, expected: 0...0),
-      (times: 0, sides: 6, expected: 0...0),
-      (times: 0, sides: 8, expected: 0...0),
-      (times: 0, sides: 10, expected: 0...0),
-      (times: 0, sides: 12, expected: 0...0),
-      (times: 0, sides: 20, expected: 0...0),
+      (operand: .roll(0, 3), expected: 0...0),
+      (operand: .roll(0, 4), expected: 0...0),
+      (operand: .roll(0, 6), expected: 0...0),
+      (operand: .roll(0, 8), expected: 0...0),
+      (operand: .roll(0, 10), expected: 0...0),
+      (operand: .roll(0, 12), expected: 0...0),
+      (operand: .roll(0, 20), expected: 0...0),
 
-      (times: -0, sides: 3, expected: 0...0),
-      (times: -0, sides: 4, expected: 0...0),
-      (times: -0, sides: 6, expected: 0...0),
-      (times: -0, sides: 8, expected: 0...0),
-      (times: -0, sides: 10, expected: 0...0),
-      (times: -0, sides: 12, expected: 0...0),
-      (times: -0, sides: 20, expected: 0...0),
+      (operand: .roll(-0, 3), expected: 0...0),
+      (operand: .roll(-0, 4), expected: 0...0),
+      (operand: .roll(-0, 6), expected: 0...0),
+      (operand: .roll(-0, 8), expected: 0...0),
+      (operand: .roll(-0, 10), expected: 0...0),
+      (operand: .roll(-0, 12), expected: 0...0),
+      (operand: .roll(-0, 20), expected: 0...0),
 
-      (times: 1, sides: 0, expected: 0...0),
-      (times: 2, sides: 0, expected: 0...0),
-      (times: 3, sides: 0, expected: 0...0),
-      (times: 4, sides: 0, expected: 0...0),
-      (times: 5, sides: 0, expected: 0...0),
-      (times: 6, sides: 0, expected: 0...0),
-      (times: 7, sides: 0, expected: 0...0),
+      (operand: .roll(1, 0), expected: 0...0),
+      (operand: .roll(2, 0), expected: 0...0),
+      (operand: .roll(3, 0), expected: 0...0),
+      (operand: .roll(4, 0), expected: 0...0),
+      (operand: .roll(5, 0), expected: 0...0),
+      (operand: .roll(6, 0), expected: 0...0),
+      (operand: .roll(7, 0), expected: 0...0),
 
-      (times: 1, sides: -0, expected: 0...0),
-      (times: 2, sides: -0, expected: 0...0),
-      (times: 3, sides: -0, expected: 0...0),
-      (times: 4, sides: -0, expected: 0...0),
-      (times: 5, sides: -0, expected: 0...0),
-      (times: 6, sides: -0, expected: 0...0),
-      (times: 7, sides: -0, expected: 0...0),
+      (operand: .roll(1, -0), expected: 0...0),
+      (operand: .roll(2, -0), expected: 0...0),
+      (operand: .roll(3, -0), expected: 0...0),
+      (operand: .roll(4, -0), expected: 0...0),
+      (operand: .roll(5, -0), expected: 0...0),
+      (operand: .roll(6, -0), expected: 0...0),
+      (operand: .roll(7, -0), expected: 0...0),
 
-      (times: 0, sides: 0, expected: 0...0),
-      (times: -0, sides: 0, expected: 0...0),
-      (times: 0, sides: -0, expected: 0...0),
-      (times: -0, sides: -0, expected: 0...0),
+      (operand: .roll(0, 0), expected: 0...0),
+      (operand: .roll(-0, 0), expected: 0...0),
+      (operand: .roll(0, -0), expected: 0...0),
+      (operand: .roll(-0, -0), expected: 0...0),
 
-      (times: 1, sides: Int.max, expected: 1...Int.max),
-      (times: 1, sides: Int.min + 1, expected: (Int.min + 1)...(-1)),
+      (operand: .roll(1, Int.max), expected: 1...Int.max),
+      (operand: .roll(1, Int.min + 1), expected: (Int.min + 1)...(-1)),
 
 //      Near infinite loops
-//      (times: Int.max, sides: 1, expected: Int.max...Int.max),
-//      (times: Int.min + 1, sides: 1, expected: (Int.min + 1)...(Int.min + 1)),
+//      (operand: .roll(Int.max, 1), expected: Int.max...Int.max),
+//      (operand: .roll(Int.min + 1, 1), expected: (Int.min + 1)...(Int.min + 1)),
     ]
 
     for fixture in fixtures {
-      let operand = Operand.roll(fixture.times, fixture.sides)
+      let operand = fixture.operand
       let expected = fixture.expected
       let actual = try! operand.value()
 
@@ -121,21 +119,16 @@ class OperandTests: XCTestCase {
   }
 
   func testRollValueWithOverflow() {
-    typealias Fixture = (
-      times: Int,
-      sides: Int
-    )
-
-    let fixtures: [Fixture] = [
-      (times: 1, sides: Int.min),
-      (times: Int.min, sides: 4),
-      (times: Int.min, sides: Int.min),
+    let fixtures: [Operand] = [
+      .roll(1, Int.min),
+      .roll(Int.min, 4),
+      .roll(Int.min, Int.min),
     ]
 
     let expected = ExpressionError.operationOverflow
 
     for fixture in fixtures {
-      let operand = Operand.roll(fixture.times, fixture.sides)
+      let operand = fixture
 
       XCTAssertThrowsError(try operand.value()) { error in
         XCTAssertEqual(expected, error as? ExpressionError)
