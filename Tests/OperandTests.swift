@@ -515,90 +515,84 @@ class OperandTests: XCTestCase {
     }
   }
 
-  func testMultiplication() {
+  func testMultiplicationWithNumbers() {
     typealias Fixture = (
-      operand1: Int,
-      operand2: Int,
-      expected: Int
+      operand1: Operand,
+      operand2: Operand,
+      expected: Operand
     )
 
     let fixtures: [Fixture] = [
-      (operand1: 6, operand2: 7, expected: 42),
-      (operand1: -6, operand2: 7, expected: -42),
-      (operand1: 6, operand2: -7, expected: -42),
-      (operand1: -6, operand2: -7, expected: 42),
+      (operand1: .number(1), operand2: .number(2), expected: .number(2)),
+      (operand1: .number(-1), operand2: .number(2), expected: .number(-2)),
+      (operand1: .number(1), operand2: .number(-2), expected: .number(-2)),
+      (operand1: .number(-1), operand2: .number(-2), expected: .number(2)),
 
-      (operand1: 7, operand2: 6, expected: 42),
-      (operand1: -7, operand2: 6, expected: -42),
-      (operand1: 7, operand2: -6, expected: -42),
-      (operand1: -7, operand2: -6, expected: 42),
+      (operand1: .number(2), operand2: .number(1), expected: .number(2)),
+      (operand1: .number(-2), operand2: .number(1), expected: .number(-2)),
+      (operand1: .number(2), operand2: .number(-1), expected: .number(-2)),
+      (operand1: .number(-2), operand2: .number(-1), expected: .number(2)),
 
-      (operand1: 0, operand2: 7, expected: 0),
-      (operand1: -0, operand2: 7, expected: 0),
-      (operand1: 0, operand2: -7, expected: 0),
-      (operand1: -0, operand2: -7, expected: 0),
+      (operand1: .number(0), operand2: .number(2), expected: .number(0)),
+      (operand1: .number(-0), operand2: .number(2), expected: .number(0)),
+      (operand1: .number(0), operand2: .number(-2), expected: .number(0)),
+      (operand1: .number(-0), operand2: .number(-2), expected: .number(0)),
 
-      (operand1: 6, operand2: 0, expected: 0),
-      (operand1: -6, operand2: 0, expected: 0),
-      (operand1: 6, operand2: -0, expected: 0),
-      (operand1: -6, operand2: -0, expected: 0),
+      (operand1: .number(1), operand2: .number(0), expected: .number(0)),
+      (operand1: .number(-1), operand2: .number(0), expected: .number(0)),
+      (operand1: .number(1), operand2: .number(-0), expected: .number(0)),
+      (operand1: .number(-1), operand2: .number(-0), expected: .number(0)),
 
-      (operand1: 0, operand2: 0, expected: 0),
-      (operand1: -0, operand2: 0, expected: 0),
-      (operand1: 0, operand2: -0, expected: 0),
-      (operand1: -0, operand2: -0, expected: 0),
+      (operand1: .number(0), operand2: .number(0), expected: .number(0)),
+      (operand1: .number(-0), operand2: .number(0), expected: .number(0)),
+      (operand1: .number(0), operand2: .number(-0), expected: .number(0)),
+      (operand1: .number(-0), operand2: .number(-0), expected: .number(0)),
 
-      (operand1: Int.max, operand2: 1, expected: Int.max),
-      (operand1: -Int.max, operand2: 1, expected: Int.min + 1),
-      (operand1: Int.max, operand2: -1, expected: Int.min + 1),
-      (operand1: -Int.max, operand2: -1, expected: Int.max),
+      (operand1: .number(1), operand2: .number(Int.max), expected: .number(Int.max)),
+      (operand1: .number(-1), operand2: .number(Int.max), expected: .number(-Int.max)),
+      (operand1: .number(Int.max), operand2: .number(1), expected: .number(Int.max)),
+      (operand1: .number(Int.max), operand2: .number(-1), expected: .number(-Int.max)),
 
-      (operand1: 1, operand2: Int.max, expected: Int.max),
-      (operand1: -1, operand2: Int.max, expected: Int.min + 1),
-      (operand1: 1, operand2: -Int.max, expected: Int.min + 1),
-      (operand1: -1, operand2: -Int.max, expected: Int.max),
-
-      (operand1: Int.min, operand2: 1, expected: Int.min),
-
-      (operand1: 1, operand2: Int.min, expected: Int.min),
+      (operand1: .number(1), operand2: .number(Int.min), expected: .number(Int.min)),
+      (operand1: .number(Int.min), operand2: .number(1), expected: .number(Int.min)),
     ]
 
     for fixture in fixtures {
-      let operand1 = Operand.number(fixture.operand1)
-      let operand2 = Operand.number(fixture.operand2)
-      let expected = Operand.number(fixture.expected)
+      let operand1 = fixture.operand1
+      let operand2 = fixture.operand2
+      let expected = fixture.expected
       let actual = try! operand1 * operand2
 
       XCTAssertEqual(expected, actual)
     }
   }
 
-  func testMultiplicationWithOverflow() {
+  func testMultiplicationWithNumbersAndOverflow() {
     typealias Fixture = (
-      operand1: Int,
-      operand2: Int
+      operand1: Operand,
+      operand2: Operand
     )
 
     let fixtures: [Fixture] = [
-      (operand1: Int.max, operand2: 2),
-      (operand1: -Int.max, operand2: 2),
-      (operand1: Int.max, operand2: -2),
-      (operand1: -Int.max, operand2: -2),
+      (operand1: .number(Int.max), operand2: .number(2)),
+      (operand1: .number(-Int.max), operand2: .number(2)),
+      (operand1: .number(Int.max), operand2: .number(-2)),
+      (operand1: .number(-Int.max), operand2: .number(-2)),
 
-      (operand1: 2, operand2: Int.max),
-      (operand1: -2, operand2: Int.max),
-      (operand1: 2, operand2: -Int.max),
-      (operand1: -2, operand2: -Int.max),
+      (operand1: .number(2), operand2: .number(Int.max)),
+      (operand1: .number(-2), operand2: .number(Int.max)),
+      (operand1: .number(2), operand2: .number(-Int.max)),
+      (operand1: .number(-2), operand2: .number(-Int.max)),
 
-      (operand1: Int.min, operand2: -1),
-      (operand1: -1, operand2: Int.min),
+      (operand1: .number(Int.min), operand2: .number(-1)),
+      (operand1: .number(-1), operand2: .number(Int.min)),
     ]
 
     let expected = ExpressionError.operationOverflow
 
     for fixture in fixtures {
-      let operand1 = Operand.number(fixture.operand1)
-      let operand2 = Operand.number(fixture.operand2)
+      let operand1 = fixture.operand1
+      let operand2 = fixture.operand2
 
       XCTAssertThrowsError(try operand1 * operand2) { error in
         XCTAssertEqual(expected, error as? ExpressionError)
