@@ -302,6 +302,9 @@ class OperandTests: XCTestCase {
 
       (operand1: .number(Int.min), operand2: .roll(-1, 1)),
       (operand1: .roll(-1, 1), operand2: .number(Int.min)),
+
+      (operand1: .roll(1, Int.min), operand2: .number(0)),
+      (operand1: .number(0), operand2: .roll(1, Int.min)),
     ]
 
     let expected = ExpressionError.operationOverflow
