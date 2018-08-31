@@ -600,6 +600,116 @@ class OperandTests: XCTestCase {
     }
   }
 
+  func testMultiplicationWithRolls() {
+    typealias Fixture = (
+      operand1: Operand,
+      operand2: Operand,
+      expected: Operand
+    )
+
+    let fixtures: [Fixture] = [
+      (operand1: .roll(1, 1), operand2: .number(2), expected: .number(2)),
+      (operand1: .roll(-1, 1), operand2: .number(2), expected: .number(-2)),
+      (operand1: .roll(1, 1), operand2: .number(-2), expected: .number(-2)),
+      (operand1: .roll(-1, 1), operand2: .number(-2), expected: .number(2)),
+
+      (operand1: .number(2), operand2: .roll(1, 1), expected: .number(2)),
+      (operand1: .number(-2), operand2: .roll(1, 1), expected: .number(-2)),
+      (operand1: .number(2), operand2: .roll(-1, 1), expected: .number(-2)),
+      (operand1: .number(-2), operand2: .roll(-1, 1), expected: .number(2)),
+
+      (operand1: .roll(0, 0), operand2: .number(2), expected: .number(0)),
+      (operand1: .roll(-0, 0), operand2: .number(2), expected: .number(0)),
+      (operand1: .roll(0, 0), operand2: .number(-2), expected: .number(0)),
+      (operand1: .roll(-0, 0), operand2: .number(-2), expected: .number(0)),
+
+      (operand1: .number(1), operand2: .roll(0, 0), expected: .number(0)),
+      (operand1: .number(-1), operand2: .roll(0, 0), expected: .number(0)),
+      (operand1: .number(1), operand2: .roll(-0, 0), expected: .number(0)),
+      (operand1: .number(-1), operand2: .roll(-0, 0), expected: .number(0)),
+
+      (operand1: .roll(0, 0), operand2: .number(0), expected: .number(0)),
+      (operand1: .roll(-0, 0), operand2: .number(0), expected: .number(0)),
+      (operand1: .roll(0, 0), operand2: .number(-0), expected: .number(0)),
+      (operand1: .roll(-0, 0), operand2: .number(-0), expected: .number(0)),
+
+      (operand1: .roll(1, 1), operand2: .number(Int.max), expected: .number(Int.max)),
+      (operand1: .roll(-1, 1), operand2: .number(Int.max), expected: .number(-Int.max)),
+      (operand1: .number(Int.max), operand2: .roll(1, 1), expected: .number(Int.max)),
+      (operand1: .number(Int.max), operand2: .roll(-1, 1), expected: .number(-Int.max)),
+
+      (operand1: .roll(1, 1), operand2: .number(Int.min), expected: .number(Int.min)),
+      (operand1: .number(Int.min), operand2: .roll(1, 1), expected: .number(Int.min)),
+
+      (operand1: .roll(1, 1), operand2: .roll(2, 1), expected: .number(2)),
+      (operand1: .roll(-1, 1), operand2: .roll(2, 1), expected: .number(-2)),
+      (operand1: .roll(1, 1), operand2: .roll(-2, 1), expected: .number(-2)),
+      (operand1: .roll(-1, 1), operand2: .roll(-2, 1), expected: .number(2)),
+
+      (operand1: .roll(2, 1), operand2: .roll(1, 1), expected: .number(2)),
+      (operand1: .roll(-2, 1), operand2: .roll(1, 1), expected: .number(-2)),
+      (operand1: .roll(2, 1), operand2: .roll(-1, 1), expected: .number(-2)),
+      (operand1: .roll(-2, 1), operand2: .roll(-1, 1), expected: .number(2)),
+
+      (operand1: .roll(0, 0), operand2: .roll(2, 1), expected: .number(0)),
+      (operand1: .roll(-0, 0), operand2: .roll(2, 1), expected: .number(0)),
+      (operand1: .roll(0, 0), operand2: .roll(-2, 1), expected: .number(0)),
+      (operand1: .roll(-0, 0), operand2: .roll(-2, 1), expected: .number(0)),
+
+      (operand1: .roll(1, 1), operand2: .roll(0, 0), expected: .number(0)),
+      (operand1: .roll(-1, 1), operand2: .roll(0, 0), expected: .number(0)),
+      (operand1: .roll(1, 1), operand2: .roll(-0, 0), expected: .number(0)),
+      (operand1: .roll(-1, 1), operand2: .roll(-0, 0), expected: .number(0)),
+
+      (operand1: .roll(0, 0), operand2: .roll(0, 0), expected: .number(0)),
+      (operand1: .roll(-0, 0), operand2: .roll(0, 0), expected: .number(0)),
+      (operand1: .roll(0, 0), operand2: .roll(-0, 0), expected: .number(0)),
+      (operand1: .roll(-0, 0), operand2: .roll(-0, 0), expected: .number(0)),
+    ]
+
+    for fixture in fixtures {
+      let operand1 = fixture.operand1
+      let operand2 = fixture.operand2
+      let expected = fixture.expected
+      let actual = try! operand1 * operand2
+
+      XCTAssertEqual(expected, actual)
+    }
+  }
+
+  func testMultiplicationWithRollsAndOverflow() {
+    typealias Fixture = (
+      operand1: Operand,
+      operand2: Operand
+    )
+
+    let fixtures: [Fixture] = [
+      (operand1: .number(Int.max), operand2: .number(2)),
+      (operand1: .number(-Int.max), operand2: .number(2)),
+      (operand1: .number(Int.max), operand2: .number(-2)),
+      (operand1: .number(-Int.max), operand2: .number(-2)),
+
+      (operand1: .number(2), operand2: .number(Int.max)),
+      (operand1: .number(-2), operand2: .number(Int.max)),
+      (operand1: .number(2), operand2: .number(-Int.max)),
+      (operand1: .number(-2), operand2: .number(-Int.max)),
+
+      (operand1: .number(Int.min), operand2: .number(-1)),
+      (operand1: .number(-1), operand2: .number(Int.min)),
+      ]
+
+    let expected = ExpressionError.operationOverflow
+
+    for fixture in fixtures {
+      let operand1 = fixture.operand1
+      let operand2 = fixture.operand2
+
+      XCTAssertThrowsError(try operand1 * operand2) { error in
+        XCTAssertEqual(expected, error as? ExpressionError)
+      }
+    }
+  }
+
   func testSubtraction() {
     typealias Fixture = (
       operand1: Int,
