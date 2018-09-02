@@ -6,7 +6,7 @@ enum Operand : Tokenable, Equatable {
 
   func value() throws -> Int {
     switch self {
-    case .number(let value):
+    case let .number(value):
       return value
 
     case let .roll(times, sides):
