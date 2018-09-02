@@ -4,6 +4,8 @@ enum Operand : Tokenable, Equatable {
   case number(Int)
   case roll(Int, Int)
 
+  // MARK: - Evaluation
+
   func value() throws -> Int {
     switch self {
     case let .number(value):
@@ -76,6 +78,8 @@ enum Operand : Tokenable, Equatable {
       return result
     }
   }
+
+  // MARK: - Operation
 
   static func +(left: Operand, right: Operand) throws -> Operand {
     let leftValue = try left.value()
