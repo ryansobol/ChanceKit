@@ -2,6 +2,146 @@
 import XCTest
 
 class OperandTests: XCTestCase {
+  func testAppendToNumber() {
+    typealias Fixture = (
+      operand: Operand,
+      digit: String,
+      expected: Operand
+    )
+
+    let fixtures: [Fixture] = [
+      (operand: .number(1), digit: "0", expected: .number(10)),
+      (operand: .number(21), digit: "0", expected: .number(210)),
+      (operand: .number(321), digit: "0", expected: .number(3210)),
+
+      (operand: .number(2), digit: "1", expected: .number(21)),
+      (operand: .number(32), digit: "1", expected: .number(321)),
+      (operand: .number(432), digit: "1", expected: .number(4321)),
+
+      (operand: .number(3), digit: "21", expected: .number(321)),
+      (operand: .number(43), digit: "21", expected: .number(4321)),
+      (operand: .number(543), digit: "21", expected: .number(54321)),
+
+      (operand: .number(0), digit: "9223372036854775807", expected: .number(Int.max)),
+      (operand: .number(9), digit: "223372036854775807", expected: .number(Int.max)),
+      (operand: .number(922337203685477580), digit: "7", expected: .number(Int.max)),
+    ]
+
+    for fixture in fixtures {
+      let digit = fixture.digit
+      let expected = fixture.expected
+
+      var operand = fixture.operand
+
+      try! operand.append(digit)
+
+      XCTAssertEqual(expected, operand)
+    }
+  }
+
+  func testAppendToNumberWithInvalidToken() {
+    typealias Fixture = (
+      operand: Operand,
+      digit: String
+    )
+
+    let fixtures: [Fixture] = [
+      (operand: .number(2), digit: "-"),
+      (operand: .number(2), digit: "+"),
+
+      (operand: .number(2), digit: "."),
+      (operand: .number(2), digit: ".0"),
+      (operand: .number(2), digit: "0.0"),
+
+      (operand: .number(2), digit: "-1"),
+      (operand: .number(2), digit: String(Int.min)),
+
+      (operand: .number(922337203685477580), digit: "8"),
+      (operand: .number(Int.max), digit: "0"),
+    ]
+
+    for fixture in fixtures {
+      let digit = fixture.digit
+      let expected = ExpressionError.invalidToken(digit)
+
+      var operand = fixture.operand
+
+      XCTAssertThrowsError(try operand.append(digit)) { error in
+        XCTAssertEqual(expected, error as? ExpressionError)
+      }
+    }
+  }
+
+  func testAppendToRoll() {
+    typealias Fixture = (
+      operand: Operand,
+      digit: String,
+      expected: Operand
+    )
+
+    let fixtures: [Fixture] = [
+      (operand: .roll(1, 1), digit: "0", expected: .roll(1, 10)),
+      (operand: .roll(1, 21), digit: "0", expected: .roll(1, 210)),
+      (operand: .roll(1, 321), digit: "0", expected: .roll(1, 3210)),
+
+      (operand: .roll(2, 2), digit: "1", expected: .roll(2, 21)),
+      (operand: .roll(2, 32), digit: "1", expected: .roll(2, 321)),
+      (operand: .roll(2, 432), digit: "1", expected: .roll(2, 4321)),
+
+      (operand: .roll(3, 3), digit: "21", expected: .roll(3, 321)),
+      (operand: .roll(3, 43), digit: "21", expected: .roll(3, 4321)),
+      (operand: .roll(3, 543), digit: "21", expected: .roll(3, 54321)),
+
+      (operand: .roll(1, 0), digit: "9223372036854775807", expected: .roll(1, Int.max)),
+      (operand: .roll(1, 9), digit: "223372036854775807", expected: .roll(1, Int.max)),
+      (operand: .roll(1, 922337203685477580), digit: "7", expected: .roll(1, Int.max)),
+    ]
+
+    for fixture in fixtures {
+      let digit = fixture.digit
+      let expected = fixture.expected
+
+      var operand = fixture.operand
+
+      try! operand.append(digit)
+
+      XCTAssertEqual(expected, operand)
+    }
+  }
+
+  func testAppendToRollWithInvalidToken() {
+    typealias Fixture = (
+      operand: Operand,
+      digit: String
+    )
+
+    let fixtures: [Fixture] = [
+      (operand: .roll(2, 2), digit: "-"),
+      (operand: .roll(2, 2), digit: "+"),
+
+      (operand: .roll(2, 2), digit: "."),
+      (operand: .roll(2, 2), digit: ".0"),
+      (operand: .roll(2, 2), digit: "0.0"),
+
+      (operand: .roll(2, 2), digit: "-1"),
+      (operand: .roll(2, 2), digit: String(Int.min)),
+
+      (operand: .roll(1, 922337203685477580), digit: "8"),
+      (operand: .roll(1, Int.max), digit: "0"),
+    ]
+
+    for fixture in fixtures {
+      let digit = fixture.digit
+      let expected = ExpressionError.invalidToken(digit)
+
+      var operand = fixture.operand
+
+      XCTAssertThrowsError(try operand.append(digit)) { error in
+        XCTAssertEqual(expected, error as? ExpressionError)
+      }
+    }
+  }
+
   func testNumberValue() {
     typealias Fixture = (
       operand: Operand,
