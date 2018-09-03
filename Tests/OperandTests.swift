@@ -2,6 +2,31 @@
 import XCTest
 
 class OperandTests: XCTestCase {
+  func testCases() {
+    typealias Fixture = (
+      operand: Operand,
+      expected: String
+    )
+
+    let fixtures: [Fixture] = [
+      (operand: .number(0), expected: "0"),
+      (operand: .number(Int.max), expected: String(Int.max)),
+      (operand: .number(Int.min), expected: String(Int.min)),
+
+      (operand: .roll(0, 0), expected: "0d0"),
+      (operand: .roll(Int.max, Int.max), expected: "\(String(Int.max))d\(String(Int.max))"),
+      (operand: .roll(Int.min, Int.min), expected: "\(String(Int.min))d\(String(Int.min))"),
+    ]
+
+    for fixture in fixtures {
+      let operand = fixture.operand
+      let expected = fixture.expected
+      let actual = String(describing: operand)
+
+      XCTAssertEqual(expected, actual)
+    }
+  }
+
   func testAppendToNumber() {
     typealias Fixture = (
       operand: Operand,

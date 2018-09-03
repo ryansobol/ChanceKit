@@ -2,6 +2,28 @@
 import XCTest
 
 class OperatorTests: XCTestCase {
+  func testCases() {
+    typealias Fixture = (
+      operator: Operator,
+      expected: String
+    )
+
+    let fixtures: [Fixture] = [
+      (operator: .addition, expected: "+"),
+      (operator: .division, expected: "÷"),
+      (operator: .multiplication, expected: "×"),
+      (operator: .subtraction, expected: "-"),
+    ]
+
+    for fixture in fixtures {
+      let `operator` = fixture.operator
+      let expected = fixture.expected
+      let actual = String(describing: `operator`)
+
+      XCTAssertEqual(expected, actual)
+    }
+  }
+
   func testHasPrecedence() {
     typealias Fixture = (
       operator1: String,

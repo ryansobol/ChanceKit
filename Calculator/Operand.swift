@@ -4,6 +4,18 @@ enum Operand : Tokenable, Equatable {
   case number(Int)
   case roll(Int, Int)
 
+  // MARK: - Presentation
+
+  var description: String {
+    switch self {
+    case let .number(value):
+      return String(value)
+
+    case let .roll(times, sides):
+      return "\(times)d\(sides)"
+    }
+  }
+
   // MARK: - Mutation
 
   mutating func append(_ digit: String) throws {

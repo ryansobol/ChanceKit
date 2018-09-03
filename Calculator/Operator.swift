@@ -4,6 +4,12 @@ enum Operator: String, Markable {
   case multiplication = "×"
   case subtraction = "-"
 
+  // MARK: - Presentation
+
+  var description: String {
+    return rawValue
+  }
+
   func hasPrecedence(_ other: Operator) -> Bool {
     let precedenceSelf: Int
     let precendenceOther: Int
