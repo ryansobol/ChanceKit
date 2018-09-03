@@ -1,6 +1,6 @@
 // https://www.youtube.com/watch?v=vXPL6UavUeA
 // https://www.youtube.com/watch?v=MeRb_1bddWg
-public struct Expression {
+public struct Expression: CustomStringConvertible {
   let infixTokens: [Tokenable]
 
   // MARK: - Initialization
@@ -21,6 +21,25 @@ public struct Expression {
 
       throw ExpressionError.invalidToken(infixToken)
     }
+  }
+
+  // MARK: - Presentation
+
+  public var description: String {
+    let result = infixTokens.reduce("") { accumulation, infixToken in
+      let description: String
+
+      if let operatorToken = infixToken as? Operator {
+        description = " \(String(describing: operatorToken)) "
+      }
+      else {
+        description = String(describing: infixToken)
+      }
+
+      return accumulation + description
+    }
+
+    return result.trimmingCharacters(in: .whitespaces)
   }
 
   // MARK: - Evaluation
