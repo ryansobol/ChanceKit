@@ -178,12 +178,13 @@ class ExpressionTests: XCTestCase {
 
   func testEvaluate() {
     for fixture in fixtures {
+      let infixTokens = fixture.infixTokens
       let expected = fixture.value
-      let expression = try! Expression(fixture.infixTokens)
-      var actual: Int? = nil
 
-      XCTAssertNoThrow(actual = try expression.evaluate())
-      XCTAssertEqual(expected, actual, "infixTokens: \(fixture.infixTokens)")
+      let expression = try! Expression(infixTokens)
+      let actual = try! expression.evaluate()
+
+      XCTAssertEqual(expected, actual, "infixTokens: \(infixTokens)")
     }
   }
 
