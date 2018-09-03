@@ -191,7 +191,7 @@ class ExpressionTests: XCTestCase {
   func testEvaluateError() {
     typealias Fixture = (
       infixTokens: [String],
-      expressionError: ExpressionError
+      expected: ExpressionError
     )
 
     let fixtures: [Fixture] = [
@@ -208,10 +208,13 @@ class ExpressionTests: XCTestCase {
     ]
 
     for fixture in fixtures {
-      let expression = try! Expression(fixture.infixTokens)
+      let infixTokens = fixture.infixTokens
+      let expected = fixture.expected
+
+      let expression = try! Expression(infixTokens)
 
       XCTAssertThrowsError(try expression.evaluate()) { error in
-        XCTAssertEqual(fixture.expressionError, error as? ExpressionError)
+        XCTAssertEqual(expected, error as? ExpressionError)
       }
     }
   }
@@ -219,11 +222,13 @@ class ExpressionTests: XCTestCase {
   func testEvaluatePerformance() {
     self.measure {
       for fixture in fixtures {
+        let infixTokens = fixture.infixTokens
         let expected = fixture.value
-        let expression = try! Expression(fixture.infixTokens)
+
+        let expression = try! Expression(infixTokens)
         let actual = try! expression.evaluate()
 
-        XCTAssertEqual(expected, actual, "infixTokens: \(fixture.infixTokens)")
+        XCTAssertEqual(expected, actual, "infixTokens: \(infixTokens)")
       }
     }
   }
