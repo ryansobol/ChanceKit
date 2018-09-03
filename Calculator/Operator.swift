@@ -10,6 +10,8 @@ enum Operator: String, Markable {
     return rawValue
   }
 
+  // MARK: - Comparison
+
   func hasPrecedence(_ other: Operator) -> Bool {
     let precedenceSelf: Int
     let precendenceOther: Int
@@ -32,6 +34,8 @@ enum Operator: String, Markable {
 
     return precedenceSelf > precendenceOther
   }
+
+  // MARK: - Evaluation
 
   func evaluate(_ operand1: Operand, _ operand2: Operand) throws -> Operand {
     switch self {
