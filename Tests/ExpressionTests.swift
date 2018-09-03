@@ -1,7 +1,7 @@
 import Calculator
 import XCTest
 
-class ExpressionTests : XCTestCase {
+class ExpressionTests: XCTestCase {
   typealias Fixture = (
     infixTokens: [String],
     expected: Int

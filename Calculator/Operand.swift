@@ -1,6 +1,6 @@
 import GameplayKit
 
-enum Operand : Tokenable, Equatable {
+enum Operand: Tokenable, Equatable {
   case number(Int)
   case roll(Int, Int)
 
