@@ -1,7 +1,7 @@
 // https://www.youtube.com/watch?v=vXPL6UavUeA
 // https://www.youtube.com/watch?v=MeRb_1bddWg
 public struct Expression: CustomStringConvertible {
-  let infixTokens: [Tokenable]
+  var infixTokens: [Tokenable]
 
   // MARK: - Initialization
 
@@ -26,6 +26,9 @@ public struct Expression: CustomStringConvertible {
   // MARK: - Presentation
 
   public var description: String {
+    // Copy into an immutable constant to prevent conflicting access to a mutable instance variable
+    let infixTokens = self.infixTokens
+
     let result = infixTokens.reduce("") { accumulation, infixToken in
       let description: String
 
@@ -45,6 +48,9 @@ public struct Expression: CustomStringConvertible {
   // MARK: - Evaluation
 
   func toPostfixTokens() throws -> [Tokenable] {
+    // Copy into an immutable constant to prevent conflicting access to a mutable instance variable
+    let infixTokens = self.infixTokens
+
     var markables = [Markable]()
     var postfixTokens = [Tokenable]()
 
@@ -154,5 +160,104 @@ public struct Expression: CustomStringConvertible {
     }
 
     return try operands[0].value()
+  }
+}
+
+// MARK: - Mutation
+
+extension Expression {
+  public mutating func push(_ infixToken: String) throws {
+    if let parenthesis = Parenthesis(rawValue: infixToken) {
+      infixTokens = pushed(parenthesisToken: parenthesis)
+      return
+    }
+
+    if let `operator` = Operator(rawValue: infixToken) {
+      infixTokens = pushed(operatorToken: `operator`)
+      return
+    }
+
+    if let digit = Int(infixToken) {
+      infixTokens = try pushed(digit: digit)
+      return
+    }
+
+    throw ExpressionError.invalidToken(infixToken)
+  }
+
+  func pushed(parenthesisToken: Parenthesis) -> [Tokenable] {
+    var infixTokens = self.infixTokens
+
+    if parenthesisToken == .close {
+      infixTokens.append(parenthesisToken)
+
+      return infixTokens
+    }
+
+    if let lastParenthesis = infixTokens.last as? Parenthesis, lastParenthesis == .close {
+      infixTokens.append(Operator.multiplication)
+    }
+    else if infixTokens.last is Operand {
+      infixTokens.append(Operator.multiplication)
+    }
+
+    infixTokens.append(parenthesisToken)
+
+    return infixTokens
+  }
+
+  func pushed(operatorToken: Operator) -> [Tokenable] {
+    var infixTokens = self.infixTokens
+
+    if infixTokens.last is Operator {
+      infixTokens.removeLast()
+    }
+
+    infixTokens.append(operatorToken)
+
+    return infixTokens
+  }
+
+  func pushed(digit: Int) throws -> [Tokenable] {
+    var digit = digit
+    var infixTokens = self.infixTokens
+
+    switch infixTokens.last {
+    case nil:
+      infixTokens.append(Operand.number(digit))
+
+    case let lastParenthesis as Parenthesis:
+      if lastParenthesis == .close {
+        infixTokens.append(Operator.multiplication)
+      }
+
+      infixTokens.append(Operand.number(digit))
+
+    case let lastOperator as Operator:
+      let tokenCount = infixTokens.count
+
+      if tokenCount == 1 && lastOperator == .addition {
+        infixTokens.removeLast()
+      }
+
+      if tokenCount == 1 && lastOperator == .subtraction {
+        infixTokens.removeLast()
+
+        digit.negate()
+      }
+
+      infixTokens.append(Operand.number(digit))
+
+    case var lastOperand as Operand:
+      try lastOperand.append(String(digit))
+
+      infixTokens.removeLast()
+      infixTokens.append(lastOperand)
+
+    default:
+      preconditionFailure()
+    }
+
+    return infixTokens
   }
 }
