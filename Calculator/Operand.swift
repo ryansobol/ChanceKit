@@ -16,34 +16,6 @@ enum Operand: Tokenable, Equatable {
     }
   }
 
-  // MARK: - Mutation
-
-  mutating func append(_ digit: String) throws {
-    guard let digitValue = Int(digit) else {
-      throw ExpressionError.invalidToken(digit)
-    }
-
-    if digitValue < 0 {
-      throw ExpressionError.invalidToken(digit)
-    }
-
-    switch self {
-    case let .number(value):
-      guard let nextValue = Int(String(value) + digit) else {
-        throw ExpressionError.invalidToken(digit)
-      }
-
-      self = .number(nextValue)
-
-    case let .roll(times, side):
-      guard let nextSide = Int(String(side) + digit) else {
-        throw ExpressionError.invalidToken(digit)
-      }
-
-      self = .roll(times, nextSide)
-    }
-  }
-
   // MARK: - Evaluation
 
   func value() throws -> Int {
@@ -172,5 +144,35 @@ enum Operand: Tokenable, Equatable {
     }
 
     return Operand.number(result)
+  }
+}
+
+// MARK: - Mutation
+
+extension Operand {
+  mutating func append(_ digit: String) throws {
+    guard let digitValue = Int(digit) else {
+      throw ExpressionError.invalidToken(digit)
+    }
+
+    if digitValue < 0 {
+      throw ExpressionError.invalidToken(digit)
+    }
+
+    switch self {
+    case let .number(value):
+      guard let nextValue = Int(String(value) + digit) else {
+        throw ExpressionError.invalidToken(digit)
+      }
+
+      self = .number(nextValue)
+
+    case let .roll(times, side):
+      guard let nextSide = Int(String(side) + digit) else {
+        throw ExpressionError.invalidToken(digit)
+      }
+
+      self = .roll(times, nextSide)
+    }
   }
 }
