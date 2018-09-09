@@ -150,7 +150,7 @@ enum Operand: Tokenable, Equatable {
 // MARK: - Mutation
 
 extension Operand {
-  mutating func append(_ digit: String) throws {
+  mutating func push(_ digit: String) throws {
     guard let digitValue = Int(digit) else {
       throw ExpressionError.invalidToken(digit)
     }

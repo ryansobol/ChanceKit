@@ -249,7 +249,7 @@ extension Expression {
       infixTokens.append(Operand.number(digit))
 
     case var lastOperand as Operand:
-      try lastOperand.append(String(digit))
+      try lastOperand.push(String(digit))
 
       infixTokens.removeLast()
       infixTokens.append(lastOperand)

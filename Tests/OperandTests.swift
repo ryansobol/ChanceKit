@@ -58,7 +58,7 @@ class OperandTests: XCTestCase {
 
       var operand = fixture.operand
 
-      try! operand.append(digit)
+      try! operand.push(digit)
 
       XCTAssertEqual(expected, operand)
     }
@@ -91,7 +91,7 @@ class OperandTests: XCTestCase {
 
       var operand = fixture.operand
 
-      XCTAssertThrowsError(try operand.append(digit)) { error in
+      XCTAssertThrowsError(try operand.push(digit)) { error in
         XCTAssertEqual(expected, error as? ExpressionError)
       }
     }
@@ -128,7 +128,7 @@ class OperandTests: XCTestCase {
 
       var operand = fixture.operand
 
-      try! operand.append(digit)
+      try! operand.push(digit)
 
       XCTAssertEqual(expected, operand)
     }
@@ -161,7 +161,7 @@ class OperandTests: XCTestCase {
 
       var operand = fixture.operand
 
-      XCTAssertThrowsError(try operand.append(digit)) { error in
+      XCTAssertThrowsError(try operand.push(digit)) { error in
         XCTAssertEqual(expected, error as? ExpressionError)
       }
     }
