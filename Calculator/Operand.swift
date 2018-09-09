@@ -3,9 +3,11 @@ import GameplayKit
 enum Operand: Tokenable, Equatable {
   case number(Int)
   case roll(Int, Int)
+}
 
-  // MARK: - Presentation
+// MARK: - Presentation
 
+extension Operand {
   var description: String {
     switch self {
     case let .number(value):
@@ -15,9 +17,11 @@ enum Operand: Tokenable, Equatable {
       return "\(times)d\(sides)"
     }
   }
+}
 
-  // MARK: - Evaluation
+// MARK: - Evaluation
 
+extension Operand {
   func value() throws -> Int {
     switch self {
     case let .number(value):
@@ -90,9 +94,11 @@ enum Operand: Tokenable, Equatable {
       return result
     }
   }
+}
 
-  // MARK: - Operation
+// MARK: - Operation
 
+extension Operand {
   static func +(left: Operand, right: Operand) throws -> Operand {
     let leftValue = try left.value()
     let rightValue = try right.value()
