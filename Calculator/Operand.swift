@@ -147,10 +147,10 @@ enum Operand: Tokenable, Equatable {
   }
 }
 
-// MARK: - Mutation
+// MARK: - Alteration
 
 extension Operand {
-  mutating func push(_ digit: String) throws {
+  func pushed(_ digit: String) throws -> Operand {
     guard let digitValue = Int(digit) else {
       throw ExpressionError.invalidToken(digit)
     }
@@ -165,14 +165,14 @@ extension Operand {
         throw ExpressionError.invalidToken(digit)
       }
 
-      self = .number(nextValue)
+      return .number(nextValue)
 
     case let .roll(times, side):
       guard let nextSide = Int(String(side) + digit) else {
         throw ExpressionError.invalidToken(digit)
       }
 
-      self = .roll(times, nextSide)
+      return .roll(times, nextSide)
     }
   }
 }

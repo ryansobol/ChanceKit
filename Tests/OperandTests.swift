@@ -53,14 +53,12 @@ class OperandTests: XCTestCase {
     ]
 
     for fixture in fixtures {
+      let operand = fixture.operand
       let digit = fixture.digit
       let expected = fixture.expected
+      let actual = try! operand.pushed(digit)
 
-      var operand = fixture.operand
-
-      try! operand.push(digit)
-
-      XCTAssertEqual(expected, operand)
+      XCTAssertEqual(expected, actual)
     }
   }
 
@@ -86,12 +84,11 @@ class OperandTests: XCTestCase {
     ]
 
     for fixture in fixtures {
+      let operand = fixture.operand
       let digit = fixture.digit
       let expected = ExpressionError.invalidToken(digit)
 
-      var operand = fixture.operand
-
-      XCTAssertThrowsError(try operand.push(digit)) { error in
+      XCTAssertThrowsError(try operand.pushed(digit)) { error in
         XCTAssertEqual(expected, error as? ExpressionError)
       }
     }
@@ -123,14 +120,12 @@ class OperandTests: XCTestCase {
     ]
 
     for fixture in fixtures {
+      let operand = fixture.operand
       let digit = fixture.digit
       let expected = fixture.expected
+      let actual = try! operand.pushed(digit)
 
-      var operand = fixture.operand
-
-      try! operand.push(digit)
-
-      XCTAssertEqual(expected, operand)
+      XCTAssertEqual(expected, actual)
     }
   }
 
@@ -156,12 +151,11 @@ class OperandTests: XCTestCase {
     ]
 
     for fixture in fixtures {
+      let operand = fixture.operand
       let digit = fixture.digit
       let expected = ExpressionError.invalidToken(digit)
 
-      var operand = fixture.operand
-
-      XCTAssertThrowsError(try operand.push(digit)) { error in
+      XCTAssertThrowsError(try operand.pushed(digit)) { error in
         XCTAssertEqual(expected, error as? ExpressionError)
       }
     }

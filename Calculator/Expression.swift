@@ -248,11 +248,11 @@ extension Expression {
 
       infixTokens.append(Operand.number(digit))
 
-    case var lastOperand as Operand:
-      try lastOperand.push(String(digit))
+    case let lastOperand as Operand:
+      let nextOperand = try lastOperand.pushed(String(digit))
 
       infixTokens.removeLast()
-      infixTokens.append(lastOperand)
+      infixTokens.append(nextOperand)
 
     default:
       preconditionFailure()
