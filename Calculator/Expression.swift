@@ -1,7 +1,7 @@
 // https://www.youtube.com/watch?v=vXPL6UavUeA
 // https://www.youtube.com/watch?v=MeRb_1bddWg
 public struct Expression: CustomStringConvertible {
-  var infixTokens: [Tokenable]
+  let infixTokens: [Tokenable]
 
   // MARK: - Initialization
 
@@ -23,12 +23,13 @@ public struct Expression: CustomStringConvertible {
     }
   }
 
+  init(_ infixTokens: [Tokenable]) {
+    self.infixTokens = infixTokens
+  }
+
   // MARK: - Presentation
 
   public var description: String {
-    // Copy into an immutable constant to prevent conflicting access to a mutable instance variable
-    let infixTokens = self.infixTokens
-
     let result = infixTokens.reduce("") { accumulation, infixToken in
       let description: String
 
@@ -48,9 +49,6 @@ public struct Expression: CustomStringConvertible {
   // MARK: - Evaluation
 
   func toPostfixTokens() throws -> [Tokenable] {
-    // Copy into an immutable constant to prevent conflicting access to a mutable instance variable
-    let infixTokens = self.infixTokens
-
     var markables = [Markable]()
     var postfixTokens = [Tokenable]()
 
@@ -163,23 +161,26 @@ public struct Expression: CustomStringConvertible {
   }
 }
 
-// MARK: - Mutation
+// MARK: - Alteration
 
 extension Expression {
-  public mutating func push(_ infixToken: String) throws {
+  public func pushed(_ infixToken: String) throws -> Expression {
     if let parenthesis = Parenthesis(rawValue: infixToken) {
-      infixTokens = pushed(parenthesisToken: parenthesis)
-      return
+      let infixTokens = pushed(parenthesisToken: parenthesis)
+
+      return Expression(infixTokens)
     }
 
     if let `operator` = Operator(rawValue: infixToken) {
-      infixTokens = pushed(operatorToken: `operator`)
-      return
+      let infixTokens = pushed(operatorToken: `operator`)
+
+      return Expression(infixTokens)
     }
 
     if let digit = Int(infixToken) {
-      infixTokens = try pushed(digit: digit)
-      return
+      let infixTokens = try pushed(digit: digit)
+
+      return Expression(infixTokens)
     }
 
     throw ExpressionError.invalidToken(infixToken)
@@ -219,7 +220,6 @@ extension Expression {
   }
 
   func pushed(digit: Int) throws -> [Tokenable] {
-    var digit = digit
     var infixTokens = self.infixTokens
 
     switch infixTokens.last {
@@ -239,6 +239,8 @@ extension Expression {
       if tokenCount == 1 && lastOperator == .addition {
         infixTokens.removeLast()
       }
+
+      var digit = digit
 
       if tokenCount == 1 && lastOperator == .subtraction {
         infixTokens.removeLast()

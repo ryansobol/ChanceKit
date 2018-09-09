@@ -380,10 +380,9 @@ class ExpressionTests: XCTestCase {
       let infixToken = fixture.infixToken
       let expected = fixture.expected
 
-      var expression = try! Expression(infixTokens)
-      try! expression.push(infixToken)
-
-      let actual = String(describing: expression)
+      let expression = try! Expression(infixTokens)
+      let nextExpression = try! expression.pushed(infixToken)
+      let actual = String(describing: nextExpression)
 
       XCTAssertEqual(expected, actual)
     }
@@ -418,10 +417,9 @@ class ExpressionTests: XCTestCase {
     for fixture in fixtures {
       let infixToken = fixture.infixToken
       let expected = fixture.expected
+      let expression = try! Expression([])
 
-      var expression = try! Expression([])
-
-      XCTAssertThrowsError(try expression.push(infixToken)) { error in
+      XCTAssertThrowsError(try expression.pushed(infixToken)) { error in
         XCTAssertEqual(expected, error as? ExpressionError)
       }
     }
