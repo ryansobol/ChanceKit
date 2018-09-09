@@ -3,15 +3,19 @@ enum Operator: String, Markable {
   case division = "÷"
   case multiplication = "×"
   case subtraction = "-"
+}
 
-  // MARK: - Presentation
+// MARK: - Presentation
 
+extension Operator {
   var description: String {
     return rawValue
   }
+}
 
-  // MARK: - Comparison
+// MARK: - Comparison
 
+extension Operator {
   func hasPrecedence(_ other: Operator) -> Bool {
     let precedenceSelf: Int
     let precendenceOther: Int
@@ -34,9 +38,11 @@ enum Operator: String, Markable {
 
     return precedenceSelf > precendenceOther
   }
+}
 
-  // MARK: - Evaluation
+// MARK: - Evaluation
 
+extension Operator {
   func evaluate(_ operand1: Operand, _ operand2: Operand) throws -> Operand {
     switch self {
     case .addition:
