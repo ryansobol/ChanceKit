@@ -27,7 +27,7 @@ class OperandTests: XCTestCase {
     }
   }
 
-  func testAppendToNumber() {
+  func testPushedToNumber() {
     typealias Fixture = (
       operand: Operand,
       digit: String,
@@ -62,7 +62,7 @@ class OperandTests: XCTestCase {
     }
   }
 
-  func testAppendToNumberWithInvalidToken() {
+  func testPushedToNumberWithInvalidToken() {
     typealias Fixture = (
       operand: Operand,
       digit: String
@@ -94,7 +94,7 @@ class OperandTests: XCTestCase {
     }
   }
 
-  func testAppendToRoll() {
+  func testPushedToRoll() {
     typealias Fixture = (
       operand: Operand,
       digit: String,
@@ -129,7 +129,7 @@ class OperandTests: XCTestCase {
     }
   }
 
-  func testAppendToRollWithInvalidToken() {
+  func testPushedToRollWithInvalidToken() {
     typealias Fixture = (
       operand: Operand,
       digit: String
