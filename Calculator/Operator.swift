@@ -1,13 +1,13 @@
-enum Operator: String, Markable {
+enum Operator: String {
   case addition = "+"
   case division = "÷"
   case multiplication = "×"
   case subtraction = "-"
 }
 
-// MARK: - Presentation
+// MARK: - Markable
 
-extension Operator {
+extension Operator: Markable {
   var description: String {
     return rawValue
   }

@@ -1,9 +1,11 @@
-enum Parenthesis: String, Markable {
+enum Parenthesis: String {
   case close = ")"
   case open = "("
+}
 
-  // MARK: - Presentation
+// MARK: - Markable
 
+extension Parenthesis: Markable {
   var description: String {
     return rawValue
   }

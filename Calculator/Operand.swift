@@ -1,13 +1,13 @@
 import GameplayKit
 
-enum Operand: Tokenable, Equatable {
+enum Operand: Equatable {
   case number(Int)
   case roll(Int, Int)
 }
 
-// MARK: - Presentation
+// MARK: - Tokenable
 
-extension Operand {
+extension Operand: Tokenable {
   var description: String {
     switch self {
     case let .number(value):
@@ -39,7 +39,7 @@ extension Operand {
 
       var result = 0
 
-      // TODO: - Allow users to cancel long-running loops (i.e. large times)
+      // TODO - Allow users to cancel long-running loops (i.e. large times)
       // Idea 1:
       //  - A concurrent, userInitiated dispatch queue
       //  - A concurrentPerform(iterations:) block within queue.sync(execute:)
