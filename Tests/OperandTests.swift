@@ -30,33 +30,42 @@ class OperandTests: XCTestCase {
   func testPushedToNumber() {
     typealias Fixture = (
       operand: Operand,
-      digit: String,
+      suffix: Int,
       expected: Operand
     )
 
     let fixtures: [Fixture] = [
-      (operand: .number(1), digit: "0", expected: .number(10)),
-      (operand: .number(21), digit: "0", expected: .number(210)),
-      (operand: .number(321), digit: "0", expected: .number(3210)),
+      (operand: .number(1), suffix: 0, expected: .number(10)),
+      (operand: .number(21), suffix: 0, expected: .number(210)),
 
-      (operand: .number(2), digit: "1", expected: .number(21)),
-      (operand: .number(32), digit: "1", expected: .number(321)),
-      (operand: .number(432), digit: "1", expected: .number(4321)),
+      (operand: .number(2), suffix: 1, expected: .number(21)),
+      (operand: .number(32), suffix: 1, expected: .number(321)),
 
-      (operand: .number(3), digit: "21", expected: .number(321)),
-      (operand: .number(43), digit: "21", expected: .number(4321)),
-      (operand: .number(543), digit: "21", expected: .number(54321)),
+      (operand: .number(8), suffix: 9, expected: .number(89)),
+      (operand: .number(78), suffix: 9, expected: .number(789)),
 
-      (operand: .number(0), digit: "9223372036854775807", expected: .number(Int.max)),
-      (operand: .number(9), digit: "223372036854775807", expected: .number(Int.max)),
-      (operand: .number(922337203685477580), digit: "7", expected: .number(Int.max)),
+      (operand: .number(0), suffix: Int.max, expected: .number(Int.max)),
+      (operand: .number(9), suffix: 223372036854775807, expected: .number(Int.max)),
+      (operand: .number(922337203685477580), suffix: 7, expected: .number(Int.max)),
+
+      (operand: .number(-1), suffix: 0, expected: .number(-10)),
+      (operand: .number(-21), suffix: 0, expected: .number(-210)),
+
+      (operand: .number(-2), suffix: 1, expected: .number(-21)),
+      (operand: .number(-32), suffix: 1, expected: .number(-321)),
+
+      (operand: .number(-8), suffix: 9, expected: .number(-89)),
+      (operand: .number(-78), suffix: 9, expected: .number(-789)),
+
+      (operand: .number(-9), suffix: 223372036854775808, expected: .number(Int.min)),
+      (operand: .number(-922337203685477580), suffix: 8, expected: .number(Int.min)),
     ]
 
     for fixture in fixtures {
       let operand = fixture.operand
-      let digit = fixture.digit
+      let suffix = fixture.suffix
       let expected = fixture.expected
-      let actual = try! operand.pushed(digit)
+      let actual = try! operand.pushed(suffix)
 
       XCTAssertEqual(expected, actual)
     }
@@ -65,30 +74,26 @@ class OperandTests: XCTestCase {
   func testPushedToNumberWithInvalidToken() {
     typealias Fixture = (
       operand: Operand,
-      digit: String
+      suffix: Int
     )
 
     let fixtures: [Fixture] = [
-      (operand: .number(2), digit: "-"),
-      (operand: .number(2), digit: "+"),
+      (operand: .number(1), suffix: -1),
+      (operand: .number(1), suffix: Int.min),
 
-      (operand: .number(2), digit: "."),
-      (operand: .number(2), digit: ".0"),
-      (operand: .number(2), digit: "0.0"),
+      (operand: .number(922337203685477580), suffix: 8),
+      (operand: .number(Int.max), suffix: 0),
 
-      (operand: .number(2), digit: "-1"),
-      (operand: .number(2), digit: String(Int.min)),
-
-      (operand: .number(922337203685477580), digit: "8"),
-      (operand: .number(Int.max), digit: "0"),
+      (operand: .number(-922337203685477580), suffix: 9),
+      (operand: .number(Int.min), suffix: 0),
     ]
 
     for fixture in fixtures {
       let operand = fixture.operand
-      let digit = fixture.digit
-      let expected = ExpressionError.invalidToken(digit)
+      let suffix = fixture.suffix
+      let expected = ExpressionError.invalidToken(String(suffix))
 
-      XCTAssertThrowsError(try operand.pushed(digit)) { error in
+      XCTAssertThrowsError(try operand.pushed(suffix)) { error in
         XCTAssertEqual(expected, error as? ExpressionError)
       }
     }
@@ -97,33 +102,83 @@ class OperandTests: XCTestCase {
   func testPushedToRoll() {
     typealias Fixture = (
       operand: Operand,
-      digit: String,
+      suffix: Int,
       expected: Operand
     )
 
     let fixtures: [Fixture] = [
-      (operand: .roll(1, 1), digit: "0", expected: .roll(1, 10)),
-      (operand: .roll(1, 21), digit: "0", expected: .roll(1, 210)),
-      (operand: .roll(1, 321), digit: "0", expected: .roll(1, 3210)),
+//      (operand: .rollWithPositiveSides(0), suffix: 0, expected: .roll(0, 0)),
+      (operand: .roll(0, 1), suffix: 0, expected: .roll(0, 10)),
+      (operand: .roll(0, 21), suffix: 0, expected: .roll(0, 210)),
 
-      (operand: .roll(2, 2), digit: "1", expected: .roll(2, 21)),
-      (operand: .roll(2, 32), digit: "1", expected: .roll(2, 321)),
-      (operand: .roll(2, 432), digit: "1", expected: .roll(2, 4321)),
+//      (operand: .rollWithPositiveSides(1), suffix: 1, expected: .roll(1, 1)),
+      (operand: .roll(1, 2), suffix: 1, expected: .roll(1, 21)),
+      (operand: .roll(1, 32), suffix: 1, expected: .roll(1, 321)),
 
-      (operand: .roll(3, 3), digit: "21", expected: .roll(3, 321)),
-      (operand: .roll(3, 43), digit: "21", expected: .roll(3, 4321)),
-      (operand: .roll(3, 543), digit: "21", expected: .roll(3, 54321)),
+//      (operand: .rollWithPositiveSides(9), suffix: 9, expected: .roll(9, 9)),
+      (operand: .roll(9, 8), suffix: 9, expected: .roll(9, 89)),
+      (operand: .roll(9, 78), suffix: 9, expected: .roll(9, 789)),
 
-      (operand: .roll(1, 0), digit: "9223372036854775807", expected: .roll(1, Int.max)),
-      (operand: .roll(1, 9), digit: "223372036854775807", expected: .roll(1, Int.max)),
-      (operand: .roll(1, 922337203685477580), digit: "7", expected: .roll(1, Int.max)),
+//      (operand: .rollWithPositiveSides(1), suffix: Int.max, expected: .roll(1, Int.max)),
+      (operand: .roll(1, 0), suffix: Int.max, expected: .roll(1, Int.max)),
+      (operand: .roll(1, 9), suffix: 223372036854775807, expected: .roll(1, Int.max)),
+      (operand: .roll(1, 922337203685477580), suffix: 7, expected: .roll(1, Int.max)),
+
+//      (operand: .rollWithNegativeSides(0), suffix: 0, expected: .roll(0, -0)),
+      (operand: .roll(0, -1), suffix: 0, expected: .roll(0, -10)),
+      (operand: .roll(0, -21), suffix: 0, expected: .roll(0, -210)),
+
+//      (operand: .rollWithNegativeSides(1), suffix: 1, expected: .roll(1, -1)),
+      (operand: .roll(1, -2), suffix: 1, expected: .roll(1, -21)),
+      (operand: .roll(1, -32), suffix: 1, expected: .roll(1, -321)),
+
+//      (operand: .rollWithNegativeSides(9), suffix: 9, expected: .roll(9, -9)),
+      (operand: .roll(9, -8), suffix: 9, expected: .roll(9, -89)),
+      (operand: .roll(9, -78), suffix: 9, expected: .roll(9, -789)),
+
+//      (operand: .rollWithNegativeSides(1), suffix: Int.max, expected: .roll(1, Int.min + 1)),
+      (operand: .roll(1, -9), suffix: 223372036854775808, expected: .roll(1, Int.min)),
+      (operand: .roll(1, -922337203685477580), suffix: 8, expected: .roll(1, Int.min)),
+
+//      (operand: .rollWithPositiveSides(-0), suffix: 0, expected: .roll(-0, 0)),
+      (operand: .roll(-0, 1), suffix: 0, expected: .roll(-0, 10)),
+      (operand: .roll(-0, 21), suffix: 0, expected: .roll(-0, 210)),
+
+//      (operand: .rollWithPositiveSides(-1), suffix: 1, expected: .roll(-1, 1)),
+      (operand: .roll(-1, 2), suffix: 1, expected: .roll(-1, 21)),
+      (operand: .roll(-1, 32), suffix: 1, expected: .roll(-1, 321)),
+
+//      (operand: .rollWithPositiveSides(-9), suffix: 9, expected: .roll(-9, 9)),
+      (operand: .roll(-9, 8), suffix: 9, expected: .roll(-9, 89)),
+      (operand: .roll(-9, 78), suffix: 9, expected: .roll(-9, 789)),
+
+//      (operand: .rollWithPositiveSides(-1), suffix: Int.max, expected: .roll(-1, Int.max)),
+      (operand: .roll(-1, 0), suffix: Int.max, expected: .roll(-1, Int.max)),
+      (operand: .roll(-1, 9), suffix: 223372036854775807, expected: .roll(-1, Int.max)),
+      (operand: .roll(-1, 922337203685477580), suffix: 7, expected: .roll(-1, Int.max)),
+
+//      (operand: .rollWithNegativeSides(-0), suffix: 0, expected: .roll(-0, -0)),
+      (operand: .roll(-0, -1), suffix: 0, expected: .roll(-0, -10)),
+      (operand: .roll(-0, -21), suffix: 0, expected: .roll(-0, -210)),
+
+//      (operand: .rollWithNegativeSides(-1), suffix: 1, expected: .roll(-1, -1)),
+      (operand: .roll(-1, -2), suffix: 1, expected: .roll(-1, -21)),
+      (operand: .roll(-1, -32), suffix: 1, expected: .roll(-1, -321)),
+
+//      (operand: .rollWithNegativeSides(-9), suffix: 9, expected: .roll(-9, -9)),
+      (operand: .roll(-9, -8), suffix: 9, expected: .roll(-9, -89)),
+      (operand: .roll(-9, -78), suffix: 9, expected: .roll(-9, -789)),
+
+//      (operand: .rollWithNegativeSides(-1), suffix: Int.max, expected: .roll(-1, Int.min + 1)),
+      (operand: .roll(-1, -9), suffix: 223372036854775808, expected: .roll(-1, Int.min)),
+      (operand: .roll(-1, -922337203685477580), suffix: 8, expected: .roll(-1, Int.min)),
     ]
 
     for fixture in fixtures {
       let operand = fixture.operand
-      let digit = fixture.digit
+      let suffix = fixture.suffix
       let expected = fixture.expected
-      let actual = try! operand.pushed(digit)
+      let actual = try! operand.pushed(suffix)
 
       XCTAssertEqual(expected, actual)
     }
@@ -132,32 +187,188 @@ class OperandTests: XCTestCase {
   func testPushedToRollWithInvalidToken() {
     typealias Fixture = (
       operand: Operand,
-      digit: String
+      suffix: Int
     )
 
     let fixtures: [Fixture] = [
-      (operand: .roll(2, 2), digit: "-"),
-      (operand: .roll(2, 2), digit: "+"),
+      (operand: .roll(2, 2), suffix: -1),
+      (operand: .roll(2, 2), suffix: Int.min),
 
-      (operand: .roll(2, 2), digit: "."),
-      (operand: .roll(2, 2), digit: ".0"),
-      (operand: .roll(2, 2), digit: "0.0"),
+      (operand: .roll(1, 922337203685477580), suffix: 8),
+      (operand: .roll(1, Int.max), suffix: 0),
 
-      (operand: .roll(2, 2), digit: "-1"),
-      (operand: .roll(2, 2), digit: String(Int.min)),
-
-      (operand: .roll(1, 922337203685477580), digit: "8"),
-      (operand: .roll(1, Int.max), digit: "0"),
+      (operand: .roll(1, -922337203685477580), suffix: 9),
+      (operand: .roll(1, Int.min), suffix: 0),
     ]
 
     for fixture in fixtures {
       let operand = fixture.operand
-      let digit = fixture.digit
-      let expected = ExpressionError.invalidToken(digit)
+      let suffix = fixture.suffix
+      let expected = ExpressionError.invalidToken(String(suffix))
 
-      XCTAssertThrowsError(try operand.pushed(digit)) { error in
+      XCTAssertThrowsError(try operand.pushed(suffix)) { error in
         XCTAssertEqual(expected, error as? ExpressionError)
       }
+    }
+  }
+
+  func testDroppedFromNumberToOperand() {
+    typealias Fixture = (
+      operand: Operand,
+      expected: Operand?
+    )
+
+    let fixtures: [Fixture] = [
+      (operand: .number(0), expected: nil),
+      (operand: .number(10), expected: Operand.number(1)),
+      (operand: .number(210), expected: Operand.number(21)),
+
+      (operand: .number(1), expected: nil),
+      (operand: .number(21), expected: Operand.number(2)),
+      (operand: .number(321), expected: Operand.number(32)),
+
+      (operand: .number(9), expected: nil),
+      (operand: .number(89), expected: Operand.number(8)),
+      (operand: .number(789), expected: Operand.number(78)),
+
+      (operand: .number(Int.max), expected: Operand.number(922337203685477580)),
+
+      (operand: .number(-10), expected: Operand.number(-1)),
+      (operand: .number(-210), expected: Operand.number(-21)),
+
+      (operand: .number(-21), expected: Operand.number(-2)),
+      (operand: .number(-321), expected: Operand.number(-32)),
+
+      (operand: .number(-89), expected: Operand.number(-8)),
+      (operand: .number(-789), expected: Operand.number(-78)),
+
+      (operand: .number(Int.min), expected: Operand.number(-922337203685477580)),
+    ]
+
+    for fixture in fixtures {
+      let operand = fixture.operand
+      let expected = fixture.expected
+      let actual = operand.dropped()
+
+      XCTAssertEqual(expected, actual as? Operand, "operand: \(operand)")
+    }
+  }
+
+  func testDroppedFromNumberToOperator() {
+    typealias Fixture = (
+      operand: Operand,
+      expected: Operator?
+    )
+
+    let fixtures: [Fixture] = [
+      (operand: .number(-0), expected: nil),
+      (operand: .number(-1), expected: Operator.subtraction),
+      (operand: .number(-9), expected: Operator.subtraction),
+    ]
+
+    for fixture in fixtures {
+      let operand = fixture.operand
+      let expected = fixture.expected
+      let actual = operand.dropped()
+
+      XCTAssertEqual(expected, actual as? Operator, "operand: \(operand)")
+    }
+  }
+
+  func testDroppedFromRollToOperand() {
+    typealias Fixture = (
+      operand: Operand,
+      expected: Operand
+    )
+
+    let fixtures: [Fixture] = [
+//      (operand: .roll(0, 0), expected: .rollWithPositiveSides(0)),
+      (operand: .roll(0, 10), expected: .roll(0, 1)),
+      (operand: .roll(0, 210), expected: .roll(0, 21)),
+
+//      (operand: .roll(1, 1), expected: .rollWithPositiveSides(1)),
+      (operand: .roll(1, 21), expected: .roll(1, 2)),
+      (operand: .roll(1, 321), expected: .roll(1, 32)),
+
+//      (operand: .roll(9, 9), expected: .rollWithPositiveSides(9)),
+      (operand: .roll(9, 89), expected: .roll(9, 8)),
+      (operand: .roll(9, 789), expected: .roll(9, 78)),
+
+      (operand: .roll(1, Int.max), expected: .roll(1, 922337203685477580)),
+
+//      (operand: .roll(0, -0), expected: .rollWithPositiveSides(0)),
+      (operand: .roll(0, -10), expected: .roll(0, -1)),
+      (operand: .roll(0, -210), expected: .roll(0, -21)),
+
+//      (operand: .roll(1, -1), expected: .rollWithNegativeSides(1)),
+      (operand: .roll(1, -21), expected: .roll(1, -2)),
+      (operand: .roll(1, -321), expected: .roll(1, -32)),
+
+//      (operand: .roll(9, -9), expected: .rollWithNegativeSides(9)),
+      (operand: .roll(9, -89), expected: .roll(9, -8)),
+      (operand: .roll(9, -789), expected: .roll(9, -78)),
+
+      (operand: .roll(1, Int.min), expected: .roll(1, -922337203685477580)),
+
+//      (operand: .roll(-0, 0), expected: .rollWithPositiveSides(-0)),
+      (operand: .roll(-0, 10), expected: .roll(-0, 1)),
+      (operand: .roll(-0, 210), expected: .roll(-0, 21)),
+
+//      (operand: .roll(-1, 1), expected: .rollWithPositiveSides(-1)),
+      (operand: .roll(-1, 21), expected: .roll(-1, 2)),
+      (operand: .roll(-1, 321), expected: .roll(-1, 32)),
+
+//      (operand: .roll(-9, 9), expected: .rollWithPositiveSides(-9)),
+      (operand: .roll(-9, 89), expected: .roll(-9, 8)),
+      (operand: .roll(-9, 789), expected: .roll(-9, 78)),
+
+      (operand: .roll(-1, Int.max), expected: .roll(-1, 922337203685477580)),
+
+//      (operand: .roll(-0, -0), expected: .rollWithPositiveSides(0)),
+      (operand: .roll(-0, -10), expected: .roll(-0, -1)),
+      (operand: .roll(-0, -210), expected: .roll(-0, -21)),
+
+//      (operand: .roll(-1, -1), expected: .rollWithNegativeSides(-1)),
+      (operand: .roll(-1, -21), expected: .roll(-1, -2)),
+      (operand: .roll(-1, -321), expected: .roll(-1, -32)),
+
+//      (operand: .roll(-9, -9), expected: .rollWithNegativeSides(-9)),
+      (operand: .roll(-9, -89), expected: .roll(-9, -8)),
+      (operand: .roll(-9, -789), expected: .roll(-9, -78)),
+
+      (operand: .roll(-1, Int.min), expected: .roll(-1, -922337203685477580)),
+
+//      (operand: .rollWithPositiveSides(0), expected: .number(0)),
+//      (operand: .rollWithPositiveSides(1), expected: .number(1)),
+//      (operand: .rollWithPositiveSides(9), expected: .number(9)),
+//
+//      (operand: .rollWithPositiveSides(Int.max), expected: .number(Int.max)),
+//
+//      (operand: .rollWithPositiveSides(-0), expected: .number(-0)),
+//      (operand: .rollWithPositiveSides(-1), expected: .number(-1)),
+//      (operand: .rollWithPositiveSides(-9), expected: .number(-9)),
+//
+//      (operand: .rollWithPositiveSides(Int.min), expected: .number(Int.min)),
+//
+//      (operand: .rollWithNegativeSides(0), expected: .rollWithPositiveSides(0)),
+//      (operand: .rollWithNegativeSides(1), expected: .rollWithPositiveSides(1)),
+//      (operand: .rollWithNegativeSides(9), expected: .rollWithPositiveSides(9)),
+//
+//      (operand: .rollWithNegativeSides(Int.max), expected: .rollWithPositiveSides(Int.max)),
+//
+//      (operand: .rollWithNegativeSides(-0), expected: .rollWithPositiveSides(-0)),
+//      (operand: .rollWithNegativeSides(-1), expected: .rollWithPositiveSides(-1)),
+//      (operand: .rollWithNegativeSides(-9), expected: .rollWithPositiveSides(-9)),
+//
+//      (operand: .rollWithNegativeSides(Int.min), expected: .rollWithPositiveSides(Int.min)),
+    ]
+
+    for fixture in fixtures {
+      let operand = fixture.operand
+      let expected = fixture.expected
+      let actual = operand.dropped()
+
+      XCTAssertEqual(expected, actual as? Operand, "operand: \(operand)")
     }
   }
 

@@ -19,6 +19,75 @@ extension Operand: Tokenable {
   }
 }
 
+// MARK: - Inclusion
+
+extension Operand {
+  func pushed(_ suffix: Int) throws -> Operand {
+    let suffixChars = String(suffix)
+
+    if suffix < 0 {
+      throw ExpressionError.invalidToken(suffixChars)
+    }
+
+    switch self {
+    case let .number(value):
+      guard let nextValue = Int(String(value) + suffixChars) else {
+        throw ExpressionError.invalidToken(suffixChars)
+      }
+
+      return .number(nextValue)
+
+    case let .roll(times, side):
+      guard let nextSide = Int(String(side) + suffixChars) else {
+        throw ExpressionError.invalidToken(suffixChars)
+      }
+
+      return .roll(times, nextSide)
+    }
+  }
+}
+
+// MARK: - Exclusion
+
+extension Operand {
+  func dropped() -> Tokenable? {
+    switch self {
+    case let .number(value):
+      let quotient = value / 10
+      let remainder = value % 10
+
+      if quotient != 0 {
+        return Operand.number(quotient)
+      }
+
+      if remainder < 0 {
+        return Operator.subtraction
+      }
+
+      return nil
+
+    case let .roll(times, sides):
+      let quotient = sides / 10
+//      let remainder = sides % 10
+
+      if quotient != 0 {
+        return Operand.roll(times, quotient)
+      }
+
+//      if remainder < 0 {
+//        if quotient >= 0 {
+//          return (Operator.rollWithPositiveSides(times), abs(remainder))
+//        }
+//        else {
+//          return (Operator.rollWithNegativeSides(times), abs(remainder))
+//        }
+//      }
+
+      return nil
+    }
+  }
+}
+
 // MARK: - Evaluation
 
 extension Operand {
@@ -150,35 +219,5 @@ extension Operand {
     }
 
     return Operand.number(result)
-  }
-}
-
-// MARK: - Alteration
-
-extension Operand {
-  func pushed(_ digit: String) throws -> Operand {
-    guard let digitValue = Int(digit) else {
-      throw ExpressionError.invalidToken(digit)
-    }
-
-    if digitValue < 0 {
-      throw ExpressionError.invalidToken(digit)
-    }
-
-    switch self {
-    case let .number(value):
-      guard let nextValue = Int(String(value) + digit) else {
-        throw ExpressionError.invalidToken(digit)
-      }
-
-      return .number(nextValue)
-
-    case let .roll(times, side):
-      guard let nextSide = Int(String(side) + digit) else {
-        throw ExpressionError.invalidToken(digit)
-      }
-
-      return .roll(times, nextSide)
-    }
   }
 }

@@ -22,6 +22,7 @@ public struct Expression {
   init(_ infixTokens: [Tokenable]) {
     self.infixTokens = infixTokens
   }
+}
 
 // MARK: - CustomStringConvertible
 
@@ -134,7 +135,7 @@ extension Expression {
       infixTokens.append(Operand.number(digit))
 
     case let lastOperand as Operand:
-      let nextOperand = try lastOperand.pushed(String(digit))
+      let nextOperand = try lastOperand.pushed(digit)
 
       infixTokens.removeLast()
       infixTokens.append(nextOperand)
