@@ -1,8 +1,12 @@
 @testable import Calculator
 import XCTest
 
-class OperatorTests: XCTestCase {
-  func testCases() {
+class OperatorTests: XCTestCase {}
+
+// MARK: - Markable
+
+extension OperatorTests {
+  func testDescription() {
     typealias Fixture = (
       operator: Operator,
       expected: String
@@ -23,7 +27,11 @@ class OperatorTests: XCTestCase {
       XCTAssertEqual(expected, actual)
     }
   }
+}
 
+// MARK: - Comparison
+
+extension OperandTests {
   func testHasPrecedence() {
     typealias Fixture = (
       operator1: String,
@@ -62,7 +70,11 @@ class OperatorTests: XCTestCase {
       XCTAssertEqual(expected, actual, "operator1: \(operator1) operator2: \(operator2)")
     }
   }
+}
 
+// MARK: - Evaluation
+
+extension OperandTests {
   func testEvaluate() {
     typealias Fixture = (
       operation: Operator,
