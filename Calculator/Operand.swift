@@ -54,11 +54,12 @@ extension Operand {
     switch self {
     case let .number(value):
       let quotient = value / 10
-      let remainder = value % 10
 
       if quotient != 0 {
         return Operand.number(quotient)
       }
+
+      let remainder = value % 10
 
       if remainder < 0 {
         return Operator.subtraction
@@ -68,12 +69,13 @@ extension Operand {
 
     case let .roll(times, sides):
       let quotient = sides / 10
-//      let remainder = sides % 10
 
       if quotient != 0 {
         return Operand.roll(times, quotient)
       }
 
+//      let remainder = sides % 10
+//
 //      if remainder < 0 {
 //        if quotient >= 0 {
 //          return (Operator.rollWithPositiveSides(times), abs(remainder))
