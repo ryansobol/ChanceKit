@@ -170,7 +170,7 @@ extension Operand {
 // MARK: - Operation
 
 extension Operand {
-  static func +(left: Operand, right: Operand) throws -> Operand {
+  static func + (left: Operand, right: Operand) throws -> Operand {
     let leftValue = try left.value()
     let rightValue = try right.value()
     let (result, didOverflow) = leftValue.addingReportingOverflow(rightValue)
@@ -182,7 +182,7 @@ extension Operand {
     return Operand.number(result)
   }
 
-  static func /(left: Operand, right: Operand) throws -> Operand {
+  static func / (left: Operand, right: Operand) throws -> Operand {
     let rightValue = try right.value()
 
     if rightValue == 0 {
@@ -199,7 +199,7 @@ extension Operand {
     return Operand.number(result)
   }
 
-  static func *(left: Operand, right: Operand) throws -> Operand {
+  static func * (left: Operand, right: Operand) throws -> Operand {
     let leftValue = try left.value()
     let rightValue = try right.value()
     let (result, didOverflow) = leftValue.multipliedReportingOverflow(by: rightValue)
@@ -211,7 +211,7 @@ extension Operand {
     return Operand.number(result)
   }
 
-  static func -(left: Operand, right: Operand) throws -> Operand {
+  static func - (left: Operand, right: Operand) throws -> Operand {
     let leftValue = try left.value()
     let rightValue = try right.value()
     let (result, didOverflow) = leftValue.subtractingReportingOverflow(rightValue)
