@@ -116,8 +116,8 @@
 		92CD302020AD0E6C002462B3 /* Tests */ = {
 			isa = PBXGroup;
 			children = (
-				92CD302A20AD0EBD002462B3 /* ExpressionTests.swift */,
 				92A4CC7020AD143C0096AF98 /* Info.plist */,
+				92CD302A20AD0EBD002462B3 /* ExpressionTests.swift */,
 				92391F0120B130A800FE8006 /* OperandTests.swift */,
 				924105A920B06B19009FC568 /* OperatorTests.swift */,
 				92D513F5213DA02C00973B6F /* ParenthesisTests.swift */,
