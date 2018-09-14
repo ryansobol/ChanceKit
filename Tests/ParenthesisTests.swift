@@ -1,8 +1,12 @@
 @testable import Calculator
 import XCTest
 
-class ParenthesisTests: XCTestCase {
-  func testCases() {
+class ParenthesisTests: XCTestCase {}
+
+// MARK: - Markable
+
+extension ParenthesisTests {
+  func testDescription() {
     typealias Fixture = (
       parenthesis: Parenthesis,
       expected: String
