@@ -23,23 +23,23 @@ extension Operand: Tokenable {
 
 extension Operand {
   func pushed(_ suffix: Int) throws -> Operand {
-    let suffixChars = String(suffix)
+    let suffixToken = String(suffix)
 
     if suffix < 0 {
-      throw ExpressionError.invalidToken(suffixChars)
+      throw ExpressionError.invalidToken(suffixToken)
     }
 
     switch self {
     case let .number(value):
-      guard let nextValue = Int(String(value) + suffixChars) else {
-        throw ExpressionError.invalidToken(suffixChars)
+      guard let nextValue = Int(String(value) + suffixToken) else {
+        throw ExpressionError.invalidToken(suffixToken)
       }
 
       return .number(nextValue)
 
     case let .roll(times, side):
-      guard let nextSide = Int(String(side) + suffixChars) else {
-        throw ExpressionError.invalidToken(suffixChars)
+      guard let nextSide = Int(String(side) + suffixToken) else {
+        throw ExpressionError.invalidToken(suffixToken)
       }
 
       return .roll(times, nextSide)
