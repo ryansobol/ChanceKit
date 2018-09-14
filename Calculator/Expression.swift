@@ -24,6 +24,17 @@ public struct Expression {
   }
 }
 
+// MARK: - Equatable
+
+extension Expression: Equatable {
+  public static func == (lhs: Expression, rhs: Expression) -> Bool {
+    let lht = lhs.infixTokens
+    let rht = rhs.infixTokens
+
+    return lht.count == rht.count && !zip(lht, rht).contains { !$0.isEqualTo($1) }
+  }
+}
+
 // MARK: - CustomStringConvertible
 
 extension Expression: CustomStringConvertible {
@@ -45,7 +56,7 @@ extension Expression: CustomStringConvertible {
   }
 }
 
-// MARK: - Alteration
+// MARK: - Inclusion
 
 extension Expression {
   public func pushed(_ infixToken: String) throws -> Expression {
@@ -145,6 +156,24 @@ extension Expression {
     }
 
     return infixTokens
+  }
+}
+
+// MARK: - Exclusion
+
+extension Expression {
+  public func dropped() -> Expression {
+    var infixTokens = self.infixTokens
+
+    guard let lastInfixToken = infixTokens.popLast() else {
+      return self
+    }
+
+    if let lastOperand = lastInfixToken as? Operand, let nextTokenable = lastOperand.dropped() {
+      infixTokens.append(nextTokenable)
+    }
+
+    return Expression(infixTokens)
   }
 }
 

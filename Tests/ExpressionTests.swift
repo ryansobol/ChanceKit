@@ -425,6 +425,176 @@ class ExpressionTests: XCTestCase {
     }
   }
 
+  func testDropped() {
+    typealias Fixture = (
+      expression: Expression,
+      expected: Expression
+    )
+
+    let fixtures: [Fixture] = [
+      (expression: try! Expression([]), expected: try! Expression([])),
+
+      (expression: try! Expression(["("]), expected: try! Expression([])),
+      (expression: try! Expression([")"]), expected: try! Expression([])),
+      (expression: try! Expression(["+"]), expected: try! Expression([])),
+      (expression: try! Expression(["÷"]), expected: try! Expression([])),
+      (expression: try! Expression(["×"]), expected: try! Expression([])),
+      (expression: try! Expression(["-"]), expected: try! Expression([])),
+      (expression: try! Expression(["0"]), expected: try! Expression([])),
+      (expression: try! Expression(["1"]), expected: try! Expression([])),
+      (expression: try! Expression(["9"]), expected: try! Expression([])),
+
+      (expression: try! Expression(["(", "("]), expected: try! Expression(["("])),
+      (expression: try! Expression(["(", ")"]), expected: try! Expression(["("])),
+      (expression: try! Expression(["(", "+"]), expected: try! Expression(["("])),
+      (expression: try! Expression(["(", "÷"]), expected: try! Expression(["("])),
+      (expression: try! Expression(["(", "×"]), expected: try! Expression(["("])),
+      (expression: try! Expression(["(", "-"]), expected: try! Expression(["("])),
+      (expression: try! Expression(["(", "0"]), expected: try! Expression(["("])),
+      (expression: try! Expression(["(", "1"]), expected: try! Expression(["("])),
+      (expression: try! Expression(["(", "9"]), expected: try! Expression(["("])),
+
+      (expression: try! Expression([")", "×", "("]), expected: try! Expression([")", "×"])),
+      (expression: try! Expression([")", ")"]), expected: try! Expression([")"])),
+      (expression: try! Expression([")", "+"]), expected: try! Expression([")"])),
+      (expression: try! Expression([")", "÷"]), expected: try! Expression([")"])),
+      (expression: try! Expression([")", "×"]), expected: try! Expression([")"])),
+      (expression: try! Expression([")", "-"]), expected: try! Expression([")"])),
+      (expression: try! Expression([")", "×", "0"]), expected: try! Expression([")", "×"])),
+      (expression: try! Expression([")", "×", "1"]), expected: try! Expression([")", "×"])),
+      (expression: try! Expression([")", "×", "9"]), expected: try! Expression([")", "×"])),
+
+      (expression: try! Expression(["+", "("]), expected: try! Expression(["+"])),
+      (expression: try! Expression(["+", ")"]), expected: try! Expression(["+"])),
+
+      (expression: try! Expression(["÷", "("]), expected: try! Expression(["÷"])),
+      (expression: try! Expression(["÷", ")"]), expected: try! Expression(["÷"])),
+      (expression: try! Expression(["÷", "0"]), expected: try! Expression(["÷"])),
+      (expression: try! Expression(["÷", "1"]), expected: try! Expression(["÷"])),
+      (expression: try! Expression(["÷", "9"]), expected: try! Expression(["÷"])),
+
+      (expression: try! Expression(["×", "("]), expected: try! Expression(["×"])),
+      (expression: try! Expression(["×", ")"]), expected: try! Expression(["×"])),
+      (expression: try! Expression(["×", "0"]), expected: try! Expression(["×"])),
+      (expression: try! Expression(["×", "1"]), expected: try! Expression(["×"])),
+      (expression: try! Expression(["×", "9"]), expected: try! Expression(["×"])),
+
+      (expression: try! Expression(["-", "("]), expected: try! Expression(["-"])),
+      (expression: try! Expression(["-", ")"]), expected: try! Expression(["-"])),
+      (expression: try! Expression(["-1"]), expected: try! Expression(["-"])),
+      (expression: try! Expression(["-9"]), expected: try! Expression(["-"])),
+
+      (expression: try! Expression(["0", "×", "("]), expected: try! Expression(["0", "×"])),
+      (expression: try! Expression(["0", ")"]), expected: try! Expression(["0"])),
+      (expression: try! Expression(["0", "+"]), expected: try! Expression(["0"])),
+      (expression: try! Expression(["0", "÷"]), expected: try! Expression(["0"])),
+      (expression: try! Expression(["0", "×"]), expected: try! Expression(["0"])),
+      (expression: try! Expression(["0", "-"]), expected: try! Expression(["0"])),
+
+      (expression: try! Expression(["1", "×", "("]), expected: try! Expression(["1", "×"])),
+      (expression: try! Expression(["1", ")"]), expected: try! Expression(["1"])),
+      (expression: try! Expression(["1", "+"]), expected: try! Expression(["1"])),
+      (expression: try! Expression(["1", "÷"]), expected: try! Expression(["1"])),
+      (expression: try! Expression(["1", "×"]), expected: try! Expression(["1"])),
+      (expression: try! Expression(["1", "-"]), expected: try! Expression(["1"])),
+      (expression: try! Expression(["10"]), expected: try! Expression(["1"])),
+      (expression: try! Expression(["11"]), expected: try! Expression(["1"])),
+      (expression: try! Expression(["19"]), expected: try! Expression(["1"])),
+
+      (expression: try! Expression(["9", "×", "("]), expected: try! Expression(["9", "×"])),
+      (expression: try! Expression(["9", ")",]), expected: try! Expression(["9"])),
+      (expression: try! Expression(["9", "+",]), expected: try! Expression(["9"])),
+      (expression: try! Expression(["9", "÷",]), expected: try! Expression(["9"])),
+      (expression: try! Expression(["9", "×",]), expected: try! Expression(["9"])),
+      (expression: try! Expression(["9", "-",]), expected: try! Expression(["9"])),
+      (expression: try! Expression(["9", "0",]), expected: try! Expression(["9"])),
+      (expression: try! Expression(["9", "1",]), expected: try! Expression(["9"])),
+      (expression: try! Expression(["9", "9",]), expected: try! Expression(["9"])),
+
+      (expression: try! Expression(["1", "×", "(", "("]), expected: try! Expression(["1", "×", "("])),
+      (expression: try! Expression(["1", "×", "(", ")"]), expected: try! Expression(["1", "×", "("])),
+      (expression: try! Expression(["1", "×", "(", "+"]), expected: try! Expression(["1", "×", "("])),
+      (expression: try! Expression(["1", "×", "(", "÷"]), expected: try! Expression(["1", "×", "("])),
+      (expression: try! Expression(["1", "×", "(", "×"]), expected: try! Expression(["1", "×", "("])),
+      (expression: try! Expression(["1", "×", "(", "-"]), expected: try! Expression(["1", "×", "("])),
+      (expression: try! Expression(["1", "×", "(", "0"]), expected: try! Expression(["1", "×", "("])),
+      (expression: try! Expression(["1", "×", "(", "1"]), expected: try! Expression(["1", "×", "("])),
+      (expression: try! Expression(["1", "×", "(", "9"]), expected: try! Expression(["1", "×", "("])),
+
+      (expression: try! Expression(["1", ")", "×", "("]), expected: try! Expression(["1", ")", "×"])),
+      (expression: try! Expression(["1", ")", ")"]), expected: try! Expression(["1", ")"])),
+      (expression: try! Expression(["1", ")", "+"]), expected: try! Expression(["1", ")"])),
+      (expression: try! Expression(["1", ")", "÷"]), expected: try! Expression(["1", ")"])),
+      (expression: try! Expression(["1", ")", "×"]), expected: try! Expression(["1", ")"])),
+      (expression: try! Expression(["1", ")", "-"]), expected: try! Expression(["1", ")"])),
+      (expression: try! Expression(["1", ")", "×", "0"]), expected: try! Expression(["1", ")", "×"])),
+      (expression: try! Expression(["1", ")", "×", "1"]), expected: try! Expression(["1", ")", "×"])),
+      (expression: try! Expression(["1", ")", "×", "9"]), expected: try! Expression(["1", ")", "×"])),
+
+      (expression: try! Expression(["1", "+", "("]), expected: try! Expression(["1", "+"])),
+      (expression: try! Expression(["1", "+", ")"]), expected: try! Expression(["1", "+"])),
+      (expression: try! Expression(["1", "+", "0"]), expected: try! Expression(["1", "+"])),
+      (expression: try! Expression(["1", "+", "1"]), expected: try! Expression(["1", "+"])),
+      (expression: try! Expression(["1", "+", "9"]), expected: try! Expression(["1", "+"])),
+
+      (expression: try! Expression(["1", "÷", "("]), expected: try! Expression(["1", "÷"])),
+      (expression: try! Expression(["1", "÷", ")"]), expected: try! Expression(["1", "÷"])),
+      (expression: try! Expression(["1", "÷", "0"]), expected: try! Expression(["1", "÷"])),
+      (expression: try! Expression(["1", "÷", "1"]), expected: try! Expression(["1", "÷"])),
+      (expression: try! Expression(["1", "÷", "9"]), expected: try! Expression(["1", "÷"])),
+
+      (expression: try! Expression(["1", "×", "("]), expected: try! Expression(["1", "×"])),
+      (expression: try! Expression(["1", "×", ")"]), expected: try! Expression(["1", "×"])),
+      (expression: try! Expression(["1", "×", "0"]), expected: try! Expression(["1", "×"])),
+      (expression: try! Expression(["1", "×", "1"]), expected: try! Expression(["1", "×"])),
+      (expression: try! Expression(["1", "×", "9"]), expected: try! Expression(["1", "×"])),
+
+      (expression: try! Expression(["1", "-", "("]), expected: try! Expression(["1", "-"])),
+      (expression: try! Expression(["1", "-", ")"]), expected: try! Expression(["1", "-"])),
+      (expression: try! Expression(["1", "-", "0"]), expected: try! Expression(["1", "-"])),
+      (expression: try! Expression(["1", "-", "1"]), expected: try! Expression(["1", "-"])),
+      (expression: try! Expression(["1", "-", "9"]), expected: try! Expression(["1", "-"])),
+
+      (expression: try! Expression(["10", "×", "("]), expected: try! Expression(["10", "×"])),
+      (expression: try! Expression(["10", ")"]), expected: try! Expression(["10"])),
+      (expression: try! Expression(["10", "+"]), expected: try! Expression(["10"])),
+      (expression: try! Expression(["10", "÷"]), expected: try! Expression(["10"])),
+      (expression: try! Expression(["10", "×"]), expected: try! Expression(["10"])),
+      (expression: try! Expression(["10", "-"]), expected: try! Expression(["10"])),
+      (expression: try! Expression(["100"]), expected: try! Expression(["10"])),
+      (expression: try! Expression(["101"]), expected: try! Expression(["10"])),
+      (expression: try! Expression(["109"]), expected: try! Expression(["10"])),
+
+      (expression: try! Expression(["11", "×", "("]), expected: try! Expression(["11", "×"])),
+      (expression: try! Expression(["11", ")"]), expected: try! Expression(["11"])),
+      (expression: try! Expression(["11", "+"]), expected: try! Expression(["11"])),
+      (expression: try! Expression(["11", "÷"]), expected: try! Expression(["11"])),
+      (expression: try! Expression(["11", "×"]), expected: try! Expression(["11"])),
+      (expression: try! Expression(["11", "-"]), expected: try! Expression(["11"])),
+      (expression: try! Expression(["110"]), expected: try! Expression(["11"])),
+      (expression: try! Expression(["111"]), expected: try! Expression(["11"])),
+      (expression: try! Expression(["119"]), expected: try! Expression(["11"])),
+
+      (expression: try! Expression(["19", "×", "("]), expected: try! Expression(["19", "×"])),
+      (expression: try! Expression(["19", ")"]), expected: try! Expression(["19"])),
+      (expression: try! Expression(["19", "+"]), expected: try! Expression(["19"])),
+      (expression: try! Expression(["19", "÷"]), expected: try! Expression(["19"])),
+      (expression: try! Expression(["19", "×"]), expected: try! Expression(["19"])),
+      (expression: try! Expression(["19", "-"]), expected: try! Expression(["19"])),
+      (expression: try! Expression(["190"]), expected: try! Expression(["19"])),
+      (expression: try! Expression(["191"]), expected: try! Expression(["19"])),
+      (expression: try! Expression(["199"]), expected: try! Expression(["19"])),
+    ]
+
+    for fixture in fixtures {
+      let expression = fixture.expression
+      let expected = fixture.expected
+      let actual = expression.dropped()
+
+      XCTAssertEqual(expected, actual, "expression: \(expression)")
+    }
+  }
+
   func testEvaluate() {
     for fixture in fixtures {
       let infixTokens = fixture.infixTokens
