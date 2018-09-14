@@ -19,8 +19,12 @@ class TokenableTest: XCTestCase {
       return rawValue
     }
   }
+}
 
-  func testCustomStringConvertible() {
+// MARK: - CustomStringConvertible
+
+extension TokenableTest {
+  func testDescription() {
     typealias Fixture = (
       mock: Tokenable,
       expected: String
@@ -42,7 +46,11 @@ class TokenableTest: XCTestCase {
       XCTAssertEqual(expected, actual)
     }
   }
+}
 
+// MARK: - where Self: Equatable
+
+extension TokenableTest {
   func testIsEqualTo() {
     typealias Fixture = (
       mock1: Tokenable,
