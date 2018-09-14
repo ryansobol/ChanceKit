@@ -1,8 +1,12 @@
 @testable import Calculator
 import XCTest
 
-class OperandTests: XCTestCase {
-  func testCases() {
+class OperandTests: XCTestCase {}
+
+// MARK: - Tokenable
+
+extension OperandTests {
+  func testDescription() {
     typealias Fixture = (
       operand: Operand,
       expected: String
@@ -26,7 +30,11 @@ class OperandTests: XCTestCase {
       XCTAssertEqual(expected, actual)
     }
   }
+}
 
+// MARK: - Inclusion
+
+extension OperandTests {
   func testPushedToNumber() {
     typealias Fixture = (
       operand: Operand,
@@ -211,7 +219,11 @@ class OperandTests: XCTestCase {
       }
     }
   }
+}
 
+// MARK: - Exclusion
+
+extension OperandTests {
   func testDroppedFromNumberToOperand() {
     typealias Fixture = (
       operand: Operand,
@@ -371,7 +383,11 @@ class OperandTests: XCTestCase {
       XCTAssertEqual(expected, actual as? Operand, "operand: \(operand)")
     }
   }
+}
 
+// MARK: - Evaluation
+
+extension OperandTests {
   func testNumberValue() {
     typealias Fixture = (
       operand: Operand,
@@ -505,7 +521,11 @@ class OperandTests: XCTestCase {
       }
     }
   }
+}
 
+// MARK: - Operation
+
+extension OperandTests {
   func testAdditionWithNumbers() {
     typealias Fixture = (
       operand1: Operand,
