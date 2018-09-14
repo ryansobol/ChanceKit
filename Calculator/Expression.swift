@@ -72,8 +72,8 @@ extension Expression {
       return Expression(infixTokens)
     }
 
-    if let digit = Int(infixToken) {
-      let infixTokens = try pushed(digit: digit)
+    if let integer = Int(infixToken) {
+      let infixTokens = try pushed(integer: integer)
 
       return Expression(infixTokens)
     }
@@ -114,19 +114,19 @@ extension Expression {
     return infixTokens
   }
 
-  func pushed(digit: Int) throws -> [Tokenable] {
+  func pushed(integer: Int) throws -> [Tokenable] {
     var infixTokens = self.infixTokens
 
     switch infixTokens.last {
     case nil:
-      infixTokens.append(Operand.number(digit))
+      infixTokens.append(Operand.number(integer))
 
     case let lastParenthesis as Parenthesis:
       if lastParenthesis == .close {
         infixTokens.append(Operator.multiplication)
       }
 
-      infixTokens.append(Operand.number(digit))
+      infixTokens.append(Operand.number(integer))
 
     case let lastOperator as Operator:
       let tokenCount = infixTokens.count
@@ -135,18 +135,18 @@ extension Expression {
         infixTokens.removeLast()
       }
 
-      var digit = digit
+      var integer = integer
 
       if tokenCount == 1 && lastOperator == .subtraction {
         infixTokens.removeLast()
 
-        digit.negate()
+        integer.negate()
       }
 
-      infixTokens.append(Operand.number(digit))
+      infixTokens.append(Operand.number(integer))
 
     case let lastOperand as Operand:
-      let nextOperand = try lastOperand.pushed(digit)
+      let nextOperand = try lastOperand.pushed(integer)
 
       infixTokens.removeLast()
       infixTokens.append(nextOperand)
