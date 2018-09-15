@@ -3,6 +3,8 @@ import GameplayKit
 enum Operand: Equatable {
   case number(Int)
   case roll(Int, Int)
+  case rollNegativeSides(Int)
+  case rollPositiveSides(Int)
 }
 
 // MARK: - Tokenable
@@ -15,6 +17,12 @@ extension Operand: Tokenable {
 
     case let .roll(times, sides):
       return "\(times)d\(sides)"
+
+    case let .rollNegativeSides(times):
+      return "\(times)d-"
+
+    case let .rollPositiveSides(times):
+      return "\(times)d"
     }
   }
 }
@@ -43,6 +51,12 @@ extension Operand {
       }
 
       return .roll(times, nextSides)
+
+    case let .rollNegativeSides(times):
+      return .roll(times, suffix * -1)
+
+    case let .rollPositiveSides(times):
+      return .roll(times, suffix)
     }
   }
 }
@@ -74,18 +88,19 @@ extension Operand {
         return Operand.roll(times, quotient)
       }
 
-//      let remainder = sides % 10
-//
-//      if remainder < 0 {
-//        if quotient >= 0 {
-//          return (Operator.rollWithPositiveSides(times), abs(remainder))
-//        }
-//        else {
-//          return (Operator.rollWithNegativeSides(times), abs(remainder))
-//        }
-//      }
+      let remainder = sides % 10
 
-      return nil
+      if remainder < 0 {
+        return Operand.rollNegativeSides(times)
+      }
+
+      return Operand.rollPositiveSides(times)
+
+    case let .rollNegativeSides(times):
+      return Operand.rollPositiveSides(times)
+
+    case let .rollPositiveSides(times):
+      return Operand.number(times)
     }
   }
 }
@@ -163,6 +178,12 @@ extension Operand {
       result.negate()
 
       return result
+
+    case .rollNegativeSides:
+      throw ExpressionError.missingOperandRollSides
+
+    case .rollPositiveSides:
+      throw ExpressionError.missingOperandRollSides
     }
   }
 }

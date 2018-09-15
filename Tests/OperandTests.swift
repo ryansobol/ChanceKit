@@ -20,6 +20,14 @@ extension OperandTests {
       (operand: .roll(0, 0), expected: "0d0"),
       (operand: .roll(Int.max, Int.max), expected: "\(String(Int.max))d\(String(Int.max))"),
       (operand: .roll(Int.min, Int.min), expected: "\(String(Int.min))d\(String(Int.min))"),
+
+      (operand: .rollNegativeSides(0), expected: "0d-"),
+      (operand: .rollNegativeSides(Int.max), expected: "\(Int.max)d-"),
+      (operand: .rollNegativeSides(Int.min), expected: "\(Int.min)d-"),
+
+      (operand: .rollPositiveSides(0), expected: "0d"),
+      (operand: .rollPositiveSides(Int.max), expected: "\(Int.max)d"),
+      (operand: .rollPositiveSides(Int.min), expected: "\(Int.min)d"),
     ]
 
     for fixture in fixtures {
@@ -115,69 +123,69 @@ extension OperandTests {
     )
 
     let fixtures: [Fixture] = [
-//      (operand: .rollWithPositiveSides(0), suffix: 0, expected: .roll(0, 0)),
+      (operand: .rollPositiveSides(0), suffix: 0, expected: .roll(0, 0)),
       (operand: .roll(0, 1), suffix: 0, expected: .roll(0, 10)),
       (operand: .roll(0, 21), suffix: 0, expected: .roll(0, 210)),
 
-//      (operand: .rollWithPositiveSides(1), suffix: 1, expected: .roll(1, 1)),
+      (operand: .rollPositiveSides(1), suffix: 1, expected: .roll(1, 1)),
       (operand: .roll(1, 2), suffix: 1, expected: .roll(1, 21)),
       (operand: .roll(1, 32), suffix: 1, expected: .roll(1, 321)),
 
-//      (operand: .rollWithPositiveSides(9), suffix: 9, expected: .roll(9, 9)),
+      (operand: .rollPositiveSides(9), suffix: 9, expected: .roll(9, 9)),
       (operand: .roll(9, 8), suffix: 9, expected: .roll(9, 89)),
       (operand: .roll(9, 78), suffix: 9, expected: .roll(9, 789)),
 
-//      (operand: .rollWithPositiveSides(1), suffix: Int.max, expected: .roll(1, Int.max)),
+      (operand: .rollPositiveSides(1), suffix: Int.max, expected: .roll(1, Int.max)),
       (operand: .roll(1, 0), suffix: Int.max, expected: .roll(1, Int.max)),
       (operand: .roll(1, 9), suffix: 223372036854775807, expected: .roll(1, Int.max)),
       (operand: .roll(1, 922337203685477580), suffix: 7, expected: .roll(1, Int.max)),
 
-//      (operand: .rollWithNegativeSides(0), suffix: 0, expected: .roll(0, -0)),
+      (operand: .rollNegativeSides(0), suffix: 0, expected: .roll(0, -0)),
       (operand: .roll(0, -1), suffix: 0, expected: .roll(0, -10)),
       (operand: .roll(0, -21), suffix: 0, expected: .roll(0, -210)),
 
-//      (operand: .rollWithNegativeSides(1), suffix: 1, expected: .roll(1, -1)),
+      (operand: .rollNegativeSides(1), suffix: 1, expected: .roll(1, -1)),
       (operand: .roll(1, -2), suffix: 1, expected: .roll(1, -21)),
       (operand: .roll(1, -32), suffix: 1, expected: .roll(1, -321)),
 
-//      (operand: .rollWithNegativeSides(9), suffix: 9, expected: .roll(9, -9)),
+      (operand: .rollNegativeSides(9), suffix: 9, expected: .roll(9, -9)),
       (operand: .roll(9, -8), suffix: 9, expected: .roll(9, -89)),
       (operand: .roll(9, -78), suffix: 9, expected: .roll(9, -789)),
 
-//      (operand: .rollWithNegativeSides(1), suffix: Int.max, expected: .roll(1, Int.min + 1)),
+      (operand: .rollNegativeSides(1), suffix: Int.max, expected: .roll(1, Int.min + 1)),
       (operand: .roll(1, -9), suffix: 223372036854775808, expected: .roll(1, Int.min)),
       (operand: .roll(1, -922337203685477580), suffix: 8, expected: .roll(1, Int.min)),
 
-//      (operand: .rollWithPositiveSides(-0), suffix: 0, expected: .roll(-0, 0)),
+      (operand: .rollPositiveSides(-0), suffix: 0, expected: .roll(-0, 0)),
       (operand: .roll(-0, 1), suffix: 0, expected: .roll(-0, 10)),
       (operand: .roll(-0, 21), suffix: 0, expected: .roll(-0, 210)),
 
-//      (operand: .rollWithPositiveSides(-1), suffix: 1, expected: .roll(-1, 1)),
+      (operand: .rollPositiveSides(-1), suffix: 1, expected: .roll(-1, 1)),
       (operand: .roll(-1, 2), suffix: 1, expected: .roll(-1, 21)),
       (operand: .roll(-1, 32), suffix: 1, expected: .roll(-1, 321)),
 
-//      (operand: .rollWithPositiveSides(-9), suffix: 9, expected: .roll(-9, 9)),
+      (operand: .rollPositiveSides(-9), suffix: 9, expected: .roll(-9, 9)),
       (operand: .roll(-9, 8), suffix: 9, expected: .roll(-9, 89)),
       (operand: .roll(-9, 78), suffix: 9, expected: .roll(-9, 789)),
 
-//      (operand: .rollWithPositiveSides(-1), suffix: Int.max, expected: .roll(-1, Int.max)),
+      (operand: .rollPositiveSides(-1), suffix: Int.max, expected: .roll(-1, Int.max)),
       (operand: .roll(-1, 0), suffix: Int.max, expected: .roll(-1, Int.max)),
       (operand: .roll(-1, 9), suffix: 223372036854775807, expected: .roll(-1, Int.max)),
       (operand: .roll(-1, 922337203685477580), suffix: 7, expected: .roll(-1, Int.max)),
 
-//      (operand: .rollWithNegativeSides(-0), suffix: 0, expected: .roll(-0, -0)),
+      (operand: .rollNegativeSides(-0), suffix: 0, expected: .roll(-0, -0)),
       (operand: .roll(-0, -1), suffix: 0, expected: .roll(-0, -10)),
       (operand: .roll(-0, -21), suffix: 0, expected: .roll(-0, -210)),
 
-//      (operand: .rollWithNegativeSides(-1), suffix: 1, expected: .roll(-1, -1)),
+      (operand: .rollNegativeSides(-1), suffix: 1, expected: .roll(-1, -1)),
       (operand: .roll(-1, -2), suffix: 1, expected: .roll(-1, -21)),
       (operand: .roll(-1, -32), suffix: 1, expected: .roll(-1, -321)),
 
-//      (operand: .rollWithNegativeSides(-9), suffix: 9, expected: .roll(-9, -9)),
+      (operand: .rollNegativeSides(-9), suffix: 9, expected: .roll(-9, -9)),
       (operand: .roll(-9, -8), suffix: 9, expected: .roll(-9, -89)),
       (operand: .roll(-9, -78), suffix: 9, expected: .roll(-9, -789)),
 
-//      (operand: .rollWithNegativeSides(-1), suffix: Int.max, expected: .roll(-1, Int.min + 1)),
+      (operand: .rollNegativeSides(-1), suffix: Int.max, expected: .roll(-1, Int.min + 1)),
       (operand: .roll(-1, -9), suffix: 223372036854775808, expected: .roll(-1, Int.min)),
       (operand: .roll(-1, -922337203685477580), suffix: 8, expected: .roll(-1, Int.min)),
     ]
@@ -294,85 +302,85 @@ extension OperandTests {
     )
 
     let fixtures: [Fixture] = [
-//      (operand: .roll(0, 0), expected: .rollWithPositiveSides(0)),
+      (operand: .roll(0, 0), expected: .rollPositiveSides(0)),
       (operand: .roll(0, 10), expected: .roll(0, 1)),
       (operand: .roll(0, 210), expected: .roll(0, 21)),
 
-//      (operand: .roll(1, 1), expected: .rollWithPositiveSides(1)),
+      (operand: .roll(1, 1), expected: .rollPositiveSides(1)),
       (operand: .roll(1, 21), expected: .roll(1, 2)),
       (operand: .roll(1, 321), expected: .roll(1, 32)),
 
-//      (operand: .roll(9, 9), expected: .rollWithPositiveSides(9)),
+      (operand: .roll(9, 9), expected: .rollPositiveSides(9)),
       (operand: .roll(9, 89), expected: .roll(9, 8)),
       (operand: .roll(9, 789), expected: .roll(9, 78)),
 
       (operand: .roll(1, Int.max), expected: .roll(1, 922337203685477580)),
 
-//      (operand: .roll(0, -0), expected: .rollWithPositiveSides(0)),
+      (operand: .roll(0, -0), expected: .rollPositiveSides(0)),
       (operand: .roll(0, -10), expected: .roll(0, -1)),
       (operand: .roll(0, -210), expected: .roll(0, -21)),
 
-//      (operand: .roll(1, -1), expected: .rollWithNegativeSides(1)),
+      (operand: .roll(1, -1), expected: .rollNegativeSides(1)),
       (operand: .roll(1, -21), expected: .roll(1, -2)),
       (operand: .roll(1, -321), expected: .roll(1, -32)),
 
-//      (operand: .roll(9, -9), expected: .rollWithNegativeSides(9)),
+      (operand: .roll(9, -9), expected: .rollNegativeSides(9)),
       (operand: .roll(9, -89), expected: .roll(9, -8)),
       (operand: .roll(9, -789), expected: .roll(9, -78)),
 
       (operand: .roll(1, Int.min), expected: .roll(1, -922337203685477580)),
 
-//      (operand: .roll(-0, 0), expected: .rollWithPositiveSides(-0)),
+      (operand: .roll(-0, 0), expected: .rollPositiveSides(-0)),
       (operand: .roll(-0, 10), expected: .roll(-0, 1)),
       (operand: .roll(-0, 210), expected: .roll(-0, 21)),
 
-//      (operand: .roll(-1, 1), expected: .rollWithPositiveSides(-1)),
+      (operand: .roll(-1, 1), expected: .rollPositiveSides(-1)),
       (operand: .roll(-1, 21), expected: .roll(-1, 2)),
       (operand: .roll(-1, 321), expected: .roll(-1, 32)),
 
-//      (operand: .roll(-9, 9), expected: .rollWithPositiveSides(-9)),
+      (operand: .roll(-9, 9), expected: .rollPositiveSides(-9)),
       (operand: .roll(-9, 89), expected: .roll(-9, 8)),
       (operand: .roll(-9, 789), expected: .roll(-9, 78)),
 
       (operand: .roll(-1, Int.max), expected: .roll(-1, 922337203685477580)),
 
-//      (operand: .roll(-0, -0), expected: .rollWithPositiveSides(0)),
+      (operand: .roll(-0, -0), expected: .rollPositiveSides(0)),
       (operand: .roll(-0, -10), expected: .roll(-0, -1)),
       (operand: .roll(-0, -210), expected: .roll(-0, -21)),
 
-//      (operand: .roll(-1, -1), expected: .rollWithNegativeSides(-1)),
+      (operand: .roll(-1, -1), expected: .rollNegativeSides(-1)),
       (operand: .roll(-1, -21), expected: .roll(-1, -2)),
       (operand: .roll(-1, -321), expected: .roll(-1, -32)),
 
-//      (operand: .roll(-9, -9), expected: .rollWithNegativeSides(-9)),
+      (operand: .roll(-9, -9), expected: .rollNegativeSides(-9)),
       (operand: .roll(-9, -89), expected: .roll(-9, -8)),
       (operand: .roll(-9, -789), expected: .roll(-9, -78)),
 
       (operand: .roll(-1, Int.min), expected: .roll(-1, -922337203685477580)),
 
-//      (operand: .rollWithPositiveSides(0), expected: .number(0)),
-//      (operand: .rollWithPositiveSides(1), expected: .number(1)),
-//      (operand: .rollWithPositiveSides(9), expected: .number(9)),
-//
-//      (operand: .rollWithPositiveSides(Int.max), expected: .number(Int.max)),
-//
-//      (operand: .rollWithPositiveSides(-0), expected: .number(-0)),
-//      (operand: .rollWithPositiveSides(-1), expected: .number(-1)),
-//      (operand: .rollWithPositiveSides(-9), expected: .number(-9)),
-//
-//      (operand: .rollWithPositiveSides(Int.min), expected: .number(Int.min)),
-//
-//      (operand: .rollWithNegativeSides(0), expected: .rollWithPositiveSides(0)),
-//      (operand: .rollWithNegativeSides(1), expected: .rollWithPositiveSides(1)),
-//      (operand: .rollWithNegativeSides(9), expected: .rollWithPositiveSides(9)),
-//
-//      (operand: .rollWithNegativeSides(Int.max), expected: .rollWithPositiveSides(Int.max)),
-//
-//      (operand: .rollWithNegativeSides(-0), expected: .rollWithPositiveSides(-0)),
-//      (operand: .rollWithNegativeSides(-1), expected: .rollWithPositiveSides(-1)),
-//      (operand: .rollWithNegativeSides(-9), expected: .rollWithPositiveSides(-9)),
-//
-//      (operand: .rollWithNegativeSides(Int.min), expected: .rollWithPositiveSides(Int.min)),
+      (operand: .rollPositiveSides(0), expected: .number(0)),
+      (operand: .rollPositiveSides(1), expected: .number(1)),
+      (operand: .rollPositiveSides(9), expected: .number(9)),
+
+      (operand: .rollPositiveSides(Int.max), expected: .number(Int.max)),
+
+      (operand: .rollPositiveSides(-0), expected: .number(-0)),
+      (operand: .rollPositiveSides(-1), expected: .number(-1)),
+      (operand: .rollPositiveSides(-9), expected: .number(-9)),
+
+      (operand: .rollPositiveSides(Int.min), expected: .number(Int.min)),
+
+      (operand: .rollNegativeSides(0), expected: .rollPositiveSides(0)),
+      (operand: .rollNegativeSides(1), expected: .rollPositiveSides(1)),
+      (operand: .rollNegativeSides(9), expected: .rollPositiveSides(9)),
+
+      (operand: .rollNegativeSides(Int.max), expected: .rollPositiveSides(Int.max)),
+
+      (operand: .rollNegativeSides(-0), expected: .rollPositiveSides(-0)),
+      (operand: .rollNegativeSides(-1), expected: .rollPositiveSides(-1)),
+      (operand: .rollNegativeSides(-9), expected: .rollPositiveSides(-9)),
+
+      (operand: .rollNegativeSides(Int.min), expected: .rollPositiveSides(Int.min)),
     ]
 
     for fixture in fixtures {
@@ -512,6 +520,58 @@ extension OperandTests {
     ]
 
     let expected = ExpressionError.operationOverflow
+
+    for fixture in fixtures {
+      let operand = fixture
+
+      XCTAssertThrowsError(try operand.value()) { error in
+        XCTAssertEqual(expected, error as? ExpressionError)
+      }
+    }
+  }
+
+  func testRollWithNegativeSidesValue() {
+    let fixtures: [Operand] = [
+      .rollNegativeSides(0),
+      .rollNegativeSides(1),
+      .rollNegativeSides(9),
+
+      .rollNegativeSides(Int.max),
+
+      .rollNegativeSides(-0),
+      .rollNegativeSides(-1),
+      .rollNegativeSides(-9),
+
+      .rollNegativeSides(Int.min),
+    ]
+
+    let expected = ExpressionError.missingOperandRollSides
+
+    for fixture in fixtures {
+      let operand = fixture
+
+      XCTAssertThrowsError(try operand.value()) { error in
+        XCTAssertEqual(expected, error as? ExpressionError)
+      }
+    }
+  }
+
+  func testRollWithPositiveSidesValue() {
+    let fixtures: [Operand] = [
+      .rollPositiveSides(0),
+      .rollPositiveSides(1),
+      .rollPositiveSides(9),
+
+      .rollPositiveSides(Int.max),
+
+      .rollPositiveSides(-0),
+      .rollPositiveSides(-1),
+      .rollPositiveSides(-9),
+
+      .rollPositiveSides(Int.min),
+    ]
+
+    let expected = ExpressionError.missingOperandRollSides
 
     for fixture in fixtures {
       let operand = fixture
