@@ -37,12 +37,12 @@ extension Operand {
 
       return .number(nextValue)
 
-    case let .roll(times, side):
-      guard let nextSide = Int(String(side) + suffixToken) else {
+    case let .roll(times, sides):
+      guard let nextSides = Int(String(sides) + suffixToken) else {
         throw ExpressionError.invalidToken(suffixToken)
       }
 
-      return .roll(times, nextSide)
+      return .roll(times, nextSides)
     }
   }
 }
