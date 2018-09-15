@@ -1,6 +1,10 @@
 public struct Expression {
   let infixTokens: [Tokenable]
+}
 
+// MARK: - Initialization
+
+extension Expression {
   public init(_ infixTokens: [String]) throws {
     self.infixTokens = try infixTokens.map { infixToken in
       if let parenthesis = Parenthesis(rawValue: infixToken) {
