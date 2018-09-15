@@ -176,7 +176,7 @@ class ExpressionTests: XCTestCase {
     }
   }
 
-  func testPushWithValidTokens() {
+  func testPushedWithValidTokens() {
     typealias Fixture = (
       infixTokens: [String],
       infixToken: String,
@@ -388,7 +388,7 @@ class ExpressionTests: XCTestCase {
     }
   }
 
-  func testPushWithInvalidTokens() {
+  func testPushedWithInvalidTokens() {
     typealias Fixture = (
       infixToken: String,
       expected: ExpressionError
