@@ -99,6 +99,7 @@ class ExpressionTests: XCTestCase {
     (["(", "1", "+", "2", "÷", "3", "×", "(", "4", "+", "5", ")", "-", "6", ")"], "(1 + 2 ÷ 3 × (4 + 5) - 6)", -5),
   ]
 
+  //  TODO: Handle 1d4, 1d6, 1d8, 1d10, 1d12, 1d20, 1d100, and 1d
   func testInitWithEvaluableTokens() {
     for fixture in fixtures {
       let infixTokens = fixture.infixTokens
@@ -176,6 +177,7 @@ class ExpressionTests: XCTestCase {
     }
   }
 
+  //  TODO: Handle 1d4, 1d6, 1d8, 1d10, 1d12, 1d20, 1d100, and 1d
   func testPushedWithValidTokens() {
     typealias Fixture = (
       infixTokens: [String],
