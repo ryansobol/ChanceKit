@@ -11,12 +11,12 @@ extension Expression {
         return parenthesis
       }
 
-      if let operation = Operator(rawValue: infixToken) {
-        return operation
+      if let `operator` = Operator(rawValue: infixToken) {
+        return `operator`
       }
 
-      if let number = Int(infixToken) {
-        return Operand.number(number)
+      if let integer = Int(infixToken) {
+        return Operand.number(integer)
       }
 
       throw ExpressionError.invalidToken(infixToken)
