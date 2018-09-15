@@ -7,6 +7,23 @@ enum Operand: Equatable {
   case rollPositiveSides(Int)
 }
 
+// MARK: - Initialization
+
+extension Operand {
+  init?(rawToken: String) {
+    if let integer = Int(rawToken) {
+      self = .number(integer)
+      return
+    }
+
+//    let rollRegex = NSRegularExpression("\\A(-?\\d+)d(-?\\d*)\\Z")
+//
+//    let range = NSRange(location: 0, length: rawToken.utf16.count)
+
+    return nil
+  }
+}
+
 // MARK: - Tokenable
 
 extension Operand: Tokenable {

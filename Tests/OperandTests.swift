@@ -3,6 +3,72 @@ import XCTest
 
 class OperandTests: XCTestCase {}
 
+// MARK - Initialization
+
+extension OperandTests {
+  func testInitWithValidRawToken() {
+    typealias Fixture = (
+      rawToken: String,
+      expected: Operand
+    )
+
+    let fixtures: [Fixture] = [
+      (rawToken: "0", expected: .number(0)),
+      (rawToken: "1", expected: .number(1)),
+      (rawToken: "9", expected: .number(9)),
+
+      (rawToken: String(Int.max), expected: .number(Int.max)),
+
+      (rawToken: "-0", expected: .number(-0)),
+      (rawToken: "-1", expected: .number(-1)),
+      (rawToken: "-9", expected: .number(-9)),
+
+      (rawToken: String(Int.min), expected: .number(Int.min)),
+    ]
+
+    for fixture in fixtures {
+      let rawToken = fixture.rawToken
+      let expected = fixture.expected
+      let actual = Operand(rawToken: rawToken)
+
+      XCTAssertEqual(expected, actual)
+    }
+  }
+}
+
+func testInitWithInvalidRawToken() {
+  let fixtures = [
+    "+",
+    "÷",
+    "×",
+    "-",
+    "(",
+    ")",
+    "d",
+    "=",
+    "[",
+    "{",
+    "<",
+    ".",
+    ",",
+    ",",
+    "**",
+    "&",
+    "|",
+    "!",
+    "~",
+    "..<",
+    "...",
+    "<<",
+    ">>",
+    "%",
+  ]
+
+  for fixture in fixtures {
+    XCTAssertNil(Operand(rawToken: fixture))
+  }
+}
+
 // MARK: - Tokenable
 
 extension OperandTests {

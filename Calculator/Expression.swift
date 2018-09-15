@@ -15,8 +15,8 @@ extension Expression {
         return `operator`
       }
 
-      if let integer = Int(infixToken) {
-        return Operand.number(integer)
+      if let operand = Operand(rawToken: infixToken) {
+        return operand
       }
 
       throw ExpressionError.invalidToken(infixToken)

@@ -152,6 +152,7 @@ extension ExpressionTests {
     )
 
     let fixtures: [Fixture] = [
+      (infixTokens: ["d"], expected: .invalidToken("d")),
       (infixTokens: ["="], expected: .invalidToken("=")),
       (infixTokens: ["["], expected: .invalidToken("[")),
       (infixTokens: ["{"], expected: .invalidToken("{")),
