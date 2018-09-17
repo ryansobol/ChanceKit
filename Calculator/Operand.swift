@@ -9,6 +9,9 @@ enum Operand: Equatable {
 
 // MARK: - Initialization
 
+// Because enums can't have stored properties
+private let timesSidesRegex = NSRegularExpression("\\A(-?\\d+)d(-?\\d*)\\Z")
+
 extension Operand {
   init?(rawToken: String) {
     if let integer = Int(rawToken) {
@@ -16,11 +19,33 @@ extension Operand {
       return
     }
 
-//    let rollRegex = NSRegularExpression("\\A(-?\\d+)d(-?\\d*)\\Z")
-//
-//    let range = NSRange(location: 0, length: rawToken.utf16.count)
+    guard let result = timesSidesRegex.firstMatch(in: rawToken) else {
+      return nil
+    }
 
-    return nil
+    guard let rawTimes = result.substring(at: 1, in: rawToken) else {
+      return nil
+    }
+
+    guard let times = Int(rawTimes) else {
+      return nil
+    }
+
+    guard let rawSides = result.substring(at: 2, in: rawToken) else {
+      return nil
+    }
+
+    if rawSides == "-" {
+      self = .rollNegativeSides(times)
+      return
+    }
+
+    guard let sides = Int(rawSides) else {
+      self = .rollPositiveSides(times)
+      return
+    }
+
+    self = .roll(times, sides)
   }
 }
 

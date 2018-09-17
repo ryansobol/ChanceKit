@@ -24,6 +24,54 @@ extension OperandTests {
       (rawToken: "-9", expected: .number(-9)),
 
       (rawToken: String(Int.min), expected: .number(Int.min)),
+
+      (rawToken: "0d0", expected: .roll(0, 0)),
+      (rawToken: "1d1", expected: .roll(1, 1)),
+      (rawToken: "9d9", expected: .roll(9, 9)),
+
+      (rawToken: "\(Int.max)d\(Int.max)", expected: .roll(Int.max, Int.max)),
+
+      (rawToken: "0d-0", expected: .roll(0, -0)),
+      (rawToken: "1d-1", expected: .roll(1, -1)),
+      (rawToken: "9d-9", expected: .roll(9, -9)),
+
+      (rawToken: "\(Int.max)d\(Int.min)", expected: .roll(Int.max, Int.min)),
+
+      (rawToken: "-0d0", expected: .roll(-0, 0)),
+      (rawToken: "-1d1", expected: .roll(-1, 1)),
+      (rawToken: "-9d9", expected: .roll(-9, 9)),
+
+      (rawToken: "\(Int.min)d\(Int.max)", expected: .roll(Int.min, Int.max)),
+
+      (rawToken: "-0d-0", expected: .roll(-0, -0)),
+      (rawToken: "-1d-1", expected: .roll(-1, -1)),
+      (rawToken: "-9d-9", expected: .roll(-9, -9)),
+
+      (rawToken: "\(Int.min)d\(Int.min)", expected: .roll(Int.min, Int.min)),
+
+      (rawToken: "0d", expected: .rollPositiveSides(0)),
+      (rawToken: "1d", expected: .rollPositiveSides(1)),
+      (rawToken: "9d", expected: .rollPositiveSides(9)),
+
+      (rawToken: "\(Int.max)d", expected: .rollPositiveSides(Int.max)),
+
+      (rawToken: "-0d", expected: .rollPositiveSides(-0)),
+      (rawToken: "-1d", expected: .rollPositiveSides(-1)),
+      (rawToken: "-9d", expected: .rollPositiveSides(-9)),
+
+      (rawToken: "\(Int.min)d", expected: .rollPositiveSides(Int.min)),
+
+      (rawToken: "0d-", expected: .rollNegativeSides(0)),
+      (rawToken: "1d-", expected: .rollNegativeSides(1)),
+      (rawToken: "9d-", expected: .rollNegativeSides(9)),
+
+      (rawToken: "\(Int.max)d-", expected: .rollNegativeSides(Int.max)),
+
+      (rawToken: "-0d-", expected: .rollNegativeSides(-0)),
+      (rawToken: "-1d-", expected: .rollNegativeSides(-1)),
+      (rawToken: "-9d-", expected: .rollNegativeSides(-9)),
+
+      (rawToken: "\(Int.min)d-", expected: .rollNegativeSides(Int.min)),
     ]
 
     for fixture in fixtures {
@@ -34,38 +82,75 @@ extension OperandTests {
       XCTAssertEqual(expected, actual)
     }
   }
-}
 
-func testInitWithInvalidRawToken() {
-  let fixtures = [
-    "+",
-    "÷",
-    "×",
-    "-",
-    "(",
-    ")",
-    "d",
-    "=",
-    "[",
-    "{",
-    "<",
-    ".",
-    ",",
-    ",",
-    "**",
-    "&",
-    "|",
-    "!",
-    "~",
-    "..<",
-    "...",
-    "<<",
-    ">>",
-    "%",
-  ]
+  func testInitWithInvalidRawToken() {
+    let fixtures = [
+      "+",
+      "÷",
+      "×",
+      "-",
+      "(",
+      ")",
+      "d",
+      "-d",
+      "d-",
+      "-d-",
+      "+d",
+      "d+",
+      "+d+",
+      "d0",
+      "d1",
+      "d9",
+      "d-0",
+      "d-1",
+      "d-9",
+      "-d0",
+      "-d1",
+      "-d9",
+      "d+0",
+      "d+1",
+      "d+9",
+      "+d0",
+      "+d1",
+      "+d9",
+      "+d-0",
+      "+d-1",
+      "+d-9",
+      "+d+0",
+      "+d+1",
+      "+d+9",
+      "0d+",
+      "1d+",
+      "9d+",
+      "-0d+",
+      "-1d+",
+      "-9d+",
+      "+0d+",
+      "+1d+",
+      "+9d+",
+      "0d0\n1d1",
+      "=",
+      "[",
+      "{",
+      "<",
+      ".",
+      ",",
+      ",",
+      "**",
+      "&",
+      "|",
+      "!",
+      "~",
+      "..<",
+      "...",
+      "<<",
+      ">>",
+      "%",
+    ]
 
-  for fixture in fixtures {
-    XCTAssertNil(Operand(rawToken: fixture))
+    for fixture in fixtures {
+      XCTAssertNil(Operand(rawToken: fixture), "rawToken: \(fixture)")
+    }
   }
 }
 
