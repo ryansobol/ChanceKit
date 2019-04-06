@@ -193,11 +193,11 @@
 				TargetAttributes = {
 					92CD2FFF20AD0D89002462B3 = {
 						CreatedOnToolsVersion = 9.3.1;
-						LastSwiftMigration = 0930;
+						LastSwiftMigration = 1020;
 					};
 					92CD301E20AD0E6C002462B3 = {
 						CreatedOnToolsVersion = 9.3.1;
-						LastSwiftMigration = 0930;
+						LastSwiftMigration = 1020;
 					};
 				};
 			};
@@ -392,7 +392,11 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+<<<<<<< HEAD
 				SWIFT_VERSION = 4.2;
+=======
+				SWIFT_VERSION = 5.0;
+>>>>>>> Convert to Swift 5
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -411,7 +415,11 @@
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+<<<<<<< HEAD
 				SWIFT_VERSION = 4.2;
+=======
+				SWIFT_VERSION = 5.0;
+>>>>>>> Convert to Swift 5
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
@@ -432,7 +440,11 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.ryansobol.Tests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+<<<<<<< HEAD
 				SWIFT_VERSION = 4.2;
+=======
+				SWIFT_VERSION = 5.0;
+>>>>>>> Convert to Swift 5
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -452,7 +464,11 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.ryansobol.Tests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+<<<<<<< HEAD
 				SWIFT_VERSION = 4.2;
+=======
+				SWIFT_VERSION = 5.0;
+>>>>>>> Convert to Swift 5
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
