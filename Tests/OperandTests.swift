@@ -6,84 +6,84 @@ class OperandTests: XCTestCase {}
 // MARK - Initialization
 
 extension OperandTests {
-  func testInitWithValidRawToken() {
+  func testInitWithValidRawLexeme() {
     typealias Fixture = (
-      rawToken: String,
+      rawLexeme: String,
       expected: Operand
     )
 
     let fixtures: [Fixture] = [
-      (rawToken: "0", expected: .number(0)),
-      (rawToken: "1", expected: .number(1)),
-      (rawToken: "9", expected: .number(9)),
+      (rawLexeme: "0", expected: .number(0)),
+      (rawLexeme: "1", expected: .number(1)),
+      (rawLexeme: "9", expected: .number(9)),
 
-      (rawToken: String(Int.max), expected: .number(Int.max)),
+      (rawLexeme: String(Int.max), expected: .number(Int.max)),
 
-      (rawToken: "-0", expected: .number(-0)),
-      (rawToken: "-1", expected: .number(-1)),
-      (rawToken: "-9", expected: .number(-9)),
+      (rawLexeme: "-0", expected: .number(-0)),
+      (rawLexeme: "-1", expected: .number(-1)),
+      (rawLexeme: "-9", expected: .number(-9)),
 
-      (rawToken: String(Int.min), expected: .number(Int.min)),
+      (rawLexeme: String(Int.min), expected: .number(Int.min)),
 
-      (rawToken: "0d0", expected: .roll(0, 0)),
-      (rawToken: "1d1", expected: .roll(1, 1)),
-      (rawToken: "9d9", expected: .roll(9, 9)),
+      (rawLexeme: "0d0", expected: .roll(0, 0)),
+      (rawLexeme: "1d1", expected: .roll(1, 1)),
+      (rawLexeme: "9d9", expected: .roll(9, 9)),
 
-      (rawToken: "\(Int.max)d\(Int.max)", expected: .roll(Int.max, Int.max)),
+      (rawLexeme: "\(Int.max)d\(Int.max)", expected: .roll(Int.max, Int.max)),
 
-      (rawToken: "0d-0", expected: .roll(0, -0)),
-      (rawToken: "1d-1", expected: .roll(1, -1)),
-      (rawToken: "9d-9", expected: .roll(9, -9)),
+      (rawLexeme: "0d-0", expected: .roll(0, -0)),
+      (rawLexeme: "1d-1", expected: .roll(1, -1)),
+      (rawLexeme: "9d-9", expected: .roll(9, -9)),
 
-      (rawToken: "\(Int.max)d\(Int.min)", expected: .roll(Int.max, Int.min)),
+      (rawLexeme: "\(Int.max)d\(Int.min)", expected: .roll(Int.max, Int.min)),
 
-      (rawToken: "-0d0", expected: .roll(-0, 0)),
-      (rawToken: "-1d1", expected: .roll(-1, 1)),
-      (rawToken: "-9d9", expected: .roll(-9, 9)),
+      (rawLexeme: "-0d0", expected: .roll(-0, 0)),
+      (rawLexeme: "-1d1", expected: .roll(-1, 1)),
+      (rawLexeme: "-9d9", expected: .roll(-9, 9)),
 
-      (rawToken: "\(Int.min)d\(Int.max)", expected: .roll(Int.min, Int.max)),
+      (rawLexeme: "\(Int.min)d\(Int.max)", expected: .roll(Int.min, Int.max)),
 
-      (rawToken: "-0d-0", expected: .roll(-0, -0)),
-      (rawToken: "-1d-1", expected: .roll(-1, -1)),
-      (rawToken: "-9d-9", expected: .roll(-9, -9)),
+      (rawLexeme: "-0d-0", expected: .roll(-0, -0)),
+      (rawLexeme: "-1d-1", expected: .roll(-1, -1)),
+      (rawLexeme: "-9d-9", expected: .roll(-9, -9)),
 
-      (rawToken: "\(Int.min)d\(Int.min)", expected: .roll(Int.min, Int.min)),
+      (rawLexeme: "\(Int.min)d\(Int.min)", expected: .roll(Int.min, Int.min)),
 
-      (rawToken: "0d", expected: .rollPositiveSides(0)),
-      (rawToken: "1d", expected: .rollPositiveSides(1)),
-      (rawToken: "9d", expected: .rollPositiveSides(9)),
+      (rawLexeme: "0d", expected: .rollPositiveSides(0)),
+      (rawLexeme: "1d", expected: .rollPositiveSides(1)),
+      (rawLexeme: "9d", expected: .rollPositiveSides(9)),
 
-      (rawToken: "\(Int.max)d", expected: .rollPositiveSides(Int.max)),
+      (rawLexeme: "\(Int.max)d", expected: .rollPositiveSides(Int.max)),
 
-      (rawToken: "-0d", expected: .rollPositiveSides(-0)),
-      (rawToken: "-1d", expected: .rollPositiveSides(-1)),
-      (rawToken: "-9d", expected: .rollPositiveSides(-9)),
+      (rawLexeme: "-0d", expected: .rollPositiveSides(-0)),
+      (rawLexeme: "-1d", expected: .rollPositiveSides(-1)),
+      (rawLexeme: "-9d", expected: .rollPositiveSides(-9)),
 
-      (rawToken: "\(Int.min)d", expected: .rollPositiveSides(Int.min)),
+      (rawLexeme: "\(Int.min)d", expected: .rollPositiveSides(Int.min)),
 
-      (rawToken: "0d-", expected: .rollNegativeSides(0)),
-      (rawToken: "1d-", expected: .rollNegativeSides(1)),
-      (rawToken: "9d-", expected: .rollNegativeSides(9)),
+      (rawLexeme: "0d-", expected: .rollNegativeSides(0)),
+      (rawLexeme: "1d-", expected: .rollNegativeSides(1)),
+      (rawLexeme: "9d-", expected: .rollNegativeSides(9)),
 
-      (rawToken: "\(Int.max)d-", expected: .rollNegativeSides(Int.max)),
+      (rawLexeme: "\(Int.max)d-", expected: .rollNegativeSides(Int.max)),
 
-      (rawToken: "-0d-", expected: .rollNegativeSides(-0)),
-      (rawToken: "-1d-", expected: .rollNegativeSides(-1)),
-      (rawToken: "-9d-", expected: .rollNegativeSides(-9)),
+      (rawLexeme: "-0d-", expected: .rollNegativeSides(-0)),
+      (rawLexeme: "-1d-", expected: .rollNegativeSides(-1)),
+      (rawLexeme: "-9d-", expected: .rollNegativeSides(-9)),
 
-      (rawToken: "\(Int.min)d-", expected: .rollNegativeSides(Int.min)),
+      (rawLexeme: "\(Int.min)d-", expected: .rollNegativeSides(Int.min)),
     ]
 
     for fixture in fixtures {
-      let rawToken = fixture.rawToken
+      let rawLexeme = fixture.rawLexeme
       let expected = fixture.expected
-      let actual = Operand(rawToken: rawToken)
+      let actual = Operand(rawLexeme: rawLexeme)
 
       XCTAssertEqual(expected, actual)
     }
   }
 
-  func testInitWithInvalidRawToken() {
+  func testInitWithInvalidRawLexeme() {
     let fixtures = [
       "+",
       "÷",
@@ -149,7 +149,7 @@ extension OperandTests {
     ]
 
     for fixture in fixtures {
-      XCTAssertNil(Operand(rawToken: fixture), "rawToken: \(fixture)")
+      XCTAssertNil(Operand(rawLexeme: fixture), "rawLexeme: \(fixture)")
     }
   }
 }
@@ -238,7 +238,7 @@ extension OperandTests {
     }
   }
 
-  func testPushedToNumberWithInvalidToken() {
+  func testPushedToNumberWithInvalidLexeme() {
     typealias Fixture = (
       operand: Operand,
       suffix: Int
@@ -258,7 +258,7 @@ extension OperandTests {
     for fixture in fixtures {
       let operand = fixture.operand
       let suffix = fixture.suffix
-      let expected = ExpressionError.invalidToken(String(suffix))
+      let expected = ExpressionError.invalidLexeme(String(suffix))
 
       XCTAssertThrowsError(try operand.pushed(suffix)) { error in
         XCTAssertEqual(expected, error as? ExpressionError)
@@ -351,7 +351,7 @@ extension OperandTests {
     }
   }
 
-  func testPushedToRollWithInvalidToken() {
+  func testPushedToRollWithInvalidLexeme() {
     typealias Fixture = (
       operand: Operand,
       suffix: Int
@@ -371,7 +371,7 @@ extension OperandTests {
     for fixture in fixtures {
       let operand = fixture.operand
       let suffix = fixture.suffix
-      let expected = ExpressionError.invalidToken(String(suffix))
+      let expected = ExpressionError.invalidLexeme(String(suffix))
 
       XCTAssertThrowsError(try operand.pushed(suffix)) { error in
         XCTAssertEqual(expected, error as? ExpressionError)

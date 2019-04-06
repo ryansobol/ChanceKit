@@ -13,17 +13,17 @@ enum Operand: Equatable {
 private let timesSidesRegex = NSRegularExpression("\\A(-?\\d+)d(-?\\d*)\\Z")
 
 extension Operand {
-  init?(rawToken: String) {
-    if let integer = Int(rawToken) {
+  init?(rawLexeme: String) {
+    if let integer = Int(rawLexeme) {
       self = .number(integer)
       return
     }
 
-    guard let result = timesSidesRegex.firstMatch(in: rawToken) else {
+    guard let result = timesSidesRegex.firstMatch(in: rawLexeme) else {
       return nil
     }
 
-    guard let rawTimes = result.substring(at: 1, in: rawToken) else {
+    guard let rawTimes = result.substring(at: 1, in: rawLexeme) else {
       return nil
     }
 
@@ -31,7 +31,7 @@ extension Operand {
       return nil
     }
 
-    guard let rawSides = result.substring(at: 2, in: rawToken) else {
+    guard let rawSides = result.substring(at: 2, in: rawLexeme) else {
       return nil
     }
 
@@ -73,23 +73,23 @@ extension Operand: Tokenable {
 
 extension Operand {
   func pushed(_ suffix: Int) throws -> Operand {
-    let suffixToken = String(suffix)
+    let lexeme = String(suffix)
 
     if suffix < 0 {
-      throw ExpressionError.invalidToken(suffixToken)
+      throw ExpressionError.invalidLexeme(lexeme)
     }
 
     switch self {
     case let .number(value):
-      guard let nextValue = Int(String(value) + suffixToken) else {
-        throw ExpressionError.invalidToken(suffixToken)
+      guard let nextValue = Int(String(value) + lexeme) else {
+        throw ExpressionError.invalidLexeme(lexeme)
       }
 
       return .number(nextValue)
 
     case let .roll(times, sides):
-      guard let nextSides = Int(String(sides) + suffixToken) else {
-        throw ExpressionError.invalidToken(suffixToken)
+      guard let nextSides = Int(String(sides) + lexeme) else {
+        throw ExpressionError.invalidLexeme(lexeme)
       }
 
       return .roll(times, nextSides)

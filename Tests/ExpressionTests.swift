@@ -3,7 +3,7 @@ import XCTest
 
 class ExpressionTests: XCTestCase {
   typealias Fixture = (
-    infixTokens: [String],
+    lexemes: [String],
     description: String,
     value: Int
   )
@@ -104,79 +104,79 @@ class ExpressionTests: XCTestCase {
 
 extension ExpressionTests {
   //  TODO: Handle 1d4, 1d6, 1d8, 1d10, 1d12, 1d20, 1d100, and 1d
-  func testInitWithEvaluableTokens() {
+  func testInitWithEvaluableLexemes() {
     for fixture in fixtures {
-      let infixTokens = fixture.infixTokens
+      let lexemes = fixture.lexemes
       let expected = fixture.description
 
-      let expression = try! Expression(infixTokens)
+      let expression = try! Expression(lexemes)
       let actual = String(describing: expression)
 
       XCTAssertEqual(expected, actual)
     }
   }
 
-  func testInitWithUnevaluableTokens() {
+  func testInitWithUnevaluableLexemes() {
     typealias Fixture = (
-      infixTokens: [String],
+      lexemes: [String],
       expected: String
     )
 
     let fixtures: [Fixture] = [
-      (infixTokens: [], expected: ""),
-      (infixTokens: ["("], expected: "("),
-      (infixTokens: [")"], expected: ")"),
-      (infixTokens: ["+"], expected: "+"),
-      (infixTokens: ["÷"], expected: "÷"),
-      (infixTokens: ["×"], expected: "×"),
-      (infixTokens: ["-"], expected: "-"),
-      (infixTokens: [String(Int.max)], expected: String(Int.max)),
-      (infixTokens: [String(Int.min)], expected: String(Int.min)),
+      (lexemes: [], expected: ""),
+      (lexemes: ["("], expected: "("),
+      (lexemes: [")"], expected: ")"),
+      (lexemes: ["+"], expected: "+"),
+      (lexemes: ["÷"], expected: "÷"),
+      (lexemes: ["×"], expected: "×"),
+      (lexemes: ["-"], expected: "-"),
+      (lexemes: [String(Int.max)], expected: String(Int.max)),
+      (lexemes: [String(Int.min)], expected: String(Int.min)),
     ]
 
     for fixture in fixtures {
-      let infixTokens = fixture.infixTokens
+      let lexemes = fixture.lexemes
       let expected = fixture.expected
 
-      let expression = try! Expression(infixTokens)
+      let expression = try! Expression(lexemes)
       let actual = String(describing: expression)
 
       XCTAssertEqual(expected, actual)
     }
   }
 
-  func testInitWithInvalidTokens() {
+  func testInitWithInvalidLexemes() {
     typealias Fixture = (
-      infixTokens: [String],
+      lexemes: [String],
       expected: ExpressionError
     )
 
     let fixtures: [Fixture] = [
-      (infixTokens: ["d"], expected: .invalidToken("d")),
-      (infixTokens: ["="], expected: .invalidToken("=")),
-      (infixTokens: ["["], expected: .invalidToken("[")),
-      (infixTokens: ["{"], expected: .invalidToken("{")),
-      (infixTokens: ["<"], expected: .invalidToken("<")),
-      (infixTokens: ["."], expected: .invalidToken(".")),
-      (infixTokens: [","], expected: .invalidToken(",")),
-      (infixTokens: [","], expected: .invalidToken(",")),
-      (infixTokens: ["**"], expected: .invalidToken("**")),
-      (infixTokens: ["&"], expected: .invalidToken("&")),
-      (infixTokens: ["|"], expected: .invalidToken("|")),
-      (infixTokens: ["!"], expected: .invalidToken("!")),
-      (infixTokens: ["~"], expected: .invalidToken("~")),
-      (infixTokens: ["..<"], expected: .invalidToken("..<")),
-      (infixTokens: ["..."], expected: .invalidToken("...")),
-      (infixTokens: ["<<"], expected: .invalidToken("<<")),
-      (infixTokens: [">>"], expected: .invalidToken(">>")),
-      (infixTokens: ["%"], expected: .invalidToken("%")),
+      (lexemes: ["d"], expected: .invalidLexeme("d")),
+      (lexemes: ["="], expected: .invalidLexeme("=")),
+      (lexemes: ["["], expected: .invalidLexeme("[")),
+      (lexemes: ["{"], expected: .invalidLexeme("{")),
+      (lexemes: ["<"], expected: .invalidLexeme("<")),
+      (lexemes: ["."], expected: .invalidLexeme(".")),
+      (lexemes: [","], expected: .invalidLexeme(",")),
+      (lexemes: [","], expected: .invalidLexeme(",")),
+      (lexemes: ["**"], expected: .invalidLexeme("**")),
+      (lexemes: ["&"], expected: .invalidLexeme("&")),
+      (lexemes: ["|"], expected: .invalidLexeme("|")),
+      (lexemes: ["!"], expected: .invalidLexeme("!")),
+      (lexemes: ["~"], expected: .invalidLexeme("~")),
+      (lexemes: ["..<"], expected: .invalidLexeme("..<")),
+      (lexemes: ["..."], expected: .invalidLexeme("...")),
+      (lexemes: ["<<"], expected: .invalidLexeme("<<")),
+      (lexemes: [">>"], expected: .invalidLexeme(">>")),
+      (lexemes: ["%"], expected: .invalidLexeme("%")),
     ]
 
     for fixture in fixtures {
-      let infixTokens = fixture.infixTokens
+      let lexemes = fixture.lexemes
       let expected = fixture.expected
 
-      XCTAssertThrowsError(try Expression(infixTokens)) { error in
+      XCTAssertThrowsError(try Expression(lexemes)) { error in
         XCTAssertEqual(expected, error as? ExpressionError)
       }
     }
@@ -187,250 +187,250 @@ extension ExpressionTests {
 
 extension ExpressionTests {
   //  TODO: Handle 1d4, 1d6, 1d8, 1d10, 1d12, 1d20, 1d100, and 1d
-  func testPushedWithValidTokens() {
+  func testPushedWithValidLexemes() {
     typealias Fixture = (
-      infixTokens: [String],
-      infixToken: String,
+      lexemes: [String],
+      lexeme: String,
       expected: String
     )
 
     let fixtures: [Fixture] = [
-      (infixTokens: [], infixToken: "(", expected: "("),
-      (infixTokens: [], infixToken: ")", expected: ")"),
-      (infixTokens: [], infixToken: "+", expected: "+"),
-      (infixTokens: [], infixToken: "÷", expected: "÷"),
-      (infixTokens: [], infixToken: "×", expected: "×"),
-      (infixTokens: [], infixToken: "-", expected: "-"),
-      (infixTokens: [], infixToken: "0", expected: "0"),
-      (infixTokens: [], infixToken: "1", expected: "1"),
-      (infixTokens: [], infixToken: "9", expected: "9"),
+      (lexemes: [], lexeme: "(", expected: "("),
+      (lexemes: [], lexeme: ")", expected: ")"),
+      (lexemes: [], lexeme: "+", expected: "+"),
+      (lexemes: [], lexeme: "÷", expected: "÷"),
+      (lexemes: [], lexeme: "×", expected: "×"),
+      (lexemes: [], lexeme: "-", expected: "-"),
+      (lexemes: [], lexeme: "0", expected: "0"),
+      (lexemes: [], lexeme: "1", expected: "1"),
+      (lexemes: [], lexeme: "9", expected: "9"),
 
-      (infixTokens: ["("], infixToken: "(", expected: "(("),
-      (infixTokens: ["("], infixToken: ")", expected: "()"),
-      (infixTokens: ["("], infixToken: "+", expected: "( +"),
-      (infixTokens: ["("], infixToken: "÷", expected: "( ÷"),
-      (infixTokens: ["("], infixToken: "×", expected: "( ×"),
-      (infixTokens: ["("], infixToken: "-", expected: "( -"),
-      (infixTokens: ["("], infixToken: "0", expected: "(0"),
-      (infixTokens: ["("], infixToken: "1", expected: "(1"),
-      (infixTokens: ["("], infixToken: "9", expected: "(9"),
+      (lexemes: ["("], lexeme: "(", expected: "(("),
+      (lexemes: ["("], lexeme: ")", expected: "()"),
+      (lexemes: ["("], lexeme: "+", expected: "( +"),
+      (lexemes: ["("], lexeme: "÷", expected: "( ÷"),
+      (lexemes: ["("], lexeme: "×", expected: "( ×"),
+      (lexemes: ["("], lexeme: "-", expected: "( -"),
+      (lexemes: ["("], lexeme: "0", expected: "(0"),
+      (lexemes: ["("], lexeme: "1", expected: "(1"),
+      (lexemes: ["("], lexeme: "9", expected: "(9"),
 
-      (infixTokens: [")"], infixToken: "(", expected: ") × ("),
-      (infixTokens: [")"], infixToken: ")", expected: "))"),
-      (infixTokens: [")"], infixToken: "+", expected: ") +"),
-      (infixTokens: [")"], infixToken: "÷", expected: ") ÷"),
-      (infixTokens: [")"], infixToken: "×", expected: ") ×"),
-      (infixTokens: [")"], infixToken: "-", expected: ") -"),
-      (infixTokens: [")"], infixToken: "0", expected: ") × 0"),
-      (infixTokens: [")"], infixToken: "1", expected: ") × 1"),
-      (infixTokens: [")"], infixToken: "9", expected: ") × 9"),
+      (lexemes: [")"], lexeme: "(", expected: ") × ("),
+      (lexemes: [")"], lexeme: ")", expected: "))"),
+      (lexemes: [")"], lexeme: "+", expected: ") +"),
+      (lexemes: [")"], lexeme: "÷", expected: ") ÷"),
+      (lexemes: [")"], lexeme: "×", expected: ") ×"),
+      (lexemes: [")"], lexeme: "-", expected: ") -"),
+      (lexemes: [")"], lexeme: "0", expected: ") × 0"),
+      (lexemes: [")"], lexeme: "1", expected: ") × 1"),
+      (lexemes: [")"], lexeme: "9", expected: ") × 9"),
 
-      (infixTokens: ["+"], infixToken: "(", expected: "+ ("),
-      (infixTokens: ["+"], infixToken: ")", expected: "+ )"),
-      (infixTokens: ["+"], infixToken: "+", expected: "+"),
-      (infixTokens: ["+"], infixToken: "÷", expected: "÷"),
-      (infixTokens: ["+"], infixToken: "×", expected: "×"),
-      (infixTokens: ["+"], infixToken: "-", expected: "-"),
-      (infixTokens: ["+"], infixToken: "0", expected: "0"),
-      (infixTokens: ["+"], infixToken: "1", expected: "1"),
-      (infixTokens: ["+"], infixToken: "9", expected: "9"),
+      (lexemes: ["+"], lexeme: "(", expected: "+ ("),
+      (lexemes: ["+"], lexeme: ")", expected: "+ )"),
+      (lexemes: ["+"], lexeme: "+", expected: "+"),
+      (lexemes: ["+"], lexeme: "÷", expected: "÷"),
+      (lexemes: ["+"], lexeme: "×", expected: "×"),
+      (lexemes: ["+"], lexeme: "-", expected: "-"),
+      (lexemes: ["+"], lexeme: "0", expected: "0"),
+      (lexemes: ["+"], lexeme: "1", expected: "1"),
+      (lexemes: ["+"], lexeme: "9", expected: "9"),
 
-      (infixTokens: ["÷"], infixToken: "(", expected: "÷ ("),
-      (infixTokens: ["÷"], infixToken: ")", expected: "÷ )"),
-      (infixTokens: ["÷"], infixToken: "+", expected: "+"),
-      (infixTokens: ["÷"], infixToken: "÷", expected: "÷"),
-      (infixTokens: ["÷"], infixToken: "×", expected: "×"),
-      (infixTokens: ["÷"], infixToken: "-", expected: "-"),
-      (infixTokens: ["÷"], infixToken: "0", expected: "÷ 0"),
-      (infixTokens: ["÷"], infixToken: "1", expected: "÷ 1"),
-      (infixTokens: ["÷"], infixToken: "9", expected: "÷ 9"),
+      (lexemes: ["÷"], lexeme: "(", expected: "÷ ("),
+      (lexemes: ["÷"], lexeme: ")", expected: "÷ )"),
+      (lexemes: ["÷"], lexeme: "+", expected: "+"),
+      (lexemes: ["÷"], lexeme: "÷", expected: "÷"),
+      (lexemes: ["÷"], lexeme: "×", expected: "×"),
+      (lexemes: ["÷"], lexeme: "-", expected: "-"),
+      (lexemes: ["÷"], lexeme: "0", expected: "÷ 0"),
+      (lexemes: ["÷"], lexeme: "1", expected: "÷ 1"),
+      (lexemes: ["÷"], lexeme: "9", expected: "÷ 9"),
 
-      (infixTokens: ["×"], infixToken: "(", expected: "× ("),
-      (infixTokens: ["×"], infixToken: ")", expected: "× )"),
-      (infixTokens: ["×"], infixToken: "+", expected: "+"),
-      (infixTokens: ["×"], infixToken: "÷", expected: "÷"),
-      (infixTokens: ["×"], infixToken: "×", expected: "×"),
-      (infixTokens: ["×"], infixToken: "-", expected: "-"),
-      (infixTokens: ["×"], infixToken: "0", expected: "× 0"),
-      (infixTokens: ["×"], infixToken: "1", expected: "× 1"),
-      (infixTokens: ["×"], infixToken: "9", expected: "× 9"),
+      (lexemes: ["×"], lexeme: "(", expected: "× ("),
+      (lexemes: ["×"], lexeme: ")", expected: "× )"),
+      (lexemes: ["×"], lexeme: "+", expected: "+"),
+      (lexemes: ["×"], lexeme: "÷", expected: "÷"),
+      (lexemes: ["×"], lexeme: "×", expected: "×"),
+      (lexemes: ["×"], lexeme: "-", expected: "-"),
+      (lexemes: ["×"], lexeme: "0", expected: "× 0"),
+      (lexemes: ["×"], lexeme: "1", expected: "× 1"),
+      (lexemes: ["×"], lexeme: "9", expected: "× 9"),
 
-      (infixTokens: ["-"], infixToken: "(", expected: "- ("),
-      (infixTokens: ["-"], infixToken: ")", expected: "- )"),
-      (infixTokens: ["-"], infixToken: "+", expected: "+"),
-      (infixTokens: ["-"], infixToken: "÷", expected: "÷"),
-      (infixTokens: ["-"], infixToken: "×", expected: "×"),
-      (infixTokens: ["-"], infixToken: "-", expected: "-"),
-      (infixTokens: ["-"], infixToken: "0", expected: "0"),
-      (infixTokens: ["-"], infixToken: "1", expected: "-1"),
-      (infixTokens: ["-"], infixToken: "9", expected: "-9"),
+      (lexemes: ["-"], lexeme: "(", expected: "- ("),
+      (lexemes: ["-"], lexeme: ")", expected: "- )"),
+      (lexemes: ["-"], lexeme: "+", expected: "+"),
+      (lexemes: ["-"], lexeme: "÷", expected: "÷"),
+      (lexemes: ["-"], lexeme: "×", expected: "×"),
+      (lexemes: ["-"], lexeme: "-", expected: "-"),
+      (lexemes: ["-"], lexeme: "0", expected: "0"),
+      (lexemes: ["-"], lexeme: "1", expected: "-1"),
+      (lexemes: ["-"], lexeme: "9", expected: "-9"),
 
-      (infixTokens: ["0"], infixToken: "(", expected: "0 × ("),
-      (infixTokens: ["0"], infixToken: ")", expected: "0)"),
-      (infixTokens: ["0"], infixToken: "+", expected: "0 +"),
-      (infixTokens: ["0"], infixToken: "÷", expected: "0 ÷"),
-      (infixTokens: ["0"], infixToken: "×", expected: "0 ×"),
-      (infixTokens: ["0"], infixToken: "-", expected: "0 -"),
-      (infixTokens: ["0"], infixToken: "0", expected: "0"),
-      (infixTokens: ["0"], infixToken: "1", expected: "1"),
-      (infixTokens: ["0"], infixToken: "9", expected: "9"),
+      (lexemes: ["0"], lexeme: "(", expected: "0 × ("),
+      (lexemes: ["0"], lexeme: ")", expected: "0)"),
+      (lexemes: ["0"], lexeme: "+", expected: "0 +"),
+      (lexemes: ["0"], lexeme: "÷", expected: "0 ÷"),
+      (lexemes: ["0"], lexeme: "×", expected: "0 ×"),
+      (lexemes: ["0"], lexeme: "-", expected: "0 -"),
+      (lexemes: ["0"], lexeme: "0", expected: "0"),
+      (lexemes: ["0"], lexeme: "1", expected: "1"),
+      (lexemes: ["0"], lexeme: "9", expected: "9"),
 
-      (infixTokens: ["1"], infixToken: "(", expected: "1 × ("),
-      (infixTokens: ["1"], infixToken: ")", expected: "1)"),
-      (infixTokens: ["1"], infixToken: "+", expected: "1 +"),
-      (infixTokens: ["1"], infixToken: "÷", expected: "1 ÷"),
-      (infixTokens: ["1"], infixToken: "×", expected: "1 ×"),
-      (infixTokens: ["1"], infixToken: "-", expected: "1 -"),
-      (infixTokens: ["1"], infixToken: "0", expected: "10"),
-      (infixTokens: ["1"], infixToken: "1", expected: "11"),
-      (infixTokens: ["1"], infixToken: "9", expected: "19"),
+      (lexemes: ["1"], lexeme: "(", expected: "1 × ("),
+      (lexemes: ["1"], lexeme: ")", expected: "1)"),
+      (lexemes: ["1"], lexeme: "+", expected: "1 +"),
+      (lexemes: ["1"], lexeme: "÷", expected: "1 ÷"),
+      (lexemes: ["1"], lexeme: "×", expected: "1 ×"),
+      (lexemes: ["1"], lexeme: "-", expected: "1 -"),
+      (lexemes: ["1"], lexeme: "0", expected: "10"),
+      (lexemes: ["1"], lexeme: "1", expected: "11"),
+      (lexemes: ["1"], lexeme: "9", expected: "19"),
 
-      (infixTokens: ["9"], infixToken: "(", expected: "9 × ("),
-      (infixTokens: ["9"], infixToken: ")", expected: "9)"),
-      (infixTokens: ["9"], infixToken: "+", expected: "9 +"),
-      (infixTokens: ["9"], infixToken: "÷", expected: "9 ÷"),
-      (infixTokens: ["9"], infixToken: "×", expected: "9 ×"),
-      (infixTokens: ["9"], infixToken: "-", expected: "9 -"),
-      (infixTokens: ["9"], infixToken: "0", expected: "90"),
-      (infixTokens: ["9"], infixToken: "1", expected: "91"),
-      (infixTokens: ["9"], infixToken: "9", expected: "99"),
+      (lexemes: ["9"], lexeme: "(", expected: "9 × ("),
+      (lexemes: ["9"], lexeme: ")", expected: "9)"),
+      (lexemes: ["9"], lexeme: "+", expected: "9 +"),
+      (lexemes: ["9"], lexeme: "÷", expected: "9 ÷"),
+      (lexemes: ["9"], lexeme: "×", expected: "9 ×"),
+      (lexemes: ["9"], lexeme: "-", expected: "9 -"),
+      (lexemes: ["9"], lexeme: "0", expected: "90"),
+      (lexemes: ["9"], lexeme: "1", expected: "91"),
+      (lexemes: ["9"], lexeme: "9", expected: "99"),
 
-      (infixTokens: ["1", "×", "("], infixToken: "(", expected: "1 × (("),
-      (infixTokens: ["1", "×", "("], infixToken: ")", expected: "1 × ()"),
-      (infixTokens: ["1", "×", "("], infixToken: "+", expected: "1 × ( +"),
-      (infixTokens: ["1", "×", "("], infixToken: "÷", expected: "1 × ( ÷"),
-      (infixTokens: ["1", "×", "("], infixToken: "×", expected: "1 × ( ×"),
-      (infixTokens: ["1", "×", "("], infixToken: "-", expected: "1 × ( -"),
-      (infixTokens: ["1", "×", "("], infixToken: "0", expected: "1 × (0"),
-      (infixTokens: ["1", "×", "("], infixToken: "1", expected: "1 × (1"),
-      (infixTokens: ["1", "×", "("], infixToken: "9", expected: "1 × (9"),
+      (lexemes: ["1", "×", "("], lexeme: "(", expected: "1 × (("),
+      (lexemes: ["1", "×", "("], lexeme: ")", expected: "1 × ()"),
+      (lexemes: ["1", "×", "("], lexeme: "+", expected: "1 × ( +"),
+      (lexemes: ["1", "×", "("], lexeme: "÷", expected: "1 × ( ÷"),
+      (lexemes: ["1", "×", "("], lexeme: "×", expected: "1 × ( ×"),
+      (lexemes: ["1", "×", "("], lexeme: "-", expected: "1 × ( -"),
+      (lexemes: ["1", "×", "("], lexeme: "0", expected: "1 × (0"),
+      (lexemes: ["1", "×", "("], lexeme: "1", expected: "1 × (1"),
+      (lexemes: ["1", "×", "("], lexeme: "9", expected: "1 × (9"),
 
-      (infixTokens: ["1", ")"], infixToken: "(", expected: "1) × ("),
-      (infixTokens: ["1", ")"], infixToken: ")", expected: "1))"),
-      (infixTokens: ["1", ")"], infixToken: "+", expected: "1) +"),
-      (infixTokens: ["1", ")"], infixToken: "÷", expected: "1) ÷"),
-      (infixTokens: ["1", ")"], infixToken: "×", expected: "1) ×"),
-      (infixTokens: ["1", ")"], infixToken: "-", expected: "1) -"),
-      (infixTokens: ["1", ")"], infixToken: "0", expected: "1) × 0"),
-      (infixTokens: ["1", ")"], infixToken: "1", expected: "1) × 1"),
-      (infixTokens: ["1", ")"], infixToken: "9", expected: "1) × 9"),
+      (lexemes: ["1", ")"], lexeme: "(", expected: "1) × ("),
+      (lexemes: ["1", ")"], lexeme: ")", expected: "1))"),
+      (lexemes: ["1", ")"], lexeme: "+", expected: "1) +"),
+      (lexemes: ["1", ")"], lexeme: "÷", expected: "1) ÷"),
+      (lexemes: ["1", ")"], lexeme: "×", expected: "1) ×"),
+      (lexemes: ["1", ")"], lexeme: "-", expected: "1) -"),
+      (lexemes: ["1", ")"], lexeme: "0", expected: "1) × 0"),
+      (lexemes: ["1", ")"], lexeme: "1", expected: "1) × 1"),
+      (lexemes: ["1", ")"], lexeme: "9", expected: "1) × 9"),
 
-      (infixTokens: ["1", "+"], infixToken: "(", expected: "1 + ("),
-      (infixTokens: ["1", "+"], infixToken: ")", expected: "1 + )"),
-      (infixTokens: ["1", "+"], infixToken: "+", expected: "1 +"),
-      (infixTokens: ["1", "+"], infixToken: "÷", expected: "1 ÷"),
-      (infixTokens: ["1", "+"], infixToken: "×", expected: "1 ×"),
-      (infixTokens: ["1", "+"], infixToken: "-", expected: "1 -"),
-      (infixTokens: ["1", "+"], infixToken: "0", expected: "1 + 0"),
-      (infixTokens: ["1", "+"], infixToken: "1", expected: "1 + 1"),
-      (infixTokens: ["1", "+"], infixToken: "9", expected: "1 + 9"),
+      (lexemes: ["1", "+"], lexeme: "(", expected: "1 + ("),
+      (lexemes: ["1", "+"], lexeme: ")", expected: "1 + )"),
+      (lexemes: ["1", "+"], lexeme: "+", expected: "1 +"),
+      (lexemes: ["1", "+"], lexeme: "÷", expected: "1 ÷"),
+      (lexemes: ["1", "+"], lexeme: "×", expected: "1 ×"),
+      (lexemes: ["1", "+"], lexeme: "-", expected: "1 -"),
+      (lexemes: ["1", "+"], lexeme: "0", expected: "1 + 0"),
+      (lexemes: ["1", "+"], lexeme: "1", expected: "1 + 1"),
+      (lexemes: ["1", "+"], lexeme: "9", expected: "1 + 9"),
 
-      (infixTokens: ["1", "÷"], infixToken: "(", expected: "1 ÷ ("),
-      (infixTokens: ["1", "÷"], infixToken: ")", expected: "1 ÷ )"),
-      (infixTokens: ["1", "÷"], infixToken: "+", expected: "1 +"),
-      (infixTokens: ["1", "÷"], infixToken: "÷", expected: "1 ÷"),
-      (infixTokens: ["1", "÷"], infixToken: "×", expected: "1 ×"),
-      (infixTokens: ["1", "÷"], infixToken: "-", expected: "1 -"),
-      (infixTokens: ["1", "÷"], infixToken: "0", expected: "1 ÷ 0"),
-      (infixTokens: ["1", "÷"], infixToken: "1", expected: "1 ÷ 1"),
-      (infixTokens: ["1", "÷"], infixToken: "9", expected: "1 ÷ 9"),
+      (lexemes: ["1", "÷"], lexeme: "(", expected: "1 ÷ ("),
+      (lexemes: ["1", "÷"], lexeme: ")", expected: "1 ÷ )"),
+      (lexemes: ["1", "÷"], lexeme: "+", expected: "1 +"),
+      (lexemes: ["1", "÷"], lexeme: "÷", expected: "1 ÷"),
+      (lexemes: ["1", "÷"], lexeme: "×", expected: "1 ×"),
+      (lexemes: ["1", "÷"], lexeme: "-", expected: "1 -"),
+      (lexemes: ["1", "÷"], lexeme: "0", expected: "1 ÷ 0"),
+      (lexemes: ["1", "÷"], lexeme: "1", expected: "1 ÷ 1"),
+      (lexemes: ["1", "÷"], lexeme: "9", expected: "1 ÷ 9"),
 
-      (infixTokens: ["1", "×"], infixToken: "(", expected: "1 × ("),
-      (infixTokens: ["1", "×"], infixToken: ")", expected: "1 × )"),
-      (infixTokens: ["1", "×"], infixToken: "+", expected: "1 +"),
-      (infixTokens: ["1", "×"], infixToken: "÷", expected: "1 ÷"),
-      (infixTokens: ["1", "×"], infixToken: "×", expected: "1 ×"),
-      (infixTokens: ["1", "×"], infixToken: "-", expected: "1 -"),
-      (infixTokens: ["1", "×"], infixToken: "0", expected: "1 × 0"),
-      (infixTokens: ["1", "×"], infixToken: "1", expected: "1 × 1"),
-      (infixTokens: ["1", "×"], infixToken: "9", expected: "1 × 9"),
+      (lexemes: ["1", "×"], lexeme: "(", expected: "1 × ("),
+      (lexemes: ["1", "×"], lexeme: ")", expected: "1 × )"),
+      (lexemes: ["1", "×"], lexeme: "+", expected: "1 +"),
+      (lexemes: ["1", "×"], lexeme: "÷", expected: "1 ÷"),
+      (lexemes: ["1", "×"], lexeme: "×", expected: "1 ×"),
+      (lexemes: ["1", "×"], lexeme: "-", expected: "1 -"),
+      (lexemes: ["1", "×"], lexeme: "0", expected: "1 × 0"),
+      (lexemes: ["1", "×"], lexeme: "1", expected: "1 × 1"),
+      (lexemes: ["1", "×"], lexeme: "9", expected: "1 × 9"),
 
-      (infixTokens: ["1", "-"], infixToken: "(", expected: "1 - ("),
-      (infixTokens: ["1", "-"], infixToken: ")", expected: "1 - )"),
-      (infixTokens: ["1", "-"], infixToken: "+", expected: "1 +"),
-      (infixTokens: ["1", "-"], infixToken: "÷", expected: "1 ÷"),
-      (infixTokens: ["1", "-"], infixToken: "×", expected: "1 ×"),
-      (infixTokens: ["1", "-"], infixToken: "-", expected: "1 -"),
-      (infixTokens: ["1", "-"], infixToken: "0", expected: "1 - 0"),
-      (infixTokens: ["1", "-"], infixToken: "1", expected: "1 - 1"),
-      (infixTokens: ["1", "-"], infixToken: "9", expected: "1 - 9"),
+      (lexemes: ["1", "-"], lexeme: "(", expected: "1 - ("),
+      (lexemes: ["1", "-"], lexeme: ")", expected: "1 - )"),
+      (lexemes: ["1", "-"], lexeme: "+", expected: "1 +"),
+      (lexemes: ["1", "-"], lexeme: "÷", expected: "1 ÷"),
+      (lexemes: ["1", "-"], lexeme: "×", expected: "1 ×"),
+      (lexemes: ["1", "-"], lexeme: "-", expected: "1 -"),
+      (lexemes: ["1", "-"], lexeme: "0", expected: "1 - 0"),
+      (lexemes: ["1", "-"], lexeme: "1", expected: "1 - 1"),
+      (lexemes: ["1", "-"], lexeme: "9", expected: "1 - 9"),
 
-      (infixTokens: ["10"], infixToken: "(", expected: "10 × ("),
-      (infixTokens: ["10"], infixToken: ")", expected: "10)"),
-      (infixTokens: ["10"], infixToken: "+", expected: "10 +"),
-      (infixTokens: ["10"], infixToken: "÷", expected: "10 ÷"),
-      (infixTokens: ["10"], infixToken: "×", expected: "10 ×"),
-      (infixTokens: ["10"], infixToken: "-", expected: "10 -"),
-      (infixTokens: ["10"], infixToken: "0", expected: "100"),
-      (infixTokens: ["10"], infixToken: "1", expected: "101"),
-      (infixTokens: ["10"], infixToken: "9", expected: "109"),
+      (lexemes: ["10"], lexeme: "(", expected: "10 × ("),
+      (lexemes: ["10"], lexeme: ")", expected: "10)"),
+      (lexemes: ["10"], lexeme: "+", expected: "10 +"),
+      (lexemes: ["10"], lexeme: "÷", expected: "10 ÷"),
+      (lexemes: ["10"], lexeme: "×", expected: "10 ×"),
+      (lexemes: ["10"], lexeme: "-", expected: "10 -"),
+      (lexemes: ["10"], lexeme: "0", expected: "100"),
+      (lexemes: ["10"], lexeme: "1", expected: "101"),
+      (lexemes: ["10"], lexeme: "9", expected: "109"),
 
-      (infixTokens: ["11"], infixToken: "(", expected: "11 × ("),
-      (infixTokens: ["11"], infixToken: ")", expected: "11)"),
-      (infixTokens: ["11"], infixToken: "+", expected: "11 +"),
-      (infixTokens: ["11"], infixToken: "÷", expected: "11 ÷"),
-      (infixTokens: ["11"], infixToken: "×", expected: "11 ×"),
-      (infixTokens: ["11"], infixToken: "-", expected: "11 -"),
-      (infixTokens: ["11"], infixToken: "0", expected: "110"),
-      (infixTokens: ["11"], infixToken: "1", expected: "111"),
-      (infixTokens: ["11"], infixToken: "9", expected: "119"),
+      (lexemes: ["11"], lexeme: "(", expected: "11 × ("),
+      (lexemes: ["11"], lexeme: ")", expected: "11)"),
+      (lexemes: ["11"], lexeme: "+", expected: "11 +"),
+      (lexemes: ["11"], lexeme: "÷", expected: "11 ÷"),
+      (lexemes: ["11"], lexeme: "×", expected: "11 ×"),
+      (lexemes: ["11"], lexeme: "-", expected: "11 -"),
+      (lexemes: ["11"], lexeme: "0", expected: "110"),
+      (lexemes: ["11"], lexeme: "1", expected: "111"),
+      (lexemes: ["11"], lexeme: "9", expected: "119"),
 
-      (infixTokens: ["19"], infixToken: "(", expected: "19 × ("),
-      (infixTokens: ["19"], infixToken: ")", expected: "19)"),
-      (infixTokens: ["19"], infixToken: "+", expected: "19 +"),
-      (infixTokens: ["19"], infixToken: "÷", expected: "19 ÷"),
-      (infixTokens: ["19"], infixToken: "×", expected: "19 ×"),
-      (infixTokens: ["19"], infixToken: "-", expected: "19 -"),
-      (infixTokens: ["19"], infixToken: "0", expected: "190"),
-      (infixTokens: ["19"], infixToken: "1", expected: "191"),
-      (infixTokens: ["19"], infixToken: "9", expected: "199"),
+      (lexemes: ["19"], lexeme: "(", expected: "19 × ("),
+      (lexemes: ["19"], lexeme: ")", expected: "19)"),
+      (lexemes: ["19"], lexeme: "+", expected: "19 +"),
+      (lexemes: ["19"], lexeme: "÷", expected: "19 ÷"),
+      (lexemes: ["19"], lexeme: "×", expected: "19 ×"),
+      (lexemes: ["19"], lexeme: "-", expected: "19 -"),
+      (lexemes: ["19"], lexeme: "0", expected: "190"),
+      (lexemes: ["19"], lexeme: "1", expected: "191"),
+      (lexemes: ["19"], lexeme: "9", expected: "199"),
     ]
 
     for fixture in fixtures {
-      let infixTokens = fixture.infixTokens
-      let infixToken = fixture.infixToken
+      let lexemes = fixture.lexemes
+      let lexeme = fixture.lexeme
       let expected = fixture.expected
 
-      let expression = try! Expression(infixTokens)
-      let nextExpression = try! expression.pushed(infixToken)
+      let expression = try! Expression(lexemes)
+      let nextExpression = try! expression.pushed(lexeme)
       let actual = String(describing: nextExpression)
 
       XCTAssertEqual(expected, actual)
     }
   }
 
-  func testPushedWithInvalidTokens() {
+  func testPushedWithInvalidLexemes() {
     typealias Fixture = (
-      infixToken: String,
+      lexeme: String,
       expected: ExpressionError
     )
 
     let fixtures: [Fixture] = [
-      (infixToken: "=", expected: .invalidToken("=")),
-      (infixToken: "[", expected: .invalidToken("[")),
-      (infixToken: "{", expected: .invalidToken("{")),
-      (infixToken: "<", expected: .invalidToken("<")),
-      (infixToken: ".", expected: .invalidToken(".")),
-      (infixToken: ",", expected: .invalidToken(",")),
-      (infixToken: ",", expected: .invalidToken(",")),
-      (infixToken: "**", expected: .invalidToken("**")),
-      (infixToken: "&", expected: .invalidToken("&")),
-      (infixToken: "|", expected: .invalidToken("|")),
-      (infixToken: "!", expected: .invalidToken("!")),
-      (infixToken: "~", expected: .invalidToken("~")),
-      (infixToken: "..<", expected: .invalidToken("..<")),
-      (infixToken: "...", expected: .invalidToken("...")),
-      (infixToken: "<<", expected: .invalidToken("<<")),
-      (infixToken: ">>", expected: .invalidToken(">>")),
-      (infixToken: "%", expected: .invalidToken("%")),
+      (lexeme: "=", expected: .invalidLexeme("=")),
+      (lexeme: "[", expected: .invalidLexeme("[")),
+      (lexeme: "{", expected: .invalidLexeme("{")),
+      (lexeme: "<", expected: .invalidLexeme("<")),
+      (lexeme: ".", expected: .invalidLexeme(".")),
+      (lexeme: ",", expected: .invalidLexeme(",")),
+      (lexeme: ",", expected: .invalidLexeme(",")),
+      (lexeme: "**", expected: .invalidLexeme("**")),
+      (lexeme: "&", expected: .invalidLexeme("&")),
+      (lexeme: "|", expected: .invalidLexeme("|")),
+      (lexeme: "!", expected: .invalidLexeme("!")),
+      (lexeme: "~", expected: .invalidLexeme("~")),
+      (lexeme: "..<", expected: .invalidLexeme("..<")),
+      (lexeme: "...", expected: .invalidLexeme("...")),
+      (lexeme: "<<", expected: .invalidLexeme("<<")),
+      (lexeme: ">>", expected: .invalidLexeme(">>")),
+      (lexeme: "%", expected: .invalidLexeme("%")),
     ]
 
     for fixture in fixtures {
-      let infixToken = fixture.infixToken
+      let lexeme = fixture.lexeme
       let expected = fixture.expected
       let expression = try! Expression([])
 
-      XCTAssertThrowsError(try expression.pushed(infixToken)) { error in
+      XCTAssertThrowsError(try expression.pushed(lexeme)) { error in
         XCTAssertEqual(expected, error as? ExpressionError)
       }
     }
@@ -616,19 +616,19 @@ extension ExpressionTests {
 extension ExpressionTests {
   func testEvaluate() {
     for fixture in fixtures {
-      let infixTokens = fixture.infixTokens
+      let lexemes = fixture.lexemes
       let expected = fixture.value
 
-      let expression = try! Expression(infixTokens)
+      let expression = try! Expression(lexemes)
       let actual = try! expression.evaluate()
 
-      XCTAssertEqual(expected, actual, "infixTokens: \(infixTokens)")
+      XCTAssertEqual(expected, actual, "lexemes: \(lexemes)")
     }
   }
 
   func testEvaluateError() {
     typealias Fixture = (
-      infixTokens: [String],
+      lexemes: [String],
       expected: ExpressionError
     )
 
@@ -646,10 +646,10 @@ extension ExpressionTests {
     ]
 
     for fixture in fixtures {
-      let infixTokens = fixture.infixTokens
+      let lexemes = fixture.lexemes
       let expected = fixture.expected
 
-      let expression = try! Expression(infixTokens)
+      let expression = try! Expression(lexemes)
 
       XCTAssertThrowsError(try expression.evaluate()) { error in
         XCTAssertEqual(expected, error as? ExpressionError)
@@ -660,13 +660,13 @@ extension ExpressionTests {
   func testEvaluatePerformance() {
     self.measure {
       for fixture in fixtures {
-        let infixTokens = fixture.infixTokens
+        let lexemes = fixture.lexemes
         let expected = fixture.value
 
-        let expression = try! Expression(infixTokens)
+        let expression = try! Expression(lexemes)
         let actual = try! expression.evaluate()
 
-        XCTAssertEqual(expected, actual, "infixTokens: \(infixTokens)")
+        XCTAssertEqual(expected, actual, "lexemes: \(lexemes)")
       }
     }
   }

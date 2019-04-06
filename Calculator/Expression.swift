@@ -5,21 +5,21 @@ public struct Expression {
 // MARK: - Initialization
 
 extension Expression {
-  public init(_ infixTokens: [String]) throws {
-    self.infixTokens = try infixTokens.map { infixToken in
-      if let parenthesis = Parenthesis(rawValue: infixToken) {
+  public init(_ lexemes: [String]) throws {
+    self.infixTokens = try lexemes.map { lexeme in
+      if let parenthesis = Parenthesis(rawValue: lexeme) {
         return parenthesis
       }
 
-      if let `operator` = Operator(rawValue: infixToken) {
+      if let `operator` = Operator(rawValue: lexeme) {
         return `operator`
       }
 
-      if let operand = Operand(rawToken: infixToken) {
+      if let operand = Operand(rawLexeme: lexeme) {
         return operand
       }
 
-      throw ExpressionError.invalidToken(infixToken)
+      throw ExpressionError.invalidLexeme(lexeme)
     }
   }
 
@@ -44,16 +44,16 @@ extension Expression: Equatable {
 extension Expression: CustomStringConvertible {
   public var description: String {
     let result = infixTokens.reduce("") { accumulation, infixToken in
-      let description: String
+      let lexeme: String
 
       if let operatorToken = infixToken as? Operator {
-        description = " \(String(describing: operatorToken)) "
+        lexeme = " \(String(describing: operatorToken)) "
       }
       else {
-        description = String(describing: infixToken)
+        lexeme = String(describing: infixToken)
       }
 
-      return accumulation + description
+      return accumulation + lexeme
     }
 
     return result.trimmingCharacters(in: .whitespaces)
@@ -63,26 +63,26 @@ extension Expression: CustomStringConvertible {
 // MARK: - Inclusion
 
 extension Expression {
-  public func pushed(_ infixToken: String) throws -> Expression {
-    if let parenthesis = Parenthesis(rawValue: infixToken) {
+  public func pushed(_ lexeme: String) throws -> Expression {
+    if let parenthesis = Parenthesis(rawValue: lexeme) {
       let infixTokens = pushed(parenthesisToken: parenthesis)
 
       return Expression(infixTokens)
     }
 
-    if let `operator` = Operator(rawValue: infixToken) {
+    if let `operator` = Operator(rawValue: lexeme) {
       let infixTokens = pushed(operatorToken: `operator`)
 
       return Expression(infixTokens)
     }
 
-    if let integer = Int(infixToken) {
+    if let integer = Int(lexeme) {
       let infixTokens = try pushed(integer: integer)
 
       return Expression(infixTokens)
     }
 
-    throw ExpressionError.invalidToken(infixToken)
+    throw ExpressionError.invalidLexeme(lexeme)
   }
 
   func pushed(parenthesisToken: Parenthesis) -> [Tokenable] {
