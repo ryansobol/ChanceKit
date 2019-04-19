@@ -42,38 +42,12 @@ extension ExpressionTests {
     }
   }
 
-  func testInitWithInvalidLexemes() {
-    typealias Fixture = (
-      lexemes: [String],
-      expected: ExpressionError
-    )
+  func testInitWithInvalidFixtures() {
+    for fixture in invalidFixtures {
+      let lexeme = fixture.lexeme
+      let expected = fixture.error
 
-    let fixtures: [Fixture] = [
-      (lexemes: ["d"], expected: .invalidLexeme("d")),
-      (lexemes: ["="], expected: .invalidLexeme("=")),
-      (lexemes: ["["], expected: .invalidLexeme("[")),
-      (lexemes: ["{"], expected: .invalidLexeme("{")),
-      (lexemes: ["<"], expected: .invalidLexeme("<")),
-      (lexemes: ["."], expected: .invalidLexeme(".")),
-      (lexemes: [","], expected: .invalidLexeme(",")),
-      (lexemes: [","], expected: .invalidLexeme(",")),
-      (lexemes: ["**"], expected: .invalidLexeme("**")),
-      (lexemes: ["&"], expected: .invalidLexeme("&")),
-      (lexemes: ["|"], expected: .invalidLexeme("|")),
-      (lexemes: ["!"], expected: .invalidLexeme("!")),
-      (lexemes: ["~"], expected: .invalidLexeme("~")),
-      (lexemes: ["..<"], expected: .invalidLexeme("..<")),
-      (lexemes: ["..."], expected: .invalidLexeme("...")),
-      (lexemes: ["<<"], expected: .invalidLexeme("<<")),
-      (lexemes: [">>"], expected: .invalidLexeme(">>")),
-      (lexemes: ["%"], expected: .invalidLexeme("%")),
-    ]
-
-    for fixture in fixtures {
-      let lexemes = fixture.lexemes
-      let expected = fixture.expected
-
-      XCTAssertThrowsError(try Expression(lexemes)) { error in
+      XCTAssertThrowsError(try Expression([lexeme])) { error in
         XCTAssertEqual(expected, error as? ExpressionError)
       }
     }
@@ -296,35 +270,10 @@ extension ExpressionTests {
     }
   }
 
-  func testPushedWithInvalidLexemes() {
-    typealias Fixture = (
-      lexeme: String,
-      expected: ExpressionError
-    )
-
-    let fixtures: [Fixture] = [
-      (lexeme: "=", expected: .invalidLexeme("=")),
-      (lexeme: "[", expected: .invalidLexeme("[")),
-      (lexeme: "{", expected: .invalidLexeme("{")),
-      (lexeme: "<", expected: .invalidLexeme("<")),
-      (lexeme: ".", expected: .invalidLexeme(".")),
-      (lexeme: ",", expected: .invalidLexeme(",")),
-      (lexeme: ",", expected: .invalidLexeme(",")),
-      (lexeme: "**", expected: .invalidLexeme("**")),
-      (lexeme: "&", expected: .invalidLexeme("&")),
-      (lexeme: "|", expected: .invalidLexeme("|")),
-      (lexeme: "!", expected: .invalidLexeme("!")),
-      (lexeme: "~", expected: .invalidLexeme("~")),
-      (lexeme: "..<", expected: .invalidLexeme("..<")),
-      (lexeme: "...", expected: .invalidLexeme("...")),
-      (lexeme: "<<", expected: .invalidLexeme("<<")),
-      (lexeme: ">>", expected: .invalidLexeme(">>")),
-      (lexeme: "%", expected: .invalidLexeme("%")),
-    ]
-
-    for fixture in fixtures {
+  func testPushedWithInvalidFixtures() {
+    for fixture in invalidFixtures {
       let lexeme = fixture.lexeme
-      let expected = fixture.expected
+      let expected = fixture.error
       let expression = try! Expression([])
 
       XCTAssertThrowsError(try expression.pushed(lexeme)) { error in
