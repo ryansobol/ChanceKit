@@ -562,7 +562,7 @@ extension ExpressionTests {
 
   func testEvaluatePerformance() {
     self.measure {
-      for fixture in fixtures {
+      for fixture in evaluatableFixtures {
         let lexemes = fixture.lexemes
         let expected = fixture.value
 
