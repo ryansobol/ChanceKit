@@ -173,8 +173,8 @@ extension Expression {
       return self
     }
 
-    if let lastOperand = lastToken as? Operand, let nextTokenable = lastOperand.dropped() {
-      tokens.append(nextTokenable)
+    if let lastOperand = lastToken as? Operand, let droppedOperand = lastOperand.dropped() {
+      tokens.append(droppedOperand)
     }
 
     return Expression(tokens)
