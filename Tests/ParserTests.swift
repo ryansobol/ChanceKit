@@ -30,20 +30,10 @@ class ParserTest: XCTestCase {
     }
   }
 
-  func testParseError() {
-    typealias Fixture = (
-      tokens: [Tokenable],
-      expected: ExpressionError
-    )
-
-    let fixtures: [Fixture] = [
-      ([Parenthesis.close], .missingParenthesisOpen),
-      ([Parenthesis.open], .missingParenthesisClose),
-    ]
-
-    for fixture in fixtures {
-      let tokens = fixture.tokens
-      let expected = fixture.expected
+  func testParseWithLexebleFixtures() {
+    for fixture in lexebleFixtures {
+      let tokens = fixture.infixTokens
+      let expected = fixture.error
 
       XCTAssertThrowsError(try parse(infixTokens: tokens)) { error in
         XCTAssertEqual(expected, error as? ExpressionError)

@@ -524,28 +524,23 @@ extension ExpressionTests {
     }
   }
 
-  func testEvaluateError() {
-    typealias Fixture = (
-      lexemes: [String],
-      expected: ExpressionError
-    )
-
-    let fixtures: [Fixture] = [
-      ([")"], .missingParenthesisOpen),
-      (["("], .missingParenthesisClose),
-      (["+"], .missingOperand),
-      (["1", "+"], .missingOperand),
-      (["1", "1"], .missingOperator),
-      (["1", "0", "÷"], .divisionByZero),
-      (["9223372036854775807", "1", "+"], .operationOverflow),
-      (["-9223372036854775808", "-1", "÷"], .operationOverflow),
-      (["-9223372036854775808", "-1", "×"], .operationOverflow),
-      (["9223372036854775807", "-1", "-"], .operationOverflow),
-    ]
-
-    for fixture in fixtures {
+  func testEvaluateWithParsableFixtures() {
+    for fixture in parsableFixtures {
       let lexemes = fixture.lexemes
-      let expected = fixture.expected
+      let expected = fixture.error
+
+      let expression = try! Expression(lexemes)
+
+      XCTAssertThrowsError(try expression.evaluate()) { error in
+        XCTAssertEqual(expected, error as? ExpressionError)
+      }
+    }
+  }
+
+  func testEvaluateWithLexebleFixtures() {
+    for fixture in lexebleFixtures {
+      let lexemes = fixture.lexemes
+      let expected = fixture.error
 
       let expression = try! Expression(lexemes)
 
