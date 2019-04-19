@@ -133,15 +133,15 @@ extension Expression {
       tokens.append(Operand.number(integer))
 
     case let lastOperator as Operator:
-      let tokenCount = tokens.count
+      let tokensCount = tokens.count
 
-      if tokenCount == 1 && lastOperator == .addition {
+      if tokensCount == 1 && lastOperator == .addition {
         tokens.removeLast()
       }
 
       var integer = integer
 
-      if tokenCount == 1 && lastOperator == .subtraction {
+      if tokensCount == 1 && lastOperator == .subtraction {
         tokens.removeLast()
 
         integer.negate()
