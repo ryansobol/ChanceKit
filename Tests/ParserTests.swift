@@ -4,7 +4,7 @@ import XCTest
 class ParserTest: XCTestCase {
   func testParse() {
     typealias Fixture = (
-      infixTokens: [Tokenable],
+      tokens: [Tokenable],
       expectedTokens: [Tokenable]
     )
 
@@ -1158,9 +1158,9 @@ class ParserTest: XCTestCase {
     ]
 
     for fixture in fixtures {
-      let infixTokens = fixture.infixTokens
+      let tokens = fixture.tokens
       let expectedTokens = fixture.expectedTokens
-      let actualTokens = try! parse(infixTokens: infixTokens)
+      let actualTokens = try! parse(infixTokens: tokens)
 
       XCTAssertTrue(expectedTokens.count == actualTokens.count)
 

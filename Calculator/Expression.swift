@@ -1,12 +1,12 @@
 public struct Expression {
-  let infixTokens: [Tokenable]
+  let tokens: [Tokenable]
 }
 
 // MARK: - Initialization
 
 extension Expression {
   public init(_ lexemes: [String]) throws {
-    self.infixTokens = try lexemes.map { lexeme in
+    self.tokens = try lexemes.map { lexeme in
       if let parenthesis = Parenthesis(rawValue: lexeme) {
         return parenthesis
       }
@@ -23,8 +23,8 @@ extension Expression {
     }
   }
 
-  init(_ infixTokens: [Tokenable]) {
-    self.infixTokens = infixTokens
+  init(_ tokens: [Tokenable]) {
+    self.tokens = tokens
   }
 }
 
@@ -32,8 +32,8 @@ extension Expression {
 
 extension Expression: Equatable {
   public static func == (lhs: Expression, rhs: Expression) -> Bool {
-    let lht = lhs.infixTokens
-    let rht = rhs.infixTokens
+    let lht = lhs.tokens
+    let rht = rhs.tokens
 
     return lht.count == rht.count && !zip(lht, rht).contains { !$0.isEqualTo($1) }
   }
@@ -43,14 +43,14 @@ extension Expression: Equatable {
 
 extension Expression: CustomStringConvertible {
   public var description: String {
-    let result = infixTokens.reduce("") { accumulation, infixToken in
+    let result = tokens.reduce("") { accumulation, token in
       let lexeme: String
 
-      if let operatorToken = infixToken as? Operator {
+      if let operatorToken = token as? Operator {
         lexeme = " \(String(describing: operatorToken)) "
       }
       else {
-        lexeme = String(describing: infixToken)
+        lexeme = String(describing: token)
       }
 
       return accumulation + lexeme
@@ -65,101 +65,101 @@ extension Expression: CustomStringConvertible {
 extension Expression {
   public func pushed(_ lexeme: String) throws -> Expression {
     if let parenthesis = Parenthesis(rawValue: lexeme) {
-      let infixTokens = pushed(parenthesisToken: parenthesis)
+      let tokens = pushed(parenthesisToken: parenthesis)
 
-      return Expression(infixTokens)
+      return Expression(tokens)
     }
 
     if let `operator` = Operator(rawValue: lexeme) {
-      let infixTokens = pushed(operatorToken: `operator`)
+      let tokens = pushed(operatorToken: `operator`)
 
-      return Expression(infixTokens)
+      return Expression(tokens)
     }
 
     if let integer = Int(lexeme) {
-      let infixTokens = try pushed(integer: integer)
+      let tokens = try pushed(integer: integer)
 
-      return Expression(infixTokens)
+      return Expression(tokens)
     }
 
     throw ExpressionError.invalidLexeme(lexeme)
   }
 
   func pushed(parenthesisToken: Parenthesis) -> [Tokenable] {
-    var infixTokens = self.infixTokens
+    var tokens = self.tokens
 
     if parenthesisToken == .close {
-      infixTokens.append(parenthesisToken)
+      tokens.append(parenthesisToken)
 
-      return infixTokens
+      return tokens
     }
 
-    if let lastParenthesis = infixTokens.last as? Parenthesis, lastParenthesis == .close {
-      infixTokens.append(Operator.multiplication)
+    if let lastParenthesis = tokens.last as? Parenthesis, lastParenthesis == .close {
+      tokens.append(Operator.multiplication)
     }
-    else if infixTokens.last is Operand {
-      infixTokens.append(Operator.multiplication)
+    else if tokens.last is Operand {
+      tokens.append(Operator.multiplication)
     }
 
-    infixTokens.append(parenthesisToken)
+    tokens.append(parenthesisToken)
 
-    return infixTokens
+    return tokens
   }
 
   func pushed(operatorToken: Operator) -> [Tokenable] {
-    var infixTokens = self.infixTokens
+    var tokens = self.tokens
 
-    if infixTokens.last is Operator {
-      infixTokens.removeLast()
+    if tokens.last is Operator {
+      tokens.removeLast()
     }
 
-    infixTokens.append(operatorToken)
+    tokens.append(operatorToken)
 
-    return infixTokens
+    return tokens
   }
 
   func pushed(integer: Int) throws -> [Tokenable] {
-    var infixTokens = self.infixTokens
+    var tokens = self.tokens
 
-    switch infixTokens.last {
+    switch tokens.last {
     case nil:
-      infixTokens.append(Operand.number(integer))
+      tokens.append(Operand.number(integer))
 
     case let lastParenthesis as Parenthesis:
       if lastParenthesis == .close {
-        infixTokens.append(Operator.multiplication)
+        tokens.append(Operator.multiplication)
       }
 
-      infixTokens.append(Operand.number(integer))
+      tokens.append(Operand.number(integer))
 
     case let lastOperator as Operator:
-      let tokenCount = infixTokens.count
+      let tokenCount = tokens.count
 
       if tokenCount == 1 && lastOperator == .addition {
-        infixTokens.removeLast()
+        tokens.removeLast()
       }
 
       var integer = integer
 
       if tokenCount == 1 && lastOperator == .subtraction {
-        infixTokens.removeLast()
+        tokens.removeLast()
 
         integer.negate()
       }
 
-      infixTokens.append(Operand.number(integer))
+      tokens.append(Operand.number(integer))
 
     case let lastOperand as Operand:
       let nextOperand = try lastOperand.pushed(integer)
 
-      infixTokens.removeLast()
-      infixTokens.append(nextOperand)
+      tokens.removeLast()
+      tokens.append(nextOperand)
 
     default:
       preconditionFailure()
     }
 
-    return infixTokens
+    return tokens
   }
 }
 
@@ -167,17 +167,17 @@ extension Expression {
 
 extension Expression {
   public func dropped() -> Expression {
-    var infixTokens = self.infixTokens
+    var tokens = self.tokens
 
-    guard let lastInfixToken = infixTokens.popLast() else {
+    guard let lastToken = tokens.popLast() else {
       return self
     }
 
-    if let lastOperand = lastInfixToken as? Operand, let nextTokenable = lastOperand.dropped() {
-      infixTokens.append(nextTokenable)
+    if let lastOperand = lastToken as? Operand, let nextTokenable = lastOperand.dropped() {
+      tokens.append(nextTokenable)
     }
 
-    return Expression(infixTokens)
+    return Expression(tokens)
   }
 }
 
@@ -187,7 +187,7 @@ extension Expression {
 // https://www.youtube.com/watch?v=MeRb_1bddWg
 extension Expression {
   public func evaluate() throws -> Int {
-    let postfixTokens = try parse(infixTokens: infixTokens)
+    let postfixTokens = try parse(infixTokens: tokens)
 
     var operands = [Operand]()
 
