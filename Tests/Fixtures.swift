@@ -26,6 +26,20 @@ let evaluatableFixtures: [EvaluatableFixture] = [
     postfixTokens: [Operand(rawLexeme: "42")!],
     value: 42
   ),
+  (
+    description: String(Int.max),
+    lexemes: [String(Int.max)],
+    infixTokens: [Operand(rawLexeme: String(Int.max))!],
+    postfixTokens: [Operand(rawLexeme: String(Int.max))!],
+    value: Int.max
+  ),
+  (
+    description: String(Int.min),
+    lexemes: [String(Int.min)],
+    infixTokens: [Operand(rawLexeme: String(Int.min))!],
+    postfixTokens: [Operand(rawLexeme: String(Int.min))!],
+    value: Int.min
+  ),
 
   // MARK: A + B
   (
@@ -303,6 +317,20 @@ let evaluatableFixtures: [EvaluatableFixture] = [
     infixTokens: [Parenthesis.open, Operand(rawLexeme: "42")!, Parenthesis.close],
     postfixTokens: [Operand(rawLexeme: "42")!],
     value: 42
+  ),
+  (
+    description: "(\(Int.max))",
+    lexemes: ["(", String(Int.max), ")"],
+    infixTokens: [Parenthesis.open, Operand(rawLexeme: String(Int.max))!, Parenthesis.close],
+    postfixTokens: [Operand(rawLexeme: String(Int.max))!],
+    value: Int.max
+  ),
+  (
+    description: "(\(Int.min))",
+    lexemes: ["(", String(Int.min), ")"],
+    infixTokens: [Parenthesis.open, Operand(rawLexeme: String(Int.min))!, Parenthesis.close],
+    postfixTokens: [Operand(rawLexeme: String(Int.min))!],
+    value: Int.min
   ),
 
   // MARK: (A + B)

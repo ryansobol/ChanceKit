@@ -19,22 +19,19 @@ extension ExpressionTests {
     }
   }
 
-  func testInitWithUnevaluableLexemes() {
+  func testInitWithUnevaluatableLexemes() {
     typealias Fixture = (
       lexemes: [String],
       expected: String
     )
 
     let fixtures: [Fixture] = [
-      (lexemes: [], expected: ""),
       (lexemes: ["("], expected: "("),
       (lexemes: [")"], expected: ")"),
       (lexemes: ["+"], expected: "+"),
       (lexemes: ["÷"], expected: "÷"),
       (lexemes: ["×"], expected: "×"),
       (lexemes: ["-"], expected: "-"),
-      (lexemes: [String(Int.max)], expected: String(Int.max)),
-      (lexemes: [String(Int.min)], expected: String(Int.min)),
     ]
 
     for fixture in fixtures {
