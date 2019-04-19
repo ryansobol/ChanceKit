@@ -6,7 +6,8 @@ typealias EvaluatableFixture = (
   description: String,
   lexemes: [String],
   infixTokens: [Tokenable],
-  postfixTokens: [Tokenable]
+  postfixTokens: [Tokenable],
+  value: Int
 )
 
 let evaluatableFixtures: [EvaluatableFixture] = [
@@ -15,13 +16,15 @@ let evaluatableFixtures: [EvaluatableFixture] = [
     description: "",
     lexemes: [],
     infixTokens: [],
-    postfixTokens: []
+    postfixTokens: [],
+    value: 0
   ),
   (
     description: "42",
     lexemes: ["42"],
     infixTokens: [Operand(rawLexeme: "42")!],
-    postfixTokens: [Operand(rawLexeme: "42")!]
+    postfixTokens: [Operand(rawLexeme: "42")!],
+    value: 42
   ),
 
   // MARK: A + B
@@ -29,37 +32,43 @@ let evaluatableFixtures: [EvaluatableFixture] = [
     description: "1 + 2",
     lexemes: ["1", "+", "2"],
     infixTokens: [Operand(rawLexeme: "1")!, Operator(rawValue: "+")!, Operand(rawLexeme: "2")!],
-    postfixTokens: [Operand(rawLexeme: "1")!, Operand(rawLexeme: "2")!, Operator(rawValue: "+")!]
+    postfixTokens: [Operand(rawLexeme: "1")!, Operand(rawLexeme: "2")!, Operator(rawValue: "+")!],
+    value: 3
   ),
   (
     description: "4 - 3",
     lexemes: ["4", "-", "3"],
     infixTokens: [Operand(rawLexeme: "4")!, Operator(rawValue: "-")!, Operand(rawLexeme: "3")!],
-    postfixTokens: [Operand(rawLexeme: "4")!, Operand(rawLexeme: "3")!, Operator(rawValue: "-")!]
+    postfixTokens: [Operand(rawLexeme: "4")!, Operand(rawLexeme: "3")!, Operator(rawValue: "-")!],
+    value: 1
   ),
   (
     description: "5 × 6",
     lexemes: ["5", "×", "6"],
     infixTokens: [Operand(rawLexeme: "5")!, Operator(rawValue: "×")!, Operand(rawLexeme: "6")!],
-    postfixTokens: [Operand(rawLexeme: "5")!, Operand(rawLexeme: "6")!, Operator(rawValue: "×")!]
+    postfixTokens: [Operand(rawLexeme: "5")!, Operand(rawLexeme: "6")!, Operator(rawValue: "×")!],
+    value: 30
   ),
   (
     description: "8 ÷ 7",
     lexemes: ["8", "÷", "7"],
     infixTokens: [Operand(rawLexeme: "8")!, Operator(rawValue: "÷")!, Operand(rawLexeme: "7")!],
-    postfixTokens: [Operand(rawLexeme: "8")!, Operand(rawLexeme: "7")!, Operator(rawValue: "÷")!]
+    postfixTokens: [Operand(rawLexeme: "8")!, Operand(rawLexeme: "7")!, Operator(rawValue: "÷")!],
+    value: 1
   ),
   (
     description: "9 × 0",
     lexemes: ["9", "×", "0"],
     infixTokens: [Operand(rawLexeme: "9")!, Operator(rawValue: "×")!, Operand(rawLexeme: "0")!],
-    postfixTokens: [Operand(rawLexeme: "9")!, Operand(rawLexeme: "0")!, Operator(rawValue: "×")!]
+    postfixTokens: [Operand(rawLexeme: "9")!, Operand(rawLexeme: "0")!, Operator(rawValue: "×")!],
+    value: 0
   ),
   (
     description: "2 ÷ 1",
     lexemes: ["2", "÷", "1"],
     infixTokens: [Operand(rawLexeme: "2")!, Operator(rawValue: "÷")!, Operand(rawLexeme: "1")!],
-    postfixTokens: [Operand(rawLexeme: "2")!, Operand(rawLexeme: "1")!, Operator(rawValue: "÷")!]
+    postfixTokens: [Operand(rawLexeme: "2")!, Operand(rawLexeme: "1")!, Operator(rawValue: "÷")!],
+    value: 2
   ),
 
   // MARK: A + B + C
@@ -79,7 +88,8 @@ let evaluatableFixtures: [EvaluatableFixture] = [
       Operator(rawValue: "-")!,
       Operand(rawLexeme: "2")!,
       Operator(rawValue: "+")!,
-    ]
+    ],
+    value: 4
   ),
   (
     description: "5 ÷ 7 × 6",
@@ -97,7 +107,8 @@ let evaluatableFixtures: [EvaluatableFixture] = [
       Operator(rawValue: "÷")!,
       Operand(rawLexeme: "6")!,
       Operator(rawValue: "×")!,
-    ]
+    ],
+    value: 0
   ),
   (
     description: "8 + 0 ÷ 9",
@@ -115,7 +126,8 @@ let evaluatableFixtures: [EvaluatableFixture] = [
       Operand(rawLexeme: "9")!,
       Operator(rawValue: "÷")!,
       Operator(rawValue: "+")!,
-    ]
+    ],
+    value: 8
   ),
   (
     description: "2 × 4 - 1",
@@ -133,7 +145,8 @@ let evaluatableFixtures: [EvaluatableFixture] = [
       Operator(rawValue: "×")!,
       Operand(rawLexeme: "1")!,
       Operator(rawValue: "-")!,
-    ]
+    ],
+    value: 7
   ),
 
   // MARK: A + B + C + D
@@ -157,7 +170,8 @@ let evaluatableFixtures: [EvaluatableFixture] = [
       Operator(rawValue: "-")!,
       Operand(rawLexeme: "8")!,
       Operator(rawValue: "+")!,
-    ]
+    ],
+    value: 7
   ),
   (
     description: "6 ÷ 1 × 2 × 0",
@@ -179,7 +193,8 @@ let evaluatableFixtures: [EvaluatableFixture] = [
       Operator(rawValue: "×")!,
       Operand(rawLexeme: "0")!,
       Operator(rawValue: "×")!,
-    ]
+    ],
+    value: 0
   ),
   (
     description: "3 + 4 ÷ 2 - 7",
@@ -201,7 +216,8 @@ let evaluatableFixtures: [EvaluatableFixture] = [
       Operator(rawValue: "+")!,
       Operand(rawLexeme: "7")!,
       Operator(rawValue: "-")!,
-    ]
+    ],
+    value: -2
   ),
   (
     description: "8 - 9 × 5 ÷ 1",
@@ -223,7 +239,8 @@ let evaluatableFixtures: [EvaluatableFixture] = [
       Operand(rawLexeme: "1")!,
       Operator(rawValue: "÷")!,
       Operator(rawValue: "-")!,
-    ]
+    ],
+    value: -37
   ),
   (
     description: "4 × 1 ÷ 6 + 0",
@@ -245,7 +262,8 @@ let evaluatableFixtures: [EvaluatableFixture] = [
       Operator(rawValue: "÷")!,
       Operand(rawLexeme: "0")!,
       Operator(rawValue: "+")!,
-    ]
+    ],
+    value: 0
   ),
   (
     description: "0 ÷ 5 + 4 × 7",
@@ -267,7 +285,8 @@ let evaluatableFixtures: [EvaluatableFixture] = [
       Operand(rawLexeme: "7")!,
       Operator(rawValue: "×")!,
       Operator(rawValue: "+")!,
-    ]
+    ],
+    value: 28
   ),
 
   // MARK: (A)
@@ -275,13 +294,15 @@ let evaluatableFixtures: [EvaluatableFixture] = [
     description: "()",
     lexemes: ["(", ")"],
     infixTokens: [Parenthesis.open, Parenthesis.close],
-    postfixTokens: []
+    postfixTokens: [],
+    value: 0
   ),
   (
     description: "(42)",
     lexemes: ["(", "42", ")"],
     infixTokens: [Parenthesis.open, Operand(rawLexeme: "42")!, Parenthesis.close],
-    postfixTokens: [Operand(rawLexeme: "42")!]
+    postfixTokens: [Operand(rawLexeme: "42")!],
+    value: 42
   ),
 
   // MARK: (A + B)
@@ -299,7 +320,8 @@ let evaluatableFixtures: [EvaluatableFixture] = [
       Operand(rawLexeme: "2")!,
       Operand(rawLexeme: "3")!,
       Operator(rawValue: "+")!,
-    ]
+    ],
+    value: 5
   ),
   (
     description: "(5 - 4)",
@@ -315,7 +337,8 @@ let evaluatableFixtures: [EvaluatableFixture] = [
       Operand(rawLexeme: "5")!,
       Operand(rawLexeme: "4")!,
       Operator(rawValue: "-")!,
-    ]
+    ],
+    value: 1
   ),
   (
     description: "(6 × 7)",
@@ -331,7 +354,8 @@ let evaluatableFixtures: [EvaluatableFixture] = [
       Operand(rawLexeme: "6")!,
       Operand(rawLexeme: "7")!,
       Operator(rawValue: "×")!,
-    ]
+    ],
+    value: 42
   ),
   (
     description: "(9 ÷ 8)",
@@ -347,7 +371,8 @@ let evaluatableFixtures: [EvaluatableFixture] = [
       Operand(rawLexeme: "9")!,
       Operand(rawLexeme: "8")!,
       Operator(rawValue: "÷")!,
-    ]
+    ],
+    value: 1
   ),
   (
     description: "(0 × 1)",
@@ -363,7 +388,8 @@ let evaluatableFixtures: [EvaluatableFixture] = [
       Operand(rawLexeme: "0")!,
       Operand(rawLexeme: "1")!,
       Operator(rawValue: "×")!,
-    ]
+    ],
+    value: 0
   ),
   (
     description: "(3 ÷ 2)",
@@ -379,7 +405,8 @@ let evaluatableFixtures: [EvaluatableFixture] = [
       Operand(rawLexeme: "3")!,
       Operand(rawLexeme: "2")!,
       Operator(rawValue: "÷")!,
-    ]
+    ],
+    value: 1
   ),
 
   // MARK: ((A + B))
@@ -399,7 +426,8 @@ let evaluatableFixtures: [EvaluatableFixture] = [
       Operand(rawLexeme: "2")!,
       Operand(rawLexeme: "3")!,
       Operator(rawValue: "+")!,
-    ]
+    ],
+    value: 5
   ),
   (
     description: "((5 - 4))",
@@ -417,7 +445,8 @@ let evaluatableFixtures: [EvaluatableFixture] = [
       Operand(rawLexeme: "5")!,
       Operand(rawLexeme: "4")!,
       Operator(rawValue: "-")!,
-    ]
+    ],
+    value: 1
   ),
   (
     description: "((6 × 7))",
@@ -435,7 +464,8 @@ let evaluatableFixtures: [EvaluatableFixture] = [
       Operand(rawLexeme: "6")!,
       Operand(rawLexeme: "7")!,
       Operator(rawValue: "×")!,
-    ]
+    ],
+    value: 42
   ),
   (
     description: "((9 ÷ 8))",
@@ -453,7 +483,8 @@ let evaluatableFixtures: [EvaluatableFixture] = [
       Operand(rawLexeme: "9")!,
       Operand(rawLexeme: "8")!,
       Operator(rawValue: "÷")!,
-    ]
+    ],
+    value: 1
   ),
   (
     description: "((0 × 1))",
@@ -471,7 +502,8 @@ let evaluatableFixtures: [EvaluatableFixture] = [
       Operand(rawLexeme: "0")!,
       Operand(rawLexeme: "1")!,
       Operator(rawValue: "×")!,
-    ]
+    ],
+    value: 0
   ),
   (
     description: "((3 ÷ 2))",
@@ -489,7 +521,8 @@ let evaluatableFixtures: [EvaluatableFixture] = [
       Operand(rawLexeme: "3")!,
       Operand(rawLexeme: "2")!,
       Operator(rawValue: "÷")!,
-    ]
+    ],
+    value: 1
   ),
 
   // MARK: (A + B) + C
@@ -511,7 +544,8 @@ let evaluatableFixtures: [EvaluatableFixture] = [
       Operator(rawValue: "-")!,
       Operand(rawLexeme: "6")!,
       Operator(rawValue: "+")!,
-    ]
+    ],
+    value: 7
   ),
   (
     description: "7 - (9 + 8)",
@@ -531,7 +565,8 @@ let evaluatableFixtures: [EvaluatableFixture] = [
       Operand(rawLexeme: "8")!,
       Operator(rawValue: "+")!,
       Operator(rawValue: "-")!,
-    ]
+    ],
+    value: -10
   ),
   (
     description: "(3 ÷ 1) - 0",
@@ -551,7 +586,8 @@ let evaluatableFixtures: [EvaluatableFixture] = [
       Operator(rawValue: "÷")!,
       Operand(rawLexeme: "0")!,
       Operator(rawValue: "-")!,
-    ]
+    ],
+    value: 3
   ),
   (
     description: "4 ÷ (2 - 5)",
@@ -571,7 +607,8 @@ let evaluatableFixtures: [EvaluatableFixture] = [
       Operand(rawLexeme: "5")!,
       Operator(rawValue: "-")!,
       Operator(rawValue: "÷")!,
-    ]
+    ],
+    value: -1
   ),
   (
     description: "(2 + 8) × 7",
@@ -591,7 +628,8 @@ let evaluatableFixtures: [EvaluatableFixture] = [
       Operator(rawValue: "+")!,
       Operand(rawLexeme: "7")!,
       Operator(rawValue: "×")!,
-    ]
+    ],
+    value: 70
   ),
   (
     description: "9 + (0 × 1)",
@@ -611,7 +649,8 @@ let evaluatableFixtures: [EvaluatableFixture] = [
       Operand(rawLexeme: "1")!,
       Operator(rawValue: "×")!,
       Operator(rawValue: "+")!,
-    ]
+    ],
+    value: 9
   ),
   (
     description: "(1 × 3) ÷ 4",
@@ -631,7 +670,8 @@ let evaluatableFixtures: [EvaluatableFixture] = [
       Operator(rawValue: "×")!,
       Operand(rawLexeme: "4")!,
       Operator(rawValue: "÷")!,
-    ]
+    ],
+    value: 0
   ),
   (
     description: "6 × (7 ÷ 5)",
@@ -651,7 +691,8 @@ let evaluatableFixtures: [EvaluatableFixture] = [
       Operand(rawLexeme: "5")!,
       Operator(rawValue: "÷")!,
       Operator(rawValue: "×")!,
-    ]
+    ],
+    value: 6
   ),
 
   // MARK: ((A + B) + C)
@@ -675,7 +716,8 @@ let evaluatableFixtures: [EvaluatableFixture] = [
       Operator(rawValue: "-")!,
       Operand(rawLexeme: "6")!,
       Operator(rawValue: "+")!,
-    ]
+    ],
+    value: 7
   ),
   (
     description: "(7 - (9 + 8))",
@@ -697,7 +739,8 @@ let evaluatableFixtures: [EvaluatableFixture] = [
       Operand(rawLexeme: "8")!,
       Operator(rawValue: "+")!,
       Operator(rawValue: "-")!,
-    ]
+    ],
+    value: -10
   ),
   (
     description: "((3 ÷ 1) - 0)",
@@ -719,7 +762,8 @@ let evaluatableFixtures: [EvaluatableFixture] = [
       Operator(rawValue: "÷")!,
       Operand(rawLexeme: "0")!,
       Operator(rawValue: "-")!,
-    ]
+    ],
+    value: 3
   ),
   (
     description: "(4 ÷ (2 - 5))",
@@ -741,7 +785,8 @@ let evaluatableFixtures: [EvaluatableFixture] = [
       Operand(rawLexeme: "5")!,
       Operator(rawValue: "-")!,
       Operator(rawValue: "÷")!,
-    ]
+    ],
+    value: -1
   ),
   (
     description: "((2 + 8) × 7)",
@@ -763,7 +808,8 @@ let evaluatableFixtures: [EvaluatableFixture] = [
       Operator(rawValue: "+")!,
       Operand(rawLexeme: "7")!,
       Operator(rawValue: "×")!,
-    ]
+    ],
+    value: 70
   ),
   (
     description: "(9 + (0 × 1))",
@@ -785,7 +831,8 @@ let evaluatableFixtures: [EvaluatableFixture] = [
       Operand(rawLexeme: "1")!,
       Operator(rawValue: "×")!,
       Operator(rawValue: "+")!,
-    ]
+    ],
+    value: 9
   ),
   (
     description: "((1 × 3) ÷ 4)",
@@ -807,7 +854,8 @@ let evaluatableFixtures: [EvaluatableFixture] = [
       Operator(rawValue: "×")!,
       Operand(rawLexeme: "4")!,
       Operator(rawValue: "÷")!,
-    ]
+    ],
+    value: 0
   ),
   (
     description: "(6 × (7 ÷ 5))",
@@ -829,7 +877,8 @@ let evaluatableFixtures: [EvaluatableFixture] = [
       Operand(rawLexeme: "5")!,
       Operator(rawValue: "÷")!,
       Operator(rawValue: "×")!,
-    ]
+    ],
+    value: 6
   ),
 
   // MARK: (A + B) + (C + D)
@@ -857,7 +906,8 @@ let evaluatableFixtures: [EvaluatableFixture] = [
       Operand(rawLexeme: "5")!,
       Operator(rawValue: "+")!,
       Operator(rawValue: "-")!,
-    ]
+    ],
+    value: -8
   ),
   (
     description: "(2 × 4) ÷ (9 × 7)",
@@ -883,7 +933,8 @@ let evaluatableFixtures: [EvaluatableFixture] = [
       Operand(rawLexeme: "7")!,
       Operator(rawValue: "×")!,
       Operator(rawValue: "÷")!,
-    ]
+    ],
+    value: 0
   ),
   (
     description: "(6 ÷ 1) + (8 ÷ 4)",
@@ -909,7 +960,8 @@ let evaluatableFixtures: [EvaluatableFixture] = [
       Operand(rawLexeme: "4")!,
       Operator(rawValue: "÷")!,
       Operator(rawValue: "+")!,
-    ]
+    ],
+    value: 8
   ),
   (
     description: "(3 - 2) × (7 - 5)",
@@ -935,7 +987,8 @@ let evaluatableFixtures: [EvaluatableFixture] = [
       Operand(rawLexeme: "5")!,
       Operator(rawValue: "-")!,
       Operator(rawValue: "×")!,
-    ]
+    ],
+    value: 2
   ),
   (
     description: "(4 + 8) - (1 × 2)",
@@ -961,7 +1014,8 @@ let evaluatableFixtures: [EvaluatableFixture] = [
       Operand(rawLexeme: "2")!,
       Operator(rawValue: "×")!,
       Operator(rawValue: "-")!,
-    ]
+    ],
+    value: 10
   ),
   (
     description: "(5 ÷ 7) + (6 - 9)",
@@ -987,7 +1041,8 @@ let evaluatableFixtures: [EvaluatableFixture] = [
       Operand(rawLexeme: "9")!,
       Operator(rawValue: "-")!,
       Operator(rawValue: "+")!,
-    ]
+    ],
+    value: -3
   ),
   (
     description: "(0 × 9) ÷ (3 + 1)",
@@ -1013,7 +1068,8 @@ let evaluatableFixtures: [EvaluatableFixture] = [
       Operand(rawLexeme: "1")!,
       Operator(rawValue: "+")!,
       Operator(rawValue: "÷")!,
-    ]
+    ],
+    value: 0
   ),
   (
     description: "(2 - 3) × (4 ÷ 5)",
@@ -1039,7 +1095,8 @@ let evaluatableFixtures: [EvaluatableFixture] = [
       Operand(rawLexeme: "5")!,
       Operator(rawValue: "÷")!,
       Operator(rawValue: "×")!,
-    ]
+    ],
+    value: 0
   ),
 
   // MARK: (A + (B + C) + D)
@@ -1067,7 +1124,8 @@ let evaluatableFixtures: [EvaluatableFixture] = [
       Operator(rawValue: "+")!,
       Operand(rawLexeme: "2")!,
       Operator(rawValue: "-")!,
-    ]
+    ],
+    value: 4
   ),
   (
     description: "(5 × (0 ÷ 3) × 7)",
@@ -1093,7 +1151,8 @@ let evaluatableFixtures: [EvaluatableFixture] = [
       Operator(rawValue: "×")!,
       Operand(rawLexeme: "7")!,
       Operator(rawValue: "×")!,
-    ]
+    ],
+    value: 0
   ),
   (
     description: "(8 - (4 × 6) + 1)",
@@ -1119,7 +1178,8 @@ let evaluatableFixtures: [EvaluatableFixture] = [
       Operator(rawValue: "-")!,
       Operand(rawLexeme: "1")!,
       Operator(rawValue: "+")!,
-    ]
+    ],
+    value: -15
   ),
   (
     description: "(3 ÷ (9 + 2) ÷ 6)",
@@ -1145,7 +1205,8 @@ let evaluatableFixtures: [EvaluatableFixture] = [
       Operator(rawValue: "÷")!,
       Operand(rawLexeme: "6")!,
       Operator(rawValue: "÷")!,
-    ]
+    ],
+    value: 0
   ),
   (
     description: "(0 + (3 - 6) × 4)",
@@ -1171,7 +1232,8 @@ let evaluatableFixtures: [EvaluatableFixture] = [
       Operand(rawLexeme: "4")!,
       Operator(rawValue: "×")!,
       Operator(rawValue: "+")!,
-    ]
+    ],
+    value: -12
   ),
   (
     description: "(2 × (5 + 8) - 1)",
@@ -1197,7 +1259,8 @@ let evaluatableFixtures: [EvaluatableFixture] = [
       Operator(rawValue: "×")!,
       Operand(rawLexeme: "1")!,
       Operator(rawValue: "-")!,
-    ]
+    ],
+    value: 25
   ),
   (
     description: "(9 ÷ (7 × 1) + 5)",
@@ -1223,7 +1286,8 @@ let evaluatableFixtures: [EvaluatableFixture] = [
       Operator(rawValue: "÷")!,
       Operand(rawLexeme: "5")!,
       Operator(rawValue: "+")!,
-    ]
+    ],
+    value: 6
   ),
   (
     description: "(4 - (6 ÷ 5) × 3)",
@@ -1249,7 +1313,8 @@ let evaluatableFixtures: [EvaluatableFixture] = [
       Operand(rawLexeme: "3")!,
       Operator(rawValue: "×")!,
       Operator(rawValue: "-")!,
-    ]
+    ],
+    value: 1
   ),
 
   // MARK: (A + B ÷ C × (D + E) - F)
@@ -1285,7 +1350,8 @@ let evaluatableFixtures: [EvaluatableFixture] = [
       Operator(rawValue: "+")!,
       Operand(rawLexeme: "6")!,
       Operator(rawValue: "-")!,
-    ]
+    ],
+    value: -5
   ),
 ]
 
