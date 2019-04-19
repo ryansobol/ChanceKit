@@ -1155,8 +1155,16 @@ let evaluatableFixtures: [EvaluatableFixture] = [
       Operator(rawValue: "-")!,
     ]
   ),
+]
 
-  // MARK: Evaluation errors
+// MARK: - ParsableFixture
+
+typealias ParsableFixture = (
+  infixTokens: [Tokenable],
+  postfixTokens: [Tokenable]
+)
+
+let parsableFixtures: [ParsableFixture] = [
   (
     infixTokens: [Operator(rawValue: "+")!],
     postfixTokens: [Operator(rawValue: "+")!]
