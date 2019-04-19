@@ -6,7 +6,6 @@ class ExpressionTests: XCTestCase {}
 // MARK: - Initialization
 
 extension ExpressionTests {
-  //  TODO: Handle 1d4, 1d6, 1d8, 1d10, 1d12, 1d20, 1d100, and 1d
   func testInitWithEvaluatableFixtures() {
     for fixture in evaluatableFixtures {
       let lexemes = fixture.lexemes
