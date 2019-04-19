@@ -23,6 +23,7 @@
 		92A4CC7E20AF68D90096AF98 /* ExpressionError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92A4CC7D20AF68D90096AF98 /* ExpressionError.swift */; };
 		92CD302420AD0E6C002462B3 /* libCalculator.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 92CD300020AD0D89002462B3 /* libCalculator.a */; };
 		92CD302B20AD0EBD002462B3 /* ExpressionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92CD302A20AD0EBD002462B3 /* ExpressionTests.swift */; };
+		92D04A98226A2C8700E97E06 /* Fixtures.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92D04A97226A2C8700E97E06 /* Fixtures.swift */; };
 		92D513F6213DA02C00973B6F /* ParenthesisTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92D513F5213DA02C00973B6F /* ParenthesisTests.swift */; };
 		92DA546D20B204CD0052CC65 /* Markable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92DA546C20B204CD0052CC65 /* Markable.swift */; };
 		92DA546F20B207270052CC65 /* Parenthesis.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92DA546E20B207270052CC65 /* Parenthesis.swift */; };
@@ -59,6 +60,7 @@
 		92CD300020AD0D89002462B3 /* libCalculator.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libCalculator.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		92CD301F20AD0E6C002462B3 /* CalculatorTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CalculatorTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		92CD302A20AD0EBD002462B3 /* ExpressionTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExpressionTests.swift; sourceTree = "<group>"; };
+		92D04A97226A2C8700E97E06 /* Fixtures.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fixtures.swift; sourceTree = "<group>"; };
 		92D513F5213DA02C00973B6F /* ParenthesisTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParenthesisTests.swift; sourceTree = "<group>"; };
 		92DA546C20B204CD0052CC65 /* Markable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Markable.swift; sourceTree = "<group>"; };
 		92DA546E20B207270052CC65 /* Parenthesis.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Parenthesis.swift; sourceTree = "<group>"; };
@@ -140,6 +142,7 @@
 			children = (
 				92A4CC7020AD143C0096AF98 /* Info.plist */,
 				92CD302A20AD0EBD002462B3 /* ExpressionTests.swift */,
+				92D04A97226A2C8700E97E06 /* Fixtures.swift */,
 				92391F0120B130A800FE8006 /* OperandTests.swift */,
 				924105A920B06B19009FC568 /* OperatorTests.swift */,
 				92D513F5213DA02C00973B6F /* ParenthesisTests.swift */,
@@ -263,6 +266,7 @@
 				923D7FBC2146E872000E1D49 /* TokenableTest.swift in Sources */,
 				92391F0220B130A800FE8006 /* OperandTests.swift in Sources */,
 				92D513F6213DA02C00973B6F /* ParenthesisTests.swift in Sources */,
+				92D04A98226A2C8700E97E06 /* Fixtures.swift in Sources */,
 				9226DC7721500ED9003D024D /* NSTextCheckingResultTests.swift in Sources */,
 				924105AA20B06B19009FC568 /* OperatorTests.swift in Sources */,
 				9226DC7421500EA7003D024D /* NSRegularExpressionTests.swift in Sources */,
