@@ -210,7 +210,7 @@ extension Expression {
         operands.append(newOperand)
 
       default:
-        throw ExpressionError.internalError(#line, #function, #file)
+        preconditionFailure()
       }
     }
 

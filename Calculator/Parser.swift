@@ -33,8 +33,7 @@ func parse(infixTokens: [Tokenable]) throws -> [Tokenable] {
         }
 
         guard let topOperator = topMarkable as? Operator else {
-          // TODO: Change to preconditionFailure()
-          throw ExpressionError.internalError(#line, #function, #file)
+          preconditionFailure()
         }
 
 
@@ -49,8 +48,7 @@ func parse(infixTokens: [Tokenable]) throws -> [Tokenable] {
       markables.append(currentOperator)
 
     default:
-      // TODO: Change to preconditionFailure()
-      throw ExpressionError.internalError(#line, #function, #file)
+      preconditionFailure()
     }
   }
 
@@ -64,8 +62,7 @@ func parse(infixTokens: [Tokenable]) throws -> [Tokenable] {
     }
 
     guard let topOperator = topMarkable as? Operator else {
-      // TODO: Change to preconditionFailure()
-      throw ExpressionError.internalError(#line, #function, #file)
+      preconditionFailure()
     }
 
     postfixTokens.append(topOperator)
