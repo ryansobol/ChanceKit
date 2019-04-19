@@ -1386,28 +1386,58 @@ let evaluatableFixtures: [EvaluatableFixture] = [
 // MARK: - ParsableFixture
 
 typealias ParsableFixture = (
+  description: String,
+  lexemes: [String],
   infixTokens: [Tokenable],
   postfixTokens: [Tokenable]
 )
 
 let parsableFixtures: [ParsableFixture] = [
   (
+    description: "+",
+    lexemes: ["+"],
     infixTokens: [Operator(rawValue: "+")!],
     postfixTokens: [Operator(rawValue: "+")!]
   ),
   (
+    description: "÷",
+    lexemes: ["÷"],
+    infixTokens: [Operator(rawValue: "÷")!],
+    postfixTokens: [Operator(rawValue: "÷")!]
+  ),
+  (
+    description: "×",
+    lexemes: ["×"],
+    infixTokens: [Operator(rawValue: "×")!],
+    postfixTokens: [Operator(rawValue: "×")!]
+  ),
+  (
+    description: "-",
+    lexemes: ["-"],
+    infixTokens: [Operator(rawValue: "-")!],
+    postfixTokens: [Operator(rawValue: "-")!]
+  ),
+  (
+    description: "1 +",
+    lexemes: ["1", "+"],
     infixTokens: [Operand(rawLexeme: "1")!, Operator(rawValue: "+")!],
     postfixTokens: [Operand(rawLexeme: "1")!, Operator(rawValue: "+")!]
   ),
   (
+    description: "11", // TODO: Fix logic to insert a space separator
+    lexemes: ["1", "1"],
     infixTokens: [Operand(rawLexeme: "1")!, Operand(rawLexeme: "1")!],
     postfixTokens: [Operand(rawLexeme: "1")!, Operand(rawLexeme: "1")!]
   ),
   (
+    description: "1 ÷ 0",
+    lexemes: ["1", "÷", "0"],
     infixTokens: [Operand(rawLexeme: "1")!, Operator(rawValue: "÷")!, Operand(rawLexeme: "0")!],
     postfixTokens: [Operand(rawLexeme: "1")!, Operand(rawLexeme: "0")!, Operator(rawValue: "÷")!]
   ),
   (
+    description: "9223372036854775807 + 1",
+    lexemes: ["9223372036854775807", "+", "1"],
     infixTokens: [
       Operand(rawLexeme: "9223372036854775807")!,
       Operator(rawValue: "+")!,
@@ -1420,6 +1450,8 @@ let parsableFixtures: [ParsableFixture] = [
     ]
   ),
   (
+    description: "-9223372036854775808 ÷ -1",
+    lexemes: ["-9223372036854775808", "÷", "-1"],
     infixTokens: [
       Operand(rawLexeme: "-9223372036854775808")!,
       Operator(rawValue: "÷")!,
@@ -1432,6 +1464,8 @@ let parsableFixtures: [ParsableFixture] = [
     ]
   ),
   (
+    description: "-9223372036854775808 × -1",
+    lexemes: ["-9223372036854775808", "×", "-1"],
     infixTokens: [
       Operand(rawLexeme: "-9223372036854775808")!,
       Operator(rawValue: "×")!,
@@ -1444,6 +1478,8 @@ let parsableFixtures: [ParsableFixture] = [
     ]
   ),
   (
+    description: "9223372036854775807 - -1",
+    lexemes: ["9223372036854775807", "-", "-1"],
     infixTokens: [
       Operand(rawLexeme: "9223372036854775807")!,
       Operator(rawValue: "-")!,
@@ -1454,5 +1490,26 @@ let parsableFixtures: [ParsableFixture] = [
       Operand(rawLexeme: "-1")!,
       Operator(rawValue: "-")!,
     ]
+  ),
+]
+
+// MARK: - LexebleFixture
+
+typealias LexebleFixture = (
+  description: String,
+  lexemes: [String],
+  infixTokens: [Tokenable]
+)
+
+let lexebleFixtures: [LexebleFixture] = [
+  (
+    description: "(",
+    lexemes: ["("],
+    infixTokens: [Parenthesis.open]
+  ),
+  (
+    description: ")",
+    lexemes: [")"],
+    infixTokens: [Parenthesis.close]
   ),
 ]

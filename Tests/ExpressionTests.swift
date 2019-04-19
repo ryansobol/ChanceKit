@@ -19,24 +19,22 @@ extension ExpressionTests {
     }
   }
 
-  func testInitWithUnevaluatableLexemes() {
-    typealias Fixture = (
-      lexemes: [String],
-      expected: String
-    )
-
-    let fixtures: [Fixture] = [
-      (lexemes: ["("], expected: "("),
-      (lexemes: [")"], expected: ")"),
-      (lexemes: ["+"], expected: "+"),
-      (lexemes: ["÷"], expected: "÷"),
-      (lexemes: ["×"], expected: "×"),
-      (lexemes: ["-"], expected: "-"),
-    ]
-
-    for fixture in fixtures {
+  func testInitWithParsableFixtures() {
+    for fixture in parsableFixtures {
       let lexemes = fixture.lexemes
-      let expected = fixture.expected
+      let expected = fixture.description
+
+      let expression = try! Expression(lexemes)
+      let actual = String(describing: expression)
+
+      XCTAssertEqual(expected, actual)
+    }
+  }
+
+  func testInitWithLexebleFixtures() {
+    for fixture in lexebleFixtures {
+      let lexemes = fixture.lexemes
+      let expected = fixture.description
 
       let expression = try! Expression(lexemes)
       let actual = String(describing: expression)
