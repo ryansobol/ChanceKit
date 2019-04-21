@@ -1,7 +1,7 @@
 @testable import Calculator
 import XCTest
 
-class ParserTest: XCTestCase {
+class ParserTests: XCTestCase {
   func testParseWithEvaluatableFixtures() {
     for fixture in evaluatableFixtures {
       let tokens = fixture.infixTokens

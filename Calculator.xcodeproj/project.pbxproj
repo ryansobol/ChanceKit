@@ -12,7 +12,7 @@
 		9226DC7421500EA7003D024D /* NSRegularExpressionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9226DC7321500EA7003D024D /* NSRegularExpressionTests.swift */; };
 		9226DC7721500ED9003D024D /* NSTextCheckingResultTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9226DC7621500ED9003D024D /* NSTextCheckingResultTests.swift */; };
 		92391F0220B130A800FE8006 /* OperandTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92391F0120B130A800FE8006 /* OperandTests.swift */; };
-		923D7FBC2146E872000E1D49 /* TokenableTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 923D7FBB2146E872000E1D49 /* TokenableTest.swift */; };
+		923D7FBC2146E872000E1D49 /* TokenableTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 923D7FBB2146E872000E1D49 /* TokenableTests.swift */; };
 		924105AA20B06B19009FC568 /* OperatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 924105A920B06B19009FC568 /* OperatorTests.swift */; };
 		9286A3742266FEC8004D7360 /* Parser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9286A3732266FEC8004D7360 /* Parser.swift */; };
 		9286A376226700BA004D7360 /* ParserTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9286A375226700BA004D7360 /* ParserTests.swift */; };
@@ -49,7 +49,7 @@
 		9226DC7321500EA7003D024D /* NSRegularExpressionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSRegularExpressionTests.swift; sourceTree = "<group>"; };
 		9226DC7621500ED9003D024D /* NSTextCheckingResultTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSTextCheckingResultTests.swift; sourceTree = "<group>"; };
 		92391F0120B130A800FE8006 /* OperandTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OperandTests.swift; sourceTree = "<group>"; };
-		923D7FBB2146E872000E1D49 /* TokenableTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenableTest.swift; sourceTree = "<group>"; };
+		923D7FBB2146E872000E1D49 /* TokenableTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenableTests.swift; sourceTree = "<group>"; };
 		924105A920B06B19009FC568 /* OperatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OperatorTests.swift; sourceTree = "<group>"; };
 		9286A3732266FEC8004D7360 /* Parser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Parser.swift; sourceTree = "<group>"; };
 		9286A375226700BA004D7360 /* ParserTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParserTests.swift; sourceTree = "<group>"; };
@@ -153,7 +153,7 @@
 				924105A920B06B19009FC568 /* OperatorTests.swift */,
 				92D513F5213DA02C00973B6F /* ParenthesisTests.swift */,
 				9286A375226700BA004D7360 /* ParserTests.swift */,
-				923D7FBB2146E872000E1D49 /* TokenableTest.swift */,
+				923D7FBB2146E872000E1D49 /* TokenableTests.swift */,
 				9226DC7521500EAE003D024D /* Additions */,
 			);
 			path = Tests;
@@ -270,7 +270,7 @@
 			files = (
 				9286A376226700BA004D7360 /* ParserTests.swift in Sources */,
 				92CD302B20AD0EBD002462B3 /* ExpressionTests.swift in Sources */,
-				923D7FBC2146E872000E1D49 /* TokenableTest.swift in Sources */,
+				923D7FBC2146E872000E1D49 /* TokenableTests.swift in Sources */,
 				92391F0220B130A800FE8006 /* OperandTests.swift in Sources */,
 				92D513F6213DA02C00973B6F /* ParenthesisTests.swift in Sources */,
 				92D04A98226A2C8700E97E06 /* Fixtures.swift in Sources */,

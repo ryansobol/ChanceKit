@@ -1,7 +1,7 @@
 @testable import Calculator
 import XCTest
 
-class TokenableTest: XCTestCase {
+class TokenableTests: XCTestCase {
   enum TokenableInt: Int, Tokenable {
     case one = 1
     case two = 2
@@ -23,7 +23,7 @@ class TokenableTest: XCTestCase {
 
 // MARK: - CustomStringConvertible
 
-extension TokenableTest {
+extension TokenableTests {
   func testDescription() {
     typealias Fixture = (
       mock: Tokenable,
@@ -50,7 +50,7 @@ extension TokenableTest {
 
 // MARK: - where Self: Equatable
 
-extension TokenableTest {
+extension TokenableTests {
   func testIsEqualTo() {
     typealias Fixture = (
       mock1: Tokenable,
