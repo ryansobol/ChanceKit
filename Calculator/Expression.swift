@@ -65,7 +65,7 @@ extension Expression: CustomStringConvertible {
 extension Expression {
   public func pushed(_ lexeme: String) throws -> Expression {
     if let parenthesis = Parenthesis(rawValue: lexeme) {
-      let tokens = pushed(parenthesisToken: parenthesis)
+      let tokens = lexed(parenthesis: parenthesis, into: self.tokens)
 
       return Expression(tokens)
     }
@@ -83,27 +83,6 @@ extension Expression {
     }
 
     throw ExpressionError.invalidLexeme(lexeme)
-  }
-
-  func pushed(parenthesisToken: Parenthesis) -> [Tokenable] {
-    var tokens = self.tokens
-
-    if parenthesisToken == .close {
-      tokens.append(parenthesisToken)
-
-      return tokens
-    }
-
-    if let lastParenthesis = tokens.last as? Parenthesis, lastParenthesis == .close {
-      tokens.append(Operator.multiplication)
-    }
-    else if tokens.last is Operand {
-      tokens.append(Operator.multiplication)
-    }
-
-    tokens.append(parenthesisToken)
-
-    return tokens
   }
 
   func pushed(operatorToken: Operator) -> [Tokenable] {

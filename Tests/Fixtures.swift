@@ -1530,6 +1530,8 @@ let lexebleFixtures: [LexebleFixture] = [
   ),
 ]
 
+// MARK: - InvalidFixture
+
 typealias InvalidFixture = (
   lexeme: String,
   error: ExpressionError
@@ -1554,4 +1556,322 @@ let invalidFixtures: [InvalidFixture] = [
   (lexeme: "<<", error: .invalidLexeme("<<")),
   (lexeme: ">>", error: .invalidLexeme(">>")),
   (lexeme: "%", error: .invalidLexeme("%")),
+]
+
+// MARK: - LexebleParenthesisFixture
+
+typealias LexebleParenthesisFixture = (
+  withoutLexemes: [String],
+  withoutTokens: [Tokenable],
+  lexeme: String,
+  token: Parenthesis,
+  withLexemes: [String],
+  withTokens: [Tokenable]
+)
+
+let lexebleParenthesisFixtures: [LexebleParenthesisFixture] = [
+  (
+    withoutLexemes: [],
+    withoutTokens: [],
+    lexeme: "(",
+    token: Parenthesis.open,
+    withLexemes: ["("],
+    withTokens: [Parenthesis.open]
+  ),
+  (
+    withoutLexemes: [],
+    withoutTokens: [],
+    lexeme: ")",
+    token: Parenthesis.close,
+    withLexemes: [")"],
+    withTokens: [Parenthesis.close]
+  ),
+  (
+    withoutLexemes: ["("],
+    withoutTokens: [Parenthesis.open],
+    lexeme: "(",
+    token: Parenthesis.open,
+    withLexemes: ["(", "("],
+    withTokens: [Parenthesis.open, Parenthesis.open]
+  ),
+  (
+    withoutLexemes: ["("],
+    withoutTokens: [Parenthesis.open],
+    lexeme: ")",
+    token: Parenthesis.close,
+    withLexemes: ["(", ")"],
+    withTokens: [Parenthesis.open, Parenthesis.close]
+  ),
+  (
+    withoutLexemes: [")"],
+    withoutTokens: [Parenthesis.close],
+    lexeme: "(",
+    token: Parenthesis.open,
+    withLexemes: [")", "×", "("],
+    withTokens: [Parenthesis.close, Operator.multiplication, Parenthesis.open]
+  ),
+  (
+    withoutLexemes: [")"],
+    withoutTokens: [Parenthesis.close],
+    lexeme: ")",
+    token: Parenthesis.close,
+    withLexemes: [")", ")"],
+    withTokens: [Parenthesis.close, Parenthesis.close]
+  ),
+  (
+    withoutLexemes: ["+"],
+    withoutTokens: [Operator.addition],
+    lexeme: "(",
+    token: Parenthesis.open,
+    withLexemes: ["+", "("],
+    withTokens: [Operator.addition, Parenthesis.open]
+  ),
+  (
+    withoutLexemes: ["+"],
+    withoutTokens: [Operator.addition],
+    lexeme: ")",
+    token: Parenthesis.close,
+    withLexemes: ["+", ")"],
+    withTokens: [Operator.addition, Parenthesis.close]
+  ),
+  (
+    withoutLexemes: ["÷"],
+    withoutTokens: [Operator.division],
+    lexeme: "(",
+    token: Parenthesis.open,
+    withLexemes: ["÷", "("],
+    withTokens: [Operator.division, Parenthesis.open]
+  ),
+  (
+    withoutLexemes: ["÷"],
+    withoutTokens: [Operator.division],
+    lexeme: ")",
+    token: Parenthesis.close,
+    withLexemes: ["÷", ")"],
+    withTokens: [Operator.division, Parenthesis.close]
+  ),
+  (
+    withoutLexemes: ["×"],
+    withoutTokens: [Operator.multiplication],
+    lexeme: "(",
+    token: Parenthesis.open,
+    withLexemes: ["×", "("],
+    withTokens: [Operator.multiplication, Parenthesis.open]
+  ),
+  (
+    withoutLexemes: ["×"],
+    withoutTokens: [Operator.multiplication],
+    lexeme: ")",
+    token: Parenthesis.close,
+    withLexemes: ["×", ")"],
+    withTokens: [Operator.multiplication, Parenthesis.close]
+  ),
+  (
+    withoutLexemes: ["-"],
+    withoutTokens: [Operator.subtraction],
+    lexeme: "(",
+    token: Parenthesis.open,
+    withLexemes: ["-", "("],
+    withTokens: [Operator.subtraction, Parenthesis.open]
+  ),
+  (
+    withoutLexemes: ["-"],
+    withoutTokens: [Operator.subtraction],
+    lexeme: ")",
+    token: Parenthesis.close,
+    withLexemes: ["-", ")"],
+    withTokens: [Operator.subtraction, Parenthesis.close]
+  ),
+  (
+    withoutLexemes: ["0"],
+    withoutTokens: [Operand.number(0)],
+    lexeme: "(",
+    token: Parenthesis.open,
+    withLexemes: ["0", "×", "("],
+    withTokens: [Operand.number(0), Operator.multiplication, Parenthesis.open]
+  ),
+  (
+    withoutLexemes: ["0"],
+    withoutTokens: [Operand.number(0)],
+    lexeme: ")",
+    token: Parenthesis.close,
+    withLexemes: ["0", ")"],
+    withTokens: [Operand.number(0), Parenthesis.close]
+  ),
+  (
+    withoutLexemes: ["1"],
+    withoutTokens: [Operand.number(1)],
+    lexeme: "(",
+    token: Parenthesis.open,
+    withLexemes: ["1", "×", "("],
+    withTokens: [Operand.number(1), Operator.multiplication, Parenthesis.open]
+  ),
+  (
+    withoutLexemes: ["1"],
+    withoutTokens: [Operand.number(1)],
+    lexeme: ")",
+    token: Parenthesis.close,
+    withLexemes: ["1", ")"],
+    withTokens: [Operand.number(1), Parenthesis.close]
+  ),
+  (
+    withoutLexemes: ["9"],
+    withoutTokens: [Operand.number(9)],
+    lexeme: "(",
+    token: Parenthesis.open,
+    withLexemes: ["9", "×", "("],
+    withTokens: [Operand.number(9), Operator.multiplication, Parenthesis.open]
+  ),
+  (
+    withoutLexemes: ["9"],
+    withoutTokens: [Operand.number(9)],
+    lexeme: ")",
+    token: Parenthesis.close,
+    withLexemes: ["9", ")"],
+    withTokens: [Operand.number(9), Parenthesis.close]
+  ),
+  (
+    withoutLexemes: ["1", "×", "("],
+    withoutTokens: [Operand.number(1), Operator.multiplication, Parenthesis.open],
+    lexeme: "(",
+    token: Parenthesis.open,
+    withLexemes: ["1", "×", "(", "("],
+    withTokens: [Operand.number(1), Operator.multiplication, Parenthesis.open, Parenthesis.open]
+  ),
+  (
+    withoutLexemes: ["1", "×", "("],
+    withoutTokens: [Operand.number(1), Operator.multiplication, Parenthesis.open],
+    lexeme: ")",
+    token: Parenthesis.close,
+    withLexemes: ["1", "×", "(", ")"],
+    withTokens: [Operand.number(1), Operator.multiplication, Parenthesis.open, Parenthesis.close]
+  ),
+  (
+    withoutLexemes: ["1", ")"],
+    withoutTokens: [Operand.number(1), Parenthesis.close],
+    lexeme: "(",
+    token: Parenthesis.open,
+    withLexemes: ["1", ")", "×", "("],
+    withTokens: [Operand.number(1), Parenthesis.close, Operator.multiplication, Parenthesis.open]
+  ),
+  (
+    withoutLexemes: ["1", ")"],
+    withoutTokens: [Operand.number(1), Parenthesis.close],
+    lexeme: ")",
+    token: Parenthesis.close,
+    withLexemes: ["1", ")", ")"],
+    withTokens: [Operand.number(1), Parenthesis.close, Parenthesis.close]
+  ),
+  (
+    withoutLexemes: ["1", "+"],
+    withoutTokens: [Operand.number(1), Operator.addition],
+    lexeme: "(",
+    token: Parenthesis.open,
+    withLexemes: ["1", "+", "("],
+    withTokens: [Operand.number(1), Operator.addition, Parenthesis.open]
+  ),
+  (
+    withoutLexemes: ["1", "+"],
+    withoutTokens: [Operand.number(1), Operator.addition],
+    lexeme: ")",
+    token: Parenthesis.close,
+    withLexemes: ["1", "+", ")"],
+    withTokens: [Operand.number(1), Operator.addition, Parenthesis.close]
+  ),
+  (
+    withoutLexemes: ["1", "×"],
+    withoutTokens: [Operand.number(1), Operator.division],
+    lexeme: "(",
+    token: Parenthesis.open,
+    withLexemes: ["1", "×", "("],
+    withTokens: [Operand.number(1), Operator.division, Parenthesis.open]
+  ),
+  (
+    withoutLexemes: ["1", "÷"],
+    withoutTokens: [Operand.number(1), Operator.division],
+    lexeme: ")",
+    token: Parenthesis.close,
+    withLexemes: ["1", "÷", ")"],
+    withTokens: [Operand.number(1), Operator.division, Parenthesis.close]
+  ),
+  (
+    withoutLexemes: ["1", "×"],
+    withoutTokens: [Operand.number(1), Operator.multiplication],
+    lexeme: "(",
+    token: Parenthesis.open,
+    withLexemes: ["1", "×", "("],
+    withTokens: [Operand.number(1), Operator.multiplication, Parenthesis.open]
+  ),
+  (
+    withoutLexemes: ["1", "×"],
+    withoutTokens: [Operand.number(1), Operator.multiplication],
+    lexeme: ")",
+    token: Parenthesis.close,
+    withLexemes: ["1", "×", ")"],
+    withTokens: [Operand.number(1), Operator.multiplication, Parenthesis.close]
+  ),
+  (
+    withoutLexemes: ["1", "-"],
+    withoutTokens: [Operand.number(1), Operator.subtraction],
+    lexeme: "(",
+    token: Parenthesis.open,
+    withLexemes: ["1", "-", "("],
+    withTokens: [Operand.number(1), Operator.subtraction, Parenthesis.open]
+  ),
+  (
+    withoutLexemes: ["1", "-"],
+    withoutTokens: [Operand.number(1), Operator.subtraction],
+    lexeme: ")",
+    token: Parenthesis.close,
+    withLexemes: ["1", "-", ")"],
+    withTokens: [Operand.number(1), Operator.subtraction, Parenthesis.close]
+  ),
+  (
+    withoutLexemes: ["10"],
+    withoutTokens: [Operand.number(10)],
+    lexeme: "(",
+    token: Parenthesis.open,
+    withLexemes: ["10", "×", "("],
+    withTokens: [Operand.number(10), Operator.multiplication, Parenthesis.open]
+  ),
+  (
+    withoutLexemes: ["10"],
+    withoutTokens: [Operand.number(10)],
+    lexeme: ")",
+    token: Parenthesis.close,
+    withLexemes: ["10", ")"],
+    withTokens: [Operand.number(10), Parenthesis.close]
+  ),
+  (
+    withoutLexemes: ["11"],
+    withoutTokens: [Operand.number(11)],
+    lexeme: "(",
+    token: Parenthesis.open,
+    withLexemes: ["11", "×", "("],
+    withTokens: [Operand.number(11), Operator.multiplication, Parenthesis.open]
+  ),
+  (
+    withoutLexemes: ["11"],
+    withoutTokens: [Operand.number(11)],
+    lexeme: ")",
+    token: Parenthesis.close,
+    withLexemes: ["11", ")"],
+    withTokens: [Operand.number(11), Parenthesis.close]
+  ),
+  (
+    withoutLexemes: ["19"],
+    withoutTokens: [Operand.number(19)],
+    lexeme: "(",
+    token: Parenthesis.open,
+    withLexemes: ["19", "×", "("],
+    withTokens: [Operand.number(19), Operator.multiplication, Parenthesis.open]
+  ),
+  (
+    withoutLexemes: ["19"],
+    withoutTokens: [Operand.number(19)],
+    lexeme: ")",
+    token: Parenthesis.close,
+    withLexemes: ["19", ")"],
+    withTokens: [Operand.number(19), Parenthesis.close]
+  ),
 ]

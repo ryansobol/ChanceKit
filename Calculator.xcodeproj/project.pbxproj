@@ -26,6 +26,8 @@
 		92D04A98226A2C8700E97E06 /* Fixtures.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92D04A97226A2C8700E97E06 /* Fixtures.swift */; };
 		92D04A9A226CCA3D00E97E06 /* Interpretter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92D04A99226CCA3D00E97E06 /* Interpretter.swift */; };
 		92D04A9E226CCC3600E97E06 /* InterpretterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92D04A9D226CCC3600E97E06 /* InterpretterTests.swift */; };
+		92D04AA0226DB0AC00E97E06 /* Lexer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92D04A9F226DB0AC00E97E06 /* Lexer.swift */; };
+		92D04AA2226DB27D00E97E06 /* LexerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92D04AA1226DB27D00E97E06 /* LexerTests.swift */; };
 		92D513F6213DA02C00973B6F /* ParenthesisTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92D513F5213DA02C00973B6F /* ParenthesisTests.swift */; };
 		92DA546D20B204CD0052CC65 /* Markable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92DA546C20B204CD0052CC65 /* Markable.swift */; };
 		92DA546F20B207270052CC65 /* Parenthesis.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92DA546E20B207270052CC65 /* Parenthesis.swift */; };
@@ -65,6 +67,8 @@
 		92D04A97226A2C8700E97E06 /* Fixtures.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fixtures.swift; sourceTree = "<group>"; };
 		92D04A99226CCA3D00E97E06 /* Interpretter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Interpretter.swift; sourceTree = "<group>"; };
 		92D04A9D226CCC3600E97E06 /* InterpretterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterpretterTests.swift; sourceTree = "<group>"; };
+		92D04A9F226DB0AC00E97E06 /* Lexer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Lexer.swift; sourceTree = "<group>"; };
+		92D04AA1226DB27D00E97E06 /* LexerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LexerTests.swift; sourceTree = "<group>"; };
 		92D513F5213DA02C00973B6F /* ParenthesisTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParenthesisTests.swift; sourceTree = "<group>"; };
 		92DA546C20B204CD0052CC65 /* Markable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Markable.swift; sourceTree = "<group>"; };
 		92DA546E20B207270052CC65 /* Parenthesis.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Parenthesis.swift; sourceTree = "<group>"; };
@@ -131,6 +135,7 @@
 				92A4CC7320AF26530096AF98 /* Expression.swift */,
 				92A4CC7D20AF68D90096AF98 /* ExpressionError.swift */,
 				92D04A99226CCA3D00E97E06 /* Interpretter.swift */,
+				92D04A9F226DB0AC00E97E06 /* Lexer.swift */,
 				92DA546C20B204CD0052CC65 /* Markable.swift */,
 				92A4CC7720AF2EE30096AF98 /* Operand.swift */,
 				92A4CC7520AF270A0096AF98 /* Operator.swift */,
@@ -149,6 +154,7 @@
 				92CD302A20AD0EBD002462B3 /* ExpressionTests.swift */,
 				92D04A97226A2C8700E97E06 /* Fixtures.swift */,
 				92D04A9D226CCC3600E97E06 /* InterpretterTests.swift */,
+				92D04AA1226DB27D00E97E06 /* LexerTests.swift */,
 				92391F0120B130A800FE8006 /* OperandTests.swift */,
 				924105A920B06B19009FC568 /* OperatorTests.swift */,
 				92D513F5213DA02C00973B6F /* ParenthesisTests.swift */,
@@ -260,6 +266,7 @@
 				92D04A9A226CCA3D00E97E06 /* Interpretter.swift in Sources */,
 				92DA546D20B204CD0052CC65 /* Markable.swift in Sources */,
 				9226DC7121500B96003D024D /* NSTextCheckingResult.swift in Sources */,
+				92D04AA0226DB0AC00E97E06 /* Lexer.swift in Sources */,
 				92DA546F20B207270052CC65 /* Parenthesis.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -275,6 +282,7 @@
 				92D513F6213DA02C00973B6F /* ParenthesisTests.swift in Sources */,
 				92D04A98226A2C8700E97E06 /* Fixtures.swift in Sources */,
 				9226DC7721500ED9003D024D /* NSTextCheckingResultTests.swift in Sources */,
+				92D04AA2226DB27D00E97E06 /* LexerTests.swift in Sources */,
 				924105AA20B06B19009FC568 /* OperatorTests.swift in Sources */,
 				9226DC7421500EA7003D024D /* NSRegularExpressionTests.swift in Sources */,
 				92D04A9E226CCC3600E97E06 /* InterpretterTests.swift in Sources */,
