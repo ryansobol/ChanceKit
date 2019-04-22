@@ -71,7 +71,7 @@ extension Expression {
     }
 
     if let `operator` = Operator(rawValue: lexeme) {
-      let tokens = pushed(operatorToken: `operator`)
+      let tokens = lexed(operator: `operator`, into: self.tokens)
 
       return Expression(tokens)
     }
@@ -83,18 +83,6 @@ extension Expression {
     }
 
     throw ExpressionError.invalidLexeme(lexeme)
-  }
-
-  func pushed(operatorToken: Operator) -> [Tokenable] {
-    var tokens = self.tokens
-
-    if tokens.last is Operator {
-      tokens.removeLast()
-    }
-
-    tokens.append(operatorToken)
-
-    return tokens
   }
 
   func pushed(integer: Int) throws -> [Tokenable] {

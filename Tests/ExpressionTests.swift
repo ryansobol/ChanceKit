@@ -66,154 +66,78 @@ extension ExpressionTests {
     )
 
     let fixtures: [Fixture] = [
-      (withoutLexemes: [], lexeme: "+", withLexemes: ["+"]),
-      (withoutLexemes: [], lexeme: "÷", withLexemes: ["÷"]),
-      (withoutLexemes: [], lexeme: "×", withLexemes: ["×"]),
-      (withoutLexemes: [], lexeme: "-", withLexemes: ["-"]),
       (withoutLexemes: [], lexeme: "0", withLexemes: ["0"]),
       (withoutLexemes: [], lexeme: "1", withLexemes: ["1"]),
       (withoutLexemes: [], lexeme: "9", withLexemes: ["9"]),
 
-      (withoutLexemes: ["("], lexeme: "+", withLexemes: ["(", "+"]),
-      (withoutLexemes: ["("], lexeme: "÷", withLexemes: ["(", "÷"]),
-      (withoutLexemes: ["("], lexeme: "×", withLexemes: ["(", "×"]),
-      (withoutLexemes: ["("], lexeme: "-", withLexemes: ["(", "-"]),
       (withoutLexemes: ["("], lexeme: "0", withLexemes: ["(", "0"]),
       (withoutLexemes: ["("], lexeme: "1", withLexemes: ["(", "1"]),
       (withoutLexemes: ["("], lexeme: "9", withLexemes: ["(", "9"]),
 
-      (withoutLexemes: [")"], lexeme: "+", withLexemes: [")", "+"]),
-      (withoutLexemes: [")"], lexeme: "÷", withLexemes: [")", "÷"]),
-      (withoutLexemes: [")"], lexeme: "×", withLexemes: [")", "×"]),
-      (withoutLexemes: [")"], lexeme: "-", withLexemes: [")", "-"]),
       (withoutLexemes: [")"], lexeme: "0", withLexemes: [")", "×", "0"]),
       (withoutLexemes: [")"], lexeme: "1", withLexemes: [")", "×", "1"]),
       (withoutLexemes: [")"], lexeme: "9", withLexemes: [")", "×", "9"]),
 
-      (withoutLexemes: ["+"], lexeme: "+", withLexemes: ["+"]),
-      (withoutLexemes: ["+"], lexeme: "÷", withLexemes: ["÷"]),
-      (withoutLexemes: ["+"], lexeme: "×", withLexemes: ["×"]),
-      (withoutLexemes: ["+"], lexeme: "-", withLexemes: ["-"]),
       (withoutLexemes: ["+"], lexeme: "0", withLexemes: ["0"]),
       (withoutLexemes: ["+"], lexeme: "1", withLexemes: ["1"]),
       (withoutLexemes: ["+"], lexeme: "9", withLexemes: ["9"]),
 
-      (withoutLexemes: ["÷"], lexeme: "+", withLexemes: ["+"]),
-      (withoutLexemes: ["÷"], lexeme: "÷", withLexemes: ["÷"]),
-      (withoutLexemes: ["÷"], lexeme: "×", withLexemes: ["×"]),
-      (withoutLexemes: ["÷"], lexeme: "-", withLexemes: ["-"]),
       (withoutLexemes: ["÷"], lexeme: "0", withLexemes: ["÷", "0"]),
       (withoutLexemes: ["÷"], lexeme: "1", withLexemes: ["÷", "1"]),
       (withoutLexemes: ["÷"], lexeme: "9", withLexemes: ["÷", "9"]),
 
-      (withoutLexemes: ["×"], lexeme: "+", withLexemes: ["+"]),
-      (withoutLexemes: ["×"], lexeme: "÷", withLexemes: ["÷"]),
-      (withoutLexemes: ["×"], lexeme: "×", withLexemes: ["×"]),
-      (withoutLexemes: ["×"], lexeme: "-", withLexemes: ["-"]),
       (withoutLexemes: ["×"], lexeme: "0", withLexemes: ["×", "0"]),
       (withoutLexemes: ["×"], lexeme: "1", withLexemes: ["×", "1"]),
       (withoutLexemes: ["×"], lexeme: "9", withLexemes: ["×", "9"]),
 
-      (withoutLexemes: ["-"], lexeme: "+", withLexemes: ["+"]),
-      (withoutLexemes: ["-"], lexeme: "÷", withLexemes: ["÷"]),
-      (withoutLexemes: ["-"], lexeme: "×", withLexemes: ["×"]),
-      (withoutLexemes: ["-"], lexeme: "-", withLexemes: ["-"]),
       (withoutLexemes: ["-"], lexeme: "0", withLexemes: ["0"]),
       (withoutLexemes: ["-"], lexeme: "1", withLexemes: ["-1"]),
       (withoutLexemes: ["-"], lexeme: "9", withLexemes: ["-9"]),
 
-      (withoutLexemes: ["0"], lexeme: "+", withLexemes: ["0", "+"]),
-      (withoutLexemes: ["0"], lexeme: "÷", withLexemes: ["0", "÷"]),
-      (withoutLexemes: ["0"], lexeme: "×", withLexemes: ["0", "×"]),
-      (withoutLexemes: ["0"], lexeme: "-", withLexemes: ["0", "-"]),
       (withoutLexemes: ["0"], lexeme: "0", withLexemes: ["0"]),
       (withoutLexemes: ["0"], lexeme: "1", withLexemes: ["1"]),
       (withoutLexemes: ["0"], lexeme: "9", withLexemes: ["9"]),
 
-      (withoutLexemes: ["1"], lexeme: "+", withLexemes: ["1", "+"]),
-      (withoutLexemes: ["1"], lexeme: "÷", withLexemes: ["1", "÷"]),
-      (withoutLexemes: ["1"], lexeme: "×", withLexemes: ["1", "×"]),
-      (withoutLexemes: ["1"], lexeme: "-", withLexemes: ["1", "-"]),
       (withoutLexemes: ["1"], lexeme: "0", withLexemes: ["10"]),
       (withoutLexemes: ["1"], lexeme: "1", withLexemes: ["11"]),
       (withoutLexemes: ["1"], lexeme: "9", withLexemes: ["19"]),
 
-      (withoutLexemes: ["9"], lexeme: "+", withLexemes: ["9", "+"]),
-      (withoutLexemes: ["9"], lexeme: "÷", withLexemes: ["9", "÷"]),
-      (withoutLexemes: ["9"], lexeme: "×", withLexemes: ["9", "×"]),
-      (withoutLexemes: ["9"], lexeme: "-", withLexemes: ["9", "-"]),
       (withoutLexemes: ["9"], lexeme: "0", withLexemes: ["90"]),
       (withoutLexemes: ["9"], lexeme: "1", withLexemes: ["91"]),
       (withoutLexemes: ["9"], lexeme: "9", withLexemes: ["99"]),
 
-      (withoutLexemes: ["1", "×", "("], lexeme: "+", withLexemes: ["1", "×", "(", "+"]),
-      (withoutLexemes: ["1", "×", "("], lexeme: "÷", withLexemes: ["1", "×", "(", "÷"]),
-      (withoutLexemes: ["1", "×", "("], lexeme: "×", withLexemes: ["1", "×", "(", "×"]),
-      (withoutLexemes: ["1", "×", "("], lexeme: "-", withLexemes: ["1", "×", "(", "-"]),
       (withoutLexemes: ["1", "×", "("], lexeme: "0", withLexemes: ["1", "×", "(", "0"]),
       (withoutLexemes: ["1", "×", "("], lexeme: "1", withLexemes: ["1", "×", "(", "1"]),
       (withoutLexemes: ["1", "×", "("], lexeme: "9", withLexemes: ["1", "×", "(", "9"]),
 
-      (withoutLexemes: ["1", ")"], lexeme: "+", withLexemes: ["1", ")", "+"]),
-      (withoutLexemes: ["1", ")"], lexeme: "÷", withLexemes: ["1", ")", "÷"]),
-      (withoutLexemes: ["1", ")"], lexeme: "×", withLexemes: ["1", ")", "×"]),
-      (withoutLexemes: ["1", ")"], lexeme: "-", withLexemes: ["1", ")", "-"]),
       (withoutLexemes: ["1", ")"], lexeme: "0", withLexemes: ["1", ")", "×", "0"]),
       (withoutLexemes: ["1", ")"], lexeme: "1", withLexemes: ["1", ")", "×", "1"]),
       (withoutLexemes: ["1", ")"], lexeme: "9", withLexemes: ["1", ")", "×", "9"]),
 
-      (withoutLexemes: ["1", "+"], lexeme: "+", withLexemes: ["1", "+"]),
-      (withoutLexemes: ["1", "+"], lexeme: "÷", withLexemes: ["1", "÷"]),
-      (withoutLexemes: ["1", "+"], lexeme: "×", withLexemes: ["1", "×"]),
-      (withoutLexemes: ["1", "+"], lexeme: "-", withLexemes: ["1", "-"]),
       (withoutLexemes: ["1", "+"], lexeme: "0", withLexemes: ["1", "+", "0"]),
       (withoutLexemes: ["1", "+"], lexeme: "1", withLexemes: ["1", "+", "1"]),
       (withoutLexemes: ["1", "+"], lexeme: "9", withLexemes: ["1", "+", "9"]),
 
-      (withoutLexemes: ["1", "÷"], lexeme: "+", withLexemes: ["1", "+"]),
-      (withoutLexemes: ["1", "÷"], lexeme: "÷", withLexemes: ["1", "÷"]),
-      (withoutLexemes: ["1", "÷"], lexeme: "×", withLexemes: ["1", "×"]),
-      (withoutLexemes: ["1", "÷"], lexeme: "-", withLexemes: ["1", "-"]),
       (withoutLexemes: ["1", "÷"], lexeme: "0", withLexemes: ["1", "÷", "0"]),
       (withoutLexemes: ["1", "÷"], lexeme: "1", withLexemes: ["1", "÷", "1"]),
       (withoutLexemes: ["1", "÷"], lexeme: "9", withLexemes: ["1", "÷", "9"]),
 
-      (withoutLexemes: ["1", "×"], lexeme: "+", withLexemes: ["1", "+"]),
-      (withoutLexemes: ["1", "×"], lexeme: "÷", withLexemes: ["1", "÷"]),
-      (withoutLexemes: ["1", "×"], lexeme: "×", withLexemes: ["1", "×"]),
-      (withoutLexemes: ["1", "×"], lexeme: "-", withLexemes: ["1", "-"]),
       (withoutLexemes: ["1", "×"], lexeme: "0", withLexemes: ["1", "×", "0"]),
       (withoutLexemes: ["1", "×"], lexeme: "1", withLexemes: ["1", "×", "1"]),
       (withoutLexemes: ["1", "×"], lexeme: "9", withLexemes: ["1", "×", "9"]),
 
-      (withoutLexemes: ["1", "-"], lexeme: "+", withLexemes: ["1", "+"]),
-      (withoutLexemes: ["1", "-"], lexeme: "÷", withLexemes: ["1", "÷"]),
-      (withoutLexemes: ["1", "-"], lexeme: "×", withLexemes: ["1", "×"]),
-      (withoutLexemes: ["1", "-"], lexeme: "-", withLexemes: ["1", "-"]),
       (withoutLexemes: ["1", "-"], lexeme: "0", withLexemes: ["1", "-", "0"]),
       (withoutLexemes: ["1", "-"], lexeme: "1", withLexemes: ["1", "-", "1"]),
       (withoutLexemes: ["1", "-"], lexeme: "9", withLexemes: ["1", "-", "9"]),
 
-      (withoutLexemes: ["10"], lexeme: "+", withLexemes: ["10", "+"]),
-      (withoutLexemes: ["10"], lexeme: "÷", withLexemes: ["10", "÷"]),
-      (withoutLexemes: ["10"], lexeme: "×", withLexemes: ["10", "×"]),
-      (withoutLexemes: ["10"], lexeme: "-", withLexemes: ["10", "-"]),
       (withoutLexemes: ["10"], lexeme: "0", withLexemes: ["100"]),
       (withoutLexemes: ["10"], lexeme: "1", withLexemes: ["101"]),
       (withoutLexemes: ["10"], lexeme: "9", withLexemes: ["109"]),
 
-      (withoutLexemes: ["11"], lexeme: "+", withLexemes: ["11", "+"]),
-      (withoutLexemes: ["11"], lexeme: "÷", withLexemes: ["11", "÷"]),
-      (withoutLexemes: ["11"], lexeme: "×", withLexemes: ["11", "×"]),
-      (withoutLexemes: ["11"], lexeme: "-", withLexemes: ["11", "-"]),
       (withoutLexemes: ["11"], lexeme: "0", withLexemes: ["110"]),
       (withoutLexemes: ["11"], lexeme: "1", withLexemes: ["111"]),
       (withoutLexemes: ["11"], lexeme: "9", withLexemes: ["119"]),
 
-      (withoutLexemes: ["19"], lexeme: "+", withLexemes: ["19", "+"]),
-      (withoutLexemes: ["19"], lexeme: "÷", withLexemes: ["19", "÷"]),
-      (withoutLexemes: ["19"], lexeme: "×", withLexemes: ["19", "×"]),
-      (withoutLexemes: ["19"], lexeme: "-", withLexemes: ["19", "-"]),
       (withoutLexemes: ["19"], lexeme: "0", withLexemes: ["190"]),
       (withoutLexemes: ["19"], lexeme: "1", withLexemes: ["191"]),
       (withoutLexemes: ["19"], lexeme: "9", withLexemes: ["199"]),
@@ -232,6 +156,18 @@ extension ExpressionTests {
 
   func testPushedWithLexebleParenthesisFixtures() {
     for fixture in lexebleParenthesisFixtures {
+      let withoutLexemes = fixture.withoutLexemes
+      let lexeme = fixture.lexeme
+      let withLexemes = fixture.withLexemes
+      let expected = try! Expression(withLexemes)
+      let actual = try! Expression(withoutLexemes).pushed(lexeme)
+
+      XCTAssertEqual(expected, actual)
+    }
+  }
+
+  func testPushedWithLexebleOperatorFixtures() {
+    for fixture in lexebleOperatorFixtures {
       let withoutLexemes = fixture.withoutLexemes
       let lexeme = fixture.lexeme
       let withLexemes = fixture.withLexemes

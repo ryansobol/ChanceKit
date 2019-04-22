@@ -18,3 +18,16 @@ func lexed(parenthesis: Parenthesis, into: [Tokenable]) -> [Tokenable] {
 
   return tokens
 }
+
+
+func lexed(operator: Operator, into: [Tokenable]) -> [Tokenable] {
+  var tokens = into
+
+  if tokens.last is Operator {
+    tokens.removeLast()
+  }
+
+  tokens.append(`operator`)
+
+  return tokens
+}
