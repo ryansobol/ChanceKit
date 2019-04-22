@@ -31,4 +31,19 @@ class LexerTests: XCTestCase {
       }
     }
   }
+
+  func testLexedInteger() {
+    for fixture in lexebleIntegerFixtures {
+      let integer = fixture.integer
+      let tokens = fixture.withoutTokens
+      let expectedTokens = fixture.withTokens
+      let actualTokens = try! lexed(integer: integer, into: tokens)
+
+      XCTAssertTrue(expectedTokens.count == actualTokens.count)
+
+      for (expected, actual) in zip(expectedTokens, actualTokens) {
+        XCTAssertTrue(expected.isEqualTo(actual), "expected: \(expected), actual: \(actual)")
+      }
+    }
+  }
 }

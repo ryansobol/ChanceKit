@@ -77,56 +77,12 @@ extension Expression {
     }
 
     if let integer = Int(lexeme) {
-      let tokens = try pushed(integer: integer)
+      let tokens = try lexed(integer: integer, into: self.tokens)
 
       return Expression(tokens)
     }
 
     throw ExpressionError.invalidLexeme(lexeme)
-  }
-
-  func pushed(integer: Int) throws -> [Tokenable] {
-    var tokens = self.tokens
-
-    switch tokens.last {
-    case nil:
-      tokens.append(Operand.number(integer))
-
-    case let lastParenthesis as Parenthesis:
-      if lastParenthesis == .close {
-        tokens.append(Operator.multiplication)
-      }
-
-      tokens.append(Operand.number(integer))
-
-    case let lastOperator as Operator:
-      let tokensCount = tokens.count
-
-      if tokensCount == 1 && lastOperator == .addition {
-        tokens.removeLast()
-      }
-
-      var integer = integer
-
-      if tokensCount == 1 && lastOperator == .subtraction {
-        tokens.removeLast()
-
-        integer.negate()
-      }
-
-      tokens.append(Operand.number(integer))
-
-    case let lastOperand as Operand:
-      let nextOperand = try lastOperand.pushed(integer)
-
-      tokens.removeLast()
-      tokens.append(nextOperand)
-
-    default:
-      preconditionFailure()
-    }
-
-    return tokens
   }
 }
 
