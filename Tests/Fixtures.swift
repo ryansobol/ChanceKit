@@ -1963,7 +1963,9 @@ typealias LexebleOperatorFixture = (
   lexeme: String,
   token: Operator,
   withLexemes: [String],
-  withTokens: [Tokenable]
+  withTokens: [Tokenable],
+  droppedLexemes: [String],
+  droppedTokens: [Tokenable]
 )
 
 //  TODO: Handle 1d4, 1d6, 1d8, 1d10, 1d12, 1d20, 1d100, and 1d
@@ -1974,7 +1976,9 @@ let lexebleOperatorFixtures: [LexebleOperatorFixture] = [
     lexeme: "+",
     token: Operator.addition,
     withLexemes: ["+"],
-    withTokens: [Operator.addition]
+    withTokens: [Operator.addition],
+    droppedLexemes: [],
+    droppedTokens: []
   ),
   (
     withoutLexemes: [],
@@ -1982,7 +1986,9 @@ let lexebleOperatorFixtures: [LexebleOperatorFixture] = [
     lexeme: "÷",
     token: Operator.division,
     withLexemes: ["÷"],
-    withTokens: [Operator.division]
+    withTokens: [Operator.division],
+    droppedLexemes: [],
+    droppedTokens: []
   ),
   (
     withoutLexemes: [],
@@ -1990,7 +1996,9 @@ let lexebleOperatorFixtures: [LexebleOperatorFixture] = [
     lexeme: "×",
     token: Operator.multiplication,
     withLexemes: ["×"],
-    withTokens: [Operator.multiplication]
+    withTokens: [Operator.multiplication],
+    droppedLexemes: [],
+    droppedTokens: []
   ),
   (
     withoutLexemes: [],
@@ -1998,7 +2006,9 @@ let lexebleOperatorFixtures: [LexebleOperatorFixture] = [
     lexeme: "-",
     token: Operator.subtraction,
     withLexemes: ["-"],
-    withTokens: [Operator.subtraction]
+    withTokens: [Operator.subtraction],
+    droppedLexemes: [],
+    droppedTokens: []
   ),
   (
     withoutLexemes: ["("],
@@ -2006,7 +2016,9 @@ let lexebleOperatorFixtures: [LexebleOperatorFixture] = [
     lexeme: "+",
     token: Operator.addition,
     withLexemes: ["(", "+"],
-    withTokens: [Parenthesis.open, Operator.addition]
+    withTokens: [Parenthesis.open, Operator.addition],
+    droppedLexemes: ["("],
+    droppedTokens: [Parenthesis.open]
   ),
   (
     withoutLexemes: ["("],
@@ -2014,7 +2026,9 @@ let lexebleOperatorFixtures: [LexebleOperatorFixture] = [
     lexeme: "÷",
     token: Operator.division,
     withLexemes: ["(", "÷"],
-    withTokens: [Parenthesis.open, Operator.division]
+    withTokens: [Parenthesis.open, Operator.division],
+    droppedLexemes: ["("],
+    droppedTokens: [Parenthesis.open]
   ),
   (
     withoutLexemes: ["("],
@@ -2022,7 +2036,9 @@ let lexebleOperatorFixtures: [LexebleOperatorFixture] = [
     lexeme: "×",
     token: Operator.multiplication,
     withLexemes: ["(", "×"],
-    withTokens: [Parenthesis.open, Operator.multiplication]
+    withTokens: [Parenthesis.open, Operator.multiplication],
+    droppedLexemes: ["("],
+    droppedTokens: [Parenthesis.open]
   ),
   (
     withoutLexemes: ["("],
@@ -2030,7 +2046,9 @@ let lexebleOperatorFixtures: [LexebleOperatorFixture] = [
     lexeme: "-",
     token: Operator.subtraction,
     withLexemes: ["(", "-"],
-    withTokens: [Parenthesis.open, Operator.subtraction]
+    withTokens: [Parenthesis.open, Operator.subtraction],
+    droppedLexemes: ["("],
+    droppedTokens: [Parenthesis.open]
   ),
   (
     withoutLexemes: [")"],
@@ -2038,7 +2056,9 @@ let lexebleOperatorFixtures: [LexebleOperatorFixture] = [
     lexeme: "+",
     token: Operator.addition,
     withLexemes: [")", "+"],
-    withTokens: [Parenthesis.close, Operator.addition]
+    withTokens: [Parenthesis.close, Operator.addition],
+    droppedLexemes: [")"],
+    droppedTokens: [Parenthesis.close]
   ),
   (
     withoutLexemes: [")"],
@@ -2046,7 +2066,9 @@ let lexebleOperatorFixtures: [LexebleOperatorFixture] = [
     lexeme: "÷",
     token: Operator.division,
     withLexemes: [")", "÷"],
-    withTokens: [Parenthesis.close, Operator.division]
+    withTokens: [Parenthesis.close, Operator.division],
+    droppedLexemes: [")"],
+    droppedTokens: [Parenthesis.close]
   ),
   (
     withoutLexemes: [")"],
@@ -2054,7 +2076,9 @@ let lexebleOperatorFixtures: [LexebleOperatorFixture] = [
     lexeme: "×",
     token: Operator.multiplication,
     withLexemes: [")", "×"],
-    withTokens: [Parenthesis.close, Operator.multiplication]
+    withTokens: [Parenthesis.close, Operator.multiplication],
+    droppedLexemes: [")"],
+    droppedTokens: [Parenthesis.close]
   ),
   (
     withoutLexemes: [")"],
@@ -2062,7 +2086,9 @@ let lexebleOperatorFixtures: [LexebleOperatorFixture] = [
     lexeme: "-",
     token: Operator.subtraction,
     withLexemes: [")", "-"],
-    withTokens: [Parenthesis.close, Operator.subtraction]
+    withTokens: [Parenthesis.close, Operator.subtraction],
+    droppedLexemes: [")"],
+    droppedTokens: [Parenthesis.close]
   ),
   (
     withoutLexemes: ["+"],
@@ -2070,7 +2096,9 @@ let lexebleOperatorFixtures: [LexebleOperatorFixture] = [
     lexeme: "+",
     token: Operator.addition,
     withLexemes: ["+"],
-    withTokens: [Operator.addition]
+    withTokens: [Operator.addition],
+    droppedLexemes: [],
+    droppedTokens: []
   ),
   (
     withoutLexemes: ["+"],
@@ -2078,7 +2106,9 @@ let lexebleOperatorFixtures: [LexebleOperatorFixture] = [
     lexeme: "÷",
     token: Operator.division,
     withLexemes: ["÷"],
-    withTokens: [Operator.division]
+    withTokens: [Operator.division],
+    droppedLexemes: [],
+    droppedTokens: []
   ),
   (
     withoutLexemes: ["+"],
@@ -2086,7 +2116,9 @@ let lexebleOperatorFixtures: [LexebleOperatorFixture] = [
     lexeme: "×",
     token: Operator.multiplication,
     withLexemes: ["×"],
-    withTokens: [Operator.multiplication]
+    withTokens: [Operator.multiplication],
+    droppedLexemes: [],
+    droppedTokens: []
   ),
   (
     withoutLexemes: ["+"],
@@ -2094,7 +2126,9 @@ let lexebleOperatorFixtures: [LexebleOperatorFixture] = [
     lexeme: "-",
     token: Operator.subtraction,
     withLexemes: ["-"],
-    withTokens: [Operator.subtraction]
+    withTokens: [Operator.subtraction],
+    droppedLexemes: [],
+    droppedTokens: []
   ),
   (
     withoutLexemes: ["÷"],
@@ -2102,7 +2136,9 @@ let lexebleOperatorFixtures: [LexebleOperatorFixture] = [
     lexeme: "+",
     token: Operator.addition,
     withLexemes: ["+"],
-    withTokens: [Operator.addition]
+    withTokens: [Operator.addition],
+    droppedLexemes: [],
+    droppedTokens: []
   ),
   (
     withoutLexemes: ["÷"],
@@ -2110,7 +2146,9 @@ let lexebleOperatorFixtures: [LexebleOperatorFixture] = [
     lexeme: "÷",
     token: Operator.division,
     withLexemes: ["÷"],
-    withTokens: [Operator.division]
+    withTokens: [Operator.division],
+    droppedLexemes: [],
+    droppedTokens: []
   ),
   (
     withoutLexemes: ["÷"],
@@ -2118,7 +2156,9 @@ let lexebleOperatorFixtures: [LexebleOperatorFixture] = [
     lexeme: "×",
     token: Operator.multiplication,
     withLexemes: ["×"],
-    withTokens: [Operator.multiplication]
+    withTokens: [Operator.multiplication],
+    droppedLexemes: [],
+    droppedTokens: []
   ),
   (
     withoutLexemes: ["÷"],
@@ -2126,7 +2166,9 @@ let lexebleOperatorFixtures: [LexebleOperatorFixture] = [
     lexeme: "-",
     token: Operator.subtraction,
     withLexemes: ["-"],
-    withTokens: [Operator.subtraction]
+    withTokens: [Operator.subtraction],
+    droppedLexemes: [],
+    droppedTokens: []
   ),
   (
     withoutLexemes: ["÷"],
@@ -2134,7 +2176,9 @@ let lexebleOperatorFixtures: [LexebleOperatorFixture] = [
     lexeme: "-",
     token: Operator.subtraction,
     withLexemes: ["-"],
-    withTokens: [Operator.subtraction]
+    withTokens: [Operator.subtraction],
+    droppedLexemes: [],
+    droppedTokens: []
   ),
   (
     withoutLexemes: ["×"],
@@ -2142,7 +2186,9 @@ let lexebleOperatorFixtures: [LexebleOperatorFixture] = [
     lexeme: "+",
     token: Operator.addition,
     withLexemes: ["+"],
-    withTokens: [Operator.addition]
+    withTokens: [Operator.addition],
+    droppedLexemes: [],
+    droppedTokens: []
   ),
   (
     withoutLexemes: ["×"],
@@ -2150,7 +2196,9 @@ let lexebleOperatorFixtures: [LexebleOperatorFixture] = [
     lexeme: "÷",
     token: Operator.division,
     withLexemes: ["÷"],
-    withTokens: [Operator.division]
+    withTokens: [Operator.division],
+    droppedLexemes: [],
+    droppedTokens: []
   ),
   (
     withoutLexemes: ["×"],
@@ -2158,7 +2206,9 @@ let lexebleOperatorFixtures: [LexebleOperatorFixture] = [
     lexeme: "×",
     token: Operator.multiplication,
     withLexemes: ["×"],
-    withTokens: [Operator.multiplication]
+    withTokens: [Operator.multiplication],
+    droppedLexemes: [],
+    droppedTokens: []
   ),
   (
     withoutLexemes: ["×"],
@@ -2166,7 +2216,9 @@ let lexebleOperatorFixtures: [LexebleOperatorFixture] = [
     lexeme: "-",
     token: Operator.subtraction,
     withLexemes: ["-"],
-    withTokens: [Operator.subtraction]
+    withTokens: [Operator.subtraction],
+    droppedLexemes: [],
+    droppedTokens: []
   ),
   (
     withoutLexemes: ["-"],
@@ -2174,7 +2226,9 @@ let lexebleOperatorFixtures: [LexebleOperatorFixture] = [
     lexeme: "+",
     token: Operator.addition,
     withLexemes: ["+"],
-    withTokens: [Operator.addition]
+    withTokens: [Operator.addition],
+    droppedLexemes: [],
+    droppedTokens: []
   ),
   (
     withoutLexemes: ["-"],
@@ -2182,7 +2236,9 @@ let lexebleOperatorFixtures: [LexebleOperatorFixture] = [
     lexeme: "÷",
     token: Operator.division,
     withLexemes: ["÷"],
-    withTokens: [Operator.division]
+    withTokens: [Operator.division],
+    droppedLexemes: [],
+    droppedTokens: []
   ),
   (
     withoutLexemes: ["-"],
@@ -2190,7 +2246,9 @@ let lexebleOperatorFixtures: [LexebleOperatorFixture] = [
     lexeme: "×",
     token: Operator.multiplication,
     withLexemes: ["×"],
-    withTokens: [Operator.multiplication]
+    withTokens: [Operator.multiplication],
+    droppedLexemes: [],
+    droppedTokens: []
   ),
   (
     withoutLexemes: ["-"],
@@ -2198,7 +2256,9 @@ let lexebleOperatorFixtures: [LexebleOperatorFixture] = [
     lexeme: "-",
     token: Operator.subtraction,
     withLexemes: ["-"],
-    withTokens: [Operator.subtraction]
+    withTokens: [Operator.subtraction],
+    droppedLexemes: [],
+    droppedTokens: []
   ),
   (
     withoutLexemes: ["0"],
@@ -2206,7 +2266,9 @@ let lexebleOperatorFixtures: [LexebleOperatorFixture] = [
     lexeme: "+",
     token: Operator.addition,
     withLexemes: ["0", "+"],
-    withTokens: [Operand.number(0), Operator.addition]
+    withTokens: [Operand.number(0), Operator.addition],
+    droppedLexemes: ["0"],
+    droppedTokens: [Operand.number(0)]
   ),
   (
     withoutLexemes: ["0"],
@@ -2214,7 +2276,9 @@ let lexebleOperatorFixtures: [LexebleOperatorFixture] = [
     lexeme: "÷",
     token: Operator.division,
     withLexemes: ["0", "÷"],
-    withTokens: [Operand.number(0), Operator.division]
+    withTokens: [Operand.number(0), Operator.division],
+    droppedLexemes: ["0"],
+    droppedTokens: [Operand.number(0)]
   ),
   (
     withoutLexemes: ["0"],
@@ -2222,7 +2286,9 @@ let lexebleOperatorFixtures: [LexebleOperatorFixture] = [
     lexeme: "×",
     token: Operator.multiplication,
     withLexemes: ["0", "×"],
-    withTokens: [Operand.number(0), Operator.multiplication]
+    withTokens: [Operand.number(0), Operator.multiplication],
+    droppedLexemes: ["0"],
+    droppedTokens: [Operand.number(0)]
   ),
   (
     withoutLexemes: ["0"],
@@ -2230,7 +2296,9 @@ let lexebleOperatorFixtures: [LexebleOperatorFixture] = [
     lexeme: "-",
     token: Operator.subtraction,
     withLexemes: ["0", "-"],
-    withTokens: [Operand.number(0), Operator.subtraction]
+    withTokens: [Operand.number(0), Operator.subtraction],
+    droppedLexemes: ["0"],
+    droppedTokens: [Operand.number(0)]
   ),
   (
     withoutLexemes: ["1"],
@@ -2238,7 +2306,9 @@ let lexebleOperatorFixtures: [LexebleOperatorFixture] = [
     lexeme: "+",
     token: Operator.addition,
     withLexemes: ["1", "+"],
-    withTokens: [Operand.number(1), Operator.addition]
+    withTokens: [Operand.number(1), Operator.addition],
+    droppedLexemes: ["1"],
+    droppedTokens: [Operand.number(1)]
   ),
   (
     withoutLexemes: ["1"],
@@ -2246,7 +2316,9 @@ let lexebleOperatorFixtures: [LexebleOperatorFixture] = [
     lexeme: "÷",
     token: Operator.division,
     withLexemes: ["1", "÷"],
-    withTokens: [Operand.number(1), Operator.division]
+    withTokens: [Operand.number(1), Operator.division],
+    droppedLexemes: ["1"],
+    droppedTokens: [Operand.number(1)]
   ),
   (
     withoutLexemes: ["1"],
@@ -2254,7 +2326,9 @@ let lexebleOperatorFixtures: [LexebleOperatorFixture] = [
     lexeme: "×",
     token: Operator.multiplication,
     withLexemes: ["1", "×"],
-    withTokens: [Operand.number(1), Operator.multiplication]
+    withTokens: [Operand.number(1), Operator.multiplication],
+    droppedLexemes: ["1"],
+    droppedTokens: [Operand.number(1)]
   ),
   (
     withoutLexemes: ["1"],
@@ -2262,7 +2336,9 @@ let lexebleOperatorFixtures: [LexebleOperatorFixture] = [
     lexeme: "-",
     token: Operator.subtraction,
     withLexemes: ["1", "-"],
-    withTokens: [Operand.number(1), Operator.subtraction]
+    withTokens: [Operand.number(1), Operator.subtraction],
+    droppedLexemes: ["1"],
+    droppedTokens: [Operand.number(1)]
   ),
   (
     withoutLexemes: ["9"],
@@ -2270,7 +2346,9 @@ let lexebleOperatorFixtures: [LexebleOperatorFixture] = [
     lexeme: "+",
     token: Operator.addition,
     withLexemes: ["9", "+"],
-    withTokens: [Operand.number(9), Operator.addition]
+    withTokens: [Operand.number(9), Operator.addition],
+    droppedLexemes: ["9"],
+    droppedTokens: [Operand.number(9)]
   ),
   (
     withoutLexemes: ["9"],
@@ -2278,7 +2356,9 @@ let lexebleOperatorFixtures: [LexebleOperatorFixture] = [
     lexeme: "÷",
     token: Operator.division,
     withLexemes: ["9", "÷"],
-    withTokens: [Operand.number(9), Operator.division]
+    withTokens: [Operand.number(9), Operator.division],
+    droppedLexemes: ["9"],
+    droppedTokens: [Operand.number(9)]
   ),
   (
     withoutLexemes: ["9"],
@@ -2286,7 +2366,9 @@ let lexebleOperatorFixtures: [LexebleOperatorFixture] = [
     lexeme: "×",
     token: Operator.multiplication,
     withLexemes: ["9", "×"],
-    withTokens: [Operand.number(9), Operator.multiplication]
+    withTokens: [Operand.number(9), Operator.multiplication],
+    droppedLexemes: ["9"],
+    droppedTokens: [Operand.number(9)]
   ),
   (
     withoutLexemes: ["9"],
@@ -2294,7 +2376,9 @@ let lexebleOperatorFixtures: [LexebleOperatorFixture] = [
     lexeme: "-",
     token: Operator.subtraction,
     withLexemes: ["9", "-"],
-    withTokens: [Operand.number(9), Operator.subtraction]
+    withTokens: [Operand.number(9), Operator.subtraction],
+    droppedLexemes: ["9"],
+    droppedTokens: [Operand.number(9)]
   ),
   (
     withoutLexemes: ["1", "×", "("],
@@ -2302,7 +2386,9 @@ let lexebleOperatorFixtures: [LexebleOperatorFixture] = [
     lexeme: "+",
     token: Operator.addition,
     withLexemes: ["1", "×", "(", "+"],
-    withTokens: [Operand.number(1), Operator.multiplication, Parenthesis.open, Operator.addition]
+    withTokens: [Operand.number(1), Operator.multiplication, Parenthesis.open, Operator.addition],
+    droppedLexemes: ["1", "×", "("],
+    droppedTokens: [Operand.number(1), Operator.multiplication, Parenthesis.open]
   ),
   (
     withoutLexemes: ["1", "×", "("],
@@ -2310,7 +2396,9 @@ let lexebleOperatorFixtures: [LexebleOperatorFixture] = [
     lexeme: "÷",
     token: Operator.division,
     withLexemes: ["1", "×", "(", "÷"],
-    withTokens: [Operand.number(1), Operator.multiplication, Parenthesis.open, Operator.division]
+    withTokens: [Operand.number(1), Operator.multiplication, Parenthesis.open, Operator.division],
+    droppedLexemes: ["1", "×", "("],
+    droppedTokens: [Operand.number(1), Operator.multiplication, Parenthesis.open]
   ),
   (
     withoutLexemes: ["1", "×", "("],
@@ -2318,7 +2406,9 @@ let lexebleOperatorFixtures: [LexebleOperatorFixture] = [
     lexeme: "×",
     token: Operator.multiplication,
     withLexemes: ["1", "×", "(", "×"],
-    withTokens: [Operand.number(1), Operator.multiplication, Parenthesis.open, Operator.multiplication]
+    withTokens: [Operand.number(1), Operator.multiplication, Parenthesis.open, Operator.multiplication],
+    droppedLexemes: ["1", "×", "("],
+    droppedTokens: [Operand.number(1), Operator.multiplication, Parenthesis.open]
   ),
   (
     withoutLexemes: ["1", "×", "("],
@@ -2326,7 +2416,9 @@ let lexebleOperatorFixtures: [LexebleOperatorFixture] = [
     lexeme: "-",
     token: Operator.subtraction,
     withLexemes: ["1", "×", "(", "-"],
-    withTokens: [Operand.number(1), Operator.multiplication, Parenthesis.open, Operator.subtraction]
+    withTokens: [Operand.number(1), Operator.multiplication, Parenthesis.open, Operator.subtraction],
+    droppedLexemes: ["1", "×", "("],
+    droppedTokens: [Operand.number(1), Operator.multiplication, Parenthesis.open]
   ),
   (
     withoutLexemes: ["1", ")"],
@@ -2334,7 +2426,9 @@ let lexebleOperatorFixtures: [LexebleOperatorFixture] = [
     lexeme: "+",
     token: Operator.addition,
     withLexemes: ["1", ")", "+"],
-    withTokens: [Operand.number(1), Parenthesis.close, Operator.addition]
+    withTokens: [Operand.number(1), Parenthesis.close, Operator.addition],
+    droppedLexemes: ["1", ")"],
+    droppedTokens: [Operand.number(1), Parenthesis.close]
   ),
   (
     withoutLexemes: ["1", ")"],
@@ -2342,7 +2436,9 @@ let lexebleOperatorFixtures: [LexebleOperatorFixture] = [
     lexeme: "÷",
     token: Operator.division,
     withLexemes: ["1", ")", "÷"],
-    withTokens: [Operand.number(1), Parenthesis.close, Operator.division]
+    withTokens: [Operand.number(1), Parenthesis.close, Operator.division],
+    droppedLexemes: ["1", ")"],
+    droppedTokens: [Operand.number(1), Parenthesis.close]
   ),
   (
     withoutLexemes: ["1", ")"],
@@ -2350,7 +2446,9 @@ let lexebleOperatorFixtures: [LexebleOperatorFixture] = [
     lexeme: "×",
     token: Operator.multiplication,
     withLexemes: ["1", ")", "×"],
-    withTokens: [Operand.number(1), Parenthesis.close, Operator.multiplication]
+    withTokens: [Operand.number(1), Parenthesis.close, Operator.multiplication],
+    droppedLexemes: ["1", ")"],
+    droppedTokens: [Operand.number(1), Parenthesis.close]
   ),
   (
     withoutLexemes: ["1", ")"],
@@ -2358,7 +2456,9 @@ let lexebleOperatorFixtures: [LexebleOperatorFixture] = [
     lexeme: "-",
     token: Operator.subtraction,
     withLexemes: ["1", ")", "-"],
-    withTokens: [Operand.number(1), Parenthesis.close, Operator.subtraction]
+    withTokens: [Operand.number(1), Parenthesis.close, Operator.subtraction],
+    droppedLexemes: ["1", ")"],
+    droppedTokens: [Operand.number(1), Parenthesis.close]
   ),
   (
     withoutLexemes: ["1", "+"],
@@ -2366,7 +2466,9 @@ let lexebleOperatorFixtures: [LexebleOperatorFixture] = [
     lexeme: "+",
     token: Operator.addition,
     withLexemes: ["1", "+"],
-    withTokens: [Operand.number(1), Operator.addition]
+    withTokens: [Operand.number(1), Operator.addition],
+    droppedLexemes: ["1"],
+    droppedTokens: [Operand.number(1)]
   ),
   (
     withoutLexemes: ["1", "+"],
@@ -2374,7 +2476,9 @@ let lexebleOperatorFixtures: [LexebleOperatorFixture] = [
     lexeme: "÷",
     token: Operator.division,
     withLexemes: ["1", "÷"],
-    withTokens: [Operand.number(1), Operator.division]
+    withTokens: [Operand.number(1), Operator.division],
+    droppedLexemes: ["1"],
+    droppedTokens: [Operand.number(1)]
   ),
   (
     withoutLexemes: ["1", "+"],
@@ -2382,7 +2486,9 @@ let lexebleOperatorFixtures: [LexebleOperatorFixture] = [
     lexeme: "×",
     token: Operator.multiplication,
     withLexemes: ["1", "×"],
-    withTokens: [Operand.number(1), Operator.multiplication]
+    withTokens: [Operand.number(1), Operator.multiplication],
+    droppedLexemes: ["1"],
+    droppedTokens: [Operand.number(1)]
   ),
   (
     withoutLexemes: ["1", "÷"],
@@ -2390,7 +2496,9 @@ let lexebleOperatorFixtures: [LexebleOperatorFixture] = [
     lexeme: "-",
     token: Operator.subtraction,
     withLexemes: ["1", "-"],
-    withTokens: [Operand.number(1), Operator.subtraction]
+    withTokens: [Operand.number(1), Operator.subtraction],
+    droppedLexemes: ["1"],
+    droppedTokens: [Operand.number(1)]
   ),
   (
     withoutLexemes: ["1", "÷"],
@@ -2398,7 +2506,9 @@ let lexebleOperatorFixtures: [LexebleOperatorFixture] = [
     lexeme: "+",
     token: Operator.addition,
     withLexemes: ["1", "+"],
-    withTokens: [Operand.number(1), Operator.addition]
+    withTokens: [Operand.number(1), Operator.addition],
+    droppedLexemes: ["1"],
+    droppedTokens: [Operand.number(1)]
   ),
   (
     withoutLexemes: ["1", "÷"],
@@ -2406,7 +2516,9 @@ let lexebleOperatorFixtures: [LexebleOperatorFixture] = [
     lexeme: "÷",
     token: Operator.division,
     withLexemes: ["1", "÷"],
-    withTokens: [Operand.number(1), Operator.division]
+    withTokens: [Operand.number(1), Operator.division],
+    droppedLexemes: ["1"],
+    droppedTokens: [Operand.number(1)]
   ),
   (
     withoutLexemes: ["1", "÷"],
@@ -2414,7 +2526,9 @@ let lexebleOperatorFixtures: [LexebleOperatorFixture] = [
     lexeme: "×",
     token: Operator.multiplication,
     withLexemes: ["1", "×"],
-    withTokens: [Operand.number(1), Operator.multiplication]
+    withTokens: [Operand.number(1), Operator.multiplication],
+    droppedLexemes: ["1"],
+    droppedTokens: [Operand.number(1)]
   ),
   (
     withoutLexemes: ["1", "÷"],
@@ -2422,7 +2536,9 @@ let lexebleOperatorFixtures: [LexebleOperatorFixture] = [
     lexeme: "-",
     token: Operator.subtraction,
     withLexemes: ["1", "-"],
-    withTokens: [Operand.number(1), Operator.subtraction]
+    withTokens: [Operand.number(1), Operator.subtraction],
+    droppedLexemes: ["1"],
+    droppedTokens: [Operand.number(1)]
   ),
   (
     withoutLexemes: ["1", "×"],
@@ -2430,7 +2546,9 @@ let lexebleOperatorFixtures: [LexebleOperatorFixture] = [
     lexeme: "+",
     token: Operator.addition,
     withLexemes: ["1", "+"],
-    withTokens: [Operand.number(1), Operator.addition]
+    withTokens: [Operand.number(1), Operator.addition],
+    droppedLexemes: ["1"],
+    droppedTokens: [Operand.number(1)]
   ),
   (
     withoutLexemes: ["1", "×"],
@@ -2438,7 +2556,9 @@ let lexebleOperatorFixtures: [LexebleOperatorFixture] = [
     lexeme: "÷",
     token: Operator.division,
     withLexemes: ["1", "÷"],
-    withTokens: [Operand.number(1), Operator.division]
+    withTokens: [Operand.number(1), Operator.division],
+    droppedLexemes: ["1"],
+    droppedTokens: [Operand.number(1)]
   ),
   (
     withoutLexemes: ["1", "×"],
@@ -2446,7 +2566,9 @@ let lexebleOperatorFixtures: [LexebleOperatorFixture] = [
     lexeme: "×",
     token: Operator.multiplication,
     withLexemes: ["1", "×"],
-    withTokens: [Operand.number(1), Operator.multiplication]
+    withTokens: [Operand.number(1), Operator.multiplication],
+    droppedLexemes: ["1"],
+    droppedTokens: [Operand.number(1)]
   ),
   (
     withoutLexemes: ["1", "×"],
@@ -2454,7 +2576,9 @@ let lexebleOperatorFixtures: [LexebleOperatorFixture] = [
     lexeme: "-",
     token: Operator.subtraction,
     withLexemes: ["1", "-"],
-    withTokens: [Operand.number(1), Operator.subtraction]
+    withTokens: [Operand.number(1), Operator.subtraction],
+    droppedLexemes: ["1"],
+    droppedTokens: [Operand.number(1)]
   ),
   (
     withoutLexemes: ["1", "-"],
@@ -2462,7 +2586,9 @@ let lexebleOperatorFixtures: [LexebleOperatorFixture] = [
     lexeme: "+",
     token: Operator.addition,
     withLexemes: ["1", "+"],
-    withTokens: [Operand.number(1), Operator.addition]
+    withTokens: [Operand.number(1), Operator.addition],
+    droppedLexemes: ["1"],
+    droppedTokens: [Operand.number(1)]
   ),
   (
     withoutLexemes: ["1", "-"],
@@ -2470,7 +2596,9 @@ let lexebleOperatorFixtures: [LexebleOperatorFixture] = [
     lexeme: "÷",
     token: Operator.division,
     withLexemes: ["1", "÷"],
-    withTokens: [Operand.number(1), Operator.division]
+    withTokens: [Operand.number(1), Operator.division],
+    droppedLexemes: ["1"],
+    droppedTokens: [Operand.number(1)]
   ),
   (
     withoutLexemes: ["1", "-"],
@@ -2478,7 +2606,9 @@ let lexebleOperatorFixtures: [LexebleOperatorFixture] = [
     lexeme: "×",
     token: Operator.multiplication,
     withLexemes: ["1", "×"],
-    withTokens: [Operand.number(1), Operator.multiplication]
+    withTokens: [Operand.number(1), Operator.multiplication],
+    droppedLexemes: ["1"],
+    droppedTokens: [Operand.number(1)]
   ),
   (
     withoutLexemes: ["1", "-"],
@@ -2486,7 +2616,9 @@ let lexebleOperatorFixtures: [LexebleOperatorFixture] = [
     lexeme: "-",
     token: Operator.subtraction,
     withLexemes: ["1", "-"],
-    withTokens: [Operand.number(1), Operator.subtraction]
+    withTokens: [Operand.number(1), Operator.subtraction],
+    droppedLexemes: ["1"],
+    droppedTokens: [Operand.number(1)]
   ),
   (
     withoutLexemes: ["10"],
@@ -2494,7 +2626,9 @@ let lexebleOperatorFixtures: [LexebleOperatorFixture] = [
     lexeme: "+",
     token: Operator.addition,
     withLexemes: ["10", "+"],
-    withTokens: [Operand.number(10), Operator.addition]
+    withTokens: [Operand.number(10), Operator.addition],
+    droppedLexemes: ["10"],
+    droppedTokens: [Operand.number(10)]
   ),
   (
     withoutLexemes: ["10"],
@@ -2502,7 +2636,9 @@ let lexebleOperatorFixtures: [LexebleOperatorFixture] = [
     lexeme: "÷",
     token: Operator.division,
     withLexemes: ["10", "÷"],
-    withTokens: [Operand.number(10), Operator.division]
+    withTokens: [Operand.number(10), Operator.division],
+    droppedLexemes: ["10"],
+    droppedTokens: [Operand.number(10)]
   ),
   (
     withoutLexemes: ["10"],
@@ -2510,7 +2646,9 @@ let lexebleOperatorFixtures: [LexebleOperatorFixture] = [
     lexeme: "×",
     token: Operator.multiplication,
     withLexemes: ["10", "×"],
-    withTokens: [Operand.number(10), Operator.multiplication]
+    withTokens: [Operand.number(10), Operator.multiplication],
+    droppedLexemes: ["10"],
+    droppedTokens: [Operand.number(10)]
   ),
   (
     withoutLexemes: ["10"],
@@ -2518,7 +2656,9 @@ let lexebleOperatorFixtures: [LexebleOperatorFixture] = [
     lexeme: "-",
     token: Operator.subtraction,
     withLexemes: ["10", "-"],
-    withTokens: [Operand.number(10), Operator.subtraction]
+    withTokens: [Operand.number(10), Operator.subtraction],
+    droppedLexemes: ["10"],
+    droppedTokens: [Operand.number(10)]
   ),
   (
     withoutLexemes: ["11"],
@@ -2526,7 +2666,9 @@ let lexebleOperatorFixtures: [LexebleOperatorFixture] = [
     lexeme: "+",
     token: Operator.addition,
     withLexemes: ["11", "+"],
-    withTokens: [Operand.number(11), Operator.addition]
+    withTokens: [Operand.number(11), Operator.addition],
+    droppedLexemes: ["11"],
+    droppedTokens: [Operand.number(11)]
   ),
   (
     withoutLexemes: ["11"],
@@ -2534,7 +2676,9 @@ let lexebleOperatorFixtures: [LexebleOperatorFixture] = [
     lexeme: "÷",
     token: Operator.division,
     withLexemes: ["11", "÷"],
-    withTokens: [Operand.number(11), Operator.division]
+    withTokens: [Operand.number(11), Operator.division],
+    droppedLexemes: ["11"],
+    droppedTokens: [Operand.number(11)]
   ),
   (
     withoutLexemes: ["11"],
@@ -2542,7 +2686,9 @@ let lexebleOperatorFixtures: [LexebleOperatorFixture] = [
     lexeme: "×",
     token: Operator.multiplication,
     withLexemes: ["11", "×"],
-    withTokens: [Operand.number(11), Operator.multiplication]
+    withTokens: [Operand.number(11), Operator.multiplication],
+    droppedLexemes: ["11"],
+    droppedTokens: [Operand.number(11)]
   ),
   (
     withoutLexemes: ["11"],
@@ -2550,7 +2696,9 @@ let lexebleOperatorFixtures: [LexebleOperatorFixture] = [
     lexeme: "-",
     token: Operator.subtraction,
     withLexemes: ["11", "-"],
-    withTokens: [Operand.number(11), Operator.subtraction]
+    withTokens: [Operand.number(11), Operator.subtraction],
+    droppedLexemes: ["11"],
+    droppedTokens: [Operand.number(11)]
   ),
   (
     withoutLexemes: ["19"],
@@ -2558,7 +2706,9 @@ let lexebleOperatorFixtures: [LexebleOperatorFixture] = [
     lexeme: "+",
     token: Operator.addition,
     withLexemes: ["19", "+"],
-    withTokens: [Operand.number(19), Operator.addition]
+    withTokens: [Operand.number(19), Operator.addition],
+    droppedLexemes: ["19"],
+    droppedTokens: [Operand.number(19)]
   ),
   (
     withoutLexemes: ["19"],
@@ -2566,7 +2716,9 @@ let lexebleOperatorFixtures: [LexebleOperatorFixture] = [
     lexeme: "÷",
     token: Operator.division,
     withLexemes: ["19", "÷"],
-    withTokens: [Operand.number(19), Operator.division]
+    withTokens: [Operand.number(19), Operator.division],
+    droppedLexemes: ["19"],
+    droppedTokens: [Operand.number(19)]
   ),
   (
     withoutLexemes: ["19"],
@@ -2574,7 +2726,9 @@ let lexebleOperatorFixtures: [LexebleOperatorFixture] = [
     lexeme: "×",
     token: Operator.multiplication,
     withLexemes: ["19", "×"],
-    withTokens: [Operand.number(19), Operator.multiplication]
+    withTokens: [Operand.number(19), Operator.multiplication],
+    droppedLexemes: ["19"],
+    droppedTokens: [Operand.number(19)]
   ),
   (
     withoutLexemes: ["19"],
@@ -2582,7 +2736,9 @@ let lexebleOperatorFixtures: [LexebleOperatorFixture] = [
     lexeme: "-",
     token: Operator.subtraction,
     withLexemes: ["19", "-"],
-    withTokens: [Operand.number(19), Operator.subtraction]
+    withTokens: [Operand.number(19), Operator.subtraction],
+    droppedLexemes: ["19"],
+    droppedTokens: [Operand.number(19)]
   ),
 ]
 
