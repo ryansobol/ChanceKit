@@ -2750,7 +2750,9 @@ typealias LexebleIntegerFixture = (
   lexeme: String,
   integer: Int,
   withLexemes: [String],
-  withTokens: [Tokenable]
+  withTokens: [Tokenable],
+  droppedLexemes: [String],
+  droppedTokens: [Tokenable]
 )
 
 //  TODO: Handle 1d4, 1d6, 1d8, 1d10, 1d12, 1d20, 1d100, and 1d
@@ -2761,7 +2763,9 @@ let lexebleIntegerFixtures: [LexebleIntegerFixture] = [
     lexeme: "0",
     integer: 0,
     withLexemes: ["0"],
-    withTokens: [Operand.number(0)]
+    withTokens: [Operand.number(0)],
+    droppedLexemes: [],
+    droppedTokens: []
   ),
   (
     withoutLexemes: [],
@@ -2769,7 +2773,9 @@ let lexebleIntegerFixtures: [LexebleIntegerFixture] = [
     lexeme: "1",
     integer: 1,
     withLexemes: ["1"],
-    withTokens: [Operand.number(1)]
+    withTokens: [Operand.number(1)],
+    droppedLexemes: [],
+    droppedTokens: []
   ),
   (
     withoutLexemes: [],
@@ -2777,7 +2783,9 @@ let lexebleIntegerFixtures: [LexebleIntegerFixture] = [
     lexeme: "9",
     integer: 9,
     withLexemes: ["9"],
-    withTokens: [Operand.number(9)]
+    withTokens: [Operand.number(9)],
+    droppedLexemes: [],
+    droppedTokens: []
   ),
   (
     withoutLexemes: ["("],
@@ -2785,7 +2793,9 @@ let lexebleIntegerFixtures: [LexebleIntegerFixture] = [
     lexeme: "0",
     integer: 0,
     withLexemes: ["(", "0"],
-    withTokens: [Parenthesis.open, Operand.number(0)]
+    withTokens: [Parenthesis.open, Operand.number(0)],
+    droppedLexemes: ["("],
+    droppedTokens: [Parenthesis.open]
   ),
   (
     withoutLexemes: ["("],
@@ -2793,7 +2803,9 @@ let lexebleIntegerFixtures: [LexebleIntegerFixture] = [
     lexeme: "1",
     integer: 1,
     withLexemes: ["(", "1"],
-    withTokens: [Parenthesis.open, Operand.number(1)]
+    withTokens: [Parenthesis.open, Operand.number(1)],
+    droppedLexemes: ["("],
+    droppedTokens: [Parenthesis.open]
   ),
   (
     withoutLexemes: ["("],
@@ -2801,7 +2813,9 @@ let lexebleIntegerFixtures: [LexebleIntegerFixture] = [
     lexeme: "9",
     integer: 9,
     withLexemes: ["(", "9"],
-    withTokens: [Parenthesis.open, Operand.number(9)]
+    withTokens: [Parenthesis.open, Operand.number(9)],
+    droppedLexemes: ["("],
+    droppedTokens: [Parenthesis.open]
   ),
   (
     withoutLexemes: [")"],
@@ -2809,7 +2823,9 @@ let lexebleIntegerFixtures: [LexebleIntegerFixture] = [
     lexeme: "0",
     integer: 0,
     withLexemes: [")", "×", "0"],
-    withTokens: [Parenthesis.close, Operator.multiplication, Operand.number(0)]
+    withTokens: [Parenthesis.close, Operator.multiplication, Operand.number(0)],
+    droppedLexemes: [")", "×"],
+    droppedTokens: [Parenthesis.close, Operator.multiplication]
   ),
   (
     withoutLexemes: [")"],
@@ -2817,7 +2833,9 @@ let lexebleIntegerFixtures: [LexebleIntegerFixture] = [
     lexeme: "1",
     integer: 1,
     withLexemes: [")", "×", "1"],
-    withTokens: [Parenthesis.close, Operator.multiplication, Operand.number(1)]
+    withTokens: [Parenthesis.close, Operator.multiplication, Operand.number(1)],
+    droppedLexemes: [")", "×"],
+    droppedTokens: [Parenthesis.close, Operator.multiplication]
   ),
   (
     withoutLexemes: [")"],
@@ -2825,7 +2843,9 @@ let lexebleIntegerFixtures: [LexebleIntegerFixture] = [
     lexeme: "9",
     integer: 9,
     withLexemes: [")", "×", "9"],
-    withTokens: [Parenthesis.close, Operator.multiplication, Operand.number(9)]
+    withTokens: [Parenthesis.close, Operator.multiplication, Operand.number(9)],
+    droppedLexemes: [")", "×"],
+    droppedTokens: [Parenthesis.close, Operator.multiplication]
   ),
   (
     withoutLexemes: ["+"],
@@ -2833,7 +2853,9 @@ let lexebleIntegerFixtures: [LexebleIntegerFixture] = [
     lexeme: "0",
     integer: 0,
     withLexemes: ["0"],
-    withTokens: [Operand.number(0)]
+    withTokens: [Operand.number(0)],
+    droppedLexemes: [],
+    droppedTokens: []
   ),
   (
     withoutLexemes: ["+"],
@@ -2841,7 +2863,9 @@ let lexebleIntegerFixtures: [LexebleIntegerFixture] = [
     lexeme: "1",
     integer: 1,
     withLexemes: ["1"],
-    withTokens: [Operand.number(1)]
+    withTokens: [Operand.number(1)],
+    droppedLexemes: [],
+    droppedTokens: []
   ),
   (
     withoutLexemes: ["+"],
@@ -2849,7 +2873,9 @@ let lexebleIntegerFixtures: [LexebleIntegerFixture] = [
     lexeme: "9",
     integer: 9,
     withLexemes: ["9"],
-    withTokens: [Operand.number(9)]
+    withTokens: [Operand.number(9)],
+    droppedLexemes: [],
+    droppedTokens: []
   ),
   (
     withoutLexemes: ["÷"],
@@ -2857,7 +2883,9 @@ let lexebleIntegerFixtures: [LexebleIntegerFixture] = [
     lexeme: "0",
     integer: 0,
     withLexemes: ["÷", "0"],
-    withTokens: [Operator.division, Operand.number(0)]
+    withTokens: [Operator.division, Operand.number(0)],
+    droppedLexemes: ["÷"],
+    droppedTokens: [Operator.division]
   ),
   (
     withoutLexemes: ["÷"],
@@ -2865,7 +2893,9 @@ let lexebleIntegerFixtures: [LexebleIntegerFixture] = [
     lexeme: "1",
     integer: 1,
     withLexemes: ["÷", "1"],
-    withTokens: [Operator.division, Operand.number(1)]
+    withTokens: [Operator.division, Operand.number(1)],
+    droppedLexemes: ["÷"],
+    droppedTokens: [Operator.division]
   ),
   (
     withoutLexemes: ["÷"],
@@ -2873,7 +2903,9 @@ let lexebleIntegerFixtures: [LexebleIntegerFixture] = [
     lexeme: "9",
     integer: 9,
     withLexemes: ["÷", "9"],
-    withTokens: [Operator.division, Operand.number(9)]
+    withTokens: [Operator.division, Operand.number(9)],
+    droppedLexemes: ["÷"],
+    droppedTokens: [Operator.division]
   ),
   (
     withoutLexemes: ["×"],
@@ -2881,7 +2913,9 @@ let lexebleIntegerFixtures: [LexebleIntegerFixture] = [
     lexeme: "0",
     integer: 0,
     withLexemes: ["×", "0"],
-    withTokens: [Operator.multiplication, Operand.number(0)]
+    withTokens: [Operator.multiplication, Operand.number(0)],
+    droppedLexemes: ["×"],
+    droppedTokens: [Operator.multiplication]
   ),
   (
     withoutLexemes: ["×"],
@@ -2889,7 +2923,9 @@ let lexebleIntegerFixtures: [LexebleIntegerFixture] = [
     lexeme: "1",
     integer: 1,
     withLexemes: ["×", "1"],
-    withTokens: [Operator.multiplication, Operand.number(1)]
+    withTokens: [Operator.multiplication, Operand.number(1)],
+    droppedLexemes: ["×"],
+    droppedTokens: [Operator.multiplication]
   ),
   (
     withoutLexemes: ["×"],
@@ -2897,7 +2933,9 @@ let lexebleIntegerFixtures: [LexebleIntegerFixture] = [
     lexeme: "9",
     integer: 9,
     withLexemes: ["×", "9"],
-    withTokens: [Operator.multiplication, Operand.number(9)]
+    withTokens: [Operator.multiplication, Operand.number(9)],
+    droppedLexemes: ["×"],
+    droppedTokens: [Operator.multiplication]
   ),
   (
     withoutLexemes: ["-"],
@@ -2905,7 +2943,9 @@ let lexebleIntegerFixtures: [LexebleIntegerFixture] = [
     lexeme: "0",
     integer: 0,
     withLexemes: ["0"],
-    withTokens: [Operand.number(0)]
+    withTokens: [Operand.number(0)],
+    droppedLexemes: [],
+    droppedTokens: []
   ),
   (
     withoutLexemes: ["-"],
@@ -2913,7 +2953,9 @@ let lexebleIntegerFixtures: [LexebleIntegerFixture] = [
     lexeme: "1",
     integer: 1,
     withLexemes: ["-1"],
-    withTokens: [Operand.number(-1)]
+    withTokens: [Operand.number(-1)],
+    droppedLexemes: ["-"],
+    droppedTokens: [Operator.subtraction]
   ),
   (
     withoutLexemes: ["-"],
@@ -2921,7 +2963,9 @@ let lexebleIntegerFixtures: [LexebleIntegerFixture] = [
     lexeme: "9",
     integer: 9,
     withLexemes: ["-9"],
-    withTokens: [Operand.number(-9)]
+    withTokens: [Operand.number(-9)],
+    droppedLexemes: ["-"],
+    droppedTokens: [Operator.subtraction]
   ),
   (
     withoutLexemes: ["0"],
@@ -2929,7 +2973,9 @@ let lexebleIntegerFixtures: [LexebleIntegerFixture] = [
     lexeme: "0",
     integer: 0,
     withLexemes: ["0"],
-    withTokens: [Operand.number(0)]
+    withTokens: [Operand.number(0)],
+    droppedLexemes: [],
+    droppedTokens: []
   ),
   (
     withoutLexemes: ["0"],
@@ -2937,7 +2983,9 @@ let lexebleIntegerFixtures: [LexebleIntegerFixture] = [
     lexeme: "1",
     integer: 1,
     withLexemes: ["1"],
-    withTokens: [Operand.number(1)]
+    withTokens: [Operand.number(1)],
+    droppedLexemes: [],
+    droppedTokens: []
   ),
   (
     withoutLexemes: ["0"],
@@ -2945,7 +2993,9 @@ let lexebleIntegerFixtures: [LexebleIntegerFixture] = [
     lexeme: "9",
     integer: 9,
     withLexemes: ["9"],
-    withTokens: [Operand.number(9)]
+    withTokens: [Operand.number(9)],
+    droppedLexemes: [],
+    droppedTokens: []
   ),
   (
     withoutLexemes: ["1"],
@@ -2953,7 +3003,9 @@ let lexebleIntegerFixtures: [LexebleIntegerFixture] = [
     lexeme: "0",
     integer: 0,
     withLexemes: ["10"],
-    withTokens: [Operand.number(10)]
+    withTokens: [Operand.number(10)],
+    droppedLexemes: ["1"],
+    droppedTokens: [Operand.number(1)]
   ),
   (
     withoutLexemes: ["1"],
@@ -2961,7 +3013,9 @@ let lexebleIntegerFixtures: [LexebleIntegerFixture] = [
     lexeme: "1",
     integer: 1,
     withLexemes: ["11"],
-    withTokens: [Operand.number(11)]
+    withTokens: [Operand.number(11)],
+    droppedLexemes: ["1"],
+    droppedTokens: [Operand.number(1)]
   ),
   (
     withoutLexemes: ["1"],
@@ -2969,7 +3023,9 @@ let lexebleIntegerFixtures: [LexebleIntegerFixture] = [
     lexeme: "9",
     integer: 9,
     withLexemes: ["19"],
-    withTokens: [Operand.number(19)]
+    withTokens: [Operand.number(19)],
+    droppedLexemes: ["1"],
+    droppedTokens: [Operand.number(1)]
   ),
   (
     withoutLexemes: ["9"],
@@ -2977,7 +3033,9 @@ let lexebleIntegerFixtures: [LexebleIntegerFixture] = [
     lexeme: "0",
     integer: 0,
     withLexemes: ["90"],
-    withTokens: [Operand.number(90)]
+    withTokens: [Operand.number(90)],
+    droppedLexemes: ["9"],
+    droppedTokens: [Operand.number(9)]
   ),
   (
     withoutLexemes: ["9"],
@@ -2985,7 +3043,9 @@ let lexebleIntegerFixtures: [LexebleIntegerFixture] = [
     lexeme: "1",
     integer: 1,
     withLexemes: ["91"],
-    withTokens: [Operand.number(91)]
+    withTokens: [Operand.number(91)],
+    droppedLexemes: ["9"],
+    droppedTokens: [Operand.number(9)]
   ),
   (
     withoutLexemes: ["9"],
@@ -2993,7 +3053,9 @@ let lexebleIntegerFixtures: [LexebleIntegerFixture] = [
     lexeme: "9",
     integer: 9,
     withLexemes: ["99"],
-    withTokens: [Operand.number(99)]
+    withTokens: [Operand.number(99)],
+    droppedLexemes: ["9"],
+    droppedTokens: [Operand.number(9)]
   ),
   (
     withoutLexemes: ["1", "×", "("],
@@ -3001,7 +3063,9 @@ let lexebleIntegerFixtures: [LexebleIntegerFixture] = [
     lexeme: "0",
     integer: 0,
     withLexemes: ["1", "×", "(", "0"],
-    withTokens: [Operand.number(1), Operator.multiplication, Parenthesis.open, Operand.number(0)]
+    withTokens: [Operand.number(1), Operator.multiplication, Parenthesis.open, Operand.number(0)],
+    droppedLexemes: ["1", "×", "("],
+    droppedTokens: [Operand.number(1), Operator.multiplication, Parenthesis.open]
   ),
   (
     withoutLexemes: ["1", "×", "("],
@@ -3009,7 +3073,9 @@ let lexebleIntegerFixtures: [LexebleIntegerFixture] = [
     lexeme: "1",
     integer: 1,
     withLexemes: ["1", "×", "(", "1"],
-    withTokens: [Operand.number(1), Operator.multiplication, Parenthesis.open, Operand.number(1)]
+    withTokens: [Operand.number(1), Operator.multiplication, Parenthesis.open, Operand.number(1)],
+    droppedLexemes: ["1", "×", "("],
+    droppedTokens: [Operand.number(1), Operator.multiplication, Parenthesis.open]
   ),
   (
     withoutLexemes: ["1", "×", "("],
@@ -3017,7 +3083,9 @@ let lexebleIntegerFixtures: [LexebleIntegerFixture] = [
     lexeme: "9",
     integer: 9,
     withLexemes: ["1", "×", "(", "9"],
-    withTokens: [Operand.number(1), Operator.multiplication, Parenthesis.open, Operand.number(9)]
+    withTokens: [Operand.number(1), Operator.multiplication, Parenthesis.open, Operand.number(9)],
+    droppedLexemes: ["1", "×", "("],
+    droppedTokens: [Operand.number(1), Operator.multiplication, Parenthesis.open]
   ),
   (
     withoutLexemes: ["1", ")"],
@@ -3025,7 +3093,9 @@ let lexebleIntegerFixtures: [LexebleIntegerFixture] = [
     lexeme: "0",
     integer: 0,
     withLexemes: ["1", ")", "×", "0"],
-    withTokens: [Operand.number(1), Parenthesis.close, Operator.multiplication, Operand.number(0)]
+    withTokens: [Operand.number(1), Parenthesis.close, Operator.multiplication, Operand.number(0)],
+    droppedLexemes: ["1", ")", "×"],
+    droppedTokens: [Operand.number(1), Parenthesis.close, Operator.multiplication]
   ),
   (
     withoutLexemes: ["1", ")"],
@@ -3033,7 +3103,9 @@ let lexebleIntegerFixtures: [LexebleIntegerFixture] = [
     lexeme: "1",
     integer: 1,
     withLexemes: ["1", ")", "×", "1"],
-    withTokens: [Operand.number(1), Parenthesis.close, Operator.multiplication, Operand.number(1)]
+    withTokens: [Operand.number(1), Parenthesis.close, Operator.multiplication, Operand.number(1)],
+    droppedLexemes: ["1", ")", "×"],
+    droppedTokens: [Operand.number(1), Parenthesis.close, Operator.multiplication]
   ),
   (
     withoutLexemes: ["1", ")"],
@@ -3041,7 +3113,9 @@ let lexebleIntegerFixtures: [LexebleIntegerFixture] = [
     lexeme: "9",
     integer: 9,
     withLexemes: ["1", ")", "×", "9"],
-    withTokens: [Operand.number(1), Parenthesis.close, Operator.multiplication, Operand.number(9)]
+    withTokens: [Operand.number(1), Parenthesis.close, Operator.multiplication, Operand.number(9)],
+    droppedLexemes: ["1", ")", "×"],
+    droppedTokens: [Operand.number(1), Parenthesis.close, Operator.multiplication]
   ),
   (
     withoutLexemes: ["1", "+"],
@@ -3049,7 +3123,9 @@ let lexebleIntegerFixtures: [LexebleIntegerFixture] = [
     lexeme: "0",
     integer: 0,
     withLexemes: ["1", "+", "0"],
-    withTokens: [Operand.number(1), Operator.addition, Operand.number(0)]
+    withTokens: [Operand.number(1), Operator.addition, Operand.number(0)],
+    droppedLexemes: ["1", "+"],
+    droppedTokens: [Operand.number(1), Operator.addition]
   ),
   (
     withoutLexemes: ["1", "+"],
@@ -3057,7 +3133,9 @@ let lexebleIntegerFixtures: [LexebleIntegerFixture] = [
     lexeme: "1",
     integer: 1,
     withLexemes: ["1", "+", "1"],
-    withTokens: [Operand.number(1), Operator.addition, Operand.number(1)]
+    withTokens: [Operand.number(1), Operator.addition, Operand.number(1)],
+    droppedLexemes: ["1", "+"],
+    droppedTokens: [Operand.number(1), Operator.addition]
   ),
   (
     withoutLexemes: ["1", "+"],
@@ -3065,7 +3143,9 @@ let lexebleIntegerFixtures: [LexebleIntegerFixture] = [
     lexeme: "9",
     integer: 9,
     withLexemes: ["1", "+", "9"],
-    withTokens: [Operand.number(1), Operator.addition, Operand.number(9)]
+    withTokens: [Operand.number(1), Operator.addition, Operand.number(9)],
+    droppedLexemes: ["1", "+"],
+    droppedTokens: [Operand.number(1), Operator.addition]
   ),
   (
     withoutLexemes: ["1", "÷"],
@@ -3073,7 +3153,9 @@ let lexebleIntegerFixtures: [LexebleIntegerFixture] = [
     lexeme: "0",
     integer: 0,
     withLexemes: ["1", "÷", "0"],
-    withTokens: [Operand.number(1), Operator.division, Operand.number(0)]
+    withTokens: [Operand.number(1), Operator.division, Operand.number(0)],
+    droppedLexemes: ["1", "÷"],
+    droppedTokens: [Operand.number(1), Operator.division]
   ),
   (
     withoutLexemes: ["1", "÷"],
@@ -3081,7 +3163,9 @@ let lexebleIntegerFixtures: [LexebleIntegerFixture] = [
     lexeme: "1",
     integer: 1,
     withLexemes: ["1", "÷", "1"],
-    withTokens: [Operand.number(1), Operator.division, Operand.number(1)]
+    withTokens: [Operand.number(1), Operator.division, Operand.number(1)],
+    droppedLexemes: ["1", "÷"],
+    droppedTokens: [Operand.number(1), Operator.division]
   ),
   (
     withoutLexemes: ["1", "÷"],
@@ -3089,7 +3173,9 @@ let lexebleIntegerFixtures: [LexebleIntegerFixture] = [
     lexeme: "9",
     integer: 9,
     withLexemes: ["1", "÷", "9"],
-    withTokens: [Operand.number(1), Operator.division, Operand.number(9)]
+    withTokens: [Operand.number(1), Operator.division, Operand.number(9)],
+    droppedLexemes: ["1", "÷"],
+    droppedTokens: [Operand.number(1), Operator.division]
   ),
   (
     withoutLexemes: ["1", "×"],
@@ -3097,7 +3183,9 @@ let lexebleIntegerFixtures: [LexebleIntegerFixture] = [
     lexeme: "0",
     integer: 0,
     withLexemes: ["1", "×", "0"],
-    withTokens: [Operand.number(1), Operator.multiplication, Operand.number(0)]
+    withTokens: [Operand.number(1), Operator.multiplication, Operand.number(0)],
+    droppedLexemes: ["1", "×"],
+    droppedTokens: [Operand.number(1), Operator.multiplication]
   ),
   (
     withoutLexemes: ["1", "×"],
@@ -3105,7 +3193,9 @@ let lexebleIntegerFixtures: [LexebleIntegerFixture] = [
     lexeme: "1",
     integer: 1,
     withLexemes: ["1", "×", "1"],
-    withTokens: [Operand.number(1), Operator.multiplication, Operand.number(1)]
+    withTokens: [Operand.number(1), Operator.multiplication, Operand.number(1)],
+    droppedLexemes: ["1", "×"],
+    droppedTokens: [Operand.number(1), Operator.multiplication]
   ),
   (
     withoutLexemes: ["1", "×"],
@@ -3113,7 +3203,9 @@ let lexebleIntegerFixtures: [LexebleIntegerFixture] = [
     lexeme: "9",
     integer: 9,
     withLexemes: ["1", "×", "9"],
-    withTokens: [Operand.number(1), Operator.multiplication, Operand.number(9)]
+    withTokens: [Operand.number(1), Operator.multiplication, Operand.number(9)],
+    droppedLexemes: ["1", "×"],
+    droppedTokens: [Operand.number(1), Operator.multiplication]
   ),
   (
     withoutLexemes: ["1", "-"],
@@ -3121,7 +3213,9 @@ let lexebleIntegerFixtures: [LexebleIntegerFixture] = [
     lexeme: "0",
     integer: 0,
     withLexemes: ["1", "-", "0"],
-    withTokens: [Operand.number(1), Operator.subtraction, Operand.number(0)]
+    withTokens: [Operand.number(1), Operator.subtraction, Operand.number(0)],
+    droppedLexemes: ["1", "-"],
+    droppedTokens: [Operand.number(1), Operator.subtraction]
   ),
   (
     withoutLexemes: ["1", "-"],
@@ -3129,7 +3223,9 @@ let lexebleIntegerFixtures: [LexebleIntegerFixture] = [
     lexeme: "1",
     integer: 1,
     withLexemes: ["1", "-", "1"],
-    withTokens: [Operand.number(1), Operator.subtraction, Operand.number(1)]
+    withTokens: [Operand.number(1), Operator.subtraction, Operand.number(1)],
+    droppedLexemes: ["1", "-"],
+    droppedTokens: [Operand.number(1), Operator.subtraction]
   ),
   (
     withoutLexemes: ["1", "-"],
@@ -3137,7 +3233,9 @@ let lexebleIntegerFixtures: [LexebleIntegerFixture] = [
     lexeme: "9",
     integer: 9,
     withLexemes: ["1", "-", "9"],
-    withTokens: [Operand.number(1), Operator.subtraction, Operand.number(9)]
+    withTokens: [Operand.number(1), Operator.subtraction, Operand.number(9)],
+    droppedLexemes: ["1", "-"],
+    droppedTokens: [Operand.number(1), Operator.subtraction]
   ),
   (
     withoutLexemes: ["10"],
@@ -3145,7 +3243,9 @@ let lexebleIntegerFixtures: [LexebleIntegerFixture] = [
     lexeme: "0",
     integer: 0,
     withLexemes: ["100"],
-    withTokens: [Operand.number(100)]
+    withTokens: [Operand.number(100)],
+    droppedLexemes: ["10"],
+    droppedTokens: [Operand.number(10)]
   ),
   (
     withoutLexemes: ["10"],
@@ -3153,7 +3253,9 @@ let lexebleIntegerFixtures: [LexebleIntegerFixture] = [
     lexeme: "1",
     integer: 1,
     withLexemes: ["101"],
-    withTokens: [Operand.number(101)]
+    withTokens: [Operand.number(101)],
+    droppedLexemes: ["10"],
+    droppedTokens: [Operand.number(10)]
   ),
   (
     withoutLexemes: ["10"],
@@ -3161,7 +3263,9 @@ let lexebleIntegerFixtures: [LexebleIntegerFixture] = [
     lexeme: "9",
     integer: 9,
     withLexemes: ["109"],
-    withTokens: [Operand.number(109)]
+    withTokens: [Operand.number(109)],
+    droppedLexemes: ["10"],
+    droppedTokens: [Operand.number(10)]
   ),
   (
     withoutLexemes: ["11"],
@@ -3169,7 +3273,9 @@ let lexebleIntegerFixtures: [LexebleIntegerFixture] = [
     lexeme: "0",
     integer: 0,
     withLexemes: ["110"],
-    withTokens: [Operand.number(110)]
+    withTokens: [Operand.number(110)],
+    droppedLexemes: ["11"],
+    droppedTokens: [Operand.number(11)]
   ),
   (
     withoutLexemes: ["11"],
@@ -3177,7 +3283,9 @@ let lexebleIntegerFixtures: [LexebleIntegerFixture] = [
     lexeme: "1",
     integer: 1,
     withLexemes: ["111"],
-    withTokens: [Operand.number(111)]
+    withTokens: [Operand.number(111)],
+    droppedLexemes: ["11"],
+    droppedTokens: [Operand.number(11)]
   ),
   (
     withoutLexemes: ["11"],
@@ -3185,7 +3293,9 @@ let lexebleIntegerFixtures: [LexebleIntegerFixture] = [
     lexeme: "9",
     integer: 9,
     withLexemes: ["119"],
-    withTokens: [Operand.number(119)]
+    withTokens: [Operand.number(119)],
+    droppedLexemes: ["11"],
+    droppedTokens: [Operand.number(11)]
   ),
   (
     withoutLexemes: ["19"],
@@ -3193,7 +3303,9 @@ let lexebleIntegerFixtures: [LexebleIntegerFixture] = [
     lexeme: "0",
     integer: 0,
     withLexemes: ["190"],
-    withTokens: [Operand.number(190)]
+    withTokens: [Operand.number(190)],
+    droppedLexemes: ["19"],
+    droppedTokens: [Operand.number(19)]
   ),
   (
     withoutLexemes: ["19"],
@@ -3201,7 +3313,9 @@ let lexebleIntegerFixtures: [LexebleIntegerFixture] = [
     lexeme: "1",
     integer: 1,
     withLexemes: ["191"],
-    withTokens: [Operand.number(191)]
+    withTokens: [Operand.number(191)],
+    droppedLexemes: ["19"],
+    droppedTokens: [Operand.number(19)]
   ),
   (
     withoutLexemes: ["19"],
@@ -3209,6 +3323,8 @@ let lexebleIntegerFixtures: [LexebleIntegerFixture] = [
     lexeme: "9",
     integer: 9,
     withLexemes: ["199"],
-    withTokens: [Operand.number(199)]
+    withTokens: [Operand.number(199)],
+    droppedLexemes: ["19"],
+    droppedTokens: [Operand.number(19)]
   ),
 ]
