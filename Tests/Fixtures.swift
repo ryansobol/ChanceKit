@@ -1566,7 +1566,9 @@ typealias LexebleParenthesisFixture = (
   lexeme: String,
   token: Parenthesis,
   withLexemes: [String],
-  withTokens: [Tokenable]
+  withTokens: [Tokenable],
+  droppedLexemes: [String],
+  droppedTokens: [Tokenable]
 )
 
 //  TODO: Handle 1d4, 1d6, 1d8, 1d10, 1d12, 1d20, 1d100, and 1d
@@ -1577,7 +1579,9 @@ let lexebleParenthesisFixtures: [LexebleParenthesisFixture] = [
     lexeme: "(",
     token: Parenthesis.open,
     withLexemes: ["("],
-    withTokens: [Parenthesis.open]
+    withTokens: [Parenthesis.open],
+    droppedLexemes: [],
+    droppedTokens: []
   ),
   (
     withoutLexemes: [],
@@ -1585,7 +1589,9 @@ let lexebleParenthesisFixtures: [LexebleParenthesisFixture] = [
     lexeme: ")",
     token: Parenthesis.close,
     withLexemes: [")"],
-    withTokens: [Parenthesis.close]
+    withTokens: [Parenthesis.close],
+    droppedLexemes: [],
+    droppedTokens: []
   ),
   (
     withoutLexemes: ["("],
@@ -1593,7 +1599,9 @@ let lexebleParenthesisFixtures: [LexebleParenthesisFixture] = [
     lexeme: "(",
     token: Parenthesis.open,
     withLexemes: ["(", "("],
-    withTokens: [Parenthesis.open, Parenthesis.open]
+    withTokens: [Parenthesis.open, Parenthesis.open],
+    droppedLexemes: ["("],
+    droppedTokens: [Parenthesis.open]
   ),
   (
     withoutLexemes: ["("],
@@ -1601,7 +1609,9 @@ let lexebleParenthesisFixtures: [LexebleParenthesisFixture] = [
     lexeme: ")",
     token: Parenthesis.close,
     withLexemes: ["(", ")"],
-    withTokens: [Parenthesis.open, Parenthesis.close]
+    withTokens: [Parenthesis.open, Parenthesis.close],
+    droppedLexemes: ["("],
+    droppedTokens: [Parenthesis.open]
   ),
   (
     withoutLexemes: [")"],
@@ -1609,7 +1619,9 @@ let lexebleParenthesisFixtures: [LexebleParenthesisFixture] = [
     lexeme: "(",
     token: Parenthesis.open,
     withLexemes: [")", "×", "("],
-    withTokens: [Parenthesis.close, Operator.multiplication, Parenthesis.open]
+    withTokens: [Parenthesis.close, Operator.multiplication, Parenthesis.open],
+    droppedLexemes: [")", "×"],
+    droppedTokens: [Parenthesis.close, Operator.multiplication]
   ),
   (
     withoutLexemes: [")"],
@@ -1617,7 +1629,9 @@ let lexebleParenthesisFixtures: [LexebleParenthesisFixture] = [
     lexeme: ")",
     token: Parenthesis.close,
     withLexemes: [")", ")"],
-    withTokens: [Parenthesis.close, Parenthesis.close]
+    withTokens: [Parenthesis.close, Parenthesis.close],
+    droppedLexemes: [")"],
+    droppedTokens: [Parenthesis.close]
   ),
   (
     withoutLexemes: ["+"],
@@ -1625,7 +1639,9 @@ let lexebleParenthesisFixtures: [LexebleParenthesisFixture] = [
     lexeme: "(",
     token: Parenthesis.open,
     withLexemes: ["+", "("],
-    withTokens: [Operator.addition, Parenthesis.open]
+    withTokens: [Operator.addition, Parenthesis.open],
+    droppedLexemes: ["+"],
+    droppedTokens: [Operator.addition]
   ),
   (
     withoutLexemes: ["+"],
@@ -1633,7 +1649,9 @@ let lexebleParenthesisFixtures: [LexebleParenthesisFixture] = [
     lexeme: ")",
     token: Parenthesis.close,
     withLexemes: ["+", ")"],
-    withTokens: [Operator.addition, Parenthesis.close]
+    withTokens: [Operator.addition, Parenthesis.close],
+    droppedLexemes: ["+"],
+    droppedTokens: [Operator.addition]
   ),
   (
     withoutLexemes: ["÷"],
@@ -1641,7 +1659,9 @@ let lexebleParenthesisFixtures: [LexebleParenthesisFixture] = [
     lexeme: "(",
     token: Parenthesis.open,
     withLexemes: ["÷", "("],
-    withTokens: [Operator.division, Parenthesis.open]
+    withTokens: [Operator.division, Parenthesis.open],
+    droppedLexemes: ["÷"],
+    droppedTokens: [Operator.division]
   ),
   (
     withoutLexemes: ["÷"],
@@ -1649,7 +1669,9 @@ let lexebleParenthesisFixtures: [LexebleParenthesisFixture] = [
     lexeme: ")",
     token: Parenthesis.close,
     withLexemes: ["÷", ")"],
-    withTokens: [Operator.division, Parenthesis.close]
+    withTokens: [Operator.division, Parenthesis.close],
+    droppedLexemes: ["÷"],
+    droppedTokens: [Operator.division]
   ),
   (
     withoutLexemes: ["×"],
@@ -1657,7 +1679,9 @@ let lexebleParenthesisFixtures: [LexebleParenthesisFixture] = [
     lexeme: "(",
     token: Parenthesis.open,
     withLexemes: ["×", "("],
-    withTokens: [Operator.multiplication, Parenthesis.open]
+    withTokens: [Operator.multiplication, Parenthesis.open],
+    droppedLexemes: ["×"],
+    droppedTokens: [Operator.multiplication]
   ),
   (
     withoutLexemes: ["×"],
@@ -1665,7 +1689,9 @@ let lexebleParenthesisFixtures: [LexebleParenthesisFixture] = [
     lexeme: ")",
     token: Parenthesis.close,
     withLexemes: ["×", ")"],
-    withTokens: [Operator.multiplication, Parenthesis.close]
+    withTokens: [Operator.multiplication, Parenthesis.close],
+    droppedLexemes: ["×"],
+    droppedTokens: [Operator.multiplication]
   ),
   (
     withoutLexemes: ["-"],
@@ -1673,7 +1699,9 @@ let lexebleParenthesisFixtures: [LexebleParenthesisFixture] = [
     lexeme: "(",
     token: Parenthesis.open,
     withLexemes: ["-", "("],
-    withTokens: [Operator.subtraction, Parenthesis.open]
+    withTokens: [Operator.subtraction, Parenthesis.open],
+    droppedLexemes: ["-"],
+    droppedTokens: [Operator.subtraction]
   ),
   (
     withoutLexemes: ["-"],
@@ -1681,7 +1709,9 @@ let lexebleParenthesisFixtures: [LexebleParenthesisFixture] = [
     lexeme: ")",
     token: Parenthesis.close,
     withLexemes: ["-", ")"],
-    withTokens: [Operator.subtraction, Parenthesis.close]
+    withTokens: [Operator.subtraction, Parenthesis.close],
+    droppedLexemes: ["-"],
+    droppedTokens: [Operator.subtraction]
   ),
   (
     withoutLexemes: ["0"],
@@ -1689,7 +1719,9 @@ let lexebleParenthesisFixtures: [LexebleParenthesisFixture] = [
     lexeme: "(",
     token: Parenthesis.open,
     withLexemes: ["0", "×", "("],
-    withTokens: [Operand.number(0), Operator.multiplication, Parenthesis.open]
+    withTokens: [Operand.number(0), Operator.multiplication, Parenthesis.open],
+    droppedLexemes: ["0", "×"],
+    droppedTokens: [Operand.number(0), Operator.multiplication]
   ),
   (
     withoutLexemes: ["0"],
@@ -1697,7 +1729,9 @@ let lexebleParenthesisFixtures: [LexebleParenthesisFixture] = [
     lexeme: ")",
     token: Parenthesis.close,
     withLexemes: ["0", ")"],
-    withTokens: [Operand.number(0), Parenthesis.close]
+    withTokens: [Operand.number(0), Parenthesis.close],
+    droppedLexemes: ["0"],
+    droppedTokens: [Operand.number(0)]
   ),
   (
     withoutLexemes: ["1"],
@@ -1705,7 +1739,9 @@ let lexebleParenthesisFixtures: [LexebleParenthesisFixture] = [
     lexeme: "(",
     token: Parenthesis.open,
     withLexemes: ["1", "×", "("],
-    withTokens: [Operand.number(1), Operator.multiplication, Parenthesis.open]
+    withTokens: [Operand.number(1), Operator.multiplication, Parenthesis.open],
+    droppedLexemes: ["1", "×"],
+    droppedTokens: [Operand.number(1), Operator.multiplication]
   ),
   (
     withoutLexemes: ["1"],
@@ -1713,7 +1749,9 @@ let lexebleParenthesisFixtures: [LexebleParenthesisFixture] = [
     lexeme: ")",
     token: Parenthesis.close,
     withLexemes: ["1", ")"],
-    withTokens: [Operand.number(1), Parenthesis.close]
+    withTokens: [Operand.number(1), Parenthesis.close],
+    droppedLexemes: ["1"],
+    droppedTokens: [Operand.number(1)]
   ),
   (
     withoutLexemes: ["9"],
@@ -1721,7 +1759,9 @@ let lexebleParenthesisFixtures: [LexebleParenthesisFixture] = [
     lexeme: "(",
     token: Parenthesis.open,
     withLexemes: ["9", "×", "("],
-    withTokens: [Operand.number(9), Operator.multiplication, Parenthesis.open]
+    withTokens: [Operand.number(9), Operator.multiplication, Parenthesis.open],
+    droppedLexemes: ["9", "×"],
+    droppedTokens: [Operand.number(9), Operator.multiplication]
   ),
   (
     withoutLexemes: ["9"],
@@ -1729,7 +1769,9 @@ let lexebleParenthesisFixtures: [LexebleParenthesisFixture] = [
     lexeme: ")",
     token: Parenthesis.close,
     withLexemes: ["9", ")"],
-    withTokens: [Operand.number(9), Parenthesis.close]
+    withTokens: [Operand.number(9), Parenthesis.close],
+    droppedLexemes: ["9"],
+    droppedTokens: [Operand.number(9)]
   ),
   (
     withoutLexemes: ["1", "×", "("],
@@ -1737,7 +1779,9 @@ let lexebleParenthesisFixtures: [LexebleParenthesisFixture] = [
     lexeme: "(",
     token: Parenthesis.open,
     withLexemes: ["1", "×", "(", "("],
-    withTokens: [Operand.number(1), Operator.multiplication, Parenthesis.open, Parenthesis.open]
+    withTokens: [Operand.number(1), Operator.multiplication, Parenthesis.open, Parenthesis.open],
+    droppedLexemes: ["1", "×", "("],
+    droppedTokens: [Operand.number(1), Operator.multiplication, Parenthesis.open]
   ),
   (
     withoutLexemes: ["1", "×", "("],
@@ -1745,7 +1789,9 @@ let lexebleParenthesisFixtures: [LexebleParenthesisFixture] = [
     lexeme: ")",
     token: Parenthesis.close,
     withLexemes: ["1", "×", "(", ")"],
-    withTokens: [Operand.number(1), Operator.multiplication, Parenthesis.open, Parenthesis.close]
+    withTokens: [Operand.number(1), Operator.multiplication, Parenthesis.open, Parenthesis.close],
+    droppedLexemes: ["1", "×", "("],
+    droppedTokens: [Operand.number(1), Operator.multiplication, Parenthesis.open]
   ),
   (
     withoutLexemes: ["1", ")"],
@@ -1753,7 +1799,9 @@ let lexebleParenthesisFixtures: [LexebleParenthesisFixture] = [
     lexeme: "(",
     token: Parenthesis.open,
     withLexemes: ["1", ")", "×", "("],
-    withTokens: [Operand.number(1), Parenthesis.close, Operator.multiplication, Parenthesis.open]
+    withTokens: [Operand.number(1), Parenthesis.close, Operator.multiplication, Parenthesis.open],
+    droppedLexemes: ["1", ")", "×"],
+    droppedTokens: [Operand.number(1), Parenthesis.close, Operator.multiplication]
   ),
   (
     withoutLexemes: ["1", ")"],
@@ -1761,7 +1809,9 @@ let lexebleParenthesisFixtures: [LexebleParenthesisFixture] = [
     lexeme: ")",
     token: Parenthesis.close,
     withLexemes: ["1", ")", ")"],
-    withTokens: [Operand.number(1), Parenthesis.close, Parenthesis.close]
+    withTokens: [Operand.number(1), Parenthesis.close, Parenthesis.close],
+    droppedLexemes: ["1", ")"],
+    droppedTokens: [Operand.number(1), Parenthesis.close]
   ),
   (
     withoutLexemes: ["1", "+"],
@@ -1769,7 +1819,9 @@ let lexebleParenthesisFixtures: [LexebleParenthesisFixture] = [
     lexeme: "(",
     token: Parenthesis.open,
     withLexemes: ["1", "+", "("],
-    withTokens: [Operand.number(1), Operator.addition, Parenthesis.open]
+    withTokens: [Operand.number(1), Operator.addition, Parenthesis.open],
+    droppedLexemes: ["1", "+"],
+    droppedTokens: [Operand.number(1), Operator.addition]
   ),
   (
     withoutLexemes: ["1", "+"],
@@ -1777,15 +1829,19 @@ let lexebleParenthesisFixtures: [LexebleParenthesisFixture] = [
     lexeme: ")",
     token: Parenthesis.close,
     withLexemes: ["1", "+", ")"],
-    withTokens: [Operand.number(1), Operator.addition, Parenthesis.close]
+    withTokens: [Operand.number(1), Operator.addition, Parenthesis.close],
+    droppedLexemes: ["1", "+"],
+    droppedTokens: [Operand.number(1), Operator.addition]
   ),
   (
-    withoutLexemes: ["1", "×"],
+    withoutLexemes: ["1", "÷"],
     withoutTokens: [Operand.number(1), Operator.division],
     lexeme: "(",
     token: Parenthesis.open,
-    withLexemes: ["1", "×", "("],
-    withTokens: [Operand.number(1), Operator.division, Parenthesis.open]
+    withLexemes: ["1", "÷", "("],
+    withTokens: [Operand.number(1), Operator.division, Parenthesis.open],
+    droppedLexemes: ["1", "÷"],
+    droppedTokens: [Operand.number(1), Operator.division]
   ),
   (
     withoutLexemes: ["1", "÷"],
@@ -1793,7 +1849,9 @@ let lexebleParenthesisFixtures: [LexebleParenthesisFixture] = [
     lexeme: ")",
     token: Parenthesis.close,
     withLexemes: ["1", "÷", ")"],
-    withTokens: [Operand.number(1), Operator.division, Parenthesis.close]
+    withTokens: [Operand.number(1), Operator.division, Parenthesis.close],
+    droppedLexemes: ["1", "÷"],
+    droppedTokens: [Operand.number(1), Operator.division]
   ),
   (
     withoutLexemes: ["1", "×"],
@@ -1801,7 +1859,9 @@ let lexebleParenthesisFixtures: [LexebleParenthesisFixture] = [
     lexeme: "(",
     token: Parenthesis.open,
     withLexemes: ["1", "×", "("],
-    withTokens: [Operand.number(1), Operator.multiplication, Parenthesis.open]
+    withTokens: [Operand.number(1), Operator.multiplication, Parenthesis.open],
+    droppedLexemes: ["1", "×"],
+    droppedTokens: [Operand.number(1), Operator.multiplication]
   ),
   (
     withoutLexemes: ["1", "×"],
@@ -1809,7 +1869,9 @@ let lexebleParenthesisFixtures: [LexebleParenthesisFixture] = [
     lexeme: ")",
     token: Parenthesis.close,
     withLexemes: ["1", "×", ")"],
-    withTokens: [Operand.number(1), Operator.multiplication, Parenthesis.close]
+    withTokens: [Operand.number(1), Operator.multiplication, Parenthesis.close],
+    droppedLexemes: ["1", "×"],
+    droppedTokens: [Operand.number(1), Operator.multiplication]
   ),
   (
     withoutLexemes: ["1", "-"],
@@ -1817,7 +1879,9 @@ let lexebleParenthesisFixtures: [LexebleParenthesisFixture] = [
     lexeme: "(",
     token: Parenthesis.open,
     withLexemes: ["1", "-", "("],
-    withTokens: [Operand.number(1), Operator.subtraction, Parenthesis.open]
+    withTokens: [Operand.number(1), Operator.subtraction, Parenthesis.open],
+    droppedLexemes: ["1", "-"],
+    droppedTokens: [Operand.number(1), Operator.subtraction]
   ),
   (
     withoutLexemes: ["1", "-"],
@@ -1825,7 +1889,9 @@ let lexebleParenthesisFixtures: [LexebleParenthesisFixture] = [
     lexeme: ")",
     token: Parenthesis.close,
     withLexemes: ["1", "-", ")"],
-    withTokens: [Operand.number(1), Operator.subtraction, Parenthesis.close]
+    withTokens: [Operand.number(1), Operator.subtraction, Parenthesis.close],
+    droppedLexemes: ["1", "-"],
+    droppedTokens: [Operand.number(1), Operator.subtraction]
   ),
   (
     withoutLexemes: ["10"],
@@ -1833,7 +1899,9 @@ let lexebleParenthesisFixtures: [LexebleParenthesisFixture] = [
     lexeme: "(",
     token: Parenthesis.open,
     withLexemes: ["10", "×", "("],
-    withTokens: [Operand.number(10), Operator.multiplication, Parenthesis.open]
+    withTokens: [Operand.number(10), Operator.multiplication, Parenthesis.open],
+    droppedLexemes: ["10", "×"],
+    droppedTokens: [Operand.number(10), Operator.multiplication]
   ),
   (
     withoutLexemes: ["10"],
@@ -1841,7 +1909,9 @@ let lexebleParenthesisFixtures: [LexebleParenthesisFixture] = [
     lexeme: ")",
     token: Parenthesis.close,
     withLexemes: ["10", ")"],
-    withTokens: [Operand.number(10), Parenthesis.close]
+    withTokens: [Operand.number(10), Parenthesis.close],
+    droppedLexemes: ["10"],
+    droppedTokens: [Operand.number(10)]
   ),
   (
     withoutLexemes: ["11"],
@@ -1849,7 +1919,9 @@ let lexebleParenthesisFixtures: [LexebleParenthesisFixture] = [
     lexeme: "(",
     token: Parenthesis.open,
     withLexemes: ["11", "×", "("],
-    withTokens: [Operand.number(11), Operator.multiplication, Parenthesis.open]
+    withTokens: [Operand.number(11), Operator.multiplication, Parenthesis.open],
+    droppedLexemes: ["11", "×"],
+    droppedTokens: [Operand.number(11), Operator.multiplication]
   ),
   (
     withoutLexemes: ["11"],
@@ -1857,7 +1929,9 @@ let lexebleParenthesisFixtures: [LexebleParenthesisFixture] = [
     lexeme: ")",
     token: Parenthesis.close,
     withLexemes: ["11", ")"],
-    withTokens: [Operand.number(11), Parenthesis.close]
+    withTokens: [Operand.number(11), Parenthesis.close],
+    droppedLexemes: ["11"],
+    droppedTokens: [Operand.number(11)]
   ),
   (
     withoutLexemes: ["19"],
@@ -1865,7 +1939,9 @@ let lexebleParenthesisFixtures: [LexebleParenthesisFixture] = [
     lexeme: "(",
     token: Parenthesis.open,
     withLexemes: ["19", "×", "("],
-    withTokens: [Operand.number(19), Operator.multiplication, Parenthesis.open]
+    withTokens: [Operand.number(19), Operator.multiplication, Parenthesis.open],
+    droppedLexemes: ["19", "×"],
+    droppedTokens: [Operand.number(19), Operator.multiplication]
   ),
   (
     withoutLexemes: ["19"],
@@ -1873,7 +1949,9 @@ let lexebleParenthesisFixtures: [LexebleParenthesisFixture] = [
     lexeme: ")",
     token: Parenthesis.close,
     withLexemes: ["19", ")"],
-    withTokens: [Operand.number(19), Parenthesis.close]
+    withTokens: [Operand.number(19), Parenthesis.close],
+    droppedLexemes: ["19"],
+    droppedTokens: [Operand.number(19)]
   ),
 ]
 

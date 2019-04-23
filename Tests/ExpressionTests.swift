@@ -118,8 +118,6 @@ extension ExpressionTests {
     let fixtures: [Fixture] = [
       (withLexemes: [], withoutLexemes: []),
 
-      (withLexemes: ["("], withoutLexemes: []),
-      (withLexemes: [")"], withoutLexemes: []),
       (withLexemes: ["+"], withoutLexemes: []),
       (withLexemes: ["÷"], withoutLexemes: []),
       (withLexemes: ["×"], withoutLexemes: []),
@@ -128,8 +126,6 @@ extension ExpressionTests {
       (withLexemes: ["1"], withoutLexemes: []),
       (withLexemes: ["9"], withoutLexemes: []),
 
-      (withLexemes: ["(", "("], withoutLexemes: ["("]),
-      (withLexemes: ["(", ")"], withoutLexemes: ["("]),
       (withLexemes: ["(", "+"], withoutLexemes: ["("]),
       (withLexemes: ["(", "÷"], withoutLexemes: ["("]),
       (withLexemes: ["(", "×"], withoutLexemes: ["("]),
@@ -138,8 +134,6 @@ extension ExpressionTests {
       (withLexemes: ["(", "1"], withoutLexemes: ["("]),
       (withLexemes: ["(", "9"], withoutLexemes: ["("]),
 
-      (withLexemes: [")", "×", "("], withoutLexemes: [")", "×"]),
-      (withLexemes: [")", ")"], withoutLexemes: [")"]),
       (withLexemes: [")", "+"], withoutLexemes: [")"]),
       (withLexemes: [")", "÷"], withoutLexemes: [")"]),
       (withLexemes: [")", "×"], withoutLexemes: [")"]),
@@ -148,35 +142,22 @@ extension ExpressionTests {
       (withLexemes: [")", "×", "1"], withoutLexemes: [")", "×"]),
       (withLexemes: [")", "×", "9"], withoutLexemes: [")", "×"]),
 
-      (withLexemes: ["+", "("], withoutLexemes: ["+"]),
-      (withLexemes: ["+", ")"], withoutLexemes: ["+"]),
-
-      (withLexemes: ["÷", "("], withoutLexemes: ["÷"]),
-      (withLexemes: ["÷", ")"], withoutLexemes: ["÷"]),
       (withLexemes: ["÷", "0"], withoutLexemes: ["÷"]),
       (withLexemes: ["÷", "1"], withoutLexemes: ["÷"]),
       (withLexemes: ["÷", "9"], withoutLexemes: ["÷"]),
 
-      (withLexemes: ["×", "("], withoutLexemes: ["×"]),
-      (withLexemes: ["×", ")"], withoutLexemes: ["×"]),
       (withLexemes: ["×", "0"], withoutLexemes: ["×"]),
       (withLexemes: ["×", "1"], withoutLexemes: ["×"]),
       (withLexemes: ["×", "9"], withoutLexemes: ["×"]),
 
-      (withLexemes: ["-", "("], withoutLexemes: ["-"]),
-      (withLexemes: ["-", ")"], withoutLexemes: ["-"]),
       (withLexemes: ["-1"], withoutLexemes: ["-"]),
       (withLexemes: ["-9"], withoutLexemes: ["-"]),
 
-      (withLexemes: ["0", "×", "("], withoutLexemes: ["0", "×"]),
-      (withLexemes: ["0", ")"], withoutLexemes: ["0"]),
       (withLexemes: ["0", "+"], withoutLexemes: ["0"]),
       (withLexemes: ["0", "÷"], withoutLexemes: ["0"]),
       (withLexemes: ["0", "×"], withoutLexemes: ["0"]),
       (withLexemes: ["0", "-"], withoutLexemes: ["0"]),
 
-      (withLexemes: ["1", "×", "("], withoutLexemes: ["1", "×"]),
-      (withLexemes: ["1", ")"], withoutLexemes: ["1"]),
       (withLexemes: ["1", "+"], withoutLexemes: ["1"]),
       (withLexemes: ["1", "÷"], withoutLexemes: ["1"]),
       (withLexemes: ["1", "×"], withoutLexemes: ["1"]),
@@ -185,8 +166,6 @@ extension ExpressionTests {
       (withLexemes: ["11"], withoutLexemes: ["1"]),
       (withLexemes: ["19"], withoutLexemes: ["1"]),
 
-      (withLexemes: ["9", "×", "("], withoutLexemes: ["9", "×"]),
-      (withLexemes: ["9", ")",], withoutLexemes: ["9"]),
       (withLexemes: ["9", "+",], withoutLexemes: ["9"]),
       (withLexemes: ["9", "÷",], withoutLexemes: ["9"]),
       (withLexemes: ["9", "×",], withoutLexemes: ["9"]),
@@ -195,8 +174,6 @@ extension ExpressionTests {
       (withLexemes: ["9", "1",], withoutLexemes: ["9"]),
       (withLexemes: ["9", "9",], withoutLexemes: ["9"]),
 
-      (withLexemes: ["1", "×", "(", "("], withoutLexemes: ["1", "×", "("]),
-      (withLexemes: ["1", "×", "(", ")"], withoutLexemes: ["1", "×", "("]),
       (withLexemes: ["1", "×", "(", "+"], withoutLexemes: ["1", "×", "("]),
       (withLexemes: ["1", "×", "(", "÷"], withoutLexemes: ["1", "×", "("]),
       (withLexemes: ["1", "×", "(", "×"], withoutLexemes: ["1", "×", "("]),
@@ -205,8 +182,6 @@ extension ExpressionTests {
       (withLexemes: ["1", "×", "(", "1"], withoutLexemes: ["1", "×", "("]),
       (withLexemes: ["1", "×", "(", "9"], withoutLexemes: ["1", "×", "("]),
 
-      (withLexemes: ["1", ")", "×", "("], withoutLexemes: ["1", ")", "×"]),
-      (withLexemes: ["1", ")", ")"], withoutLexemes: ["1", ")"]),
       (withLexemes: ["1", ")", "+"], withoutLexemes: ["1", ")"]),
       (withLexemes: ["1", ")", "÷"], withoutLexemes: ["1", ")"]),
       (withLexemes: ["1", ")", "×"], withoutLexemes: ["1", ")"]),
@@ -215,32 +190,22 @@ extension ExpressionTests {
       (withLexemes: ["1", ")", "×", "1"], withoutLexemes: ["1", ")", "×"]),
       (withLexemes: ["1", ")", "×", "9"], withoutLexemes: ["1", ")", "×"]),
 
-      (withLexemes: ["1", "+", "("], withoutLexemes: ["1", "+"]),
-      (withLexemes: ["1", "+", ")"], withoutLexemes: ["1", "+"]),
       (withLexemes: ["1", "+", "0"], withoutLexemes: ["1", "+"]),
       (withLexemes: ["1", "+", "1"], withoutLexemes: ["1", "+"]),
       (withLexemes: ["1", "+", "9"], withoutLexemes: ["1", "+"]),
 
-      (withLexemes: ["1", "÷", "("], withoutLexemes: ["1", "÷"]),
-      (withLexemes: ["1", "÷", ")"], withoutLexemes: ["1", "÷"]),
       (withLexemes: ["1", "÷", "0"], withoutLexemes: ["1", "÷"]),
       (withLexemes: ["1", "÷", "1"], withoutLexemes: ["1", "÷"]),
       (withLexemes: ["1", "÷", "9"], withoutLexemes: ["1", "÷"]),
 
-      (withLexemes: ["1", "×", "("], withoutLexemes: ["1", "×"]),
-      (withLexemes: ["1", "×", ")"], withoutLexemes: ["1", "×"]),
       (withLexemes: ["1", "×", "0"], withoutLexemes: ["1", "×"]),
       (withLexemes: ["1", "×", "1"], withoutLexemes: ["1", "×"]),
       (withLexemes: ["1", "×", "9"], withoutLexemes: ["1", "×"]),
 
-      (withLexemes: ["1", "-", "("], withoutLexemes: ["1", "-"]),
-      (withLexemes: ["1", "-", ")"], withoutLexemes: ["1", "-"]),
       (withLexemes: ["1", "-", "0"], withoutLexemes: ["1", "-"]),
       (withLexemes: ["1", "-", "1"], withoutLexemes: ["1", "-"]),
       (withLexemes: ["1", "-", "9"], withoutLexemes: ["1", "-"]),
 
-      (withLexemes: ["10", "×", "("], withoutLexemes: ["10", "×"]),
-      (withLexemes: ["10", ")"], withoutLexemes: ["10"]),
       (withLexemes: ["10", "+"], withoutLexemes: ["10"]),
       (withLexemes: ["10", "÷"], withoutLexemes: ["10"]),
       (withLexemes: ["10", "×"], withoutLexemes: ["10"]),
@@ -249,8 +214,6 @@ extension ExpressionTests {
       (withLexemes: ["101"], withoutLexemes: ["10"]),
       (withLexemes: ["109"], withoutLexemes: ["10"]),
 
-      (withLexemes: ["11", "×", "("], withoutLexemes: ["11", "×"]),
-      (withLexemes: ["11", ")"], withoutLexemes: ["11"]),
       (withLexemes: ["11", "+"], withoutLexemes: ["11"]),
       (withLexemes: ["11", "÷"], withoutLexemes: ["11"]),
       (withLexemes: ["11", "×"], withoutLexemes: ["11"]),
@@ -259,8 +222,6 @@ extension ExpressionTests {
       (withLexemes: ["111"], withoutLexemes: ["11"]),
       (withLexemes: ["119"], withoutLexemes: ["11"]),
 
-      (withLexemes: ["19", "×", "("], withoutLexemes: ["19", "×"]),
-      (withLexemes: ["19", ")"], withoutLexemes: ["19"]),
       (withLexemes: ["19", "+"], withoutLexemes: ["19"]),
       (withLexemes: ["19", "÷"], withoutLexemes: ["19"]),
       (withLexemes: ["19", "×"], withoutLexemes: ["19"]),
@@ -277,6 +238,17 @@ extension ExpressionTests {
       let actual = try! Expression(withLexemes).dropped()
 
       XCTAssertEqual(expected, actual)
+    }
+  }
+
+  func testDroppedWithLexebleParenthesisFixtures() {
+    for fixture in lexebleParenthesisFixtures {
+      let withLexemes = fixture.withLexemes
+      let droppedLexemes = fixture.droppedLexemes
+      let expected = try! Expression(droppedLexemes)
+      let actual = try! Expression(withLexemes).dropped()
+
+      XCTAssertEqual(expected, actual, "withLexemes: \(withLexemes), droppedLexemes: \(droppedLexemes)")
     }
   }
 }
