@@ -62,6 +62,7 @@ extension ExpressionTests {
       let withoutLexemes = fixture.withoutLexemes
       let lexeme = fixture.lexeme
       let withLexemes = fixture.withLexemes
+
       let expected = try! Expression(withLexemes)
       let actual = try! Expression(withoutLexemes).pushed(lexeme)
 
@@ -74,6 +75,7 @@ extension ExpressionTests {
       let withoutLexemes = fixture.withoutLexemes
       let lexeme = fixture.lexeme
       let withLexemes = fixture.withLexemes
+
       let expected = try! Expression(withLexemes)
       let actual = try! Expression(withoutLexemes).pushed(lexeme)
 
@@ -86,6 +88,7 @@ extension ExpressionTests {
       let withoutLexemes = fixture.withoutLexemes
       let lexeme = fixture.lexeme
       let withLexemes = fixture.withLexemes
+
       let expected = try! Expression(withLexemes)
       let actual = try! Expression(withoutLexemes).pushed(lexeme)
 
@@ -97,6 +100,7 @@ extension ExpressionTests {
     for fixture in invalidFixtures {
       let lexeme = fixture.lexeme
       let expected = fixture.error
+
       let expression = try! Expression([])
 
       XCTAssertThrowsError(try expression.pushed(lexeme)) { error in
@@ -120,6 +124,7 @@ extension ExpressionTests {
     for fixture in lexebleParenthesisFixtures {
       let withLexemes = fixture.withLexemes
       let droppedLexemes = fixture.droppedLexemes
+
       let expected = try! Expression(droppedLexemes)
       let actual = try! Expression(withLexemes).dropped()
 
@@ -131,6 +136,7 @@ extension ExpressionTests {
     for fixture in lexebleOperatorFixtures {
       let withLexemes = fixture.withLexemes
       let droppedLexemes = fixture.droppedLexemes
+
       let expected = try! Expression(droppedLexemes)
       let actual = try! Expression(withLexemes).dropped()
 
@@ -142,6 +148,7 @@ extension ExpressionTests {
     for fixture in lexebleIntegerFixtures {
       let withLexemes = fixture.withLexemes
       let droppedLexemes = fixture.droppedLexemes
+      
       let expected = try! Expression(droppedLexemes)
       let actual = try! Expression(withLexemes).dropped()
 
