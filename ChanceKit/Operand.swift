@@ -10,7 +10,7 @@ enum Operand: Equatable {
 // MARK: - Initialization
 
 // Because enums can't have stored properties
-private let timesSidesRegex = NSRegularExpression("\\A(-?\\d+)d(-?\\d*)\\Z")
+private let timesSidesRegex = NSRegularExpression(#"\A(-?\d+)d(-?\d*)\Z"#)
 
 extension Operand {
   init?(rawLexeme: String) {
