@@ -14,8 +14,8 @@ private let timesSidesRegex = NSRegularExpression(#"\A(-?\d+)d(-?\d*)\Z"#)
 
 extension Operand {
   init?(rawLexeme: String) {
-    if let integer = Int(rawLexeme) {
-      self = .number(integer)
+    if let value = Int(rawLexeme) {
+      self = .number(value)
       return
     }
 
