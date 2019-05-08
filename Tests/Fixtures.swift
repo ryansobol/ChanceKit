@@ -1,4 +1,4 @@
-@testable import Calculator
+@testable import ChanceKit
 
 // MARK: - EvaluatableFixture
 

@@ -1,4 +1,4 @@
-import Calculator
+import ChanceKit
 import XCTest
 
 class ExpressionTests: XCTestCase {}

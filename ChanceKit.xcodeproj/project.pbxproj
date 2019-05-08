@@ -21,7 +21,7 @@
 		92A4CC7820AF2EE30096AF98 /* Operand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92A4CC7720AF2EE30096AF98 /* Operand.swift */; };
 		92A4CC7C20AF2F560096AF98 /* Tokenable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92A4CC7B20AF2F560096AF98 /* Tokenable.swift */; };
 		92A4CC7E20AF68D90096AF98 /* ExpressionError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92A4CC7D20AF68D90096AF98 /* ExpressionError.swift */; };
-		92CD302420AD0E6C002462B3 /* libCalculator.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 92CD300020AD0D89002462B3 /* libCalculator.a */; };
+		92CD302420AD0E6C002462B3 /* libChanceKit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 92CD300020AD0D89002462B3 /* libChanceKit.a */; };
 		92CD302B20AD0EBD002462B3 /* ExpressionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92CD302A20AD0EBD002462B3 /* ExpressionTests.swift */; };
 		92D04A98226A2C8700E97E06 /* Fixtures.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92D04A97226A2C8700E97E06 /* Fixtures.swift */; };
 		92D04A9A226CCA3D00E97E06 /* Interpretter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92D04A99226CCA3D00E97E06 /* Interpretter.swift */; };
@@ -61,8 +61,8 @@
 		92A4CC7720AF2EE30096AF98 /* Operand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Operand.swift; sourceTree = "<group>"; };
 		92A4CC7B20AF2F560096AF98 /* Tokenable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tokenable.swift; sourceTree = "<group>"; };
 		92A4CC7D20AF68D90096AF98 /* ExpressionError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpressionError.swift; sourceTree = "<group>"; };
-		92CD300020AD0D89002462B3 /* libCalculator.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libCalculator.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		92CD301F20AD0E6C002462B3 /* CalculatorTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CalculatorTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		92CD300020AD0D89002462B3 /* libChanceKit.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libChanceKit.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		92CD301F20AD0E6C002462B3 /* ChanceKitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ChanceKitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		92CD302A20AD0EBD002462B3 /* ExpressionTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExpressionTests.swift; sourceTree = "<group>"; };
 		92D04A97226A2C8700E97E06 /* Fixtures.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fixtures.swift; sourceTree = "<group>"; };
 		92D04A99226CCA3D00E97E06 /* Interpretter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Interpretter.swift; sourceTree = "<group>"; };
@@ -86,7 +86,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				92CD302420AD0E6C002462B3 /* libCalculator.a in Frameworks */,
+				92CD302420AD0E6C002462B3 /* libChanceKit.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -114,7 +114,7 @@
 		92CD2FF720AD0D89002462B3 = {
 			isa = PBXGroup;
 			children = (
-				92CD300220AD0D89002462B3 /* Calculator */,
+				92CD300220AD0D89002462B3 /* ChanceKit */,
 				92CD300120AD0D89002462B3 /* Products */,
 				92CD302020AD0E6C002462B3 /* Tests */,
 			);
@@ -123,13 +123,13 @@
 		92CD300120AD0D89002462B3 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				92CD300020AD0D89002462B3 /* libCalculator.a */,
-				92CD301F20AD0E6C002462B3 /* CalculatorTests.xctest */,
+				92CD300020AD0D89002462B3 /* libChanceKit.a */,
+				92CD301F20AD0E6C002462B3 /* ChanceKitTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		92CD300220AD0D89002462B3 /* Calculator */ = {
+		92CD300220AD0D89002462B3 /* ChanceKit */ = {
 			isa = PBXGroup;
 			children = (
 				92A4CC7320AF26530096AF98 /* Expression.swift */,
@@ -144,7 +144,7 @@
 				92A4CC7B20AF2F560096AF98 /* Tokenable.swift */,
 				9226DC7221500BF2003D024D /* Additions */,
 			);
-			path = Calculator;
+			path = ChanceKit;
 			sourceTree = "<group>";
 		};
 		92CD302020AD0E6C002462B3 /* Tests */ = {
@@ -168,9 +168,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		92CD2FFF20AD0D89002462B3 /* Calculator */ = {
+		92CD2FFF20AD0D89002462B3 /* ChanceKit */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 92CD300720AD0D89002462B3 /* Build configuration list for PBXNativeTarget "Calculator" */;
+			buildConfigurationList = 92CD300720AD0D89002462B3 /* Build configuration list for PBXNativeTarget "ChanceKit" */;
 			buildPhases = (
 				92CD2FFC20AD0D89002462B3 /* Sources */,
 				92CD2FFD20AD0D89002462B3 /* Frameworks */,
@@ -180,14 +180,14 @@
 			);
 			dependencies = (
 			);
-			name = Calculator;
-			productName = Calculator;
-			productReference = 92CD300020AD0D89002462B3 /* libCalculator.a */;
+			name = ChanceKit;
+			productName = ChanceKit;
+			productReference = 92CD300020AD0D89002462B3 /* libChanceKit.a */;
 			productType = "com.apple.product-type.library.static";
 		};
-		92CD301E20AD0E6C002462B3 /* CalculatorTests */ = {
+		92CD301E20AD0E6C002462B3 /* ChanceKitTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 92CD302720AD0E6C002462B3 /* Build configuration list for PBXNativeTarget "CalculatorTests" */;
+			buildConfigurationList = 92CD302720AD0E6C002462B3 /* Build configuration list for PBXNativeTarget "ChanceKitTests" */;
 			buildPhases = (
 				92CD301B20AD0E6C002462B3 /* Sources */,
 				92CD301C20AD0E6C002462B3 /* Frameworks */,
@@ -197,9 +197,9 @@
 			);
 			dependencies = (
 			);
-			name = CalculatorTests;
+			name = ChanceKitTests;
 			productName = Tests;
-			productReference = 92CD301F20AD0E6C002462B3 /* CalculatorTests.xctest */;
+			productReference = 92CD301F20AD0E6C002462B3 /* ChanceKitTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
@@ -222,7 +222,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 92CD2FFB20AD0D89002462B3 /* Build configuration list for PBXProject "Calculator" */;
+			buildConfigurationList = 92CD2FFB20AD0D89002462B3 /* Build configuration list for PBXProject "ChanceKit" */;
 			compatibilityVersion = "Xcode 9.3";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -235,8 +235,8 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				92CD2FFF20AD0D89002462B3 /* Calculator */,
-				92CD301E20AD0E6C002462B3 /* CalculatorTests */,
+				92CD2FFF20AD0D89002462B3 /* ChanceKit */,
+				92CD301E20AD0E6C002462B3 /* ChanceKitTests */,
 			);
 		};
 /* End PBXProject section */
@@ -489,7 +489,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		92CD2FFB20AD0D89002462B3 /* Build configuration list for PBXProject "Calculator" */ = {
+		92CD2FFB20AD0D89002462B3 /* Build configuration list for PBXProject "ChanceKit" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				92CD300520AD0D89002462B3 /* Debug */,
@@ -498,7 +498,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		92CD300720AD0D89002462B3 /* Build configuration list for PBXNativeTarget "Calculator" */ = {
+		92CD300720AD0D89002462B3 /* Build configuration list for PBXNativeTarget "ChanceKit" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				92CD300820AD0D89002462B3 /* Debug */,
@@ -507,7 +507,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		92CD302720AD0E6C002462B3 /* Build configuration list for PBXNativeTarget "CalculatorTests" */ = {
+		92CD302720AD0E6C002462B3 /* Build configuration list for PBXNativeTarget "ChanceKitTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				92CD302820AD0E6C002462B3 /* Debug */,
