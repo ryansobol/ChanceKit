@@ -41,6 +41,34 @@ let evaluatableFixtures: [EvaluatableFixture] = [
     postfixTokens: [Operand(rawLexeme: String(Int.min))!],
     value: Int.min
   ),
+  (
+    description: "1d1",
+    lexemes: ["1d1"],
+    infixTokens: [Operand(rawLexeme: "1d1")!],
+    postfixTokens: [Operand(rawLexeme: "1d1")!],
+    value: 1
+  ),
+  (
+    description: "-1d1",
+    lexemes: ["-1d1"],
+    infixTokens: [Operand(rawLexeme: "-1d1")!],
+    postfixTokens: [Operand(rawLexeme: "-1d1")!],
+    value: -1
+  ),
+  (
+    description: "1d-1",
+    lexemes: ["1d-1"],
+    infixTokens: [Operand(rawLexeme: "1d-1")!],
+    postfixTokens: [Operand(rawLexeme: "1d-1")!],
+    value: -1
+  ),
+  (
+    description: "-1d-1",
+    lexemes: ["-1d-1"],
+    infixTokens: [Operand(rawLexeme: "-1d-1")!],
+    postfixTokens: [Operand(rawLexeme: "-1d-1")!],
+    value: 1
+  ),
 
   // MARK: A + B
   (
@@ -83,6 +111,56 @@ let evaluatableFixtures: [EvaluatableFixture] = [
     lexemes: ["2", "÷", "1"],
     infixTokens: [Operand(rawLexeme: "2")!, Operator(rawValue: "÷")!, Operand(rawLexeme: "1")!],
     postfixTokens: [Operand(rawLexeme: "2")!, Operand(rawLexeme: "1")!, Operator(rawValue: "÷")!],
+    value: 2
+  ),
+  (
+    description: "1d1 + 2",
+    lexemes: ["1d1", "+", "2"],
+    infixTokens: [Operand(rawLexeme: "1d1")!, Operator(rawValue: "+")!, Operand(rawLexeme: "2")!],
+    postfixTokens: [Operand(rawLexeme: "1d1")!, Operand(rawLexeme: "2")!, Operator(rawValue: "+")!],
+    value: 3
+  ),
+  (
+    description: "4 - 3d1",
+    lexemes: ["4", "-", "3d1"],
+    infixTokens: [Operand(rawLexeme: "4")!, Operator(rawValue: "-")!, Operand(rawLexeme: "3d1")!],
+    postfixTokens: [Operand(rawLexeme: "4")!, Operand(rawLexeme: "3d1")!, Operator(rawValue: "-")!],
+    value: 1
+  ),
+  (
+    description: "5d1 × 6d1",
+    lexemes: ["5d1", "×", "6d1"],
+    infixTokens: [Operand(rawLexeme: "5d1")!, Operator(rawValue: "×")!, Operand(rawLexeme: "6d1")!],
+    postfixTokens: [
+      Operand(rawLexeme: "5d1")!,
+      Operand(rawLexeme: "6d1")!,
+      Operator(rawValue: "×")!
+    ],
+    value: 30
+  ),
+  (
+    description: "8d1 ÷ 7d1",
+    lexemes: ["8d1", "÷", "7d1"],
+    infixTokens: [Operand(rawLexeme: "8d1")!, Operator(rawValue: "÷")!, Operand(rawLexeme: "7d1")!],
+    postfixTokens: [
+      Operand(rawLexeme: "8d1")!,
+      Operand(rawLexeme: "7d1")!,
+      Operator(rawValue: "÷")!
+    ],
+    value: 1
+  ),
+  (
+    description: "9 × 0d1",
+    lexemes: ["9", "×", "0d1"],
+    infixTokens: [Operand(rawLexeme: "9")!, Operator(rawValue: "×")!, Operand(rawLexeme: "0d1")!],
+    postfixTokens: [Operand(rawLexeme: "9")!, Operand(rawLexeme: "0d1")!, Operator(rawValue: "×")!],
+    value: 0
+  ),
+  (
+    description: "2 ÷ 1d1",
+    lexemes: ["2", "÷", "1d1"],
+    infixTokens: [Operand(rawLexeme: "2")!, Operator(rawValue: "÷")!, Operand(rawLexeme: "1d1")!],
+    postfixTokens: [Operand(rawLexeme: "2")!, Operand(rawLexeme: "1d1")!, Operator(rawValue: "÷")!],
     value: 2
   ),
 
@@ -159,6 +237,82 @@ let evaluatableFixtures: [EvaluatableFixture] = [
       Operand(rawLexeme: "4")!,
       Operator(rawValue: "×")!,
       Operand(rawLexeme: "1")!,
+      Operator(rawValue: "-")!,
+    ],
+    value: 7
+  ),
+  (
+    description: "3d1 - 1 + 2",
+    lexemes: ["3d1", "-", "1", "+", "2"],
+    infixTokens: [
+      Operand(rawLexeme: "3d1")!,
+      Operator(rawValue: "-")!,
+      Operand(rawLexeme: "1")!,
+      Operator(rawValue: "+")!,
+      Operand(rawLexeme: "2")!,
+    ],
+    postfixTokens: [
+      Operand(rawLexeme: "3d1")!,
+      Operand(rawLexeme: "1")!,
+      Operator(rawValue: "-")!,
+      Operand(rawLexeme: "2")!,
+      Operator(rawValue: "+")!,
+    ],
+    value: 4
+  ),
+  (
+    description: "5 ÷ 7d1 × 6",
+    lexemes: ["5", "÷", "7d1", "×", "6"],
+    infixTokens: [
+      Operand(rawLexeme: "5")!,
+      Operator(rawValue: "÷")!,
+      Operand(rawLexeme: "7d1")!,
+      Operator(rawValue: "×")!,
+      Operand(rawLexeme: "6")!,
+    ],
+    postfixTokens: [
+      Operand(rawLexeme: "5")!,
+      Operand(rawLexeme: "7d1")!,
+      Operator(rawValue: "÷")!,
+      Operand(rawLexeme: "6")!,
+      Operator(rawValue: "×")!,
+    ],
+    value: 0
+  ),
+  (
+    description: "8 + 0 ÷ 9d1",
+    lexemes: ["8", "+", "0", "÷", "9d1"],
+    infixTokens: [
+      Operand(rawLexeme: "8")!,
+      Operator(rawValue: "+")!,
+      Operand(rawLexeme: "0")!,
+      Operator(rawValue: "÷")!,
+      Operand(rawLexeme: "9d1")!,
+    ],
+    postfixTokens: [
+      Operand(rawLexeme: "8")!,
+      Operand(rawLexeme: "0")!,
+      Operand(rawLexeme: "9d1")!,
+      Operator(rawValue: "÷")!,
+      Operator(rawValue: "+")!,
+    ],
+    value: 8
+  ),
+  (
+    description: "2d1 × 4d1 - 1d1",
+    lexemes: ["2d1", "×", "4d1", "-", "1d1"],
+    infixTokens: [
+      Operand(rawLexeme: "2d1")!,
+      Operator(rawValue: "×")!,
+      Operand(rawLexeme: "4d1")!,
+      Operator(rawValue: "-")!,
+      Operand(rawLexeme: "1d1")!,
+    ],
+    postfixTokens: [
+      Operand(rawLexeme: "2d1")!,
+      Operand(rawLexeme: "4d1")!,
+      Operator(rawValue: "×")!,
+      Operand(rawLexeme: "1d1")!,
       Operator(rawValue: "-")!,
     ],
     value: 7
@@ -303,6 +457,144 @@ let evaluatableFixtures: [EvaluatableFixture] = [
     ],
     value: 28
   ),
+  (
+    description: "7d1 - 5 - 3 + 8",
+    lexemes: ["7d1", "-", "5", "-", "3", "+", "8"],
+    infixTokens: [
+      Operand(rawLexeme: "7d1")!,
+      Operator(rawValue: "-")!,
+      Operand(rawLexeme: "5")!,
+      Operator(rawValue: "-")!,
+      Operand(rawLexeme: "3")!,
+      Operator(rawValue: "+")!,
+      Operand(rawLexeme: "8")!,
+    ],
+    postfixTokens: [
+      Operand(rawLexeme: "7d1")!,
+      Operand(rawLexeme: "5")!,
+      Operator(rawValue: "-")!,
+      Operand(rawLexeme: "3")!,
+      Operator(rawValue: "-")!,
+      Operand(rawLexeme: "8")!,
+      Operator(rawValue: "+")!,
+    ],
+    value: 7
+  ),
+  (
+    description: "6 ÷ 1d1 × 2 × 0",
+    lexemes: ["6", "÷", "1d1", "×", "2", "×", "0"],
+    infixTokens: [
+      Operand(rawLexeme: "6")!,
+      Operator(rawValue: "÷")!,
+      Operand(rawLexeme: "1d1")!,
+      Operator(rawValue: "×")!,
+      Operand(rawLexeme: "2")!,
+      Operator(rawValue: "×")!,
+      Operand(rawLexeme: "0")!,
+    ],
+    postfixTokens: [
+      Operand(rawLexeme: "6")!,
+      Operand(rawLexeme: "1d1")!,
+      Operator(rawValue: "÷")!,
+      Operand(rawLexeme: "2")!,
+      Operator(rawValue: "×")!,
+      Operand(rawLexeme: "0")!,
+      Operator(rawValue: "×")!,
+    ],
+    value: 0
+  ),
+  (
+    description: "3 + 4 ÷ 2d1 - 7",
+    lexemes: ["3", "+", "4", "÷", "2d1", "-", "7"],
+    infixTokens: [
+      Operand(rawLexeme: "3")!,
+      Operator(rawValue: "+")!,
+      Operand(rawLexeme: "4")!,
+      Operator(rawValue: "÷")!,
+      Operand(rawLexeme: "2d1")!,
+      Operator(rawValue: "-")!,
+      Operand(rawLexeme: "7")!,
+    ],
+    postfixTokens: [
+      Operand(rawLexeme: "3")!,
+      Operand(rawLexeme: "4")!,
+      Operand(rawLexeme: "2d1")!,
+      Operator(rawValue: "÷")!,
+      Operator(rawValue: "+")!,
+      Operand(rawLexeme: "7")!,
+      Operator(rawValue: "-")!,
+    ],
+    value: -2
+  ),
+  (
+    description: "8 - 9 × 5 ÷ 1d1",
+    lexemes: ["8", "-", "9", "×", "5", "÷", "1d1"],
+    infixTokens: [
+      Operand(rawLexeme: "8")!,
+      Operator(rawValue: "-")!,
+      Operand(rawLexeme: "9")!,
+      Operator(rawValue: "×")!,
+      Operand(rawLexeme: "5")!,
+      Operator(rawValue: "÷")!,
+      Operand(rawLexeme: "1d1")!,
+    ],
+    postfixTokens: [
+      Operand(rawLexeme: "8")!,
+      Operand(rawLexeme: "9")!,
+      Operand(rawLexeme: "5")!,
+      Operator(rawValue: "×")!,
+      Operand(rawLexeme: "1d1")!,
+      Operator(rawValue: "÷")!,
+      Operator(rawValue: "-")!,
+    ],
+    value: -37
+  ),
+  (
+    description: "4d1 × 1 ÷ 6d1 + 0",
+    lexemes: ["4d1", "×", "1", "÷", "6d1", "+", "0"],
+    infixTokens: [
+      Operand(rawLexeme: "4d1")!,
+      Operator(rawValue: "×")!,
+      Operand(rawLexeme: "1")!,
+      Operator(rawValue: "÷")!,
+      Operand(rawLexeme: "6d1")!,
+      Operator(rawValue: "+")!,
+      Operand(rawLexeme: "0")!,
+    ],
+    postfixTokens: [
+      Operand(rawLexeme: "4d1")!,
+      Operand(rawLexeme: "1")!,
+      Operator(rawValue: "×")!,
+      Operand(rawLexeme: "6d1")!,
+      Operator(rawValue: "÷")!,
+      Operand(rawLexeme: "0")!,
+      Operator(rawValue: "+")!,
+    ],
+    value: 0
+  ),
+  (
+    description: "0 ÷ 5d1 + 4 × 7d1",
+    lexemes: ["0", "÷", "5d1", "+", "4", "×", "7d1"],
+    infixTokens: [
+      Operand(rawLexeme: "0")!,
+      Operator(rawValue: "÷")!,
+      Operand(rawLexeme: "5d1")!,
+      Operator(rawValue: "+")!,
+      Operand(rawLexeme: "4")!,
+      Operator(rawValue: "×")!,
+      Operand(rawLexeme: "7d1")!,
+    ],
+    postfixTokens: [
+      Operand(rawLexeme: "0")!,
+      Operand(rawLexeme: "5d1")!,
+      Operator(rawValue: "÷")!,
+      Operand(rawLexeme: "4")!,
+      Operand(rawLexeme: "7d1")!,
+      Operator(rawValue: "×")!,
+      Operator(rawValue: "+")!,
+    ],
+    value: 28
+  ),
 
   // MARK: (A)
   (
@@ -332,6 +624,34 @@ let evaluatableFixtures: [EvaluatableFixture] = [
     infixTokens: [Parenthesis.open, Operand(rawLexeme: String(Int.min))!, Parenthesis.close],
     postfixTokens: [Operand(rawLexeme: String(Int.min))!],
     value: Int.min
+  ),
+  (
+    description: "(1d1)",
+    lexemes: ["(", "1d1", ")"],
+    infixTokens: [Parenthesis.open, Operand(rawLexeme: "1d1")!, Parenthesis.close],
+    postfixTokens: [Operand(rawLexeme: "1d1")!],
+    value: 1
+  ),
+  (
+    description: "(-1d1)",
+    lexemes: ["(", "-1d1", ")"],
+    infixTokens: [Parenthesis.open, Operand(rawLexeme: "-1d1")!, Parenthesis.close],
+    postfixTokens: [Operand(rawLexeme: "-1d1")!],
+    value: -1
+  ),
+  (
+    description: "(1d-1)",
+    lexemes: ["(", "1d-1", ")"],
+    infixTokens: [Parenthesis.open, Operand(rawLexeme: "1d-1")!, Parenthesis.close],
+    postfixTokens: [Operand(rawLexeme: "1d-1")!],
+    value: -1
+  ),
+  (
+    description: "(-1d-1)",
+    lexemes: ["(", "-1d-1", ")"],
+    infixTokens: [Parenthesis.open, Operand(rawLexeme: "-1d-1")!, Parenthesis.close],
+    postfixTokens: [Operand(rawLexeme: "-1d-1")!],
+    value: 1
   ),
 
   // MARK: (A + B)
@@ -433,6 +753,108 @@ let evaluatableFixtures: [EvaluatableFixture] = [
     postfixTokens: [
       Operand(rawLexeme: "3")!,
       Operand(rawLexeme: "2")!,
+      Operator(rawValue: "÷")!,
+    ],
+    value: 1
+  ),
+  (
+    description: "(2d1 + 3)",
+    lexemes: ["(", "2d1", "+", "3", ")"],
+    infixTokens: [
+      Parenthesis.open,
+      Operand(rawLexeme: "2d1")!,
+      Operator(rawValue: "+")!,
+      Operand(rawLexeme: "3")!,
+      Parenthesis.close,
+    ],
+    postfixTokens: [
+      Operand(rawLexeme: "2d1")!,
+      Operand(rawLexeme: "3")!,
+      Operator(rawValue: "+")!,
+    ],
+    value: 5
+  ),
+  (
+    description: "(5 - 4d1)",
+    lexemes: ["(", "5", "-", "4d1", ")"],
+    infixTokens: [
+      Parenthesis.open,
+      Operand(rawLexeme: "5")!,
+      Operator(rawValue: "-")!,
+      Operand(rawLexeme: "4d1")!,
+      Parenthesis.close,
+    ],
+    postfixTokens: [
+      Operand(rawLexeme: "5")!,
+      Operand(rawLexeme: "4d1")!,
+      Operator(rawValue: "-")!,
+    ],
+    value: 1
+  ),
+  (
+    description: "(6d1 × 7d1)",
+    lexemes: ["(", "6d1", "×", "7d1", ")"],
+    infixTokens: [
+      Parenthesis.open,
+      Operand(rawLexeme: "6d1")!,
+      Operator(rawValue: "×")!,
+      Operand(rawLexeme: "7d1")!,
+      Parenthesis.close,
+    ],
+    postfixTokens: [
+      Operand(rawLexeme: "6d1")!,
+      Operand(rawLexeme: "7d1")!,
+      Operator(rawValue: "×")!,
+    ],
+    value: 42
+  ),
+  (
+    description: "(9d1 ÷ 8d1)",
+    lexemes: ["(", "9d1", "÷", "8d1", ")"],
+    infixTokens: [
+      Parenthesis.open,
+      Operand(rawLexeme: "9d1")!,
+      Operator(rawValue: "÷")!,
+      Operand(rawLexeme: "8d1")!,
+      Parenthesis.close,
+    ],
+    postfixTokens: [
+      Operand(rawLexeme: "9d1")!,
+      Operand(rawLexeme: "8d1")!,
+      Operator(rawValue: "÷")!,
+    ],
+    value: 1
+  ),
+  (
+    description: "(0d1 × 1)",
+    lexemes: ["(", "0d1", "×", "1", ")"],
+    infixTokens: [
+      Parenthesis.open,
+      Operand(rawLexeme: "0d1")!,
+      Operator(rawValue: "×")!,
+      Operand(rawLexeme: "1")!,
+      Parenthesis.close,
+    ],
+    postfixTokens: [
+      Operand(rawLexeme: "0d1")!,
+      Operand(rawLexeme: "1")!,
+      Operator(rawValue: "×")!,
+    ],
+    value: 0
+  ),
+  (
+    description: "(3 ÷ 2d1)",
+    lexemes: ["(", "3", "÷", "2d1", ")"],
+    infixTokens: [
+      Parenthesis.open,
+      Operand(rawLexeme: "3")!,
+      Operator(rawValue: "÷")!,
+      Operand(rawLexeme: "2d1")!,
+      Parenthesis.close,
+    ],
+    postfixTokens: [
+      Operand(rawLexeme: "3")!,
+      Operand(rawLexeme: "2d1")!,
       Operator(rawValue: "÷")!,
     ],
     value: 1
@@ -549,6 +971,120 @@ let evaluatableFixtures: [EvaluatableFixture] = [
     postfixTokens: [
       Operand(rawLexeme: "3")!,
       Operand(rawLexeme: "2")!,
+      Operator(rawValue: "÷")!,
+    ],
+    value: 1
+  ),
+  (
+    description: "((2d1 + 3))",
+    lexemes: ["(", "(", "2d1", "+", "3", ")", ")"],
+    infixTokens: [
+      Parenthesis.open,
+      Parenthesis.open,
+      Operand(rawLexeme: "2d1")!,
+      Operator(rawValue: "+")!,
+      Operand(rawLexeme: "3")!,
+      Parenthesis.close,
+      Parenthesis.close,
+    ],
+    postfixTokens: [
+      Operand(rawLexeme: "2d1")!,
+      Operand(rawLexeme: "3")!,
+      Operator(rawValue: "+")!,
+    ],
+    value: 5
+  ),
+  (
+    description: "((5 - 4d1))",
+    lexemes: ["(", "(", "5", "-", "4d1", ")", ")"],
+    infixTokens: [
+      Parenthesis.open,
+      Parenthesis.open,
+      Operand(rawLexeme: "5")!,
+      Operator(rawValue: "-")!,
+      Operand(rawLexeme: "4d1")!,
+      Parenthesis.close,
+      Parenthesis.close,
+    ],
+    postfixTokens: [
+      Operand(rawLexeme: "5")!,
+      Operand(rawLexeme: "4d1")!,
+      Operator(rawValue: "-")!,
+    ],
+    value: 1
+  ),
+  (
+    description: "((6d1 × 7d1))",
+    lexemes: ["(", "(", "6d1", "×", "7d1", ")", ")"],
+    infixTokens: [
+      Parenthesis.open,
+      Parenthesis.open,
+      Operand(rawLexeme: "6d1")!,
+      Operator(rawValue: "×")!,
+      Operand(rawLexeme: "7d1")!,
+      Parenthesis.close,
+      Parenthesis.close,
+    ],
+    postfixTokens: [
+      Operand(rawLexeme: "6d1")!,
+      Operand(rawLexeme: "7d1")!,
+      Operator(rawValue: "×")!,
+    ],
+    value: 42
+  ),
+  (
+    description: "((9d1 ÷ 8d1))",
+    lexemes: ["(", "(", "9d1", "÷", "8d1", ")", ")"],
+    infixTokens: [
+      Parenthesis.open,
+      Parenthesis.open,
+      Operand(rawLexeme: "9d1")!,
+      Operator(rawValue: "÷")!,
+      Operand(rawLexeme: "8d1")!,
+      Parenthesis.close,
+      Parenthesis.close,
+    ],
+    postfixTokens: [
+      Operand(rawLexeme: "9d1")!,
+      Operand(rawLexeme: "8d1")!,
+      Operator(rawValue: "÷")!,
+    ],
+    value: 1
+  ),
+  (
+    description: "((0d1 × 1))",
+    lexemes: ["(", "(", "0d1", "×", "1", ")", ")"],
+    infixTokens: [
+      Parenthesis.open,
+      Parenthesis.open,
+      Operand(rawLexeme: "0d1")!,
+      Operator(rawValue: "×")!,
+      Operand(rawLexeme: "1")!,
+      Parenthesis.close,
+      Parenthesis.close,
+    ],
+    postfixTokens: [
+      Operand(rawLexeme: "0d1")!,
+      Operand(rawLexeme: "1")!,
+      Operator(rawValue: "×")!,
+    ],
+    value: 0
+  ),
+  (
+    description: "((3 ÷ 2d1))",
+    lexemes: ["(", "(", "3", "÷", "2d1", ")", ")"],
+    infixTokens: [
+      Parenthesis.open,
+      Parenthesis.open,
+      Operand(rawLexeme: "3")!,
+      Operator(rawValue: "÷")!,
+      Operand(rawLexeme: "2d1")!,
+      Parenthesis.close,
+      Parenthesis.close,
+    ],
+    postfixTokens: [
+      Operand(rawLexeme: "3")!,
+      Operand(rawLexeme: "2d1")!,
       Operator(rawValue: "÷")!,
     ],
     value: 1
@@ -718,6 +1254,174 @@ let evaluatableFixtures: [EvaluatableFixture] = [
       Operand(rawLexeme: "6")!,
       Operand(rawLexeme: "7")!,
       Operand(rawLexeme: "5")!,
+      Operator(rawValue: "÷")!,
+      Operator(rawValue: "×")!,
+    ],
+    value: 6
+  ),
+  (
+    description: "(5d1 - 4) + 6",
+    lexemes: ["(", "5d1", "-", "4", ")", "+", "6"],
+    infixTokens: [
+      Parenthesis.open,
+      Operand(rawLexeme: "5d1")!,
+      Operator(rawValue: "-")!,
+      Operand(rawLexeme: "4")!,
+      Parenthesis.close,
+      Operator(rawValue: "+")!,
+      Operand(rawLexeme: "6")!,
+    ],
+    postfixTokens: [
+      Operand(rawLexeme: "5d1")!,
+      Operand(rawLexeme: "4")!,
+      Operator(rawValue: "-")!,
+      Operand(rawLexeme: "6")!,
+      Operator(rawValue: "+")!,
+    ],
+    value: 7
+  ),
+  (
+    description: "7 - (9d1 + 8)",
+    lexemes: ["7", "-", "(", "9d1", "+", "8", ")"],
+    infixTokens: [
+      Operand(rawLexeme: "7")!,
+      Operator(rawValue: "-")!,
+      Parenthesis.open,
+      Operand(rawLexeme: "9d1")!,
+      Operator(rawValue: "+")!,
+      Operand(rawLexeme: "8")!,
+      Parenthesis.close,
+    ],
+    postfixTokens: [
+      Operand(rawLexeme: "7")!,
+      Operand(rawLexeme: "9d1")!,
+      Operand(rawLexeme: "8")!,
+      Operator(rawValue: "+")!,
+      Operator(rawValue: "-")!,
+    ],
+    value: -10
+  ),
+  (
+    description: "(3 ÷ 1) - 0d1",
+    lexemes: ["(", "3", "÷", "1", ")", "-", "0d1"],
+    infixTokens: [
+      Parenthesis.open,
+      Operand(rawLexeme: "3")!,
+      Operator(rawValue: "÷")!,
+      Operand(rawLexeme: "1")!,
+      Parenthesis.close,
+      Operator(rawValue: "-")!,
+      Operand(rawLexeme: "0d1")!,
+    ],
+    postfixTokens: [
+      Operand(rawLexeme: "3")!,
+      Operand(rawLexeme: "1")!,
+      Operator(rawValue: "÷")!,
+      Operand(rawLexeme: "0d1")!,
+      Operator(rawValue: "-")!,
+    ],
+    value: 3
+  ),
+  (
+    description: "4d1 ÷ (2d1 - 5)",
+    lexemes: ["4d1", "÷", "(", "2d1", "-", "5", ")"],
+    infixTokens: [
+      Operand(rawLexeme: "4d1")!,
+      Operator(rawValue: "÷")!,
+      Parenthesis.open,
+      Operand(rawLexeme: "2d1")!,
+      Operator(rawValue: "-")!,
+      Operand(rawLexeme: "5")!,
+      Parenthesis.close,
+    ],
+    postfixTokens: [
+      Operand(rawLexeme: "4d1")!,
+      Operand(rawLexeme: "2d1")!,
+      Operand(rawLexeme: "5")!,
+      Operator(rawValue: "-")!,
+      Operator(rawValue: "÷")!,
+    ],
+    value: -1
+  ),
+  (
+    description: "(2 + 8d1) × 7d1",
+    lexemes: ["(", "2", "+", "8d1", ")", "×", "7d1"],
+    infixTokens: [
+      Parenthesis.open,
+      Operand(rawLexeme: "2")!,
+      Operator(rawValue: "+")!,
+      Operand(rawLexeme: "8d1")!,
+      Parenthesis.close,
+      Operator(rawValue: "×")!,
+      Operand(rawLexeme: "7d1")!,
+    ],
+    postfixTokens: [
+      Operand(rawLexeme: "2")!,
+      Operand(rawLexeme: "8d1")!,
+      Operator(rawValue: "+")!,
+      Operand(rawLexeme: "7d1")!,
+      Operator(rawValue: "×")!,
+    ],
+    value: 70
+  ),
+  (
+    description: "9d1 + (0d1 × 1d1)",
+    lexemes: ["9d1", "+", "(", "0d1", "×", "1d1", ")"],
+    infixTokens: [
+      Operand(rawLexeme: "9d1")!,
+      Operator(rawValue: "+")!,
+      Parenthesis.open,
+      Operand(rawLexeme: "0d1")!,
+      Operator(rawValue: "×")!,
+      Operand(rawLexeme: "1d1")!,
+      Parenthesis.close,
+    ],
+    postfixTokens: [
+      Operand(rawLexeme: "9d1")!,
+      Operand(rawLexeme: "0d1")!,
+      Operand(rawLexeme: "1d1")!,
+      Operator(rawValue: "×")!,
+      Operator(rawValue: "+")!,
+    ],
+    value: 9
+  ),
+  (
+    description: "(1 × 3d1) ÷ 4",
+    lexemes: ["(", "1", "×", "3d1", ")", "÷", "4"],
+    infixTokens: [
+      Parenthesis.open,
+      Operand(rawLexeme: "1")!,
+      Operator(rawValue: "×")!,
+      Operand(rawLexeme: "3d1")!,
+      Parenthesis.close,
+      Operator(rawValue: "÷")!,
+      Operand(rawLexeme: "4")!,
+    ],
+    postfixTokens: [
+      Operand(rawLexeme: "1")!,
+      Operand(rawLexeme: "3d1")!,
+      Operator(rawValue: "×")!,
+      Operand(rawLexeme: "4")!,
+      Operator(rawValue: "÷")!,
+    ],
+    value: 0
+  ),
+  (
+    description: "6d1 × (7 ÷ 5d1)",
+    lexemes: ["6d1", "×", "(", "7", "÷", "5d1", ")"],
+    infixTokens: [
+      Operand(rawLexeme: "6d1")!,
+      Operator(rawValue: "×")!,
+      Parenthesis.open,
+      Operand(rawLexeme: "7")!,
+      Operator(rawValue: "÷")!,
+      Operand(rawLexeme: "5d1")!,
+      Parenthesis.close,
+    ],
+    postfixTokens: [
+      Operand(rawLexeme: "6d1")!,
+      Operand(rawLexeme: "7")!,
+      Operand(rawLexeme: "5d1")!,
       Operator(rawValue: "÷")!,
       Operator(rawValue: "×")!,
     ],
@@ -904,6 +1608,190 @@ let evaluatableFixtures: [EvaluatableFixture] = [
       Operand(rawLexeme: "6")!,
       Operand(rawLexeme: "7")!,
       Operand(rawLexeme: "5")!,
+      Operator(rawValue: "÷")!,
+      Operator(rawValue: "×")!,
+    ],
+    value: 6
+  ),
+  (
+    description: "((5d1 - 4) + 6)",
+    lexemes: ["(", "(", "5d1", "-", "4", ")", "+", "6", ")"],
+    infixTokens: [
+      Parenthesis.open,
+      Parenthesis.open,
+      Operand(rawLexeme: "5d1")!,
+      Operator(rawValue: "-")!,
+      Operand(rawLexeme: "4")!,
+      Parenthesis.close,
+      Operator(rawValue: "+")!,
+      Operand(rawLexeme: "6")!,
+      Parenthesis.close,
+    ],
+    postfixTokens: [
+      Operand(rawLexeme: "5d1")!,
+      Operand(rawLexeme: "4")!,
+      Operator(rawValue: "-")!,
+      Operand(rawLexeme: "6")!,
+      Operator(rawValue: "+")!,
+    ],
+    value: 7
+  ),
+  (
+    description: "(7 - (9d1 + 8))",
+    lexemes: ["(", "7", "-", "(", "9d1", "+", "8", ")", ")"],
+    infixTokens: [
+      Parenthesis.open,
+      Operand(rawLexeme: "7")!,
+      Operator(rawValue: "-")!,
+      Parenthesis.open,
+      Operand(rawLexeme: "9d1")!,
+      Operator(rawValue: "+")!,
+      Operand(rawLexeme: "8")!,
+      Parenthesis.close,
+      Parenthesis.close,
+    ],
+    postfixTokens: [
+      Operand(rawLexeme: "7")!,
+      Operand(rawLexeme: "9d1")!,
+      Operand(rawLexeme: "8")!,
+      Operator(rawValue: "+")!,
+      Operator(rawValue: "-")!,
+    ],
+    value: -10
+  ),
+  (
+    description: "((3 ÷ 1) - 0d1)",
+    lexemes: ["(", "(", "3", "÷", "1", ")", "-", "0d1", ")"],
+    infixTokens: [
+      Parenthesis.open,
+      Parenthesis.open,
+      Operand(rawLexeme: "3")!,
+      Operator(rawValue: "÷")!,
+      Operand(rawLexeme: "1")!,
+      Parenthesis.close,
+      Operator(rawValue: "-")!,
+      Operand(rawLexeme: "0d1")!,
+      Parenthesis.close,
+    ],
+    postfixTokens: [
+      Operand(rawLexeme: "3")!,
+      Operand(rawLexeme: "1")!,
+      Operator(rawValue: "÷")!,
+      Operand(rawLexeme: "0d1")!,
+      Operator(rawValue: "-")!,
+    ],
+    value: 3
+  ),
+  (
+    description: "(4d1 ÷ (2d1 - 5))",
+    lexemes: ["(", "4d1", "÷", "(", "2d1", "-", "5", ")", ")"],
+    infixTokens: [
+      Parenthesis.open,
+      Operand(rawLexeme: "4d1")!,
+      Operator(rawValue: "÷")!,
+      Parenthesis.open,
+      Operand(rawLexeme: "2d1")!,
+      Operator(rawValue: "-")!,
+      Operand(rawLexeme: "5")!,
+      Parenthesis.close,
+      Parenthesis.close,
+    ],
+    postfixTokens: [
+      Operand(rawLexeme: "4d1")!,
+      Operand(rawLexeme: "2d1")!,
+      Operand(rawLexeme: "5")!,
+      Operator(rawValue: "-")!,
+      Operator(rawValue: "÷")!,
+    ],
+    value: -1
+  ),
+  (
+    description: "((2 + 8d1) × 7d1)",
+    lexemes: ["(", "(", "2", "+", "8d1", ")", "×", "7d1", ")"],
+    infixTokens: [
+      Parenthesis.open,
+      Parenthesis.open,
+      Operand(rawLexeme: "2")!,
+      Operator(rawValue: "+")!,
+      Operand(rawLexeme: "8d1")!,
+      Parenthesis.close,
+      Operator(rawValue: "×")!,
+      Operand(rawLexeme: "7d1")!,
+      Parenthesis.close,
+    ],
+    postfixTokens: [
+      Operand(rawLexeme: "2")!,
+      Operand(rawLexeme: "8d1")!,
+      Operator(rawValue: "+")!,
+      Operand(rawLexeme: "7d1")!,
+      Operator(rawValue: "×")!,
+    ],
+    value: 70
+  ),
+  (
+    description: "(9d1 + (0d1 × 1d1))",
+    lexemes: ["(", "9d1", "+", "(", "0d1", "×", "1d1", ")", ")"],
+    infixTokens: [
+      Parenthesis.open,
+      Operand(rawLexeme: "9d1")!,
+      Operator(rawValue: "+")!,
+      Parenthesis.open,
+      Operand(rawLexeme: "0d1")!,
+      Operator(rawValue: "×")!,
+      Operand(rawLexeme: "1d1")!,
+      Parenthesis.close,
+      Parenthesis.close,
+    ],
+    postfixTokens: [
+      Operand(rawLexeme: "9d1")!,
+      Operand(rawLexeme: "0d1")!,
+      Operand(rawLexeme: "1d1")!,
+      Operator(rawValue: "×")!,
+      Operator(rawValue: "+")!,
+    ],
+    value: 9
+  ),
+  (
+    description: "((1 × 3d1) ÷ 4)",
+    lexemes: ["(", "(", "1", "×", "3d1", ")", "÷", "4", ")"],
+    infixTokens: [
+      Parenthesis.open,
+      Parenthesis.open,
+      Operand(rawLexeme: "1")!,
+      Operator(rawValue: "×")!,
+      Operand(rawLexeme: "3d1")!,
+      Parenthesis.close,
+      Operator(rawValue: "÷")!,
+      Operand(rawLexeme: "4")!,
+      Parenthesis.close,
+    ],
+    postfixTokens: [
+      Operand(rawLexeme: "1")!,
+      Operand(rawLexeme: "3d1")!,
+      Operator(rawValue: "×")!,
+      Operand(rawLexeme: "4")!,
+      Operator(rawValue: "÷")!,
+    ],
+    value: 0
+  ),
+  (
+    description: "(6d1 × (7 ÷ 5d1))",
+    lexemes: ["(", "6d1", "×", "(", "7", "÷", "5d1", ")", ")"],
+    infixTokens: [
+      Parenthesis.open,
+      Operand(rawLexeme: "6d1")!,
+      Operator(rawValue: "×")!,
+      Parenthesis.open,
+      Operand(rawLexeme: "7")!,
+      Operator(rawValue: "÷")!,
+      Operand(rawLexeme: "5d1")!,
+      Parenthesis.close,
+      Parenthesis.close,
+    ],
+    postfixTokens: [
+      Operand(rawLexeme: "6d1")!,
+      Operand(rawLexeme: "7")!,
+      Operand(rawLexeme: "5d1")!,
       Operator(rawValue: "÷")!,
       Operator(rawValue: "×")!,
     ],
@@ -1127,6 +2015,222 @@ let evaluatableFixtures: [EvaluatableFixture] = [
     ],
     value: 0
   ),
+  (
+    description: "(4d1 + 1) - (8 + 5)",
+    lexemes: ["(", "4d1", "+", "1", ")", "-", "(", "8", "+", "5", ")"],
+    infixTokens: [
+      Parenthesis.open,
+      Operand(rawLexeme: "4d1")!,
+      Operator(rawValue: "+")!,
+      Operand(rawLexeme: "1")!,
+      Parenthesis.close,
+      Operator(rawValue: "-")!,
+      Parenthesis.open,
+      Operand(rawLexeme: "8")!,
+      Operator(rawValue: "+")!,
+      Operand(rawLexeme: "5")!,
+      Parenthesis.close,
+    ],
+    postfixTokens: [
+      Operand(rawLexeme: "4d1")!,
+      Operand(rawLexeme: "1")!,
+      Operator(rawValue: "+")!,
+      Operand(rawLexeme: "8")!,
+      Operand(rawLexeme: "5")!,
+      Operator(rawValue: "+")!,
+      Operator(rawValue: "-")!,
+    ],
+    value: -8
+  ),
+  (
+    description: "(2 × 4d1) ÷ (9 × 7)",
+    lexemes: ["(", "2", "×", "4d1", ")", "÷", "(", "9", "×", "7", ")"],
+    infixTokens: [
+      Parenthesis.open,
+      Operand(rawLexeme: "2")!,
+      Operator(rawValue: "×")!,
+      Operand(rawLexeme: "4d1")!,
+      Parenthesis.close,
+      Operator(rawValue: "÷")!,
+      Parenthesis.open,
+      Operand(rawLexeme: "9")!,
+      Operator(rawValue: "×")!,
+      Operand(rawLexeme: "7")!,
+      Parenthesis.close,
+    ],
+    postfixTokens: [
+      Operand(rawLexeme: "2")!,
+      Operand(rawLexeme: "4d1")!,
+      Operator(rawValue: "×")!,
+      Operand(rawLexeme: "9")!,
+      Operand(rawLexeme: "7")!,
+      Operator(rawValue: "×")!,
+      Operator(rawValue: "÷")!,
+    ],
+    value: 0
+  ),
+  (
+    description: "(6 ÷ 1) + (8d1 ÷ 4)",
+    lexemes: ["(", "6", "÷", "1", ")", "+", "(", "8d1", "÷", "4", ")"],
+    infixTokens: [
+      Parenthesis.open,
+      Operand(rawLexeme: "6")!,
+      Operator(rawValue: "÷")!,
+      Operand(rawLexeme: "1")!,
+      Parenthesis.close,
+      Operator(rawValue: "+")!,
+      Parenthesis.open,
+      Operand(rawLexeme: "8d1")!,
+      Operator(rawValue: "÷")!,
+      Operand(rawLexeme: "4")!,
+      Parenthesis.close,
+    ],
+    postfixTokens: [
+      Operand(rawLexeme: "6")!,
+      Operand(rawLexeme: "1")!,
+      Operator(rawValue: "÷")!,
+      Operand(rawLexeme: "8d1")!,
+      Operand(rawLexeme: "4")!,
+      Operator(rawValue: "÷")!,
+      Operator(rawValue: "+")!,
+    ],
+    value: 8
+  ),
+  (
+    description: "(3 - 2) × (7 - 5d1)",
+    lexemes: ["(", "3", "-", "2", ")", "×", "(", "7", "-", "5d1", ")"],
+    infixTokens: [
+      Parenthesis.open,
+      Operand(rawLexeme: "3")!,
+      Operator(rawValue: "-")!,
+      Operand(rawLexeme: "2")!,
+      Parenthesis.close,
+      Operator(rawValue: "×")!,
+      Parenthesis.open,
+      Operand(rawLexeme: "7")!,
+      Operator(rawValue: "-")!,
+      Operand(rawLexeme: "5d1")!,
+      Parenthesis.close,
+    ],
+    postfixTokens: [
+      Operand(rawLexeme: "3")!,
+      Operand(rawLexeme: "2")!,
+      Operator(rawValue: "-")!,
+      Operand(rawLexeme: "7")!,
+      Operand(rawLexeme: "5d1")!,
+      Operator(rawValue: "-")!,
+      Operator(rawValue: "×")!,
+    ],
+    value: 2
+  ),
+  (
+    description: "(4d1 + 8) - (1 × 2d1)",
+    lexemes: ["(", "4d1", "+", "8", ")", "-", "(", "1", "×", "2d1", ")"],
+    infixTokens: [
+      Parenthesis.open,
+      Operand(rawLexeme: "4d1")!,
+      Operator(rawValue: "+")!,
+      Operand(rawLexeme: "8")!,
+      Parenthesis.close,
+      Operator(rawValue: "-")!,
+      Parenthesis.open,
+      Operand(rawLexeme: "1")!,
+      Operator(rawValue: "×")!,
+      Operand(rawLexeme: "2d1")!,
+      Parenthesis.close,
+    ],
+    postfixTokens: [
+      Operand(rawLexeme: "4d1")!,
+      Operand(rawLexeme: "8")!,
+      Operator(rawValue: "+")!,
+      Operand(rawLexeme: "1")!,
+      Operand(rawLexeme: "2d1")!,
+      Operator(rawValue: "×")!,
+      Operator(rawValue: "-")!,
+    ],
+    value: 10
+  ),
+  (
+    description: "(5 ÷ 7d1) + (6d1 - 9)",
+    lexemes: ["(", "5", "÷", "7d1", ")", "+", "(", "6d1", "-", "9", ")"],
+    infixTokens: [
+      Parenthesis.open,
+      Operand(rawLexeme: "5")!,
+      Operator(rawValue: "÷")!,
+      Operand(rawLexeme: "7d1")!,
+      Parenthesis.close,
+      Operator(rawValue: "+")!,
+      Parenthesis.open,
+      Operand(rawLexeme: "6d1")!,
+      Operator(rawValue: "-")!,
+      Operand(rawLexeme: "9")!,
+      Parenthesis.close,
+    ],
+    postfixTokens: [
+      Operand(rawLexeme: "5")!,
+      Operand(rawLexeme: "7d1")!,
+      Operator(rawValue: "÷")!,
+      Operand(rawLexeme: "6d1")!,
+      Operand(rawLexeme: "9")!,
+      Operator(rawValue: "-")!,
+      Operator(rawValue: "+")!,
+    ],
+    value: -3
+  ),
+  (
+    description: "(0d1 × 9d1) ÷ (3d1 + 1)",
+    lexemes: ["(", "0d1", "×", "9d1", ")", "÷", "(", "3d1", "+", "1", ")"],
+    infixTokens: [
+      Parenthesis.open,
+      Operand(rawLexeme: "0d1")!,
+      Operator(rawValue: "×")!,
+      Operand(rawLexeme: "9d1")!,
+      Parenthesis.close,
+      Operator(rawValue: "÷")!,
+      Parenthesis.open,
+      Operand(rawLexeme: "3d1")!,
+      Operator(rawValue: "+")!,
+      Operand(rawLexeme: "1")!,
+      Parenthesis.close,
+    ],
+    postfixTokens: [
+      Operand(rawLexeme: "0d1")!,
+      Operand(rawLexeme: "9d1")!,
+      Operator(rawValue: "×")!,
+      Operand(rawLexeme: "3d1")!,
+      Operand(rawLexeme: "1")!,
+      Operator(rawValue: "+")!,
+      Operator(rawValue: "÷")!,
+    ],
+    value: 0
+  ),
+  (
+    description: "(2 - 3d1) × (4d1 ÷ 5d1)",
+    lexemes: ["(", "2", "-", "3d1", ")", "×", "(", "4d1", "÷", "5d1", ")"],
+    infixTokens: [
+      Parenthesis.open,
+      Operand(rawLexeme: "2")!,
+      Operator(rawValue: "-")!,
+      Operand(rawLexeme: "3d1")!,
+      Parenthesis.close,
+      Operator(rawValue: "×")!,
+      Parenthesis.open,
+      Operand(rawLexeme: "4d1")!,
+      Operator(rawValue: "÷")!,
+      Operand(rawLexeme: "5d1")!,
+      Parenthesis.close,
+    ],
+    postfixTokens: [
+      Operand(rawLexeme: "2")!,
+      Operand(rawLexeme: "3d1")!,
+      Operator(rawValue: "-")!,
+      Operand(rawLexeme: "4d1")!,
+      Operand(rawLexeme: "5d1")!,
+      Operator(rawValue: "÷")!,
+      Operator(rawValue: "×")!,
+    ],
+    value: 0
+  ),
 
   // MARK: (A + (B + C) + D)
   (
@@ -1345,6 +2449,222 @@ let evaluatableFixtures: [EvaluatableFixture] = [
     ],
     value: 1
   ),
+  (
+    description: "(1d1 + (9 - 4) - 2)",
+    lexemes: ["(", "1d1", "+", "(", "9", "-", "4", ")", "-", "2", ")"],
+    infixTokens: [
+      Parenthesis.open,
+      Operand(rawLexeme: "1d1")!,
+      Operator(rawValue: "+")!,
+      Parenthesis.open,
+      Operand(rawLexeme: "9")!,
+      Operator(rawValue: "-")!,
+      Operand(rawLexeme: "4")!,
+      Parenthesis.close,
+      Operator(rawValue: "-")!,
+      Operand(rawLexeme: "2")!,
+      Parenthesis.close,
+    ],
+    postfixTokens: [
+      Operand(rawLexeme: "1d1")!,
+      Operand(rawLexeme: "9")!,
+      Operand(rawLexeme: "4")!,
+      Operator(rawValue: "-")!,
+      Operator(rawValue: "+")!,
+      Operand(rawLexeme: "2")!,
+      Operator(rawValue: "-")!,
+    ],
+    value: 4
+  ),
+  (
+    description: "(5 × (0d1 ÷ 3) × 7)",
+    lexemes: ["(", "5", "×", "(", "0d1", "÷", "3", ")", "×", "7", ")"],
+    infixTokens: [
+      Parenthesis.open,
+      Operand(rawLexeme: "5")!,
+      Operator(rawValue: "×")!,
+      Parenthesis.open,
+      Operand(rawLexeme: "0d1")!,
+      Operator(rawValue: "÷")!,
+      Operand(rawLexeme: "3")!,
+      Parenthesis.close,
+      Operator(rawValue: "×")!,
+      Operand(rawLexeme: "7")!,
+      Parenthesis.close,
+    ],
+    postfixTokens: [
+      Operand(rawLexeme: "5")!,
+      Operand(rawLexeme: "0d1")!,
+      Operand(rawLexeme: "3")!,
+      Operator(rawValue: "÷")!,
+      Operator(rawValue: "×")!,
+      Operand(rawLexeme: "7")!,
+      Operator(rawValue: "×")!,
+    ],
+    value: 0
+  ),
+  (
+    description: "(8 - (4 × 6d1) + 1)",
+    lexemes: ["(", "8", "-", "(", "4", "×", "6d1", ")", "+", "1", ")"],
+    infixTokens: [
+      Parenthesis.open,
+      Operand(rawLexeme: "8")!,
+      Operator(rawValue: "-")!,
+      Parenthesis.open,
+      Operand(rawLexeme: "4")!,
+      Operator(rawValue: "×")!,
+      Operand(rawLexeme: "6d1")!,
+      Parenthesis.close,
+      Operator(rawValue: "+")!,
+      Operand(rawLexeme: "1")!,
+      Parenthesis.close,
+    ],
+    postfixTokens: [
+      Operand(rawLexeme: "8")!,
+      Operand(rawLexeme: "4")!,
+      Operand(rawLexeme: "6d1")!,
+      Operator(rawValue: "×")!,
+      Operator(rawValue: "-")!,
+      Operand(rawLexeme: "1")!,
+      Operator(rawValue: "+")!,
+    ],
+    value: -15
+  ),
+  (
+    description: "(3 ÷ (9 + 2) ÷ 6d1)",
+    lexemes: ["(", "3", "÷", "(", "9", "+", "2", ")", "÷", "6d1", ")"],
+    infixTokens: [
+      Parenthesis.open,
+      Operand(rawLexeme: "3")!,
+      Operator(rawValue: "÷")!,
+      Parenthesis.open,
+      Operand(rawLexeme: "9")!,
+      Operator(rawValue: "+")!,
+      Operand(rawLexeme: "2")!,
+      Parenthesis.close,
+      Operator(rawValue: "÷")!,
+      Operand(rawLexeme: "6d1")!,
+      Parenthesis.close,
+    ],
+    postfixTokens: [
+      Operand(rawLexeme: "3")!,
+      Operand(rawLexeme: "9")!,
+      Operand(rawLexeme: "2")!,
+      Operator(rawValue: "+")!,
+      Operator(rawValue: "÷")!,
+      Operand(rawLexeme: "6d1")!,
+      Operator(rawValue: "÷")!,
+    ],
+    value: 0
+  ),
+  (
+    description: "(0d1 + (3 - 6) × 4d1)",
+    lexemes: ["(", "0d1", "+", "(", "3", "-", "6", ")", "×", "4d1", ")"],
+    infixTokens: [
+      Parenthesis.open,
+      Operand(rawLexeme: "0d1")!,
+      Operator(rawValue: "+")!,
+      Parenthesis.open,
+      Operand(rawLexeme: "3")!,
+      Operator(rawValue: "-")!,
+      Operand(rawLexeme: "6")!,
+      Parenthesis.close,
+      Operator(rawValue: "×")!,
+      Operand(rawLexeme: "4d1")!,
+      Parenthesis.close,
+    ],
+    postfixTokens: [
+      Operand(rawLexeme: "0d1")!,
+      Operand(rawLexeme: "3")!,
+      Operand(rawLexeme: "6")!,
+      Operator(rawValue: "-")!,
+      Operand(rawLexeme: "4d1")!,
+      Operator(rawValue: "×")!,
+      Operator(rawValue: "+")!,
+    ],
+    value: -12
+  ),
+  (
+    description: "(2 × (5d1 + 8d1) - 1)",
+    lexemes: ["(", "2", "×", "(", "5d1", "+", "8d1", ")", "-", "1", ")"],
+    infixTokens: [
+      Parenthesis.open,
+      Operand(rawLexeme: "2")!,
+      Operator(rawValue: "×")!,
+      Parenthesis.open,
+      Operand(rawLexeme: "5d1")!,
+      Operator(rawValue: "+")!,
+      Operand(rawLexeme: "8d1")!,
+      Parenthesis.close,
+      Operator(rawValue: "-")!,
+      Operand(rawLexeme: "1")!,
+      Parenthesis.close,
+    ],
+    postfixTokens: [
+      Operand(rawLexeme: "2")!,
+      Operand(rawLexeme: "5d1")!,
+      Operand(rawLexeme: "8d1")!,
+      Operator(rawValue: "+")!,
+      Operator(rawValue: "×")!,
+      Operand(rawLexeme: "1")!,
+      Operator(rawValue: "-")!,
+    ],
+    value: 25
+  ),
+  (
+    description: "(9d1 ÷ (7d1 × 1d1) + 5)",
+    lexemes: ["(", "9d1", "÷", "(", "7d1", "×", "1d1", ")", "+", "5", ")"],
+    infixTokens: [
+      Parenthesis.open,
+      Operand(rawLexeme: "9d1")!,
+      Operator(rawValue: "÷")!,
+      Parenthesis.open,
+      Operand(rawLexeme: "7d1")!,
+      Operator(rawValue: "×")!,
+      Operand(rawLexeme: "1d1")!,
+      Parenthesis.close,
+      Operator(rawValue: "+")!,
+      Operand(rawLexeme: "5")!,
+      Parenthesis.close,
+    ],
+    postfixTokens: [
+      Operand(rawLexeme: "9d1")!,
+      Operand(rawLexeme: "7d1")!,
+      Operand(rawLexeme: "1d1")!,
+      Operator(rawValue: "×")!,
+      Operator(rawValue: "÷")!,
+      Operand(rawLexeme: "5")!,
+      Operator(rawValue: "+")!,
+    ],
+    value: 6
+  ),
+  (
+    description: "(4 - (6d1 ÷ 5d1) × 3d1)",
+    lexemes: ["(", "4", "-", "(", "6d1", "÷", "5d1", ")", "×", "3d1", ")"],
+    infixTokens: [
+      Parenthesis.open,
+      Operand(rawLexeme: "4")!,
+      Operator(rawValue: "-")!,
+      Parenthesis.open,
+      Operand(rawLexeme: "6d1")!,
+      Operator(rawValue: "÷")!,
+      Operand(rawLexeme: "5d1")!,
+      Parenthesis.close,
+      Operator(rawValue: "×")!,
+      Operand(rawLexeme: "3d1")!,
+      Parenthesis.close,
+    ],
+    postfixTokens: [
+      Operand(rawLexeme: "4")!,
+      Operand(rawLexeme: "6d1")!,
+      Operand(rawLexeme: "5d1")!,
+      Operator(rawValue: "÷")!,
+      Operand(rawLexeme: "3d1")!,
+      Operator(rawValue: "×")!,
+      Operator(rawValue: "-")!,
+    ],
+    value: 1
+  ),
 
   // MARK: (A + B ÷ C × (D + E) - F)
   (
@@ -1378,6 +2698,41 @@ let evaluatableFixtures: [EvaluatableFixture] = [
       Operator(rawValue: "×")!,
       Operator(rawValue: "+")!,
       Operand(rawLexeme: "6")!,
+      Operator(rawValue: "-")!,
+    ],
+    value: -5
+  ),
+  (
+    description: "(1d1 + 2d1 ÷ 3d1 × (4d1 + 5d1) - 6d1)",
+    lexemes: ["(", "1d1", "+", "2d1", "÷", "3d1", "×", "(", "4d1", "+", "5d1", ")", "-", "6d1", ")"],
+    infixTokens: [
+      Parenthesis.open,
+      Operand(rawLexeme: "1d1")!,
+      Operator(rawValue: "+")!,
+      Operand(rawLexeme: "2d1")!,
+      Operator(rawValue: "÷")!,
+      Operand(rawLexeme: "3d1")!,
+      Operator(rawValue: "×")!,
+      Parenthesis.open,
+      Operand(rawLexeme: "4d1")!,
+      Operator(rawValue: "+")!,
+      Operand(rawLexeme: "5d1")!,
+      Parenthesis.close,
+      Operator(rawValue: "-")!,
+      Operand(rawLexeme: "6d1")!,
+      Parenthesis.close,
+    ],
+    postfixTokens: [
+      Operand(rawLexeme: "1d1")!,
+      Operand(rawLexeme: "2d1")!,
+      Operand(rawLexeme: "3d1")!,
+      Operator(rawValue: "÷")!,
+      Operand(rawLexeme: "4d1")!,
+      Operand(rawLexeme: "5d1")!,
+      Operator(rawValue: "+")!,
+      Operator(rawValue: "×")!,
+      Operator(rawValue: "+")!,
+      Operand(rawLexeme: "6d1")!,
       Operator(rawValue: "-")!,
     ],
     value: -5
