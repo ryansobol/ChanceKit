@@ -1,7 +1,7 @@
 @testable import ChanceKit
 import XCTest
 
-class InterpretterTests: XCTestCase {
+class InterpreterTests: XCTestCase {
   func testInterpretWithEvaluatableFixtures() {
     for fixture in evaluatableFixtures {
       let tokens = fixture.postfixTokens
