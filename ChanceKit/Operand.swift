@@ -190,8 +190,8 @@ extension Operand {
       //  - queue.sync(execute:) can't cancel blocks
       //
       // Idea 4:
-      //  - Async execution of expression.evaluate(completion: (result: Int?, error: Error?) -> Void) -> DispatchWorkItem
-      //  - Inside expression.evaluate, create a serial, userInitiated dispatch queue
+      //  - Async execution of expression.interpret(completion: (result: Int?, error: Error?) -> Void) -> DispatchWorkItem
+      //  - Inside expression.interpret, create a serial, userInitiated dispatch queue
       //  - A single, cancelable work item block passed to queue.async(execute:)
       //  - Return a reference to the DispatchWorkItem
       //  - The final result is passed to the completion handler as an argument

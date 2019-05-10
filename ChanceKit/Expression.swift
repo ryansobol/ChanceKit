@@ -104,14 +104,14 @@ extension Expression {
   }
 }
 
-// MARK: - Evaluation
+// MARK: - Interpretation
 
 // https://www.youtube.com/watch?v=vXPL6UavUeA
 // https://www.youtube.com/watch?v=MeRb_1bddWg
 extension Expression {
-  public func evaluate() throws -> Int {
+  public func interpret() throws -> Int {
     let parsedTokens = try parse(infixTokens: tokens)
 
-    return try interpret(postfixTokens: parsedTokens)
+    return try evaluate(postfixTokens: parsedTokens)
   }
 }

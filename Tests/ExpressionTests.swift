@@ -157,55 +157,55 @@ extension ExpressionTests {
   }
 }
 
-// MARK: - Evaluation
+// MARK: - Interpretation
 
 extension ExpressionTests {
-  func testEvaluateWithEvaluatableFixtures() {
+  func testInterpretWithEvaluatableFixtures() {
     for fixture in evaluatableFixtures {
       let lexemes = fixture.lexemes
       let expected = fixture.value
 
       let expression = try! Expression(lexemes)
-      let actual = try! expression.evaluate()
+      let actual = try! expression.interpret()
 
       XCTAssertEqual(expected, actual, "lexemes: \(lexemes)")
     }
   }
 
-  func testEvaluateWithParsableFixtures() {
+  func testInterpretWithParsableFixtures() {
     for fixture in parsableFixtures {
       let lexemes = fixture.lexemes
       let expected = fixture.error
 
       let expression = try! Expression(lexemes)
 
-      XCTAssertThrowsError(try expression.evaluate()) { error in
+      XCTAssertThrowsError(try expression.interpret()) { error in
         XCTAssertEqual(expected, error as? ExpressionError, "lexemes: \(lexemes)")
       }
     }
   }
 
-  func testEvaluateWithLexebleFixtures() {
+  func testInterpretWithLexebleFixtures() {
     for fixture in lexebleFixtures {
       let lexemes = fixture.lexemes
       let expected = fixture.error
 
       let expression = try! Expression(lexemes)
 
-      XCTAssertThrowsError(try expression.evaluate()) { error in
+      XCTAssertThrowsError(try expression.interpret()) { error in
         XCTAssertEqual(expected, error as? ExpressionError, "lexemes: \(lexemes)")
       }
     }
   }
 
-  func testEvaluatePerformance() {
+  func testInterpretPerformance() {
     self.measure {
       for fixture in evaluatableFixtures {
         let lexemes = fixture.lexemes
         let expected = fixture.value
 
         let expression = try! Expression(lexemes)
-        let actual = try! expression.evaluate()
+        let actual = try! expression.interpret()
 
         XCTAssertEqual(expected, actual, "lexemes: \(lexemes)")
       }

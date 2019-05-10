@@ -1,4 +1,4 @@
-func interpret(postfixTokens: [Tokenable]) throws -> Int {
+func evaluate(postfixTokens: [Tokenable]) throws -> Int {
   var operands = [Operand]()
 
   for currentToken in postfixTokens {
