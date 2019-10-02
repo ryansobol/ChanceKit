@@ -2926,7 +2926,6 @@ typealias LexebleParenthesisFixture = (
   droppedTokens: [Tokenable]
 )
 
-//  TODO: Handle 1d4, 1d6, 1d8, 1d10, 1d12, 1d20, 1d100, and 1d
 let lexebleParenthesisFixtures: [LexebleParenthesisFixture] = [
   (
     withoutLexemes: [],
@@ -3307,6 +3306,301 @@ let lexebleParenthesisFixtures: [LexebleParenthesisFixture] = [
     withTokens: [Operand.number(19), Parenthesis.close],
     droppedLexemes: ["19"],
     droppedTokens: [Operand.number(19)]
+  ),
+  (
+    withoutLexemes: ["1d1"],
+    withoutTokens: [Operand.roll(1, 1)],
+    lexeme: "(",
+    token: Parenthesis.open,
+    withLexemes: ["1d1", "×", "("],
+    withTokens: [Operand.roll(1, 1), Operator.multiplication, Parenthesis.open],
+    droppedLexemes: ["1d1", "×"],
+    droppedTokens: [Operand.roll(1, 1), Operator.multiplication]
+  ),
+  (
+    withoutLexemes: ["1d1"],
+    withoutTokens: [Operand.roll(1, 1)],
+    lexeme: ")",
+    token: Parenthesis.close,
+    withLexemes: ["1d1", ")"],
+    withTokens: [Operand.roll(1, 1), Parenthesis.close],
+    droppedLexemes: ["1d1"],
+    droppedTokens: [Operand.roll(1, 1)]
+  ),
+  (
+    withoutLexemes: ["1d"],
+    withoutTokens: [Operand.rollPositiveSides(1)],
+    lexeme: "(",
+    token: Parenthesis.open,
+    withLexemes: ["1d", "×", "("],
+    withTokens: [Operand.rollPositiveSides(1), Operator.multiplication, Parenthesis.open],
+    droppedLexemes: ["1d", "×"],
+    droppedTokens: [Operand.rollPositiveSides(1), Operator.multiplication]
+  ),
+  (
+    withoutLexemes: ["1d"],
+    withoutTokens: [Operand.rollPositiveSides(1)],
+    lexeme: ")",
+    token: Parenthesis.close,
+    withLexemes: ["1d", ")"],
+    withTokens: [Operand.rollPositiveSides(1), Parenthesis.close],
+    droppedLexemes: ["1d"],
+    droppedTokens: [Operand.rollPositiveSides(1)]
+  ),
+  (
+    withoutLexemes: ["1d1", "×", "("],
+    withoutTokens: [Operand.roll(1, 1), Operator.multiplication, Parenthesis.open],
+    lexeme: "(",
+    token: Parenthesis.open,
+    withLexemes: ["1d1", "×", "(", "("],
+    withTokens: [Operand.roll(1, 1), Operator.multiplication, Parenthesis.open, Parenthesis.open],
+    droppedLexemes: ["1d1", "×", "("],
+    droppedTokens: [Operand.roll(1, 1), Operator.multiplication, Parenthesis.open]
+  ),
+  (
+    withoutLexemes: ["1d1", "×", "("],
+    withoutTokens: [Operand.roll(1, 1), Operator.multiplication, Parenthesis.open],
+    lexeme: ")",
+    token: Parenthesis.close,
+    withLexemes: ["1d1", "×", "(", ")"],
+    withTokens: [Operand.roll(1, 1), Operator.multiplication, Parenthesis.open, Parenthesis.close],
+    droppedLexemes: ["1d1", "×", "("],
+    droppedTokens: [Operand.roll(1, 1), Operator.multiplication, Parenthesis.open]
+  ),
+  (
+    withoutLexemes: ["1d", "×", "("],
+    withoutTokens: [Operand.rollPositiveSides(1), Operator.multiplication, Parenthesis.open],
+    lexeme: "(",
+    token: Parenthesis.open,
+    withLexemes: ["1d", "×", "(", "("],
+    withTokens: [
+      Operand.rollPositiveSides(1),
+      Operator.multiplication,
+      Parenthesis.open,
+      Parenthesis.open
+    ],
+    droppedLexemes: ["1d", "×", "("],
+    droppedTokens: [Operand.rollPositiveSides(1), Operator.multiplication, Parenthesis.open]
+  ),
+  (
+    withoutLexemes: ["1d", "×", "("],
+    withoutTokens: [Operand.rollPositiveSides(1), Operator.multiplication, Parenthesis.open],
+    lexeme: ")",
+    token: Parenthesis.close,
+    withLexemes: ["1d", "×", "(", ")"],
+    withTokens: [
+      Operand.rollPositiveSides(1),
+      Operator.multiplication,
+      Parenthesis.open,
+      Parenthesis.close
+    ],
+    droppedLexemes: ["1d", "×", "("],
+    droppedTokens: [Operand.rollPositiveSides(1), Operator.multiplication, Parenthesis.open]
+  ),
+  (
+    withoutLexemes: ["1d1", ")"],
+    withoutTokens: [Operand.roll(1, 1), Parenthesis.close],
+    lexeme: "(",
+    token: Parenthesis.open,
+    withLexemes: ["1d1", ")", "×", "("],
+    withTokens: [Operand.roll(1, 1), Parenthesis.close, Operator.multiplication, Parenthesis.open],
+    droppedLexemes: ["1d1", ")", "×"],
+    droppedTokens: [Operand.roll(1, 1), Parenthesis.close, Operator.multiplication]
+  ),
+  (
+    withoutLexemes: ["1d1", ")"],
+    withoutTokens: [Operand.roll(1, 1), Parenthesis.close],
+    lexeme: ")",
+    token: Parenthesis.close,
+    withLexemes: ["1d1", ")", ")"],
+    withTokens: [Operand.roll(1, 1), Parenthesis.close, Parenthesis.close],
+    droppedLexemes: ["1d1", ")"],
+    droppedTokens: [Operand.roll(1, 1), Parenthesis.close]
+  ),
+  (
+    withoutLexemes: ["1d", ")"],
+    withoutTokens: [Operand.rollPositiveSides(1), Parenthesis.close],
+    lexeme: "(",
+    token: Parenthesis.open,
+    withLexemes: ["1d", ")", "×", "("],
+    withTokens: [
+      Operand.rollPositiveSides(1),
+      Parenthesis.close,
+      Operator.multiplication,
+      Parenthesis.open
+    ],
+    droppedLexemes: ["1d", ")", "×"],
+    droppedTokens: [Operand.rollPositiveSides(1), Parenthesis.close, Operator.multiplication]
+  ),
+  (
+    withoutLexemes: ["1d", ")"],
+    withoutTokens: [Operand.rollPositiveSides(1), Parenthesis.close],
+    lexeme: ")",
+    token: Parenthesis.close,
+    withLexemes: ["1d", ")", ")"],
+    withTokens: [Operand.rollPositiveSides(1), Parenthesis.close, Parenthesis.close],
+    droppedLexemes: ["1d", ")"],
+    droppedTokens: [Operand.rollPositiveSides(1), Parenthesis.close]
+  ),
+  (
+    withoutLexemes: ["1d1", "+"],
+    withoutTokens: [Operand.roll(1, 1), Operator.addition],
+    lexeme: "(",
+    token: Parenthesis.open,
+    withLexemes: ["1d1", "+", "("],
+    withTokens: [Operand.roll(1, 1), Operator.addition, Parenthesis.open],
+    droppedLexemes: ["1d1", "+"],
+    droppedTokens: [Operand.roll(1, 1), Operator.addition]
+  ),
+  (
+    withoutLexemes: ["1d1", "+"],
+    withoutTokens: [Operand.roll(1, 1), Operator.addition],
+    lexeme: ")",
+    token: Parenthesis.close,
+    withLexemes: ["1d1", "+", ")"],
+    withTokens: [Operand.roll(1, 1), Operator.addition, Parenthesis.close],
+    droppedLexemes: ["1d1", "+"],
+    droppedTokens: [Operand.roll(1, 1), Operator.addition]
+  ),
+  (
+    withoutLexemes: ["1d", "+"],
+    withoutTokens: [Operand.rollPositiveSides(1), Operator.addition],
+    lexeme: "(",
+    token: Parenthesis.open,
+    withLexemes: ["1d", "+", "("],
+    withTokens: [Operand.rollPositiveSides(1), Operator.addition, Parenthesis.open],
+    droppedLexemes: ["1d", "+"],
+    droppedTokens: [Operand.rollPositiveSides(1), Operator.addition]
+  ),
+  (
+    withoutLexemes: ["1d", "+"],
+    withoutTokens: [Operand.rollPositiveSides(1), Operator.addition],
+    lexeme: ")",
+    token: Parenthesis.close,
+    withLexemes: ["1d", "+", ")"],
+    withTokens: [Operand.rollPositiveSides(1), Operator.addition, Parenthesis.close],
+    droppedLexemes: ["1d", "+"],
+    droppedTokens: [Operand.rollPositiveSides(1), Operator.addition]
+  ),
+  (
+    withoutLexemes: ["1d1", "÷"],
+    withoutTokens: [Operand.roll(1, 1), Operator.division],
+    lexeme: "(",
+    token: Parenthesis.open,
+    withLexemes: ["1d1", "÷", "("],
+    withTokens: [Operand.roll(1, 1), Operator.division, Parenthesis.open],
+    droppedLexemes: ["1d1", "÷"],
+    droppedTokens: [Operand.roll(1, 1), Operator.division]
+  ),
+  (
+    withoutLexemes: ["1d1", "÷"],
+    withoutTokens: [Operand.roll(1, 1), Operator.division],
+    lexeme: ")",
+    token: Parenthesis.close,
+    withLexemes: ["1d1", "÷", ")"],
+    withTokens: [Operand.roll(1, 1), Operator.division, Parenthesis.close],
+    droppedLexemes: ["1d1", "÷"],
+    droppedTokens: [Operand.roll(1, 1), Operator.division]
+  ),
+  (
+    withoutLexemes: ["1d", "÷"],
+    withoutTokens: [Operand.rollPositiveSides(1), Operator.division],
+    lexeme: "(",
+    token: Parenthesis.open,
+    withLexemes: ["1d", "÷", "("],
+    withTokens: [Operand.rollPositiveSides(1), Operator.division, Parenthesis.open],
+    droppedLexemes: ["1d", "÷"],
+    droppedTokens: [Operand.rollPositiveSides(1), Operator.division]
+  ),
+  (
+    withoutLexemes: ["1d", "÷"],
+    withoutTokens: [Operand.rollPositiveSides(1), Operator.division],
+    lexeme: ")",
+    token: Parenthesis.close,
+    withLexemes: ["1d", "÷", ")"],
+    withTokens: [Operand.rollPositiveSides(1), Operator.division, Parenthesis.close],
+    droppedLexemes: ["1d", "÷"],
+    droppedTokens: [Operand.rollPositiveSides(1), Operator.division]
+  ),
+  (
+    withoutLexemes: ["1d1", "×"],
+    withoutTokens: [Operand.roll(1, 1), Operator.multiplication],
+    lexeme: "(",
+    token: Parenthesis.open,
+    withLexemes: ["1d1", "×", "("],
+    withTokens: [Operand.roll(1, 1), Operator.multiplication, Parenthesis.open],
+    droppedLexemes: ["1d1", "×"],
+    droppedTokens: [Operand.roll(1, 1), Operator.multiplication]
+  ),
+  (
+    withoutLexemes: ["1d1", "×"],
+    withoutTokens: [Operand.roll(1, 1), Operator.multiplication],
+    lexeme: ")",
+    token: Parenthesis.close,
+    withLexemes: ["1d1", "×", ")"],
+    withTokens: [Operand.roll(1, 1), Operator.multiplication, Parenthesis.close],
+    droppedLexemes: ["1d1", "×"],
+    droppedTokens: [Operand.roll(1, 1), Operator.multiplication]
+  ),
+  (
+    withoutLexemes: ["1d", "×"],
+    withoutTokens: [Operand.rollPositiveSides(1), Operator.multiplication],
+    lexeme: "(",
+    token: Parenthesis.open,
+    withLexemes: ["1d", "×", "("],
+    withTokens: [Operand.rollPositiveSides(1), Operator.multiplication, Parenthesis.open],
+    droppedLexemes: ["1d", "×"],
+    droppedTokens: [Operand.rollPositiveSides(1), Operator.multiplication]
+  ),
+  (
+    withoutLexemes: ["1d", "×"],
+    withoutTokens: [Operand.rollPositiveSides(1), Operator.multiplication],
+    lexeme: ")",
+    token: Parenthesis.close,
+    withLexemes: ["1d", "×", ")"],
+    withTokens: [Operand.rollPositiveSides(1), Operator.multiplication, Parenthesis.close],
+    droppedLexemes: ["1d", "×"],
+    droppedTokens: [Operand.rollPositiveSides(1), Operator.multiplication]
+  ),
+  (
+    withoutLexemes: ["1d1", "-"],
+    withoutTokens: [Operand.roll(1, 1), Operator.subtraction],
+    lexeme: "(",
+    token: Parenthesis.open,
+    withLexemes: ["1d1", "-", "("],
+    withTokens: [Operand.roll(1, 1), Operator.subtraction, Parenthesis.open],
+    droppedLexemes: ["1d1", "-"],
+    droppedTokens: [Operand.roll(1, 1), Operator.subtraction]
+  ),
+  (
+    withoutLexemes: ["1d1", "-"],
+    withoutTokens: [Operand.roll(1, 1), Operator.subtraction],
+    lexeme: ")",
+    token: Parenthesis.close,
+    withLexemes: ["1d1", "-", ")"],
+    withTokens: [Operand.roll(1, 1), Operator.subtraction, Parenthesis.close],
+    droppedLexemes: ["1d1", "-"],
+    droppedTokens: [Operand.roll(1, 1), Operator.subtraction]
+  ),
+  (
+    withoutLexemes: ["1d", "-"],
+    withoutTokens: [Operand.rollPositiveSides(1), Operator.subtraction],
+    lexeme: "(",
+    token: Parenthesis.open,
+    withLexemes: ["1d", "-", "("],
+    withTokens: [Operand.rollPositiveSides(1), Operator.subtraction, Parenthesis.open],
+    droppedLexemes: ["1d", "-"],
+    droppedTokens: [Operand.rollPositiveSides(1), Operator.subtraction]
+  ),
+  (
+    withoutLexemes: ["1d", "-"],
+    withoutTokens: [Operand.rollPositiveSides(1), Operator.subtraction],
+    lexeme: ")",
+    token: Parenthesis.close,
+    withLexemes: ["1d", "-", ")"],
+    withTokens: [Operand.rollPositiveSides(1), Operator.subtraction, Parenthesis.close],
+    droppedLexemes: ["1d", "-"],
+    droppedTokens: [Operand.rollPositiveSides(1), Operator.subtraction]
   ),
 ]
 
