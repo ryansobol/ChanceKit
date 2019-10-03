@@ -32,6 +32,7 @@
 		92DA546D20B204CD0052CC65 /* Markable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92DA546C20B204CD0052CC65 /* Markable.swift */; };
 		92DA546F20B207270052CC65 /* Parenthesis.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92DA546E20B207270052CC65 /* Parenthesis.swift */; };
 		92DE254B23464CF4003A75A0 /* LexebleOperatorFixture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92DE254A23464CF4003A75A0 /* LexebleOperatorFixture.swift */; };
+		92DE254D2346508F003A75A0 /* LexebleParenthesisFixture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92DE254C2346508F003A75A0 /* LexebleParenthesisFixture.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -74,6 +75,7 @@
 		92DA546C20B204CD0052CC65 /* Markable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Markable.swift; sourceTree = "<group>"; };
 		92DA546E20B207270052CC65 /* Parenthesis.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Parenthesis.swift; sourceTree = "<group>"; };
 		92DE254A23464CF4003A75A0 /* LexebleOperatorFixture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LexebleOperatorFixture.swift; sourceTree = "<group>"; };
+		92DE254C2346508F003A75A0 /* LexebleParenthesisFixture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LexebleParenthesisFixture.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -174,6 +176,7 @@
 			isa = PBXGroup;
 			children = (
 				92DE254A23464CF4003A75A0 /* LexebleOperatorFixture.swift */,
+				92DE254C2346508F003A75A0 /* LexebleParenthesisFixture.swift */,
 			);
 			path = Fixtures;
 			sourceTree = "<group>";
@@ -293,6 +296,7 @@
 				923D7FBC2146E872000E1D49 /* TokenableTests.swift in Sources */,
 				92391F0220B130A800FE8006 /* OperandTests.swift in Sources */,
 				92D513F6213DA02C00973B6F /* ParenthesisTests.swift in Sources */,
+				92DE254D2346508F003A75A0 /* LexebleParenthesisFixture.swift in Sources */,
 				92D04A98226A2C8700E97E06 /* Fixtures.swift in Sources */,
 				9226DC7721500ED9003D024D /* NSTextCheckingResultTests.swift in Sources */,
 				92DE254B23464CF4003A75A0 /* LexebleOperatorFixture.swift in Sources */,
