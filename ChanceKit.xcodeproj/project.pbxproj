@@ -31,6 +31,7 @@
 		92D513F6213DA02C00973B6F /* ParenthesisTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92D513F5213DA02C00973B6F /* ParenthesisTests.swift */; };
 		92DA546D20B204CD0052CC65 /* Markable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92DA546C20B204CD0052CC65 /* Markable.swift */; };
 		92DA546F20B207270052CC65 /* Parenthesis.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92DA546E20B207270052CC65 /* Parenthesis.swift */; };
+		92DE254B23464CF4003A75A0 /* LexebleOperatorFixture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92DE254A23464CF4003A75A0 /* LexebleOperatorFixture.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -72,6 +73,7 @@
 		92D513F5213DA02C00973B6F /* ParenthesisTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParenthesisTests.swift; sourceTree = "<group>"; };
 		92DA546C20B204CD0052CC65 /* Markable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Markable.swift; sourceTree = "<group>"; };
 		92DA546E20B207270052CC65 /* Parenthesis.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Parenthesis.swift; sourceTree = "<group>"; };
+		92DE254A23464CF4003A75A0 /* LexebleOperatorFixture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LexebleOperatorFixture.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -152,6 +154,7 @@
 		92CD302020AD0E6C002462B3 /* Tests */ = {
 			isa = PBXGroup;
 			children = (
+				92DE254923464CCD003A75A0 /* Fixtures */,
 				92A4CC7020AD143C0096AF98 /* Info.plist */,
 				92CD302A20AD0EBD002462B3 /* ExpressionTests.swift */,
 				92D04A97226A2C8700E97E06 /* Fixtures.swift */,
@@ -165,6 +168,14 @@
 				9226DC7521500EAE003D024D /* Additions */,
 			);
 			path = Tests;
+			sourceTree = "<group>";
+		};
+		92DE254923464CCD003A75A0 /* Fixtures */ = {
+			isa = PBXGroup;
+			children = (
+				92DE254A23464CF4003A75A0 /* LexebleOperatorFixture.swift */,
+			);
+			path = Fixtures;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -284,6 +295,7 @@
 				92D513F6213DA02C00973B6F /* ParenthesisTests.swift in Sources */,
 				92D04A98226A2C8700E97E06 /* Fixtures.swift in Sources */,
 				9226DC7721500ED9003D024D /* NSTextCheckingResultTests.swift in Sources */,
+				92DE254B23464CF4003A75A0 /* LexebleOperatorFixture.swift in Sources */,
 				92D04AA2226DB27D00E97E06 /* LexerTests.swift in Sources */,
 				924105AA20B06B19009FC568 /* OperatorTests.swift in Sources */,
 				9226DC7421500EA7003D024D /* NSRegularExpressionTests.swift in Sources */,
