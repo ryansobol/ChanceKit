@@ -34,6 +34,7 @@
 		92DE254B23464CF4003A75A0 /* LexebleOperatorFixture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92DE254A23464CF4003A75A0 /* LexebleOperatorFixture.swift */; };
 		92DE254D2346508F003A75A0 /* LexebleParenthesisFixture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92DE254C2346508F003A75A0 /* LexebleParenthesisFixture.swift */; };
 		92DE254F23465101003A75A0 /* LexebleIntegerFixture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92DE254E23465101003A75A0 /* LexebleIntegerFixture.swift */; };
+		92DE255123465169003A75A0 /* EvaluatableFixture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92DE255023465169003A75A0 /* EvaluatableFixture.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -78,6 +79,7 @@
 		92DE254A23464CF4003A75A0 /* LexebleOperatorFixture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LexebleOperatorFixture.swift; sourceTree = "<group>"; };
 		92DE254C2346508F003A75A0 /* LexebleParenthesisFixture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LexebleParenthesisFixture.swift; sourceTree = "<group>"; };
 		92DE254E23465101003A75A0 /* LexebleIntegerFixture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LexebleIntegerFixture.swift; sourceTree = "<group>"; };
+		92DE255023465169003A75A0 /* EvaluatableFixture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EvaluatableFixture.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -180,6 +182,7 @@
 				92DE254A23464CF4003A75A0 /* LexebleOperatorFixture.swift */,
 				92DE254C2346508F003A75A0 /* LexebleParenthesisFixture.swift */,
 				92DE254E23465101003A75A0 /* LexebleIntegerFixture.swift */,
+				92DE255023465169003A75A0 /* EvaluatableFixture.swift */,
 			);
 			path = Fixtures;
 			sourceTree = "<group>";
@@ -307,6 +310,7 @@
 				92D04AA2226DB27D00E97E06 /* LexerTests.swift in Sources */,
 				924105AA20B06B19009FC568 /* OperatorTests.swift in Sources */,
 				9226DC7421500EA7003D024D /* NSRegularExpressionTests.swift in Sources */,
+				92DE255123465169003A75A0 /* EvaluatableFixture.swift in Sources */,
 				92D04A9E226CCC3600E97E06 /* EvaluatorTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
