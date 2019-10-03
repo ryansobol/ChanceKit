@@ -35,6 +35,7 @@
 		92DE254D2346508F003A75A0 /* LexebleParenthesisFixture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92DE254C2346508F003A75A0 /* LexebleParenthesisFixture.swift */; };
 		92DE254F23465101003A75A0 /* LexebleIntegerFixture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92DE254E23465101003A75A0 /* LexebleIntegerFixture.swift */; };
 		92DE255123465169003A75A0 /* EvaluatableFixture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92DE255023465169003A75A0 /* EvaluatableFixture.swift */; };
+		92DE255523465244003A75A0 /* ParsableFixture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92DE255423465244003A75A0 /* ParsableFixture.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -80,6 +81,7 @@
 		92DE254C2346508F003A75A0 /* LexebleParenthesisFixture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LexebleParenthesisFixture.swift; sourceTree = "<group>"; };
 		92DE254E23465101003A75A0 /* LexebleIntegerFixture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LexebleIntegerFixture.swift; sourceTree = "<group>"; };
 		92DE255023465169003A75A0 /* EvaluatableFixture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EvaluatableFixture.swift; sourceTree = "<group>"; };
+		92DE255423465244003A75A0 /* ParsableFixture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParsableFixture.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -183,6 +185,7 @@
 				92DE254C2346508F003A75A0 /* LexebleParenthesisFixture.swift */,
 				92DE254E23465101003A75A0 /* LexebleIntegerFixture.swift */,
 				92DE255023465169003A75A0 /* EvaluatableFixture.swift */,
+				92DE255423465244003A75A0 /* ParsableFixture.swift */,
 			);
 			path = Fixtures;
 			sourceTree = "<group>";
@@ -298,6 +301,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				92DE254F23465101003A75A0 /* LexebleIntegerFixture.swift in Sources */,
+				92DE255523465244003A75A0 /* ParsableFixture.swift in Sources */,
 				9286A376226700BA004D7360 /* ParserTests.swift in Sources */,
 				92CD302B20AD0EBD002462B3 /* ExpressionTests.swift in Sources */,
 				923D7FBC2146E872000E1D49 /* TokenableTests.swift in Sources */,
