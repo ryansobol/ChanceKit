@@ -33,6 +33,7 @@
 		92DA546F20B207270052CC65 /* Parenthesis.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92DA546E20B207270052CC65 /* Parenthesis.swift */; };
 		92DE254B23464CF4003A75A0 /* LexebleOperatorFixture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92DE254A23464CF4003A75A0 /* LexebleOperatorFixture.swift */; };
 		92DE254D2346508F003A75A0 /* LexebleParenthesisFixture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92DE254C2346508F003A75A0 /* LexebleParenthesisFixture.swift */; };
+		92DE254F23465101003A75A0 /* LexebleIntegerFixture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92DE254E23465101003A75A0 /* LexebleIntegerFixture.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -76,6 +77,7 @@
 		92DA546E20B207270052CC65 /* Parenthesis.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Parenthesis.swift; sourceTree = "<group>"; };
 		92DE254A23464CF4003A75A0 /* LexebleOperatorFixture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LexebleOperatorFixture.swift; sourceTree = "<group>"; };
 		92DE254C2346508F003A75A0 /* LexebleParenthesisFixture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LexebleParenthesisFixture.swift; sourceTree = "<group>"; };
+		92DE254E23465101003A75A0 /* LexebleIntegerFixture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LexebleIntegerFixture.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -177,6 +179,7 @@
 			children = (
 				92DE254A23464CF4003A75A0 /* LexebleOperatorFixture.swift */,
 				92DE254C2346508F003A75A0 /* LexebleParenthesisFixture.swift */,
+				92DE254E23465101003A75A0 /* LexebleIntegerFixture.swift */,
 			);
 			path = Fixtures;
 			sourceTree = "<group>";
@@ -291,6 +294,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				92DE254F23465101003A75A0 /* LexebleIntegerFixture.swift in Sources */,
 				9286A376226700BA004D7360 /* ParserTests.swift in Sources */,
 				92CD302B20AD0EBD002462B3 /* ExpressionTests.swift in Sources */,
 				923D7FBC2146E872000E1D49 /* TokenableTests.swift in Sources */,
