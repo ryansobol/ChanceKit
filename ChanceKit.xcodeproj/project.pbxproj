@@ -23,7 +23,7 @@
 		92A4CC7E20AF68D90096AF98 /* ExpressionError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92A4CC7D20AF68D90096AF98 /* ExpressionError.swift */; };
 		92CD302420AD0E6C002462B3 /* libChanceKit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 92CD300020AD0D89002462B3 /* libChanceKit.a */; };
 		92CD302B20AD0EBD002462B3 /* ExpressionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92CD302A20AD0EBD002462B3 /* ExpressionTests.swift */; };
-		92D04A98226A2C8700E97E06 /* Fixtures.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92D04A97226A2C8700E97E06 /* Fixtures.swift */; };
+		92D04A98226A2C8700E97E06 /* LexebleFixture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92D04A97226A2C8700E97E06 /* LexebleFixture.swift */; };
 		92D04A9A226CCA3D00E97E06 /* Evaluator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92D04A99226CCA3D00E97E06 /* Evaluator.swift */; };
 		92D04A9E226CCC3600E97E06 /* EvaluatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92D04A9D226CCC3600E97E06 /* EvaluatorTests.swift */; };
 		92D04AA0226DB0AC00E97E06 /* Lexer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92D04A9F226DB0AC00E97E06 /* Lexer.swift */; };
@@ -36,6 +36,7 @@
 		92DE254F23465101003A75A0 /* LexebleIntegerFixture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92DE254E23465101003A75A0 /* LexebleIntegerFixture.swift */; };
 		92DE255123465169003A75A0 /* EvaluatableFixture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92DE255023465169003A75A0 /* EvaluatableFixture.swift */; };
 		92DE255523465244003A75A0 /* ParsableFixture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92DE255423465244003A75A0 /* ParsableFixture.swift */; };
+		92DE2559234652FE003A75A0 /* InvalidFixture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92DE2558234652FE003A75A0 /* InvalidFixture.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -69,7 +70,7 @@
 		92CD300020AD0D89002462B3 /* libChanceKit.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libChanceKit.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		92CD301F20AD0E6C002462B3 /* ChanceKitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ChanceKitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		92CD302A20AD0EBD002462B3 /* ExpressionTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExpressionTests.swift; sourceTree = "<group>"; };
-		92D04A97226A2C8700E97E06 /* Fixtures.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fixtures.swift; sourceTree = "<group>"; };
+		92D04A97226A2C8700E97E06 /* LexebleFixture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LexebleFixture.swift; sourceTree = "<group>"; };
 		92D04A99226CCA3D00E97E06 /* Evaluator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Evaluator.swift; sourceTree = "<group>"; };
 		92D04A9D226CCC3600E97E06 /* EvaluatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EvaluatorTests.swift; sourceTree = "<group>"; };
 		92D04A9F226DB0AC00E97E06 /* Lexer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Lexer.swift; sourceTree = "<group>"; };
@@ -82,6 +83,7 @@
 		92DE254E23465101003A75A0 /* LexebleIntegerFixture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LexebleIntegerFixture.swift; sourceTree = "<group>"; };
 		92DE255023465169003A75A0 /* EvaluatableFixture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EvaluatableFixture.swift; sourceTree = "<group>"; };
 		92DE255423465244003A75A0 /* ParsableFixture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParsableFixture.swift; sourceTree = "<group>"; };
+		92DE2558234652FE003A75A0 /* InvalidFixture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvalidFixture.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -165,7 +167,6 @@
 				92DE254923464CCD003A75A0 /* Fixtures */,
 				92A4CC7020AD143C0096AF98 /* Info.plist */,
 				92CD302A20AD0EBD002462B3 /* ExpressionTests.swift */,
-				92D04A97226A2C8700E97E06 /* Fixtures.swift */,
 				92D04A9D226CCC3600E97E06 /* EvaluatorTests.swift */,
 				92D04AA1226DB27D00E97E06 /* LexerTests.swift */,
 				92391F0120B130A800FE8006 /* OperandTests.swift */,
@@ -181,11 +182,13 @@
 		92DE254923464CCD003A75A0 /* Fixtures */ = {
 			isa = PBXGroup;
 			children = (
+				92D04A97226A2C8700E97E06 /* LexebleFixture.swift */,
 				92DE254A23464CF4003A75A0 /* LexebleOperatorFixture.swift */,
 				92DE254C2346508F003A75A0 /* LexebleParenthesisFixture.swift */,
 				92DE254E23465101003A75A0 /* LexebleIntegerFixture.swift */,
 				92DE255023465169003A75A0 /* EvaluatableFixture.swift */,
 				92DE255423465244003A75A0 /* ParsableFixture.swift */,
+				92DE2558234652FE003A75A0 /* InvalidFixture.swift */,
 			);
 			path = Fixtures;
 			sourceTree = "<group>";
@@ -308,13 +311,14 @@
 				92391F0220B130A800FE8006 /* OperandTests.swift in Sources */,
 				92D513F6213DA02C00973B6F /* ParenthesisTests.swift in Sources */,
 				92DE254D2346508F003A75A0 /* LexebleParenthesisFixture.swift in Sources */,
-				92D04A98226A2C8700E97E06 /* Fixtures.swift in Sources */,
+				92D04A98226A2C8700E97E06 /* LexebleFixture.swift in Sources */,
 				9226DC7721500ED9003D024D /* NSTextCheckingResultTests.swift in Sources */,
 				92DE254B23464CF4003A75A0 /* LexebleOperatorFixture.swift in Sources */,
 				92D04AA2226DB27D00E97E06 /* LexerTests.swift in Sources */,
 				924105AA20B06B19009FC568 /* OperatorTests.swift in Sources */,
 				9226DC7421500EA7003D024D /* NSRegularExpressionTests.swift in Sources */,
 				92DE255123465169003A75A0 /* EvaluatableFixture.swift in Sources */,
+				92DE2559234652FE003A75A0 /* InvalidFixture.swift in Sources */,
 				92D04A9E226CCC3600E97E06 /* EvaluatorTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
