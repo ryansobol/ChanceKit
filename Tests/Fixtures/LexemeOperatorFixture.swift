@@ -1,6 +1,6 @@
 @testable import ChanceKit
 
-typealias OperatorFixture = (
+typealias LexemeOperatorFixture = (
   withoutLexemes: [String],
   withoutTokens: [Tokenable],
   lexeme: String,
@@ -11,7 +11,7 @@ typealias OperatorFixture = (
   droppedTokens: [Tokenable]
 )
 
-let operatorFixtures: [OperatorFixture] = [
+let lexemeOperatorFixtures: [LexemeOperatorFixture] = [
   (
     withoutLexemes: [],
     withoutTokens: [],

@@ -57,8 +57,8 @@ extension ExpressionTests {
 // MARK: - Inclusion
 
 extension ExpressionTests {
-  func testPushedWithParenthesisFixtures() {
-    for fixture in parenthesisFixtures {
+  func testPushedWithLexemeParenthesisFixtures() {
+    for fixture in lexemeParenthesisFixtures {
       let withoutLexemes = fixture.withoutLexemes
       let lexeme = fixture.lexeme
       let withLexemes = fixture.withLexemes
@@ -70,8 +70,8 @@ extension ExpressionTests {
     }
   }
 
-  func testPushedWithOperatorFixtures() {
-    for fixture in operatorFixtures {
+  func testPushedWithLexemeOperatorFixtures() {
+    for fixture in lexemeOperatorFixtures {
       let withoutLexemes = fixture.withoutLexemes
       let lexeme = fixture.lexeme
       let withLexemes = fixture.withLexemes
@@ -83,8 +83,8 @@ extension ExpressionTests {
     }
   }
 
-  func testPushedWithIntegerFixtures() {
-    for fixture in integerFixtures {
+  func testPushedWithLexemeIntegerFixtures() {
+    for fixture in lexemeIntegerFixtures {
       let withoutLexemes = fixture.withoutLexemes
       let lexeme = fixture.lexeme
       let withLexemes = fixture.withLexemes
@@ -120,8 +120,8 @@ extension ExpressionTests {
     XCTAssertEqual(expected, actual)
   }
 
-  func testDroppedWithParenthesisFixtures() {
-    for fixture in parenthesisFixtures {
+  func testDroppedWithLexemeParenthesisFixtures() {
+    for fixture in lexemeParenthesisFixtures {
       let withLexemes = fixture.withLexemes
       let droppedLexemes = fixture.droppedLexemes
 
@@ -132,8 +132,8 @@ extension ExpressionTests {
     }
   }
 
-  func testDroppedWithOperatorFixtures() {
-    for fixture in operatorFixtures {
+  func testDroppedWithLexemeOperatorFixtures() {
+    for fixture in lexemeOperatorFixtures {
       let withLexemes = fixture.withLexemes
       let droppedLexemes = fixture.droppedLexemes
 
@@ -144,8 +144,8 @@ extension ExpressionTests {
     }
   }
 
-  func testDroppedWithIntegerFixtures() {
-    for fixture in integerFixtures {
+  func testDroppedWithLexemeIntegerFixtures() {
+    for fixture in lexemeIntegerFixtures {
       let withLexemes = fixture.withLexemes
       let droppedLexemes = fixture.droppedLexemes
       

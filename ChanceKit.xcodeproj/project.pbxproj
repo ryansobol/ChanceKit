@@ -31,9 +31,9 @@
 		92D513F6213DA02C00973B6F /* ParenthesisTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92D513F5213DA02C00973B6F /* ParenthesisTests.swift */; };
 		92DA546D20B204CD0052CC65 /* Markable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92DA546C20B204CD0052CC65 /* Markable.swift */; };
 		92DA546F20B207270052CC65 /* Parenthesis.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92DA546E20B207270052CC65 /* Parenthesis.swift */; };
-		92DE254B23464CF4003A75A0 /* OperatorFixture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92DE254A23464CF4003A75A0 /* OperatorFixture.swift */; };
-		92DE254D2346508F003A75A0 /* ParenthesisFixture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92DE254C2346508F003A75A0 /* ParenthesisFixture.swift */; };
-		92DE254F23465101003A75A0 /* IntegerFixture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92DE254E23465101003A75A0 /* IntegerFixture.swift */; };
+		92DE254B23464CF4003A75A0 /* LexemeOperatorFixture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92DE254A23464CF4003A75A0 /* LexemeOperatorFixture.swift */; };
+		92DE254D2346508F003A75A0 /* LexemeParenthesisFixture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92DE254C2346508F003A75A0 /* LexemeParenthesisFixture.swift */; };
+		92DE254F23465101003A75A0 /* LexemeIntegerFixture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92DE254E23465101003A75A0 /* LexemeIntegerFixture.swift */; };
 		92DE255123465169003A75A0 /* EvaluatableFixture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92DE255023465169003A75A0 /* EvaluatableFixture.swift */; };
 		92DE255523465244003A75A0 /* ParsableOnlyFixture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92DE255423465244003A75A0 /* ParsableOnlyFixture.swift */; };
 		92DE2559234652FE003A75A0 /* InvalidFixture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92DE2558234652FE003A75A0 /* InvalidFixture.swift */; };
@@ -78,9 +78,9 @@
 		92D513F5213DA02C00973B6F /* ParenthesisTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParenthesisTests.swift; sourceTree = "<group>"; };
 		92DA546C20B204CD0052CC65 /* Markable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Markable.swift; sourceTree = "<group>"; };
 		92DA546E20B207270052CC65 /* Parenthesis.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Parenthesis.swift; sourceTree = "<group>"; };
-		92DE254A23464CF4003A75A0 /* OperatorFixture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OperatorFixture.swift; sourceTree = "<group>"; };
-		92DE254C2346508F003A75A0 /* ParenthesisFixture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParenthesisFixture.swift; sourceTree = "<group>"; };
-		92DE254E23465101003A75A0 /* IntegerFixture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntegerFixture.swift; sourceTree = "<group>"; };
+		92DE254A23464CF4003A75A0 /* LexemeOperatorFixture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LexemeOperatorFixture.swift; sourceTree = "<group>"; };
+		92DE254C2346508F003A75A0 /* LexemeParenthesisFixture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LexemeParenthesisFixture.swift; sourceTree = "<group>"; };
+		92DE254E23465101003A75A0 /* LexemeIntegerFixture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LexemeIntegerFixture.swift; sourceTree = "<group>"; };
 		92DE255023465169003A75A0 /* EvaluatableFixture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EvaluatableFixture.swift; sourceTree = "<group>"; };
 		92DE255423465244003A75A0 /* ParsableOnlyFixture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParsableOnlyFixture.swift; sourceTree = "<group>"; };
 		92DE2558234652FE003A75A0 /* InvalidFixture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvalidFixture.swift; sourceTree = "<group>"; };
@@ -183,11 +183,11 @@
 			isa = PBXGroup;
 			children = (
 				92DE255023465169003A75A0 /* EvaluatableFixture.swift */,
-				92DE254E23465101003A75A0 /* IntegerFixture.swift */,
 				92DE2558234652FE003A75A0 /* InvalidFixture.swift */,
 				92D04A97226A2C8700E97E06 /* LexebleOnlyFixture.swift */,
-				92DE254A23464CF4003A75A0 /* OperatorFixture.swift */,
-				92DE254C2346508F003A75A0 /* ParenthesisFixture.swift */,
+				92DE254E23465101003A75A0 /* LexemeIntegerFixture.swift */,
+				92DE254A23464CF4003A75A0 /* LexemeOperatorFixture.swift */,
+				92DE254C2346508F003A75A0 /* LexemeParenthesisFixture.swift */,
 				92DE255423465244003A75A0 /* ParsableOnlyFixture.swift */,
 			);
 			path = Fixtures;
@@ -303,17 +303,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				92DE254F23465101003A75A0 /* IntegerFixture.swift in Sources */,
+				92DE254F23465101003A75A0 /* LexemeIntegerFixture.swift in Sources */,
 				92DE255523465244003A75A0 /* ParsableOnlyFixture.swift in Sources */,
 				9286A376226700BA004D7360 /* ParserTests.swift in Sources */,
 				92CD302B20AD0EBD002462B3 /* ExpressionTests.swift in Sources */,
 				923D7FBC2146E872000E1D49 /* TokenableTests.swift in Sources */,
 				92391F0220B130A800FE8006 /* OperandTests.swift in Sources */,
 				92D513F6213DA02C00973B6F /* ParenthesisTests.swift in Sources */,
-				92DE254D2346508F003A75A0 /* ParenthesisFixture.swift in Sources */,
+				92DE254D2346508F003A75A0 /* LexemeParenthesisFixture.swift in Sources */,
 				92D04A98226A2C8700E97E06 /* LexebleOnlyFixture.swift in Sources */,
 				9226DC7721500ED9003D024D /* NSTextCheckingResultTests.swift in Sources */,
-				92DE254B23464CF4003A75A0 /* OperatorFixture.swift in Sources */,
+				92DE254B23464CF4003A75A0 /* LexemeOperatorFixture.swift in Sources */,
 				92D04AA2226DB27D00E97E06 /* LexerTests.swift in Sources */,
 				924105AA20B06B19009FC568 /* OperatorTests.swift in Sources */,
 				9226DC7421500EA7003D024D /* NSRegularExpressionTests.swift in Sources */,
