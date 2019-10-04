@@ -8,7 +8,7 @@ class ParserTests: XCTestCase {
       let expectedTokens = fixture.postfixTokens
       let actualTokens = try! parse(infixTokens: tokens)
 
-      XCTAssertTrue(expectedTokens.count == actualTokens.count)
+      XCTAssertEqual(expectedTokens.count, actualTokens.count)
 
       for (expected, actual) in zip(expectedTokens, actualTokens) {
         XCTAssertTrue(expected.isEqualTo(actual), "expected: \(expected), actual: \(actual)")
@@ -22,7 +22,7 @@ class ParserTests: XCTestCase {
       let expectedTokens = fixture.postfixTokens
       let actualTokens = try! parse(infixTokens: tokens)
 
-      XCTAssertTrue(expectedTokens.count == actualTokens.count)
+      XCTAssertEqual(expectedTokens.count, actualTokens.count)
 
       for (expected, actual) in zip(expectedTokens, actualTokens) {
         XCTAssertTrue(expected.isEqualTo(actual), "expected: \(expected), actual: \(actual)")
