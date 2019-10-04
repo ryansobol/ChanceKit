@@ -11,7 +11,6 @@ typealias LexebleIntegerFixture = (
   droppedTokens: [Tokenable]
 )
 
-//  TODO: Handle 1d4, 1d6, 1d8, 1d10, 1d12, 1d20, 1d100, and 1d
 let lexebleIntegerFixtures: [LexebleIntegerFixture] = [
   (
     withoutLexemes: [],
@@ -582,6 +581,411 @@ let lexebleIntegerFixtures: [LexebleIntegerFixture] = [
     withTokens: [Operand.number(199)],
     droppedLexemes: ["19"],
     droppedTokens: [Operand.number(19)]
+  ),
+  (
+    withoutLexemes: ["1d1"],
+    withoutTokens: [Operand.roll(1, 1)],
+    lexeme: "0",
+    integer: 0,
+    withLexemes: ["1d10"],
+    withTokens: [Operand.roll(1, 10)],
+    droppedLexemes: ["1d1"],
+    droppedTokens: [Operand.roll(1, 1)]
+  ),
+  (
+    withoutLexemes: ["1d1"],
+    withoutTokens: [Operand.roll(1, 1)],
+    lexeme: "1",
+    integer: 1,
+    withLexemes: ["1d11"],
+    withTokens: [Operand.roll(1, 11)],
+    droppedLexemes: ["1d1"],
+    droppedTokens: [Operand.roll(1, 1)]
+  ),
+  (
+    withoutLexemes: ["1d1"],
+    withoutTokens: [Operand.roll(1, 1)],
+    lexeme: "9",
+    integer: 9,
+    withLexemes: ["1d19"],
+    withTokens: [Operand.roll(1, 19)],
+    droppedLexemes: ["1d1"],
+    droppedTokens: [Operand.roll(1, 1)]
+  ),
+  (
+    withoutLexemes: ["1d"],
+    withoutTokens: [Operand.rollPositiveSides(1)],
+    lexeme: "0",
+    integer: 0,
+    withLexemes: ["1d0"],
+    withTokens: [Operand.roll(1, 0)],
+    droppedLexemes: ["1d"],
+    droppedTokens: [Operand.rollPositiveSides(1)]
+  ),
+  (
+    withoutLexemes: ["1d"],
+    withoutTokens: [Operand.rollPositiveSides(1)],
+    lexeme: "1",
+    integer: 1,
+    withLexemes: ["1d1"],
+    withTokens: [Operand.roll(1, 1)],
+    droppedLexemes: ["1d"],
+    droppedTokens: [Operand.rollPositiveSides(1)]
+  ),
+  (
+    withoutLexemes: ["1d"],
+    withoutTokens: [Operand.rollPositiveSides(1)],
+    lexeme: "9",
+    integer: 9,
+    withLexemes: ["1d9"],
+    withTokens: [Operand.roll(1, 9)],
+    droppedLexemes: ["1d"],
+    droppedTokens: [Operand.rollPositiveSides(1)]
+  ),
+  (
+    withoutLexemes: ["1d1", "×", "("],
+    withoutTokens: [Operand.roll(1, 1), Operator.multiplication, Parenthesis.open],
+    lexeme: "0",
+    integer: 0,
+    withLexemes: ["1d1", "×", "(", "0"],
+    withTokens: [Operand.roll(1, 1), Operator.multiplication, Parenthesis.open, Operand.number(0)],
+    droppedLexemes: ["1d1", "×", "("],
+    droppedTokens: [Operand.roll(1, 1), Operator.multiplication, Parenthesis.open]
+  ),
+  (
+    withoutLexemes: ["1d1", "×", "("],
+    withoutTokens: [Operand.roll(1, 1), Operator.multiplication, Parenthesis.open],
+    lexeme: "1",
+    integer: 1,
+    withLexemes: ["1d1", "×", "(", "1"],
+    withTokens: [Operand.roll(1, 1), Operator.multiplication, Parenthesis.open, Operand.number(1)],
+    droppedLexemes: ["1d1", "×", "("],
+    droppedTokens: [Operand.roll(1, 1), Operator.multiplication, Parenthesis.open]
+  ),
+  (
+    withoutLexemes: ["1d1", "×", "("],
+    withoutTokens: [Operand.roll(1, 1), Operator.multiplication, Parenthesis.open],
+    lexeme: "9",
+    integer: 9,
+    withLexemes: ["1d1", "×", "(", "9"],
+    withTokens: [Operand.roll(1, 1), Operator.multiplication, Parenthesis.open, Operand.number(9)],
+    droppedLexemes: ["1d1", "×", "("],
+    droppedTokens: [Operand.roll(1, 1), Operator.multiplication, Parenthesis.open]
+  ),
+  (
+    withoutLexemes: ["1d", "×", "("],
+    withoutTokens: [Operand.rollPositiveSides(1), Operator.multiplication, Parenthesis.open],
+    lexeme: "0",
+    integer: 0,
+    withLexemes: ["1d", "×", "(", "0"],
+    withTokens: [
+      Operand.rollPositiveSides(1),
+      Operator.multiplication,
+      Parenthesis.open,
+      Operand.number(0)
+    ],
+    droppedLexemes: ["1d", "×", "("],
+    droppedTokens: [Operand.rollPositiveSides(1), Operator.multiplication, Parenthesis.open]
+  ),
+  (
+    withoutLexemes: ["1d", "×", "("],
+    withoutTokens: [Operand.rollPositiveSides(1), Operator.multiplication, Parenthesis.open],
+    lexeme: "1",
+    integer: 1,
+    withLexemes: ["1d", "×", "(", "1"],
+    withTokens: [
+      Operand.rollPositiveSides(1),
+      Operator.multiplication,
+      Parenthesis.open,
+      Operand.number(1)
+    ],
+    droppedLexemes: ["1d", "×", "("],
+    droppedTokens: [Operand.rollPositiveSides(1), Operator.multiplication, Parenthesis.open]
+  ),
+  (
+    withoutLexemes: ["1d", "×", "("],
+    withoutTokens: [Operand.rollPositiveSides(1), Operator.multiplication, Parenthesis.open],
+    lexeme: "9",
+    integer: 9,
+    withLexemes: ["1d", "×", "(", "9"],
+    withTokens: [
+      Operand.rollPositiveSides(1),
+      Operator.multiplication,
+      Parenthesis.open,
+      Operand.number(9)
+    ],
+    droppedLexemes: ["1d", "×", "("],
+    droppedTokens: [Operand.rollPositiveSides(1), Operator.multiplication, Parenthesis.open]
+  ),
+  (
+    withoutLexemes: ["1d1", ")"],
+    withoutTokens: [Operand.roll(1, 1), Parenthesis.close],
+    lexeme: "0",
+    integer: 0,
+    withLexemes: ["1d1", ")", "×", "0"],
+    withTokens: [Operand.roll(1, 1), Parenthesis.close, Operator.multiplication, Operand.number(0)],
+    droppedLexemes: ["1d1", ")", "×"],
+    droppedTokens: [Operand.roll(1, 1), Parenthesis.close, Operator.multiplication]
+  ),
+  (
+    withoutLexemes: ["1d1", ")"],
+    withoutTokens: [Operand.roll(1, 1), Parenthesis.close],
+    lexeme: "1",
+    integer: 1,
+    withLexemes: ["1d1", ")", "×", "1"],
+    withTokens: [Operand.roll(1, 1), Parenthesis.close, Operator.multiplication, Operand.number(1)],
+    droppedLexemes: ["1d1", ")", "×"],
+    droppedTokens: [Operand.roll(1, 1), Parenthesis.close, Operator.multiplication]
+  ),
+  (
+    withoutLexemes: ["1d1", ")"],
+    withoutTokens: [Operand.roll(1, 1), Parenthesis.close],
+    lexeme: "9",
+    integer: 9,
+    withLexemes: ["1d1", ")", "×", "9"],
+    withTokens: [Operand.roll(1, 1), Parenthesis.close, Operator.multiplication, Operand.number(9)],
+    droppedLexemes: ["1d1", ")", "×"],
+    droppedTokens: [Operand.roll(1, 1), Parenthesis.close, Operator.multiplication]
+  ),
+  (
+    withoutLexemes: ["1d", ")"],
+    withoutTokens: [Operand.rollPositiveSides(1), Parenthesis.close],
+    lexeme: "0",
+    integer: 0,
+    withLexemes: ["1d", ")", "×", "0"],
+    withTokens: [Operand.rollPositiveSides(1), Parenthesis.close, Operator.multiplication, Operand.number(0)],
+    droppedLexemes: ["1d", ")", "×"],
+    droppedTokens: [Operand.rollPositiveSides(1), Parenthesis.close, Operator.multiplication]
+  ),
+  (
+    withoutLexemes: ["1d", ")"],
+    withoutTokens: [Operand.rollPositiveSides(1), Parenthesis.close],
+    lexeme: "1",
+    integer: 1,
+    withLexemes: ["1d", ")", "×", "1"],
+    withTokens: [Operand.rollPositiveSides(1), Parenthesis.close, Operator.multiplication, Operand.number(1)],
+    droppedLexemes: ["1d", ")", "×"],
+    droppedTokens: [Operand.rollPositiveSides(1), Parenthesis.close, Operator.multiplication]
+  ),
+  (
+    withoutLexemes: ["1d", ")"],
+    withoutTokens: [Operand.rollPositiveSides(1), Parenthesis.close],
+    lexeme: "9",
+    integer: 9,
+    withLexemes: ["1d", ")", "×", "9"],
+    withTokens: [Operand.rollPositiveSides(1), Parenthesis.close, Operator.multiplication, Operand.number(9)],
+    droppedLexemes: ["1d", ")", "×"],
+    droppedTokens: [Operand.rollPositiveSides(1), Parenthesis.close, Operator.multiplication]
+  ),
+  (
+    withoutLexemes: ["1d1", "+"],
+    withoutTokens: [Operand.roll(1, 1), Operator.addition],
+    lexeme: "0",
+    integer: 0,
+    withLexemes: ["1d1", "+", "0"],
+    withTokens: [Operand.roll(1, 1), Operator.addition, Operand.number(0)],
+    droppedLexemes: ["1d1", "+"],
+    droppedTokens: [Operand.roll(1, 1), Operator.addition]
+  ),
+  (
+    withoutLexemes: ["1d1", "+"],
+    withoutTokens: [Operand.roll(1, 1), Operator.addition],
+    lexeme: "1",
+    integer: 1,
+    withLexemes: ["1d1", "+", "1"],
+    withTokens: [Operand.roll(1, 1), Operator.addition, Operand.number(1)],
+    droppedLexemes: ["1d1", "+"],
+    droppedTokens: [Operand.roll(1, 1), Operator.addition]
+  ),
+  (
+    withoutLexemes: ["1d1", "+"],
+    withoutTokens: [Operand.roll(1, 1), Operator.addition],
+    lexeme: "9",
+    integer: 9,
+    withLexemes: ["1d1", "+", "9"],
+    withTokens: [Operand.roll(1, 1), Operator.addition, Operand.number(9)],
+    droppedLexemes: ["1d1", "+"],
+    droppedTokens: [Operand.roll(1, 1), Operator.addition]
+  ),
+  (
+    withoutLexemes: ["1d", "+"],
+    withoutTokens: [Operand.rollPositiveSides(1), Operator.addition],
+    lexeme: "0",
+    integer: 0,
+    withLexemes: ["1d", "+", "0"],
+    withTokens: [Operand.rollPositiveSides(1), Operator.addition, Operand.number(0)],
+    droppedLexemes: ["1d", "+"],
+    droppedTokens: [Operand.rollPositiveSides(1), Operator.addition]
+  ),
+  (
+    withoutLexemes: ["1d", "+"],
+    withoutTokens: [Operand.rollPositiveSides(1), Operator.addition],
+    lexeme: "1",
+    integer: 1,
+    withLexemes: ["1d", "+", "1"],
+    withTokens: [Operand.rollPositiveSides(1), Operator.addition, Operand.number(1)],
+    droppedLexemes: ["1d", "+"],
+    droppedTokens: [Operand.rollPositiveSides(1), Operator.addition]
+  ),
+  (
+    withoutLexemes: ["1d", "+"],
+    withoutTokens: [Operand.rollPositiveSides(1), Operator.addition],
+    lexeme: "9",
+    integer: 9,
+    withLexemes: ["1d", "+", "9"],
+    withTokens: [Operand.rollPositiveSides(1), Operator.addition, Operand.number(9)],
+    droppedLexemes: ["1d", "+"],
+    droppedTokens: [Operand.rollPositiveSides(1), Operator.addition]
+  ),
+  (
+    withoutLexemes: ["1d1", "÷"],
+    withoutTokens: [Operand.roll(1, 1), Operator.division],
+    lexeme: "0",
+    integer: 0,
+    withLexemes: ["1d1", "÷", "0"],
+    withTokens: [Operand.roll(1, 1), Operator.division, Operand.number(0)],
+    droppedLexemes: ["1d1", "÷"],
+    droppedTokens: [Operand.roll(1, 1), Operator.division]
+  ),
+  (
+    withoutLexemes: ["1d1", "÷"],
+    withoutTokens: [Operand.roll(1, 1), Operator.division],
+    lexeme: "1",
+    integer: 1,
+    withLexemes: ["1d1", "÷", "1"],
+    withTokens: [Operand.roll(1, 1), Operator.division, Operand.number(1)],
+    droppedLexemes: ["1d1", "÷"],
+    droppedTokens: [Operand.roll(1, 1), Operator.division]
+  ),
+  (
+    withoutLexemes: ["1d1", "÷"],
+    withoutTokens: [Operand.roll(1, 1), Operator.division],
+    lexeme: "9",
+    integer: 9,
+    withLexemes: ["1d1", "÷", "9"],
+    withTokens: [Operand.roll(1, 1), Operator.division, Operand.number(9)],
+    droppedLexemes: ["1d1", "÷"],
+    droppedTokens: [Operand.roll(1, 1), Operator.division]
+  ),
+  (
+    withoutLexemes: ["1d1", "×"],
+    withoutTokens: [Operand.roll(1, 1), Operator.multiplication],
+    lexeme: "0",
+    integer: 0,
+    withLexemes: ["1d1", "×", "0"],
+    withTokens: [Operand.roll(1, 1), Operator.multiplication, Operand.number(0)],
+    droppedLexemes: ["1d1", "×"],
+    droppedTokens: [Operand.roll(1, 1), Operator.multiplication]
+  ),
+  (
+    withoutLexemes: ["1d1", "×"],
+    withoutTokens: [Operand.roll(1, 1), Operator.multiplication],
+    lexeme: "1",
+    integer: 1,
+    withLexemes: ["1d1", "×", "1"],
+    withTokens: [Operand.roll(1, 1), Operator.multiplication, Operand.number(1)],
+    droppedLexemes: ["1d1", "×"],
+    droppedTokens: [Operand.roll(1, 1), Operator.multiplication]
+  ),
+  (
+    withoutLexemes: ["1d1", "×"],
+    withoutTokens: [Operand.roll(1, 1), Operator.multiplication],
+    lexeme: "9",
+    integer: 9,
+    withLexemes: ["1d1", "×", "9"],
+    withTokens: [Operand.roll(1, 1), Operator.multiplication, Operand.number(9)],
+    droppedLexemes: ["1d1", "×"],
+    droppedTokens: [Operand.roll(1, 1), Operator.multiplication]
+  ),
+  (
+    withoutLexemes: ["1d", "×"],
+    withoutTokens: [Operand.rollPositiveSides(1), Operator.multiplication],
+    lexeme: "0",
+    integer: 0,
+    withLexemes: ["1d", "×", "0"],
+    withTokens: [Operand.rollPositiveSides(1), Operator.multiplication, Operand.number(0)],
+    droppedLexemes: ["1d", "×"],
+    droppedTokens: [Operand.rollPositiveSides(1), Operator.multiplication]
+  ),
+  (
+    withoutLexemes: ["1d", "×"],
+    withoutTokens: [Operand.rollPositiveSides(1), Operator.multiplication],
+    lexeme: "1",
+    integer: 1,
+    withLexemes: ["1d", "×", "1"],
+    withTokens: [Operand.rollPositiveSides(1), Operator.multiplication, Operand.number(1)],
+    droppedLexemes: ["1d", "×"],
+    droppedTokens: [Operand.rollPositiveSides(1), Operator.multiplication]
+  ),
+  (
+    withoutLexemes: ["1d", "×"],
+    withoutTokens: [Operand.rollPositiveSides(1), Operator.multiplication],
+    lexeme: "9",
+    integer: 9,
+    withLexemes: ["1d", "×", "9"],
+    withTokens: [Operand.rollPositiveSides(1), Operator.multiplication, Operand.number(9)],
+    droppedLexemes: ["1d", "×"],
+    droppedTokens: [Operand.rollPositiveSides(1), Operator.multiplication]
+  ),
+  (
+    withoutLexemes: ["1d1", "-"],
+    withoutTokens: [Operand.roll(1, 1), Operator.subtraction],
+    lexeme: "0",
+    integer: 0,
+    withLexemes: ["1d1", "-", "0"],
+    withTokens: [Operand.roll(1, 1), Operator.subtraction, Operand.number(0)],
+    droppedLexemes: ["1d1", "-"],
+    droppedTokens: [Operand.roll(1, 1), Operator.subtraction]
+  ),
+  (
+    withoutLexemes: ["1d1", "-"],
+    withoutTokens: [Operand.roll(1, 1), Operator.subtraction],
+    lexeme: "1",
+    integer: 1,
+    withLexemes: ["1d1", "-", "1"],
+    withTokens: [Operand.roll(1, 1), Operator.subtraction, Operand.number(1)],
+    droppedLexemes: ["1d1", "-"],
+    droppedTokens: [Operand.roll(1, 1), Operator.subtraction]
+  ),
+  (
+    withoutLexemes: ["1d1", "-"],
+    withoutTokens: [Operand.roll(1, 1), Operator.subtraction],
+    lexeme: "9",
+    integer: 9,
+    withLexemes: ["1d1", "-", "9"],
+    withTokens: [Operand.roll(1, 1), Operator.subtraction, Operand.number(9)],
+    droppedLexemes: ["1d1", "-"],
+    droppedTokens: [Operand.roll(1, 1), Operator.subtraction]
+  ),
+  (
+    withoutLexemes: ["1d", "-"],
+    withoutTokens: [Operand.rollPositiveSides(1), Operator.subtraction],
+    lexeme: "0",
+    integer: 0,
+    withLexemes: ["1d", "-", "0"],
+    withTokens: [Operand.rollPositiveSides(1), Operator.subtraction, Operand.number(0)],
+    droppedLexemes: ["1d", "-"],
+    droppedTokens: [Operand.rollPositiveSides(1), Operator.subtraction]
+  ),
+  (
+    withoutLexemes: ["1d", "-"],
+    withoutTokens: [Operand.rollPositiveSides(1), Operator.subtraction],
+    lexeme: "1",
+    integer: 1,
+    withLexemes: ["1d", "-", "1"],
+    withTokens: [Operand.rollPositiveSides(1), Operator.subtraction, Operand.number(1)],
+    droppedLexemes: ["1d", "-"],
+    droppedTokens: [Operand.rollPositiveSides(1), Operator.subtraction]
+  ),
+  (
+    withoutLexemes: ["1d", "-"],
+    withoutTokens: [Operand.rollPositiveSides(1), Operator.subtraction],
+    lexeme: "9",
+    integer: 9,
+    withLexemes: ["1d", "-", "9"],
+    withTokens: [Operand.rollPositiveSides(1), Operator.subtraction, Operand.number(9)],
+    droppedLexemes: ["1d", "-"],
+    droppedTokens: [Operand.rollPositiveSides(1), Operator.subtraction]
   ),
 ]
 
