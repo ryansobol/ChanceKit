@@ -1,13 +1,13 @@
 @testable import ChanceKit
 
-typealias LexebleFixture = (
+typealias LexebleOnlyFixture = (
   description: String,
   lexemes: [String],
   infixTokens: [Tokenable],
   error: ExpressionError
 )
 
-let lexebleFixtures: [LexebleFixture] = [
+let lexebleOnlyFixtures: [LexebleOnlyFixture] = [
   (
     description: "(",
     lexemes: ["("],

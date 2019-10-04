@@ -30,8 +30,8 @@ class ParserTests: XCTestCase {
     }
   }
 
-  func testParseWithLexebleFixtures() {
-    for fixture in lexebleFixtures {
+  func testParseWithLexebleOnlyFixtures() {
+    for fixture in lexebleOnlyFixtures {
       let tokens = fixture.infixTokens
       let expected = fixture.error
 
