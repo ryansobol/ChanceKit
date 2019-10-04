@@ -1,6 +1,6 @@
 @testable import ChanceKit
 
-typealias ParsableFixture = (
+typealias ParsableOnlyFixture = (
   description: String,
   lexemes: [String],
   infixTokens: [Tokenable],
@@ -8,7 +8,7 @@ typealias ParsableFixture = (
   error: ExpressionError
 )
 
-let parsableFixtures: [ParsableFixture] = [
+let parsableOnlyFixtures: [ParsableOnlyFixture] = [
   (
     description: "+",
     lexemes: ["+"],

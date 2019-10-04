@@ -16,8 +16,8 @@ class ParserTests: XCTestCase {
     }
   }
 
-  func testParseWithParsableFixtures() {
-    for fixture in parsableFixtures {
+  func testParseWithParsableOnlyFixtures() {
+    for fixture in parsableOnlyFixtures {
       let tokens = fixture.infixTokens
       let expectedTokens = fixture.postfixTokens
       let actualTokens = try! parse(infixTokens: tokens)

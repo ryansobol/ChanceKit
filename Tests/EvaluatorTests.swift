@@ -12,8 +12,8 @@ class EvaluatorTests: XCTestCase {
     }
   }
 
-  func testEvaluateWithParsableFixtures() {
-    for fixture in parsableFixtures {
+  func testEvaluateWithParsableOnlyFixtures() {
+    for fixture in parsableOnlyFixtures {
       let tokens = fixture.postfixTokens
       let expected = fixture.error
 
