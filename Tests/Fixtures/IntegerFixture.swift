@@ -1,6 +1,6 @@
 @testable import ChanceKit
 
-typealias LexebleIntegerFixture = (
+typealias IntegerFixture = (
   withoutLexemes: [String],
   withoutTokens: [Tokenable],
   lexeme: String,
@@ -11,7 +11,7 @@ typealias LexebleIntegerFixture = (
   droppedTokens: [Tokenable]
 )
 
-let lexebleIntegerFixtures: [LexebleIntegerFixture] = [
+let integerFixtures: [IntegerFixture] = [
   (
     withoutLexemes: [],
     withoutTokens: [],

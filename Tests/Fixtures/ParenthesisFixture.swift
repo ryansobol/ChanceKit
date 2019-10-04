@@ -1,6 +1,6 @@
 @testable import ChanceKit
 
-typealias LexebleParenthesisFixture = (
+typealias ParenthesisFixture = (
   withoutLexemes: [String],
   withoutTokens: [Tokenable],
   lexeme: String,
@@ -11,7 +11,7 @@ typealias LexebleParenthesisFixture = (
   droppedTokens: [Tokenable]
 )
 
-let lexebleParenthesisFixtures: [LexebleParenthesisFixture] = [
+let parenthesisFixtures: [ParenthesisFixture] = [
   (
     withoutLexemes: [],
     withoutTokens: [],

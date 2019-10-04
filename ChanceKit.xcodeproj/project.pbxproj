@@ -31,9 +31,9 @@
 		92D513F6213DA02C00973B6F /* ParenthesisTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92D513F5213DA02C00973B6F /* ParenthesisTests.swift */; };
 		92DA546D20B204CD0052CC65 /* Markable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92DA546C20B204CD0052CC65 /* Markable.swift */; };
 		92DA546F20B207270052CC65 /* Parenthesis.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92DA546E20B207270052CC65 /* Parenthesis.swift */; };
-		92DE254B23464CF4003A75A0 /* LexebleOperatorFixture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92DE254A23464CF4003A75A0 /* LexebleOperatorFixture.swift */; };
-		92DE254D2346508F003A75A0 /* LexebleParenthesisFixture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92DE254C2346508F003A75A0 /* LexebleParenthesisFixture.swift */; };
-		92DE254F23465101003A75A0 /* LexebleIntegerFixture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92DE254E23465101003A75A0 /* LexebleIntegerFixture.swift */; };
+		92DE254B23464CF4003A75A0 /* OperatorFixture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92DE254A23464CF4003A75A0 /* OperatorFixture.swift */; };
+		92DE254D2346508F003A75A0 /* ParenthesisFixture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92DE254C2346508F003A75A0 /* ParenthesisFixture.swift */; };
+		92DE254F23465101003A75A0 /* IntegerFixture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92DE254E23465101003A75A0 /* IntegerFixture.swift */; };
 		92DE255123465169003A75A0 /* EvaluatableFixture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92DE255023465169003A75A0 /* EvaluatableFixture.swift */; };
 		92DE255523465244003A75A0 /* ParsableOnlyFixture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92DE255423465244003A75A0 /* ParsableOnlyFixture.swift */; };
 		92DE2559234652FE003A75A0 /* InvalidFixture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92DE2558234652FE003A75A0 /* InvalidFixture.swift */; };
@@ -78,9 +78,9 @@
 		92D513F5213DA02C00973B6F /* ParenthesisTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParenthesisTests.swift; sourceTree = "<group>"; };
 		92DA546C20B204CD0052CC65 /* Markable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Markable.swift; sourceTree = "<group>"; };
 		92DA546E20B207270052CC65 /* Parenthesis.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Parenthesis.swift; sourceTree = "<group>"; };
-		92DE254A23464CF4003A75A0 /* LexebleOperatorFixture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LexebleOperatorFixture.swift; sourceTree = "<group>"; };
-		92DE254C2346508F003A75A0 /* LexebleParenthesisFixture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LexebleParenthesisFixture.swift; sourceTree = "<group>"; };
-		92DE254E23465101003A75A0 /* LexebleIntegerFixture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LexebleIntegerFixture.swift; sourceTree = "<group>"; };
+		92DE254A23464CF4003A75A0 /* OperatorFixture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OperatorFixture.swift; sourceTree = "<group>"; };
+		92DE254C2346508F003A75A0 /* ParenthesisFixture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParenthesisFixture.swift; sourceTree = "<group>"; };
+		92DE254E23465101003A75A0 /* IntegerFixture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntegerFixture.swift; sourceTree = "<group>"; };
 		92DE255023465169003A75A0 /* EvaluatableFixture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EvaluatableFixture.swift; sourceTree = "<group>"; };
 		92DE255423465244003A75A0 /* ParsableOnlyFixture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParsableOnlyFixture.swift; sourceTree = "<group>"; };
 		92DE2558234652FE003A75A0 /* InvalidFixture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvalidFixture.swift; sourceTree = "<group>"; };
@@ -164,10 +164,9 @@
 		92CD302020AD0E6C002462B3 /* Tests */ = {
 			isa = PBXGroup;
 			children = (
-				92DE254923464CCD003A75A0 /* Fixtures */,
 				92A4CC7020AD143C0096AF98 /* Info.plist */,
-				92CD302A20AD0EBD002462B3 /* ExpressionTests.swift */,
 				92D04A9D226CCC3600E97E06 /* EvaluatorTests.swift */,
+				92CD302A20AD0EBD002462B3 /* ExpressionTests.swift */,
 				92D04AA1226DB27D00E97E06 /* LexerTests.swift */,
 				92391F0120B130A800FE8006 /* OperandTests.swift */,
 				924105A920B06B19009FC568 /* OperatorTests.swift */,
@@ -175,6 +174,7 @@
 				9286A375226700BA004D7360 /* ParserTests.swift */,
 				923D7FBB2146E872000E1D49 /* TokenableTests.swift */,
 				9226DC7521500EAE003D024D /* Additions */,
+				92DE254923464CCD003A75A0 /* Fixtures */,
 			);
 			path = Tests;
 			sourceTree = "<group>";
@@ -182,13 +182,13 @@
 		92DE254923464CCD003A75A0 /* Fixtures */ = {
 			isa = PBXGroup;
 			children = (
-				92D04A97226A2C8700E97E06 /* LexebleOnlyFixture.swift */,
-				92DE254A23464CF4003A75A0 /* LexebleOperatorFixture.swift */,
-				92DE254C2346508F003A75A0 /* LexebleParenthesisFixture.swift */,
-				92DE254E23465101003A75A0 /* LexebleIntegerFixture.swift */,
 				92DE255023465169003A75A0 /* EvaluatableFixture.swift */,
-				92DE255423465244003A75A0 /* ParsableOnlyFixture.swift */,
+				92DE254E23465101003A75A0 /* IntegerFixture.swift */,
 				92DE2558234652FE003A75A0 /* InvalidFixture.swift */,
+				92D04A97226A2C8700E97E06 /* LexebleOnlyFixture.swift */,
+				92DE254A23464CF4003A75A0 /* OperatorFixture.swift */,
+				92DE254C2346508F003A75A0 /* ParenthesisFixture.swift */,
+				92DE255423465244003A75A0 /* ParsableOnlyFixture.swift */,
 			);
 			path = Fixtures;
 			sourceTree = "<group>";
@@ -303,17 +303,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				92DE254F23465101003A75A0 /* LexebleIntegerFixture.swift in Sources */,
+				92DE254F23465101003A75A0 /* IntegerFixture.swift in Sources */,
 				92DE255523465244003A75A0 /* ParsableOnlyFixture.swift in Sources */,
 				9286A376226700BA004D7360 /* ParserTests.swift in Sources */,
 				92CD302B20AD0EBD002462B3 /* ExpressionTests.swift in Sources */,
 				923D7FBC2146E872000E1D49 /* TokenableTests.swift in Sources */,
 				92391F0220B130A800FE8006 /* OperandTests.swift in Sources */,
 				92D513F6213DA02C00973B6F /* ParenthesisTests.swift in Sources */,
-				92DE254D2346508F003A75A0 /* LexebleParenthesisFixture.swift in Sources */,
+				92DE254D2346508F003A75A0 /* ParenthesisFixture.swift in Sources */,
 				92D04A98226A2C8700E97E06 /* LexebleOnlyFixture.swift in Sources */,
 				9226DC7721500ED9003D024D /* NSTextCheckingResultTests.swift in Sources */,
-				92DE254B23464CF4003A75A0 /* LexebleOperatorFixture.swift in Sources */,
+				92DE254B23464CF4003A75A0 /* OperatorFixture.swift in Sources */,
 				92D04AA2226DB27D00E97E06 /* LexerTests.swift in Sources */,
 				924105AA20B06B19009FC568 /* OperatorTests.swift in Sources */,
 				9226DC7421500EA7003D024D /* NSRegularExpressionTests.swift in Sources */,
