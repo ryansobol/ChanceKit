@@ -95,7 +95,7 @@ extension Operand {
       return .roll(times, nextSides)
 
     case let .rollNegativeSides(times):
-      return .roll(times, suffix * -1)
+      return .roll(times, -suffix)
 
     case let .rollPositiveSides(times):
       return .roll(times, suffix)
