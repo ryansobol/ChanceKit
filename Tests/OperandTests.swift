@@ -1497,4 +1497,104 @@ extension OperandTests {
       }
     }
   }
+
+  func testNegationWithNumbers() {
+    typealias Fixture = (
+      operand: Operand,
+      expected: Operand
+    )
+
+    let fixtures: [Fixture] = [
+      (operand: .number(1), expected: .number(-1)),
+      (operand: .number(-1), expected: .number(1)),
+
+      (operand: .number(0), expected: .number(0)),
+      (operand: .number(-0), expected: .number(0)),
+
+      (operand: .number(Int.max), expected: .number(-Int.max)),
+    ]
+
+    for fixture in fixtures {
+      let operand = fixture.operand
+      let expected = fixture.expected
+      let actual = try! -operand
+
+      XCTAssertEqual(expected, actual)
+    }
+  }
+
+  func testNegationWithNumbersAndOverflow() {
+    let operands: [Operand] = [
+      .number(Int.min),
+    ]
+
+    let expected = ExpressionError.operationOverflow
+
+    for operand in operands {
+      XCTAssertThrowsError(try -operand) { error in
+        XCTAssertEqual(expected, error as? ExpressionError)
+      }
+    }
+  }
+
+  func testNegationWithRoll() {
+    typealias Fixture = (
+      operand: Operand,
+      expected: Operand
+    )
+
+    let fixtures: [Fixture] = [
+      (operand: .roll(1, 1), expected: .roll(1, -1)),
+      (operand: .roll(1, -1), expected: .roll(1, 1)),
+      (operand: .roll(-1, 1), expected: .roll(-1, -1)),
+      (operand: .roll(-1, -1), expected: .roll(-1, 1)),
+
+      (operand: .roll(0, 0), expected: .roll(0, 0)),
+      (operand: .roll(0, -0), expected: .roll(0, 0)),
+      (operand: .roll(-0, 0), expected: .roll(0, 0)),
+      (operand: .roll(-0, -0), expected: .roll(0, 0)),
+
+      (operand: .roll(Int.max, Int.max), expected: .roll(Int.max, -Int.max)),
+
+      (operand: .rollNegativeSides(1), expected: .rollPositiveSides(1)),
+      (operand: .rollNegativeSides(-1), expected: .rollPositiveSides(-1)),
+
+      (operand: .rollNegativeSides(0), expected: .rollPositiveSides(0)),
+      (operand: .rollNegativeSides(-0), expected: .rollPositiveSides(0)),
+
+      (operand: .rollNegativeSides(Int.max), expected: .rollPositiveSides(Int.max)),
+      (operand: .rollNegativeSides(Int.min), expected: .rollPositiveSides(Int.min)),
+
+      (operand: .rollPositiveSides(1), expected: .rollNegativeSides(1)),
+      (operand: .rollPositiveSides(-1), expected: .rollNegativeSides(-1)),
+
+      (operand: .rollPositiveSides(0), expected: .rollNegativeSides(0)),
+      (operand: .rollPositiveSides(-0), expected: .rollNegativeSides(0)),
+
+      (operand: .rollPositiveSides(Int.max), expected: .rollNegativeSides(Int.max)),
+      (operand: .rollPositiveSides(Int.min), expected: .rollNegativeSides(Int.min)),
+    ]
+
+    for fixture in fixtures {
+      let operand = fixture.operand
+      let expected = fixture.expected
+      let actual = try! -operand
+
+      XCTAssertEqual(expected, actual)
+    }
+  }
+
+  func testNegationWithRollAndOverflow() {
+    let operands: [Operand] = [
+      .roll(Int.min, Int.min)
+    ]
+
+    let expected = ExpressionError.operationOverflow
+
+    for operand in operands {
+      XCTAssertThrowsError(try -operand) { error in
+        XCTAssertEqual(expected, error as? ExpressionError)
+      }
+    }
+  }
 }

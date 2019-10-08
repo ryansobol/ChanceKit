@@ -291,4 +291,30 @@ extension Operand {
 
     return Operand.number(result)
   }
+
+  static prefix func - (operand: Operand) throws -> Operand {
+    switch operand {
+    case let .number(value):
+      // Because -Int.min > Int.max
+      if value == Int.min {
+        throw ExpressionError.operationOverflow
+      }
+
+      return .number(-value)
+
+    case let .roll(times, sides):
+      // Because -Int.min > Int.max
+      if sides == Int.min {
+        throw ExpressionError.operationOverflow
+      }
+
+      return .roll(times, -sides)
+
+    case let .rollNegativeSides(times):
+      return .rollPositiveSides(times)
+
+    case let .rollPositiveSides(times):
+      return .rollNegativeSides(times)
+    }
+  }
 }
