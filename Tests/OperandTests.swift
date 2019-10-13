@@ -238,6 +238,68 @@ extension OperandTests {
     }
   }
 
+  func testCombinedNumberIntoNumber() {
+    typealias Fixture = (
+      operand1: Operand,
+      operand2: Operand,
+      expected: Operand
+    )
+
+    let fixtures: [Fixture] = [
+      (operand1: .number(0), operand2: .number(0), expected: .number(0)),
+      (operand1: .number(1), operand2: .number(0), expected: .number(10)),
+      (operand1: .number(21), operand2: .number(0), expected: .number(210)),
+
+      (operand1: .number(0), operand2: .number(1), expected: .number(1)),
+      (operand1: .number(2), operand2: .number(1), expected: .number(21)),
+      (operand1: .number(32), operand2: .number(1), expected: .number(321)),
+
+      (operand1: .number(0), operand2: .number(9), expected: .number(9)),
+      (operand1: .number(8), operand2: .number(9), expected: .number(89)),
+      (operand1: .number(78), operand2: .number(9), expected: .number(789)),
+
+      (operand1: .number(0), operand2: .number(Int.max), expected: .number(Int.max)),
+      (operand1: .number(9), operand2: .number(223372036854775807), expected: .number(Int.max)),
+      (operand1: .number(922337203685477580), operand2: .number(7), expected: .number(Int.max)),
+
+      (operand1: .number(-0), operand2: .number(0), expected: .number(0)),
+      (operand1: .number(-1), operand2: .number(0), expected: .number(-10)),
+      (operand1: .number(-21), operand2: .number(0), expected: .number(-210)),
+
+      (operand1: .number(-0), operand2: .number(1), expected: .number(1)),
+      (operand1: .number(-2), operand2: .number(1), expected: .number(-21)),
+      (operand1: .number(-32), operand2: .number(1), expected: .number(-321)),
+
+      (operand1: .number(-0), operand2: .number(9), expected: .number(9)),
+      (operand1: .number(-8), operand2: .number(9), expected: .number(-89)),
+      (operand1: .number(-78), operand2: .number(9), expected: .number(-789)),
+
+      (operand1: .number(-0), operand2: .number(Int.max), expected: .number(Int.max)),
+      (operand1: .number(-9), operand2: .number(223372036854775807), expected: .number(-Int.max)),
+      (operand1: .number(-922337203685477580), operand2: .number(7), expected: .number(-Int.max)),
+
+      (operand1: .number(0), operand2: .number(-0), expected: .number(0)),
+      (operand1: .number(1), operand2: .number(-0), expected: .number(10)),
+      (operand1: .number(21), operand2: .number(-0), expected: .number(210)),
+
+      (operand1: .number(-0), operand2: .number(-0), expected: .number(0)),
+      (operand1: .number(-1), operand2: .number(-0), expected: .number(-10)),
+      (operand1: .number(-21), operand2: .number(-0), expected: .number(-210)),
+
+      (operand1: .number(-9), operand2: .number(223372036854775808), expected: .number(Int.min)),
+      (operand1: .number(-922337203685477580), operand2: .number(8), expected: .number(Int.min)),
+    ]
+
+    for fixture in fixtures {
+      let operand1 = fixture.operand1
+      let operand2 = fixture.operand2
+      let expected = fixture.expected
+      let actual = try! operand1.combined(operand2)
+
+      XCTAssertEqual(expected, actual)
+    }
+  }
+
   func testPushedToNumberWithInvalidLexeme() {
     typealias Fixture = (
       operand: Operand,
@@ -261,6 +323,60 @@ extension OperandTests {
       let expected = ExpressionError.invalidLexeme(String(suffix))
 
       XCTAssertThrowsError(try operand.pushed(suffix)) { error in
+        XCTAssertEqual(expected, error as? ExpressionError)
+      }
+    }
+  }
+
+  func testCombinedNumberIntoNumberWithInvalidCombinationOperands() {
+    typealias Fixture = (
+      operand1: Operand,
+      operand2: Operand
+    )
+
+    let fixtures: [Fixture] = [
+      // Invalid format
+      (operand1: .number(0), operand2: .number(-1)),
+      (operand1: .number(2), operand2: .number(-1)),
+      (operand1: .number(32), operand2: .number(-1)),
+
+      (operand1: .number(0), operand2: .number(-9)),
+      (operand1: .number(8), operand2: .number(-9)),
+      (operand1: .number(78), operand2: .number(-9)),
+
+      (operand1: .number(0), operand2: .number(Int.min)),
+      (operand1: .number(9), operand2: .number(-223372036854775807)),
+      (operand1: .number(922337203685477580), operand2: .number(-7)),
+
+      (operand1: .number(-0), operand2: .number(-1)),
+      (operand1: .number(-2), operand2: .number(-1)),
+      (operand1: .number(-32), operand2: .number(-1)),
+
+      (operand1: .number(-0), operand2: .number(-9)),
+      (operand1: .number(-8), operand2: .number(-9)),
+      (operand1: .number(-78), operand2: .number(-9)),
+
+      (operand1: .number(-0), operand2: .number(Int.min)),
+      (operand1: .number(-9), operand2: .number(-223372036854775807)),
+      (operand1: .number(-922337203685477580), operand2: .number(-7)),
+
+      // Out of range
+      (operand1: .number(922337203685477580), operand2: .number(8)),
+      (operand1: .number(Int.max), operand2: .number(0)),
+
+      (operand1: .number(-922337203685477580), operand2: .number(9)),
+      (operand1: .number(Int.min), operand2: .number(0)),
+    ]
+
+    for fixture in fixtures {
+      let operand1 = fixture.operand1
+      let operand2 = fixture.operand2
+      let expected = ExpressionError.invalidCombinationOperands(
+        String(describing: operand1),
+        String(describing: operand2)
+      )
+
+      XCTAssertThrowsError(try operand1.combined(operand2)) { error in
         XCTAssertEqual(expected, error as? ExpressionError)
       }
     }
@@ -351,6 +467,149 @@ extension OperandTests {
     }
   }
 
+  func testCombinedNumberIntoRoll() {
+    typealias Fixture = (
+      operand1: Operand,
+      operand2: Operand,
+      expected: Operand
+    )
+
+    let fixtures: [Fixture] = [
+      (operand1: .rollPositiveSides(0), operand2: .number(0), expected: .roll(0, 0)),
+      (operand1: .roll(0, 0), operand2: .number(0), expected: .roll(0, 0)),
+      (operand1: .roll(0, 1), operand2: .number(0), expected: .roll(0, 10)),
+      (operand1: .roll(0, 21), operand2: .number(0), expected: .roll(0, 210)),
+
+      (operand1: .rollPositiveSides(1), operand2: .number(1), expected: .roll(1, 1)),
+      (operand1: .roll(1, 0), operand2: .number(1), expected: .roll(1, 1)),
+      (operand1: .roll(1, 2), operand2: .number(1), expected: .roll(1, 21)),
+      (operand1: .roll(1, 32), operand2: .number(1), expected: .roll(1, 321)),
+
+      (operand1: .rollPositiveSides(9), operand2: .number(9), expected: .roll(9, 9)),
+      (operand1: .roll(9, 0), operand2: .number(9), expected: .roll(9, 9)),
+      (operand1: .roll(9, 8), operand2: .number(9), expected: .roll(9, 89)),
+      (operand1: .roll(9, 78), operand2: .number(9), expected: .roll(9, 789)),
+
+      (operand1: .rollPositiveSides(1), operand2: .number(Int.max), expected: .roll(1, Int.max)),
+      (operand1: .roll(1, 0), operand2: .number(Int.max), expected: .roll(1, Int.max)),
+      (operand1: .roll(1, 9), operand2: .number(223372036854775807), expected: .roll(1, Int.max)),
+      (operand1: .roll(1, 922337203685477580), operand2: .number(7), expected: .roll(1, Int.max)),
+
+      (operand1: .rollNegativeSides(0), operand2: .number(0), expected: .roll(0, -0)),
+      (operand1: .roll(0, -0), operand2: .number(0), expected: .roll(0, 0)),
+      (operand1: .roll(0, -1), operand2: .number(0), expected: .roll(0, -10)),
+      (operand1: .roll(0, -21), operand2: .number(0), expected: .roll(0, -210)),
+
+      (operand1: .rollNegativeSides(1), operand2: .number(1), expected: .roll(1, -1)),
+      (operand1: .roll(1, -0), operand2: .number(1), expected: .roll(1, 1)),
+      (operand1: .roll(1, -2), operand2: .number(1), expected: .roll(1, -21)),
+      (operand1: .roll(1, -32), operand2: .number(1), expected: .roll(1, -321)),
+
+      (operand1: .rollNegativeSides(9), operand2: .number(9), expected: .roll(9, -9)),
+      (operand1: .roll(9, -0), operand2: .number(9), expected: .roll(9, 9)),
+      (operand1: .roll(9, -8), operand2: .number(9), expected: .roll(9, -89)),
+      (operand1: .roll(9, -78), operand2: .number(9), expected: .roll(9, -789)),
+
+      (operand1: .rollNegativeSides(1), operand2: .number(Int.max), expected: .roll(1, -Int.max)),
+      (operand1: .roll(1, -0), operand2: .number(Int.max), expected: .roll(1, Int.max)),
+      (operand1: .roll(1, -9), operand2: .number(223372036854775808), expected: .roll(1, Int.min)),
+      (operand1: .roll(1, -922337203685477580), operand2: .number(8), expected: .roll(1, Int.min)),
+
+      (operand1: .rollPositiveSides(-0), operand2: .number(0), expected: .roll(-0, 0)),
+      (operand1: .roll(-0, 0), operand2: .number(0), expected: .roll(-0, 0)),
+      (operand1: .roll(-0, 1), operand2: .number(0), expected: .roll(-0, 10)),
+      (operand1: .roll(-0, 21), operand2: .number(0), expected: .roll(-0, 210)),
+
+      (operand1: .rollPositiveSides(-1), operand2: .number(1), expected: .roll(-1, 1)),
+      (operand1: .roll(-1, 0), operand2: .number(1), expected: .roll(-1, 1)),
+      (operand1: .roll(-1, 2), operand2: .number(1), expected: .roll(-1, 21)),
+      (operand1: .roll(-1, 32), operand2: .number(1), expected: .roll(-1, 321)),
+
+      (operand1: .rollPositiveSides(-9), operand2: .number(9), expected: .roll(-9, 9)),
+      (operand1: .roll(-9, 0), operand2: .number(9), expected: .roll(-9, 9)),
+      (operand1: .roll(-9, 8), operand2: .number(9), expected: .roll(-9, 89)),
+      (operand1: .roll(-9, 78), operand2: .number(9), expected: .roll(-9, 789)),
+
+      (operand1: .rollPositiveSides(-1), operand2: .number(Int.max), expected: .roll(-1, Int.max)),
+      (operand1: .roll(-1, 0), operand2: .number(Int.max), expected: .roll(-1, Int.max)),
+      (operand1: .roll(-1, 9), operand2: .number(223372036854775807), expected: .roll(-1, Int.max)),
+      (operand1: .roll(-1, 922337203685477580), operand2: .number(7), expected: .roll(-1, Int.max)),
+
+      (operand1: .rollNegativeSides(-0), operand2: .number(0), expected: .roll(-0, -0)),
+      (operand1: .roll(-0, -0), operand2: .number(0), expected: .roll(-0, 0)),
+      (operand1: .roll(-0, -1), operand2: .number(0), expected: .roll(-0, -10)),
+      (operand1: .roll(-0, -21), operand2: .number(0), expected: .roll(-0, -210)),
+
+      (operand1: .rollNegativeSides(-1), operand2: .number(1), expected: .roll(-1, -1)),
+      (operand1: .roll(-1, -0), operand2: .number(1), expected: .roll(-1, 1)),
+      (operand1: .roll(-1, -2), operand2: .number(1), expected: .roll(-1, -21)),
+      (operand1: .roll(-1, -32), operand2: .number(1), expected: .roll(-1, -321)),
+
+      (operand1: .rollNegativeSides(-9), operand2: .number(9), expected: .roll(-9, -9)),
+      (operand1: .roll(-9, -0), operand2: .number(9), expected: .roll(-9, 9)),
+      (operand1: .roll(-9, -8), operand2: .number(9), expected: .roll(-9, -89)),
+      (operand1: .roll(-9, -78), operand2: .number(9), expected: .roll(-9, -789)),
+
+      (operand1: .rollNegativeSides(-1), operand2: .number(Int.max), expected: .roll(-1, -Int.max)),
+      (operand1: .roll(-1, -0), operand2: .number(Int.max), expected: .roll(-1, Int.max)),
+      (operand1: .roll(-1, -9), operand2: .number(223372036854775808), expected: .roll(-1, Int.min)),
+      (operand1: .roll(-1, -922337203685477580), operand2: .number(8), expected: .roll(-1, Int.min)),
+
+      (operand1: .rollPositiveSides(0), operand2: .number(-0), expected: .roll(0, 0)),
+      (operand1: .roll(0, 0), operand2: .number(-0), expected: .roll(0, 0)),
+      (operand1: .roll(0, 1), operand2: .number(-0), expected: .roll(0, 10)),
+      (operand1: .roll(0, 21), operand2: .number(-0), expected: .roll(0, 210)),
+
+      (operand1: .rollPositiveSides(1), operand2: .number(-1), expected: .roll(1, -1)),
+
+      (operand1: .rollPositiveSides(9), operand2: .number(-9), expected: .roll(9, -9)),
+
+      (operand1: .rollPositiveSides(1), operand2: .number(Int.min), expected: .roll(1, Int.min)),
+
+      (operand1: .rollNegativeSides(0), operand2: .number(0), expected: .roll(0, -0)),
+      (operand1: .roll(0, -0), operand2: .number(0), expected: .roll(0, 0)),
+      (operand1: .roll(0, -1), operand2: .number(0), expected: .roll(0, -10)),
+      (operand1: .roll(0, -21), operand2: .number(0), expected: .roll(0, -210)),
+
+      (operand1: .rollNegativeSides(1), operand2: .number(-1), expected: .roll(1, 1)),
+
+      (operand1: .rollNegativeSides(9), operand2: .number(-9), expected: .roll(9, 9)),
+
+      (operand1: .rollNegativeSides(1), operand2: .number(-Int.max), expected: .roll(1, Int.max)),
+
+      (operand1: .rollPositiveSides(-0), operand2: .number(-0), expected: .roll(-0, 0)),
+      (operand1: .roll(-0, 0), operand2: .number(-0), expected: .roll(-0, 0)),
+      (operand1: .roll(-0, 1), operand2: .number(-0), expected: .roll(-0, 10)),
+      (operand1: .roll(-0, 21), operand2: .number(-0), expected: .roll(-0, 210)),
+
+      (operand1: .rollPositiveSides(-1), operand2: .number(-1), expected: .roll(-1, -1)),
+
+      (operand1: .rollPositiveSides(-9), operand2: .number(-9), expected: .roll(-9, -9)),
+
+      (operand1: .rollPositiveSides(-1), operand2: .number(Int.min), expected: .roll(-1, Int.min)),
+
+      (operand1: .rollNegativeSides(-0), operand2: .number(0), expected: .roll(-0, -0)),
+      (operand1: .roll(-0, -0), operand2: .number(0), expected: .roll(-0, 0)),
+      (operand1: .roll(-0, -1), operand2: .number(0), expected: .roll(-0, -10)),
+      (operand1: .roll(-0, -21), operand2: .number(0), expected: .roll(-0, -210)),
+
+      (operand1: .rollNegativeSides(-1), operand2: .number(-1), expected: .roll(-1, 1)),
+
+      (operand1: .rollNegativeSides(-9), operand2: .number(-9), expected: .roll(-9, 9)),
+
+      (operand1: .rollNegativeSides(-1), operand2: .number(-Int.max), expected: .roll(-1, Int.max)),
+    ]
+
+    for fixture in fixtures {
+      let operand1 = fixture.operand1
+      let operand2 = fixture.operand2
+      let expected = fixture.expected
+      let actual = try! operand1.combined(operand2)
+
+      XCTAssertEqual(expected, actual)
+    }
+  }
+
   func testPushedToRollWithInvalidLexeme() {
     typealias Fixture = (
       operand: Operand,
@@ -374,6 +633,105 @@ extension OperandTests {
       let expected = ExpressionError.invalidLexeme(String(suffix))
 
       XCTAssertThrowsError(try operand.pushed(suffix)) { error in
+        XCTAssertEqual(expected, error as? ExpressionError)
+      }
+    }
+  }
+
+  func testCombinedNumberIntoRollWithInvalidCombinationOperands() {
+    typealias Fixture = (
+      operand1: Operand,
+      operand2: Operand
+    )
+
+    let fixtures: [Fixture] = [
+      // Invalid format
+      (operand1: .roll(1, 0), operand2: .number(-1)),
+      (operand1: .roll(1, 2), operand2: .number(-1)),
+      (operand1: .roll(1, 32), operand2: .number(-1)),
+
+      (operand1: .roll(9, 0), operand2: .number(-9)),
+      (operand1: .roll(9, 8), operand2: .number(-9)),
+      (operand1: .roll(9, 78), operand2: .number(-9)),
+
+      (operand1: .roll(1, 0), operand2: .number(Int.min)),
+      (operand1: .roll(1, 9), operand2: .number(-223372036854775808)),
+      (operand1: .roll(1, 922337203685477580), operand2: .number(-8)),
+
+      (operand1: .roll(1, -0), operand2: .number(-1)),
+      (operand1: .roll(1, -2), operand2: .number(-1)),
+      (operand1: .roll(1, -32), operand2: .number(-1)),
+
+      (operand1: .roll(9, -0), operand2: .number(-9)),
+      (operand1: .roll(9, -8), operand2: .number(-9)),
+      (operand1: .roll(9, -78), operand2: .number(-9)),
+
+      (operand1: .roll(1, -0), operand2: .number(Int.min)),
+      (operand1: .roll(1, -9), operand2: .number(-223372036854775808)),
+      (operand1: .roll(1, -922337203685477580), operand2: .number(-8)),
+
+      (operand1: .roll(-1, 0), operand2: .number(-1)),
+      (operand1: .roll(-1, 2), operand2: .number(-1)),
+      (operand1: .roll(-1, 32), operand2: .number(-1)),
+
+      (operand1: .roll(-9, 0), operand2: .number(-9)),
+      (operand1: .roll(-9, 8), operand2: .number(-9)),
+      (operand1: .roll(-9, 78), operand2: .number(-9)),
+
+      (operand1: .roll(-1, 0), operand2: .number(Int.min)),
+      (operand1: .roll(-1, 9), operand2: .number(-223372036854775808)),
+      (operand1: .roll(-1, 922337203685477580), operand2: .number(-8)),
+
+      (operand1: .roll(-1, -0), operand2: .number(-1)),
+      (operand1: .roll(-1, -2), operand2: .number(-1)),
+      (operand1: .roll(-1, -32), operand2: .number(-1)),
+
+      (operand1: .roll(-9, -0), operand2: .number(-9)),
+      (operand1: .roll(-9, -8), operand2: .number(-9)),
+      (operand1: .roll(-9, -78), operand2: .number(-9)),
+
+      (operand1: .roll(-1, -0), operand2: .number(Int.min)),
+      (operand1: .roll(-1, -9), operand2: .number(-223372036854775808)),
+      (operand1: .roll(-1, -922337203685477580), operand2: .number(-8)),
+
+      // Out of range
+      (operand1: .roll(1, 922337203685477580), operand2: .number(8)),
+      (operand1: .roll(1, Int.max), operand2: .number(0)),
+
+      (operand1: .roll(1, -922337203685477580), operand2: .number(9)),
+      (operand1: .roll(1, Int.min), operand2: .number(0)),
+    ]
+
+    for fixture in fixtures {
+      let operand1 = fixture.operand1
+      let operand2 = fixture.operand2
+      let expected = ExpressionError.invalidCombinationOperands(
+        String(describing: operand1),
+        String(describing: operand2)
+      )
+
+      XCTAssertThrowsError(try operand1.combined(operand2)) { error in
+        XCTAssertEqual(expected, error as? ExpressionError)
+      }
+    }
+  }
+
+  func testCombinedNumberIntoRollWithOperationOverflow() {
+    typealias Fixture = (
+      operand1: Operand,
+      operand2: Operand
+    )
+
+    let fixtures: [Fixture] = [
+      (operand1: .rollNegativeSides(1), operand2: .number(Int.min))
+    ]
+
+    for fixture in fixtures {
+      let operand1 = fixture.operand1
+      let operand2 = fixture.operand2
+      let expected = ExpressionError.operationOverflow
+
+      XCTAssertThrowsError(try operand1.combined(operand2)) { error in
         XCTAssertEqual(expected, error as? ExpressionError)
       }
     }

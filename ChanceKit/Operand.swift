@@ -101,6 +101,54 @@ extension Operand {
       return .roll(times, suffix)
     }
   }
+
+  func combined(_ other: Operand) throws -> Operand {
+    switch self {
+    case let .number(value):
+      let lexemeOther = String(describing: other)
+
+      guard let nextValue = Int(String(value) + lexemeOther) else {
+        throw ExpressionError.invalidCombinationOperands(String(describing: self), lexemeOther)
+      }
+
+      return .number(nextValue)
+
+    case let .roll(times, sides):
+      let lexemeOther = String(describing: other)
+
+      guard let nextSides = Int(String(sides) + lexemeOther) else {
+        throw ExpressionError.invalidCombinationOperands(String(describing: self), lexemeOther)
+      }
+
+      return .roll(times, nextSides)
+
+    case let .rollNegativeSides(times):
+      let negativeOther = try -other
+
+      switch negativeOther {
+      case let .number(nextSides):
+        return .roll(times, nextSides)
+
+      default:
+        throw ExpressionError.invalidCombinationOperands(
+          String(describing: self),
+          String(describing: other)
+        )
+      }
+
+    case let .rollPositiveSides(times):
+      switch other {
+      case let .number(nextSides):
+        return .roll(times, nextSides)
+
+      default:
+        throw ExpressionError.invalidCombinationOperands(
+          String(describing: self),
+          String(describing: other)
+        )
+      }
+    }
+  }
 }
 
 // MARK: - Exclusion
