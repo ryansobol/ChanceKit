@@ -66,12 +66,12 @@ func lexed(integer: Int, into: [Tokenable]) throws -> [Tokenable] {
   case let lastOperand as Operand:
     // TODO: If current operand is .number
     //       and last operand is a .roll,
-    //       then push current .number into last .roll and replace
+    //       then combine current .number into last .roll and replace
 
     // TODO: If current operand is a .roll
     //       and last operand is a .roll
     //       and current operand sides == last operand sides
-    //       then push current .roll into last .roll and replace
+    //       then combine current .roll into last .roll and replace
 
     // TODO: If current operand is a .roll
     //       and last operand is a .roll
@@ -80,7 +80,7 @@ func lexed(integer: Int, into: [Tokenable]) throws -> [Tokenable] {
 
     // TODO: If current operand is .number
     //       and last operand is a .number
-    //       then push current .number into last .number and replace
+    //       then combine current .number into last .number and replace
 
     // TODO: If current operand is a .roll
     //       and last operand is a .number

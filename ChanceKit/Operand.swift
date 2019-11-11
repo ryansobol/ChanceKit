@@ -103,49 +103,88 @@ extension Operand {
   }
 
   func combined(_ other: Operand) throws -> Operand {
+    let lexemeSelf = String(describing: self)
+    let lexemeOther = String(describing: other)
+
     switch self {
-    case let .number(value):
-      let lexemeOther = String(describing: other)
-
-      guard let nextValue = Int(String(value) + lexemeOther) else {
-        throw ExpressionError.invalidCombinationOperands(String(describing: self), lexemeOther)
-      }
-
-      return .number(nextValue)
-
-    case let .roll(times, sides):
-      let lexemeOther = String(describing: other)
-
-      guard let nextSides = Int(String(sides) + lexemeOther) else {
-        throw ExpressionError.invalidCombinationOperands(String(describing: self), lexemeOther)
-      }
-
-      return .roll(times, nextSides)
-
-    case let .rollNegativeSides(times):
-      let negativeOther = try -other
-
-      switch negativeOther {
-      case let .number(nextSides):
-        return .roll(times, nextSides)
-
-      default:
-        throw ExpressionError.invalidCombinationOperands(
-          String(describing: self),
-          String(describing: other)
-        )
-      }
-
-    case let .rollPositiveSides(times):
+    case .number:
       switch other {
-      case let .number(nextSides):
-        return .roll(times, nextSides)
+      case .number:
+        guard let valueResult = Int(lexemeSelf + lexemeOther) else {
+          throw ExpressionError.invalidCombinationOperands(lexemeSelf, lexemeOther)
+        }
+
+        return .number(valueResult)
 
       default:
-        throw ExpressionError.invalidCombinationOperands(
-          String(describing: self),
-          String(describing: other)
-        )
+        throw ExpressionError.invalidCombinationOperands(lexemeSelf, lexemeOther)
+      }
+
+    case let .roll(timesSelf, sidesSelf):
+      switch other {
+      case .number:
+        guard let sidesResult = Int(String(sidesSelf) + lexemeOther) else {
+          throw ExpressionError.invalidCombinationOperands(lexemeSelf, lexemeOther)
+        }
+
+        return .roll(timesSelf, sidesResult)
+
+      case let .roll(timesOther, sidesOther):
+        if sidesSelf != sidesOther {
+          throw ExpressionError.invalidCombinationOperands(lexemeSelf, lexemeOther)
+        }
+
+        let (timesResult, didOverflow) = timesSelf.addingReportingOverflow(timesOther)
+
+        if didOverflow {
+          throw ExpressionError.invalidCombinationOperands(lexemeSelf, lexemeOther)
+        }
+
+        return .roll(timesResult, sidesSelf)
+
+      default:
+        throw ExpressionError.invalidCombinationOperands(lexemeSelf, lexemeOther)
+      }
+
+    case let .rollNegativeSides(timesSelf):
+      switch other {
+      case let .number(sidesOther):
+        // Because -Int.min > Int.max
+        if sidesOther == Int.min {
+          throw ExpressionError.invalidCombinationOperands(lexemeSelf, lexemeOther)
+        }
+
+        return .roll(timesSelf, -sidesOther)
+
+      default:
+        throw ExpressionError.invalidCombinationOperands(lexemeSelf, lexemeOther)
+      }
+
+    case let .rollPositiveSides(timesSelf):
+      switch other {
+      case let .number(sidesOther):
+        return .roll(timesSelf, sidesOther)
+
+      case let .roll(timesOther, sidesOther):
+        let (timesResult, didOverflow) = timesSelf.addingReportingOverflow(timesOther)
+
+        if didOverflow {
+          throw ExpressionError.invalidCombinationOperands(lexemeSelf, lexemeOther)
+        }
+
+        return .roll(timesResult, sidesOther)
+
+      case let .rollPositiveSides(timesOther):
+        let (timesResult, didOverflow) = timesSelf.addingReportingOverflow(timesOther)
+
+        if didOverflow {
+          throw ExpressionError.invalidCombinationOperands(lexemeSelf, lexemeOther)
+        }
+
+        return .rollPositiveSides(timesResult)
+
+      default:
+        throw ExpressionError.invalidCombinationOperands(lexemeSelf, lexemeOther)
       }
     }
   }
