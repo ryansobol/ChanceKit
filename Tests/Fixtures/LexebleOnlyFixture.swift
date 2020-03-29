@@ -21,4 +21,3 @@ let lexebleOnlyFixtures: [LexebleOnlyFixture] = [
     error: .missingParenthesisOpen
   ),
 ]
-

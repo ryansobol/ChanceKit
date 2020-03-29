@@ -1372,4 +1372,5 @@ let lexemeOperatorFixtures: [LexemeOperatorFixture] = [
     droppedLexemes: ["1d"],
     droppedTokens: [Operand.rollPositiveSides(1)]
   ),
+  // TODO: Operand.rollNegativeSides
 ]

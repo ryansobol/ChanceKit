@@ -687,4 +687,5 @@ let lexemeParenthesisFixtures: [LexemeParenthesisFixture] = [
     droppedLexemes: ["1d", "-"],
     droppedTokens: [Operand.rollPositiveSides(1), Operator.subtraction]
   ),
+  // TODO: Operand.rollNegativeSides
 ]
