@@ -18,8 +18,20 @@ extension ExpressionTests {
     }
   }
 
-  func testInitWithParsableOnlyFixtures() {
-    for fixture in parsableOnlyFixtures {
+  func testInitWithEvaluatableClosedRangeFixtures() {
+    for fixture in evaluatableClosedRangeFixtures {
+      let lexemes = fixture.lexemes
+      let expected = fixture.description
+
+      let expression = try! Expression(lexemes)
+      let actual = String(describing: expression)
+
+      XCTAssertEqual(expected, actual, "lexemes: \(lexemes)")
+    }
+  }
+
+  func testInitWithParsableFixtures() {
+    for fixture in parsableFixtures {
       let lexemes = fixture.lexemes
       let expected = fixture.description
 
@@ -172,8 +184,23 @@ extension ExpressionTests {
     }
   }
 
-  func testInterpretWithParsableOnlyFixtures() {
-    for fixture in parsableOnlyFixtures {
+  func testInterpretWithEvaluatableClosedRangeFixtures() {
+    for fixture in evaluatableClosedRangeFixtures {
+      let lexemes = fixture.lexemes
+      let expected = fixture.value
+
+      let expression = try! Expression(lexemes)
+      let actual = try! expression.interpret()
+
+      XCTAssertTrue(
+        expected.contains(actual),
+        "lexemes: \(lexemes), expected: \(expected), actual: \(actual)"
+      )
+    }
+  }
+
+  func testInterpretWithParsableFixtures() {
+    for fixture in parsableFixtures {
       let lexemes = fixture.lexemes
       let expected = fixture.error
 
