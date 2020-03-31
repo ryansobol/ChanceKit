@@ -30,8 +30,8 @@ extension ExpressionTests {
     }
   }
 
-  func testInitWithParsableFixtures() {
-    for fixture in parsableFixtures {
+  func testInitWithParsableOnlyFixtures() {
+    for fixture in parsableOnlyFixtures {
       let lexemes = fixture.lexemes
       let expected = fixture.description
 
@@ -199,8 +199,8 @@ extension ExpressionTests {
     }
   }
 
-  func testInterpretWithParsableFixtures() {
-    for fixture in parsableFixtures {
+  func testInterpretWithParsableOnlyFixtures() {
+    for fixture in parsableOnlyFixtures {
       let lexemes = fixture.lexemes
       let expected = fixture.error
 
