@@ -1,6 +1,6 @@
 @testable import ChanceKit
 
-typealias EvaluatableFixture = (
+typealias EvaluatableIntegerFixture = (
   description: String,
   lexemes: [String],
   infixTokens: [Tokenable],
@@ -8,7 +8,7 @@ typealias EvaluatableFixture = (
   value: Int
 )
 
-let evaluatableFixtures: [EvaluatableFixture] = [
+let evaluatableIntegerFixtures: [EvaluatableIntegerFixture] = [
   // MARK: A
   (
     description: "",

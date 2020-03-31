@@ -6,8 +6,8 @@ class ExpressionTests: XCTestCase {}
 // MARK: - Initialization
 
 extension ExpressionTests {
-  func testInitWithEvaluatableFixtures() {
-    for fixture in evaluatableFixtures {
+  func testInitWithEvaluatableIntegerFixtures() {
+    for fixture in evaluatableIntegerFixtures {
       let lexemes = fixture.lexemes
       let expected = fixture.description
 
@@ -172,8 +172,8 @@ extension ExpressionTests {
 // MARK: - Interpretation
 
 extension ExpressionTests {
-  func testInterpretWithEvaluatableFixtures() {
-    for fixture in evaluatableFixtures {
+  func testInterpretWithEvaluatableIntegerFixtures() {
+    for fixture in evaluatableIntegerFixtures {
       let lexemes = fixture.lexemes
       let expected = fixture.value
 
@@ -227,7 +227,7 @@ extension ExpressionTests {
 
   func testInterpretPerformance() {
     self.measure {
-      for fixture in evaluatableFixtures {
+      for fixture in evaluatableIntegerFixtures {
         let lexemes = fixture.lexemes
         let expected = fixture.value
 

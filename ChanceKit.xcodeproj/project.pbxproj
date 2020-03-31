@@ -35,7 +35,7 @@
 		92DE254B23464CF4003A75A0 /* LexemeOperatorFixture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92DE254A23464CF4003A75A0 /* LexemeOperatorFixture.swift */; };
 		92DE254D2346508F003A75A0 /* LexemeParenthesisFixture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92DE254C2346508F003A75A0 /* LexemeParenthesisFixture.swift */; };
 		92DE254F23465101003A75A0 /* LexemeIntegerFixture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92DE254E23465101003A75A0 /* LexemeIntegerFixture.swift */; };
-		92DE255123465169003A75A0 /* EvaluatableFixture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92DE255023465169003A75A0 /* EvaluatableFixture.swift */; };
+		92DE255123465169003A75A0 /* EvaluatableIntegerFixture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92DE255023465169003A75A0 /* EvaluatableIntegerFixture.swift */; };
 		92DE255523465244003A75A0 /* ParsableOnlyFixture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92DE255423465244003A75A0 /* ParsableOnlyFixture.swift */; };
 		92DE2559234652FE003A75A0 /* InvalidFixture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92DE2558234652FE003A75A0 /* InvalidFixture.swift */; };
 /* End PBXBuildFile section */
@@ -83,7 +83,7 @@
 		92DE254A23464CF4003A75A0 /* LexemeOperatorFixture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LexemeOperatorFixture.swift; sourceTree = "<group>"; };
 		92DE254C2346508F003A75A0 /* LexemeParenthesisFixture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LexemeParenthesisFixture.swift; sourceTree = "<group>"; };
 		92DE254E23465101003A75A0 /* LexemeIntegerFixture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LexemeIntegerFixture.swift; sourceTree = "<group>"; };
-		92DE255023465169003A75A0 /* EvaluatableFixture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EvaluatableFixture.swift; sourceTree = "<group>"; };
+		92DE255023465169003A75A0 /* EvaluatableIntegerFixture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EvaluatableIntegerFixture.swift; sourceTree = "<group>"; };
 		92DE255423465244003A75A0 /* ParsableOnlyFixture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParsableOnlyFixture.swift; sourceTree = "<group>"; };
 		92DE2558234652FE003A75A0 /* InvalidFixture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvalidFixture.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -185,7 +185,7 @@
 			isa = PBXGroup;
 			children = (
 				9290C1152433CBE400609A2D /* EvaluatableClosedRangeFixture.swift */,
-				92DE255023465169003A75A0 /* EvaluatableFixture.swift */,
+				92DE255023465169003A75A0 /* EvaluatableIntegerFixture.swift */,
 				92DE2558234652FE003A75A0 /* InvalidFixture.swift */,
 				92D04A97226A2C8700E97E06 /* LexebleOnlyFixture.swift */,
 				92DE254E23465101003A75A0 /* LexemeIntegerFixture.swift */,
@@ -321,7 +321,7 @@
 				924105AA20B06B19009FC568 /* OperatorTests.swift in Sources */,
 				9226DC7421500EA7003D024D /* NSRegularExpressionTests.swift in Sources */,
 				9290C1162433CBE400609A2D /* EvaluatableClosedRangeFixture.swift in Sources */,
-				92DE255123465169003A75A0 /* EvaluatableFixture.swift in Sources */,
+				92DE255123465169003A75A0 /* EvaluatableIntegerFixture.swift in Sources */,
 				92DE2559234652FE003A75A0 /* InvalidFixture.swift in Sources */,
 				92D04A9E226CCC3600E97E06 /* EvaluatorTests.swift in Sources */,
 			);
