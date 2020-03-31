@@ -16,6 +16,7 @@
 		924105AA20B06B19009FC568 /* OperatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 924105A920B06B19009FC568 /* OperatorTests.swift */; };
 		9286A3742266FEC8004D7360 /* Parser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9286A3732266FEC8004D7360 /* Parser.swift */; };
 		9286A376226700BA004D7360 /* ParserTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9286A375226700BA004D7360 /* ParserTests.swift */; };
+		9290C1162433CBE400609A2D /* EvaluatableClosedRangeFixture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9290C1152433CBE400609A2D /* EvaluatableClosedRangeFixture.swift */; };
 		92A4CC7420AF26530096AF98 /* Expression.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92A4CC7320AF26530096AF98 /* Expression.swift */; };
 		92A4CC7620AF270A0096AF98 /* Operator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92A4CC7520AF270A0096AF98 /* Operator.swift */; };
 		92A4CC7820AF2EE30096AF98 /* Operand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92A4CC7720AF2EE30096AF98 /* Operand.swift */; };
@@ -61,6 +62,7 @@
 		924105A920B06B19009FC568 /* OperatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OperatorTests.swift; sourceTree = "<group>"; };
 		9286A3732266FEC8004D7360 /* Parser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Parser.swift; sourceTree = "<group>"; };
 		9286A375226700BA004D7360 /* ParserTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParserTests.swift; sourceTree = "<group>"; };
+		9290C1152433CBE400609A2D /* EvaluatableClosedRangeFixture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EvaluatableClosedRangeFixture.swift; sourceTree = "<group>"; };
 		92A4CC7020AD143C0096AF98 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		92A4CC7320AF26530096AF98 /* Expression.swift */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 2; lastKnownFileType = sourcecode.swift; path = Expression.swift; sourceTree = "<group>"; tabWidth = 2; usesTabs = 0; };
 		92A4CC7520AF270A0096AF98 /* Operator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Operator.swift; sourceTree = "<group>"; };
@@ -182,6 +184,7 @@
 		92DE254923464CCD003A75A0 /* Fixtures */ = {
 			isa = PBXGroup;
 			children = (
+				9290C1152433CBE400609A2D /* EvaluatableClosedRangeFixture.swift */,
 				92DE255023465169003A75A0 /* EvaluatableFixture.swift */,
 				92DE2558234652FE003A75A0 /* InvalidFixture.swift */,
 				92D04A97226A2C8700E97E06 /* LexebleOnlyFixture.swift */,
@@ -317,6 +320,7 @@
 				92D04AA2226DB27D00E97E06 /* LexerTests.swift in Sources */,
 				924105AA20B06B19009FC568 /* OperatorTests.swift in Sources */,
 				9226DC7421500EA7003D024D /* NSRegularExpressionTests.swift in Sources */,
+				9290C1162433CBE400609A2D /* EvaluatableClosedRangeFixture.swift in Sources */,
 				92DE255123465169003A75A0 /* EvaluatableFixture.swift in Sources */,
 				92DE2559234652FE003A75A0 /* InvalidFixture.swift in Sources */,
 				92D04A9E226CCC3600E97E06 /* EvaluatorTests.swift in Sources */,
