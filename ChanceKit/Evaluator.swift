@@ -1,4 +1,8 @@
 func evaluate(postfixTokens: [Tokenable]) throws -> Int {
+  if postfixTokens.isEmpty {
+    return 0
+  }
+
   var operands = [Operand]()
 
   for currentToken in postfixTokens {
@@ -22,10 +26,6 @@ func evaluate(postfixTokens: [Tokenable]) throws -> Int {
     default:
       preconditionFailure()
     }
-  }
-
-  if operands.isEmpty {
-    return 0
   }
 
   if operands.count > 1 {
