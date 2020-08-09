@@ -822,9 +822,9 @@ extension OperandTests {
       (operand1: .number(-9), operand2: .roll(9, 78)),
 
       (operand1: .number(Int.min), operand2: .rollPositiveSides(1)),
-      (operand2: .number(Int.min), operand1: .roll(1, 0)),
-      (operand2: .number(-922337203685477580), operand1: .roll(1, 8)),
-      (operand2: .number(-9), operand1: .roll(1, 223372036854775808)),
+      (operand1: .number(Int.min), operand2: .roll(1, 0)),
+      (operand1: .number(-922337203685477580), operand2: .roll(1, 8)),
+      (operand1: .number(-9), operand2: .roll(1, 223372036854775808)),
 
       (operand1: .number(0), operand2: .rollNegativeSides(0)),
       (operand1: .number(0), operand2: .roll(0, -0)),
