@@ -1,6 +1,7 @@
 import GameplayKit
 
 enum Operand: Equatable {
+  // TODO: Consider renaming this case to constant
   case number(Int)
   case roll(Int, Int)
   case rollNegativeSides(Int)
