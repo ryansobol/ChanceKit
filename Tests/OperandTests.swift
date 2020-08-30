@@ -1233,205 +1233,58 @@ extension OperandTests {
     )
 
     let fixtures: [Fixture] = [
-      (operand1: .roll(0, 0), operand2: .roll(0, 1)),
-      (operand1: .roll(0, 0), operand2: .roll(0, 21)),
+      // Mis-matching sides value
+      (operand1: .roll(1, 0), operand2: .roll(1, 1)),
+      (operand1: .roll(1, 1), operand2: .roll(1, 0)),
+      (operand1: .roll(1, 0), operand2: .roll(1, Int.max)),
+      (operand1: .roll(1, Int.max), operand2: .roll(1, 0)),
 
-      (operand1: .roll(0, 1), operand2: .roll(0, 0)),
-      (operand1: .roll(0, 1), operand2: .roll(0, 21)),
+      (operand1: .roll(1, -0), operand2: .roll(1, -1)),
+      (operand1: .roll(1, -1), operand2: .roll(1, -0)),
+      (operand1: .roll(1, -0), operand2: .roll(1, Int.min)),
+      (operand1: .roll(1, Int.min), operand2: .roll(1, -0)),
 
-      (operand1: .roll(0, 21), operand2: .roll(0, 0)),
-      (operand1: .roll(0, 21), operand2: .roll(0, 1)),
+      // Mis-matching sides signage
+      (operand1: .roll(1, 1), operand2: .rollNegativeSides(1)),
+      (operand1: .roll(1, Int.max), operand2: .rollNegativeSides(1)),
+      (operand1: .rollNegativeSides(1), operand2: .roll(1, 1)),
+      (operand1: .rollNegativeSides(1), operand2: .roll(1, Int.max)),
 
-      (operand1: .roll(1, 0), operand2: .roll(1, 2)),
-      (operand1: .roll(1, 0), operand2: .roll(1, 32)),
+      (operand1: .roll(1, -1), operand2: .rollPositiveSides(1)),
+      (operand1: .roll(1, Int.min), operand2: .rollPositiveSides(1)),
+      (operand1: .rollPositiveSides(1), operand2: .roll(1, -1)),
+      (operand1: .rollPositiveSides(1), operand2: .roll(1, Int.min)),
 
-      (operand1: .roll(1, 2), operand2: .roll(1, 0)),
-      (operand1: .roll(1, 2), operand2: .roll(1, 32)),
+      (operand1: .rollPositiveSides(1), operand2: .rollNegativeSides(1)),
+      (operand1: .rollNegativeSides(1), operand2: .rollPositiveSides(1)),
+      (operand1: .rollPositiveSides(-1), operand2: .rollNegativeSides(-1)),
+      (operand1: .rollNegativeSides(-1), operand2: .rollPositiveSides(-1)),
 
-      (operand1: .roll(1, 32), operand2: .roll(1, 0)),
-      (operand1: .roll(1, 32), operand2: .roll(1, 2)),
-
-      (operand1: .roll(9, 0), operand2: .roll(9, 8)),
-      (operand1: .roll(9, 0), operand2: .roll(9, 78)),
-
-      (operand1: .roll(9, 8), operand2: .roll(9, 0)),
-      (operand1: .roll(9, 8), operand2: .roll(9, 78)),
-
-      (operand1: .roll(9, 78), operand2: .roll(9, 0)),
-      (operand1: .roll(9, 78), operand2: .roll(9, 8)),
-
-      (operand1: .rollPositiveSides(Int.max), operand2: .rollPositiveSides(1)),
-      (operand1: .rollPositiveSides(Int.max), operand2: .roll(1, 0)),
-      (operand1: .rollPositiveSides(Int.max), operand2: .roll(1, 1)),
-      (operand1: .rollPositiveSides(Int.max), operand2: .roll(1, Int.max)),
-
-      (operand1: .rollPositiveSides(Int.max), operand2: .rollPositiveSides(Int.max)),
-      (operand1: .rollPositiveSides(Int.max), operand2: .roll(Int.max, 0)),
-      (operand1: .rollPositiveSides(Int.max), operand2: .roll(Int.max, 1)),
-      (operand1: .rollPositiveSides(Int.max), operand2: .roll(Int.max, Int.max)),
-
-      (operand1: .roll(Int.max, 0), operand2: .roll(0, 1)),
-      (operand1: .roll(Int.max, 0), operand2: .roll(0, Int.max)),
+      // Overflowing integer addition
+      (operand1: .roll(Int.max, 1), operand2: .roll(1, 1)),
+      (operand1: .roll(1, 1), operand2: .roll(Int.max, 1)),
+      (operand1: .roll(Int.min, 1), operand2: .roll(-1, 1)),
+      (operand1: .roll(-1, 1), operand2: .roll(Int.min, 1)),
 
       (operand1: .roll(Int.max, 1), operand2: .rollPositiveSides(1)),
-      (operand1: .roll(Int.max, 1), operand2: .roll(1, 0)),
-      (operand1: .roll(Int.max, 1), operand2: .roll(1, 1)),
-      (operand1: .roll(Int.max, 1), operand2: .roll(1, Int.max)),
+      (operand1: .roll(Int.max, -1), operand2: .rollNegativeSides(1)),
+      (operand1: .rollPositiveSides(1), operand2: .roll(Int.max, 1)),
+      (operand1: .rollNegativeSides(1), operand2: .roll(Int.max, -1)),
 
-      (operand1: .roll(Int.max, Int.max), operand2: .roll(Int.max, 0)),
-      (operand1: .roll(Int.max, Int.max), operand2: .roll(Int.max, 1)),
-      (operand1: .roll(Int.max, Int.max), operand2: .roll(Int.max, Int.max)),
+      (operand1: .roll(Int.min, 1), operand2: .rollPositiveSides(-1)),
+      (operand1: .roll(Int.min, -1), operand2: .rollNegativeSides(-1)),
+      (operand1: .rollPositiveSides(-1), operand2: .roll(Int.min, 1)),
+      (operand1: .rollNegativeSides(-1), operand2: .roll(Int.min, -1)),
 
-//      (operand1: .number(Int.max), operand2: .rollPositiveSides(1)),
-//      (operand1: .number(Int.max), operand2: .roll(1, 0)),
-//      (operand1: .number(922337203685477580), operand2: .roll(1, 7)),
-//      (operand1: .number(9), operand2: .roll(1, 223372036854775807)),
-//
-//      (operand1: .number(0), operand2: .rollNegativeSides(0)),
-//      (operand1: .number(0), operand2: .roll(0, -0)),
-//      (operand1: .number(0), operand2: .roll(0, -1)),
-//      (operand1: .number(0), operand2: .roll(0, -21)),
-//
-//      (operand1: .number(1), operand2: .rollNegativeSides(1)),
-//      (operand1: .number(1), operand2: .roll(1, -0)),
-//      (operand1: .number(1), operand2: .roll(1, -2)),
-//      (operand1: .number(1), operand2: .roll(1, -32)),
-//
-//      (operand1: .number(9), operand2: .rollNegativeSides(9)),
-//      (operand1: .number(9), operand2: .roll(9, -0)),
-//      (operand1: .number(9), operand2: .roll(9, -8)),
-//      (operand1: .number(9), operand2: .roll(9, -78)),
-//
-//      (operand1: .number(Int.max), operand2: .rollNegativeSides(1)),
-//      (operand1: .number(Int.max), operand2: .roll(1, -0)),
-//      (operand1: .number(922337203685477580), operand2: .roll(1, -7)),
-//      (operand1: .number(9), operand2: .roll(1, -223372036854775807)),
-//
-//      (operand1: .number(0), operand2: .rollPositiveSides(-0)),
-//      (operand1: .number(0), operand2: .roll(-0, 0)),
-//      (operand1: .number(0), operand2: .roll(-0, 1)),
-//      (operand1: .number(0), operand2: .roll(-0, 21)),
-//
-//      (operand1: .number(1), operand2: .rollPositiveSides(-1)),
-//      (operand1: .number(1), operand2: .roll(-1, 0)),
-//      (operand1: .number(1), operand2: .roll(-1, 2)),
-//      (operand1: .number(1), operand2: .roll(-1, 32)),
-//
-//      (operand1: .number(9), operand2: .rollPositiveSides(-9)),
-//      (operand1: .number(9), operand2: .roll(-9, 0)),
-//      (operand1: .number(9), operand2: .roll(-9, 8)),
-//      (operand1: .number(9), operand2: .roll(-9, 78)),
-//
-//      (operand1: .number(Int.max), operand2: .rollPositiveSides(-1)),
-//      (operand1: .number(Int.max), operand2: .roll(-1, 0)),
-//      (operand1: .number(922337203685477580), operand2: .roll(-1, 7)),
-//      (operand1: .number(9), operand2: .roll(-1, 223372036854775807)),
-//
-//      (operand1: .number(0), operand2: .rollNegativeSides(-0)),
-//      (operand1: .number(0), operand2: .roll(-0, -0)),
-//      (operand1: .number(0), operand2: .roll(-0, -1)),
-//      (operand1: .number(0), operand2: .roll(-0, -21)),
-//
-//      (operand1: .number(1), operand2: .rollNegativeSides(-1)),
-//      (operand1: .number(1), operand2: .roll(-1, -0)),
-//      (operand1: .number(1), operand2: .roll(-1, -2)),
-//      (operand1: .number(1), operand2: .roll(-1, -32)),
-//
-//      (operand1: .number(9), operand2: .rollNegativeSides(-9)),
-//      (operand1: .number(9), operand2: .roll(-9, -0)),
-//      (operand1: .number(9), operand2: .roll(-9, -8)),
-//      (operand1: .number(9), operand2: .roll(-9, -78)),
-//
-//      (operand1: .number(Int.max), operand2: .rollNegativeSides(-1)),
-//      (operand1: .number(Int.max), operand2: .roll(-1, -0)),
-//      (operand1: .number(922337203685477580), operand2: .roll(-1, -7)),
-//      (operand1: .number(9), operand2: .roll(-1, -223372036854775807)),
-//
-//      (operand1: .number(-0), operand2: .rollPositiveSides(0)),
-//      (operand1: .number(-0), operand2: .roll(0, 0)),
-//      (operand1: .number(-0), operand2: .roll(0, 1)),
-//      (operand1: .number(-0), operand2: .roll(0, 21)),
-//
-//      (operand1: .number(-1), operand2: .rollPositiveSides(1)),
-//      (operand1: .number(-1), operand2: .roll(1, 0)),
-//      (operand1: .number(-1), operand2: .roll(1, 2)),
-//      (operand1: .number(-1), operand2: .roll(1, 32)),
-//
-//      (operand1: .number(-9), operand2: .rollPositiveSides(9)),
-//      (operand1: .number(-9), operand2: .roll(9, 0)),
-//      (operand1: .number(-9), operand2: .roll(9, 8)),
-//      (operand1: .number(-9), operand2: .roll(9, 78)),
-//
-//      (operand1: .number(Int.min), operand2: .rollPositiveSides(1)),
-//      (operand2: .number(Int.min), operand1: .roll(1, 0)),
-//      (operand2: .number(-922337203685477580), operand1: .roll(1, 8)),
-//      (operand2: .number(-9), operand1: .roll(1, 223372036854775808)),
-//
-//      (operand1: .number(0), operand2: .rollNegativeSides(0)),
-//      (operand1: .number(0), operand2: .roll(0, -0)),
-//      (operand1: .number(0), operand2: .roll(0, -1)),
-//      (operand1: .number(0), operand2: .roll(0, -21)),
-//
-//      (operand1: .number(-1), operand2: .rollNegativeSides(1)),
-//      (operand1: .number(-1), operand2: .roll(1, -0)),
-//      (operand1: .number(-1), operand2: .roll(1, -2)),
-//      (operand1: .number(-1), operand2: .roll(1, -32)),
-//
-//      (operand1: .number(-9), operand2: .rollNegativeSides(9)),
-//      (operand1: .number(-9), operand2: .roll(9, -0)),
-//      (operand1: .number(-9), operand2: .roll(9, -8)),
-//      (operand1: .number(-9), operand2: .roll(9, -78)),
-//
-//      (operand1: .number(-Int.max), operand2: .rollNegativeSides(1)),
-//      (operand1: .number(Int.min), operand2: .roll(1, -0)),
-//      (operand1: .number(-922337203685477580), operand2: .roll(1, -8)),
-//      (operand1: .number(-9), operand2: .roll(1, -223372036854775808)),
-//
-//      (operand1: .number(-0), operand2: .rollPositiveSides(-0)),
-//      (operand1: .number(-0), operand2: .roll(-0, 0)),
-//      (operand1: .number(-0), operand2: .roll(-0, 1)),
-//      (operand1: .number(-0), operand2: .roll(-0, 21)),
-//
-//      (operand1: .number(-1), operand2: .rollPositiveSides(-1)),
-//      (operand1: .number(-1), operand2: .roll(-1, 0)),
-//      (operand1: .number(-1), operand2: .roll(-1, 2)),
-//      (operand1: .number(-1), operand2: .roll(-1, 32)),
-//
-//      (operand1: .number(-9), operand2: .rollPositiveSides(-9)),
-//      (operand1: .number(-9), operand2: .roll(-9, 0)),
-//      (operand1: .number(-9), operand2: .roll(-9, 8)),
-//      (operand1: .number(-9), operand2: .roll(-9, 78)),
-//
-//      (operand1: .number(Int.min), operand2: .rollPositiveSides(-1)),
-//      (operand1: .number(Int.min), operand2: .roll(-1, 0)),
-//      (operand1: .number(-92337203685477580), operand2: .roll(-1, 8)),
-//      (operand1: .number(-9), operand2: .roll(-1, 223372036854775808)),
-//
-//      (operand1: .number(0), operand2: .rollNegativeSides(-0)),
-//      (operand1: .number(0), operand2: .roll(-0, -0)),
-//      (operand1: .number(0), operand2: .roll(-0, -1)),
-//      (operand1: .number(0), operand2: .roll(-0, -21)),
-//
-//      (operand1: .number(-1), operand2: .rollNegativeSides(-1)),
-//      (operand1: .number(-1), operand2: .roll(-1, -0)),
-//      (operand1: .number(-1), operand2: .roll(-1, -2)),
-//      (operand1: .number(-1), operand2: .roll(-1, -32)),
-//
-//      (operand1: .number(-9), operand2: .rollNegativeSides(-9)),
-//      (operand1: .number(-9), operand2: .roll(-9, -0)),
-//      (operand1: .number(-9), operand2: .roll(-9, -8)),
-//      (operand1: .number(-9), operand2: .roll(-9, -78)),
-//
-//      (operand1: .number(-Int.max), operand2: .rollNegativeSides(-1)),
-//      (operand1: .number(Int.min), operand2: .roll(-1, -0)),
-//      (operand1: .number(-922337203685477580), operand2: .roll(-1, -8)),
-//      (operand1: .number(-9), operand2: .roll(-1, -223372036854775808)),
-//
-//      (operand1: .number(9), operand2: .roll(1, 223372036854775808)),
-//      (operand1: .number(0), operand2: .roll(1, Int.max)),
-//
-//      (operand1: .number(-9), operand2: .roll(1, -223372036854775809)),
-//      (operand1: .number(-0), operand2: .roll(1, Int.min)),
+      (operand1: .rollPositiveSides(Int.max), operand2: .rollPositiveSides(1)),
+      (operand1: .rollPositiveSides(1), operand2: .rollPositiveSides(Int.max)),
+      (operand1: .rollPositiveSides(Int.min), operand2: .rollPositiveSides(-1)),
+      (operand1: .rollPositiveSides(-1), operand2: .rollPositiveSides(Int.min)),
+
+      (operand1: .rollNegativeSides(Int.max), operand2: .rollNegativeSides(1)),
+      (operand1: .rollNegativeSides(1), operand2: .rollNegativeSides(Int.max)),
+      (operand1: .rollNegativeSides(Int.min), operand2: .rollNegativeSides(-1)),
+      (operand1: .rollNegativeSides(-1), operand2: .rollNegativeSides(Int.min)),
     ]
 
     for fixture in fixtures {
@@ -1448,8 +1301,6 @@ extension OperandTests {
     }
   }
 }
-
-
 
 // MARK: - Exclusion
 
