@@ -143,8 +143,31 @@ extension Operand {
 
         return .roll(timesResult, sidesSelf)
 
-      default:
-        throw ExpressionError.invalidCombinationOperands(lexemeSelf, lexemeOther)
+      case let .rollNegativeSides(timesOther):
+        if sidesSelf > 0 {
+          throw ExpressionError.invalidCombinationOperands(lexemeSelf, lexemeOther)
+        }
+
+        let (timesResult, didOverflow) = timesSelf.addingReportingOverflow(timesOther)
+
+        if didOverflow {
+          throw ExpressionError.invalidCombinationOperands(lexemeSelf, lexemeOther)
+        }
+
+        return .roll(timesResult, sidesSelf)
+
+      case let .rollPositiveSides(timesOther):
+        if sidesSelf < 0 {
+          throw ExpressionError.invalidCombinationOperands(lexemeSelf, lexemeOther)
+        }
+
+        let (timesResult, didOverflow) = timesSelf.addingReportingOverflow(timesOther)
+
+        if didOverflow {
+          throw ExpressionError.invalidCombinationOperands(lexemeSelf, lexemeOther)
+        }
+
+        return .roll(timesResult, sidesSelf)
       }
 
     case let .rollNegativeSides(timesSelf):
@@ -157,6 +180,28 @@ extension Operand {
 
         return .roll(timesSelf, -sidesOther)
 
+      case let .roll(timesOther, sidesOther):
+        if sidesOther > 0 {
+          throw ExpressionError.invalidCombinationOperands(lexemeSelf, lexemeOther)
+        }
+
+        let (timesResult, didOverflow) = timesSelf.addingReportingOverflow(timesOther)
+
+        if didOverflow {
+          throw ExpressionError.invalidCombinationOperands(lexemeSelf, lexemeOther)
+        }
+
+        return .roll(timesResult, sidesOther)
+
+      case let .rollNegativeSides(timesOther):
+        let (timesResult, didOverflow) = timesSelf.addingReportingOverflow(timesOther)
+
+        if didOverflow {
+          throw ExpressionError.invalidCombinationOperands(lexemeSelf, lexemeOther)
+        }
+
+        return .rollNegativeSides(timesResult)
+
       default:
         throw ExpressionError.invalidCombinationOperands(lexemeSelf, lexemeOther)
       }
@@ -167,6 +212,10 @@ extension Operand {
         return .roll(timesSelf, sidesOther)
 
       case let .roll(timesOther, sidesOther):
+        if sidesOther < 0 {
+          throw ExpressionError.invalidCombinationOperands(lexemeSelf, lexemeOther)
+        }
+
         let (timesResult, didOverflow) = timesSelf.addingReportingOverflow(timesOther)
 
         if didOverflow {

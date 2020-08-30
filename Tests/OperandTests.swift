@@ -920,14 +920,17 @@ extension OperandTests {
         operand2: .rollPositiveSides(0),
         expected: .rollPositiveSides(0)
       ),
+
       (operand1: .rollPositiveSides(0), operand2: .roll(0, 0), expected: .roll(0, 0)),
       (operand1: .rollPositiveSides(0), operand2: .roll(0, 1), expected: .roll(0, 1)),
       (operand1: .rollPositiveSides(0), operand2: .roll(0, 21), expected: .roll(0, 21)),
 
+      (operand1: .roll(0, 0), operand2: .rollPositiveSides(0), expected: .roll(0, 0)),
+      (operand1: .roll(0, 1), operand2: .rollPositiveSides(0), expected: .roll(0, 1)),
+      (operand1: .roll(0, 21), operand2: .rollPositiveSides(0), expected: .roll(0, 21)),
+
       (operand1: .roll(0, 0), operand2: .roll(0, 0), expected: .roll(0, 0)),
-
       (operand1: .roll(0, 1), operand2: .roll(0, 1), expected: .roll(0, 1)),
-
       (operand1: .roll(0, 21), operand2: .roll(0, 21), expected: .roll(0, 21)),
 
       (
@@ -935,14 +938,17 @@ extension OperandTests {
         operand2: .rollPositiveSides(1),
         expected: .rollPositiveSides(2)
       ),
+
       (operand1: .rollPositiveSides(1), operand2: .roll(1, 0), expected: .roll(2, 0)),
       (operand1: .rollPositiveSides(1), operand2: .roll(1, 2), expected: .roll(2, 2)),
       (operand1: .rollPositiveSides(1), operand2: .roll(1, 32), expected: .roll(2, 32)),
 
+      (operand1: .roll(1, 0), operand2: .rollPositiveSides(1), expected: .roll(2, 0)),
+      (operand1: .roll(1, 2), operand2: .rollPositiveSides(1), expected: .roll(2, 2)),
+      (operand1: .roll(1, 32), operand2: .rollPositiveSides(1), expected: .roll(2, 32)),
+
       (operand1: .roll(1, 0), operand2: .roll(1, 0), expected: .roll(2, 0)),
-
       (operand1: .roll(1, 2), operand2: .roll(1, 2), expected: .roll(2, 2)),
-
       (operand1: .roll(1, 32), operand2: .roll(1, 32), expected: .roll(2, 32)),
 
       (
@@ -950,14 +956,17 @@ extension OperandTests {
         operand2: .rollPositiveSides(9),
         expected: .rollPositiveSides(18)
       ),
+
       (operand1: .rollPositiveSides(9), operand2: .roll(9, 0), expected: .roll(18, 0)),
       (operand1: .rollPositiveSides(9), operand2: .roll(9, 8), expected: .roll(18, 8)),
       (operand1: .rollPositiveSides(9), operand2: .roll(9, 78), expected: .roll(18, 78)),
 
+      (operand1: .roll(9, 0), operand2: .rollPositiveSides(9), expected: .roll(18, 0)),
+      (operand1: .roll(9, 8), operand2: .rollPositiveSides(9), expected: .roll(18, 8)),
+      (operand1: .roll(9, 78), operand2: .rollPositiveSides(9), expected: .roll(18, 78)),
+
       (operand1: .roll(9, 0), operand2: .roll(9, 0), expected: .roll(18, 0)),
-
       (operand1: .roll(9, 8), operand2: .roll(9, 8), expected: .roll(18, 8)),
-
       (operand1: .roll(9, 78), operand2: .roll(9, 78), expected: .roll(18, 78)),
 
       (
@@ -965,6 +974,7 @@ extension OperandTests {
         operand2: .rollPositiveSides(0),
         expected: .rollPositiveSides(Int.max)
       ),
+
       (operand1: .rollPositiveSides(Int.max), operand2: .roll(0, 0), expected: .roll(Int.max, 0)),
       (operand1: .rollPositiveSides(Int.max), operand2: .roll(0, 1), expected: .roll(Int.max, 1)),
       (
@@ -973,7 +983,237 @@ extension OperandTests {
         expected: .roll(Int.max, Int.max)
       ),
 
+      (operand1: .roll(0, 0), operand2: .rollPositiveSides(Int.max), expected: .roll(Int.max, 0)),
+      (operand1: .roll(0, 1), operand2: .rollPositiveSides(Int.max), expected: .roll(Int.max, 1)),
+      (
+        operand1: .roll(0, Int.max),
+        operand2: .rollPositiveSides(Int.max),
+        expected: .roll(Int.max, Int.max)
+      ),
+
       (operand1: .roll(Int.max, 0), operand2: .roll(0, 0), expected: .roll(Int.max, 0)),
+      (operand1: .roll(Int.max, 1), operand2: .roll(0, 1), expected: .roll(Int.max, 1)),
+      (
+        operand1: .roll(Int.max, Int.max),
+        operand2: .roll(0, Int.max),
+        expected: .roll(Int.max, Int.max)
+      ),
+
+      (
+        operand1: .rollNegativeSides(0),
+        operand2: .rollNegativeSides(0),
+        expected: .rollNegativeSides(0)
+      ),
+
+      (operand1: .rollNegativeSides(0), operand2: .roll(0, -0), expected: .roll(0, -0)),
+      (operand1: .rollNegativeSides(0), operand2: .roll(0, -1), expected: .roll(0, -1)),
+      (operand1: .rollNegativeSides(0), operand2: .roll(0, -21), expected: .roll(0, -21)),
+
+      (operand1: .roll(0, -0), operand2: .rollNegativeSides(0), expected: .roll(0, -0)),
+      (operand1: .roll(0, -1), operand2: .rollNegativeSides(0), expected: .roll(0, -1)),
+      (operand1: .roll(0, -21), operand2: .rollNegativeSides(0), expected: .roll(0, -21)),
+
+      (operand1: .roll(0, -0), operand2: .roll(0, -0), expected: .roll(0, -0)),
+      (operand1: .roll(0, -1), operand2: .roll(0, -1), expected: .roll(0, -1)),
+      (operand1: .roll(0, -21), operand2: .roll(0, -21), expected: .roll(0, -21)),
+
+      (
+        operand1: .rollNegativeSides(1),
+        operand2: .rollNegativeSides(1),
+        expected: .rollNegativeSides(2)
+      ),
+
+      (operand1: .rollNegativeSides(1), operand2: .roll(1, -0), expected: .roll(2, -0)),
+      (operand1: .rollNegativeSides(1), operand2: .roll(1, -2), expected: .roll(2, -2)),
+      (operand1: .rollNegativeSides(1), operand2: .roll(1, -32), expected: .roll(2, -32)),
+
+      (operand1: .roll(1, -0), operand2: .rollNegativeSides(1), expected: .roll(2, -0)),
+      (operand1: .roll(1, -2), operand2: .rollNegativeSides(1), expected: .roll(2, -2)),
+      (operand1: .roll(1, -32), operand2: .rollNegativeSides(1), expected: .roll(2, -32)),
+
+      (operand1: .roll(1, -0), operand2: .roll(1, -0), expected: .roll(2, -0)),
+      (operand1: .roll(1, -2), operand2: .roll(1, -2), expected: .roll(2, -2)),
+      (operand1: .roll(1, -32), operand2: .roll(1, -32), expected: .roll(2, -32)),
+
+      (
+        operand1: .rollNegativeSides(9),
+        operand2: .rollNegativeSides(9),
+        expected: .rollNegativeSides(18)
+      ),
+
+      (operand1: .rollNegativeSides(9), operand2: .roll(9, -0), expected: .roll(18, -0)),
+      (operand1: .rollNegativeSides(9), operand2: .roll(9, -8), expected: .roll(18, -8)),
+      (operand1: .rollNegativeSides(9), operand2: .roll(9, -78), expected: .roll(18, -78)),
+
+      (operand1: .roll(9, -0), operand2: .rollNegativeSides(9), expected: .roll(18, -0)),
+      (operand1: .roll(9, -8), operand2: .rollNegativeSides(9), expected: .roll(18, -8)),
+      (operand1: .roll(9, -78), operand2: .rollNegativeSides(9), expected: .roll(18, -78)),
+
+      (operand1: .roll(9, -0), operand2: .roll(9, -0), expected: .roll(18, -0)),
+      (operand1: .roll(9, -8), operand2: .roll(9, -8), expected: .roll(18, -8)),
+      (operand1: .roll(9, -78), operand2: .roll(9, -78), expected: .roll(18, -78)),
+
+      (
+        operand1: .rollNegativeSides(Int.max),
+        operand2: .rollNegativeSides(0),
+        expected: .rollNegativeSides(Int.max)
+      ),
+
+      (operand1: .rollNegativeSides(Int.max), operand2: .roll(0, -0), expected: .roll(Int.max, -0)),
+      (operand1: .rollNegativeSides(Int.max), operand2: .roll(0, -1), expected: .roll(Int.max, -1)),
+      (
+        operand1: .rollNegativeSides(Int.max),
+        operand2: .roll(0, Int.min),
+        expected: .roll(Int.max, Int.min)
+      ),
+
+      (operand1: .roll(0, -0), operand2: .rollNegativeSides(Int.max), expected: .roll(Int.max, -0)),
+      (operand1: .roll(0, -1), operand2: .rollNegativeSides(Int.max), expected: .roll(Int.max, -1)),
+      (
+        operand1: .roll(0, Int.min),
+        operand2: .rollNegativeSides(Int.max),
+        expected: .roll(Int.max, Int.min)
+      ),
+
+      (operand1: .roll(Int.max, -0), operand2: .roll(0, -0), expected: .roll(Int.max, -0)),
+      (operand1: .roll(Int.max, -1), operand2: .roll(0, -1), expected: .roll(Int.max, -1)),
+      (
+        operand1: .roll(Int.max, Int.min),
+        operand2: .roll(0, Int.min),
+        expected: .roll(Int.max, Int.min)
+      ),
+
+      (
+        operand1: .rollPositiveSides(-1),
+        operand2: .rollPositiveSides(-1),
+        expected: .rollPositiveSides(-2)
+      ),
+
+      (operand1: .rollPositiveSides(-1), operand2: .roll(-1, 0), expected: .roll(-2, 0)),
+      (operand1: .rollPositiveSides(-1), operand2: .roll(-1, 2), expected: .roll(-2, 2)),
+      (operand1: .rollPositiveSides(-1), operand2: .roll(-1, 32), expected: .roll(-2, 32)),
+
+      (operand1: .roll(-1, 0), operand2: .rollPositiveSides(-1), expected: .roll(-2, 0)),
+      (operand1: .roll(-1, 2), operand2: .rollPositiveSides(-1), expected: .roll(-2, 2)),
+      (operand1: .roll(-1, 32), operand2: .rollPositiveSides(-1), expected: .roll(-2, 32)),
+
+      (operand1: .roll(-1, 0), operand2: .roll(-1, 0), expected: .roll(-2, 0)),
+      (operand1: .roll(-1, 2), operand2: .roll(-1, 2), expected: .roll(-2, 2)),
+      (operand1: .roll(-1, 32), operand2: .roll(-1, 32), expected: .roll(-2, 32)),
+
+      (
+        operand1: .rollPositiveSides(-9),
+        operand2: .rollPositiveSides(-9),
+        expected: .rollPositiveSides(-18)
+      ),
+
+      (operand1: .rollPositiveSides(-9), operand2: .roll(-9, 0), expected: .roll(-18, 0)),
+      (operand1: .rollPositiveSides(-9), operand2: .roll(-9, 8), expected: .roll(-18, 8)),
+      (operand1: .rollPositiveSides(-9), operand2: .roll(-9, 78), expected: .roll(-18, 78)),
+
+      (operand1: .roll(-9, 0), operand2: .rollPositiveSides(-9), expected: .roll(-18, 0)),
+      (operand1: .roll(-9, 8), operand2: .rollPositiveSides(-9), expected: .roll(-18, 8)),
+      (operand1: .roll(-9, 78), operand2: .rollPositiveSides(-9), expected: .roll(-18, 78)),
+
+      (operand1: .roll(-9, 0), operand2: .roll(-9, 0), expected: .roll(-18, 0)),
+      (operand1: .roll(-9, 8), operand2: .roll(-9, 8), expected: .roll(-18, 8)),
+      (operand1: .roll(-9, 78), operand2: .roll(-9, 78), expected: .roll(-18, 78)),
+
+      (
+        operand1: .rollPositiveSides(Int.min),
+        operand2: .rollPositiveSides(-0),
+        expected: .rollPositiveSides(Int.min)
+      ),
+
+      (operand1: .rollPositiveSides(Int.min), operand2: .roll(-0, 0), expected: .roll(Int.min, 0)),
+      (operand1: .rollPositiveSides(Int.min), operand2: .roll(-0, 1), expected: .roll(Int.min, 1)),
+      (
+        operand1: .rollPositiveSides(Int.min),
+        operand2: .roll(-0, Int.max),
+        expected: .roll(Int.min, Int.max)
+      ),
+
+      (operand1: .roll(-0, 0), operand2: .rollPositiveSides(Int.min), expected: .roll(Int.min, 0)),
+      (operand1: .roll(-0, 1), operand2: .rollPositiveSides(Int.min), expected: .roll(Int.min, 1)),
+      (
+        operand1: .roll(-0, Int.max),
+        operand2: .rollPositiveSides(Int.min),
+        expected: .roll(Int.min, Int.max)
+      ),
+
+      (operand1: .roll(Int.min, 0), operand2: .roll(-0, 0), expected: .roll(Int.min, 0)),
+      (operand1: .roll(Int.min, 1), operand2: .roll(-0, 1), expected: .roll(Int.min, 1)),
+      (
+        operand1: .roll(Int.min, Int.max),
+        operand2: .roll(-0, Int.max),
+        expected: .roll(Int.min, Int.max)
+      ),
+
+      (
+        operand1: .rollNegativeSides(-1),
+        operand2: .rollNegativeSides(-1),
+        expected: .rollNegativeSides(-2)
+      ),
+
+      (operand1: .rollNegativeSides(-1), operand2: .roll(-1, -0), expected: .roll(-2, -0)),
+      (operand1: .rollNegativeSides(-1), operand2: .roll(-1, -2), expected: .roll(-2, -2)),
+      (operand1: .rollNegativeSides(-1), operand2: .roll(-1, -32), expected: .roll(-2, -32)),
+
+      (operand1: .roll(-1, -0), operand2: .rollNegativeSides(-1), expected: .roll(-2, -0)),
+      (operand1: .roll(-1, -2), operand2: .rollNegativeSides(-1), expected: .roll(-2, -2)),
+      (operand1: .roll(-1, -32), operand2: .rollNegativeSides(-1), expected: .roll(-2, -32)),
+
+      (operand1: .roll(-1, -0), operand2: .roll(-1, -0), expected: .roll(-2, -0)),
+      (operand1: .roll(-1, -2), operand2: .roll(-1, -2), expected: .roll(-2, -2)),
+      (operand1: .roll(-1, -32), operand2: .roll(-1, -32), expected: .roll(-2, -32)),
+
+      (
+        operand1: .rollNegativeSides(-9),
+        operand2: .rollNegativeSides(-9),
+        expected: .rollNegativeSides(-18)
+      ),
+
+      (operand1: .rollNegativeSides(-9), operand2: .roll(-9, -0), expected: .roll(-18, -0)),
+      (operand1: .rollNegativeSides(-9), operand2: .roll(-9, -8), expected: .roll(-18, -8)),
+      (operand1: .rollNegativeSides(-9), operand2: .roll(-9, -78), expected: .roll(-18, -78)),
+
+      (operand1: .roll(-9, -0), operand2: .rollNegativeSides(-9), expected: .roll(-18, -0)),
+      (operand1: .roll(-9, -8), operand2: .rollNegativeSides(-9), expected: .roll(-18, -8)),
+      (operand1: .roll(-9, -78), operand2: .rollNegativeSides(-9), expected: .roll(-18, -78)),
+
+      (operand1: .roll(-9, -0), operand2: .roll(-9, -0), expected: .roll(-18, -0)),
+      (operand1: .roll(-9, -8), operand2: .roll(-9, -8), expected: .roll(-18, -8)),
+      (operand1: .roll(-9, -78), operand2: .roll(-9, -78), expected: .roll(-18, -78)),
+
+      (
+        operand1: .rollNegativeSides(Int.min),
+        operand2: .rollNegativeSides(-0),
+        expected: .rollNegativeSides(Int.min)
+      ),
+
+      (operand1: .rollNegativeSides(Int.min), operand2: .roll(-0, -0), expected: .roll(Int.min, -0)),
+      (operand1: .rollNegativeSides(Int.min), operand2: .roll(-0, -1), expected: .roll(Int.min, -1)),
+      (
+        operand1: .rollNegativeSides(Int.min),
+        operand2: .roll(-0, Int.min),
+        expected: .roll(Int.min, Int.min)
+      ),
+
+      (operand1: .roll(-0, -0), operand2: .rollNegativeSides(Int.min), expected: .roll(Int.min, -0)),
+      (operand1: .roll(-0, -1), operand2: .rollNegativeSides(Int.min), expected: .roll(Int.min, -1)),
+      (
+        operand1: .roll(-0, Int.min),
+        operand2: .rollNegativeSides(Int.min),
+        expected: .roll(Int.min, Int.min)
+      ),
+
+      (operand1: .roll(Int.min, -0), operand2: .roll(-0, -0), expected: .roll(Int.min, -0)),
+      (operand1: .roll(Int.min, -1), operand2: .roll(-0, -1), expected: .roll(Int.min, -1)),
+      (
+        operand1: .roll(Int.min, Int.min),
+        operand2: .roll(-0, Int.min),
+        expected: .roll(Int.min, Int.min)
+      ),
     ]
 
     for fixture in fixtures {
@@ -993,39 +1233,30 @@ extension OperandTests {
     )
 
     let fixtures: [Fixture] = [
-      (operand1: .roll(0, 0), operand2: .rollPositiveSides(0)),
       (operand1: .roll(0, 0), operand2: .roll(0, 1)),
       (operand1: .roll(0, 0), operand2: .roll(0, 21)),
 
-      (operand1: .roll(0, 1), operand2: .rollPositiveSides(0)),
       (operand1: .roll(0, 1), operand2: .roll(0, 0)),
       (operand1: .roll(0, 1), operand2: .roll(0, 21)),
 
-      (operand1: .roll(0, 21), operand2: .rollPositiveSides(0)),
       (operand1: .roll(0, 21), operand2: .roll(0, 0)),
       (operand1: .roll(0, 21), operand2: .roll(0, 1)),
 
-      (operand1: .roll(1, 0), operand2: .rollPositiveSides(1)),
       (operand1: .roll(1, 0), operand2: .roll(1, 2)),
       (operand1: .roll(1, 0), operand2: .roll(1, 32)),
 
-      (operand1: .roll(1, 2), operand2: .rollPositiveSides(1)),
       (operand1: .roll(1, 2), operand2: .roll(1, 0)),
       (operand1: .roll(1, 2), operand2: .roll(1, 32)),
 
-      (operand1: .roll(1, 32), operand2: .rollPositiveSides(1)),
       (operand1: .roll(1, 32), operand2: .roll(1, 0)),
       (operand1: .roll(1, 32), operand2: .roll(1, 2)),
 
-      (operand1: .roll(9, 0), operand2: .rollPositiveSides(9)),
       (operand1: .roll(9, 0), operand2: .roll(9, 8)),
       (operand1: .roll(9, 0), operand2: .roll(9, 78)),
 
-      (operand1: .roll(9, 8), operand2: .rollPositiveSides(9)),
       (operand1: .roll(9, 8), operand2: .roll(9, 0)),
       (operand1: .roll(9, 8), operand2: .roll(9, 78)),
 
-      (operand1: .roll(9, 78), operand2: .rollPositiveSides(9)),
       (operand1: .roll(9, 78), operand2: .roll(9, 0)),
       (operand1: .roll(9, 78), operand2: .roll(9, 8)),
 
@@ -1039,7 +1270,6 @@ extension OperandTests {
       (operand1: .rollPositiveSides(Int.max), operand2: .roll(Int.max, 1)),
       (operand1: .rollPositiveSides(Int.max), operand2: .roll(Int.max, Int.max)),
 
-      (operand1: .roll(Int.max, 0), operand2: .rollPositiveSides(0)),
       (operand1: .roll(Int.max, 0), operand2: .roll(0, 1)),
       (operand1: .roll(Int.max, 0), operand2: .roll(0, Int.max)),
 
@@ -1048,7 +1278,6 @@ extension OperandTests {
       (operand1: .roll(Int.max, 1), operand2: .roll(1, 1)),
       (operand1: .roll(Int.max, 1), operand2: .roll(1, Int.max)),
 
-      (operand1: .roll(Int.max, Int.max), operand2: .rollPositiveSides(Int.max)),
       (operand1: .roll(Int.max, Int.max), operand2: .roll(Int.max, 0)),
       (operand1: .roll(Int.max, Int.max), operand2: .roll(Int.max, 1)),
       (operand1: .roll(Int.max, Int.max), operand2: .roll(Int.max, Int.max)),
