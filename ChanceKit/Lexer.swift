@@ -66,10 +66,10 @@ func lexed(operand: Operand, into: [Tokenable]) throws -> [Tokenable] {
   case let lastOperand as Operand:
 
     switch lastOperand {
-    case .number:
+    case .constant:
 
       switch operand {
-      case .number:
+      case .constant:
         let nextOperand = try lastOperand.combined(operand)
 
         tokens.removeLast()
@@ -91,7 +91,7 @@ func lexed(operand: Operand, into: [Tokenable]) throws -> [Tokenable] {
     case let .roll(_, sidesLast):
 
       switch operand {
-      case .number:
+      case .constant:
         let nextOperand = try lastOperand.combined(operand)
 
         tokens.removeLast()
@@ -137,7 +137,7 @@ func lexed(operand: Operand, into: [Tokenable]) throws -> [Tokenable] {
     case .rollNegativeSides:
 
       switch operand {
-      case .number:
+      case .constant:
         let nextOperand = try lastOperand.combined(operand)
 
         tokens.removeLast()
@@ -169,7 +169,7 @@ func lexed(operand: Operand, into: [Tokenable]) throws -> [Tokenable] {
     case .rollPositiveSides:
 
       switch operand {
-      case .number:
+      case .constant:
         let nextOperand = try lastOperand.combined(operand)
 
         tokens.removeLast()

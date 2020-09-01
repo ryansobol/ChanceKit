@@ -1,8 +1,7 @@
 import GameplayKit
 
 enum Operand: Equatable {
-  // TODO: Consider renaming this case to constant
-  case number(Int)
+  case constant(Int)
   case roll(Int, Int)
   case rollNegativeSides(Int)
   case rollPositiveSides(Int)
@@ -15,8 +14,8 @@ private let timesSidesRegex = NSRegularExpression(#"\A(-?\d+)d(-?\d*)\Z"#)
 
 extension Operand {
   init?(rawLexeme: String) {
-    if let value = Int(rawLexeme) {
-      self = .number(value)
+    if let term = Int(rawLexeme) {
+      self = .constant(term)
       return
     }
 
@@ -55,8 +54,8 @@ extension Operand {
 extension Operand: Tokenable {
   var description: String {
     switch self {
-    case let .number(value):
-      return String(value)
+    case let .constant(term):
+      return String(term)
 
     case let .roll(times, sides):
       return "\(times)d\(sides)"
@@ -78,14 +77,14 @@ extension Operand {
     let lexemeOther = String(describing: other)
 
     switch self {
-    case .number:
+    case .constant:
       switch other {
-      case .number:
-        guard let valueResult = Int(lexemeSelf + lexemeOther) else {
+      case .constant:
+        guard let termResult = Int(lexemeSelf + lexemeOther) else {
           throw ExpressionError.invalidCombinationOperands(lexemeSelf, lexemeOther)
         }
 
-        return .number(valueResult)
+        return .constant(termResult)
 
       default:
         throw ExpressionError.invalidCombinationOperands(lexemeSelf, lexemeOther)
@@ -93,7 +92,7 @@ extension Operand {
 
     case let .roll(timesSelf, sidesSelf):
       switch other {
-      case .number:
+      case .constant:
         guard let sidesResult = Int(String(sidesSelf) + lexemeOther) else {
           throw ExpressionError.invalidCombinationOperands(lexemeSelf, lexemeOther)
         }
@@ -142,13 +141,13 @@ extension Operand {
 
     case let .rollNegativeSides(timesSelf):
       switch other {
-      case let .number(sidesOther):
+      case let .constant(termOther):
         // Because -Int.min > Int.max
-        if sidesOther == Int.min {
+        if termOther == Int.min {
           throw ExpressionError.invalidCombinationOperands(lexemeSelf, lexemeOther)
         }
 
-        return .roll(timesSelf, -sidesOther)
+        return .roll(timesSelf, -termOther)
 
       case let .roll(timesOther, sidesOther):
         if sidesOther > 0 {
@@ -178,8 +177,8 @@ extension Operand {
 
     case let .rollPositiveSides(timesSelf):
       switch other {
-      case let .number(sidesOther):
-        return .roll(timesSelf, sidesOther)
+      case let .constant(termOther):
+        return .roll(timesSelf, termOther)
 
       case let .roll(timesOther, sidesOther):
         if sidesOther < 0 {
@@ -215,14 +214,14 @@ extension Operand {
 extension Operand {
   func dropped() -> Tokenable? {
     switch self {
-    case let .number(value):
-      let quotient = value / 10
+    case let .constant(term):
+      let quotient = term / 10
 
       if quotient != 0 {
-        return Operand.number(quotient)
+        return Operand.constant(quotient)
       }
 
-      let remainder = value % 10
+      let remainder = term % 10
 
       if remainder < 0 {
         return Operator.subtraction
@@ -249,7 +248,7 @@ extension Operand {
       return Operand.rollPositiveSides(times)
 
     case let .rollPositiveSides(times):
-      return Operand.number(times)
+      return Operand.constant(times)
     }
   }
 }
@@ -259,8 +258,8 @@ extension Operand {
 extension Operand {
   func value() throws -> Int {
     switch self {
-    case let .number(value):
-      return value
+    case let .constant(term):
+      return term
 
     case let .roll(times, sides):
       if times == 0 || sides == 0 {
@@ -355,7 +354,7 @@ extension Operand {
       throw ExpressionError.operationOverflow
     }
 
-    return Operand.number(result)
+    return Operand.constant(result)
   }
 
   static func / (left: Operand, right: Operand) throws -> Operand {
@@ -372,7 +371,7 @@ extension Operand {
       throw ExpressionError.operationOverflow
     }
 
-    return Operand.number(result)
+    return Operand.constant(result)
   }
 
   static func * (left: Operand, right: Operand) throws -> Operand {
@@ -384,7 +383,7 @@ extension Operand {
       throw ExpressionError.operationOverflow
     }
 
-    return Operand.number(result)
+    return Operand.constant(result)
   }
 
   static func - (left: Operand, right: Operand) throws -> Operand {
@@ -396,18 +395,18 @@ extension Operand {
       throw ExpressionError.operationOverflow
     }
 
-    return Operand.number(result)
+    return Operand.constant(result)
   }
 
   static prefix func - (operand: Operand) throws -> Operand {
     switch operand {
-    case let .number(value):
+    case let .constant(term):
       // Because -Int.min > Int.max
-      if value == Int.min {
+      if term == Int.min {
         throw ExpressionError.operationOverflow
       }
 
-      return .number(-value)
+      return .constant(-term)
 
     case let .roll(times, sides):
       // Because -Int.min > Int.max

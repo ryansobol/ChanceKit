@@ -84,10 +84,10 @@ extension OperandTests {
     )
 
     let fixtures: [Fixture] = [
-      (Operator(rawValue: "+")!, .number(1), .number(2), .number(3)),
-      (Operator(rawValue: "-")!, .number(5), .number(4), .number(1)),
-      (Operator(rawValue: "×")!, .number(6), .number(7), .number(42)),
-      (Operator(rawValue: "÷")!, .number(8), .number(2), .number(4)),
+      (Operator(rawValue: "+")!, .constant(1), .constant(2), .constant(3)),
+      (Operator(rawValue: "-")!, .constant(5), .constant(4), .constant(1)),
+      (Operator(rawValue: "×")!, .constant(6), .constant(7), .constant(42)),
+      (Operator(rawValue: "÷")!, .constant(8), .constant(2), .constant(4)),
     ]
 
     for fixture in fixtures {
@@ -103,8 +103,8 @@ extension OperandTests {
 
   func testEvaluateDivisionByZero() {
     let operation = Operator(rawValue: "÷")!
-    let operand1 = Operand.number(1)
-    let operand2 = Operand.number(0)
+    let operand1 = Operand.constant(1)
+    let operand2 = Operand.constant(0)
     let expected = ExpressionError.divisionByZero
 
     XCTAssertThrowsError(try operation.evaluate(operand1, operand2)) { error in
@@ -120,10 +120,10 @@ extension OperandTests {
     )
 
     let fixtures: [Fixture] = [
-      (Operator(rawValue: "+")!, .number(Int.max), .number(1)),
-      (Operator(rawValue: "÷")!, .number(Int.min), .number(-1)),
-      (Operator(rawValue: "×")!, .number(Int.min), .number(-1)),
-      (Operator(rawValue: "-")!, .number(Int.max), .number(-1)),
+      (Operator(rawValue: "+")!, .constant(Int.max), .constant(1)),
+      (Operator(rawValue: "÷")!, .constant(Int.min), .constant(-1)),
+      (Operator(rawValue: "×")!, .constant(Int.min), .constant(-1)),
+      (Operator(rawValue: "-")!, .constant(Int.max), .constant(-1)),
     ]
 
     let expected = ExpressionError.operationOverflow

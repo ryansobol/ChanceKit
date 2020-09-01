@@ -13,17 +13,17 @@ extension OperandTests {
     )
 
     let fixtures: [Fixture] = [
-      (rawLexeme: "0", expected: .number(0)),
-      (rawLexeme: "1", expected: .number(1)),
-      (rawLexeme: "9", expected: .number(9)),
+      (rawLexeme: "0", expected: .constant(0)),
+      (rawLexeme: "1", expected: .constant(1)),
+      (rawLexeme: "9", expected: .constant(9)),
 
-      (rawLexeme: String(Int.max), expected: .number(Int.max)),
+      (rawLexeme: String(Int.max), expected: .constant(Int.max)),
 
-      (rawLexeme: "-0", expected: .number(-0)),
-      (rawLexeme: "-1", expected: .number(-1)),
-      (rawLexeme: "-9", expected: .number(-9)),
+      (rawLexeme: "-0", expected: .constant(-0)),
+      (rawLexeme: "-1", expected: .constant(-1)),
+      (rawLexeme: "-9", expected: .constant(-9)),
 
-      (rawLexeme: String(Int.min), expected: .number(Int.min)),
+      (rawLexeme: String(Int.min), expected: .constant(Int.min)),
 
       (rawLexeme: "0d0", expected: .roll(0, 0)),
       (rawLexeme: "1d1", expected: .roll(1, 1)),
@@ -164,9 +164,9 @@ extension OperandTests {
     )
 
     let fixtures: [Fixture] = [
-      (operand: .number(0), expected: "0"),
-      (operand: .number(Int.max), expected: String(Int.max)),
-      (operand: .number(Int.min), expected: String(Int.min)),
+      (operand: .constant(0), expected: "0"),
+      (operand: .constant(Int.max), expected: String(Int.max)),
+      (operand: .constant(Int.min), expected: String(Int.min)),
 
       (operand: .roll(0, 0), expected: "0d0"),
       (operand: .roll(Int.max, Int.max), expected: "\(String(Int.max))d\(String(Int.max))"),
@@ -202,48 +202,48 @@ extension OperandTests {
     )
 
     let fixtures: [Fixture] = [
-      (operand1: .number(0), operand2: .number(0), expected: .number(0)),
-      (operand1: .number(1), operand2: .number(0), expected: .number(10)),
-      (operand1: .number(21), operand2: .number(0), expected: .number(210)),
+      (operand1: .constant(0), operand2: .constant(0), expected: .constant(0)),
+      (operand1: .constant(1), operand2: .constant(0), expected: .constant(10)),
+      (operand1: .constant(21), operand2: .constant(0), expected: .constant(210)),
 
-      (operand1: .number(0), operand2: .number(1), expected: .number(1)),
-      (operand1: .number(2), operand2: .number(1), expected: .number(21)),
-      (operand1: .number(32), operand2: .number(1), expected: .number(321)),
+      (operand1: .constant(0), operand2: .constant(1), expected: .constant(1)),
+      (operand1: .constant(2), operand2: .constant(1), expected: .constant(21)),
+      (operand1: .constant(32), operand2: .constant(1), expected: .constant(321)),
 
-      (operand1: .number(0), operand2: .number(9), expected: .number(9)),
-      (operand1: .number(8), operand2: .number(9), expected: .number(89)),
-      (operand1: .number(78), operand2: .number(9), expected: .number(789)),
+      (operand1: .constant(0), operand2: .constant(9), expected: .constant(9)),
+      (operand1: .constant(8), operand2: .constant(9), expected: .constant(89)),
+      (operand1: .constant(78), operand2: .constant(9), expected: .constant(789)),
 
-      (operand1: .number(0), operand2: .number(Int.max), expected: .number(Int.max)),
-      (operand1: .number(9), operand2: .number(223372036854775807), expected: .number(Int.max)),
-      (operand1: .number(922337203685477580), operand2: .number(7), expected: .number(Int.max)),
+      (operand1: .constant(0), operand2: .constant(Int.max), expected: .constant(Int.max)),
+      (operand1: .constant(9), operand2: .constant(223372036854775807), expected: .constant(Int.max)),
+      (operand1: .constant(922337203685477580), operand2: .constant(7), expected: .constant(Int.max)),
 
-      (operand1: .number(-0), operand2: .number(0), expected: .number(0)),
-      (operand1: .number(-1), operand2: .number(0), expected: .number(-10)),
-      (operand1: .number(-21), operand2: .number(0), expected: .number(-210)),
+      (operand1: .constant(-0), operand2: .constant(0), expected: .constant(0)),
+      (operand1: .constant(-1), operand2: .constant(0), expected: .constant(-10)),
+      (operand1: .constant(-21), operand2: .constant(0), expected: .constant(-210)),
 
-      (operand1: .number(-0), operand2: .number(1), expected: .number(1)),
-      (operand1: .number(-2), operand2: .number(1), expected: .number(-21)),
-      (operand1: .number(-32), operand2: .number(1), expected: .number(-321)),
+      (operand1: .constant(-0), operand2: .constant(1), expected: .constant(1)),
+      (operand1: .constant(-2), operand2: .constant(1), expected: .constant(-21)),
+      (operand1: .constant(-32), operand2: .constant(1), expected: .constant(-321)),
 
-      (operand1: .number(-0), operand2: .number(9), expected: .number(9)),
-      (operand1: .number(-8), operand2: .number(9), expected: .number(-89)),
-      (operand1: .number(-78), operand2: .number(9), expected: .number(-789)),
+      (operand1: .constant(-0), operand2: .constant(9), expected: .constant(9)),
+      (operand1: .constant(-8), operand2: .constant(9), expected: .constant(-89)),
+      (operand1: .constant(-78), operand2: .constant(9), expected: .constant(-789)),
 
-      (operand1: .number(-0), operand2: .number(Int.max), expected: .number(Int.max)),
-      (operand1: .number(-9), operand2: .number(223372036854775807), expected: .number(-Int.max)),
-      (operand1: .number(-922337203685477580), operand2: .number(7), expected: .number(-Int.max)),
+      (operand1: .constant(-0), operand2: .constant(Int.max), expected: .constant(Int.max)),
+      (operand1: .constant(-9), operand2: .constant(223372036854775807), expected: .constant(-Int.max)),
+      (operand1: .constant(-922337203685477580), operand2: .constant(7), expected: .constant(-Int.max)),
 
-      (operand1: .number(0), operand2: .number(-0), expected: .number(0)),
-      (operand1: .number(1), operand2: .number(-0), expected: .number(10)),
-      (operand1: .number(21), operand2: .number(-0), expected: .number(210)),
+      (operand1: .constant(0), operand2: .constant(-0), expected: .constant(0)),
+      (operand1: .constant(1), operand2: .constant(-0), expected: .constant(10)),
+      (operand1: .constant(21), operand2: .constant(-0), expected: .constant(210)),
 
-      (operand1: .number(-0), operand2: .number(-0), expected: .number(0)),
-      (operand1: .number(-1), operand2: .number(-0), expected: .number(-10)),
-      (operand1: .number(-21), operand2: .number(-0), expected: .number(-210)),
+      (operand1: .constant(-0), operand2: .constant(-0), expected: .constant(0)),
+      (operand1: .constant(-1), operand2: .constant(-0), expected: .constant(-10)),
+      (operand1: .constant(-21), operand2: .constant(-0), expected: .constant(-210)),
 
-      (operand1: .number(-9), operand2: .number(223372036854775808), expected: .number(Int.min)),
-      (operand1: .number(-922337203685477580), operand2: .number(8), expected: .number(Int.min)),
+      (operand1: .constant(-9), operand2: .constant(223372036854775808), expected: .constant(Int.min)),
+      (operand1: .constant(-922337203685477580), operand2: .constant(8), expected: .constant(Int.min)),
     ]
 
     for fixture in fixtures {
@@ -264,36 +264,36 @@ extension OperandTests {
 
     let fixtures: [Fixture] = [
       // Invalid format
-      (operand1: .number(0), operand2: .number(-1)),
-      (operand1: .number(2), operand2: .number(-1)),
-      (operand1: .number(32), operand2: .number(-1)),
+      (operand1: .constant(0), operand2: .constant(-1)),
+      (operand1: .constant(2), operand2: .constant(-1)),
+      (operand1: .constant(32), operand2: .constant(-1)),
 
-      (operand1: .number(0), operand2: .number(-9)),
-      (operand1: .number(8), operand2: .number(-9)),
-      (operand1: .number(78), operand2: .number(-9)),
+      (operand1: .constant(0), operand2: .constant(-9)),
+      (operand1: .constant(8), operand2: .constant(-9)),
+      (operand1: .constant(78), operand2: .constant(-9)),
 
-      (operand1: .number(0), operand2: .number(Int.min)),
-      (operand1: .number(9), operand2: .number(-223372036854775807)),
-      (operand1: .number(922337203685477580), operand2: .number(-7)),
+      (operand1: .constant(0), operand2: .constant(Int.min)),
+      (operand1: .constant(9), operand2: .constant(-223372036854775807)),
+      (operand1: .constant(922337203685477580), operand2: .constant(-7)),
 
-      (operand1: .number(-0), operand2: .number(-1)),
-      (operand1: .number(-2), operand2: .number(-1)),
-      (operand1: .number(-32), operand2: .number(-1)),
+      (operand1: .constant(-0), operand2: .constant(-1)),
+      (operand1: .constant(-2), operand2: .constant(-1)),
+      (operand1: .constant(-32), operand2: .constant(-1)),
 
-      (operand1: .number(-0), operand2: .number(-9)),
-      (operand1: .number(-8), operand2: .number(-9)),
-      (operand1: .number(-78), operand2: .number(-9)),
+      (operand1: .constant(-0), operand2: .constant(-9)),
+      (operand1: .constant(-8), operand2: .constant(-9)),
+      (operand1: .constant(-78), operand2: .constant(-9)),
 
-      (operand1: .number(-0), operand2: .number(Int.min)),
-      (operand1: .number(-9), operand2: .number(-223372036854775807)),
-      (operand1: .number(-922337203685477580), operand2: .number(-7)),
+      (operand1: .constant(-0), operand2: .constant(Int.min)),
+      (operand1: .constant(-9), operand2: .constant(-223372036854775807)),
+      (operand1: .constant(-922337203685477580), operand2: .constant(-7)),
 
       // Out of range
-      (operand1: .number(922337203685477580), operand2: .number(8)),
-      (operand1: .number(Int.max), operand2: .number(0)),
+      (operand1: .constant(922337203685477580), operand2: .constant(8)),
+      (operand1: .constant(Int.max), operand2: .constant(0)),
 
-      (operand1: .number(-922337203685477580), operand2: .number(9)),
-      (operand1: .number(Int.min), operand2: .number(0)),
+      (operand1: .constant(-922337203685477580), operand2: .constant(9)),
+      (operand1: .constant(Int.min), operand2: .constant(0)),
     ]
 
     for fixture in fixtures {
@@ -318,129 +318,129 @@ extension OperandTests {
     )
 
     let fixtures: [Fixture] = [
-      (operand1: .rollPositiveSides(0), operand2: .number(0), expected: .roll(0, 0)),
-      (operand1: .roll(0, 0), operand2: .number(0), expected: .roll(0, 0)),
-      (operand1: .roll(0, 1), operand2: .number(0), expected: .roll(0, 10)),
-      (operand1: .roll(0, 21), operand2: .number(0), expected: .roll(0, 210)),
+      (operand1: .rollPositiveSides(0), operand2: .constant(0), expected: .roll(0, 0)),
+      (operand1: .roll(0, 0), operand2: .constant(0), expected: .roll(0, 0)),
+      (operand1: .roll(0, 1), operand2: .constant(0), expected: .roll(0, 10)),
+      (operand1: .roll(0, 21), operand2: .constant(0), expected: .roll(0, 210)),
 
-      (operand1: .rollPositiveSides(1), operand2: .number(1), expected: .roll(1, 1)),
-      (operand1: .roll(1, 0), operand2: .number(1), expected: .roll(1, 1)),
-      (operand1: .roll(1, 2), operand2: .number(1), expected: .roll(1, 21)),
-      (operand1: .roll(1, 32), operand2: .number(1), expected: .roll(1, 321)),
+      (operand1: .rollPositiveSides(1), operand2: .constant(1), expected: .roll(1, 1)),
+      (operand1: .roll(1, 0), operand2: .constant(1), expected: .roll(1, 1)),
+      (operand1: .roll(1, 2), operand2: .constant(1), expected: .roll(1, 21)),
+      (operand1: .roll(1, 32), operand2: .constant(1), expected: .roll(1, 321)),
 
-      (operand1: .rollPositiveSides(9), operand2: .number(9), expected: .roll(9, 9)),
-      (operand1: .roll(9, 0), operand2: .number(9), expected: .roll(9, 9)),
-      (operand1: .roll(9, 8), operand2: .number(9), expected: .roll(9, 89)),
-      (operand1: .roll(9, 78), operand2: .number(9), expected: .roll(9, 789)),
+      (operand1: .rollPositiveSides(9), operand2: .constant(9), expected: .roll(9, 9)),
+      (operand1: .roll(9, 0), operand2: .constant(9), expected: .roll(9, 9)),
+      (operand1: .roll(9, 8), operand2: .constant(9), expected: .roll(9, 89)),
+      (operand1: .roll(9, 78), operand2: .constant(9), expected: .roll(9, 789)),
 
-      (operand1: .rollPositiveSides(1), operand2: .number(Int.max), expected: .roll(1, Int.max)),
-      (operand1: .roll(1, 0), operand2: .number(Int.max), expected: .roll(1, Int.max)),
-      (operand1: .roll(1, 9), operand2: .number(223372036854775807), expected: .roll(1, Int.max)),
-      (operand1: .roll(1, 922337203685477580), operand2: .number(7), expected: .roll(1, Int.max)),
+      (operand1: .rollPositiveSides(1), operand2: .constant(Int.max), expected: .roll(1, Int.max)),
+      (operand1: .roll(1, 0), operand2: .constant(Int.max), expected: .roll(1, Int.max)),
+      (operand1: .roll(1, 9), operand2: .constant(223372036854775807), expected: .roll(1, Int.max)),
+      (operand1: .roll(1, 922337203685477580), operand2: .constant(7), expected: .roll(1, Int.max)),
 
-      (operand1: .rollNegativeSides(0), operand2: .number(0), expected: .roll(0, -0)),
-      (operand1: .roll(0, -0), operand2: .number(0), expected: .roll(0, 0)),
-      (operand1: .roll(0, -1), operand2: .number(0), expected: .roll(0, -10)),
-      (operand1: .roll(0, -21), operand2: .number(0), expected: .roll(0, -210)),
+      (operand1: .rollNegativeSides(0), operand2: .constant(0), expected: .roll(0, -0)),
+      (operand1: .roll(0, -0), operand2: .constant(0), expected: .roll(0, 0)),
+      (operand1: .roll(0, -1), operand2: .constant(0), expected: .roll(0, -10)),
+      (operand1: .roll(0, -21), operand2: .constant(0), expected: .roll(0, -210)),
 
-      (operand1: .rollNegativeSides(1), operand2: .number(1), expected: .roll(1, -1)),
-      (operand1: .roll(1, -0), operand2: .number(1), expected: .roll(1, 1)),
-      (operand1: .roll(1, -2), operand2: .number(1), expected: .roll(1, -21)),
-      (operand1: .roll(1, -32), operand2: .number(1), expected: .roll(1, -321)),
+      (operand1: .rollNegativeSides(1), operand2: .constant(1), expected: .roll(1, -1)),
+      (operand1: .roll(1, -0), operand2: .constant(1), expected: .roll(1, 1)),
+      (operand1: .roll(1, -2), operand2: .constant(1), expected: .roll(1, -21)),
+      (operand1: .roll(1, -32), operand2: .constant(1), expected: .roll(1, -321)),
 
-      (operand1: .rollNegativeSides(9), operand2: .number(9), expected: .roll(9, -9)),
-      (operand1: .roll(9, -0), operand2: .number(9), expected: .roll(9, 9)),
-      (operand1: .roll(9, -8), operand2: .number(9), expected: .roll(9, -89)),
-      (operand1: .roll(9, -78), operand2: .number(9), expected: .roll(9, -789)),
+      (operand1: .rollNegativeSides(9), operand2: .constant(9), expected: .roll(9, -9)),
+      (operand1: .roll(9, -0), operand2: .constant(9), expected: .roll(9, 9)),
+      (operand1: .roll(9, -8), operand2: .constant(9), expected: .roll(9, -89)),
+      (operand1: .roll(9, -78), operand2: .constant(9), expected: .roll(9, -789)),
 
-      (operand1: .rollNegativeSides(1), operand2: .number(Int.max), expected: .roll(1, -Int.max)),
-      (operand1: .roll(1, -0), operand2: .number(Int.max), expected: .roll(1, Int.max)),
-      (operand1: .roll(1, -9), operand2: .number(223372036854775808), expected: .roll(1, Int.min)),
-      (operand1: .roll(1, -922337203685477580), operand2: .number(8), expected: .roll(1, Int.min)),
+      (operand1: .rollNegativeSides(1), operand2: .constant(Int.max), expected: .roll(1, -Int.max)),
+      (operand1: .roll(1, -0), operand2: .constant(Int.max), expected: .roll(1, Int.max)),
+      (operand1: .roll(1, -9), operand2: .constant(223372036854775808), expected: .roll(1, Int.min)),
+      (operand1: .roll(1, -922337203685477580), operand2: .constant(8), expected: .roll(1, Int.min)),
 
-      (operand1: .rollPositiveSides(-0), operand2: .number(0), expected: .roll(-0, 0)),
-      (operand1: .roll(-0, 0), operand2: .number(0), expected: .roll(-0, 0)),
-      (operand1: .roll(-0, 1), operand2: .number(0), expected: .roll(-0, 10)),
-      (operand1: .roll(-0, 21), operand2: .number(0), expected: .roll(-0, 210)),
+      (operand1: .rollPositiveSides(-0), operand2: .constant(0), expected: .roll(-0, 0)),
+      (operand1: .roll(-0, 0), operand2: .constant(0), expected: .roll(-0, 0)),
+      (operand1: .roll(-0, 1), operand2: .constant(0), expected: .roll(-0, 10)),
+      (operand1: .roll(-0, 21), operand2: .constant(0), expected: .roll(-0, 210)),
 
-      (operand1: .rollPositiveSides(-1), operand2: .number(1), expected: .roll(-1, 1)),
-      (operand1: .roll(-1, 0), operand2: .number(1), expected: .roll(-1, 1)),
-      (operand1: .roll(-1, 2), operand2: .number(1), expected: .roll(-1, 21)),
-      (operand1: .roll(-1, 32), operand2: .number(1), expected: .roll(-1, 321)),
+      (operand1: .rollPositiveSides(-1), operand2: .constant(1), expected: .roll(-1, 1)),
+      (operand1: .roll(-1, 0), operand2: .constant(1), expected: .roll(-1, 1)),
+      (operand1: .roll(-1, 2), operand2: .constant(1), expected: .roll(-1, 21)),
+      (operand1: .roll(-1, 32), operand2: .constant(1), expected: .roll(-1, 321)),
 
-      (operand1: .rollPositiveSides(-9), operand2: .number(9), expected: .roll(-9, 9)),
-      (operand1: .roll(-9, 0), operand2: .number(9), expected: .roll(-9, 9)),
-      (operand1: .roll(-9, 8), operand2: .number(9), expected: .roll(-9, 89)),
-      (operand1: .roll(-9, 78), operand2: .number(9), expected: .roll(-9, 789)),
+      (operand1: .rollPositiveSides(-9), operand2: .constant(9), expected: .roll(-9, 9)),
+      (operand1: .roll(-9, 0), operand2: .constant(9), expected: .roll(-9, 9)),
+      (operand1: .roll(-9, 8), operand2: .constant(9), expected: .roll(-9, 89)),
+      (operand1: .roll(-9, 78), operand2: .constant(9), expected: .roll(-9, 789)),
 
-      (operand1: .rollPositiveSides(-1), operand2: .number(Int.max), expected: .roll(-1, Int.max)),
-      (operand1: .roll(-1, 0), operand2: .number(Int.max), expected: .roll(-1, Int.max)),
-      (operand1: .roll(-1, 9), operand2: .number(223372036854775807), expected: .roll(-1, Int.max)),
-      (operand1: .roll(-1, 922337203685477580), operand2: .number(7), expected: .roll(-1, Int.max)),
+      (operand1: .rollPositiveSides(-1), operand2: .constant(Int.max), expected: .roll(-1, Int.max)),
+      (operand1: .roll(-1, 0), operand2: .constant(Int.max), expected: .roll(-1, Int.max)),
+      (operand1: .roll(-1, 9), operand2: .constant(223372036854775807), expected: .roll(-1, Int.max)),
+      (operand1: .roll(-1, 922337203685477580), operand2: .constant(7), expected: .roll(-1, Int.max)),
 
-      (operand1: .rollNegativeSides(-0), operand2: .number(0), expected: .roll(-0, -0)),
-      (operand1: .roll(-0, -0), operand2: .number(0), expected: .roll(-0, 0)),
-      (operand1: .roll(-0, -1), operand2: .number(0), expected: .roll(-0, -10)),
-      (operand1: .roll(-0, -21), operand2: .number(0), expected: .roll(-0, -210)),
+      (operand1: .rollNegativeSides(-0), operand2: .constant(0), expected: .roll(-0, -0)),
+      (operand1: .roll(-0, -0), operand2: .constant(0), expected: .roll(-0, 0)),
+      (operand1: .roll(-0, -1), operand2: .constant(0), expected: .roll(-0, -10)),
+      (operand1: .roll(-0, -21), operand2: .constant(0), expected: .roll(-0, -210)),
 
-      (operand1: .rollNegativeSides(-1), operand2: .number(1), expected: .roll(-1, -1)),
-      (operand1: .roll(-1, -0), operand2: .number(1), expected: .roll(-1, 1)),
-      (operand1: .roll(-1, -2), operand2: .number(1), expected: .roll(-1, -21)),
-      (operand1: .roll(-1, -32), operand2: .number(1), expected: .roll(-1, -321)),
+      (operand1: .rollNegativeSides(-1), operand2: .constant(1), expected: .roll(-1, -1)),
+      (operand1: .roll(-1, -0), operand2: .constant(1), expected: .roll(-1, 1)),
+      (operand1: .roll(-1, -2), operand2: .constant(1), expected: .roll(-1, -21)),
+      (operand1: .roll(-1, -32), operand2: .constant(1), expected: .roll(-1, -321)),
 
-      (operand1: .rollNegativeSides(-9), operand2: .number(9), expected: .roll(-9, -9)),
-      (operand1: .roll(-9, -0), operand2: .number(9), expected: .roll(-9, 9)),
-      (operand1: .roll(-9, -8), operand2: .number(9), expected: .roll(-9, -89)),
-      (operand1: .roll(-9, -78), operand2: .number(9), expected: .roll(-9, -789)),
+      (operand1: .rollNegativeSides(-9), operand2: .constant(9), expected: .roll(-9, -9)),
+      (operand1: .roll(-9, -0), operand2: .constant(9), expected: .roll(-9, 9)),
+      (operand1: .roll(-9, -8), operand2: .constant(9), expected: .roll(-9, -89)),
+      (operand1: .roll(-9, -78), operand2: .constant(9), expected: .roll(-9, -789)),
 
-      (operand1: .rollNegativeSides(-1), operand2: .number(Int.max), expected: .roll(-1, -Int.max)),
-      (operand1: .roll(-1, -0), operand2: .number(Int.max), expected: .roll(-1, Int.max)),
-      (operand1: .roll(-1, -9), operand2: .number(223372036854775808), expected: .roll(-1, Int.min)),
-      (operand1: .roll(-1, -922337203685477580), operand2: .number(8), expected: .roll(-1, Int.min)),
+      (operand1: .rollNegativeSides(-1), operand2: .constant(Int.max), expected: .roll(-1, -Int.max)),
+      (operand1: .roll(-1, -0), operand2: .constant(Int.max), expected: .roll(-1, Int.max)),
+      (operand1: .roll(-1, -9), operand2: .constant(223372036854775808), expected: .roll(-1, Int.min)),
+      (operand1: .roll(-1, -922337203685477580), operand2: .constant(8), expected: .roll(-1, Int.min)),
 
-      (operand1: .rollPositiveSides(0), operand2: .number(-0), expected: .roll(0, 0)),
-      (operand1: .roll(0, 0), operand2: .number(-0), expected: .roll(0, 0)),
-      (operand1: .roll(0, 1), operand2: .number(-0), expected: .roll(0, 10)),
-      (operand1: .roll(0, 21), operand2: .number(-0), expected: .roll(0, 210)),
+      (operand1: .rollPositiveSides(0), operand2: .constant(-0), expected: .roll(0, 0)),
+      (operand1: .roll(0, 0), operand2: .constant(-0), expected: .roll(0, 0)),
+      (operand1: .roll(0, 1), operand2: .constant(-0), expected: .roll(0, 10)),
+      (operand1: .roll(0, 21), operand2: .constant(-0), expected: .roll(0, 210)),
 
-      (operand1: .rollPositiveSides(1), operand2: .number(-1), expected: .roll(1, -1)),
+      (operand1: .rollPositiveSides(1), operand2: .constant(-1), expected: .roll(1, -1)),
 
-      (operand1: .rollPositiveSides(9), operand2: .number(-9), expected: .roll(9, -9)),
+      (operand1: .rollPositiveSides(9), operand2: .constant(-9), expected: .roll(9, -9)),
 
-      (operand1: .rollPositiveSides(1), operand2: .number(Int.min), expected: .roll(1, Int.min)),
+      (operand1: .rollPositiveSides(1), operand2: .constant(Int.min), expected: .roll(1, Int.min)),
 
-      (operand1: .rollNegativeSides(0), operand2: .number(0), expected: .roll(0, -0)),
-      (operand1: .roll(0, -0), operand2: .number(0), expected: .roll(0, 0)),
-      (operand1: .roll(0, -1), operand2: .number(0), expected: .roll(0, -10)),
-      (operand1: .roll(0, -21), operand2: .number(0), expected: .roll(0, -210)),
+      (operand1: .rollNegativeSides(0), operand2: .constant(0), expected: .roll(0, -0)),
+      (operand1: .roll(0, -0), operand2: .constant(0), expected: .roll(0, 0)),
+      (operand1: .roll(0, -1), operand2: .constant(0), expected: .roll(0, -10)),
+      (operand1: .roll(0, -21), operand2: .constant(0), expected: .roll(0, -210)),
 
-      (operand1: .rollNegativeSides(1), operand2: .number(-1), expected: .roll(1, 1)),
+      (operand1: .rollNegativeSides(1), operand2: .constant(-1), expected: .roll(1, 1)),
 
-      (operand1: .rollNegativeSides(9), operand2: .number(-9), expected: .roll(9, 9)),
+      (operand1: .rollNegativeSides(9), operand2: .constant(-9), expected: .roll(9, 9)),
 
-      (operand1: .rollNegativeSides(1), operand2: .number(-Int.max), expected: .roll(1, Int.max)),
+      (operand1: .rollNegativeSides(1), operand2: .constant(-Int.max), expected: .roll(1, Int.max)),
 
-      (operand1: .rollPositiveSides(-0), operand2: .number(-0), expected: .roll(-0, 0)),
-      (operand1: .roll(-0, 0), operand2: .number(-0), expected: .roll(-0, 0)),
-      (operand1: .roll(-0, 1), operand2: .number(-0), expected: .roll(-0, 10)),
-      (operand1: .roll(-0, 21), operand2: .number(-0), expected: .roll(-0, 210)),
+      (operand1: .rollPositiveSides(-0), operand2: .constant(-0), expected: .roll(-0, 0)),
+      (operand1: .roll(-0, 0), operand2: .constant(-0), expected: .roll(-0, 0)),
+      (operand1: .roll(-0, 1), operand2: .constant(-0), expected: .roll(-0, 10)),
+      (operand1: .roll(-0, 21), operand2: .constant(-0), expected: .roll(-0, 210)),
 
-      (operand1: .rollPositiveSides(-1), operand2: .number(-1), expected: .roll(-1, -1)),
+      (operand1: .rollPositiveSides(-1), operand2: .constant(-1), expected: .roll(-1, -1)),
 
-      (operand1: .rollPositiveSides(-9), operand2: .number(-9), expected: .roll(-9, -9)),
+      (operand1: .rollPositiveSides(-9), operand2: .constant(-9), expected: .roll(-9, -9)),
 
-      (operand1: .rollPositiveSides(-1), operand2: .number(Int.min), expected: .roll(-1, Int.min)),
+      (operand1: .rollPositiveSides(-1), operand2: .constant(Int.min), expected: .roll(-1, Int.min)),
 
-      (operand1: .rollNegativeSides(-0), operand2: .number(0), expected: .roll(-0, -0)),
-      (operand1: .roll(-0, -0), operand2: .number(0), expected: .roll(-0, 0)),
-      (operand1: .roll(-0, -1), operand2: .number(0), expected: .roll(-0, -10)),
-      (operand1: .roll(-0, -21), operand2: .number(0), expected: .roll(-0, -210)),
+      (operand1: .rollNegativeSides(-0), operand2: .constant(0), expected: .roll(-0, -0)),
+      (operand1: .roll(-0, -0), operand2: .constant(0), expected: .roll(-0, 0)),
+      (operand1: .roll(-0, -1), operand2: .constant(0), expected: .roll(-0, -10)),
+      (operand1: .roll(-0, -21), operand2: .constant(0), expected: .roll(-0, -210)),
 
-      (operand1: .rollNegativeSides(-1), operand2: .number(-1), expected: .roll(-1, 1)),
+      (operand1: .rollNegativeSides(-1), operand2: .constant(-1), expected: .roll(-1, 1)),
 
-      (operand1: .rollNegativeSides(-9), operand2: .number(-9), expected: .roll(-9, 9)),
+      (operand1: .rollNegativeSides(-9), operand2: .constant(-9), expected: .roll(-9, 9)),
 
-      (operand1: .rollNegativeSides(-1), operand2: .number(-Int.max), expected: .roll(-1, Int.max)),
+      (operand1: .rollNegativeSides(-1), operand2: .constant(-Int.max), expected: .roll(-1, Int.max)),
     ]
 
     for fixture in fixtures {
@@ -461,63 +461,63 @@ extension OperandTests {
 
     let fixtures: [Fixture] = [
       // Invalid format
-      (operand1: .roll(1, 0), operand2: .number(-1)),
-      (operand1: .roll(1, 2), operand2: .number(-1)),
-      (operand1: .roll(1, 32), operand2: .number(-1)),
+      (operand1: .roll(1, 0), operand2: .constant(-1)),
+      (operand1: .roll(1, 2), operand2: .constant(-1)),
+      (operand1: .roll(1, 32), operand2: .constant(-1)),
 
-      (operand1: .roll(9, 0), operand2: .number(-9)),
-      (operand1: .roll(9, 8), operand2: .number(-9)),
-      (operand1: .roll(9, 78), operand2: .number(-9)),
+      (operand1: .roll(9, 0), operand2: .constant(-9)),
+      (operand1: .roll(9, 8), operand2: .constant(-9)),
+      (operand1: .roll(9, 78), operand2: .constant(-9)),
 
-      (operand1: .roll(1, 0), operand2: .number(Int.min)),
-      (operand1: .roll(1, 9), operand2: .number(-223372036854775808)),
-      (operand1: .roll(1, 922337203685477580), operand2: .number(-8)),
+      (operand1: .roll(1, 0), operand2: .constant(Int.min)),
+      (operand1: .roll(1, 9), operand2: .constant(-223372036854775808)),
+      (operand1: .roll(1, 922337203685477580), operand2: .constant(-8)),
 
-      (operand1: .roll(1, -0), operand2: .number(-1)),
-      (operand1: .roll(1, -2), operand2: .number(-1)),
-      (operand1: .roll(1, -32), operand2: .number(-1)),
+      (operand1: .roll(1, -0), operand2: .constant(-1)),
+      (operand1: .roll(1, -2), operand2: .constant(-1)),
+      (operand1: .roll(1, -32), operand2: .constant(-1)),
 
-      (operand1: .roll(9, -0), operand2: .number(-9)),
-      (operand1: .roll(9, -8), operand2: .number(-9)),
-      (operand1: .roll(9, -78), operand2: .number(-9)),
+      (operand1: .roll(9, -0), operand2: .constant(-9)),
+      (operand1: .roll(9, -8), operand2: .constant(-9)),
+      (operand1: .roll(9, -78), operand2: .constant(-9)),
 
-      (operand1: .roll(1, -0), operand2: .number(Int.min)),
-      (operand1: .roll(1, -9), operand2: .number(-223372036854775808)),
-      (operand1: .roll(1, -922337203685477580), operand2: .number(-8)),
+      (operand1: .roll(1, -0), operand2: .constant(Int.min)),
+      (operand1: .roll(1, -9), operand2: .constant(-223372036854775808)),
+      (operand1: .roll(1, -922337203685477580), operand2: .constant(-8)),
 
-      (operand1: .roll(-1, 0), operand2: .number(-1)),
-      (operand1: .roll(-1, 2), operand2: .number(-1)),
-      (operand1: .roll(-1, 32), operand2: .number(-1)),
+      (operand1: .roll(-1, 0), operand2: .constant(-1)),
+      (operand1: .roll(-1, 2), operand2: .constant(-1)),
+      (operand1: .roll(-1, 32), operand2: .constant(-1)),
 
-      (operand1: .roll(-9, 0), operand2: .number(-9)),
-      (operand1: .roll(-9, 8), operand2: .number(-9)),
-      (operand1: .roll(-9, 78), operand2: .number(-9)),
+      (operand1: .roll(-9, 0), operand2: .constant(-9)),
+      (operand1: .roll(-9, 8), operand2: .constant(-9)),
+      (operand1: .roll(-9, 78), operand2: .constant(-9)),
 
-      (operand1: .roll(-1, 0), operand2: .number(Int.min)),
-      (operand1: .roll(-1, 9), operand2: .number(-223372036854775808)),
-      (operand1: .roll(-1, 922337203685477580), operand2: .number(-8)),
+      (operand1: .roll(-1, 0), operand2: .constant(Int.min)),
+      (operand1: .roll(-1, 9), operand2: .constant(-223372036854775808)),
+      (operand1: .roll(-1, 922337203685477580), operand2: .constant(-8)),
 
-      (operand1: .roll(-1, -0), operand2: .number(-1)),
-      (operand1: .roll(-1, -2), operand2: .number(-1)),
-      (operand1: .roll(-1, -32), operand2: .number(-1)),
+      (operand1: .roll(-1, -0), operand2: .constant(-1)),
+      (operand1: .roll(-1, -2), operand2: .constant(-1)),
+      (operand1: .roll(-1, -32), operand2: .constant(-1)),
 
-      (operand1: .roll(-9, -0), operand2: .number(-9)),
-      (operand1: .roll(-9, -8), operand2: .number(-9)),
-      (operand1: .roll(-9, -78), operand2: .number(-9)),
+      (operand1: .roll(-9, -0), operand2: .constant(-9)),
+      (operand1: .roll(-9, -8), operand2: .constant(-9)),
+      (operand1: .roll(-9, -78), operand2: .constant(-9)),
 
-      (operand1: .roll(-1, -0), operand2: .number(Int.min)),
-      (operand1: .roll(-1, -9), operand2: .number(-223372036854775808)),
-      (operand1: .roll(-1, -922337203685477580), operand2: .number(-8)),
+      (operand1: .roll(-1, -0), operand2: .constant(Int.min)),
+      (operand1: .roll(-1, -9), operand2: .constant(-223372036854775808)),
+      (operand1: .roll(-1, -922337203685477580), operand2: .constant(-8)),
 
       // Out of range
-      (operand1: .roll(1, 922337203685477580), operand2: .number(8)),
-      (operand1: .roll(1, Int.max), operand2: .number(0)),
+      (operand1: .roll(1, 922337203685477580), operand2: .constant(8)),
+      (operand1: .roll(1, Int.max), operand2: .constant(0)),
 
-      (operand1: .roll(1, -922337203685477580), operand2: .number(9)),
-      (operand1: .roll(1, Int.min), operand2: .number(0)),
+      (operand1: .roll(1, -922337203685477580), operand2: .constant(9)),
+      (operand1: .roll(1, Int.min), operand2: .constant(0)),
 
       // Overflow negation
-      (operand1: .rollNegativeSides(1), operand2: .number(Int.min)),
+      (operand1: .rollNegativeSides(1), operand2: .constant(Int.min)),
     ]
 
     for fixture in fixtures {
@@ -541,171 +541,171 @@ extension OperandTests {
     )
 
     let fixtures: [Fixture] = [
-      (operand1: .number(0), operand2: .rollPositiveSides(0)),
-      (operand1: .number(0), operand2: .roll(0, 0)),
-      (operand1: .number(0), operand2: .roll(0, 1)),
-      (operand1: .number(0), operand2: .roll(0, 21)),
+      (operand1: .constant(0), operand2: .rollPositiveSides(0)),
+      (operand1: .constant(0), operand2: .roll(0, 0)),
+      (operand1: .constant(0), operand2: .roll(0, 1)),
+      (operand1: .constant(0), operand2: .roll(0, 21)),
 
-      (operand1: .number(1), operand2: .rollPositiveSides(1)),
-      (operand1: .number(1), operand2: .roll(1, 0)),
-      (operand1: .number(1), operand2: .roll(1, 2)),
-      (operand1: .number(1), operand2: .roll(1, 32)),
+      (operand1: .constant(1), operand2: .rollPositiveSides(1)),
+      (operand1: .constant(1), operand2: .roll(1, 0)),
+      (operand1: .constant(1), operand2: .roll(1, 2)),
+      (operand1: .constant(1), operand2: .roll(1, 32)),
 
-      (operand1: .number(9), operand2: .rollPositiveSides(9)),
-      (operand1: .number(9), operand2: .roll(9, 0)),
-      (operand1: .number(9), operand2: .roll(9, 8)),
-      (operand1: .number(9), operand2: .roll(9, 78)),
+      (operand1: .constant(9), operand2: .rollPositiveSides(9)),
+      (operand1: .constant(9), operand2: .roll(9, 0)),
+      (operand1: .constant(9), operand2: .roll(9, 8)),
+      (operand1: .constant(9), operand2: .roll(9, 78)),
 
-      (operand1: .number(Int.max), operand2: .rollPositiveSides(1)),
-      (operand1: .number(Int.max), operand2: .roll(1, 0)),
-      (operand1: .number(922337203685477580), operand2: .roll(1, 7)),
-      (operand1: .number(9), operand2: .roll(1, 223372036854775807)),
+      (operand1: .constant(Int.max), operand2: .rollPositiveSides(1)),
+      (operand1: .constant(Int.max), operand2: .roll(1, 0)),
+      (operand1: .constant(922337203685477580), operand2: .roll(1, 7)),
+      (operand1: .constant(9), operand2: .roll(1, 223372036854775807)),
 
-      (operand1: .number(0), operand2: .rollNegativeSides(0)),
-      (operand1: .number(0), operand2: .roll(0, -0)),
-      (operand1: .number(0), operand2: .roll(0, -1)),
-      (operand1: .number(0), operand2: .roll(0, -21)),
+      (operand1: .constant(0), operand2: .rollNegativeSides(0)),
+      (operand1: .constant(0), operand2: .roll(0, -0)),
+      (operand1: .constant(0), operand2: .roll(0, -1)),
+      (operand1: .constant(0), operand2: .roll(0, -21)),
 
-      (operand1: .number(1), operand2: .rollNegativeSides(1)),
-      (operand1: .number(1), operand2: .roll(1, -0)),
-      (operand1: .number(1), operand2: .roll(1, -2)),
-      (operand1: .number(1), operand2: .roll(1, -32)),
+      (operand1: .constant(1), operand2: .rollNegativeSides(1)),
+      (operand1: .constant(1), operand2: .roll(1, -0)),
+      (operand1: .constant(1), operand2: .roll(1, -2)),
+      (operand1: .constant(1), operand2: .roll(1, -32)),
 
-      (operand1: .number(9), operand2: .rollNegativeSides(9)),
-      (operand1: .number(9), operand2: .roll(9, -0)),
-      (operand1: .number(9), operand2: .roll(9, -8)),
-      (operand1: .number(9), operand2: .roll(9, -78)),
+      (operand1: .constant(9), operand2: .rollNegativeSides(9)),
+      (operand1: .constant(9), operand2: .roll(9, -0)),
+      (operand1: .constant(9), operand2: .roll(9, -8)),
+      (operand1: .constant(9), operand2: .roll(9, -78)),
 
-      (operand1: .number(Int.max), operand2: .rollNegativeSides(1)),
-      (operand1: .number(Int.max), operand2: .roll(1, -0)),
-      (operand1: .number(922337203685477580), operand2: .roll(1, -7)),
-      (operand1: .number(9), operand2: .roll(1, -223372036854775807)),
+      (operand1: .constant(Int.max), operand2: .rollNegativeSides(1)),
+      (operand1: .constant(Int.max), operand2: .roll(1, -0)),
+      (operand1: .constant(922337203685477580), operand2: .roll(1, -7)),
+      (operand1: .constant(9), operand2: .roll(1, -223372036854775807)),
 
-      (operand1: .number(0), operand2: .rollPositiveSides(-0)),
-      (operand1: .number(0), operand2: .roll(-0, 0)),
-      (operand1: .number(0), operand2: .roll(-0, 1)),
-      (operand1: .number(0), operand2: .roll(-0, 21)),
+      (operand1: .constant(0), operand2: .rollPositiveSides(-0)),
+      (operand1: .constant(0), operand2: .roll(-0, 0)),
+      (operand1: .constant(0), operand2: .roll(-0, 1)),
+      (operand1: .constant(0), operand2: .roll(-0, 21)),
 
-      (operand1: .number(1), operand2: .rollPositiveSides(-1)),
-      (operand1: .number(1), operand2: .roll(-1, 0)),
-      (operand1: .number(1), operand2: .roll(-1, 2)),
-      (operand1: .number(1), operand2: .roll(-1, 32)),
+      (operand1: .constant(1), operand2: .rollPositiveSides(-1)),
+      (operand1: .constant(1), operand2: .roll(-1, 0)),
+      (operand1: .constant(1), operand2: .roll(-1, 2)),
+      (operand1: .constant(1), operand2: .roll(-1, 32)),
 
-      (operand1: .number(9), operand2: .rollPositiveSides(-9)),
-      (operand1: .number(9), operand2: .roll(-9, 0)),
-      (operand1: .number(9), operand2: .roll(-9, 8)),
-      (operand1: .number(9), operand2: .roll(-9, 78)),
+      (operand1: .constant(9), operand2: .rollPositiveSides(-9)),
+      (operand1: .constant(9), operand2: .roll(-9, 0)),
+      (operand1: .constant(9), operand2: .roll(-9, 8)),
+      (operand1: .constant(9), operand2: .roll(-9, 78)),
 
-      (operand1: .number(Int.max), operand2: .rollPositiveSides(-1)),
-      (operand1: .number(Int.max), operand2: .roll(-1, 0)),
-      (operand1: .number(922337203685477580), operand2: .roll(-1, 7)),
-      (operand1: .number(9), operand2: .roll(-1, 223372036854775807)),
+      (operand1: .constant(Int.max), operand2: .rollPositiveSides(-1)),
+      (operand1: .constant(Int.max), operand2: .roll(-1, 0)),
+      (operand1: .constant(922337203685477580), operand2: .roll(-1, 7)),
+      (operand1: .constant(9), operand2: .roll(-1, 223372036854775807)),
 
-      (operand1: .number(0), operand2: .rollNegativeSides(-0)),
-      (operand1: .number(0), operand2: .roll(-0, -0)),
-      (operand1: .number(0), operand2: .roll(-0, -1)),
-      (operand1: .number(0), operand2: .roll(-0, -21)),
+      (operand1: .constant(0), operand2: .rollNegativeSides(-0)),
+      (operand1: .constant(0), operand2: .roll(-0, -0)),
+      (operand1: .constant(0), operand2: .roll(-0, -1)),
+      (operand1: .constant(0), operand2: .roll(-0, -21)),
 
-      (operand1: .number(1), operand2: .rollNegativeSides(-1)),
-      (operand1: .number(1), operand2: .roll(-1, -0)),
-      (operand1: .number(1), operand2: .roll(-1, -2)),
-      (operand1: .number(1), operand2: .roll(-1, -32)),
+      (operand1: .constant(1), operand2: .rollNegativeSides(-1)),
+      (operand1: .constant(1), operand2: .roll(-1, -0)),
+      (operand1: .constant(1), operand2: .roll(-1, -2)),
+      (operand1: .constant(1), operand2: .roll(-1, -32)),
 
-      (operand1: .number(9), operand2: .rollNegativeSides(-9)),
-      (operand1: .number(9), operand2: .roll(-9, -0)),
-      (operand1: .number(9), operand2: .roll(-9, -8)),
-      (operand1: .number(9), operand2: .roll(-9, -78)),
+      (operand1: .constant(9), operand2: .rollNegativeSides(-9)),
+      (operand1: .constant(9), operand2: .roll(-9, -0)),
+      (operand1: .constant(9), operand2: .roll(-9, -8)),
+      (operand1: .constant(9), operand2: .roll(-9, -78)),
 
-      (operand1: .number(Int.max), operand2: .rollNegativeSides(-1)),
-      (operand1: .number(Int.max), operand2: .roll(-1, -0)),
-      (operand1: .number(922337203685477580), operand2: .roll(-1, -7)),
-      (operand1: .number(9), operand2: .roll(-1, -223372036854775807)),
+      (operand1: .constant(Int.max), operand2: .rollNegativeSides(-1)),
+      (operand1: .constant(Int.max), operand2: .roll(-1, -0)),
+      (operand1: .constant(922337203685477580), operand2: .roll(-1, -7)),
+      (operand1: .constant(9), operand2: .roll(-1, -223372036854775807)),
 
-      (operand1: .number(-0), operand2: .rollPositiveSides(0)),
-      (operand1: .number(-0), operand2: .roll(0, 0)),
-      (operand1: .number(-0), operand2: .roll(0, 1)),
-      (operand1: .number(-0), operand2: .roll(0, 21)),
+      (operand1: .constant(-0), operand2: .rollPositiveSides(0)),
+      (operand1: .constant(-0), operand2: .roll(0, 0)),
+      (operand1: .constant(-0), operand2: .roll(0, 1)),
+      (operand1: .constant(-0), operand2: .roll(0, 21)),
 
-      (operand1: .number(-1), operand2: .rollPositiveSides(1)),
-      (operand1: .number(-1), operand2: .roll(1, 0)),
-      (operand1: .number(-1), operand2: .roll(1, 2)),
-      (operand1: .number(-1), operand2: .roll(1, 32)),
+      (operand1: .constant(-1), operand2: .rollPositiveSides(1)),
+      (operand1: .constant(-1), operand2: .roll(1, 0)),
+      (operand1: .constant(-1), operand2: .roll(1, 2)),
+      (operand1: .constant(-1), operand2: .roll(1, 32)),
 
-      (operand1: .number(-9), operand2: .rollPositiveSides(9)),
-      (operand1: .number(-9), operand2: .roll(9, 0)),
-      (operand1: .number(-9), operand2: .roll(9, 8)),
-      (operand1: .number(-9), operand2: .roll(9, 78)),
+      (operand1: .constant(-9), operand2: .rollPositiveSides(9)),
+      (operand1: .constant(-9), operand2: .roll(9, 0)),
+      (operand1: .constant(-9), operand2: .roll(9, 8)),
+      (operand1: .constant(-9), operand2: .roll(9, 78)),
 
-      (operand1: .number(Int.min), operand2: .rollPositiveSides(1)),
-      (operand1: .number(Int.min), operand2: .roll(1, 0)),
-      (operand1: .number(-922337203685477580), operand2: .roll(1, 8)),
-      (operand1: .number(-9), operand2: .roll(1, 223372036854775808)),
+      (operand1: .constant(Int.min), operand2: .rollPositiveSides(1)),
+      (operand1: .constant(Int.min), operand2: .roll(1, 0)),
+      (operand1: .constant(-922337203685477580), operand2: .roll(1, 8)),
+      (operand1: .constant(-9), operand2: .roll(1, 223372036854775808)),
 
-      (operand1: .number(0), operand2: .rollNegativeSides(0)),
-      (operand1: .number(0), operand2: .roll(0, -0)),
-      (operand1: .number(0), operand2: .roll(0, -1)),
-      (operand1: .number(0), operand2: .roll(0, -21)),
+      (operand1: .constant(0), operand2: .rollNegativeSides(0)),
+      (operand1: .constant(0), operand2: .roll(0, -0)),
+      (operand1: .constant(0), operand2: .roll(0, -1)),
+      (operand1: .constant(0), operand2: .roll(0, -21)),
 
-      (operand1: .number(-1), operand2: .rollNegativeSides(1)),
-      (operand1: .number(-1), operand2: .roll(1, -0)),
-      (operand1: .number(-1), operand2: .roll(1, -2)),
-      (operand1: .number(-1), operand2: .roll(1, -32)),
+      (operand1: .constant(-1), operand2: .rollNegativeSides(1)),
+      (operand1: .constant(-1), operand2: .roll(1, -0)),
+      (operand1: .constant(-1), operand2: .roll(1, -2)),
+      (operand1: .constant(-1), operand2: .roll(1, -32)),
 
-      (operand1: .number(-9), operand2: .rollNegativeSides(9)),
-      (operand1: .number(-9), operand2: .roll(9, -0)),
-      (operand1: .number(-9), operand2: .roll(9, -8)),
-      (operand1: .number(-9), operand2: .roll(9, -78)),
+      (operand1: .constant(-9), operand2: .rollNegativeSides(9)),
+      (operand1: .constant(-9), operand2: .roll(9, -0)),
+      (operand1: .constant(-9), operand2: .roll(9, -8)),
+      (operand1: .constant(-9), operand2: .roll(9, -78)),
 
-      (operand1: .number(-Int.max), operand2: .rollNegativeSides(1)),
-      (operand1: .number(Int.min), operand2: .roll(1, -0)),
-      (operand1: .number(-922337203685477580), operand2: .roll(1, -8)),
-      (operand1: .number(-9), operand2: .roll(1, -223372036854775808)),
+      (operand1: .constant(-Int.max), operand2: .rollNegativeSides(1)),
+      (operand1: .constant(Int.min), operand2: .roll(1, -0)),
+      (operand1: .constant(-922337203685477580), operand2: .roll(1, -8)),
+      (operand1: .constant(-9), operand2: .roll(1, -223372036854775808)),
 
-      (operand1: .number(-0), operand2: .rollPositiveSides(-0)),
-      (operand1: .number(-0), operand2: .roll(-0, 0)),
-      (operand1: .number(-0), operand2: .roll(-0, 1)),
-      (operand1: .number(-0), operand2: .roll(-0, 21)),
+      (operand1: .constant(-0), operand2: .rollPositiveSides(-0)),
+      (operand1: .constant(-0), operand2: .roll(-0, 0)),
+      (operand1: .constant(-0), operand2: .roll(-0, 1)),
+      (operand1: .constant(-0), operand2: .roll(-0, 21)),
 
-      (operand1: .number(-1), operand2: .rollPositiveSides(-1)),
-      (operand1: .number(-1), operand2: .roll(-1, 0)),
-      (operand1: .number(-1), operand2: .roll(-1, 2)),
-      (operand1: .number(-1), operand2: .roll(-1, 32)),
+      (operand1: .constant(-1), operand2: .rollPositiveSides(-1)),
+      (operand1: .constant(-1), operand2: .roll(-1, 0)),
+      (operand1: .constant(-1), operand2: .roll(-1, 2)),
+      (operand1: .constant(-1), operand2: .roll(-1, 32)),
 
-      (operand1: .number(-9), operand2: .rollPositiveSides(-9)),
-      (operand1: .number(-9), operand2: .roll(-9, 0)),
-      (operand1: .number(-9), operand2: .roll(-9, 8)),
-      (operand1: .number(-9), operand2: .roll(-9, 78)),
+      (operand1: .constant(-9), operand2: .rollPositiveSides(-9)),
+      (operand1: .constant(-9), operand2: .roll(-9, 0)),
+      (operand1: .constant(-9), operand2: .roll(-9, 8)),
+      (operand1: .constant(-9), operand2: .roll(-9, 78)),
 
-      (operand1: .number(Int.min), operand2: .rollPositiveSides(-1)),
-      (operand1: .number(Int.min), operand2: .roll(-1, 0)),
-      (operand1: .number(-92337203685477580), operand2: .roll(-1, 8)),
-      (operand1: .number(-9), operand2: .roll(-1, 223372036854775808)),
+      (operand1: .constant(Int.min), operand2: .rollPositiveSides(-1)),
+      (operand1: .constant(Int.min), operand2: .roll(-1, 0)),
+      (operand1: .constant(-92337203685477580), operand2: .roll(-1, 8)),
+      (operand1: .constant(-9), operand2: .roll(-1, 223372036854775808)),
 
-      (operand1: .number(0), operand2: .rollNegativeSides(-0)),
-      (operand1: .number(0), operand2: .roll(-0, -0)),
-      (operand1: .number(0), operand2: .roll(-0, -1)),
-      (operand1: .number(0), operand2: .roll(-0, -21)),
+      (operand1: .constant(0), operand2: .rollNegativeSides(-0)),
+      (operand1: .constant(0), operand2: .roll(-0, -0)),
+      (operand1: .constant(0), operand2: .roll(-0, -1)),
+      (operand1: .constant(0), operand2: .roll(-0, -21)),
 
-      (operand1: .number(-1), operand2: .rollNegativeSides(-1)),
-      (operand1: .number(-1), operand2: .roll(-1, -0)),
-      (operand1: .number(-1), operand2: .roll(-1, -2)),
-      (operand1: .number(-1), operand2: .roll(-1, -32)),
+      (operand1: .constant(-1), operand2: .rollNegativeSides(-1)),
+      (operand1: .constant(-1), operand2: .roll(-1, -0)),
+      (operand1: .constant(-1), operand2: .roll(-1, -2)),
+      (operand1: .constant(-1), operand2: .roll(-1, -32)),
 
-      (operand1: .number(-9), operand2: .rollNegativeSides(-9)),
-      (operand1: .number(-9), operand2: .roll(-9, -0)),
-      (operand1: .number(-9), operand2: .roll(-9, -8)),
-      (operand1: .number(-9), operand2: .roll(-9, -78)),
+      (operand1: .constant(-9), operand2: .rollNegativeSides(-9)),
+      (operand1: .constant(-9), operand2: .roll(-9, -0)),
+      (operand1: .constant(-9), operand2: .roll(-9, -8)),
+      (operand1: .constant(-9), operand2: .roll(-9, -78)),
 
-      (operand1: .number(-Int.max), operand2: .rollNegativeSides(-1)),
-      (operand1: .number(Int.min), operand2: .roll(-1, -0)),
-      (operand1: .number(-922337203685477580), operand2: .roll(-1, -8)),
-      (operand1: .number(-9), operand2: .roll(-1, -223372036854775808)),
+      (operand1: .constant(-Int.max), operand2: .rollNegativeSides(-1)),
+      (operand1: .constant(Int.min), operand2: .roll(-1, -0)),
+      (operand1: .constant(-922337203685477580), operand2: .roll(-1, -8)),
+      (operand1: .constant(-9), operand2: .roll(-1, -223372036854775808)),
 
-      (operand1: .number(9), operand2: .roll(1, 223372036854775808)),
-      (operand1: .number(0), operand2: .roll(1, Int.max)),
+      (operand1: .constant(9), operand2: .roll(1, 223372036854775808)),
+      (operand1: .constant(0), operand2: .roll(1, Int.max)),
 
-      (operand1: .number(-9), operand2: .roll(1, -223372036854775809)),
-      (operand1: .number(-0), operand2: .roll(1, Int.min)),
+      (operand1: .constant(-9), operand2: .roll(1, -223372036854775809)),
+      (operand1: .constant(-0), operand2: .roll(1, Int.min)),
     ]
 
     for fixture in fixtures {
@@ -1127,30 +1127,30 @@ extension OperandTests {
     )
 
     let fixtures: [Fixture] = [
-      (operand: .number(0), expected: nil),
-      (operand: .number(10), expected: Operand.number(1)),
-      (operand: .number(210), expected: Operand.number(21)),
+      (operand: .constant(0), expected: nil),
+      (operand: .constant(10), expected: Operand.constant(1)),
+      (operand: .constant(210), expected: Operand.constant(21)),
 
-      (operand: .number(1), expected: nil),
-      (operand: .number(21), expected: Operand.number(2)),
-      (operand: .number(321), expected: Operand.number(32)),
+      (operand: .constant(1), expected: nil),
+      (operand: .constant(21), expected: Operand.constant(2)),
+      (operand: .constant(321), expected: Operand.constant(32)),
 
-      (operand: .number(9), expected: nil),
-      (operand: .number(89), expected: Operand.number(8)),
-      (operand: .number(789), expected: Operand.number(78)),
+      (operand: .constant(9), expected: nil),
+      (operand: .constant(89), expected: Operand.constant(8)),
+      (operand: .constant(789), expected: Operand.constant(78)),
 
-      (operand: .number(Int.max), expected: Operand.number(922337203685477580)),
+      (operand: .constant(Int.max), expected: Operand.constant(922337203685477580)),
 
-      (operand: .number(-10), expected: Operand.number(-1)),
-      (operand: .number(-210), expected: Operand.number(-21)),
+      (operand: .constant(-10), expected: Operand.constant(-1)),
+      (operand: .constant(-210), expected: Operand.constant(-21)),
 
-      (operand: .number(-21), expected: Operand.number(-2)),
-      (operand: .number(-321), expected: Operand.number(-32)),
+      (operand: .constant(-21), expected: Operand.constant(-2)),
+      (operand: .constant(-321), expected: Operand.constant(-32)),
 
-      (operand: .number(-89), expected: Operand.number(-8)),
-      (operand: .number(-789), expected: Operand.number(-78)),
+      (operand: .constant(-89), expected: Operand.constant(-8)),
+      (operand: .constant(-789), expected: Operand.constant(-78)),
 
-      (operand: .number(Int.min), expected: Operand.number(-922337203685477580)),
+      (operand: .constant(Int.min), expected: Operand.constant(-922337203685477580)),
     ]
 
     for fixture in fixtures {
@@ -1169,9 +1169,9 @@ extension OperandTests {
     )
 
     let fixtures: [Fixture] = [
-      (operand: .number(-0), expected: nil),
-      (operand: .number(-1), expected: Operator.subtraction),
-      (operand: .number(-9), expected: Operator.subtraction),
+      (operand: .constant(-0), expected: nil),
+      (operand: .constant(-1), expected: Operator.subtraction),
+      (operand: .constant(-9), expected: Operator.subtraction),
     ]
 
     for fixture in fixtures {
@@ -1246,17 +1246,17 @@ extension OperandTests {
 
       (operand: .roll(-1, Int.min), expected: .roll(-1, -922337203685477580)),
 
-      (operand: .rollPositiveSides(0), expected: .number(0)),
-      (operand: .rollPositiveSides(1), expected: .number(1)),
-      (operand: .rollPositiveSides(9), expected: .number(9)),
+      (operand: .rollPositiveSides(0), expected: .constant(0)),
+      (operand: .rollPositiveSides(1), expected: .constant(1)),
+      (operand: .rollPositiveSides(9), expected: .constant(9)),
 
-      (operand: .rollPositiveSides(Int.max), expected: .number(Int.max)),
+      (operand: .rollPositiveSides(Int.max), expected: .constant(Int.max)),
 
-      (operand: .rollPositiveSides(-0), expected: .number(-0)),
-      (operand: .rollPositiveSides(-1), expected: .number(-1)),
-      (operand: .rollPositiveSides(-9), expected: .number(-9)),
+      (operand: .rollPositiveSides(-0), expected: .constant(-0)),
+      (operand: .rollPositiveSides(-1), expected: .constant(-1)),
+      (operand: .rollPositiveSides(-9), expected: .constant(-9)),
 
-      (operand: .rollPositiveSides(Int.min), expected: .number(Int.min)),
+      (operand: .rollPositiveSides(Int.min), expected: .constant(Int.min)),
 
       (operand: .rollNegativeSides(0), expected: .rollPositiveSides(0)),
       (operand: .rollNegativeSides(1), expected: .rollPositiveSides(1)),
@@ -1291,12 +1291,12 @@ extension OperandTests {
     )
 
     let fixtures: [Fixture] = [
-      (operand: .number(42), expected: 42),
-      (operand: .number(-42), expected: -42),
-      (operand: .number(0), expected: 0),
-      (operand: .number(-0), expected: 0),
-      (operand: .number(Int.max), expected: Int.max),
-      (operand: .number(Int.min), expected: Int.min),    ]
+      (operand: .constant(42), expected: 42),
+      (operand: .constant(-42), expected: -42),
+      (operand: .constant(0), expected: 0),
+      (operand: .constant(-0), expected: 0),
+      (operand: .constant(Int.max), expected: Int.max),
+      (operand: .constant(Int.min), expected: Int.min),    ]
 
     for fixture in fixtures {
       let operand = fixture.operand
@@ -1482,40 +1482,40 @@ extension OperandTests {
     )
 
     let fixtures: [Fixture] = [
-      (operand1: .number(1), operand2: .number(2), expected: .number(3)),
-      (operand1: .number(-1), operand2: .number(2), expected: .number(1)),
-      (operand1: .number(1), operand2: .number(-2), expected: .number(-1)),
-      (operand1: .number(-1), operand2: .number(-2), expected: .number(-3)),
+      (operand1: .constant(1), operand2: .constant(2), expected: .constant(3)),
+      (operand1: .constant(-1), operand2: .constant(2), expected: .constant(1)),
+      (operand1: .constant(1), operand2: .constant(-2), expected: .constant(-1)),
+      (operand1: .constant(-1), operand2: .constant(-2), expected: .constant(-3)),
 
-      (operand1: .number(2), operand2: .number(1), expected: .number(3)),
-      (operand1: .number(-2), operand2: .number(1), expected: .number(-1)),
-      (operand1: .number(2), operand2: .number(-1), expected: .number(1)),
-      (operand1: .number(-2), operand2: .number(-1), expected: .number(-3)),
+      (operand1: .constant(2), operand2: .constant(1), expected: .constant(3)),
+      (operand1: .constant(-2), operand2: .constant(1), expected: .constant(-1)),
+      (operand1: .constant(2), operand2: .constant(-1), expected: .constant(1)),
+      (operand1: .constant(-2), operand2: .constant(-1), expected: .constant(-3)),
 
-      (operand1: .number(1), operand2: .number(0), expected: .number(1)),
-      (operand1: .number(-1), operand2: .number(0), expected: .number(-1)),
-      (operand1: .number(1), operand2: .number(-0), expected: .number(1)),
-      (operand1: .number(-1), operand2: .number(-0), expected: .number(-1)),
+      (operand1: .constant(1), operand2: .constant(0), expected: .constant(1)),
+      (operand1: .constant(-1), operand2: .constant(0), expected: .constant(-1)),
+      (operand1: .constant(1), operand2: .constant(-0), expected: .constant(1)),
+      (operand1: .constant(-1), operand2: .constant(-0), expected: .constant(-1)),
 
-      (operand1: .number(0), operand2: .number(1), expected: .number(1)),
-      (operand1: .number(-0), operand2: .number(1), expected: .number(1)),
-      (operand1: .number(0), operand2: .number(-1), expected: .number(-1)),
-      (operand1: .number(-0), operand2: .number(-1), expected: .number(-1)),
+      (operand1: .constant(0), operand2: .constant(1), expected: .constant(1)),
+      (operand1: .constant(-0), operand2: .constant(1), expected: .constant(1)),
+      (operand1: .constant(0), operand2: .constant(-1), expected: .constant(-1)),
+      (operand1: .constant(-0), operand2: .constant(-1), expected: .constant(-1)),
 
-      (operand1: .number(0), operand2: .number(0), expected: .number(0)),
-      (operand1: .number(-0), operand2: .number(0), expected: .number(0)),
-      (operand1: .number(0), operand2: .number(-0), expected: .number(0)),
-      (operand1: .number(-0), operand2: .number(-0), expected: .number(0)),
+      (operand1: .constant(0), operand2: .constant(0), expected: .constant(0)),
+      (operand1: .constant(-0), operand2: .constant(0), expected: .constant(0)),
+      (operand1: .constant(0), operand2: .constant(-0), expected: .constant(0)),
+      (operand1: .constant(-0), operand2: .constant(-0), expected: .constant(0)),
 
-      (operand1: .number(0), operand2: .number(Int.max), expected: .number(Int.max)),
-      (operand1: .number(-0), operand2: .number(Int.max), expected: .number(Int.max)),
-      (operand1: .number(Int.max), operand2: .number(0), expected: .number(Int.max)),
-      (operand1: .number(Int.max), operand2: .number(-0), expected: .number(Int.max)),
+      (operand1: .constant(0), operand2: .constant(Int.max), expected: .constant(Int.max)),
+      (operand1: .constant(-0), operand2: .constant(Int.max), expected: .constant(Int.max)),
+      (operand1: .constant(Int.max), operand2: .constant(0), expected: .constant(Int.max)),
+      (operand1: .constant(Int.max), operand2: .constant(-0), expected: .constant(Int.max)),
 
-      (operand1: .number(0), operand2: .number(Int.min), expected: .number(Int.min)),
-      (operand1: .number(-0), operand2: .number(Int.min), expected: .number(Int.min)),
-      (operand1: .number(Int.min), operand2: .number(0), expected: .number(Int.min)),
-      (operand1: .number(Int.min), operand2: .number(-0), expected: .number(Int.min)),
+      (operand1: .constant(0), operand2: .constant(Int.min), expected: .constant(Int.min)),
+      (operand1: .constant(-0), operand2: .constant(Int.min), expected: .constant(Int.min)),
+      (operand1: .constant(Int.min), operand2: .constant(0), expected: .constant(Int.min)),
+      (operand1: .constant(Int.min), operand2: .constant(-0), expected: .constant(Int.min)),
     ]
 
     for fixture in fixtures {
@@ -1535,11 +1535,11 @@ extension OperandTests {
     )
 
     let fixtures: [Fixture] = [
-      (operand1: .number(Int.max), operand2: .number(1)),
-      (operand1: .number(1), operand2: .number(Int.max)),
+      (operand1: .constant(Int.max), operand2: .constant(1)),
+      (operand1: .constant(1), operand2: .constant(Int.max)),
 
-      (operand1: .number(Int.min), operand2: .number(-1)),
-      (operand1: .number(-1), operand2: .number(Int.min)),
+      (operand1: .constant(Int.min), operand2: .constant(-1)),
+      (operand1: .constant(-1), operand2: .constant(Int.min)),
     ]
 
     let expected = ExpressionError.operationOverflow
@@ -1562,60 +1562,60 @@ extension OperandTests {
     )
 
     let fixtures: [Fixture] = [
-      (operand1: .roll(1, 1), operand2: .number(2), expected: .number(3)),
-      (operand1: .roll(-1, 1), operand2: .number(2), expected: .number(1)),
-      (operand1: .roll(1, 1), operand2: .number(-2), expected: .number(-1)),
-      (operand1: .roll(-1, 1), operand2: .number(-2), expected: .number(-3)),
+      (operand1: .roll(1, 1), operand2: .constant(2), expected: .constant(3)),
+      (operand1: .roll(-1, 1), operand2: .constant(2), expected: .constant(1)),
+      (operand1: .roll(1, 1), operand2: .constant(-2), expected: .constant(-1)),
+      (operand1: .roll(-1, 1), operand2: .constant(-2), expected: .constant(-3)),
 
-      (operand1: .number(2), operand2: .roll(1, 1), expected: .number(3)),
-      (operand1: .number(-2), operand2: .roll(1, 1), expected: .number(-1)),
-      (operand1: .number(2), operand2: .roll(-1, 1), expected: .number(1)),
-      (operand1: .number(-2), operand2: .roll(-1, 1), expected: .number(-3)),
+      (operand1: .constant(2), operand2: .roll(1, 1), expected: .constant(3)),
+      (operand1: .constant(-2), operand2: .roll(1, 1), expected: .constant(-1)),
+      (operand1: .constant(2), operand2: .roll(-1, 1), expected: .constant(1)),
+      (operand1: .constant(-2), operand2: .roll(-1, 1), expected: .constant(-3)),
 
-      (operand1: .roll(1, 1), operand2: .number(0), expected: .number(1)),
-      (operand1: .roll(-1, 1), operand2: .number(0), expected: .number(-1)),
-      (operand1: .roll(1, 1), operand2: .number(-0), expected: .number(1)),
-      (operand1: .roll(-1, 1), operand2: .number(-0), expected: .number(-1)),
+      (operand1: .roll(1, 1), operand2: .constant(0), expected: .constant(1)),
+      (operand1: .roll(-1, 1), operand2: .constant(0), expected: .constant(-1)),
+      (operand1: .roll(1, 1), operand2: .constant(-0), expected: .constant(1)),
+      (operand1: .roll(-1, 1), operand2: .constant(-0), expected: .constant(-1)),
 
-      (operand1: .number(0), operand2: .roll(1, 1), expected: .number(1)),
-      (operand1: .number(-0), operand2: .roll(1, 1), expected: .number(1)),
-      (operand1: .number(0), operand2: .roll(-1, 1), expected: .number(-1)),
-      (operand1: .number(-0), operand2: .roll(-1, 1), expected: .number(-1)),
+      (operand1: .constant(0), operand2: .roll(1, 1), expected: .constant(1)),
+      (operand1: .constant(-0), operand2: .roll(1, 1), expected: .constant(1)),
+      (operand1: .constant(0), operand2: .roll(-1, 1), expected: .constant(-1)),
+      (operand1: .constant(-0), operand2: .roll(-1, 1), expected: .constant(-1)),
 
-      (operand1: .roll(0, 0), operand2: .number(0), expected: .number(0)),
-      (operand1: .roll(-0, 0), operand2: .number(0), expected: .number(0)),
-      (operand1: .roll(0, 0), operand2: .number(-0), expected: .number(0)),
-      (operand1: .roll(-0, 0), operand2: .number(-0), expected: .number(0)),
+      (operand1: .roll(0, 0), operand2: .constant(0), expected: .constant(0)),
+      (operand1: .roll(-0, 0), operand2: .constant(0), expected: .constant(0)),
+      (operand1: .roll(0, 0), operand2: .constant(-0), expected: .constant(0)),
+      (operand1: .roll(-0, 0), operand2: .constant(-0), expected: .constant(0)),
 
-      (operand1: .roll(0, 0), operand2: .number(Int.max), expected: .number(Int.max)),
-      (operand1: .roll(-0, 0), operand2: .number(Int.max), expected: .number(Int.max)),
-      (operand1: .number(Int.max), operand2: .roll(0, 0), expected: .number(Int.max)),
-      (operand1: .number(Int.max), operand2: .roll(-0, 0), expected: .number(Int.max)),
+      (operand1: .roll(0, 0), operand2: .constant(Int.max), expected: .constant(Int.max)),
+      (operand1: .roll(-0, 0), operand2: .constant(Int.max), expected: .constant(Int.max)),
+      (operand1: .constant(Int.max), operand2: .roll(0, 0), expected: .constant(Int.max)),
+      (operand1: .constant(Int.max), operand2: .roll(-0, 0), expected: .constant(Int.max)),
 
-      (operand1: .roll(0, 0), operand2: .number(Int.min), expected: .number(Int.min)),
-      (operand1: .roll(-0, 0), operand2: .number(Int.min), expected: .number(Int.min)),
-      (operand1: .number(Int.min), operand2: .roll(0, 0), expected: .number(Int.min)),
-      (operand1: .number(Int.min), operand2: .roll(-0, 0), expected: .number(Int.min)),
+      (operand1: .roll(0, 0), operand2: .constant(Int.min), expected: .constant(Int.min)),
+      (operand1: .roll(-0, 0), operand2: .constant(Int.min), expected: .constant(Int.min)),
+      (operand1: .constant(Int.min), operand2: .roll(0, 0), expected: .constant(Int.min)),
+      (operand1: .constant(Int.min), operand2: .roll(-0, 0), expected: .constant(Int.min)),
 
-      (operand1: .roll(1, 1), operand2: .roll(1, 1), expected: .number(2)),
-      (operand1: .roll(-1, 1), operand2: .roll(1, 1), expected: .number(0)),
-      (operand1: .roll(1, 1), operand2: .roll(-1, 1), expected: .number(0)),
-      (operand1: .roll(-1, 1), operand2: .roll(-1, 1), expected: .number(-2)),
+      (operand1: .roll(1, 1), operand2: .roll(1, 1), expected: .constant(2)),
+      (operand1: .roll(-1, 1), operand2: .roll(1, 1), expected: .constant(0)),
+      (operand1: .roll(1, 1), operand2: .roll(-1, 1), expected: .constant(0)),
+      (operand1: .roll(-1, 1), operand2: .roll(-1, 1), expected: .constant(-2)),
 
-      (operand1: .roll(1, 1), operand2: .roll(0, 0), expected: .number(1)),
-      (operand1: .roll(-1, 1), operand2: .roll(0, 0), expected: .number(-1)),
-      (operand1: .roll(1, 1), operand2: .roll(-0, 0), expected: .number(1)),
-      (operand1: .roll(-1, 1), operand2: .roll(-0, 0), expected: .number(-1)),
+      (operand1: .roll(1, 1), operand2: .roll(0, 0), expected: .constant(1)),
+      (operand1: .roll(-1, 1), operand2: .roll(0, 0), expected: .constant(-1)),
+      (operand1: .roll(1, 1), operand2: .roll(-0, 0), expected: .constant(1)),
+      (operand1: .roll(-1, 1), operand2: .roll(-0, 0), expected: .constant(-1)),
 
-      (operand1: .roll(0, 0), operand2: .roll(1, 1), expected: .number(1)),
-      (operand1: .roll(-0, 0), operand2: .roll(1, 1), expected: .number(1)),
-      (operand1: .roll(0, 0), operand2: .roll(-1, 1), expected: .number(-1)),
-      (operand1: .roll(-0, 0), operand2: .roll(-1, 1), expected: .number(-1)),
+      (operand1: .roll(0, 0), operand2: .roll(1, 1), expected: .constant(1)),
+      (operand1: .roll(-0, 0), operand2: .roll(1, 1), expected: .constant(1)),
+      (operand1: .roll(0, 0), operand2: .roll(-1, 1), expected: .constant(-1)),
+      (operand1: .roll(-0, 0), operand2: .roll(-1, 1), expected: .constant(-1)),
 
-      (operand1: .roll(0, 0), operand2: .roll(0, 0), expected: .number(0)),
-      (operand1: .roll(-0, 0), operand2: .roll(0, 0), expected: .number(0)),
-      (operand1: .roll(0, 0), operand2: .roll(-0, 0), expected: .number(0)),
-      (operand1: .roll(-0, 0), operand2: .roll(-0, 0), expected: .number(0)),
+      (operand1: .roll(0, 0), operand2: .roll(0, 0), expected: .constant(0)),
+      (operand1: .roll(-0, 0), operand2: .roll(0, 0), expected: .constant(0)),
+      (operand1: .roll(0, 0), operand2: .roll(-0, 0), expected: .constant(0)),
+      (operand1: .roll(-0, 0), operand2: .roll(-0, 0), expected: .constant(0)),
     ]
 
     for fixture in fixtures {
@@ -1635,14 +1635,14 @@ extension OperandTests {
     )
 
     let fixtures: [Fixture] = [
-      (operand1: .number(Int.max), operand2: .roll(1, 1)),
-      (operand1: .roll(1, 1), operand2: .number(Int.max)),
+      (operand1: .constant(Int.max), operand2: .roll(1, 1)),
+      (operand1: .roll(1, 1), operand2: .constant(Int.max)),
 
-      (operand1: .number(Int.min), operand2: .roll(-1, 1)),
-      (operand1: .roll(-1, 1), operand2: .number(Int.min)),
+      (operand1: .constant(Int.min), operand2: .roll(-1, 1)),
+      (operand1: .roll(-1, 1), operand2: .constant(Int.min)),
 
-      (operand1: .roll(1, Int.min), operand2: .number(0)),
-      (operand1: .number(0), operand2: .roll(1, Int.min)),
+      (operand1: .roll(1, Int.min), operand2: .constant(0)),
+      (operand1: .constant(0), operand2: .roll(1, Int.min)),
     ]
 
     let expected = ExpressionError.operationOverflow
@@ -1665,29 +1665,29 @@ extension OperandTests {
     )
 
     let fixtures: [Fixture] = [
-      (operand1: .number(1), operand2: .number(2), expected: .number(0)),
-      (operand1: .number(-1), operand2: .number(2), expected: .number(0)),
-      (operand1: .number(1), operand2: .number(-2), expected: .number(0)),
-      (operand1: .number(-1), operand2: .number(-2), expected: .number(0)),
+      (operand1: .constant(1), operand2: .constant(2), expected: .constant(0)),
+      (operand1: .constant(-1), operand2: .constant(2), expected: .constant(0)),
+      (operand1: .constant(1), operand2: .constant(-2), expected: .constant(0)),
+      (operand1: .constant(-1), operand2: .constant(-2), expected: .constant(0)),
 
-      (operand1: .number(2), operand2: .number(1), expected: .number(2)),
-      (operand1: .number(-2), operand2: .number(1), expected: .number(-2)),
-      (operand1: .number(2), operand2: .number(-1), expected: .number(-2)),
-      (operand1: .number(-2), operand2: .number(-1), expected: .number(2)),
+      (operand1: .constant(2), operand2: .constant(1), expected: .constant(2)),
+      (operand1: .constant(-2), operand2: .constant(1), expected: .constant(-2)),
+      (operand1: .constant(2), operand2: .constant(-1), expected: .constant(-2)),
+      (operand1: .constant(-2), operand2: .constant(-1), expected: .constant(2)),
 
-      (operand1: .number(0), operand2: .number(2), expected: .number(0)),
-      (operand1: .number(-0), operand2: .number(2), expected: .number(0)),
-      (operand1: .number(0), operand2: .number(-2), expected: .number(0)),
-      (operand1: .number(-0), operand2: .number(-2), expected: .number(0)),
+      (operand1: .constant(0), operand2: .constant(2), expected: .constant(0)),
+      (operand1: .constant(-0), operand2: .constant(2), expected: .constant(0)),
+      (operand1: .constant(0), operand2: .constant(-2), expected: .constant(0)),
+      (operand1: .constant(-0), operand2: .constant(-2), expected: .constant(0)),
 
-      (operand1: .number(1), operand2: .number(Int.max), expected: .number(0)),
-      (operand1: .number(-1), operand2: .number(Int.max), expected: .number(0)),
-      (operand1: .number(Int.max), operand2: .number(1), expected: .number(Int.max)),
-      (operand1: .number(Int.max), operand2: .number(-1), expected: .number(-Int.max)),
+      (operand1: .constant(1), operand2: .constant(Int.max), expected: .constant(0)),
+      (operand1: .constant(-1), operand2: .constant(Int.max), expected: .constant(0)),
+      (operand1: .constant(Int.max), operand2: .constant(1), expected: .constant(Int.max)),
+      (operand1: .constant(Int.max), operand2: .constant(-1), expected: .constant(-Int.max)),
 
-      (operand1: .number(1), operand2: .number(Int.min), expected: .number(0)),
-      (operand1: .number(-1), operand2: .number(Int.min), expected: .number(0)),
-      (operand1: .number(Int.min), operand2: .number(1), expected: .number(Int.min)),
+      (operand1: .constant(1), operand2: .constant(Int.min), expected: .constant(0)),
+      (operand1: .constant(-1), operand2: .constant(Int.min), expected: .constant(0)),
+      (operand1: .constant(Int.min), operand2: .constant(1), expected: .constant(Int.min)),
     ]
 
     for fixture in fixtures {
@@ -1707,15 +1707,15 @@ extension OperandTests {
     )
 
     let fixtures: [Fixture] = [
-      (operand1: .number(1), operand2: .number(0)),
-      (operand1: .number(-1), operand2: .number(0)),
-      (operand1: .number(1), operand2: .number(-0)),
-      (operand1: .number(-1), operand2: .number(-0)),
+      (operand1: .constant(1), operand2: .constant(0)),
+      (operand1: .constant(-1), operand2: .constant(0)),
+      (operand1: .constant(1), operand2: .constant(-0)),
+      (operand1: .constant(-1), operand2: .constant(-0)),
 
-      (operand1: .number(0), operand2: .number(0)),
-      (operand1: .number(-0), operand2: .number(0)),
-      (operand1: .number(0), operand2: .number(-0)),
-      (operand1: .number(-0), operand2: .number(-0)),
+      (operand1: .constant(0), operand2: .constant(0)),
+      (operand1: .constant(-0), operand2: .constant(0)),
+      (operand1: .constant(0), operand2: .constant(-0)),
+      (operand1: .constant(-0), operand2: .constant(-0)),
     ]
 
     let expected = ExpressionError.divisionByZero
@@ -1731,8 +1731,8 @@ extension OperandTests {
   }
 
   func testDivisionWithNumbersAndOverflow() {
-    let operand1 = Operand.number(Int.min)
-    let operand2 = Operand.number(-1)
+    let operand1 = Operand.constant(Int.min)
+    let operand2 = Operand.constant(-1)
     let expected = ExpressionError.operationOverflow
 
     XCTAssertThrowsError(try operand1 / operand2) { error in
@@ -1748,44 +1748,44 @@ extension OperandTests {
     )
 
     let fixtures: [Fixture] = [
-      (operand1: .roll(1, 1), operand2: .number(2), expected: .number(0)),
-      (operand1: .roll(-1, 1), operand2: .number(2), expected: .number(0)),
-      (operand1: .roll(1, 1), operand2: .number(-2), expected: .number(0)),
-      (operand1: .roll(-1, 1), operand2: .number(-2), expected: .number(0)),
+      (operand1: .roll(1, 1), operand2: .constant(2), expected: .constant(0)),
+      (operand1: .roll(-1, 1), operand2: .constant(2), expected: .constant(0)),
+      (operand1: .roll(1, 1), operand2: .constant(-2), expected: .constant(0)),
+      (operand1: .roll(-1, 1), operand2: .constant(-2), expected: .constant(0)),
 
-      (operand1: .number(2), operand2: .roll(1, 1), expected: .number(2)),
-      (operand1: .number(-2), operand2: .roll(1, 1), expected: .number(-2)),
-      (operand1: .number(2), operand2: .roll(-1, 1), expected: .number(-2)),
-      (operand1: .number(-2), operand2: .roll(-1, 1), expected: .number(2)),
+      (operand1: .constant(2), operand2: .roll(1, 1), expected: .constant(2)),
+      (operand1: .constant(-2), operand2: .roll(1, 1), expected: .constant(-2)),
+      (operand1: .constant(2), operand2: .roll(-1, 1), expected: .constant(-2)),
+      (operand1: .constant(-2), operand2: .roll(-1, 1), expected: .constant(2)),
 
-      (operand1: .roll(0, 0), operand2: .number(2), expected: .number(0)),
-      (operand1: .roll(-0, 0), operand2: .number(2), expected: .number(0)),
-      (operand1: .roll(0, 0), operand2: .number(-2), expected: .number(0)),
-      (operand1: .roll(-0, 0), operand2: .number(-2), expected: .number(0)),
+      (operand1: .roll(0, 0), operand2: .constant(2), expected: .constant(0)),
+      (operand1: .roll(-0, 0), operand2: .constant(2), expected: .constant(0)),
+      (operand1: .roll(0, 0), operand2: .constant(-2), expected: .constant(0)),
+      (operand1: .roll(-0, 0), operand2: .constant(-2), expected: .constant(0)),
 
-      (operand1: .roll(1, 1), operand2: .number(Int.max), expected: .number(0)),
-      (operand1: .roll(-1, 1), operand2: .number(Int.max), expected: .number(0)),
-      (operand1: .number(Int.max), operand2: .roll(1, 1), expected: .number(Int.max)),
-      (operand1: .number(Int.max), operand2: .roll(-1, 1), expected: .number(-Int.max)),
+      (operand1: .roll(1, 1), operand2: .constant(Int.max), expected: .constant(0)),
+      (operand1: .roll(-1, 1), operand2: .constant(Int.max), expected: .constant(0)),
+      (operand1: .constant(Int.max), operand2: .roll(1, 1), expected: .constant(Int.max)),
+      (operand1: .constant(Int.max), operand2: .roll(-1, 1), expected: .constant(-Int.max)),
 
-      (operand1: .roll(1, 1), operand2: .number(Int.min), expected: .number(0)),
-      (operand1: .roll(-1, 1), operand2: .number(Int.min), expected: .number(0)),
-      (operand1: .number(Int.min), operand2: .roll(1, 1), expected: .number(Int.min)),
+      (operand1: .roll(1, 1), operand2: .constant(Int.min), expected: .constant(0)),
+      (operand1: .roll(-1, 1), operand2: .constant(Int.min), expected: .constant(0)),
+      (operand1: .constant(Int.min), operand2: .roll(1, 1), expected: .constant(Int.min)),
 
-      (operand1: .roll(1, 1), operand2: .roll(2, 1), expected: .number(0)),
-      (operand1: .roll(-1, 1), operand2: .roll(2, 1), expected: .number(0)),
-      (operand1: .roll(1, 1), operand2: .roll(-2, 1), expected: .number(0)),
-      (operand1: .roll(-1, 1), operand2: .roll(-2, 1), expected: .number(0)),
+      (operand1: .roll(1, 1), operand2: .roll(2, 1), expected: .constant(0)),
+      (operand1: .roll(-1, 1), operand2: .roll(2, 1), expected: .constant(0)),
+      (operand1: .roll(1, 1), operand2: .roll(-2, 1), expected: .constant(0)),
+      (operand1: .roll(-1, 1), operand2: .roll(-2, 1), expected: .constant(0)),
 
-      (operand1: .roll(2, 1), operand2: .roll(1, 1), expected: .number(2)),
-      (operand1: .roll(-2, 1), operand2: .roll(1, 1), expected: .number(-2)),
-      (operand1: .roll(2, 1), operand2: .roll(-1, 1), expected: .number(-2)),
-      (operand1: .roll(-2, 1), operand2: .roll(-1, 1), expected: .number(2)),
+      (operand1: .roll(2, 1), operand2: .roll(1, 1), expected: .constant(2)),
+      (operand1: .roll(-2, 1), operand2: .roll(1, 1), expected: .constant(-2)),
+      (operand1: .roll(2, 1), operand2: .roll(-1, 1), expected: .constant(-2)),
+      (operand1: .roll(-2, 1), operand2: .roll(-1, 1), expected: .constant(2)),
 
-      (operand1: .roll(0, 0), operand2: .roll(2, 1), expected: .number(0)),
-      (operand1: .roll(-0, 0), operand2: .roll(2, 1), expected: .number(0)),
-      (operand1: .roll(0, 0), operand2: .roll(-2, 1), expected: .number(0)),
-      (operand1: .roll(-0, 0), operand2: .roll(-2, 1), expected: .number(0)),
+      (operand1: .roll(0, 0), operand2: .roll(2, 1), expected: .constant(0)),
+      (operand1: .roll(-0, 0), operand2: .roll(2, 1), expected: .constant(0)),
+      (operand1: .roll(0, 0), operand2: .roll(-2, 1), expected: .constant(0)),
+      (operand1: .roll(-0, 0), operand2: .roll(-2, 1), expected: .constant(0)),
     ]
 
     for fixture in fixtures {
@@ -1805,15 +1805,15 @@ extension OperandTests {
     )
 
     let fixtures: [Fixture] = [
-      (operand1: .roll(1, 1), operand2: .number(0)),
-      (operand1: .roll(-1, 1), operand2: .number(0)),
-      (operand1: .roll(1, 1), operand2: .number(-0)),
-      (operand1: .roll(-1, 1), operand2: .number(-0)),
+      (operand1: .roll(1, 1), operand2: .constant(0)),
+      (operand1: .roll(-1, 1), operand2: .constant(0)),
+      (operand1: .roll(1, 1), operand2: .constant(-0)),
+      (operand1: .roll(-1, 1), operand2: .constant(-0)),
 
-      (operand1: .roll(0, 0), operand2: .number(0)),
-      (operand1: .roll(-0, 0), operand2: .number(0)),
-      (operand1: .roll(0, 0), operand2: .number(-0)),
-      (operand1: .roll(-0, 0), operand2: .number(-0)),
+      (operand1: .roll(0, 0), operand2: .constant(0)),
+      (operand1: .roll(-0, 0), operand2: .constant(0)),
+      (operand1: .roll(0, 0), operand2: .constant(-0)),
+      (operand1: .roll(-0, 0), operand2: .constant(-0)),
     ]
 
     let expected = ExpressionError.divisionByZero
@@ -1835,10 +1835,10 @@ extension OperandTests {
     )
 
     let fixtures: [Fixture] = [
-      (operand1: .number(Int.min), operand2: .roll(-1, 1)),
+      (operand1: .constant(Int.min), operand2: .roll(-1, 1)),
 
-      (operand1: .roll(1, Int.min), operand2: .number(1)),
-      (operand1: .number(1), operand2: .roll(1, Int.min)),
+      (operand1: .roll(1, Int.min), operand2: .constant(1)),
+      (operand1: .constant(1), operand2: .roll(1, Int.min)),
     ]
 
     let expected = ExpressionError.operationOverflow
@@ -1861,38 +1861,38 @@ extension OperandTests {
     )
 
     let fixtures: [Fixture] = [
-      (operand1: .number(1), operand2: .number(2), expected: .number(2)),
-      (operand1: .number(-1), operand2: .number(2), expected: .number(-2)),
-      (operand1: .number(1), operand2: .number(-2), expected: .number(-2)),
-      (operand1: .number(-1), operand2: .number(-2), expected: .number(2)),
+      (operand1: .constant(1), operand2: .constant(2), expected: .constant(2)),
+      (operand1: .constant(-1), operand2: .constant(2), expected: .constant(-2)),
+      (operand1: .constant(1), operand2: .constant(-2), expected: .constant(-2)),
+      (operand1: .constant(-1), operand2: .constant(-2), expected: .constant(2)),
 
-      (operand1: .number(2), operand2: .number(1), expected: .number(2)),
-      (operand1: .number(-2), operand2: .number(1), expected: .number(-2)),
-      (operand1: .number(2), operand2: .number(-1), expected: .number(-2)),
-      (operand1: .number(-2), operand2: .number(-1), expected: .number(2)),
+      (operand1: .constant(2), operand2: .constant(1), expected: .constant(2)),
+      (operand1: .constant(-2), operand2: .constant(1), expected: .constant(-2)),
+      (operand1: .constant(2), operand2: .constant(-1), expected: .constant(-2)),
+      (operand1: .constant(-2), operand2: .constant(-1), expected: .constant(2)),
 
-      (operand1: .number(0), operand2: .number(2), expected: .number(0)),
-      (operand1: .number(-0), operand2: .number(2), expected: .number(0)),
-      (operand1: .number(0), operand2: .number(-2), expected: .number(0)),
-      (operand1: .number(-0), operand2: .number(-2), expected: .number(0)),
+      (operand1: .constant(0), operand2: .constant(2), expected: .constant(0)),
+      (operand1: .constant(-0), operand2: .constant(2), expected: .constant(0)),
+      (operand1: .constant(0), operand2: .constant(-2), expected: .constant(0)),
+      (operand1: .constant(-0), operand2: .constant(-2), expected: .constant(0)),
 
-      (operand1: .number(1), operand2: .number(0), expected: .number(0)),
-      (operand1: .number(-1), operand2: .number(0), expected: .number(0)),
-      (operand1: .number(1), operand2: .number(-0), expected: .number(0)),
-      (operand1: .number(-1), operand2: .number(-0), expected: .number(0)),
+      (operand1: .constant(1), operand2: .constant(0), expected: .constant(0)),
+      (operand1: .constant(-1), operand2: .constant(0), expected: .constant(0)),
+      (operand1: .constant(1), operand2: .constant(-0), expected: .constant(0)),
+      (operand1: .constant(-1), operand2: .constant(-0), expected: .constant(0)),
 
-      (operand1: .number(0), operand2: .number(0), expected: .number(0)),
-      (operand1: .number(-0), operand2: .number(0), expected: .number(0)),
-      (operand1: .number(0), operand2: .number(-0), expected: .number(0)),
-      (operand1: .number(-0), operand2: .number(-0), expected: .number(0)),
+      (operand1: .constant(0), operand2: .constant(0), expected: .constant(0)),
+      (operand1: .constant(-0), operand2: .constant(0), expected: .constant(0)),
+      (operand1: .constant(0), operand2: .constant(-0), expected: .constant(0)),
+      (operand1: .constant(-0), operand2: .constant(-0), expected: .constant(0)),
 
-      (operand1: .number(1), operand2: .number(Int.max), expected: .number(Int.max)),
-      (operand1: .number(-1), operand2: .number(Int.max), expected: .number(-Int.max)),
-      (operand1: .number(Int.max), operand2: .number(1), expected: .number(Int.max)),
-      (operand1: .number(Int.max), operand2: .number(-1), expected: .number(-Int.max)),
+      (operand1: .constant(1), operand2: .constant(Int.max), expected: .constant(Int.max)),
+      (operand1: .constant(-1), operand2: .constant(Int.max), expected: .constant(-Int.max)),
+      (operand1: .constant(Int.max), operand2: .constant(1), expected: .constant(Int.max)),
+      (operand1: .constant(Int.max), operand2: .constant(-1), expected: .constant(-Int.max)),
 
-      (operand1: .number(1), operand2: .number(Int.min), expected: .number(Int.min)),
-      (operand1: .number(Int.min), operand2: .number(1), expected: .number(Int.min)),
+      (operand1: .constant(1), operand2: .constant(Int.min), expected: .constant(Int.min)),
+      (operand1: .constant(Int.min), operand2: .constant(1), expected: .constant(Int.min)),
     ]
 
     for fixture in fixtures {
@@ -1912,18 +1912,18 @@ extension OperandTests {
     )
 
     let fixtures: [Fixture] = [
-      (operand1: .number(Int.max), operand2: .number(2)),
-      (operand1: .number(-Int.max), operand2: .number(2)),
-      (operand1: .number(Int.max), operand2: .number(-2)),
-      (operand1: .number(-Int.max), operand2: .number(-2)),
+      (operand1: .constant(Int.max), operand2: .constant(2)),
+      (operand1: .constant(-Int.max), operand2: .constant(2)),
+      (operand1: .constant(Int.max), operand2: .constant(-2)),
+      (operand1: .constant(-Int.max), operand2: .constant(-2)),
 
-      (operand1: .number(2), operand2: .number(Int.max)),
-      (operand1: .number(-2), operand2: .number(Int.max)),
-      (operand1: .number(2), operand2: .number(-Int.max)),
-      (operand1: .number(-2), operand2: .number(-Int.max)),
+      (operand1: .constant(2), operand2: .constant(Int.max)),
+      (operand1: .constant(-2), operand2: .constant(Int.max)),
+      (operand1: .constant(2), operand2: .constant(-Int.max)),
+      (operand1: .constant(-2), operand2: .constant(-Int.max)),
 
-      (operand1: .number(Int.min), operand2: .number(-1)),
-      (operand1: .number(-1), operand2: .number(Int.min)),
+      (operand1: .constant(Int.min), operand2: .constant(-1)),
+      (operand1: .constant(-1), operand2: .constant(Int.min)),
     ]
 
     let expected = ExpressionError.operationOverflow
@@ -1946,63 +1946,63 @@ extension OperandTests {
     )
 
     let fixtures: [Fixture] = [
-      (operand1: .roll(1, 1), operand2: .number(2), expected: .number(2)),
-      (operand1: .roll(-1, 1), operand2: .number(2), expected: .number(-2)),
-      (operand1: .roll(1, 1), operand2: .number(-2), expected: .number(-2)),
-      (operand1: .roll(-1, 1), operand2: .number(-2), expected: .number(2)),
+      (operand1: .roll(1, 1), operand2: .constant(2), expected: .constant(2)),
+      (operand1: .roll(-1, 1), operand2: .constant(2), expected: .constant(-2)),
+      (operand1: .roll(1, 1), operand2: .constant(-2), expected: .constant(-2)),
+      (operand1: .roll(-1, 1), operand2: .constant(-2), expected: .constant(2)),
 
-      (operand1: .number(2), operand2: .roll(1, 1), expected: .number(2)),
-      (operand1: .number(-2), operand2: .roll(1, 1), expected: .number(-2)),
-      (operand1: .number(2), operand2: .roll(-1, 1), expected: .number(-2)),
-      (operand1: .number(-2), operand2: .roll(-1, 1), expected: .number(2)),
+      (operand1: .constant(2), operand2: .roll(1, 1), expected: .constant(2)),
+      (operand1: .constant(-2), operand2: .roll(1, 1), expected: .constant(-2)),
+      (operand1: .constant(2), operand2: .roll(-1, 1), expected: .constant(-2)),
+      (operand1: .constant(-2), operand2: .roll(-1, 1), expected: .constant(2)),
 
-      (operand1: .roll(0, 0), operand2: .number(2), expected: .number(0)),
-      (operand1: .roll(-0, 0), operand2: .number(2), expected: .number(0)),
-      (operand1: .roll(0, 0), operand2: .number(-2), expected: .number(0)),
-      (operand1: .roll(-0, 0), operand2: .number(-2), expected: .number(0)),
+      (operand1: .roll(0, 0), operand2: .constant(2), expected: .constant(0)),
+      (operand1: .roll(-0, 0), operand2: .constant(2), expected: .constant(0)),
+      (operand1: .roll(0, 0), operand2: .constant(-2), expected: .constant(0)),
+      (operand1: .roll(-0, 0), operand2: .constant(-2), expected: .constant(0)),
 
-      (operand1: .number(1), operand2: .roll(0, 0), expected: .number(0)),
-      (operand1: .number(-1), operand2: .roll(0, 0), expected: .number(0)),
-      (operand1: .number(1), operand2: .roll(-0, 0), expected: .number(0)),
-      (operand1: .number(-1), operand2: .roll(-0, 0), expected: .number(0)),
+      (operand1: .constant(1), operand2: .roll(0, 0), expected: .constant(0)),
+      (operand1: .constant(-1), operand2: .roll(0, 0), expected: .constant(0)),
+      (operand1: .constant(1), operand2: .roll(-0, 0), expected: .constant(0)),
+      (operand1: .constant(-1), operand2: .roll(-0, 0), expected: .constant(0)),
 
-      (operand1: .roll(0, 0), operand2: .number(0), expected: .number(0)),
-      (operand1: .roll(-0, 0), operand2: .number(0), expected: .number(0)),
-      (operand1: .roll(0, 0), operand2: .number(-0), expected: .number(0)),
-      (operand1: .roll(-0, 0), operand2: .number(-0), expected: .number(0)),
+      (operand1: .roll(0, 0), operand2: .constant(0), expected: .constant(0)),
+      (operand1: .roll(-0, 0), operand2: .constant(0), expected: .constant(0)),
+      (operand1: .roll(0, 0), operand2: .constant(-0), expected: .constant(0)),
+      (operand1: .roll(-0, 0), operand2: .constant(-0), expected: .constant(0)),
 
-      (operand1: .roll(1, 1), operand2: .number(Int.max), expected: .number(Int.max)),
-      (operand1: .roll(-1, 1), operand2: .number(Int.max), expected: .number(-Int.max)),
-      (operand1: .number(Int.max), operand2: .roll(1, 1), expected: .number(Int.max)),
-      (operand1: .number(Int.max), operand2: .roll(-1, 1), expected: .number(-Int.max)),
+      (operand1: .roll(1, 1), operand2: .constant(Int.max), expected: .constant(Int.max)),
+      (operand1: .roll(-1, 1), operand2: .constant(Int.max), expected: .constant(-Int.max)),
+      (operand1: .constant(Int.max), operand2: .roll(1, 1), expected: .constant(Int.max)),
+      (operand1: .constant(Int.max), operand2: .roll(-1, 1), expected: .constant(-Int.max)),
 
-      (operand1: .roll(1, 1), operand2: .number(Int.min), expected: .number(Int.min)),
-      (operand1: .number(Int.min), operand2: .roll(1, 1), expected: .number(Int.min)),
+      (operand1: .roll(1, 1), operand2: .constant(Int.min), expected: .constant(Int.min)),
+      (operand1: .constant(Int.min), operand2: .roll(1, 1), expected: .constant(Int.min)),
 
-      (operand1: .roll(1, 1), operand2: .roll(2, 1), expected: .number(2)),
-      (operand1: .roll(-1, 1), operand2: .roll(2, 1), expected: .number(-2)),
-      (operand1: .roll(1, 1), operand2: .roll(-2, 1), expected: .number(-2)),
-      (operand1: .roll(-1, 1), operand2: .roll(-2, 1), expected: .number(2)),
+      (operand1: .roll(1, 1), operand2: .roll(2, 1), expected: .constant(2)),
+      (operand1: .roll(-1, 1), operand2: .roll(2, 1), expected: .constant(-2)),
+      (operand1: .roll(1, 1), operand2: .roll(-2, 1), expected: .constant(-2)),
+      (operand1: .roll(-1, 1), operand2: .roll(-2, 1), expected: .constant(2)),
 
-      (operand1: .roll(2, 1), operand2: .roll(1, 1), expected: .number(2)),
-      (operand1: .roll(-2, 1), operand2: .roll(1, 1), expected: .number(-2)),
-      (operand1: .roll(2, 1), operand2: .roll(-1, 1), expected: .number(-2)),
-      (operand1: .roll(-2, 1), operand2: .roll(-1, 1), expected: .number(2)),
+      (operand1: .roll(2, 1), operand2: .roll(1, 1), expected: .constant(2)),
+      (operand1: .roll(-2, 1), operand2: .roll(1, 1), expected: .constant(-2)),
+      (operand1: .roll(2, 1), operand2: .roll(-1, 1), expected: .constant(-2)),
+      (operand1: .roll(-2, 1), operand2: .roll(-1, 1), expected: .constant(2)),
 
-      (operand1: .roll(0, 0), operand2: .roll(2, 1), expected: .number(0)),
-      (operand1: .roll(-0, 0), operand2: .roll(2, 1), expected: .number(0)),
-      (operand1: .roll(0, 0), operand2: .roll(-2, 1), expected: .number(0)),
-      (operand1: .roll(-0, 0), operand2: .roll(-2, 1), expected: .number(0)),
+      (operand1: .roll(0, 0), operand2: .roll(2, 1), expected: .constant(0)),
+      (operand1: .roll(-0, 0), operand2: .roll(2, 1), expected: .constant(0)),
+      (operand1: .roll(0, 0), operand2: .roll(-2, 1), expected: .constant(0)),
+      (operand1: .roll(-0, 0), operand2: .roll(-2, 1), expected: .constant(0)),
 
-      (operand1: .roll(1, 1), operand2: .roll(0, 0), expected: .number(0)),
-      (operand1: .roll(-1, 1), operand2: .roll(0, 0), expected: .number(0)),
-      (operand1: .roll(1, 1), operand2: .roll(-0, 0), expected: .number(0)),
-      (operand1: .roll(-1, 1), operand2: .roll(-0, 0), expected: .number(0)),
+      (operand1: .roll(1, 1), operand2: .roll(0, 0), expected: .constant(0)),
+      (operand1: .roll(-1, 1), operand2: .roll(0, 0), expected: .constant(0)),
+      (operand1: .roll(1, 1), operand2: .roll(-0, 0), expected: .constant(0)),
+      (operand1: .roll(-1, 1), operand2: .roll(-0, 0), expected: .constant(0)),
 
-      (operand1: .roll(0, 0), operand2: .roll(0, 0), expected: .number(0)),
-      (operand1: .roll(-0, 0), operand2: .roll(0, 0), expected: .number(0)),
-      (operand1: .roll(0, 0), operand2: .roll(-0, 0), expected: .number(0)),
-      (operand1: .roll(-0, 0), operand2: .roll(-0, 0), expected: .number(0)),
+      (operand1: .roll(0, 0), operand2: .roll(0, 0), expected: .constant(0)),
+      (operand1: .roll(-0, 0), operand2: .roll(0, 0), expected: .constant(0)),
+      (operand1: .roll(0, 0), operand2: .roll(-0, 0), expected: .constant(0)),
+      (operand1: .roll(-0, 0), operand2: .roll(-0, 0), expected: .constant(0)),
     ]
 
     for fixture in fixtures {
@@ -2022,18 +2022,18 @@ extension OperandTests {
     )
 
     let fixtures: [Fixture] = [
-      (operand1: .number(Int.max), operand2: .number(2)),
-      (operand1: .number(-Int.max), operand2: .number(2)),
-      (operand1: .number(Int.max), operand2: .number(-2)),
-      (operand1: .number(-Int.max), operand2: .number(-2)),
+      (operand1: .constant(Int.max), operand2: .constant(2)),
+      (operand1: .constant(-Int.max), operand2: .constant(2)),
+      (operand1: .constant(Int.max), operand2: .constant(-2)),
+      (operand1: .constant(-Int.max), operand2: .constant(-2)),
 
-      (operand1: .number(2), operand2: .number(Int.max)),
-      (operand1: .number(-2), operand2: .number(Int.max)),
-      (operand1: .number(2), operand2: .number(-Int.max)),
-      (operand1: .number(-2), operand2: .number(-Int.max)),
+      (operand1: .constant(2), operand2: .constant(Int.max)),
+      (operand1: .constant(-2), operand2: .constant(Int.max)),
+      (operand1: .constant(2), operand2: .constant(-Int.max)),
+      (operand1: .constant(-2), operand2: .constant(-Int.max)),
 
-      (operand1: .number(Int.min), operand2: .number(-1)),
-      (operand1: .number(-1), operand2: .number(Int.min)),
+      (operand1: .constant(Int.min), operand2: .constant(-1)),
+      (operand1: .constant(-1), operand2: .constant(Int.min)),
       ]
 
     let expected = ExpressionError.operationOverflow
@@ -2056,40 +2056,40 @@ extension OperandTests {
     )
 
     let fixtures: [Fixture] = [
-      (operand1: .number(1), operand2: .number(2), expected: .number(-1)),
-      (operand1: .number(-1), operand2: .number(2), expected: .number(-3)),
-      (operand1: .number(1), operand2: .number(-2), expected: .number(3)),
-      (operand1: .number(-1), operand2: .number(-2), expected: .number(1)),
+      (operand1: .constant(1), operand2: .constant(2), expected: .constant(-1)),
+      (operand1: .constant(-1), operand2: .constant(2), expected: .constant(-3)),
+      (operand1: .constant(1), operand2: .constant(-2), expected: .constant(3)),
+      (operand1: .constant(-1), operand2: .constant(-2), expected: .constant(1)),
 
-      (operand1: .number(2), operand2: .number(1), expected: .number(1)),
-      (operand1: .number(-2), operand2: .number(1), expected: .number(-3)),
-      (operand1: .number(2), operand2: .number(-1), expected: .number(3)),
-      (operand1: .number(-2), operand2: .number(-1), expected: .number(-1)),
+      (operand1: .constant(2), operand2: .constant(1), expected: .constant(1)),
+      (operand1: .constant(-2), operand2: .constant(1), expected: .constant(-3)),
+      (operand1: .constant(2), operand2: .constant(-1), expected: .constant(3)),
+      (operand1: .constant(-2), operand2: .constant(-1), expected: .constant(-1)),
 
-      (operand1: .number(0), operand2: .number(2), expected: .number(-2)),
-      (operand1: .number(-0), operand2: .number(2), expected: .number(-2)),
-      (operand1: .number(0), operand2: .number(-2), expected: .number(2)),
-      (operand1: .number(-0), operand2: .number(-2), expected: .number(2)),
+      (operand1: .constant(0), operand2: .constant(2), expected: .constant(-2)),
+      (operand1: .constant(-0), operand2: .constant(2), expected: .constant(-2)),
+      (operand1: .constant(0), operand2: .constant(-2), expected: .constant(2)),
+      (operand1: .constant(-0), operand2: .constant(-2), expected: .constant(2)),
 
-      (operand1: .number(1), operand2: .number(0), expected: .number(1)),
-      (operand1: .number(-1), operand2: .number(0), expected: .number(-1)),
-      (operand1: .number(1), operand2: .number(-0), expected: .number(1)),
-      (operand1: .number(-1), operand2: .number(-0), expected: .number(-1)),
+      (operand1: .constant(1), operand2: .constant(0), expected: .constant(1)),
+      (operand1: .constant(-1), operand2: .constant(0), expected: .constant(-1)),
+      (operand1: .constant(1), operand2: .constant(-0), expected: .constant(1)),
+      (operand1: .constant(-1), operand2: .constant(-0), expected: .constant(-1)),
 
-      (operand1: .number(0), operand2: .number(0), expected: .number(0)),
-      (operand1: .number(-0), operand2: .number(0), expected: .number(0)),
-      (operand1: .number(0), operand2: .number(-0), expected: .number(0)),
-      (operand1: .number(-0), operand2: .number(-0), expected: .number(0)),
+      (operand1: .constant(0), operand2: .constant(0), expected: .constant(0)),
+      (operand1: .constant(-0), operand2: .constant(0), expected: .constant(0)),
+      (operand1: .constant(0), operand2: .constant(-0), expected: .constant(0)),
+      (operand1: .constant(-0), operand2: .constant(-0), expected: .constant(0)),
 
-      (operand1: .number(Int.max), operand2: .number(0), expected: .number(Int.max)),
-      (operand1: .number(Int.max), operand2: .number(-0), expected: .number(Int.max)),
-      (operand1: .number(0), operand2: .number(Int.max), expected: .number(-Int.max)),
-      (operand1: .number(-0), operand2: .number(Int.max), expected: .number(-Int.max)),
+      (operand1: .constant(Int.max), operand2: .constant(0), expected: .constant(Int.max)),
+      (operand1: .constant(Int.max), operand2: .constant(-0), expected: .constant(Int.max)),
+      (operand1: .constant(0), operand2: .constant(Int.max), expected: .constant(-Int.max)),
+      (operand1: .constant(-0), operand2: .constant(Int.max), expected: .constant(-Int.max)),
 
-      (operand1: .number(Int.min), operand2: .number(0), expected: .number(Int.min)),
-      (operand1: .number(Int.min), operand2: .number(-0), expected: .number(Int.min)),
-      (operand1: .number(0), operand2: .number(Int.min + 1), expected: .number(Int.max)),
-      (operand1: .number(-0), operand2: .number(Int.min + 1), expected: .number(Int.max)),
+      (operand1: .constant(Int.min), operand2: .constant(0), expected: .constant(Int.min)),
+      (operand1: .constant(Int.min), operand2: .constant(-0), expected: .constant(Int.min)),
+      (operand1: .constant(0), operand2: .constant(Int.min + 1), expected: .constant(Int.max)),
+      (operand1: .constant(-0), operand2: .constant(Int.min + 1), expected: .constant(Int.max)),
     ]
 
     for fixture in fixtures {
@@ -2109,12 +2109,12 @@ extension OperandTests {
     )
 
     let fixtures: [Fixture] = [
-      (operand1: .number(Int.max), operand2: .number(-1)),
-      (operand1: .number(-2), operand2: .number(Int.max)),
+      (operand1: .constant(Int.max), operand2: .constant(-1)),
+      (operand1: .constant(-2), operand2: .constant(Int.max)),
 
-      (operand1: .number(Int.min), operand2: .number(1)),
-      (operand1: .number(0), operand2: .number(Int.min)),
-      (operand1: .number(-0), operand2: .number(Int.min)),
+      (operand1: .constant(Int.min), operand2: .constant(1)),
+      (operand1: .constant(0), operand2: .constant(Int.min)),
+      (operand1: .constant(-0), operand2: .constant(Int.min)),
     ]
 
     let expected = ExpressionError.operationOverflow
@@ -2137,65 +2137,65 @@ extension OperandTests {
     )
 
     let fixtures: [Fixture] = [
-      (operand1: .roll(1, 1), operand2: .number(2), expected: .number(-1)),
-      (operand1: .roll(-1, 1), operand2: .number(2), expected: .number(-3)),
-      (operand1: .roll(1, 1), operand2: .number(-2), expected: .number(3)),
-      (operand1: .roll(-1, 1), operand2: .number(-2), expected: .number(1)),
+      (operand1: .roll(1, 1), operand2: .constant(2), expected: .constant(-1)),
+      (operand1: .roll(-1, 1), operand2: .constant(2), expected: .constant(-3)),
+      (operand1: .roll(1, 1), operand2: .constant(-2), expected: .constant(3)),
+      (operand1: .roll(-1, 1), operand2: .constant(-2), expected: .constant(1)),
 
-      (operand1: .number(2), operand2: .roll(1, 1), expected: .number(1)),
-      (operand1: .number(-2), operand2: .roll(1, 1), expected: .number(-3)),
-      (operand1: .number(2), operand2: .roll(-1, 1), expected: .number(3)),
-      (operand1: .number(-2), operand2: .roll(-1, 1), expected: .number(-1)),
+      (operand1: .constant(2), operand2: .roll(1, 1), expected: .constant(1)),
+      (operand1: .constant(-2), operand2: .roll(1, 1), expected: .constant(-3)),
+      (operand1: .constant(2), operand2: .roll(-1, 1), expected: .constant(3)),
+      (operand1: .constant(-2), operand2: .roll(-1, 1), expected: .constant(-1)),
 
-      (operand1: .roll(0, 0), operand2: .number(2), expected: .number(-2)),
-      (operand1: .roll(-0, 0), operand2: .number(2), expected: .number(-2)),
-      (operand1: .roll(0, 0), operand2: .number(-2), expected: .number(2)),
-      (operand1: .roll(-0, 0), operand2: .number(-2), expected: .number(2)),
+      (operand1: .roll(0, 0), operand2: .constant(2), expected: .constant(-2)),
+      (operand1: .roll(-0, 0), operand2: .constant(2), expected: .constant(-2)),
+      (operand1: .roll(0, 0), operand2: .constant(-2), expected: .constant(2)),
+      (operand1: .roll(-0, 0), operand2: .constant(-2), expected: .constant(2)),
 
-      (operand1: .number(1), operand2: .roll(0, 0), expected: .number(1)),
-      (operand1: .number(-1), operand2: .roll(0, 0), expected: .number(-1)),
-      (operand1: .number(1), operand2: .roll(-0, 0), expected: .number(1)),
-      (operand1: .number(-1), operand2: .roll(-0, 0), expected: .number(-1)),
+      (operand1: .constant(1), operand2: .roll(0, 0), expected: .constant(1)),
+      (operand1: .constant(-1), operand2: .roll(0, 0), expected: .constant(-1)),
+      (operand1: .constant(1), operand2: .roll(-0, 0), expected: .constant(1)),
+      (operand1: .constant(-1), operand2: .roll(-0, 0), expected: .constant(-1)),
 
-      (operand1: .roll(0, 0), operand2: .number(0), expected: .number(0)),
-      (operand1: .roll(-0, 0), operand2: .number(0), expected: .number(0)),
-      (operand1: .roll(0, -0), operand2: .number(-0), expected: .number(0)),
-      (operand1: .roll(-0, 0), operand2: .number(-0), expected: .number(0)),
+      (operand1: .roll(0, 0), operand2: .constant(0), expected: .constant(0)),
+      (operand1: .roll(-0, 0), operand2: .constant(0), expected: .constant(0)),
+      (operand1: .roll(0, -0), operand2: .constant(-0), expected: .constant(0)),
+      (operand1: .roll(-0, 0), operand2: .constant(-0), expected: .constant(0)),
 
-      (operand1: .roll(0, 0), operand2: .number(Int.max), expected: .number(-Int.max)),
-      (operand1: .roll(-0, 0), operand2: .number(Int.max), expected: .number(-Int.max)),
-      (operand1: .number(Int.max), operand2: .roll(0, 0), expected: .number(Int.max)),
-      (operand1: .number(Int.max), operand2: .roll(-0, 0), expected: .number(Int.max)),
+      (operand1: .roll(0, 0), operand2: .constant(Int.max), expected: .constant(-Int.max)),
+      (operand1: .roll(-0, 0), operand2: .constant(Int.max), expected: .constant(-Int.max)),
+      (operand1: .constant(Int.max), operand2: .roll(0, 0), expected: .constant(Int.max)),
+      (operand1: .constant(Int.max), operand2: .roll(-0, 0), expected: .constant(Int.max)),
 
-      (operand1: .roll(0, 0), operand2: .number(Int.min + 1), expected: .number(Int.max)),
-      (operand1: .roll(-0, 0), operand2: .number(Int.min + 1), expected: .number(Int.max)),
-      (operand1: .number(Int.min), operand2: .roll(0, 0), expected: .number(Int.min)),
-      (operand1: .number(Int.min), operand2: .roll(-0, 0), expected: .number(Int.min)),
+      (operand1: .roll(0, 0), operand2: .constant(Int.min + 1), expected: .constant(Int.max)),
+      (operand1: .roll(-0, 0), operand2: .constant(Int.min + 1), expected: .constant(Int.max)),
+      (operand1: .constant(Int.min), operand2: .roll(0, 0), expected: .constant(Int.min)),
+      (operand1: .constant(Int.min), operand2: .roll(-0, 0), expected: .constant(Int.min)),
 
-      (operand1: .roll(1, 1), operand2: .roll(2, 1), expected: .number(-1)),
-      (operand1: .roll(-1, 1), operand2: .roll(2, 1), expected: .number(-3)),
-      (operand1: .roll(1, 1), operand2: .roll(-2, 1), expected: .number(3)),
-      (operand1: .roll(-1, 1), operand2: .roll(-2, 1), expected: .number(1)),
+      (operand1: .roll(1, 1), operand2: .roll(2, 1), expected: .constant(-1)),
+      (operand1: .roll(-1, 1), operand2: .roll(2, 1), expected: .constant(-3)),
+      (operand1: .roll(1, 1), operand2: .roll(-2, 1), expected: .constant(3)),
+      (operand1: .roll(-1, 1), operand2: .roll(-2, 1), expected: .constant(1)),
 
-      (operand1: .roll(2, 1), operand2: .roll(1, 1), expected: .number(1)),
-      (operand1: .roll(-2, 1), operand2: .roll(1, 1), expected: .number(-3)),
-      (operand1: .roll(2, 1), operand2: .roll(-1, 1), expected: .number(3)),
-      (operand1: .roll(-2, 1), operand2: .roll(-1, 1), expected: .number(-1)),
+      (operand1: .roll(2, 1), operand2: .roll(1, 1), expected: .constant(1)),
+      (operand1: .roll(-2, 1), operand2: .roll(1, 1), expected: .constant(-3)),
+      (operand1: .roll(2, 1), operand2: .roll(-1, 1), expected: .constant(3)),
+      (operand1: .roll(-2, 1), operand2: .roll(-1, 1), expected: .constant(-1)),
 
-      (operand1: .roll(0, 0), operand2: .roll(2, 1), expected: .number(-2)),
-      (operand1: .roll(-0, 0), operand2: .roll(2, 1), expected: .number(-2)),
-      (operand1: .roll(0, 0), operand2: .roll(-2, 1), expected: .number(2)),
-      (operand1: .roll(-0, 0), operand2: .roll(-2, 1), expected: .number(2)),
+      (operand1: .roll(0, 0), operand2: .roll(2, 1), expected: .constant(-2)),
+      (operand1: .roll(-0, 0), operand2: .roll(2, 1), expected: .constant(-2)),
+      (operand1: .roll(0, 0), operand2: .roll(-2, 1), expected: .constant(2)),
+      (operand1: .roll(-0, 0), operand2: .roll(-2, 1), expected: .constant(2)),
 
-      (operand1: .roll(1, 1), operand2: .roll(0, 0), expected: .number(1)),
-      (operand1: .roll(-1, 1), operand2: .roll(0, 0), expected: .number(-1)),
-      (operand1: .roll(1, 1), operand2: .roll(-0, 0), expected: .number(1)),
-      (operand1: .roll(-1, 1), operand2: .roll(-0, 0), expected: .number(-1)),
+      (operand1: .roll(1, 1), operand2: .roll(0, 0), expected: .constant(1)),
+      (operand1: .roll(-1, 1), operand2: .roll(0, 0), expected: .constant(-1)),
+      (operand1: .roll(1, 1), operand2: .roll(-0, 0), expected: .constant(1)),
+      (operand1: .roll(-1, 1), operand2: .roll(-0, 0), expected: .constant(-1)),
 
-      (operand1: .roll(0, 0), operand2: .roll(0, 0), expected: .number(0)),
-      (operand1: .roll(-0, 0), operand2: .roll(0, 0), expected: .number(0)),
-      (operand1: .roll(0, -0), operand2: .roll(-0, 0), expected: .number(0)),
-      (operand1: .roll(-0, 0), operand2: .roll(-0, 0), expected: .number(0)),
+      (operand1: .roll(0, 0), operand2: .roll(0, 0), expected: .constant(0)),
+      (operand1: .roll(-0, 0), operand2: .roll(0, 0), expected: .constant(0)),
+      (operand1: .roll(0, -0), operand2: .roll(-0, 0), expected: .constant(0)),
+      (operand1: .roll(-0, 0), operand2: .roll(-0, 0), expected: .constant(0)),
     ]
 
     for fixture in fixtures {
@@ -2215,12 +2215,12 @@ extension OperandTests {
     )
 
     let fixtures: [Fixture] = [
-      (operand1: .number(Int.max), operand2: .roll(-1, 1)),
-      (operand1: .roll(-2, 1), operand2: .number(Int.max)),
+      (operand1: .constant(Int.max), operand2: .roll(-1, 1)),
+      (operand1: .roll(-2, 1), operand2: .constant(Int.max)),
 
-      (operand1: .number(Int.min), operand2: .roll(1, 1)),
-      (operand1: .roll(0, 0), operand2: .number(Int.min)),
-      (operand1: .roll(-0, 0), operand2: .number(Int.min)),
+      (operand1: .constant(Int.min), operand2: .roll(1, 1)),
+      (operand1: .roll(0, 0), operand2: .constant(Int.min)),
+      (operand1: .roll(-0, 0), operand2: .constant(Int.min)),
     ]
 
     let expected = ExpressionError.operationOverflow
@@ -2242,13 +2242,13 @@ extension OperandTests {
     )
 
     let fixtures: [Fixture] = [
-      (operand: .number(1), expected: .number(-1)),
-      (operand: .number(-1), expected: .number(1)),
+      (operand: .constant(1), expected: .constant(-1)),
+      (operand: .constant(-1), expected: .constant(1)),
 
-      (operand: .number(0), expected: .number(0)),
-      (operand: .number(-0), expected: .number(0)),
+      (operand: .constant(0), expected: .constant(0)),
+      (operand: .constant(-0), expected: .constant(0)),
 
-      (operand: .number(Int.max), expected: .number(-Int.max)),
+      (operand: .constant(Int.max), expected: .constant(-Int.max)),
     ]
 
     for fixture in fixtures {
@@ -2262,7 +2262,7 @@ extension OperandTests {
 
   func testNegationWithNumbersAndOverflow() {
     let operands: [Operand] = [
-      .number(Int.min),
+      .constant(Int.min),
     ]
 
     let expected = ExpressionError.operationOverflow
