@@ -95,8 +95,8 @@ extension ExpressionTests {
     }
   }
 
-  func testPushedWithLexemeIntegerFixtures() {
-    for fixture in lexemeIntegerFixtures {
+  func testPushedWithLexemeOperandFixtures() {
+    for fixture in lexemeOperandFixtures {
       let withoutLexemes = fixture.withoutLexemes
       let lexeme = fixture.lexeme
       let withLexemes = fixture.withLexemes
@@ -156,8 +156,8 @@ extension ExpressionTests {
     }
   }
 
-  func testDroppedWithLexemeIntegerFixtures() {
-    for fixture in lexemeIntegerFixtures {
+  func testDroppedWithLexemeOperandFixtures() {
+    for fixture in lexemeOperandFixtures {
       let withLexemes = fixture.withLexemes
       let droppedLexemes = fixture.droppedLexemes
       

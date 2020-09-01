@@ -32,12 +32,12 @@ class LexerTests: XCTestCase {
     }
   }
 
-  func testLexedWithLexemeIntegerFixtures() {
-    for fixture in lexemeIntegerFixtures {
-      let integer = fixture.integer
+  func testLexedWithLexemeOperandFixtures() {
+    for fixture in lexemeOperandFixtures {
+      let token = fixture.token
       let tokens = fixture.withoutTokens
       let expectedTokens = fixture.withTokens
-      let actualTokens = try! lexed(integer: integer, into: tokens)
+      let actualTokens = try! lexed(operand: token, into: tokens)
 
       XCTAssertEqual(expectedTokens.count, actualTokens.count)
 

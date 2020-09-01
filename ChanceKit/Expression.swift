@@ -76,8 +76,8 @@ extension Expression {
       return Expression(tokens)
     }
 
-    if let integer = Int(lexeme) {
-      let tokens = try lexed(integer: integer, into: self.tokens)
+    if let operand = Operand(rawLexeme: lexeme) {
+      let tokens = try lexed(operand: operand, into: self.tokens)
 
       return Expression(tokens)
     }

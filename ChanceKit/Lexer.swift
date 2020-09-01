@@ -32,19 +32,19 @@ func lexed(operator: Operator, into: [Tokenable]) -> [Tokenable] {
   return tokens
 }
 
-func lexed(integer: Int, into: [Tokenable]) throws -> [Tokenable] {
+func lexed(operand: Operand, into: [Tokenable]) throws -> [Tokenable] {
   var tokens = into
 
   switch tokens.last {
   case nil:
-    tokens.append(Operand.number(integer))
+    tokens.append(operand)
 
   case let lastParenthesis as Parenthesis:
     if lastParenthesis == .close {
       tokens.append(Operator.multiplication)
     }
 
-    tokens.append(Operand.number(integer))
+    tokens.append(operand)
 
   case let lastOperator as Operator:
     let tokensCount = tokens.count
@@ -53,42 +53,151 @@ func lexed(integer: Int, into: [Tokenable]) throws -> [Tokenable] {
       tokens.removeLast()
     }
 
-    var integer = integer
+    var operand = operand
 
     if tokensCount == 1 && lastOperator == .subtraction {
       tokens.removeLast()
 
-      integer.negate()
+      operand = try -operand
     }
 
-    tokens.append(Operand.number(integer))
+    tokens.append(operand)
 
   case let lastOperand as Operand:
-    // TODO: If current operand is .number
-    //       and last operand is a .roll,
-    //       then combine current .number into last .roll and replace
 
-    // TODO: If current operand is a .roll
-    //       and last operand is a .roll
-    //       and current operand sides == last operand sides
-    //       then combine current .roll into last .roll and replace
+    switch lastOperand {
+    case .number:
 
-    // TODO: If current operand is a .roll
-    //       and last operand is a .roll
-    //       and current operand sides != last operand sides
-    //       then append addition operator, then append current .roll
+      switch operand {
+      case .number:
+        let nextOperand = try lastOperand.combined(operand)
 
-    // TODO: If current operand is .number
-    //       and last operand is a .number
-    //       then combine current .number into last .number and replace
+        tokens.removeLast()
+        tokens.append(nextOperand)
 
-    // TODO: If current operand is a .roll
-    //       and last operand is a .number
-    //       then append addition operator, then append current .roll
-    let nextOperand = try lastOperand.pushed(integer)
+      case .roll:
+        tokens.append(Operator.addition)
+        tokens.append(operand)
 
-    tokens.removeLast()
-    tokens.append(nextOperand)
+      case .rollNegativeSides:
+        tokens.append(Operator.addition)
+        tokens.append(operand)
+
+      case .rollPositiveSides:
+        tokens.append(Operator.addition)
+        tokens.append(operand)
+      }
+
+    case let .roll(_, sidesLast):
+
+      switch operand {
+      case .number:
+        let nextOperand = try lastOperand.combined(operand)
+
+        tokens.removeLast()
+        tokens.append(nextOperand)
+
+      case let .roll(_, sidesCurrent):
+        if sidesLast == sidesCurrent {
+          let nextOperand = try lastOperand.combined(operand)
+
+          tokens.removeLast()
+          tokens.append(nextOperand)
+        }
+        else {
+          tokens.append(Operator.addition)
+          tokens.append(operand)
+        }
+
+      case .rollNegativeSides:
+        if sidesLast <= 0 {
+          let nextOperand = try lastOperand.combined(operand)
+
+          tokens.removeLast()
+          tokens.append(nextOperand)
+        }
+        else {
+          tokens.append(Operator.addition)
+          tokens.append(operand)
+        }
+
+      case .rollPositiveSides:
+        if sidesLast >= 0 {
+          let nextOperand = try lastOperand.combined(operand)
+
+          tokens.removeLast()
+          tokens.append(nextOperand)
+        }
+        else {
+          tokens.append(Operator.addition)
+          tokens.append(operand)
+        }
+      }
+
+    case .rollNegativeSides:
+
+      switch operand {
+      case .number:
+        let nextOperand = try lastOperand.combined(operand)
+
+        tokens.removeLast()
+        tokens.append(nextOperand)
+
+      case let .roll(_, sidesCurrent):
+        if sidesCurrent <= 0 {
+          let nextOperand = try lastOperand.combined(operand)
+
+          tokens.removeLast()
+          tokens.append(nextOperand)
+        }
+        else {
+          tokens.append(Operator.addition)
+          tokens.append(operand)
+        }
+
+      case .rollNegativeSides:
+        let nextOperand = try lastOperand.combined(operand)
+
+        tokens.removeLast()
+        tokens.append(nextOperand)
+
+      case .rollPositiveSides:
+        tokens.append(Operator.addition)
+        tokens.append(operand)
+      }
+
+    case .rollPositiveSides:
+
+      switch operand {
+      case .number:
+        let nextOperand = try lastOperand.combined(operand)
+
+        tokens.removeLast()
+        tokens.append(nextOperand)
+
+      case let .roll(_, sidesCurrent):
+        if sidesCurrent >= 0 {
+          let nextOperand = try lastOperand.combined(operand)
+
+          tokens.removeLast()
+          tokens.append(nextOperand)
+        }
+        else {
+          tokens.append(Operator.addition)
+          tokens.append(operand)
+        }
+
+      case .rollNegativeSides:
+        tokens.append(Operator.addition)
+        tokens.append(operand)
+
+      case .rollPositiveSides:
+        let nextOperand = try lastOperand.combined(operand)
+
+        tokens.removeLast()
+        tokens.append(nextOperand)
+      }
+    }
 
   default:
     preconditionFailure()
