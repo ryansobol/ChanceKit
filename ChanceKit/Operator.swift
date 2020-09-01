@@ -46,16 +46,16 @@ extension Operator {
   func evaluate(_ operand1: Operand, _ operand2: Operand) throws -> Operand {
     switch self {
     case .addition:
-      return try operand1 + operand2
+      return try operand1.added(operand2)
 
     case .division:
-      return try operand1 / operand2
+      return try operand1.divided(operand2)
 
     case .multiplication:
-      return try operand1 * operand2
+      return try operand1.multiplied(operand2)
 
     case .subtraction:
-      return try operand1 - operand2
+      return try operand1.subtracted(operand2)
     }
   }
 }

@@ -1522,7 +1522,7 @@ extension OperandTests {
       let operand1 = fixture.operand1
       let operand2 = fixture.operand2
       let expected = fixture.expected
-      let actual = try! operand1 + operand2
+      let actual = try! operand1.added(operand2)
 
       XCTAssertEqual(expected, actual)
     }
@@ -1548,7 +1548,7 @@ extension OperandTests {
       let operand1 = fixture.operand1
       let operand2 = fixture.operand2
 
-      XCTAssertThrowsError(try operand1 + operand2) { error in
+      XCTAssertThrowsError(try operand1.added(operand2)) { error in
         XCTAssertEqual(expected, error as? ExpressionError)
       }
     }
@@ -1622,7 +1622,7 @@ extension OperandTests {
       let operand1 = fixture.operand1
       let operand2 = fixture.operand2
       let expected = fixture.expected
-      let actual = try! operand1 + operand2
+      let actual = try! operand1.added(operand2)
 
       XCTAssertEqual(expected, actual)
     }
@@ -1651,7 +1651,7 @@ extension OperandTests {
       let operand1 = fixture.operand1
       let operand2 = fixture.operand2
 
-      XCTAssertThrowsError(try operand1 + operand2) { error in
+      XCTAssertThrowsError(try operand1.added(operand2)) { error in
         XCTAssertEqual(expected, error as? ExpressionError)
       }
     }
@@ -1694,7 +1694,7 @@ extension OperandTests {
       let operand1 = fixture.operand1
       let operand2 = fixture.operand2
       let expected = fixture.expected
-      let actual = try! operand1 / operand2
+      let actual = try! operand1.divided(operand2)
 
       XCTAssertEqual(expected, actual)
     }
@@ -1724,7 +1724,7 @@ extension OperandTests {
       let operand1 = fixture.operand1
       let operand2 = fixture.operand2
 
-      XCTAssertThrowsError(try operand1 / operand2) { error in
+      XCTAssertThrowsError(try operand1.divided(operand2)) { error in
         XCTAssertEqual(expected, error as? ExpressionError)
       }
     }
@@ -1735,7 +1735,7 @@ extension OperandTests {
     let operand2 = Operand.constant(-1)
     let expected = ExpressionError.operationOverflow
 
-    XCTAssertThrowsError(try operand1 / operand2) { error in
+    XCTAssertThrowsError(try operand1.divided(operand2)) { error in
       XCTAssertEqual(expected, error as? ExpressionError)
     }
   }
@@ -1792,7 +1792,7 @@ extension OperandTests {
       let operand1 = fixture.operand1
       let operand2 = fixture.operand2
       let expected = fixture.expected
-      let actual = try! operand1 / operand2
+      let actual = try! operand1.divided(operand2)
 
       XCTAssertEqual(expected, actual)
     }
@@ -1822,7 +1822,7 @@ extension OperandTests {
       let operand1 = fixture.operand1
       let operand2 = fixture.operand2
 
-      XCTAssertThrowsError(try operand1 / operand2) { error in
+      XCTAssertThrowsError(try operand1.divided(operand2)) { error in
         XCTAssertEqual(expected, error as? ExpressionError)
       }
     }
@@ -1847,7 +1847,7 @@ extension OperandTests {
       let operand1 = fixture.operand1
       let operand2 = fixture.operand2
 
-      XCTAssertThrowsError(try operand1 / operand2) { error in
+      XCTAssertThrowsError(try operand1.divided(operand2)) { error in
         XCTAssertEqual(expected, error as? ExpressionError)
       }
     }
@@ -1899,7 +1899,7 @@ extension OperandTests {
       let operand1 = fixture.operand1
       let operand2 = fixture.operand2
       let expected = fixture.expected
-      let actual = try! operand1 * operand2
+      let actual = try! operand1.multiplied(operand2)
 
       XCTAssertEqual(expected, actual)
     }
@@ -1932,7 +1932,7 @@ extension OperandTests {
       let operand1 = fixture.operand1
       let operand2 = fixture.operand2
 
-      XCTAssertThrowsError(try operand1 * operand2) { error in
+      XCTAssertThrowsError(try operand1.multiplied(operand2)) { error in
         XCTAssertEqual(expected, error as? ExpressionError)
       }
     }
@@ -2009,7 +2009,7 @@ extension OperandTests {
       let operand1 = fixture.operand1
       let operand2 = fixture.operand2
       let expected = fixture.expected
-      let actual = try! operand1 * operand2
+      let actual = try! operand1.multiplied(operand2)
 
       XCTAssertEqual(expected, actual)
     }
@@ -2042,7 +2042,7 @@ extension OperandTests {
       let operand1 = fixture.operand1
       let operand2 = fixture.operand2
 
-      XCTAssertThrowsError(try operand1 * operand2) { error in
+      XCTAssertThrowsError(try operand1.multiplied(operand2)) { error in
         XCTAssertEqual(expected, error as? ExpressionError)
       }
     }
@@ -2096,7 +2096,7 @@ extension OperandTests {
       let operand1 = fixture.operand1
       let operand2 = fixture.operand2
       let expected = fixture.expected
-      let actual = try! operand1 - operand2
+      let actual = try! operand1.subtracted(operand2)
 
       XCTAssertEqual(expected, actual)
     }
@@ -2123,7 +2123,7 @@ extension OperandTests {
       let operand1 = fixture.operand1
       let operand2 = fixture.operand2
 
-      XCTAssertThrowsError(try operand1 - operand2) { error in
+      XCTAssertThrowsError(try operand1.subtracted(operand2)) { error in
         XCTAssertEqual(expected, error as? ExpressionError)
       }
     }
@@ -2202,7 +2202,7 @@ extension OperandTests {
       let operand1 = fixture.operand1
       let operand2 = fixture.operand2
       let expected = fixture.expected
-      let actual = try! operand1 - operand2
+      let actual = try! operand1.subtracted(operand2)
 
       XCTAssertEqual(expected, actual)
     }
@@ -2229,7 +2229,7 @@ extension OperandTests {
       let operand1 = fixture.operand1
       let operand2 = fixture.operand2
 
-      XCTAssertThrowsError(try operand1 - operand2) { error in
+      XCTAssertThrowsError(try operand1.subtracted(operand2)) { error in
         XCTAssertEqual(expected, error as? ExpressionError)
       }
     }
@@ -2254,7 +2254,7 @@ extension OperandTests {
     for fixture in fixtures {
       let operand = fixture.operand
       let expected = fixture.expected
-      let actual = try! -operand
+      let actual = try! operand.negated()
 
       XCTAssertEqual(expected, actual)
     }
@@ -2268,7 +2268,7 @@ extension OperandTests {
     let expected = ExpressionError.operationOverflow
 
     for operand in operands {
-      XCTAssertThrowsError(try -operand) { error in
+      XCTAssertThrowsError(try operand.negated()) { error in
         XCTAssertEqual(expected, error as? ExpressionError)
       }
     }
@@ -2315,7 +2315,7 @@ extension OperandTests {
     for fixture in fixtures {
       let operand = fixture.operand
       let expected = fixture.expected
-      let actual = try! -operand
+      let actual = try! operand.negated()
 
       XCTAssertEqual(expected, actual)
     }
@@ -2329,7 +2329,7 @@ extension OperandTests {
     let expected = ExpressionError.operationOverflow
 
     for operand in operands {
-      XCTAssertThrowsError(try -operand) { error in
+      XCTAssertThrowsError(try operand.negated()) { error in
         XCTAssertEqual(expected, error as? ExpressionError)
       }
     }

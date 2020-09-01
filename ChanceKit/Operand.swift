@@ -345,10 +345,10 @@ extension Operand {
 // MARK: - Operation
 
 extension Operand {
-  static func + (left: Operand, right: Operand) throws -> Operand {
-    let leftValue = try left.value()
-    let rightValue = try right.value()
-    let (result, didOverflow) = leftValue.addingReportingOverflow(rightValue)
+  func added(_ other: Operand) throws -> Operand {
+    let selfValue = try self.value()
+    let otherValue = try other.value()
+    let (result, didOverflow) = selfValue.addingReportingOverflow(otherValue)
 
     if didOverflow {
       throw ExpressionError.operationOverflow
@@ -357,15 +357,15 @@ extension Operand {
     return Operand.constant(result)
   }
 
-  static func / (left: Operand, right: Operand) throws -> Operand {
-    let rightValue = try right.value()
+  func divided(_ other: Operand) throws -> Operand {
+    let otherValue = try other.value()
 
-    if rightValue == 0 {
+    if otherValue == 0 {
       throw ExpressionError.divisionByZero
     }
 
-    let leftValue = try left.value()
-    let (result, didOverflow) = leftValue.dividedReportingOverflow(by: rightValue)
+    let selfValue = try self.value()
+    let (result, didOverflow) = selfValue.dividedReportingOverflow(by: otherValue)
 
     if didOverflow {
       throw ExpressionError.operationOverflow
@@ -374,10 +374,10 @@ extension Operand {
     return Operand.constant(result)
   }
 
-  static func * (left: Operand, right: Operand) throws -> Operand {
-    let leftValue = try left.value()
-    let rightValue = try right.value()
-    let (result, didOverflow) = leftValue.multipliedReportingOverflow(by: rightValue)
+  func multiplied(_ other: Operand) throws -> Operand {
+    let selfValue = try self.value()
+    let otherValue = try other.value()
+    let (result, didOverflow) = selfValue.multipliedReportingOverflow(by: otherValue)
 
     if didOverflow {
       throw ExpressionError.operationOverflow
@@ -386,10 +386,10 @@ extension Operand {
     return Operand.constant(result)
   }
 
-  static func - (left: Operand, right: Operand) throws -> Operand {
-    let leftValue = try left.value()
-    let rightValue = try right.value()
-    let (result, didOverflow) = leftValue.subtractingReportingOverflow(rightValue)
+  func subtracted(_ other: Operand) throws -> Operand {
+    let selfValue = try self.value()
+    let otherValue = try other.value()
+    let (result, didOverflow) = selfValue.subtractingReportingOverflow(otherValue)
 
     if didOverflow {
       throw ExpressionError.operationOverflow
@@ -398,8 +398,8 @@ extension Operand {
     return Operand.constant(result)
   }
 
-  static prefix func - (operand: Operand) throws -> Operand {
-    switch operand {
+  func negated() throws -> Operand {
+    switch self {
     case let .constant(term):
       // Because -Int.min > Int.max
       if term == Int.min {

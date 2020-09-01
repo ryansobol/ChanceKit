@@ -58,7 +58,7 @@ func lexed(operand: Operand, into: [Tokenable]) throws -> [Tokenable] {
     if tokensCount == 1 && lastOperator == .subtraction {
       tokens.removeLast()
 
-      operand = try -operand
+      operand = try operand.negated()
     }
 
     tokens.append(operand)
