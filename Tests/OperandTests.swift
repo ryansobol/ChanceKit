@@ -194,50 +194,6 @@ extension OperandTests {
 // MARK: - Inclusion
 
 extension OperandTests {
-  func testPushedToNumber() {
-    typealias Fixture = (
-      operand: Operand,
-      suffix: Int,
-      expected: Operand
-    )
-
-    let fixtures: [Fixture] = [
-      (operand: .number(1), suffix: 0, expected: .number(10)),
-      (operand: .number(21), suffix: 0, expected: .number(210)),
-
-      (operand: .number(2), suffix: 1, expected: .number(21)),
-      (operand: .number(32), suffix: 1, expected: .number(321)),
-
-      (operand: .number(8), suffix: 9, expected: .number(89)),
-      (operand: .number(78), suffix: 9, expected: .number(789)),
-
-      (operand: .number(0), suffix: Int.max, expected: .number(Int.max)),
-      (operand: .number(9), suffix: 223372036854775807, expected: .number(Int.max)),
-      (operand: .number(922337203685477580), suffix: 7, expected: .number(Int.max)),
-
-      (operand: .number(-1), suffix: 0, expected: .number(-10)),
-      (operand: .number(-21), suffix: 0, expected: .number(-210)),
-
-      (operand: .number(-2), suffix: 1, expected: .number(-21)),
-      (operand: .number(-32), suffix: 1, expected: .number(-321)),
-
-      (operand: .number(-8), suffix: 9, expected: .number(-89)),
-      (operand: .number(-78), suffix: 9, expected: .number(-789)),
-
-      (operand: .number(-9), suffix: 223372036854775808, expected: .number(Int.min)),
-      (operand: .number(-922337203685477580), suffix: 8, expected: .number(Int.min)),
-    ]
-
-    for fixture in fixtures {
-      let operand = fixture.operand
-      let suffix = fixture.suffix
-      let expected = fixture.expected
-      let actual = try! operand.pushed(suffix)
-
-      XCTAssertEqual(expected, actual)
-    }
-  }
-
   func testCombinedNumberIntoNumber() {
     typealias Fixture = (
       operand1: Operand,
@@ -300,34 +256,6 @@ extension OperandTests {
     }
   }
 
-  func testPushedToNumberWithInvalidLexeme() {
-    typealias Fixture = (
-      operand: Operand,
-      suffix: Int
-    )
-
-    let fixtures: [Fixture] = [
-      (operand: .number(1), suffix: -1),
-      (operand: .number(1), suffix: Int.min),
-
-      (operand: .number(922337203685477580), suffix: 8),
-      (operand: .number(Int.max), suffix: 0),
-
-      (operand: .number(-922337203685477580), suffix: 9),
-      (operand: .number(Int.min), suffix: 0),
-    ]
-
-    for fixture in fixtures {
-      let operand = fixture.operand
-      let suffix = fixture.suffix
-      let expected = ExpressionError.invalidLexeme(String(suffix))
-
-      XCTAssertThrowsError(try operand.pushed(suffix)) { error in
-        XCTAssertEqual(expected, error as? ExpressionError)
-      }
-    }
-  }
-
   func testCombinedNumberIntoNumberWithInvalidCombinationOperands() {
     typealias Fixture = (
       operand1: Operand,
@@ -379,91 +307,6 @@ extension OperandTests {
       XCTAssertThrowsError(try operand1.combined(operand2)) { error in
         XCTAssertEqual(expected, error as? ExpressionError)
       }
-    }
-  }
-
-  func testPushedToRoll() {
-    typealias Fixture = (
-      operand: Operand,
-      suffix: Int,
-      expected: Operand
-    )
-
-    let fixtures: [Fixture] = [
-      (operand: .rollPositiveSides(0), suffix: 0, expected: .roll(0, 0)),
-      (operand: .roll(0, 1), suffix: 0, expected: .roll(0, 10)),
-      (operand: .roll(0, 21), suffix: 0, expected: .roll(0, 210)),
-
-      (operand: .rollPositiveSides(1), suffix: 1, expected: .roll(1, 1)),
-      (operand: .roll(1, 2), suffix: 1, expected: .roll(1, 21)),
-      (operand: .roll(1, 32), suffix: 1, expected: .roll(1, 321)),
-
-      (operand: .rollPositiveSides(9), suffix: 9, expected: .roll(9, 9)),
-      (operand: .roll(9, 8), suffix: 9, expected: .roll(9, 89)),
-      (operand: .roll(9, 78), suffix: 9, expected: .roll(9, 789)),
-
-      (operand: .rollPositiveSides(1), suffix: Int.max, expected: .roll(1, Int.max)),
-      (operand: .roll(1, 0), suffix: Int.max, expected: .roll(1, Int.max)),
-      (operand: .roll(1, 9), suffix: 223372036854775807, expected: .roll(1, Int.max)),
-      (operand: .roll(1, 922337203685477580), suffix: 7, expected: .roll(1, Int.max)),
-
-      (operand: .rollNegativeSides(0), suffix: 0, expected: .roll(0, -0)),
-      (operand: .roll(0, -1), suffix: 0, expected: .roll(0, -10)),
-      (operand: .roll(0, -21), suffix: 0, expected: .roll(0, -210)),
-
-      (operand: .rollNegativeSides(1), suffix: 1, expected: .roll(1, -1)),
-      (operand: .roll(1, -2), suffix: 1, expected: .roll(1, -21)),
-      (operand: .roll(1, -32), suffix: 1, expected: .roll(1, -321)),
-
-      (operand: .rollNegativeSides(9), suffix: 9, expected: .roll(9, -9)),
-      (operand: .roll(9, -8), suffix: 9, expected: .roll(9, -89)),
-      (operand: .roll(9, -78), suffix: 9, expected: .roll(9, -789)),
-
-      (operand: .rollNegativeSides(1), suffix: Int.max, expected: .roll(1, Int.min + 1)),
-      (operand: .roll(1, -9), suffix: 223372036854775808, expected: .roll(1, Int.min)),
-      (operand: .roll(1, -922337203685477580), suffix: 8, expected: .roll(1, Int.min)),
-
-      (operand: .rollPositiveSides(-0), suffix: 0, expected: .roll(-0, 0)),
-      (operand: .roll(-0, 1), suffix: 0, expected: .roll(-0, 10)),
-      (operand: .roll(-0, 21), suffix: 0, expected: .roll(-0, 210)),
-
-      (operand: .rollPositiveSides(-1), suffix: 1, expected: .roll(-1, 1)),
-      (operand: .roll(-1, 2), suffix: 1, expected: .roll(-1, 21)),
-      (operand: .roll(-1, 32), suffix: 1, expected: .roll(-1, 321)),
-
-      (operand: .rollPositiveSides(-9), suffix: 9, expected: .roll(-9, 9)),
-      (operand: .roll(-9, 8), suffix: 9, expected: .roll(-9, 89)),
-      (operand: .roll(-9, 78), suffix: 9, expected: .roll(-9, 789)),
-
-      (operand: .rollPositiveSides(-1), suffix: Int.max, expected: .roll(-1, Int.max)),
-      (operand: .roll(-1, 0), suffix: Int.max, expected: .roll(-1, Int.max)),
-      (operand: .roll(-1, 9), suffix: 223372036854775807, expected: .roll(-1, Int.max)),
-      (operand: .roll(-1, 922337203685477580), suffix: 7, expected: .roll(-1, Int.max)),
-
-      (operand: .rollNegativeSides(-0), suffix: 0, expected: .roll(-0, -0)),
-      (operand: .roll(-0, -1), suffix: 0, expected: .roll(-0, -10)),
-      (operand: .roll(-0, -21), suffix: 0, expected: .roll(-0, -210)),
-
-      (operand: .rollNegativeSides(-1), suffix: 1, expected: .roll(-1, -1)),
-      (operand: .roll(-1, -2), suffix: 1, expected: .roll(-1, -21)),
-      (operand: .roll(-1, -32), suffix: 1, expected: .roll(-1, -321)),
-
-      (operand: .rollNegativeSides(-9), suffix: 9, expected: .roll(-9, -9)),
-      (operand: .roll(-9, -8), suffix: 9, expected: .roll(-9, -89)),
-      (operand: .roll(-9, -78), suffix: 9, expected: .roll(-9, -789)),
-
-      (operand: .rollNegativeSides(-1), suffix: Int.max, expected: .roll(-1, Int.min + 1)),
-      (operand: .roll(-1, -9), suffix: 223372036854775808, expected: .roll(-1, Int.min)),
-      (operand: .roll(-1, -922337203685477580), suffix: 8, expected: .roll(-1, Int.min)),
-    ]
-
-    for fixture in fixtures {
-      let operand = fixture.operand
-      let suffix = fixture.suffix
-      let expected = fixture.expected
-      let actual = try! operand.pushed(suffix)
-
-      XCTAssertEqual(expected, actual)
     }
   }
 
@@ -607,34 +450,6 @@ extension OperandTests {
       let actual = try! operand1.combined(operand2)
 
       XCTAssertEqual(expected, actual)
-    }
-  }
-
-  func testPushedToRollWithInvalidLexeme() {
-    typealias Fixture = (
-      operand: Operand,
-      suffix: Int
-    )
-
-    let fixtures: [Fixture] = [
-      (operand: .roll(2, 2), suffix: -1),
-      (operand: .roll(2, 2), suffix: Int.min),
-
-      (operand: .roll(1, 922337203685477580), suffix: 8),
-      (operand: .roll(1, Int.max), suffix: 0),
-
-      (operand: .roll(1, -922337203685477580), suffix: 9),
-      (operand: .roll(1, Int.min), suffix: 0),
-    ]
-
-    for fixture in fixtures {
-      let operand = fixture.operand
-      let suffix = fixture.suffix
-      let expected = ExpressionError.invalidLexeme(String(suffix))
-
-      XCTAssertThrowsError(try operand.pushed(suffix)) { error in
-        XCTAssertEqual(expected, error as? ExpressionError)
-      }
     }
   }
 

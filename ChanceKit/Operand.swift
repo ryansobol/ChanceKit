@@ -73,36 +73,6 @@ extension Operand: Tokenable {
 // MARK: - Inclusion
 
 extension Operand {
-  func pushed(_ suffix: Int) throws -> Operand {
-    let lexeme = String(suffix)
-
-    if suffix < 0 {
-      throw ExpressionError.invalidLexeme(lexeme)
-    }
-
-    switch self {
-    case let .number(value):
-      guard let nextValue = Int(String(value) + lexeme) else {
-        throw ExpressionError.invalidLexeme(lexeme)
-      }
-
-      return .number(nextValue)
-
-    case let .roll(times, sides):
-      guard let nextSides = Int(String(sides) + lexeme) else {
-        throw ExpressionError.invalidLexeme(lexeme)
-      }
-
-      return .roll(times, nextSides)
-
-    case let .rollNegativeSides(times):
-      return .roll(times, -suffix)
-
-    case let .rollPositiveSides(times):
-      return .roll(times, suffix)
-    }
-  }
-
   func combined(_ other: Operand) throws -> Operand {
     let lexemeSelf = String(describing: self)
     let lexemeOther = String(describing: other)
