@@ -75,15 +75,7 @@ func lexed(operand: Operand, into: [Tokenable]) throws -> [Tokenable] {
         tokens.removeLast()
         tokens.append(nextOperand)
 
-      case .roll:
-        tokens.append(Operator.addition)
-        tokens.append(operand)
-
-      case .rollNegativeSides:
-        tokens.append(Operator.addition)
-        tokens.append(operand)
-
-      case .rollPositiveSides:
+      default:
         tokens.append(Operator.addition)
         tokens.append(operand)
       }
@@ -109,29 +101,9 @@ func lexed(operand: Operand, into: [Tokenable]) throws -> [Tokenable] {
           tokens.append(operand)
         }
 
-      case .rollNegativeSides:
-        if sidesLast <= 0 {
-          let nextOperand = try lastOperand.combined(operand)
-
-          tokens.removeLast()
-          tokens.append(nextOperand)
-        }
-        else {
-          tokens.append(Operator.addition)
-          tokens.append(operand)
-        }
-
-      case .rollPositiveSides:
-        if sidesLast >= 0 {
-          let nextOperand = try lastOperand.combined(operand)
-
-          tokens.removeLast()
-          tokens.append(nextOperand)
-        }
-        else {
-          tokens.append(Operator.addition)
-          tokens.append(operand)
-        }
+      default:
+        tokens.append(Operator.addition)
+        tokens.append(operand)
       }
 
     case .rollNegativeSides:
@@ -143,25 +115,13 @@ func lexed(operand: Operand, into: [Tokenable]) throws -> [Tokenable] {
         tokens.removeLast()
         tokens.append(nextOperand)
 
-      case let .roll(_, sidesCurrent):
-        if sidesCurrent <= 0 {
-          let nextOperand = try lastOperand.combined(operand)
-
-          tokens.removeLast()
-          tokens.append(nextOperand)
-        }
-        else {
-          tokens.append(Operator.addition)
-          tokens.append(operand)
-        }
-
       case .rollNegativeSides:
         let nextOperand = try lastOperand.combined(operand)
 
         tokens.removeLast()
         tokens.append(nextOperand)
 
-      case .rollPositiveSides:
+      default:
         tokens.append(Operator.addition)
         tokens.append(operand)
       }
@@ -175,27 +135,15 @@ func lexed(operand: Operand, into: [Tokenable]) throws -> [Tokenable] {
         tokens.removeLast()
         tokens.append(nextOperand)
 
-      case let .roll(_, sidesCurrent):
-        if sidesCurrent >= 0 {
-          let nextOperand = try lastOperand.combined(operand)
-
-          tokens.removeLast()
-          tokens.append(nextOperand)
-        }
-        else {
-          tokens.append(Operator.addition)
-          tokens.append(operand)
-        }
-
-      case .rollNegativeSides:
-        tokens.append(Operator.addition)
-        tokens.append(operand)
-
       case .rollPositiveSides:
         let nextOperand = try lastOperand.combined(operand)
 
         tokens.removeLast()
         tokens.append(nextOperand)
+
+      default:
+        tokens.append(Operator.addition)
+        tokens.append(operand)
       }
     }
 

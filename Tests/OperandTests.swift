@@ -6,7 +6,7 @@ class OperandTests: XCTestCase {}
 // MARK - Initialization
 
 extension OperandTests {
-  func testInitWithValidRawLexeme() {
+  func testInitConstantWithValidRawLexeme() {
     typealias Fixture = (
       rawLexeme: String,
       expected: Operand
@@ -16,62 +16,103 @@ extension OperandTests {
       (rawLexeme: "0", expected: .constant(0)),
       (rawLexeme: "1", expected: .constant(1)),
       (rawLexeme: "9", expected: .constant(9)),
-
       (rawLexeme: String(Int.max), expected: .constant(Int.max)),
 
       (rawLexeme: "-0", expected: .constant(-0)),
       (rawLexeme: "-1", expected: .constant(-1)),
       (rawLexeme: "-9", expected: .constant(-9)),
-
       (rawLexeme: String(Int.min), expected: .constant(Int.min)),
+    ]
 
+    for fixture in fixtures {
+      let rawLexeme = fixture.rawLexeme
+      let expected = fixture.expected
+      let actual = Operand(rawLexeme: rawLexeme)
+
+      XCTAssertEqual(expected, actual)
+    }
+  }
+
+  func testInitRollWithValidRawLexeme() {
+    typealias Fixture = (
+      rawLexeme: String,
+      expected: Operand
+    )
+
+    let fixtures: [Fixture] = [
       (rawLexeme: "0d0", expected: .roll(0, 0)),
       (rawLexeme: "1d1", expected: .roll(1, 1)),
       (rawLexeme: "9d9", expected: .roll(9, 9)),
-
       (rawLexeme: "\(Int.max)d\(Int.max)", expected: .roll(Int.max, Int.max)),
 
       (rawLexeme: "0d-0", expected: .roll(0, -0)),
       (rawLexeme: "1d-1", expected: .roll(1, -1)),
       (rawLexeme: "9d-9", expected: .roll(9, -9)),
-
       (rawLexeme: "\(Int.max)d\(Int.min)", expected: .roll(Int.max, Int.min)),
 
       (rawLexeme: "-0d0", expected: .roll(-0, 0)),
       (rawLexeme: "-1d1", expected: .roll(-1, 1)),
       (rawLexeme: "-9d9", expected: .roll(-9, 9)),
-
       (rawLexeme: "\(Int.min)d\(Int.max)", expected: .roll(Int.min, Int.max)),
 
       (rawLexeme: "-0d-0", expected: .roll(-0, -0)),
       (rawLexeme: "-1d-1", expected: .roll(-1, -1)),
       (rawLexeme: "-9d-9", expected: .roll(-9, -9)),
-
       (rawLexeme: "\(Int.min)d\(Int.min)", expected: .roll(Int.min, Int.min)),
+    ]
 
-      (rawLexeme: "0d", expected: .rollPositiveSides(0)),
-      (rawLexeme: "1d", expected: .rollPositiveSides(1)),
-      (rawLexeme: "9d", expected: .rollPositiveSides(9)),
+    for fixture in fixtures {
+      let rawLexeme = fixture.rawLexeme
+      let expected = fixture.expected
+      let actual = Operand(rawLexeme: rawLexeme)
 
-      (rawLexeme: "\(Int.max)d", expected: .rollPositiveSides(Int.max)),
+      XCTAssertEqual(expected, actual)
+    }
+  }
 
-      (rawLexeme: "-0d", expected: .rollPositiveSides(-0)),
-      (rawLexeme: "-1d", expected: .rollPositiveSides(-1)),
-      (rawLexeme: "-9d", expected: .rollPositiveSides(-9)),
+  func testInitRollNegativeSidesWithValidRawLexeme() {
+    typealias Fixture = (
+      rawLexeme: String,
+      expected: Operand
+    )
 
-      (rawLexeme: "\(Int.min)d", expected: .rollPositiveSides(Int.min)),
-
+    let fixtures: [Fixture] = [
       (rawLexeme: "0d-", expected: .rollNegativeSides(0)),
       (rawLexeme: "1d-", expected: .rollNegativeSides(1)),
       (rawLexeme: "9d-", expected: .rollNegativeSides(9)),
-
       (rawLexeme: "\(Int.max)d-", expected: .rollNegativeSides(Int.max)),
 
       (rawLexeme: "-0d-", expected: .rollNegativeSides(-0)),
       (rawLexeme: "-1d-", expected: .rollNegativeSides(-1)),
       (rawLexeme: "-9d-", expected: .rollNegativeSides(-9)),
-
       (rawLexeme: "\(Int.min)d-", expected: .rollNegativeSides(Int.min)),
+    ]
+
+    for fixture in fixtures {
+      let rawLexeme = fixture.rawLexeme
+      let expected = fixture.expected
+      let actual = Operand(rawLexeme: rawLexeme)
+
+      XCTAssertEqual(expected, actual)
+    }
+  }
+
+  func testInitRollPositiveSidesWithValidRawLexeme() {
+    typealias Fixture = (
+      rawLexeme: String,
+      expected: Operand
+    )
+
+    let fixtures: [Fixture] = [
+      (rawLexeme: "0d", expected: .rollPositiveSides(0)),
+      (rawLexeme: "1d", expected: .rollPositiveSides(1)),
+      (rawLexeme: "9d", expected: .rollPositiveSides(9)),
+      (rawLexeme: "\(Int.max)d", expected: .rollPositiveSides(Int.max)),
+
+      (rawLexeme: "-0d", expected: .rollPositiveSides(-0)),
+      (rawLexeme: "-1d", expected: .rollPositiveSides(-1)),
+      (rawLexeme: "-9d", expected: .rollPositiveSides(-9)),
+      (rawLexeme: "\(Int.min)d", expected: .rollPositiveSides(Int.min)),
     ]
 
     for fixture in fixtures {
@@ -194,7 +235,9 @@ extension OperandTests {
 // MARK: - Inclusion
 
 extension OperandTests {
-  func testCombinedNumberIntoNumber() {
+  // MARK: - Constant
+
+  func testCombinedConstantWithConstant() {
     typealias Fixture = (
       operand1: Operand,
       operand2: Operand,
@@ -256,7 +299,7 @@ extension OperandTests {
     }
   }
 
-  func testCombinedNumberIntoNumberWithInvalidCombinationOperands() {
+  func testCombinedConstantWithInvalidConstant() {
     typealias Fixture = (
       operand1: Operand,
       operand2: Operand
@@ -310,7 +353,249 @@ extension OperandTests {
     }
   }
 
-  func testCombinedNumberIntoRoll() {
+  func testCombinedConstantWithRoll() {
+    typealias Fixture = (
+      operand1: Operand,
+      operand2: Operand
+    )
+
+    let fixtures: [Fixture] = [
+      (operand1: .constant(0), operand2: .roll(0, 0)),
+      (operand1: .constant(0), operand2: .roll(0, 1)),
+      (operand1: .constant(0), operand2: .roll(0, 21)),
+
+      (operand1: .constant(1), operand2: .roll(1, 0)),
+      (operand1: .constant(1), operand2: .roll(1, 2)),
+      (operand1: .constant(1), operand2: .roll(1, 32)),
+
+      (operand1: .constant(9), operand2: .roll(9, 0)),
+      (operand1: .constant(9), operand2: .roll(9, 8)),
+      (operand1: .constant(9), operand2: .roll(9, 78)),
+
+      (operand1: .constant(Int.max), operand2: .roll(1, 0)),
+      (operand1: .constant(922337203685477580), operand2: .roll(1, 7)),
+      (operand1: .constant(9), operand2: .roll(1, 223372036854775807)),
+
+      (operand1: .constant(0), operand2: .roll(0, -0)),
+      (operand1: .constant(0), operand2: .roll(0, -1)),
+      (operand1: .constant(0), operand2: .roll(0, -21)),
+
+      (operand1: .constant(1), operand2: .roll(1, -0)),
+      (operand1: .constant(1), operand2: .roll(1, -2)),
+      (operand1: .constant(1), operand2: .roll(1, -32)),
+
+      (operand1: .constant(9), operand2: .roll(9, -0)),
+      (operand1: .constant(9), operand2: .roll(9, -8)),
+      (operand1: .constant(9), operand2: .roll(9, -78)),
+
+      (operand1: .constant(Int.max), operand2: .roll(1, -0)),
+      (operand1: .constant(922337203685477580), operand2: .roll(1, -7)),
+      (operand1: .constant(9), operand2: .roll(1, -223372036854775807)),
+
+      (operand1: .constant(0), operand2: .roll(-0, 0)),
+      (operand1: .constant(0), operand2: .roll(-0, 1)),
+      (operand1: .constant(0), operand2: .roll(-0, 21)),
+
+      (operand1: .constant(1), operand2: .roll(-1, 0)),
+      (operand1: .constant(1), operand2: .roll(-1, 2)),
+      (operand1: .constant(1), operand2: .roll(-1, 32)),
+
+      (operand1: .constant(9), operand2: .roll(-9, 0)),
+      (operand1: .constant(9), operand2: .roll(-9, 8)),
+      (operand1: .constant(9), operand2: .roll(-9, 78)),
+
+      (operand1: .constant(Int.max), operand2: .roll(-1, 0)),
+      (operand1: .constant(922337203685477580), operand2: .roll(-1, 7)),
+      (operand1: .constant(9), operand2: .roll(-1, 223372036854775807)),
+
+      (operand1: .constant(0), operand2: .roll(-0, -0)),
+      (operand1: .constant(0), operand2: .roll(-0, -1)),
+      (operand1: .constant(0), operand2: .roll(-0, -21)),
+
+      (operand1: .constant(1), operand2: .roll(-1, -0)),
+      (operand1: .constant(1), operand2: .roll(-1, -2)),
+      (operand1: .constant(1), operand2: .roll(-1, -32)),
+
+      (operand1: .constant(9), operand2: .roll(-9, -0)),
+      (operand1: .constant(9), operand2: .roll(-9, -8)),
+      (operand1: .constant(9), operand2: .roll(-9, -78)),
+
+      (operand1: .constant(Int.max), operand2: .roll(-1, -0)),
+      (operand1: .constant(922337203685477580), operand2: .roll(-1, -7)),
+      (operand1: .constant(9), operand2: .roll(-1, -223372036854775807)),
+
+      (operand1: .constant(-0), operand2: .roll(0, 0)),
+      (operand1: .constant(-0), operand2: .roll(0, 1)),
+      (operand1: .constant(-0), operand2: .roll(0, 21)),
+
+      (operand1: .constant(-1), operand2: .roll(1, 0)),
+      (operand1: .constant(-1), operand2: .roll(1, 2)),
+      (operand1: .constant(-1), operand2: .roll(1, 32)),
+
+      (operand1: .constant(-9), operand2: .roll(9, 0)),
+      (operand1: .constant(-9), operand2: .roll(9, 8)),
+      (operand1: .constant(-9), operand2: .roll(9, 78)),
+
+      (operand1: .constant(Int.min), operand2: .roll(1, 0)),
+      (operand1: .constant(-922337203685477580), operand2: .roll(1, 8)),
+      (operand1: .constant(-9), operand2: .roll(1, 223372036854775808)),
+
+      (operand1: .constant(0), operand2: .roll(0, -0)),
+      (operand1: .constant(0), operand2: .roll(0, -1)),
+      (operand1: .constant(0), operand2: .roll(0, -21)),
+
+      (operand1: .constant(-1), operand2: .roll(1, -0)),
+      (operand1: .constant(-1), operand2: .roll(1, -2)),
+      (operand1: .constant(-1), operand2: .roll(1, -32)),
+
+      (operand1: .constant(-9), operand2: .roll(9, -0)),
+      (operand1: .constant(-9), operand2: .roll(9, -8)),
+      (operand1: .constant(-9), operand2: .roll(9, -78)),
+
+      (operand1: .constant(Int.min), operand2: .roll(1, -0)),
+      (operand1: .constant(-922337203685477580), operand2: .roll(1, -8)),
+      (operand1: .constant(-9), operand2: .roll(1, -223372036854775808)),
+
+      (operand1: .constant(-0), operand2: .roll(-0, 0)),
+      (operand1: .constant(-0), operand2: .roll(-0, 1)),
+      (operand1: .constant(-0), operand2: .roll(-0, 21)),
+
+      (operand1: .constant(-1), operand2: .roll(-1, 0)),
+      (operand1: .constant(-1), operand2: .roll(-1, 2)),
+      (operand1: .constant(-1), operand2: .roll(-1, 32)),
+
+      (operand1: .constant(-9), operand2: .roll(-9, 0)),
+      (operand1: .constant(-9), operand2: .roll(-9, 8)),
+      (operand1: .constant(-9), operand2: .roll(-9, 78)),
+
+      (operand1: .constant(Int.min), operand2: .roll(-1, 0)),
+      (operand1: .constant(-92337203685477580), operand2: .roll(-1, 8)),
+      (operand1: .constant(-9), operand2: .roll(-1, 223372036854775808)),
+
+      (operand1: .constant(0), operand2: .roll(-0, -0)),
+      (operand1: .constant(0), operand2: .roll(-0, -1)),
+      (operand1: .constant(0), operand2: .roll(-0, -21)),
+
+      (operand1: .constant(-1), operand2: .roll(-1, -0)),
+      (operand1: .constant(-1), operand2: .roll(-1, -2)),
+      (operand1: .constant(-1), operand2: .roll(-1, -32)),
+
+      (operand1: .constant(-9), operand2: .roll(-9, -0)),
+      (operand1: .constant(-9), operand2: .roll(-9, -8)),
+      (operand1: .constant(-9), operand2: .roll(-9, -78)),
+
+      (operand1: .constant(Int.min), operand2: .roll(-1, -0)),
+      (operand1: .constant(-922337203685477580), operand2: .roll(-1, -8)),
+      (operand1: .constant(-9), operand2: .roll(-1, -223372036854775808)),
+
+      (operand1: .constant(9), operand2: .roll(1, 223372036854775808)),
+      (operand1: .constant(0), operand2: .roll(1, Int.max)),
+
+      (operand1: .constant(-9), operand2: .roll(1, -223372036854775809)),
+      (operand1: .constant(-0), operand2: .roll(1, Int.min)),
+    ]
+
+    for fixture in fixtures {
+      let operand1 = fixture.operand1
+      let operand2 = fixture.operand2
+      let expected = ExpressionError.invalidCombinationOperands(
+        String(describing: operand1),
+        String(describing: operand2)
+      )
+
+      XCTAssertThrowsError(try operand1.combined(operand2)) { error in
+        XCTAssertEqual(expected, error as? ExpressionError)
+      }
+    }
+  }
+
+  func testCombinedConstantWithRollNegativeSides() {
+    typealias Fixture = (
+      operand1: Operand,
+      operand2: Operand
+    )
+
+    let fixtures: [Fixture] = [
+      (operand1: .constant(0), operand2: .rollNegativeSides(0)),
+      (operand1: .constant(1), operand2: .rollNegativeSides(1)),
+      (operand1: .constant(9), operand2: .rollNegativeSides(9)),
+      (operand1: .constant(Int.max), operand2: .rollNegativeSides(1)),
+
+      (operand1: .constant(0), operand2: .rollNegativeSides(-0)),
+      (operand1: .constant(1), operand2: .rollNegativeSides(-1)),
+      (operand1: .constant(9), operand2: .rollNegativeSides(-9)),
+      (operand1: .constant(Int.max), operand2: .rollNegativeSides(-1)),
+
+      (operand1: .constant(-0), operand2: .rollNegativeSides(0)),
+      (operand1: .constant(-1), operand2: .rollNegativeSides(1)),
+      (operand1: .constant(-9), operand2: .rollNegativeSides(9)),
+      (operand1: .constant(-Int.max), operand2: .rollNegativeSides(1)),
+
+      (operand1: .constant(-0), operand2: .rollNegativeSides(-0)),
+      (operand1: .constant(-1), operand2: .rollNegativeSides(-1)),
+      (operand1: .constant(-9), operand2: .rollNegativeSides(-9)),
+      (operand1: .constant(-Int.max), operand2: .rollNegativeSides(-1)),
+    ]
+
+    for fixture in fixtures {
+      let operand1 = fixture.operand1
+      let operand2 = fixture.operand2
+      let expected = ExpressionError.invalidCombinationOperands(
+        String(describing: operand1),
+        String(describing: operand2)
+      )
+
+      XCTAssertThrowsError(try operand1.combined(operand2)) { error in
+        XCTAssertEqual(expected, error as? ExpressionError)
+      }
+    }
+  }
+
+  func testCombinedConstantWithRollPositiveSides() {
+    typealias Fixture = (
+      operand1: Operand,
+      operand2: Operand
+    )
+
+    let fixtures: [Fixture] = [
+      (operand1: .constant(0), operand2: .rollPositiveSides(0)),
+      (operand1: .constant(1), operand2: .rollPositiveSides(1)),
+      (operand1: .constant(9), operand2: .rollPositiveSides(9)),
+      (operand1: .constant(Int.max), operand2: .rollPositiveSides(1)),
+
+      (operand1: .constant(0), operand2: .rollPositiveSides(-0)),
+      (operand1: .constant(1), operand2: .rollPositiveSides(-1)),
+      (operand1: .constant(9), operand2: .rollPositiveSides(-9)),
+      (operand1: .constant(Int.max), operand2: .rollPositiveSides(-1)),
+
+      (operand1: .constant(-0), operand2: .rollPositiveSides(0)),
+      (operand1: .constant(-1), operand2: .rollPositiveSides(1)),
+      (operand1: .constant(-9), operand2: .rollPositiveSides(9)),
+      (operand1: .constant(Int.min), operand2: .rollPositiveSides(1)),
+
+      (operand1: .constant(-0), operand2: .rollPositiveSides(-0)),
+      (operand1: .constant(-1), operand2: .rollPositiveSides(-1)),
+      (operand1: .constant(-9), operand2: .rollPositiveSides(-9)),
+      (operand1: .constant(Int.min), operand2: .rollPositiveSides(-1)),
+    ]
+
+    for fixture in fixtures {
+      let operand1 = fixture.operand1
+      let operand2 = fixture.operand2
+      let expected = ExpressionError.invalidCombinationOperands(
+        String(describing: operand1),
+        String(describing: operand2)
+      )
+
+      XCTAssertThrowsError(try operand1.combined(operand2)) { error in
+        XCTAssertEqual(expected, error as? ExpressionError)
+      }
+    }
+  }
+
+  // MARK: - Roll
+
+  func testCombinedRollWithConstant() {
     typealias Fixture = (
       operand1: Operand,
       operand2: Operand,
@@ -318,129 +603,85 @@ extension OperandTests {
     )
 
     let fixtures: [Fixture] = [
-      (operand1: .rollPositiveSides(0), operand2: .constant(0), expected: .roll(0, 0)),
       (operand1: .roll(0, 0), operand2: .constant(0), expected: .roll(0, 0)),
       (operand1: .roll(0, 1), operand2: .constant(0), expected: .roll(0, 10)),
       (operand1: .roll(0, 21), operand2: .constant(0), expected: .roll(0, 210)),
 
-      (operand1: .rollPositiveSides(1), operand2: .constant(1), expected: .roll(1, 1)),
       (operand1: .roll(1, 0), operand2: .constant(1), expected: .roll(1, 1)),
       (operand1: .roll(1, 2), operand2: .constant(1), expected: .roll(1, 21)),
       (operand1: .roll(1, 32), operand2: .constant(1), expected: .roll(1, 321)),
 
-      (operand1: .rollPositiveSides(9), operand2: .constant(9), expected: .roll(9, 9)),
       (operand1: .roll(9, 0), operand2: .constant(9), expected: .roll(9, 9)),
       (operand1: .roll(9, 8), operand2: .constant(9), expected: .roll(9, 89)),
       (operand1: .roll(9, 78), operand2: .constant(9), expected: .roll(9, 789)),
 
-      (operand1: .rollPositiveSides(1), operand2: .constant(Int.max), expected: .roll(1, Int.max)),
       (operand1: .roll(1, 0), operand2: .constant(Int.max), expected: .roll(1, Int.max)),
       (operand1: .roll(1, 9), operand2: .constant(223372036854775807), expected: .roll(1, Int.max)),
       (operand1: .roll(1, 922337203685477580), operand2: .constant(7), expected: .roll(1, Int.max)),
 
-      (operand1: .rollNegativeSides(0), operand2: .constant(0), expected: .roll(0, -0)),
       (operand1: .roll(0, -0), operand2: .constant(0), expected: .roll(0, 0)),
       (operand1: .roll(0, -1), operand2: .constant(0), expected: .roll(0, -10)),
       (operand1: .roll(0, -21), operand2: .constant(0), expected: .roll(0, -210)),
 
-      (operand1: .rollNegativeSides(1), operand2: .constant(1), expected: .roll(1, -1)),
       (operand1: .roll(1, -0), operand2: .constant(1), expected: .roll(1, 1)),
       (operand1: .roll(1, -2), operand2: .constant(1), expected: .roll(1, -21)),
       (operand1: .roll(1, -32), operand2: .constant(1), expected: .roll(1, -321)),
 
-      (operand1: .rollNegativeSides(9), operand2: .constant(9), expected: .roll(9, -9)),
       (operand1: .roll(9, -0), operand2: .constant(9), expected: .roll(9, 9)),
       (operand1: .roll(9, -8), operand2: .constant(9), expected: .roll(9, -89)),
       (operand1: .roll(9, -78), operand2: .constant(9), expected: .roll(9, -789)),
 
-      (operand1: .rollNegativeSides(1), operand2: .constant(Int.max), expected: .roll(1, -Int.max)),
       (operand1: .roll(1, -0), operand2: .constant(Int.max), expected: .roll(1, Int.max)),
       (operand1: .roll(1, -9), operand2: .constant(223372036854775808), expected: .roll(1, Int.min)),
       (operand1: .roll(1, -922337203685477580), operand2: .constant(8), expected: .roll(1, Int.min)),
 
-      (operand1: .rollPositiveSides(-0), operand2: .constant(0), expected: .roll(-0, 0)),
       (operand1: .roll(-0, 0), operand2: .constant(0), expected: .roll(-0, 0)),
       (operand1: .roll(-0, 1), operand2: .constant(0), expected: .roll(-0, 10)),
       (operand1: .roll(-0, 21), operand2: .constant(0), expected: .roll(-0, 210)),
 
-      (operand1: .rollPositiveSides(-1), operand2: .constant(1), expected: .roll(-1, 1)),
       (operand1: .roll(-1, 0), operand2: .constant(1), expected: .roll(-1, 1)),
       (operand1: .roll(-1, 2), operand2: .constant(1), expected: .roll(-1, 21)),
       (operand1: .roll(-1, 32), operand2: .constant(1), expected: .roll(-1, 321)),
 
-      (operand1: .rollPositiveSides(-9), operand2: .constant(9), expected: .roll(-9, 9)),
       (operand1: .roll(-9, 0), operand2: .constant(9), expected: .roll(-9, 9)),
       (operand1: .roll(-9, 8), operand2: .constant(9), expected: .roll(-9, 89)),
       (operand1: .roll(-9, 78), operand2: .constant(9), expected: .roll(-9, 789)),
 
-      (operand1: .rollPositiveSides(-1), operand2: .constant(Int.max), expected: .roll(-1, Int.max)),
       (operand1: .roll(-1, 0), operand2: .constant(Int.max), expected: .roll(-1, Int.max)),
       (operand1: .roll(-1, 9), operand2: .constant(223372036854775807), expected: .roll(-1, Int.max)),
       (operand1: .roll(-1, 922337203685477580), operand2: .constant(7), expected: .roll(-1, Int.max)),
 
-      (operand1: .rollNegativeSides(-0), operand2: .constant(0), expected: .roll(-0, -0)),
       (operand1: .roll(-0, -0), operand2: .constant(0), expected: .roll(-0, 0)),
       (operand1: .roll(-0, -1), operand2: .constant(0), expected: .roll(-0, -10)),
       (operand1: .roll(-0, -21), operand2: .constant(0), expected: .roll(-0, -210)),
 
-      (operand1: .rollNegativeSides(-1), operand2: .constant(1), expected: .roll(-1, -1)),
       (operand1: .roll(-1, -0), operand2: .constant(1), expected: .roll(-1, 1)),
       (operand1: .roll(-1, -2), operand2: .constant(1), expected: .roll(-1, -21)),
       (operand1: .roll(-1, -32), operand2: .constant(1), expected: .roll(-1, -321)),
 
-      (operand1: .rollNegativeSides(-9), operand2: .constant(9), expected: .roll(-9, -9)),
       (operand1: .roll(-9, -0), operand2: .constant(9), expected: .roll(-9, 9)),
       (operand1: .roll(-9, -8), operand2: .constant(9), expected: .roll(-9, -89)),
       (operand1: .roll(-9, -78), operand2: .constant(9), expected: .roll(-9, -789)),
 
-      (operand1: .rollNegativeSides(-1), operand2: .constant(Int.max), expected: .roll(-1, -Int.max)),
       (operand1: .roll(-1, -0), operand2: .constant(Int.max), expected: .roll(-1, Int.max)),
       (operand1: .roll(-1, -9), operand2: .constant(223372036854775808), expected: .roll(-1, Int.min)),
       (operand1: .roll(-1, -922337203685477580), operand2: .constant(8), expected: .roll(-1, Int.min)),
 
-      (operand1: .rollPositiveSides(0), operand2: .constant(-0), expected: .roll(0, 0)),
       (operand1: .roll(0, 0), operand2: .constant(-0), expected: .roll(0, 0)),
       (operand1: .roll(0, 1), operand2: .constant(-0), expected: .roll(0, 10)),
       (operand1: .roll(0, 21), operand2: .constant(-0), expected: .roll(0, 210)),
 
-      (operand1: .rollPositiveSides(1), operand2: .constant(-1), expected: .roll(1, -1)),
-
-      (operand1: .rollPositiveSides(9), operand2: .constant(-9), expected: .roll(9, -9)),
-
-      (operand1: .rollPositiveSides(1), operand2: .constant(Int.min), expected: .roll(1, Int.min)),
-
-      (operand1: .rollNegativeSides(0), operand2: .constant(0), expected: .roll(0, -0)),
       (operand1: .roll(0, -0), operand2: .constant(0), expected: .roll(0, 0)),
       (operand1: .roll(0, -1), operand2: .constant(0), expected: .roll(0, -10)),
       (operand1: .roll(0, -21), operand2: .constant(0), expected: .roll(0, -210)),
 
-      (operand1: .rollNegativeSides(1), operand2: .constant(-1), expected: .roll(1, 1)),
-
-      (operand1: .rollNegativeSides(9), operand2: .constant(-9), expected: .roll(9, 9)),
-
-      (operand1: .rollNegativeSides(1), operand2: .constant(-Int.max), expected: .roll(1, Int.max)),
-
-      (operand1: .rollPositiveSides(-0), operand2: .constant(-0), expected: .roll(-0, 0)),
       (operand1: .roll(-0, 0), operand2: .constant(-0), expected: .roll(-0, 0)),
       (operand1: .roll(-0, 1), operand2: .constant(-0), expected: .roll(-0, 10)),
       (operand1: .roll(-0, 21), operand2: .constant(-0), expected: .roll(-0, 210)),
 
-      (operand1: .rollPositiveSides(-1), operand2: .constant(-1), expected: .roll(-1, -1)),
-
-      (operand1: .rollPositiveSides(-9), operand2: .constant(-9), expected: .roll(-9, -9)),
-
-      (operand1: .rollPositiveSides(-1), operand2: .constant(Int.min), expected: .roll(-1, Int.min)),
-
-      (operand1: .rollNegativeSides(-0), operand2: .constant(0), expected: .roll(-0, -0)),
       (operand1: .roll(-0, -0), operand2: .constant(0), expected: .roll(-0, 0)),
       (operand1: .roll(-0, -1), operand2: .constant(0), expected: .roll(-0, -10)),
       (operand1: .roll(-0, -21), operand2: .constant(0), expected: .roll(-0, -210)),
-
-      (operand1: .rollNegativeSides(-1), operand2: .constant(-1), expected: .roll(-1, 1)),
-
-      (operand1: .rollNegativeSides(-9), operand2: .constant(-9), expected: .roll(-9, 9)),
-
-      (operand1: .rollNegativeSides(-1), operand2: .constant(-Int.max), expected: .roll(-1, Int.max)),
     ]
 
     for fixture in fixtures {
@@ -453,7 +694,7 @@ extension OperandTests {
     }
   }
 
-  func testCombinedNumberIntoRollWithInvalidCombinationOperands() {
+  func testCombinedRollWithInvalidConstant() {
     typealias Fixture = (
       operand1: Operand,
       operand2: Operand
@@ -534,195 +775,7 @@ extension OperandTests {
     }
   }
 
-  func testCombinedRollIntoNumberWithInvalidCombinationOperands() {
-    typealias Fixture = (
-      operand1: Operand,
-      operand2: Operand
-    )
-
-    let fixtures: [Fixture] = [
-      (operand1: .constant(0), operand2: .rollPositiveSides(0)),
-      (operand1: .constant(0), operand2: .roll(0, 0)),
-      (operand1: .constant(0), operand2: .roll(0, 1)),
-      (operand1: .constant(0), operand2: .roll(0, 21)),
-
-      (operand1: .constant(1), operand2: .rollPositiveSides(1)),
-      (operand1: .constant(1), operand2: .roll(1, 0)),
-      (operand1: .constant(1), operand2: .roll(1, 2)),
-      (operand1: .constant(1), operand2: .roll(1, 32)),
-
-      (operand1: .constant(9), operand2: .rollPositiveSides(9)),
-      (operand1: .constant(9), operand2: .roll(9, 0)),
-      (operand1: .constant(9), operand2: .roll(9, 8)),
-      (operand1: .constant(9), operand2: .roll(9, 78)),
-
-      (operand1: .constant(Int.max), operand2: .rollPositiveSides(1)),
-      (operand1: .constant(Int.max), operand2: .roll(1, 0)),
-      (operand1: .constant(922337203685477580), operand2: .roll(1, 7)),
-      (operand1: .constant(9), operand2: .roll(1, 223372036854775807)),
-
-      (operand1: .constant(0), operand2: .rollNegativeSides(0)),
-      (operand1: .constant(0), operand2: .roll(0, -0)),
-      (operand1: .constant(0), operand2: .roll(0, -1)),
-      (operand1: .constant(0), operand2: .roll(0, -21)),
-
-      (operand1: .constant(1), operand2: .rollNegativeSides(1)),
-      (operand1: .constant(1), operand2: .roll(1, -0)),
-      (operand1: .constant(1), operand2: .roll(1, -2)),
-      (operand1: .constant(1), operand2: .roll(1, -32)),
-
-      (operand1: .constant(9), operand2: .rollNegativeSides(9)),
-      (operand1: .constant(9), operand2: .roll(9, -0)),
-      (operand1: .constant(9), operand2: .roll(9, -8)),
-      (operand1: .constant(9), operand2: .roll(9, -78)),
-
-      (operand1: .constant(Int.max), operand2: .rollNegativeSides(1)),
-      (operand1: .constant(Int.max), operand2: .roll(1, -0)),
-      (operand1: .constant(922337203685477580), operand2: .roll(1, -7)),
-      (operand1: .constant(9), operand2: .roll(1, -223372036854775807)),
-
-      (operand1: .constant(0), operand2: .rollPositiveSides(-0)),
-      (operand1: .constant(0), operand2: .roll(-0, 0)),
-      (operand1: .constant(0), operand2: .roll(-0, 1)),
-      (operand1: .constant(0), operand2: .roll(-0, 21)),
-
-      (operand1: .constant(1), operand2: .rollPositiveSides(-1)),
-      (operand1: .constant(1), operand2: .roll(-1, 0)),
-      (operand1: .constant(1), operand2: .roll(-1, 2)),
-      (operand1: .constant(1), operand2: .roll(-1, 32)),
-
-      (operand1: .constant(9), operand2: .rollPositiveSides(-9)),
-      (operand1: .constant(9), operand2: .roll(-9, 0)),
-      (operand1: .constant(9), operand2: .roll(-9, 8)),
-      (operand1: .constant(9), operand2: .roll(-9, 78)),
-
-      (operand1: .constant(Int.max), operand2: .rollPositiveSides(-1)),
-      (operand1: .constant(Int.max), operand2: .roll(-1, 0)),
-      (operand1: .constant(922337203685477580), operand2: .roll(-1, 7)),
-      (operand1: .constant(9), operand2: .roll(-1, 223372036854775807)),
-
-      (operand1: .constant(0), operand2: .rollNegativeSides(-0)),
-      (operand1: .constant(0), operand2: .roll(-0, -0)),
-      (operand1: .constant(0), operand2: .roll(-0, -1)),
-      (operand1: .constant(0), operand2: .roll(-0, -21)),
-
-      (operand1: .constant(1), operand2: .rollNegativeSides(-1)),
-      (operand1: .constant(1), operand2: .roll(-1, -0)),
-      (operand1: .constant(1), operand2: .roll(-1, -2)),
-      (operand1: .constant(1), operand2: .roll(-1, -32)),
-
-      (operand1: .constant(9), operand2: .rollNegativeSides(-9)),
-      (operand1: .constant(9), operand2: .roll(-9, -0)),
-      (operand1: .constant(9), operand2: .roll(-9, -8)),
-      (operand1: .constant(9), operand2: .roll(-9, -78)),
-
-      (operand1: .constant(Int.max), operand2: .rollNegativeSides(-1)),
-      (operand1: .constant(Int.max), operand2: .roll(-1, -0)),
-      (operand1: .constant(922337203685477580), operand2: .roll(-1, -7)),
-      (operand1: .constant(9), operand2: .roll(-1, -223372036854775807)),
-
-      (operand1: .constant(-0), operand2: .rollPositiveSides(0)),
-      (operand1: .constant(-0), operand2: .roll(0, 0)),
-      (operand1: .constant(-0), operand2: .roll(0, 1)),
-      (operand1: .constant(-0), operand2: .roll(0, 21)),
-
-      (operand1: .constant(-1), operand2: .rollPositiveSides(1)),
-      (operand1: .constant(-1), operand2: .roll(1, 0)),
-      (operand1: .constant(-1), operand2: .roll(1, 2)),
-      (operand1: .constant(-1), operand2: .roll(1, 32)),
-
-      (operand1: .constant(-9), operand2: .rollPositiveSides(9)),
-      (operand1: .constant(-9), operand2: .roll(9, 0)),
-      (operand1: .constant(-9), operand2: .roll(9, 8)),
-      (operand1: .constant(-9), operand2: .roll(9, 78)),
-
-      (operand1: .constant(Int.min), operand2: .rollPositiveSides(1)),
-      (operand1: .constant(Int.min), operand2: .roll(1, 0)),
-      (operand1: .constant(-922337203685477580), operand2: .roll(1, 8)),
-      (operand1: .constant(-9), operand2: .roll(1, 223372036854775808)),
-
-      (operand1: .constant(0), operand2: .rollNegativeSides(0)),
-      (operand1: .constant(0), operand2: .roll(0, -0)),
-      (operand1: .constant(0), operand2: .roll(0, -1)),
-      (operand1: .constant(0), operand2: .roll(0, -21)),
-
-      (operand1: .constant(-1), operand2: .rollNegativeSides(1)),
-      (operand1: .constant(-1), operand2: .roll(1, -0)),
-      (operand1: .constant(-1), operand2: .roll(1, -2)),
-      (operand1: .constant(-1), operand2: .roll(1, -32)),
-
-      (operand1: .constant(-9), operand2: .rollNegativeSides(9)),
-      (operand1: .constant(-9), operand2: .roll(9, -0)),
-      (operand1: .constant(-9), operand2: .roll(9, -8)),
-      (operand1: .constant(-9), operand2: .roll(9, -78)),
-
-      (operand1: .constant(-Int.max), operand2: .rollNegativeSides(1)),
-      (operand1: .constant(Int.min), operand2: .roll(1, -0)),
-      (operand1: .constant(-922337203685477580), operand2: .roll(1, -8)),
-      (operand1: .constant(-9), operand2: .roll(1, -223372036854775808)),
-
-      (operand1: .constant(-0), operand2: .rollPositiveSides(-0)),
-      (operand1: .constant(-0), operand2: .roll(-0, 0)),
-      (operand1: .constant(-0), operand2: .roll(-0, 1)),
-      (operand1: .constant(-0), operand2: .roll(-0, 21)),
-
-      (operand1: .constant(-1), operand2: .rollPositiveSides(-1)),
-      (operand1: .constant(-1), operand2: .roll(-1, 0)),
-      (operand1: .constant(-1), operand2: .roll(-1, 2)),
-      (operand1: .constant(-1), operand2: .roll(-1, 32)),
-
-      (operand1: .constant(-9), operand2: .rollPositiveSides(-9)),
-      (operand1: .constant(-9), operand2: .roll(-9, 0)),
-      (operand1: .constant(-9), operand2: .roll(-9, 8)),
-      (operand1: .constant(-9), operand2: .roll(-9, 78)),
-
-      (operand1: .constant(Int.min), operand2: .rollPositiveSides(-1)),
-      (operand1: .constant(Int.min), operand2: .roll(-1, 0)),
-      (operand1: .constant(-92337203685477580), operand2: .roll(-1, 8)),
-      (operand1: .constant(-9), operand2: .roll(-1, 223372036854775808)),
-
-      (operand1: .constant(0), operand2: .rollNegativeSides(-0)),
-      (operand1: .constant(0), operand2: .roll(-0, -0)),
-      (operand1: .constant(0), operand2: .roll(-0, -1)),
-      (operand1: .constant(0), operand2: .roll(-0, -21)),
-
-      (operand1: .constant(-1), operand2: .rollNegativeSides(-1)),
-      (operand1: .constant(-1), operand2: .roll(-1, -0)),
-      (operand1: .constant(-1), operand2: .roll(-1, -2)),
-      (operand1: .constant(-1), operand2: .roll(-1, -32)),
-
-      (operand1: .constant(-9), operand2: .rollNegativeSides(-9)),
-      (operand1: .constant(-9), operand2: .roll(-9, -0)),
-      (operand1: .constant(-9), operand2: .roll(-9, -8)),
-      (operand1: .constant(-9), operand2: .roll(-9, -78)),
-
-      (operand1: .constant(-Int.max), operand2: .rollNegativeSides(-1)),
-      (operand1: .constant(Int.min), operand2: .roll(-1, -0)),
-      (operand1: .constant(-922337203685477580), operand2: .roll(-1, -8)),
-      (operand1: .constant(-9), operand2: .roll(-1, -223372036854775808)),
-
-      (operand1: .constant(9), operand2: .roll(1, 223372036854775808)),
-      (operand1: .constant(0), operand2: .roll(1, Int.max)),
-
-      (operand1: .constant(-9), operand2: .roll(1, -223372036854775809)),
-      (operand1: .constant(-0), operand2: .roll(1, Int.min)),
-    ]
-
-    for fixture in fixtures {
-      let operand1 = fixture.operand1
-      let operand2 = fixture.operand2
-      let expected = ExpressionError.invalidCombinationOperands(
-        String(describing: operand1),
-        String(describing: operand2)
-      )
-
-      XCTAssertThrowsError(try operand1.combined(operand2)) { error in
-        XCTAssertEqual(expected, error as? ExpressionError)
-      }
-    }
-  }
-
-  func testCombinedRollIntoRoll() {
+  func testCombinedRollWithRoll() {
     typealias Fixture = (
       operand1: Operand,
       operand2: Operand,
@@ -730,81 +783,17 @@ extension OperandTests {
     )
 
     let fixtures: [Fixture] = [
-      (
-        operand1: .rollPositiveSides(0),
-        operand2: .rollPositiveSides(0),
-        expected: .rollPositiveSides(0)
-      ),
-
-      (operand1: .rollPositiveSides(0), operand2: .roll(0, 0), expected: .roll(0, 0)),
-      (operand1: .rollPositiveSides(0), operand2: .roll(0, 1), expected: .roll(0, 1)),
-      (operand1: .rollPositiveSides(0), operand2: .roll(0, 21), expected: .roll(0, 21)),
-
-      (operand1: .roll(0, 0), operand2: .rollPositiveSides(0), expected: .roll(0, 0)),
-      (operand1: .roll(0, 1), operand2: .rollPositiveSides(0), expected: .roll(0, 1)),
-      (operand1: .roll(0, 21), operand2: .rollPositiveSides(0), expected: .roll(0, 21)),
-
       (operand1: .roll(0, 0), operand2: .roll(0, 0), expected: .roll(0, 0)),
       (operand1: .roll(0, 1), operand2: .roll(0, 1), expected: .roll(0, 1)),
       (operand1: .roll(0, 21), operand2: .roll(0, 21), expected: .roll(0, 21)),
-
-      (
-        operand1: .rollPositiveSides(1),
-        operand2: .rollPositiveSides(1),
-        expected: .rollPositiveSides(2)
-      ),
-
-      (operand1: .rollPositiveSides(1), operand2: .roll(1, 0), expected: .roll(2, 0)),
-      (operand1: .rollPositiveSides(1), operand2: .roll(1, 2), expected: .roll(2, 2)),
-      (operand1: .rollPositiveSides(1), operand2: .roll(1, 32), expected: .roll(2, 32)),
-
-      (operand1: .roll(1, 0), operand2: .rollPositiveSides(1), expected: .roll(2, 0)),
-      (operand1: .roll(1, 2), operand2: .rollPositiveSides(1), expected: .roll(2, 2)),
-      (operand1: .roll(1, 32), operand2: .rollPositiveSides(1), expected: .roll(2, 32)),
 
       (operand1: .roll(1, 0), operand2: .roll(1, 0), expected: .roll(2, 0)),
       (operand1: .roll(1, 2), operand2: .roll(1, 2), expected: .roll(2, 2)),
       (operand1: .roll(1, 32), operand2: .roll(1, 32), expected: .roll(2, 32)),
 
-      (
-        operand1: .rollPositiveSides(9),
-        operand2: .rollPositiveSides(9),
-        expected: .rollPositiveSides(18)
-      ),
-
-      (operand1: .rollPositiveSides(9), operand2: .roll(9, 0), expected: .roll(18, 0)),
-      (operand1: .rollPositiveSides(9), operand2: .roll(9, 8), expected: .roll(18, 8)),
-      (operand1: .rollPositiveSides(9), operand2: .roll(9, 78), expected: .roll(18, 78)),
-
-      (operand1: .roll(9, 0), operand2: .rollPositiveSides(9), expected: .roll(18, 0)),
-      (operand1: .roll(9, 8), operand2: .rollPositiveSides(9), expected: .roll(18, 8)),
-      (operand1: .roll(9, 78), operand2: .rollPositiveSides(9), expected: .roll(18, 78)),
-
       (operand1: .roll(9, 0), operand2: .roll(9, 0), expected: .roll(18, 0)),
       (operand1: .roll(9, 8), operand2: .roll(9, 8), expected: .roll(18, 8)),
       (operand1: .roll(9, 78), operand2: .roll(9, 78), expected: .roll(18, 78)),
-
-      (
-        operand1: .rollPositiveSides(Int.max),
-        operand2: .rollPositiveSides(0),
-        expected: .rollPositiveSides(Int.max)
-      ),
-
-      (operand1: .rollPositiveSides(Int.max), operand2: .roll(0, 0), expected: .roll(Int.max, 0)),
-      (operand1: .rollPositiveSides(Int.max), operand2: .roll(0, 1), expected: .roll(Int.max, 1)),
-      (
-        operand1: .rollPositiveSides(Int.max),
-        operand2: .roll(0, Int.max),
-        expected: .roll(Int.max, Int.max)
-      ),
-
-      (operand1: .roll(0, 0), operand2: .rollPositiveSides(Int.max), expected: .roll(Int.max, 0)),
-      (operand1: .roll(0, 1), operand2: .rollPositiveSides(Int.max), expected: .roll(Int.max, 1)),
-      (
-        operand1: .roll(0, Int.max),
-        operand2: .rollPositiveSides(Int.max),
-        expected: .roll(Int.max, Int.max)
-      ),
 
       (operand1: .roll(Int.max, 0), operand2: .roll(0, 0), expected: .roll(Int.max, 0)),
       (operand1: .roll(Int.max, 1), operand2: .roll(0, 1), expected: .roll(Int.max, 1)),
@@ -814,81 +803,17 @@ extension OperandTests {
         expected: .roll(Int.max, Int.max)
       ),
 
-      (
-        operand1: .rollNegativeSides(0),
-        operand2: .rollNegativeSides(0),
-        expected: .rollNegativeSides(0)
-      ),
-
-      (operand1: .rollNegativeSides(0), operand2: .roll(0, -0), expected: .roll(0, -0)),
-      (operand1: .rollNegativeSides(0), operand2: .roll(0, -1), expected: .roll(0, -1)),
-      (operand1: .rollNegativeSides(0), operand2: .roll(0, -21), expected: .roll(0, -21)),
-
-      (operand1: .roll(0, -0), operand2: .rollNegativeSides(0), expected: .roll(0, -0)),
-      (operand1: .roll(0, -1), operand2: .rollNegativeSides(0), expected: .roll(0, -1)),
-      (operand1: .roll(0, -21), operand2: .rollNegativeSides(0), expected: .roll(0, -21)),
-
       (operand1: .roll(0, -0), operand2: .roll(0, -0), expected: .roll(0, -0)),
       (operand1: .roll(0, -1), operand2: .roll(0, -1), expected: .roll(0, -1)),
       (operand1: .roll(0, -21), operand2: .roll(0, -21), expected: .roll(0, -21)),
-
-      (
-        operand1: .rollNegativeSides(1),
-        operand2: .rollNegativeSides(1),
-        expected: .rollNegativeSides(2)
-      ),
-
-      (operand1: .rollNegativeSides(1), operand2: .roll(1, -0), expected: .roll(2, -0)),
-      (operand1: .rollNegativeSides(1), operand2: .roll(1, -2), expected: .roll(2, -2)),
-      (operand1: .rollNegativeSides(1), operand2: .roll(1, -32), expected: .roll(2, -32)),
-
-      (operand1: .roll(1, -0), operand2: .rollNegativeSides(1), expected: .roll(2, -0)),
-      (operand1: .roll(1, -2), operand2: .rollNegativeSides(1), expected: .roll(2, -2)),
-      (operand1: .roll(1, -32), operand2: .rollNegativeSides(1), expected: .roll(2, -32)),
 
       (operand1: .roll(1, -0), operand2: .roll(1, -0), expected: .roll(2, -0)),
       (operand1: .roll(1, -2), operand2: .roll(1, -2), expected: .roll(2, -2)),
       (operand1: .roll(1, -32), operand2: .roll(1, -32), expected: .roll(2, -32)),
 
-      (
-        operand1: .rollNegativeSides(9),
-        operand2: .rollNegativeSides(9),
-        expected: .rollNegativeSides(18)
-      ),
-
-      (operand1: .rollNegativeSides(9), operand2: .roll(9, -0), expected: .roll(18, -0)),
-      (operand1: .rollNegativeSides(9), operand2: .roll(9, -8), expected: .roll(18, -8)),
-      (operand1: .rollNegativeSides(9), operand2: .roll(9, -78), expected: .roll(18, -78)),
-
-      (operand1: .roll(9, -0), operand2: .rollNegativeSides(9), expected: .roll(18, -0)),
-      (operand1: .roll(9, -8), operand2: .rollNegativeSides(9), expected: .roll(18, -8)),
-      (operand1: .roll(9, -78), operand2: .rollNegativeSides(9), expected: .roll(18, -78)),
-
       (operand1: .roll(9, -0), operand2: .roll(9, -0), expected: .roll(18, -0)),
       (operand1: .roll(9, -8), operand2: .roll(9, -8), expected: .roll(18, -8)),
       (operand1: .roll(9, -78), operand2: .roll(9, -78), expected: .roll(18, -78)),
-
-      (
-        operand1: .rollNegativeSides(Int.max),
-        operand2: .rollNegativeSides(0),
-        expected: .rollNegativeSides(Int.max)
-      ),
-
-      (operand1: .rollNegativeSides(Int.max), operand2: .roll(0, -0), expected: .roll(Int.max, -0)),
-      (operand1: .rollNegativeSides(Int.max), operand2: .roll(0, -1), expected: .roll(Int.max, -1)),
-      (
-        operand1: .rollNegativeSides(Int.max),
-        operand2: .roll(0, Int.min),
-        expected: .roll(Int.max, Int.min)
-      ),
-
-      (operand1: .roll(0, -0), operand2: .rollNegativeSides(Int.max), expected: .roll(Int.max, -0)),
-      (operand1: .roll(0, -1), operand2: .rollNegativeSides(Int.max), expected: .roll(Int.max, -1)),
-      (
-        operand1: .roll(0, Int.min),
-        operand2: .rollNegativeSides(Int.max),
-        expected: .roll(Int.max, Int.min)
-      ),
 
       (operand1: .roll(Int.max, -0), operand2: .roll(0, -0), expected: .roll(Int.max, -0)),
       (operand1: .roll(Int.max, -1), operand2: .roll(0, -1), expected: .roll(Int.max, -1)),
@@ -898,63 +823,17 @@ extension OperandTests {
         expected: .roll(Int.max, Int.min)
       ),
 
-      (
-        operand1: .rollPositiveSides(-1),
-        operand2: .rollPositiveSides(-1),
-        expected: .rollPositiveSides(-2)
-      ),
-
-      (operand1: .rollPositiveSides(-1), operand2: .roll(-1, 0), expected: .roll(-2, 0)),
-      (operand1: .rollPositiveSides(-1), operand2: .roll(-1, 2), expected: .roll(-2, 2)),
-      (operand1: .rollPositiveSides(-1), operand2: .roll(-1, 32), expected: .roll(-2, 32)),
-
-      (operand1: .roll(-1, 0), operand2: .rollPositiveSides(-1), expected: .roll(-2, 0)),
-      (operand1: .roll(-1, 2), operand2: .rollPositiveSides(-1), expected: .roll(-2, 2)),
-      (operand1: .roll(-1, 32), operand2: .rollPositiveSides(-1), expected: .roll(-2, 32)),
+      (operand1: .roll(-0, 0), operand2: .roll(-0, 0), expected: .roll(-0, 0)),
+      (operand1: .roll(-0, 2), operand2: .roll(-0, 2), expected: .roll(-0, 2)),
+      (operand1: .roll(-0, 32), operand2: .roll(-0, 32), expected: .roll(-0, 32)),
 
       (operand1: .roll(-1, 0), operand2: .roll(-1, 0), expected: .roll(-2, 0)),
       (operand1: .roll(-1, 2), operand2: .roll(-1, 2), expected: .roll(-2, 2)),
       (operand1: .roll(-1, 32), operand2: .roll(-1, 32), expected: .roll(-2, 32)),
 
-      (
-        operand1: .rollPositiveSides(-9),
-        operand2: .rollPositiveSides(-9),
-        expected: .rollPositiveSides(-18)
-      ),
-
-      (operand1: .rollPositiveSides(-9), operand2: .roll(-9, 0), expected: .roll(-18, 0)),
-      (operand1: .rollPositiveSides(-9), operand2: .roll(-9, 8), expected: .roll(-18, 8)),
-      (operand1: .rollPositiveSides(-9), operand2: .roll(-9, 78), expected: .roll(-18, 78)),
-
-      (operand1: .roll(-9, 0), operand2: .rollPositiveSides(-9), expected: .roll(-18, 0)),
-      (operand1: .roll(-9, 8), operand2: .rollPositiveSides(-9), expected: .roll(-18, 8)),
-      (operand1: .roll(-9, 78), operand2: .rollPositiveSides(-9), expected: .roll(-18, 78)),
-
       (operand1: .roll(-9, 0), operand2: .roll(-9, 0), expected: .roll(-18, 0)),
       (operand1: .roll(-9, 8), operand2: .roll(-9, 8), expected: .roll(-18, 8)),
       (operand1: .roll(-9, 78), operand2: .roll(-9, 78), expected: .roll(-18, 78)),
-
-      (
-        operand1: .rollPositiveSides(Int.min),
-        operand2: .rollPositiveSides(-0),
-        expected: .rollPositiveSides(Int.min)
-      ),
-
-      (operand1: .rollPositiveSides(Int.min), operand2: .roll(-0, 0), expected: .roll(Int.min, 0)),
-      (operand1: .rollPositiveSides(Int.min), operand2: .roll(-0, 1), expected: .roll(Int.min, 1)),
-      (
-        operand1: .rollPositiveSides(Int.min),
-        operand2: .roll(-0, Int.max),
-        expected: .roll(Int.min, Int.max)
-      ),
-
-      (operand1: .roll(-0, 0), operand2: .rollPositiveSides(Int.min), expected: .roll(Int.min, 0)),
-      (operand1: .roll(-0, 1), operand2: .rollPositiveSides(Int.min), expected: .roll(Int.min, 1)),
-      (
-        operand1: .roll(-0, Int.max),
-        operand2: .rollPositiveSides(Int.min),
-        expected: .roll(Int.min, Int.max)
-      ),
 
       (operand1: .roll(Int.min, 0), operand2: .roll(-0, 0), expected: .roll(Int.min, 0)),
       (operand1: .roll(Int.min, 1), operand2: .roll(-0, 1), expected: .roll(Int.min, 1)),
@@ -964,63 +843,17 @@ extension OperandTests {
         expected: .roll(Int.min, Int.max)
       ),
 
-      (
-        operand1: .rollNegativeSides(-1),
-        operand2: .rollNegativeSides(-1),
-        expected: .rollNegativeSides(-2)
-      ),
-
-      (operand1: .rollNegativeSides(-1), operand2: .roll(-1, -0), expected: .roll(-2, -0)),
-      (operand1: .rollNegativeSides(-1), operand2: .roll(-1, -2), expected: .roll(-2, -2)),
-      (operand1: .rollNegativeSides(-1), operand2: .roll(-1, -32), expected: .roll(-2, -32)),
-
-      (operand1: .roll(-1, -0), operand2: .rollNegativeSides(-1), expected: .roll(-2, -0)),
-      (operand1: .roll(-1, -2), operand2: .rollNegativeSides(-1), expected: .roll(-2, -2)),
-      (operand1: .roll(-1, -32), operand2: .rollNegativeSides(-1), expected: .roll(-2, -32)),
+      (operand1: .roll(-0, -0), operand2: .roll(-0, -0), expected: .roll(-0, -0)),
+      (operand1: .roll(-0, -2), operand2: .roll(-0, -2), expected: .roll(-0, -2)),
+      (operand1: .roll(-0, -32), operand2: .roll(-0, -32), expected: .roll(-0, -32)),
 
       (operand1: .roll(-1, -0), operand2: .roll(-1, -0), expected: .roll(-2, -0)),
       (operand1: .roll(-1, -2), operand2: .roll(-1, -2), expected: .roll(-2, -2)),
       (operand1: .roll(-1, -32), operand2: .roll(-1, -32), expected: .roll(-2, -32)),
 
-      (
-        operand1: .rollNegativeSides(-9),
-        operand2: .rollNegativeSides(-9),
-        expected: .rollNegativeSides(-18)
-      ),
-
-      (operand1: .rollNegativeSides(-9), operand2: .roll(-9, -0), expected: .roll(-18, -0)),
-      (operand1: .rollNegativeSides(-9), operand2: .roll(-9, -8), expected: .roll(-18, -8)),
-      (operand1: .rollNegativeSides(-9), operand2: .roll(-9, -78), expected: .roll(-18, -78)),
-
-      (operand1: .roll(-9, -0), operand2: .rollNegativeSides(-9), expected: .roll(-18, -0)),
-      (operand1: .roll(-9, -8), operand2: .rollNegativeSides(-9), expected: .roll(-18, -8)),
-      (operand1: .roll(-9, -78), operand2: .rollNegativeSides(-9), expected: .roll(-18, -78)),
-
       (operand1: .roll(-9, -0), operand2: .roll(-9, -0), expected: .roll(-18, -0)),
       (operand1: .roll(-9, -8), operand2: .roll(-9, -8), expected: .roll(-18, -8)),
       (operand1: .roll(-9, -78), operand2: .roll(-9, -78), expected: .roll(-18, -78)),
-
-      (
-        operand1: .rollNegativeSides(Int.min),
-        operand2: .rollNegativeSides(-0),
-        expected: .rollNegativeSides(Int.min)
-      ),
-
-      (operand1: .rollNegativeSides(Int.min), operand2: .roll(-0, -0), expected: .roll(Int.min, -0)),
-      (operand1: .rollNegativeSides(Int.min), operand2: .roll(-0, -1), expected: .roll(Int.min, -1)),
-      (
-        operand1: .rollNegativeSides(Int.min),
-        operand2: .roll(-0, Int.min),
-        expected: .roll(Int.min, Int.min)
-      ),
-
-      (operand1: .roll(-0, -0), operand2: .rollNegativeSides(Int.min), expected: .roll(Int.min, -0)),
-      (operand1: .roll(-0, -1), operand2: .rollNegativeSides(Int.min), expected: .roll(Int.min, -1)),
-      (
-        operand1: .roll(-0, Int.min),
-        operand2: .rollNegativeSides(Int.min),
-        expected: .roll(Int.min, Int.min)
-      ),
 
       (operand1: .roll(Int.min, -0), operand2: .roll(-0, -0), expected: .roll(Int.min, -0)),
       (operand1: .roll(Int.min, -1), operand2: .roll(-0, -1), expected: .roll(Int.min, -1)),
@@ -1041,7 +874,7 @@ extension OperandTests {
     }
   }
 
-  func testCombinedRollIntoRollWithInvalidCombinationOperands() {
+  func testCombinedRollWithInvalidRoll() {
     typealias Fixture = (
       operand1: Operand,
       operand2: Operand
@@ -1059,47 +892,605 @@ extension OperandTests {
       (operand1: .roll(1, -0), operand2: .roll(1, Int.min)),
       (operand1: .roll(1, Int.min), operand2: .roll(1, -0)),
 
-      // Mis-matching sides signage
-      (operand1: .roll(1, 1), operand2: .rollNegativeSides(1)),
-      (operand1: .roll(1, Int.max), operand2: .rollNegativeSides(1)),
-      (operand1: .rollNegativeSides(1), operand2: .roll(1, 1)),
-      (operand1: .rollNegativeSides(1), operand2: .roll(1, Int.max)),
-
-      (operand1: .roll(1, -1), operand2: .rollPositiveSides(1)),
-      (operand1: .roll(1, Int.min), operand2: .rollPositiveSides(1)),
-      (operand1: .rollPositiveSides(1), operand2: .roll(1, -1)),
-      (operand1: .rollPositiveSides(1), operand2: .roll(1, Int.min)),
-
-      (operand1: .rollPositiveSides(1), operand2: .rollNegativeSides(1)),
-      (operand1: .rollNegativeSides(1), operand2: .rollPositiveSides(1)),
-      (operand1: .rollPositiveSides(-1), operand2: .rollNegativeSides(-1)),
-      (operand1: .rollNegativeSides(-1), operand2: .rollPositiveSides(-1)),
-
       // Overflowing integer addition
       (operand1: .roll(Int.max, 1), operand2: .roll(1, 1)),
       (operand1: .roll(1, 1), operand2: .roll(Int.max, 1)),
       (operand1: .roll(Int.min, 1), operand2: .roll(-1, 1)),
       (operand1: .roll(-1, 1), operand2: .roll(Int.min, 1)),
+    ]
 
-      (operand1: .roll(Int.max, 1), operand2: .rollPositiveSides(1)),
+    for fixture in fixtures {
+      let operand1 = fixture.operand1
+      let operand2 = fixture.operand2
+      let expected = ExpressionError.invalidCombinationOperands(
+        String(describing: operand1),
+        String(describing: operand2)
+      )
+
+      XCTAssertThrowsError(try operand1.combined(operand2)) { error in
+        XCTAssertEqual(expected, error as? ExpressionError)
+      }
+    }
+  }
+
+  func testCombinedRollWithRollNegativeSides() {
+    typealias Fixture = (
+      operand1: Operand,
+      operand2: Operand
+    )
+
+    let fixtures: [Fixture] = [
+      // Mis-matching roll types
+      (operand1: .roll(0, -0), operand2: .rollNegativeSides(0)),
+      (operand1: .roll(0, -1), operand2: .rollNegativeSides(0)),
+      (operand1: .roll(0, -21), operand2: .rollNegativeSides(0)),
+
+      (operand1: .roll(1, -0), operand2: .rollNegativeSides(1)),
+      (operand1: .roll(1, -2), operand2: .rollNegativeSides(1)),
+      (operand1: .roll(1, -32), operand2: .rollNegativeSides(1)),
+
+      (operand1: .roll(9, -0), operand2: .rollNegativeSides(9)),
+      (operand1: .roll(9, -8), operand2: .rollNegativeSides(9)),
+      (operand1: .roll(9, -78), operand2: .rollNegativeSides(9)),
+
+      (operand1: .roll(0, -0), operand2: .rollNegativeSides(Int.max)),
+      (operand1: .roll(0, -1), operand2: .rollNegativeSides(Int.max)),
+      (operand1: .roll(0, Int.min), operand2: .rollNegativeSides(Int.max)),
+
+      (operand1: .roll(-1, -0), operand2: .rollNegativeSides(-1)),
+      (operand1: .roll(-1, -2), operand2: .rollNegativeSides(-1)),
+      (operand1: .roll(-1, -32), operand2: .rollNegativeSides(-1)),
+
+      (operand1: .roll(-9, -0), operand2: .rollNegativeSides(-9)),
+      (operand1: .roll(-9, -8), operand2: .rollNegativeSides(-9)),
+      (operand1: .roll(-9, -78), operand2: .rollNegativeSides(-9)),
+
+      (operand1: .roll(-0, -0), operand2: .rollNegativeSides(Int.min)),
+      (operand1: .roll(-0, -1), operand2: .rollNegativeSides(Int.min)),
+      (operand1: .roll(-0, Int.min), operand2: .rollNegativeSides(Int.min)),
+
+      // Mis-matching sides signage
+      (operand1: .roll(1, 1), operand2: .rollNegativeSides(1)),
+      (operand1: .roll(1, Int.max), operand2: .rollNegativeSides(1)),
+
+      // Overflowing integer addition
       (operand1: .roll(Int.max, -1), operand2: .rollNegativeSides(1)),
-      (operand1: .rollPositiveSides(1), operand2: .roll(Int.max, 1)),
-      (operand1: .rollNegativeSides(1), operand2: .roll(Int.max, -1)),
-
-      (operand1: .roll(Int.min, 1), operand2: .rollPositiveSides(-1)),
       (operand1: .roll(Int.min, -1), operand2: .rollNegativeSides(-1)),
-      (operand1: .rollPositiveSides(-1), operand2: .roll(Int.min, 1)),
+    ]
+
+    for fixture in fixtures {
+      let operand1 = fixture.operand1
+      let operand2 = fixture.operand2
+      let expected = ExpressionError.invalidCombinationOperands(
+        String(describing: operand1),
+        String(describing: operand2)
+      )
+
+      XCTAssertThrowsError(try operand1.combined(operand2)) { error in
+        XCTAssertEqual(expected, error as? ExpressionError)
+      }
+    }
+  }
+
+  func testCombinedRollWithRollPositiveSides() {
+    typealias Fixture = (
+      operand1: Operand,
+      operand2: Operand
+    )
+
+    let fixtures: [Fixture] = [
+      // Mis-matching roll types
+      (operand1: .roll(0, 0), operand2: .rollPositiveSides(0)),
+      (operand1: .roll(0, 1), operand2: .rollPositiveSides(0)),
+      (operand1: .roll(0, 21), operand2: .rollPositiveSides(0)),
+
+      (operand1: .roll(1, 0), operand2: .rollPositiveSides(1)),
+      (operand1: .roll(1, 2), operand2: .rollPositiveSides(1)),
+      (operand1: .roll(1, 32), operand2: .rollPositiveSides(1)),
+
+      (operand1: .roll(9, 0), operand2: .rollPositiveSides(9)),
+      (operand1: .roll(9, 8), operand2: .rollPositiveSides(9)),
+      (operand1: .roll(9, 78), operand2: .rollPositiveSides(9)),
+
+      (operand1: .roll(0, 0), operand2: .rollPositiveSides(Int.max)),
+      (operand1: .roll(0, 1), operand2: .rollPositiveSides(Int.max)),
+      (operand1: .roll(0, Int.max), operand2: .rollPositiveSides(Int.max)),
+
+      (operand1: .roll(-1, 0), operand2: .rollPositiveSides(-1)),
+      (operand1: .roll(-1, 2), operand2: .rollPositiveSides(-1)),
+      (operand1: .roll(-1, 32), operand2: .rollPositiveSides(-1)),
+
+      (operand1: .roll(-9, 0), operand2: .rollPositiveSides(-9)),
+      (operand1: .roll(-9, 8), operand2: .rollPositiveSides(-9)),
+      (operand1: .roll(-9, 78), operand2: .rollPositiveSides(-9)),
+
+      (operand1: .roll(-0, 0), operand2: .rollPositiveSides(Int.min)),
+      (operand1: .roll(-0, 1), operand2: .rollPositiveSides(Int.min)),
+      (operand1: .roll(-0, Int.max), operand2: .rollPositiveSides(Int.min)),
+
+      // Mis-matching sides signage
+      (operand1: .roll(1, -1), operand2: .rollPositiveSides(1)),
+      (operand1: .roll(1, Int.min), operand2: .rollPositiveSides(1)),
+
+      // Overflowing integer addition
+      (operand1: .roll(Int.max, 1), operand2: .rollPositiveSides(1)),
+      (operand1: .roll(Int.min, 1), operand2: .rollPositiveSides(-1)),
+    ]
+
+    for fixture in fixtures {
+      let operand1 = fixture.operand1
+      let operand2 = fixture.operand2
+      let expected = ExpressionError.invalidCombinationOperands(
+        String(describing: operand1),
+        String(describing: operand2)
+      )
+
+      XCTAssertThrowsError(try operand1.combined(operand2)) { error in
+        XCTAssertEqual(expected, error as? ExpressionError)
+      }
+    }
+  }
+
+  // MARK: - RollNegativeSides
+
+  func testCombinedRollNegativeSidesWithConstant() {
+    typealias Fixture = (
+      operand1: Operand,
+      operand2: Operand,
+      expected: Operand
+    )
+
+    let fixtures: [Fixture] = [
+      (operand1: .rollNegativeSides(0), operand2: .constant(0), expected: .roll(0, -0)),
+      (operand1: .rollNegativeSides(1), operand2: .constant(1), expected: .roll(1, -1)),
+      (operand1: .rollNegativeSides(9), operand2: .constant(9), expected: .roll(9, -9)),
+      (operand1: .rollNegativeSides(1), operand2: .constant(Int.max), expected: .roll(1, -Int.max)),
+
+      (operand1: .rollNegativeSides(-0), operand2: .constant(0), expected: .roll(-0, -0)),
+      (operand1: .rollNegativeSides(-1), operand2: .constant(1), expected: .roll(-1, -1)),
+      (operand1: .rollNegativeSides(-9), operand2: .constant(9), expected: .roll(-9, -9)),
+      (operand1: .rollNegativeSides(-1), operand2: .constant(Int.max), expected: .roll(-1, -Int.max)),
+
+      (operand1: .rollNegativeSides(0), operand2: .constant(-0), expected: .roll(0, -0)),
+      (operand1: .rollNegativeSides(1), operand2: .constant(-1), expected: .roll(1, 1)),
+      (operand1: .rollNegativeSides(9), operand2: .constant(-9), expected: .roll(9, 9)),
+      (operand1: .rollNegativeSides(1), operand2: .constant(-Int.max), expected: .roll(1, Int.max)),
+
+      (operand1: .rollNegativeSides(-0), operand2: .constant(-0), expected: .roll(-0, -0)),
+      (operand1: .rollNegativeSides(-1), operand2: .constant(-1), expected: .roll(-1, 1)),
+      (operand1: .rollNegativeSides(-9), operand2: .constant(-9), expected: .roll(-9, 9)),
+      (operand1: .rollNegativeSides(-1), operand2: .constant(-Int.max), expected: .roll(-1, Int.max)),
+    ]
+
+    for fixture in fixtures {
+      let operand1 = fixture.operand1
+      let operand2 = fixture.operand2
+      let expected = fixture.expected
+      let actual = try! operand1.combined(operand2)
+
+      XCTAssertEqual(expected, actual)
+    }
+  }
+
+  func testCombinedRollNegativeSidesWithInvalidConstant() {
+    typealias Fixture = (
+      operand1: Operand,
+      operand2: Operand
+    )
+
+    let fixtures: [Fixture] = [
+      // Overflow negation
+      (operand1: .rollNegativeSides(1), operand2: .constant(Int.min)),
+    ]
+
+    for fixture in fixtures {
+      let operand1 = fixture.operand1
+      let operand2 = fixture.operand2
+      let expected = ExpressionError.invalidCombinationOperands(
+        String(describing: operand1),
+        String(describing: operand2)
+      )
+
+      XCTAssertThrowsError(try operand1.combined(operand2)) { error in
+        XCTAssertEqual(expected, error as? ExpressionError)
+      }
+    }
+  }
+
+  func testCombinedRollNegativeSidesWithRoll() {
+    typealias Fixture = (
+      operand1: Operand,
+      operand2: Operand
+    )
+
+    let fixtures: [Fixture] = [
+      // Mis-matching roll types
+      (operand1: .rollNegativeSides(0), operand2: .roll(0, -0)),
+      (operand1: .rollNegativeSides(0), operand2: .roll(0, -1)),
+      (operand1: .rollNegativeSides(0), operand2: .roll(0, -21)),
+
+      (operand1: .rollNegativeSides(1), operand2: .roll(1, -0)),
+      (operand1: .rollNegativeSides(1), operand2: .roll(1, -2)),
+      (operand1: .rollNegativeSides(1), operand2: .roll(1, -32)),
+
+      (operand1: .rollNegativeSides(9), operand2: .roll(9, -0)),
+      (operand1: .rollNegativeSides(9), operand2: .roll(9, -8)),
+      (operand1: .rollNegativeSides(9), operand2: .roll(9, -78)),
+
+      (operand1: .rollNegativeSides(Int.max), operand2: .roll(0, -0)),
+      (operand1: .rollNegativeSides(Int.max), operand2: .roll(0, -1)),
+      (operand1: .rollNegativeSides(Int.max), operand2: .roll(0, Int.min)),
+
+      (operand1: .rollNegativeSides(-0), operand2: .roll(-0, -0)),
+      (operand1: .rollNegativeSides(-0), operand2: .roll(-0, -2)),
+      (operand1: .rollNegativeSides(-0), operand2: .roll(-0, -32)),
+
+      (operand1: .rollNegativeSides(-1), operand2: .roll(-1, -0)),
+      (operand1: .rollNegativeSides(-1), operand2: .roll(-1, -2)),
+      (operand1: .rollNegativeSides(-1), operand2: .roll(-1, -32)),
+
+      (operand1: .rollNegativeSides(-9), operand2: .roll(-9, -0)),
+      (operand1: .rollNegativeSides(-9), operand2: .roll(-9, -8)),
+      (operand1: .rollNegativeSides(-9), operand2: .roll(-9, -78)),
+
+      (operand1: .rollNegativeSides(Int.min), operand2: .roll(-0, -0)),
+      (operand1: .rollNegativeSides(Int.min), operand2: .roll(-0, -1)),
+      (operand1: .rollNegativeSides(Int.min), operand2: .roll(-0, Int.min)),
+
+      // Mis-matching sides signage
+      (operand1: .rollNegativeSides(1), operand2: .roll(1, 1)),
+      (operand1: .rollNegativeSides(1), operand2: .roll(1, Int.max)),
+
+      // Overflowing integer addition
+      (operand1: .rollNegativeSides(1), operand2: .roll(Int.max, -1)),
       (operand1: .rollNegativeSides(-1), operand2: .roll(Int.min, -1)),
+    ]
 
-      (operand1: .rollPositiveSides(Int.max), operand2: .rollPositiveSides(1)),
-      (operand1: .rollPositiveSides(1), operand2: .rollPositiveSides(Int.max)),
-      (operand1: .rollPositiveSides(Int.min), operand2: .rollPositiveSides(-1)),
-      (operand1: .rollPositiveSides(-1), operand2: .rollPositiveSides(Int.min)),
+    for fixture in fixtures {
+      let operand1 = fixture.operand1
+      let operand2 = fixture.operand2
+      let expected = ExpressionError.invalidCombinationOperands(
+        String(describing: operand1),
+        String(describing: operand2)
+      )
 
+      XCTAssertThrowsError(try operand1.combined(operand2)) { error in
+        XCTAssertEqual(expected, error as? ExpressionError)
+      }
+    }
+  }
+
+  func testCombinedRollNegativeSidesWithRollNegativeSides() {
+    typealias Fixture = (
+      operand1: Operand,
+      operand2: Operand,
+      expected: Operand
+    )
+
+    let fixtures: [Fixture] = [
+      (
+        operand1: .rollNegativeSides(0),
+        operand2: .rollNegativeSides(0),
+        expected: .rollNegativeSides(0)
+      ),
+
+      (
+        operand1: .rollNegativeSides(1),
+        operand2: .rollNegativeSides(1),
+        expected: .rollNegativeSides(2)
+      ),
+
+      (
+        operand1: .rollNegativeSides(9),
+        operand2: .rollNegativeSides(9),
+        expected: .rollNegativeSides(18)
+      ),
+
+      (
+        operand1: .rollNegativeSides(Int.max),
+        operand2: .rollNegativeSides(0),
+        expected: .rollNegativeSides(Int.max)
+      ),
+
+      (
+        operand1: .rollNegativeSides(-0),
+        operand2: .rollNegativeSides(-0),
+        expected: .rollNegativeSides(-0)
+      ),
+
+      (
+        operand1: .rollNegativeSides(-1),
+        operand2: .rollNegativeSides(-1),
+        expected: .rollNegativeSides(-2)
+      ),
+
+      (
+        operand1: .rollNegativeSides(-9),
+        operand2: .rollNegativeSides(-9),
+        expected: .rollNegativeSides(-18)
+      ),
+
+      (
+        operand1: .rollNegativeSides(Int.min),
+        operand2: .rollNegativeSides(-0),
+        expected: .rollNegativeSides(Int.min)
+      ),
+    ]
+
+    for fixture in fixtures {
+      let operand1 = fixture.operand1
+      let operand2 = fixture.operand2
+      let expected = fixture.expected
+      let actual = try! operand1.combined(operand2)
+
+      XCTAssertEqual(expected, actual)
+    }
+  }
+
+  func testCombinedRollNegativeSidesWithInvalidRollNegativeSides() {
+    typealias Fixture = (
+      operand1: Operand,
+      operand2: Operand
+    )
+
+    let fixtures: [Fixture] = [
+      // Overflowing integer addition
       (operand1: .rollNegativeSides(Int.max), operand2: .rollNegativeSides(1)),
       (operand1: .rollNegativeSides(1), operand2: .rollNegativeSides(Int.max)),
       (operand1: .rollNegativeSides(Int.min), operand2: .rollNegativeSides(-1)),
       (operand1: .rollNegativeSides(-1), operand2: .rollNegativeSides(Int.min)),
+    ]
+
+    for fixture in fixtures {
+      let operand1 = fixture.operand1
+      let operand2 = fixture.operand2
+      let expected = ExpressionError.invalidCombinationOperands(
+        String(describing: operand1),
+        String(describing: operand2)
+      )
+
+      XCTAssertThrowsError(try operand1.combined(operand2)) { error in
+        XCTAssertEqual(expected, error as? ExpressionError)
+      }
+    }
+  }
+
+  func testCombinedRollNegativeSidesWithRollPositiveSides() {
+    typealias Fixture = (
+      operand1: Operand,
+      operand2: Operand
+    )
+
+    let fixtures: [Fixture] = [
+      // Mis-matching sides signage
+      (operand1: .rollNegativeSides(1), operand2: .rollPositiveSides(1)),
+      (operand1: .rollNegativeSides(-1), operand2: .rollPositiveSides(-1)),
+    ]
+
+    for fixture in fixtures {
+      let operand1 = fixture.operand1
+      let operand2 = fixture.operand2
+      let expected = ExpressionError.invalidCombinationOperands(
+        String(describing: operand1),
+        String(describing: operand2)
+      )
+
+      XCTAssertThrowsError(try operand1.combined(operand2)) { error in
+        XCTAssertEqual(expected, error as? ExpressionError)
+      }
+    }
+  }
+
+  // MARK: - RollPositiveSides
+
+  func testCombinedRollPositiveSidesWithConstant() {
+    typealias Fixture = (
+      operand1: Operand,
+      operand2: Operand,
+      expected: Operand
+    )
+
+    let fixtures: [Fixture] = [
+      (operand1: .rollPositiveSides(0), operand2: .constant(0), expected: .roll(0, 0)),
+      (operand1: .rollPositiveSides(1), operand2: .constant(1), expected: .roll(1, 1)),
+      (operand1: .rollPositiveSides(9), operand2: .constant(9), expected: .roll(9, 9)),
+      (operand1: .rollPositiveSides(1), operand2: .constant(Int.max), expected: .roll(1, Int.max)),
+
+      (operand1: .rollPositiveSides(-0), operand2: .constant(0), expected: .roll(-0, 0)),
+      (operand1: .rollPositiveSides(-1), operand2: .constant(1), expected: .roll(-1, 1)),
+      (operand1: .rollPositiveSides(-9), operand2: .constant(9), expected: .roll(-9, 9)),
+      (operand1: .rollPositiveSides(-1), operand2: .constant(Int.max), expected: .roll(-1, Int.max)),
+
+      (operand1: .rollPositiveSides(0), operand2: .constant(-0), expected: .roll(0, 0)),
+      (operand1: .rollPositiveSides(1), operand2: .constant(-1), expected: .roll(1, -1)),
+      (operand1: .rollPositiveSides(9), operand2: .constant(-9), expected: .roll(9, -9)),
+      (operand1: .rollPositiveSides(1), operand2: .constant(Int.min), expected: .roll(1, Int.min)),
+
+      (operand1: .rollPositiveSides(-0), operand2: .constant(-0), expected: .roll(-0, 0)),
+      (operand1: .rollPositiveSides(-1), operand2: .constant(-1), expected: .roll(-1, -1)),
+      (operand1: .rollPositiveSides(-9), operand2: .constant(-9), expected: .roll(-9, -9)),
+      (operand1: .rollPositiveSides(-1), operand2: .constant(Int.min), expected: .roll(-1, Int.min)),
+
+    ]
+
+    for fixture in fixtures {
+      let operand1 = fixture.operand1
+      let operand2 = fixture.operand2
+      let expected = fixture.expected
+      let actual = try! operand1.combined(operand2)
+
+      XCTAssertEqual(expected, actual)
+    }
+  }
+
+  func testCombinedRollPositiveSidesWithRoll() {
+    typealias Fixture = (
+      operand1: Operand,
+      operand2: Operand
+    )
+
+    let fixtures: [Fixture] = [
+      // Mis-matching roll types
+      (operand1: .rollPositiveSides(0), operand2: .roll(0, 0)),
+      (operand1: .rollPositiveSides(0), operand2: .roll(0, 1)),
+      (operand1: .rollPositiveSides(0), operand2: .roll(0, 21)),
+
+      (operand1: .rollPositiveSides(1), operand2: .roll(1, 0)),
+      (operand1: .rollPositiveSides(1), operand2: .roll(1, 2)),
+      (operand1: .rollPositiveSides(1), operand2: .roll(1, 32)),
+
+      (operand1: .rollPositiveSides(9), operand2: .roll(9, 0)),
+      (operand1: .rollPositiveSides(9), operand2: .roll(9, 8)),
+      (operand1: .rollPositiveSides(9), operand2: .roll(9, 78)),
+
+      (operand1: .rollPositiveSides(Int.max), operand2: .roll(0, 0)),
+      (operand1: .rollPositiveSides(Int.max), operand2: .roll(0, 1)),
+      (operand1: .rollPositiveSides(Int.max), operand2: .roll(0, Int.max)),
+
+      (operand1: .rollPositiveSides(-0), operand2: .roll(-0, 0)),
+      (operand1: .rollPositiveSides(-0), operand2: .roll(-0, 2)),
+      (operand1: .rollPositiveSides(-0), operand2: .roll(-0, 32)),
+
+      (operand1: .rollPositiveSides(-1), operand2: .roll(-1, 0)),
+      (operand1: .rollPositiveSides(-1), operand2: .roll(-1, 2)),
+      (operand1: .rollPositiveSides(-1), operand2: .roll(-1, 32)),
+
+      (operand1: .rollPositiveSides(-9), operand2: .roll(-9, 0)),
+      (operand1: .rollPositiveSides(-9), operand2: .roll(-9, 8)),
+      (operand1: .rollPositiveSides(-9), operand2: .roll(-9, 78)),
+
+      (operand1: .rollPositiveSides(Int.min), operand2: .roll(-0, 0)),
+      (operand1: .rollPositiveSides(Int.min), operand2: .roll(-0, 1)),
+      (operand1: .rollPositiveSides(Int.min), operand2: .roll(-0, Int.max)),
+
+      // Mis-matching sides signage
+      (operand1: .rollPositiveSides(1), operand2: .roll(1, -1)),
+      (operand1: .rollPositiveSides(1), operand2: .roll(1, Int.min)),
+
+      // Overflowing integer addition
+      (operand1: .rollPositiveSides(1), operand2: .roll(Int.max, 1)),
+      (operand1: .rollPositiveSides(-1), operand2: .roll(Int.min, 1)),
+    ]
+
+    for fixture in fixtures {
+      let operand1 = fixture.operand1
+      let operand2 = fixture.operand2
+      let expected = ExpressionError.invalidCombinationOperands(
+        String(describing: operand1),
+        String(describing: operand2)
+      )
+
+      XCTAssertThrowsError(try operand1.combined(operand2)) { error in
+        XCTAssertEqual(expected, error as? ExpressionError)
+      }
+    }
+  }
+
+  func testCombinedRollPositiveSidesWithRollPositiveSides() {
+    typealias Fixture = (
+      operand1: Operand,
+      operand2: Operand,
+      expected: Operand
+    )
+
+    let fixtures: [Fixture] = [
+      (
+        operand1: .rollPositiveSides(0),
+        operand2: .rollPositiveSides(0),
+        expected: .rollPositiveSides(0)
+      ),
+
+      (
+        operand1: .rollPositiveSides(1),
+        operand2: .rollPositiveSides(1),
+        expected: .rollPositiveSides(2)
+      ),
+
+      (
+        operand1: .rollPositiveSides(9),
+        operand2: .rollPositiveSides(9),
+        expected: .rollPositiveSides(18)
+      ),
+
+      (
+        operand1: .rollPositiveSides(Int.max),
+        operand2: .rollPositiveSides(0),
+        expected: .rollPositiveSides(Int.max)
+      ),
+
+      (
+        operand1: .rollPositiveSides(-0),
+        operand2: .rollPositiveSides(-0),
+        expected: .rollPositiveSides(-0)
+      ),
+
+      (
+        operand1: .rollPositiveSides(-1),
+        operand2: .rollPositiveSides(-1),
+        expected: .rollPositiveSides(-2)
+      ),
+
+      (
+        operand1: .rollPositiveSides(-9),
+        operand2: .rollPositiveSides(-9),
+        expected: .rollPositiveSides(-18)
+      ),
+
+      (
+        operand1: .rollPositiveSides(Int.min),
+        operand2: .rollPositiveSides(-0),
+        expected: .rollPositiveSides(Int.min)
+      ),
+    ]
+
+    for fixture in fixtures {
+      let operand1 = fixture.operand1
+      let operand2 = fixture.operand2
+      let expected = fixture.expected
+      let actual = try! operand1.combined(operand2)
+
+      XCTAssertEqual(expected, actual)
+    }
+  }
+
+  func testCombinedRollPositiveSidesWithInvalidRollPositiveSides() {
+    typealias Fixture = (
+      operand1: Operand,
+      operand2: Operand
+    )
+
+    let fixtures: [Fixture] = [
+      // Overflowing integer addition
+      (operand1: .rollPositiveSides(Int.max), operand2: .rollPositiveSides(1)),
+      (operand1: .rollPositiveSides(1), operand2: .rollPositiveSides(Int.max)),
+      (operand1: .rollPositiveSides(Int.min), operand2: .rollPositiveSides(-1)),
+      (operand1: .rollPositiveSides(-1), operand2: .rollPositiveSides(Int.min)),
+    ]
+
+    for fixture in fixtures {
+      let operand1 = fixture.operand1
+      let operand2 = fixture.operand2
+      let expected = ExpressionError.invalidCombinationOperands(
+        String(describing: operand1),
+        String(describing: operand2)
+      )
+
+      XCTAssertThrowsError(try operand1.combined(operand2)) { error in
+        XCTAssertEqual(expected, error as? ExpressionError)
+      }
+    }
+  }
+
+  func testCombinedRollPositiveSidesWithRollNegativeSides() {
+    typealias Fixture = (
+      operand1: Operand,
+      operand2: Operand
+    )
+
+    let fixtures: [Fixture] = [
+      // Mis-matching sides signage
+      (operand1: .rollPositiveSides(1), operand2: .rollNegativeSides(1)),
+      (operand1: .rollPositiveSides(-1), operand2: .rollNegativeSides(-1)),
     ]
 
     for fixture in fixtures {
@@ -1120,7 +1511,9 @@ extension OperandTests {
 // MARK: - Exclusion
 
 extension OperandTests {
-  func testDroppedFromNumberToOperand() {
+  // MARK: - Constant
+
+  func testDroppedFromConstantToNil() {
     typealias Fixture = (
       operand: Operand,
       expected: Operand?
@@ -1128,14 +1521,34 @@ extension OperandTests {
 
     let fixtures: [Fixture] = [
       (operand: .constant(0), expected: nil),
+      (operand: .constant(1), expected: nil),
+      (operand: .constant(9), expected: nil),
+
+      (operand: .constant(-0), expected: nil),
+    ]
+
+    for fixture in fixtures {
+      let operand = fixture.operand
+      let expected = fixture.expected
+      let actual = operand.dropped()
+
+      XCTAssertEqual(expected, actual as? Operand, "operand: \(operand)")
+    }
+  }
+
+  func testDroppedFromConstantToConstant() {
+    typealias Fixture = (
+      operand: Operand,
+      expected: Operand?
+    )
+
+    let fixtures: [Fixture] = [
       (operand: .constant(10), expected: Operand.constant(1)),
       (operand: .constant(210), expected: Operand.constant(21)),
 
-      (operand: .constant(1), expected: nil),
       (operand: .constant(21), expected: Operand.constant(2)),
       (operand: .constant(321), expected: Operand.constant(32)),
 
-      (operand: .constant(9), expected: nil),
       (operand: .constant(89), expected: Operand.constant(8)),
       (operand: .constant(789), expected: Operand.constant(78)),
 
@@ -1162,14 +1575,13 @@ extension OperandTests {
     }
   }
 
-  func testDroppedFromNumberToOperator() {
+  func testDroppedFromConstantToOperator() {
     typealias Fixture = (
       operand: Operand,
       expected: Operator?
     )
 
     let fixtures: [Fixture] = [
-      (operand: .constant(-0), expected: nil),
       (operand: .constant(-1), expected: Operator.subtraction),
       (operand: .constant(-9), expected: Operator.subtraction),
     ]
@@ -1183,7 +1595,93 @@ extension OperandTests {
     }
   }
 
-  func testDroppedFromRollToOperand() {
+  // MARK: - Roll
+
+  func testDroppedFromRollToRoll() {
+    typealias Fixture = (
+      operand: Operand,
+      expected: Operand
+    )
+
+    let fixtures: [Fixture] = [
+      (operand: .roll(0, 10), expected: .roll(0, 1)),
+      (operand: .roll(0, 210), expected: .roll(0, 21)),
+
+      (operand: .roll(1, 21), expected: .roll(1, 2)),
+      (operand: .roll(1, 321), expected: .roll(1, 32)),
+
+      (operand: .roll(9, 89), expected: .roll(9, 8)),
+      (operand: .roll(9, 789), expected: .roll(9, 78)),
+
+      (operand: .roll(1, Int.max), expected: .roll(1, 922337203685477580)),
+
+      (operand: .roll(0, -10), expected: .roll(0, -1)),
+      (operand: .roll(0, -210), expected: .roll(0, -21)),
+
+      (operand: .roll(1, -21), expected: .roll(1, -2)),
+      (operand: .roll(1, -321), expected: .roll(1, -32)),
+
+      (operand: .roll(9, -89), expected: .roll(9, -8)),
+      (operand: .roll(9, -789), expected: .roll(9, -78)),
+
+      (operand: .roll(1, Int.min), expected: .roll(1, -922337203685477580)),
+
+      (operand: .roll(-0, 10), expected: .roll(-0, 1)),
+      (operand: .roll(-0, 210), expected: .roll(-0, 21)),
+
+      (operand: .roll(-1, 21), expected: .roll(-1, 2)),
+      (operand: .roll(-1, 321), expected: .roll(-1, 32)),
+
+      (operand: .roll(-9, 89), expected: .roll(-9, 8)),
+      (operand: .roll(-9, 789), expected: .roll(-9, 78)),
+
+      (operand: .roll(-1, Int.max), expected: .roll(-1, 922337203685477580)),
+
+      (operand: .roll(-0, -10), expected: .roll(-0, -1)),
+      (operand: .roll(-0, -210), expected: .roll(-0, -21)),
+
+      (operand: .roll(-1, -21), expected: .roll(-1, -2)),
+      (operand: .roll(-1, -321), expected: .roll(-1, -32)),
+
+      (operand: .roll(-9, -89), expected: .roll(-9, -8)),
+      (operand: .roll(-9, -789), expected: .roll(-9, -78)),
+
+      (operand: .roll(-1, Int.min), expected: .roll(-1, -922337203685477580)),
+    ]
+
+    for fixture in fixtures {
+      let operand = fixture.operand
+      let expected = fixture.expected
+      let actual = operand.dropped()
+
+      XCTAssertEqual(expected, actual as? Operand, "operand: \(operand)")
+    }
+  }
+
+  func testDroppedFromRollToRollNegativeSides() {
+    typealias Fixture = (
+      operand: Operand,
+      expected: Operand
+    )
+
+    let fixtures: [Fixture] = [
+      (operand: .roll(1, -1), expected: .rollNegativeSides(1)),
+      (operand: .roll(9, -9), expected: .rollNegativeSides(9)),
+
+      (operand: .roll(-1, -1), expected: .rollNegativeSides(-1)),
+      (operand: .roll(-9, -9), expected: .rollNegativeSides(-9)),
+    ]
+
+    for fixture in fixtures {
+      let operand = fixture.operand
+      let expected = fixture.expected
+      let actual = operand.dropped()
+
+      XCTAssertEqual(expected, actual as? Operand, "operand: \(operand)")
+    }
+  }
+
+  func testDroppedFromRollToRollPositiveSides() {
     typealias Fixture = (
       operand: Operand,
       expected: Operand
@@ -1191,73 +1689,36 @@ extension OperandTests {
 
     let fixtures: [Fixture] = [
       (operand: .roll(0, 0), expected: .rollPositiveSides(0)),
-      (operand: .roll(0, 10), expected: .roll(0, 1)),
-      (operand: .roll(0, 210), expected: .roll(0, 21)),
-
       (operand: .roll(1, 1), expected: .rollPositiveSides(1)),
-      (operand: .roll(1, 21), expected: .roll(1, 2)),
-      (operand: .roll(1, 321), expected: .roll(1, 32)),
-
       (operand: .roll(9, 9), expected: .rollPositiveSides(9)),
-      (operand: .roll(9, 89), expected: .roll(9, 8)),
-      (operand: .roll(9, 789), expected: .roll(9, 78)),
-
-      (operand: .roll(1, Int.max), expected: .roll(1, 922337203685477580)),
 
       (operand: .roll(0, -0), expected: .rollPositiveSides(0)),
-      (operand: .roll(0, -10), expected: .roll(0, -1)),
-      (operand: .roll(0, -210), expected: .roll(0, -21)),
-
-      (operand: .roll(1, -1), expected: .rollNegativeSides(1)),
-      (operand: .roll(1, -21), expected: .roll(1, -2)),
-      (operand: .roll(1, -321), expected: .roll(1, -32)),
-
-      (operand: .roll(9, -9), expected: .rollNegativeSides(9)),
-      (operand: .roll(9, -89), expected: .roll(9, -8)),
-      (operand: .roll(9, -789), expected: .roll(9, -78)),
-
-      (operand: .roll(1, Int.min), expected: .roll(1, -922337203685477580)),
 
       (operand: .roll(-0, 0), expected: .rollPositiveSides(-0)),
-      (operand: .roll(-0, 10), expected: .roll(-0, 1)),
-      (operand: .roll(-0, 210), expected: .roll(-0, 21)),
-
       (operand: .roll(-1, 1), expected: .rollPositiveSides(-1)),
-      (operand: .roll(-1, 21), expected: .roll(-1, 2)),
-      (operand: .roll(-1, 321), expected: .roll(-1, 32)),
-
       (operand: .roll(-9, 9), expected: .rollPositiveSides(-9)),
-      (operand: .roll(-9, 89), expected: .roll(-9, 8)),
-      (operand: .roll(-9, 789), expected: .roll(-9, 78)),
-
-      (operand: .roll(-1, Int.max), expected: .roll(-1, 922337203685477580)),
 
       (operand: .roll(-0, -0), expected: .rollPositiveSides(0)),
-      (operand: .roll(-0, -10), expected: .roll(-0, -1)),
-      (operand: .roll(-0, -210), expected: .roll(-0, -21)),
+    ]
 
-      (operand: .roll(-1, -1), expected: .rollNegativeSides(-1)),
-      (operand: .roll(-1, -21), expected: .roll(-1, -2)),
-      (operand: .roll(-1, -321), expected: .roll(-1, -32)),
+    for fixture in fixtures {
+      let operand = fixture.operand
+      let expected = fixture.expected
+      let actual = operand.dropped()
 
-      (operand: .roll(-9, -9), expected: .rollNegativeSides(-9)),
-      (operand: .roll(-9, -89), expected: .roll(-9, -8)),
-      (operand: .roll(-9, -789), expected: .roll(-9, -78)),
+      XCTAssertEqual(expected, actual as? Operand, "operand: \(operand)")
+    }
+  }
 
-      (operand: .roll(-1, Int.min), expected: .roll(-1, -922337203685477580)),
+  // MARK: - RollNegativeSides
 
-      (operand: .rollPositiveSides(0), expected: .constant(0)),
-      (operand: .rollPositiveSides(1), expected: .constant(1)),
-      (operand: .rollPositiveSides(9), expected: .constant(9)),
+  func testDroppedFromRollNegativeSidesToRollPositiveSides() {
+    typealias Fixture = (
+      operand: Operand,
+      expected: Operand
+    )
 
-      (operand: .rollPositiveSides(Int.max), expected: .constant(Int.max)),
-
-      (operand: .rollPositiveSides(-0), expected: .constant(-0)),
-      (operand: .rollPositiveSides(-1), expected: .constant(-1)),
-      (operand: .rollPositiveSides(-9), expected: .constant(-9)),
-
-      (operand: .rollPositiveSides(Int.min), expected: .constant(Int.min)),
-
+    let fixtures: [Fixture] = [
       (operand: .rollNegativeSides(0), expected: .rollPositiveSides(0)),
       (operand: .rollNegativeSides(1), expected: .rollPositiveSides(1)),
       (operand: .rollNegativeSides(9), expected: .rollPositiveSides(9)),
@@ -1279,12 +1740,43 @@ extension OperandTests {
       XCTAssertEqual(expected, actual as? Operand, "operand: \(operand)")
     }
   }
+
+  // MARK: - RollPositiveSides
+
+  func testDroppedFromRollPositiveSidesToConstant() {
+    typealias Fixture = (
+      operand: Operand,
+      expected: Operand
+    )
+
+    let fixtures: [Fixture] = [
+      (operand: .rollPositiveSides(0), expected: .constant(0)),
+      (operand: .rollPositiveSides(1), expected: .constant(1)),
+      (operand: .rollPositiveSides(9), expected: .constant(9)),
+
+      (operand: .rollPositiveSides(Int.max), expected: .constant(Int.max)),
+
+      (operand: .rollPositiveSides(-0), expected: .constant(-0)),
+      (operand: .rollPositiveSides(-1), expected: .constant(-1)),
+      (operand: .rollPositiveSides(-9), expected: .constant(-9)),
+
+      (operand: .rollPositiveSides(Int.min), expected: .constant(Int.min)),
+    ]
+
+    for fixture in fixtures {
+      let operand = fixture.operand
+      let expected = fixture.expected
+      let actual = operand.dropped()
+
+      XCTAssertEqual(expected, actual as? Operand, "operand: \(operand)")
+    }
+  }
 }
 
 // MARK: - Evaluation
 
 extension OperandTests {
-  func testNumberValue() {
+  func testValueConstant() {
     typealias Fixture = (
       operand: Operand,
       expected: Int
@@ -1307,7 +1799,7 @@ extension OperandTests {
     }
   }
 
-  func testRollValue() {
+  func testValueRoll() {
     typealias Fixture = (
       operand: Operand,
       expected: CountableClosedRange<Int>
@@ -1400,7 +1892,7 @@ extension OperandTests {
     }
   }
 
-  func testRollValueWithOverflow() {
+  func testValueRollWithOverflow() {
     let fixtures: [Operand] = [
       .roll(1, Int.min),
       .roll(Int.min, 4),
@@ -1418,7 +1910,7 @@ extension OperandTests {
     }
   }
 
-  func testRollWithNegativeSidesValue() {
+  func testValueRollNegativeSides() {
     let fixtures: [Operand] = [
       .rollNegativeSides(0),
       .rollNegativeSides(1),
@@ -1444,7 +1936,7 @@ extension OperandTests {
     }
   }
 
-  func testRollWithPositiveSidesValue() {
+  func testValueRollPositiveSides() {
     let fixtures: [Operand] = [
       .rollPositiveSides(0),
       .rollPositiveSides(1),
@@ -1474,7 +1966,9 @@ extension OperandTests {
 // MARK: - Operation
 
 extension OperandTests {
-  func testAdditionWithNumbers() {
+  // MARK: - Addition
+
+  func testAddedConstantToConstant() {
     typealias Fixture = (
       operand1: Operand,
       operand2: Operand,
@@ -1528,7 +2022,7 @@ extension OperandTests {
     }
   }
 
-  func testAdditionWithNumbersAndOverflow() {
+  func testAddedConstantToConstantWithOverflow() {
     typealias Fixture = (
       operand1: Operand,
       operand2: Operand
@@ -1554,7 +2048,65 @@ extension OperandTests {
     }
   }
 
-  func testAdditionWithRolls() {
+  func testAddedConstantToRoll() {
+    typealias Fixture = (
+      operand1: Operand,
+      operand2: Operand,
+      expected: Operand
+    )
+
+    let fixtures: [Fixture] = [
+      (operand1: .constant(2), operand2: .roll(1, 1), expected: .constant(3)),
+      (operand1: .constant(-2), operand2: .roll(1, 1), expected: .constant(-1)),
+      (operand1: .constant(2), operand2: .roll(-1, 1), expected: .constant(1)),
+      (operand1: .constant(-2), operand2: .roll(-1, 1), expected: .constant(-3)),
+
+      (operand1: .constant(0), operand2: .roll(1, 1), expected: .constant(1)),
+      (operand1: .constant(-0), operand2: .roll(1, 1), expected: .constant(1)),
+      (operand1: .constant(0), operand2: .roll(-1, 1), expected: .constant(-1)),
+      (operand1: .constant(-0), operand2: .roll(-1, 1), expected: .constant(-1)),
+
+      (operand1: .constant(Int.max), operand2: .roll(0, 0), expected: .constant(Int.max)),
+      (operand1: .constant(Int.max), operand2: .roll(-0, 0), expected: .constant(Int.max)),
+      (operand1: .constant(Int.min), operand2: .roll(0, 0), expected: .constant(Int.min)),
+      (operand1: .constant(Int.min), operand2: .roll(-0, 0), expected: .constant(Int.min)),
+    ]
+
+    for fixture in fixtures {
+      let operand1 = fixture.operand1
+      let operand2 = fixture.operand2
+      let expected = fixture.expected
+      let actual = try! operand1.added(operand2)
+
+      XCTAssertEqual(expected, actual)
+    }
+  }
+
+  func testAddedConstantToRollWithOverflow() {
+    typealias Fixture = (
+      operand1: Operand,
+      operand2: Operand
+    )
+
+    let fixtures: [Fixture] = [
+      (operand1: .constant(Int.max), operand2: .roll(1, 1)),
+      (operand1: .constant(Int.min), operand2: .roll(-1, 1)),
+      (operand1: .constant(0), operand2: .roll(1, Int.min)),
+    ]
+
+    let expected = ExpressionError.operationOverflow
+
+    for fixture in fixtures {
+      let operand1 = fixture.operand1
+      let operand2 = fixture.operand2
+
+      XCTAssertThrowsError(try operand1.added(operand2)) { error in
+        XCTAssertEqual(expected, error as? ExpressionError)
+      }
+    }
+  }
+
+  func testAddedRollToConstant() {
     typealias Fixture = (
       operand1: Operand,
       operand2: Operand,
@@ -1567,20 +2119,10 @@ extension OperandTests {
       (operand1: .roll(1, 1), operand2: .constant(-2), expected: .constant(-1)),
       (operand1: .roll(-1, 1), operand2: .constant(-2), expected: .constant(-3)),
 
-      (operand1: .constant(2), operand2: .roll(1, 1), expected: .constant(3)),
-      (operand1: .constant(-2), operand2: .roll(1, 1), expected: .constant(-1)),
-      (operand1: .constant(2), operand2: .roll(-1, 1), expected: .constant(1)),
-      (operand1: .constant(-2), operand2: .roll(-1, 1), expected: .constant(-3)),
-
       (operand1: .roll(1, 1), operand2: .constant(0), expected: .constant(1)),
       (operand1: .roll(-1, 1), operand2: .constant(0), expected: .constant(-1)),
       (operand1: .roll(1, 1), operand2: .constant(-0), expected: .constant(1)),
       (operand1: .roll(-1, 1), operand2: .constant(-0), expected: .constant(-1)),
-
-      (operand1: .constant(0), operand2: .roll(1, 1), expected: .constant(1)),
-      (operand1: .constant(-0), operand2: .roll(1, 1), expected: .constant(1)),
-      (operand1: .constant(0), operand2: .roll(-1, 1), expected: .constant(-1)),
-      (operand1: .constant(-0), operand2: .roll(-1, 1), expected: .constant(-1)),
 
       (operand1: .roll(0, 0), operand2: .constant(0), expected: .constant(0)),
       (operand1: .roll(-0, 0), operand2: .constant(0), expected: .constant(0)),
@@ -1589,14 +2131,28 @@ extension OperandTests {
 
       (operand1: .roll(0, 0), operand2: .constant(Int.max), expected: .constant(Int.max)),
       (operand1: .roll(-0, 0), operand2: .constant(Int.max), expected: .constant(Int.max)),
-      (operand1: .constant(Int.max), operand2: .roll(0, 0), expected: .constant(Int.max)),
-      (operand1: .constant(Int.max), operand2: .roll(-0, 0), expected: .constant(Int.max)),
-
       (operand1: .roll(0, 0), operand2: .constant(Int.min), expected: .constant(Int.min)),
       (operand1: .roll(-0, 0), operand2: .constant(Int.min), expected: .constant(Int.min)),
-      (operand1: .constant(Int.min), operand2: .roll(0, 0), expected: .constant(Int.min)),
-      (operand1: .constant(Int.min), operand2: .roll(-0, 0), expected: .constant(Int.min)),
+    ]
 
+    for fixture in fixtures {
+      let operand1 = fixture.operand1
+      let operand2 = fixture.operand2
+      let expected = fixture.expected
+      let actual = try! operand1.added(operand2)
+
+      XCTAssertEqual(expected, actual)
+    }
+  }
+
+  func testAddedRollToRoll() {
+    typealias Fixture = (
+      operand1: Operand,
+      operand2: Operand,
+      expected: Operand
+    )
+
+    let fixtures: [Fixture] = [
       (operand1: .roll(1, 1), operand2: .roll(1, 1), expected: .constant(2)),
       (operand1: .roll(-1, 1), operand2: .roll(1, 1), expected: .constant(0)),
       (operand1: .roll(1, 1), operand2: .roll(-1, 1), expected: .constant(0)),
@@ -1628,21 +2184,16 @@ extension OperandTests {
     }
   }
 
-  func testAdditionWithRollsAndOverflow() {
+  func testAddedRollToConstantWithOverflow() {
     typealias Fixture = (
       operand1: Operand,
       operand2: Operand
     )
 
     let fixtures: [Fixture] = [
-      (operand1: .constant(Int.max), operand2: .roll(1, 1)),
       (operand1: .roll(1, 1), operand2: .constant(Int.max)),
-
-      (operand1: .constant(Int.min), operand2: .roll(-1, 1)),
       (operand1: .roll(-1, 1), operand2: .constant(Int.min)),
-
       (operand1: .roll(1, Int.min), operand2: .constant(0)),
-      (operand1: .constant(0), operand2: .roll(1, Int.min)),
     ]
 
     let expected = ExpressionError.operationOverflow
@@ -1657,7 +2208,9 @@ extension OperandTests {
     }
   }
 
-  func testDivisionWithNumbers() {
+  // MARK: - Division
+
+  func testDividedConstantByConstant() {
     typealias Fixture = (
       operand1: Operand,
       operand2: Operand,
@@ -1700,7 +2253,7 @@ extension OperandTests {
     }
   }
 
-  func testDivisionByZeroWithNumbers() {
+  func testDividedConstantByConstantZero() {
     typealias Fixture = (
       operand1: Operand,
       operand2: Operand
@@ -1730,7 +2283,7 @@ extension OperandTests {
     }
   }
 
-  func testDivisionWithNumbersAndOverflow() {
+  func testDividedConstantByConstantWithOverflow() {
     let operand1 = Operand.constant(Int.min)
     let operand2 = Operand.constant(-1)
     let expected = ExpressionError.operationOverflow
@@ -1740,7 +2293,7 @@ extension OperandTests {
     }
   }
 
-  func testDivisionWithRolls() {
+  func testDividedConstantByRoll() {
     typealias Fixture = (
       operand1: Operand,
       operand2: Operand,
@@ -1748,44 +2301,14 @@ extension OperandTests {
     )
 
     let fixtures: [Fixture] = [
-      (operand1: .roll(1, 1), operand2: .constant(2), expected: .constant(0)),
-      (operand1: .roll(-1, 1), operand2: .constant(2), expected: .constant(0)),
-      (operand1: .roll(1, 1), operand2: .constant(-2), expected: .constant(0)),
-      (operand1: .roll(-1, 1), operand2: .constant(-2), expected: .constant(0)),
-
       (operand1: .constant(2), operand2: .roll(1, 1), expected: .constant(2)),
       (operand1: .constant(-2), operand2: .roll(1, 1), expected: .constant(-2)),
       (operand1: .constant(2), operand2: .roll(-1, 1), expected: .constant(-2)),
       (operand1: .constant(-2), operand2: .roll(-1, 1), expected: .constant(2)),
 
-      (operand1: .roll(0, 0), operand2: .constant(2), expected: .constant(0)),
-      (operand1: .roll(-0, 0), operand2: .constant(2), expected: .constant(0)),
-      (operand1: .roll(0, 0), operand2: .constant(-2), expected: .constant(0)),
-      (operand1: .roll(-0, 0), operand2: .constant(-2), expected: .constant(0)),
-
-      (operand1: .roll(1, 1), operand2: .constant(Int.max), expected: .constant(0)),
-      (operand1: .roll(-1, 1), operand2: .constant(Int.max), expected: .constant(0)),
       (operand1: .constant(Int.max), operand2: .roll(1, 1), expected: .constant(Int.max)),
       (operand1: .constant(Int.max), operand2: .roll(-1, 1), expected: .constant(-Int.max)),
-
-      (operand1: .roll(1, 1), operand2: .constant(Int.min), expected: .constant(0)),
-      (operand1: .roll(-1, 1), operand2: .constant(Int.min), expected: .constant(0)),
       (operand1: .constant(Int.min), operand2: .roll(1, 1), expected: .constant(Int.min)),
-
-      (operand1: .roll(1, 1), operand2: .roll(2, 1), expected: .constant(0)),
-      (operand1: .roll(-1, 1), operand2: .roll(2, 1), expected: .constant(0)),
-      (operand1: .roll(1, 1), operand2: .roll(-2, 1), expected: .constant(0)),
-      (operand1: .roll(-1, 1), operand2: .roll(-2, 1), expected: .constant(0)),
-
-      (operand1: .roll(2, 1), operand2: .roll(1, 1), expected: .constant(2)),
-      (operand1: .roll(-2, 1), operand2: .roll(1, 1), expected: .constant(-2)),
-      (operand1: .roll(2, 1), operand2: .roll(-1, 1), expected: .constant(-2)),
-      (operand1: .roll(-2, 1), operand2: .roll(-1, 1), expected: .constant(2)),
-
-      (operand1: .roll(0, 0), operand2: .roll(2, 1), expected: .constant(0)),
-      (operand1: .roll(-0, 0), operand2: .roll(2, 1), expected: .constant(0)),
-      (operand1: .roll(0, 0), operand2: .roll(-2, 1), expected: .constant(0)),
-      (operand1: .roll(-0, 0), operand2: .roll(-2, 1), expected: .constant(0)),
     ]
 
     for fixture in fixtures {
@@ -1798,7 +2321,64 @@ extension OperandTests {
     }
   }
 
-  func testDivisionByZeroWithRolls() {
+  func testDividedConstantByRollWithOverflow() {
+    typealias Fixture = (
+      operand1: Operand,
+      operand2: Operand
+    )
+
+    let fixtures: [Fixture] = [
+      (operand1: .constant(Int.min), operand2: .roll(-1, 1)),
+      (operand1: .constant(1), operand2: .roll(1, Int.min)),
+    ]
+
+    let expected = ExpressionError.operationOverflow
+
+    for fixture in fixtures {
+      let operand1 = fixture.operand1
+      let operand2 = fixture.operand2
+
+      XCTAssertThrowsError(try operand1.divided(operand2)) { error in
+        XCTAssertEqual(expected, error as? ExpressionError)
+      }
+    }
+  }
+
+  func testDividedRollByConstant() {
+    typealias Fixture = (
+      operand1: Operand,
+      operand2: Operand,
+      expected: Operand
+    )
+
+    let fixtures: [Fixture] = [
+      (operand1: .roll(1, 1), operand2: .constant(2), expected: .constant(0)),
+      (operand1: .roll(-1, 1), operand2: .constant(2), expected: .constant(0)),
+      (operand1: .roll(1, 1), operand2: .constant(-2), expected: .constant(0)),
+      (operand1: .roll(-1, 1), operand2: .constant(-2), expected: .constant(0)),
+
+      (operand1: .roll(0, 0), operand2: .constant(2), expected: .constant(0)),
+      (operand1: .roll(-0, 0), operand2: .constant(2), expected: .constant(0)),
+      (operand1: .roll(0, 0), operand2: .constant(-2), expected: .constant(0)),
+      (operand1: .roll(-0, 0), operand2: .constant(-2), expected: .constant(0)),
+
+      (operand1: .roll(1, 1), operand2: .constant(Int.max), expected: .constant(0)),
+      (operand1: .roll(-1, 1), operand2: .constant(Int.max), expected: .constant(0)),
+      (operand1: .roll(1, 1), operand2: .constant(Int.min), expected: .constant(0)),
+      (operand1: .roll(-1, 1), operand2: .constant(Int.min), expected: .constant(0)),
+    ]
+
+    for fixture in fixtures {
+      let operand1 = fixture.operand1
+      let operand2 = fixture.operand2
+      let expected = fixture.expected
+      let actual = try! operand1.divided(operand2)
+
+      XCTAssertEqual(expected, actual)
+    }
+  }
+
+  func testDividedRollByConstantZero() {
     typealias Fixture = (
       operand1: Operand,
       operand2: Operand
@@ -1828,17 +2408,14 @@ extension OperandTests {
     }
   }
 
-  func testDivisionWithRollsAndOverflow() {
+  func testDividedRollByConstantWithOverflow() {
     typealias Fixture = (
       operand1: Operand,
       operand2: Operand
     )
 
     let fixtures: [Fixture] = [
-      (operand1: .constant(Int.min), operand2: .roll(-1, 1)),
-
       (operand1: .roll(1, Int.min), operand2: .constant(1)),
-      (operand1: .constant(1), operand2: .roll(1, Int.min)),
     ]
 
     let expected = ExpressionError.operationOverflow
@@ -1853,7 +2430,44 @@ extension OperandTests {
     }
   }
 
-  func testMultiplicationWithNumbers() {
+
+  func testDividedRollByRoll() {
+    typealias Fixture = (
+      operand1: Operand,
+      operand2: Operand,
+      expected: Operand
+    )
+
+    let fixtures: [Fixture] = [
+      (operand1: .roll(1, 1), operand2: .roll(2, 1), expected: .constant(0)),
+      (operand1: .roll(-1, 1), operand2: .roll(2, 1), expected: .constant(0)),
+      (operand1: .roll(1, 1), operand2: .roll(-2, 1), expected: .constant(0)),
+      (operand1: .roll(-1, 1), operand2: .roll(-2, 1), expected: .constant(0)),
+
+      (operand1: .roll(2, 1), operand2: .roll(1, 1), expected: .constant(2)),
+      (operand1: .roll(-2, 1), operand2: .roll(1, 1), expected: .constant(-2)),
+      (operand1: .roll(2, 1), operand2: .roll(-1, 1), expected: .constant(-2)),
+      (operand1: .roll(-2, 1), operand2: .roll(-1, 1), expected: .constant(2)),
+
+      (operand1: .roll(0, 0), operand2: .roll(2, 1), expected: .constant(0)),
+      (operand1: .roll(-0, 0), operand2: .roll(2, 1), expected: .constant(0)),
+      (operand1: .roll(0, 0), operand2: .roll(-2, 1), expected: .constant(0)),
+      (operand1: .roll(-0, 0), operand2: .roll(-2, 1), expected: .constant(0)),
+    ]
+
+    for fixture in fixtures {
+      let operand1 = fixture.operand1
+      let operand2 = fixture.operand2
+      let expected = fixture.expected
+      let actual = try! operand1.divided(operand2)
+
+      XCTAssertEqual(expected, actual)
+    }
+  }
+
+  // MARK: - Multiplication
+
+  func testMultipliedConstantByConstant() {
     typealias Fixture = (
       operand1: Operand,
       operand2: Operand,
@@ -1905,7 +2519,7 @@ extension OperandTests {
     }
   }
 
-  func testMultiplicationWithNumbersAndOverflow() {
+  func testMultipliedConstantByConstantWithOverflow() {
     typealias Fixture = (
       operand1: Operand,
       operand2: Operand
@@ -1938,7 +2552,40 @@ extension OperandTests {
     }
   }
 
-  func testMultiplicationWithRolls() {
+  func testMultipliedConstantByRoll() {
+    typealias Fixture = (
+      operand1: Operand,
+      operand2: Operand,
+      expected: Operand
+    )
+
+    let fixtures: [Fixture] = [
+      (operand1: .constant(2), operand2: .roll(1, 1), expected: .constant(2)),
+      (operand1: .constant(-2), operand2: .roll(1, 1), expected: .constant(-2)),
+      (operand1: .constant(2), operand2: .roll(-1, 1), expected: .constant(-2)),
+      (operand1: .constant(-2), operand2: .roll(-1, 1), expected: .constant(2)),
+
+      (operand1: .constant(1), operand2: .roll(0, 0), expected: .constant(0)),
+      (operand1: .constant(-1), operand2: .roll(0, 0), expected: .constant(0)),
+      (operand1: .constant(1), operand2: .roll(-0, 0), expected: .constant(0)),
+      (operand1: .constant(-1), operand2: .roll(-0, 0), expected: .constant(0)),
+
+      (operand1: .constant(Int.max), operand2: .roll(1, 1), expected: .constant(Int.max)),
+      (operand1: .constant(Int.max), operand2: .roll(-1, 1), expected: .constant(-Int.max)),
+      (operand1: .constant(Int.min), operand2: .roll(1, 1), expected: .constant(Int.min)),
+    ]
+
+    for fixture in fixtures {
+      let operand1 = fixture.operand1
+      let operand2 = fixture.operand2
+      let expected = fixture.expected
+      let actual = try! operand1.multiplied(operand2)
+
+      XCTAssertEqual(expected, actual)
+    }
+  }
+
+  func testMultipliedRollByConstant() {
     typealias Fixture = (
       operand1: Operand,
       operand2: Operand,
@@ -1951,20 +2598,10 @@ extension OperandTests {
       (operand1: .roll(1, 1), operand2: .constant(-2), expected: .constant(-2)),
       (operand1: .roll(-1, 1), operand2: .constant(-2), expected: .constant(2)),
 
-      (operand1: .constant(2), operand2: .roll(1, 1), expected: .constant(2)),
-      (operand1: .constant(-2), operand2: .roll(1, 1), expected: .constant(-2)),
-      (operand1: .constant(2), operand2: .roll(-1, 1), expected: .constant(-2)),
-      (operand1: .constant(-2), operand2: .roll(-1, 1), expected: .constant(2)),
-
       (operand1: .roll(0, 0), operand2: .constant(2), expected: .constant(0)),
       (operand1: .roll(-0, 0), operand2: .constant(2), expected: .constant(0)),
       (operand1: .roll(0, 0), operand2: .constant(-2), expected: .constant(0)),
       (operand1: .roll(-0, 0), operand2: .constant(-2), expected: .constant(0)),
-
-      (operand1: .constant(1), operand2: .roll(0, 0), expected: .constant(0)),
-      (operand1: .constant(-1), operand2: .roll(0, 0), expected: .constant(0)),
-      (operand1: .constant(1), operand2: .roll(-0, 0), expected: .constant(0)),
-      (operand1: .constant(-1), operand2: .roll(-0, 0), expected: .constant(0)),
 
       (operand1: .roll(0, 0), operand2: .constant(0), expected: .constant(0)),
       (operand1: .roll(-0, 0), operand2: .constant(0), expected: .constant(0)),
@@ -1973,12 +2610,62 @@ extension OperandTests {
 
       (operand1: .roll(1, 1), operand2: .constant(Int.max), expected: .constant(Int.max)),
       (operand1: .roll(-1, 1), operand2: .constant(Int.max), expected: .constant(-Int.max)),
-      (operand1: .constant(Int.max), operand2: .roll(1, 1), expected: .constant(Int.max)),
-      (operand1: .constant(Int.max), operand2: .roll(-1, 1), expected: .constant(-Int.max)),
-
       (operand1: .roll(1, 1), operand2: .constant(Int.min), expected: .constant(Int.min)),
-      (operand1: .constant(Int.min), operand2: .roll(1, 1), expected: .constant(Int.min)),
+    ]
 
+    for fixture in fixtures {
+      let operand1 = fixture.operand1
+      let operand2 = fixture.operand2
+      let expected = fixture.expected
+      let actual = try! operand1.multiplied(operand2)
+
+      XCTAssertEqual(expected, actual)
+    }
+  }
+
+  func testMultipliedRollByConstantWithOverflow() {
+    typealias Fixture = (
+      operand1: Operand,
+      operand2: Operand
+    )
+
+    let fixtures: [Fixture] = [
+      (operand1: .roll(1, Int.max), operand2: .constant(Int.max)),
+      (operand1: .roll(1, -Int.max), operand2: .constant(Int.max)),
+      (operand1: .roll(1, Int.max), operand2: .constant(-Int.max)),
+      (operand1: .roll(1, -Int.max), operand2: .constant(-Int.max)),
+
+      (operand1: .roll(2, 1), operand2: .constant(Int.max)),
+      (operand1: .roll(-2, 1), operand2: .constant(Int.max)),
+      (operand1: .roll(2, 1), operand2: .constant(-Int.max)),
+      (operand1: .roll(-2, 1), operand2: .constant(-Int.max)),
+
+      (operand1: .roll(-1, 1), operand2: .constant(Int.min)),
+
+//       Near infinite loop
+//       (operand1: .roll(Int.min, 1), operand2: .constant(-1)),
+      ]
+
+    let expected = ExpressionError.operationOverflow
+
+    for fixture in fixtures {
+      let operand1 = fixture.operand1
+      let operand2 = fixture.operand2
+
+      XCTAssertThrowsError(try operand1.multiplied(operand2)) { error in
+        XCTAssertEqual(expected, error as? ExpressionError)
+      }
+    }
+  }
+
+  func testMultipliedRollByRoll() {
+    typealias Fixture = (
+      operand1: Operand,
+      operand2: Operand,
+      expected: Operand
+    )
+
+    let fixtures: [Fixture] = [
       (operand1: .roll(1, 1), operand2: .roll(2, 1), expected: .constant(2)),
       (operand1: .roll(-1, 1), operand2: .roll(2, 1), expected: .constant(-2)),
       (operand1: .roll(1, 1), operand2: .roll(-2, 1), expected: .constant(-2)),
@@ -2015,40 +2702,9 @@ extension OperandTests {
     }
   }
 
-  func testMultiplicationWithRollsAndOverflow() {
-    typealias Fixture = (
-      operand1: Operand,
-      operand2: Operand
-    )
+  // MARK: - Subtraction
 
-    let fixtures: [Fixture] = [
-      (operand1: .constant(Int.max), operand2: .constant(2)),
-      (operand1: .constant(-Int.max), operand2: .constant(2)),
-      (operand1: .constant(Int.max), operand2: .constant(-2)),
-      (operand1: .constant(-Int.max), operand2: .constant(-2)),
-
-      (operand1: .constant(2), operand2: .constant(Int.max)),
-      (operand1: .constant(-2), operand2: .constant(Int.max)),
-      (operand1: .constant(2), operand2: .constant(-Int.max)),
-      (operand1: .constant(-2), operand2: .constant(-Int.max)),
-
-      (operand1: .constant(Int.min), operand2: .constant(-1)),
-      (operand1: .constant(-1), operand2: .constant(Int.min)),
-      ]
-
-    let expected = ExpressionError.operationOverflow
-
-    for fixture in fixtures {
-      let operand1 = fixture.operand1
-      let operand2 = fixture.operand2
-
-      XCTAssertThrowsError(try operand1.multiplied(operand2)) { error in
-        XCTAssertEqual(expected, error as? ExpressionError)
-      }
-    }
-  }
-
-  func testSubtractionWithNumbers() {
+  func testSubtractedConstantByConstant() {
     typealias Fixture = (
       operand1: Operand,
       operand2: Operand,
@@ -2102,7 +2758,7 @@ extension OperandTests {
     }
   }
 
-  func testSubtractionWithNumbersAndOverflow() {
+  func testSubtractedConstantByConstantWithOverflow() {
     typealias Fixture = (
       operand1: Operand,
       operand2: Operand
@@ -2129,7 +2785,64 @@ extension OperandTests {
     }
   }
 
-  func testSubtractionWithRolls() {
+  func testSubtractedConstantByRoll() {
+    typealias Fixture = (
+      operand1: Operand,
+      operand2: Operand,
+      expected: Operand
+    )
+
+    let fixtures: [Fixture] = [
+      (operand1: .constant(2), operand2: .roll(1, 1), expected: .constant(1)),
+      (operand1: .constant(-2), operand2: .roll(1, 1), expected: .constant(-3)),
+      (operand1: .constant(2), operand2: .roll(-1, 1), expected: .constant(3)),
+      (operand1: .constant(-2), operand2: .roll(-1, 1), expected: .constant(-1)),
+
+      (operand1: .constant(1), operand2: .roll(0, 0), expected: .constant(1)),
+      (operand1: .constant(-1), operand2: .roll(0, 0), expected: .constant(-1)),
+      (operand1: .constant(1), operand2: .roll(-0, 0), expected: .constant(1)),
+      (operand1: .constant(-1), operand2: .roll(-0, 0), expected: .constant(-1)),
+
+      (operand1: .constant(Int.max), operand2: .roll(0, 0), expected: .constant(Int.max)),
+      (operand1: .constant(Int.max), operand2: .roll(-0, 0), expected: .constant(Int.max)),
+      (operand1: .constant(Int.min), operand2: .roll(0, 0), expected: .constant(Int.min)),
+      (operand1: .constant(Int.min), operand2: .roll(-0, 0), expected: .constant(Int.min)),
+    ]
+
+    for fixture in fixtures {
+      let operand1 = fixture.operand1
+      let operand2 = fixture.operand2
+      let expected = fixture.expected
+      let actual = try! operand1.subtracted(operand2)
+
+      XCTAssertEqual(expected, actual)
+    }
+  }
+
+  func testSubtractedConstantByRollWithOverflow() {
+    typealias Fixture = (
+      operand1: Operand,
+      operand2: Operand
+    )
+
+    let fixtures: [Fixture] = [
+      (operand1: .constant(Int.max), operand2: .roll(-1, 1)),
+      (operand1: .constant(Int.min), operand2: .roll(1, 1)),
+    ]
+
+    let expected = ExpressionError.operationOverflow
+
+    for fixture in fixtures {
+      let operand1 = fixture.operand1
+      let operand2 = fixture.operand2
+
+      XCTAssertThrowsError(try operand1.subtracted(operand2)) { error in
+        XCTAssertEqual(expected, error as? ExpressionError)
+      }
+    }
+  }
+
+  func testSubtractedRollByConstant() {
     typealias Fixture = (
       operand1: Operand,
       operand2: Operand,
@@ -2142,36 +2855,65 @@ extension OperandTests {
       (operand1: .roll(1, 1), operand2: .constant(-2), expected: .constant(3)),
       (operand1: .roll(-1, 1), operand2: .constant(-2), expected: .constant(1)),
 
-      (operand1: .constant(2), operand2: .roll(1, 1), expected: .constant(1)),
-      (operand1: .constant(-2), operand2: .roll(1, 1), expected: .constant(-3)),
-      (operand1: .constant(2), operand2: .roll(-1, 1), expected: .constant(3)),
-      (operand1: .constant(-2), operand2: .roll(-1, 1), expected: .constant(-1)),
-
       (operand1: .roll(0, 0), operand2: .constant(2), expected: .constant(-2)),
       (operand1: .roll(-0, 0), operand2: .constant(2), expected: .constant(-2)),
       (operand1: .roll(0, 0), operand2: .constant(-2), expected: .constant(2)),
       (operand1: .roll(-0, 0), operand2: .constant(-2), expected: .constant(2)),
-
-      (operand1: .constant(1), operand2: .roll(0, 0), expected: .constant(1)),
-      (operand1: .constant(-1), operand2: .roll(0, 0), expected: .constant(-1)),
-      (operand1: .constant(1), operand2: .roll(-0, 0), expected: .constant(1)),
-      (operand1: .constant(-1), operand2: .roll(-0, 0), expected: .constant(-1)),
 
       (operand1: .roll(0, 0), operand2: .constant(0), expected: .constant(0)),
       (operand1: .roll(-0, 0), operand2: .constant(0), expected: .constant(0)),
       (operand1: .roll(0, -0), operand2: .constant(-0), expected: .constant(0)),
       (operand1: .roll(-0, 0), operand2: .constant(-0), expected: .constant(0)),
 
-      (operand1: .roll(0, 0), operand2: .constant(Int.max), expected: .constant(-Int.max)),
-      (operand1: .roll(-0, 0), operand2: .constant(Int.max), expected: .constant(-Int.max)),
       (operand1: .constant(Int.max), operand2: .roll(0, 0), expected: .constant(Int.max)),
       (operand1: .constant(Int.max), operand2: .roll(-0, 0), expected: .constant(Int.max)),
-
-      (operand1: .roll(0, 0), operand2: .constant(Int.min + 1), expected: .constant(Int.max)),
-      (operand1: .roll(-0, 0), operand2: .constant(Int.min + 1), expected: .constant(Int.max)),
       (operand1: .constant(Int.min), operand2: .roll(0, 0), expected: .constant(Int.min)),
       (operand1: .constant(Int.min), operand2: .roll(-0, 0), expected: .constant(Int.min)),
+    ]
 
+    for fixture in fixtures {
+      let operand1 = fixture.operand1
+      let operand2 = fixture.operand2
+      let expected = fixture.expected
+      let actual = try! operand1.subtracted(operand2)
+
+      XCTAssertEqual(expected, actual)
+    }
+  }
+
+  func testSubtractedRollByConstantWithOverflow() {
+    typealias Fixture = (
+      operand1: Operand,
+      operand2: Operand
+    )
+
+    let fixtures: [Fixture] = [
+      (operand1: .roll(-2, 1), operand2: .constant(Int.max)),
+
+      (operand1: .roll(0, 0), operand2: .constant(Int.min)),
+      (operand1: .roll(-0, 0), operand2: .constant(Int.min)),
+    ]
+
+    let expected = ExpressionError.operationOverflow
+
+    for fixture in fixtures {
+      let operand1 = fixture.operand1
+      let operand2 = fixture.operand2
+
+      XCTAssertThrowsError(try operand1.subtracted(operand2)) { error in
+        XCTAssertEqual(expected, error as? ExpressionError)
+      }
+    }
+  }
+
+  func testSubtractedRollByRoll() {
+    typealias Fixture = (
+      operand1: Operand,
+      operand2: Operand,
+      expected: Operand
+    )
+
+    let fixtures: [Fixture] = [
       (operand1: .roll(1, 1), operand2: .roll(2, 1), expected: .constant(-1)),
       (operand1: .roll(-1, 1), operand2: .roll(2, 1), expected: .constant(-3)),
       (operand1: .roll(1, 1), operand2: .roll(-2, 1), expected: .constant(3)),
@@ -2208,34 +2950,9 @@ extension OperandTests {
     }
   }
 
-  func testSubtractionWithRollsAndOverflow() {
-    typealias Fixture = (
-      operand1: Operand,
-      operand2: Operand
-    )
+  // MARK: - Negation
 
-    let fixtures: [Fixture] = [
-      (operand1: .constant(Int.max), operand2: .roll(-1, 1)),
-      (operand1: .roll(-2, 1), operand2: .constant(Int.max)),
-
-      (operand1: .constant(Int.min), operand2: .roll(1, 1)),
-      (operand1: .roll(0, 0), operand2: .constant(Int.min)),
-      (operand1: .roll(-0, 0), operand2: .constant(Int.min)),
-    ]
-
-    let expected = ExpressionError.operationOverflow
-
-    for fixture in fixtures {
-      let operand1 = fixture.operand1
-      let operand2 = fixture.operand2
-
-      XCTAssertThrowsError(try operand1.subtracted(operand2)) { error in
-        XCTAssertEqual(expected, error as? ExpressionError)
-      }
-    }
-  }
-
-  func testNegationWithNumbers() {
+  func testNegatedConstant() {
     typealias Fixture = (
       operand: Operand,
       expected: Operand
@@ -2260,7 +2977,7 @@ extension OperandTests {
     }
   }
 
-  func testNegationWithNumbersAndOverflow() {
+  func testNegatedConstantWithOverflow() {
     let operands: [Operand] = [
       .constant(Int.min),
     ]
@@ -2274,7 +2991,7 @@ extension OperandTests {
     }
   }
 
-  func testNegationWithRoll() {
+  func testNegatedRoll() {
     typealias Fixture = (
       operand: Operand,
       expected: Operand
@@ -2292,7 +3009,38 @@ extension OperandTests {
       (operand: .roll(-0, -0), expected: .roll(0, 0)),
 
       (operand: .roll(Int.max, Int.max), expected: .roll(Int.max, -Int.max)),
+    ]
 
+    for fixture in fixtures {
+      let operand = fixture.operand
+      let expected = fixture.expected
+      let actual = try! operand.negated()
+
+      XCTAssertEqual(expected, actual)
+    }
+  }
+
+  func testNegatedRollWithOverflow() {
+    let operands: [Operand] = [
+      .roll(Int.min, Int.min)
+    ]
+
+    let expected = ExpressionError.operationOverflow
+
+    for operand in operands {
+      XCTAssertThrowsError(try operand.negated()) { error in
+        XCTAssertEqual(expected, error as? ExpressionError)
+      }
+    }
+  }
+
+  func testNegatedRollNegativeSides() {
+    typealias Fixture = (
+      operand: Operand,
+      expected: Operand
+    )
+
+    let fixtures: [Fixture] = [
       (operand: .rollNegativeSides(1), expected: .rollPositiveSides(1)),
       (operand: .rollNegativeSides(-1), expected: .rollPositiveSides(-1)),
 
@@ -2301,7 +3049,24 @@ extension OperandTests {
 
       (operand: .rollNegativeSides(Int.max), expected: .rollPositiveSides(Int.max)),
       (operand: .rollNegativeSides(Int.min), expected: .rollPositiveSides(Int.min)),
+    ]
 
+    for fixture in fixtures {
+      let operand = fixture.operand
+      let expected = fixture.expected
+      let actual = try! operand.negated()
+
+      XCTAssertEqual(expected, actual)
+    }
+  }
+
+  func testNegatedRollPositiveSides() {
+    typealias Fixture = (
+      operand: Operand,
+      expected: Operand
+    )
+
+    let fixtures: [Fixture] = [
       (operand: .rollPositiveSides(1), expected: .rollNegativeSides(1)),
       (operand: .rollPositiveSides(-1), expected: .rollNegativeSides(-1)),
 
@@ -2318,20 +3083,6 @@ extension OperandTests {
       let actual = try! operand.negated()
 
       XCTAssertEqual(expected, actual)
-    }
-  }
-
-  func testNegationWithRollAndOverflow() {
-    let operands: [Operand] = [
-      .roll(Int.min, Int.min)
-    ]
-
-    let expected = ExpressionError.operationOverflow
-
-    for operand in operands {
-      XCTAssertThrowsError(try operand.negated()) { error in
-        XCTAssertEqual(expected, error as? ExpressionError)
-      }
     }
   }
 }

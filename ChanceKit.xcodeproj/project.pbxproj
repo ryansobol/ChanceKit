@@ -14,6 +14,19 @@
 		92391F0220B130A800FE8006 /* OperandTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92391F0120B130A800FE8006 /* OperandTests.swift */; };
 		923D7FBC2146E872000E1D49 /* TokenableTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 923D7FBB2146E872000E1D49 /* TokenableTests.swift */; };
 		924105AA20B06B19009FC568 /* OperatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 924105A920B06B19009FC568 /* OperatorTests.swift */; };
+		9271D3F325004C1600F9FC5A /* ConstantTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9271D3F225004C1600F9FC5A /* ConstantTests.swift */; };
+		9271D3F525004CCC00F9FC5A /* RollTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9271D3F425004CCC00F9FC5A /* RollTests.swift */; };
+		9271D3F725004E6600F9FC5A /* RollNegativeSidesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9271D3F625004E6600F9FC5A /* RollNegativeSidesTests.swift */; };
+		9271D3F925004EE100F9FC5A /* RollPositiveSidesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9271D3F825004EE100F9FC5A /* RollPositiveSidesTests.swift */; };
+		9271D3FB25004F9600F9FC5A /* LexemeConstantFixture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9271D3FA25004F9600F9FC5A /* LexemeConstantFixture.swift */; };
+		9271D3FD2500506F00F9FC5A /* LexemeRollFixture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9271D3FC2500506F00F9FC5A /* LexemeRollFixture.swift */; };
+		9271D4012500522000F9FC5A /* LexemeRollNegativeSidesFixture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9271D4002500522000F9FC5A /* LexemeRollNegativeSidesFixture.swift */; };
+		9271D4032500524D00F9FC5A /* LexemeRollPositiveSidesFixture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9271D4022500524D00F9FC5A /* LexemeRollPositiveSidesFixture.swift */; };
+		927DA38124FF21D000C868BB /* Operand2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 927DA38024FF21D000C868BB /* Operand2.swift */; };
+		927DA38324FF223F00C868BB /* Constant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 927DA38224FF223F00C868BB /* Constant.swift */; };
+		927DA38524FF285800C868BB /* Roll.swift in Sources */ = {isa = PBXBuildFile; fileRef = 927DA38424FF285800C868BB /* Roll.swift */; };
+		927DA38724FF407400C868BB /* RollNegativeSides.swift in Sources */ = {isa = PBXBuildFile; fileRef = 927DA38624FF407400C868BB /* RollNegativeSides.swift */; };
+		927DA38924FF438500C868BB /* RollPositiveSides.swift in Sources */ = {isa = PBXBuildFile; fileRef = 927DA38824FF438500C868BB /* RollPositiveSides.swift */; };
 		9286A3742266FEC8004D7360 /* Parser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9286A3732266FEC8004D7360 /* Parser.swift */; };
 		9286A376226700BA004D7360 /* ParserTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9286A375226700BA004D7360 /* ParserTests.swift */; };
 		9290C1162433CBE400609A2D /* EvaluatableClosedRangeFixture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9290C1152433CBE400609A2D /* EvaluatableClosedRangeFixture.swift */; };
@@ -60,6 +73,19 @@
 		92391F0120B130A800FE8006 /* OperandTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OperandTests.swift; sourceTree = "<group>"; };
 		923D7FBB2146E872000E1D49 /* TokenableTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenableTests.swift; sourceTree = "<group>"; };
 		924105A920B06B19009FC568 /* OperatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OperatorTests.swift; sourceTree = "<group>"; };
+		9271D3F225004C1600F9FC5A /* ConstantTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConstantTests.swift; sourceTree = "<group>"; };
+		9271D3F425004CCC00F9FC5A /* RollTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RollTests.swift; sourceTree = "<group>"; };
+		9271D3F625004E6600F9FC5A /* RollNegativeSidesTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RollNegativeSidesTests.swift; sourceTree = "<group>"; };
+		9271D3F825004EE100F9FC5A /* RollPositiveSidesTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RollPositiveSidesTests.swift; sourceTree = "<group>"; };
+		9271D3FA25004F9600F9FC5A /* LexemeConstantFixture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LexemeConstantFixture.swift; sourceTree = "<group>"; };
+		9271D3FC2500506F00F9FC5A /* LexemeRollFixture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LexemeRollFixture.swift; sourceTree = "<group>"; };
+		9271D4002500522000F9FC5A /* LexemeRollNegativeSidesFixture.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LexemeRollNegativeSidesFixture.swift; sourceTree = "<group>"; };
+		9271D4022500524D00F9FC5A /* LexemeRollPositiveSidesFixture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LexemeRollPositiveSidesFixture.swift; sourceTree = "<group>"; };
+		927DA38024FF21D000C868BB /* Operand2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Operand2.swift; sourceTree = "<group>"; };
+		927DA38224FF223F00C868BB /* Constant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constant.swift; sourceTree = "<group>"; };
+		927DA38424FF285800C868BB /* Roll.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Roll.swift; sourceTree = "<group>"; };
+		927DA38624FF407400C868BB /* RollNegativeSides.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RollNegativeSides.swift; sourceTree = "<group>"; };
+		927DA38824FF438500C868BB /* RollPositiveSides.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RollPositiveSides.swift; sourceTree = "<group>"; };
 		9286A3732266FEC8004D7360 /* Parser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Parser.swift; sourceTree = "<group>"; };
 		9286A375226700BA004D7360 /* ParserTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParserTests.swift; sourceTree = "<group>"; };
 		9290C1152433CBE400609A2D /* EvaluatableClosedRangeFixture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EvaluatableClosedRangeFixture.swift; sourceTree = "<group>"; };
@@ -148,15 +174,20 @@
 		92CD300220AD0D89002462B3 /* ChanceKit */ = {
 			isa = PBXGroup;
 			children = (
+				927DA38224FF223F00C868BB /* Constant.swift */,
+				92D04A99226CCA3D00E97E06 /* Evaluator.swift */,
 				92A4CC7320AF26530096AF98 /* Expression.swift */,
 				92A4CC7D20AF68D90096AF98 /* ExpressionError.swift */,
-				92D04A99226CCA3D00E97E06 /* Evaluator.swift */,
 				92D04A9F226DB0AC00E97E06 /* Lexer.swift */,
 				92DA546C20B204CD0052CC65 /* Markable.swift */,
 				92A4CC7720AF2EE30096AF98 /* Operand.swift */,
+				927DA38024FF21D000C868BB /* Operand2.swift */,
 				92A4CC7520AF270A0096AF98 /* Operator.swift */,
 				92DA546E20B207270052CC65 /* Parenthesis.swift */,
 				9286A3732266FEC8004D7360 /* Parser.swift */,
+				927DA38424FF285800C868BB /* Roll.swift */,
+				927DA38624FF407400C868BB /* RollNegativeSides.swift */,
+				927DA38824FF438500C868BB /* RollPositiveSides.swift */,
 				92A4CC7B20AF2F560096AF98 /* Tokenable.swift */,
 				9226DC7221500BF2003D024D /* Additions */,
 			);
@@ -167,6 +198,7 @@
 			isa = PBXGroup;
 			children = (
 				92A4CC7020AD143C0096AF98 /* Info.plist */,
+				9271D3F225004C1600F9FC5A /* ConstantTests.swift */,
 				92D04A9D226CCC3600E97E06 /* EvaluatorTests.swift */,
 				92CD302A20AD0EBD002462B3 /* ExpressionTests.swift */,
 				92D04AA1226DB27D00E97E06 /* LexerTests.swift */,
@@ -174,6 +206,9 @@
 				924105A920B06B19009FC568 /* OperatorTests.swift */,
 				92D513F5213DA02C00973B6F /* ParenthesisTests.swift */,
 				9286A375226700BA004D7360 /* ParserTests.swift */,
+				9271D3F625004E6600F9FC5A /* RollNegativeSidesTests.swift */,
+				9271D3F825004EE100F9FC5A /* RollPositiveSidesTests.swift */,
+				9271D3F425004CCC00F9FC5A /* RollTests.swift */,
 				923D7FBB2146E872000E1D49 /* TokenableTests.swift */,
 				9226DC7521500EAE003D024D /* Additions */,
 				92DE254923464CCD003A75A0 /* Fixtures */,
@@ -188,9 +223,13 @@
 				92DE255023465169003A75A0 /* EvaluatableIntegerFixture.swift */,
 				92DE2558234652FE003A75A0 /* InvalidFixture.swift */,
 				92D04A97226A2C8700E97E06 /* LexebleOnlyFixture.swift */,
+				9271D3FA25004F9600F9FC5A /* LexemeConstantFixture.swift */,
 				92DE254E23465101003A75A0 /* LexemeOperandFixture.swift */,
 				92DE254A23464CF4003A75A0 /* LexemeOperatorFixture.swift */,
 				92DE254C2346508F003A75A0 /* LexemeParenthesisFixture.swift */,
+				9271D3FC2500506F00F9FC5A /* LexemeRollFixture.swift */,
+				9271D4002500522000F9FC5A /* LexemeRollNegativeSidesFixture.swift */,
+				9271D4022500524D00F9FC5A /* LexemeRollPositiveSidesFixture.swift */,
 				92DE255423465244003A75A0 /* ParsableOnlyFixture.swift */,
 			);
 			path = Fixtures;
@@ -292,13 +331,18 @@
 				9286A3742266FEC8004D7360 /* Parser.swift in Sources */,
 				92A4CC7420AF26530096AF98 /* Expression.swift in Sources */,
 				9226DC6F21500AF2003D024D /* NSRegularExpression.swift in Sources */,
+				927DA38124FF21D000C868BB /* Operand2.swift in Sources */,
+				927DA38724FF407400C868BB /* RollNegativeSides.swift in Sources */,
 				92A4CC7620AF270A0096AF98 /* Operator.swift in Sources */,
 				92A4CC7C20AF2F560096AF98 /* Tokenable.swift in Sources */,
+				927DA38924FF438500C868BB /* RollPositiveSides.swift in Sources */,
 				92D04A9A226CCA3D00E97E06 /* Evaluator.swift in Sources */,
+				927DA38324FF223F00C868BB /* Constant.swift in Sources */,
 				92DA546D20B204CD0052CC65 /* Markable.swift in Sources */,
 				9226DC7121500B96003D024D /* NSTextCheckingResult.swift in Sources */,
 				92D04AA0226DB0AC00E97E06 /* Lexer.swift in Sources */,
 				92DA546F20B207270052CC65 /* Parenthesis.swift in Sources */,
+				927DA38524FF285800C868BB /* Roll.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -307,22 +351,30 @@
 			buildActionMask = 2147483647;
 			files = (
 				92DE254F23465101003A75A0 /* LexemeOperandFixture.swift in Sources */,
+				9271D3F725004E6600F9FC5A /* RollNegativeSidesTests.swift in Sources */,
+				9271D3FD2500506F00F9FC5A /* LexemeRollFixture.swift in Sources */,
 				92DE255523465244003A75A0 /* ParsableOnlyFixture.swift in Sources */,
 				9286A376226700BA004D7360 /* ParserTests.swift in Sources */,
 				92CD302B20AD0EBD002462B3 /* ExpressionTests.swift in Sources */,
+				9271D4032500524D00F9FC5A /* LexemeRollPositiveSidesFixture.swift in Sources */,
 				923D7FBC2146E872000E1D49 /* TokenableTests.swift in Sources */,
 				92391F0220B130A800FE8006 /* OperandTests.swift in Sources */,
+				9271D3F325004C1600F9FC5A /* ConstantTests.swift in Sources */,
 				92D513F6213DA02C00973B6F /* ParenthesisTests.swift in Sources */,
 				92DE254D2346508F003A75A0 /* LexemeParenthesisFixture.swift in Sources */,
 				92D04A98226A2C8700E97E06 /* LexebleOnlyFixture.swift in Sources */,
 				9226DC7721500ED9003D024D /* NSTextCheckingResultTests.swift in Sources */,
 				92DE254B23464CF4003A75A0 /* LexemeOperatorFixture.swift in Sources */,
+				9271D4012500522000F9FC5A /* LexemeRollNegativeSidesFixture.swift in Sources */,
 				92D04AA2226DB27D00E97E06 /* LexerTests.swift in Sources */,
 				924105AA20B06B19009FC568 /* OperatorTests.swift in Sources */,
+				9271D3FB25004F9600F9FC5A /* LexemeConstantFixture.swift in Sources */,
 				9226DC7421500EA7003D024D /* NSRegularExpressionTests.swift in Sources */,
+				9271D3F925004EE100F9FC5A /* RollPositiveSidesTests.swift in Sources */,
 				9290C1162433CBE400609A2D /* EvaluatableClosedRangeFixture.swift in Sources */,
 				92DE255123465169003A75A0 /* EvaluatableIntegerFixture.swift in Sources */,
 				92DE2559234652FE003A75A0 /* InvalidFixture.swift in Sources */,
+				9271D3F525004CCC00F9FC5A /* RollTests.swift in Sources */,
 				92D04A9E226CCC3600E97E06 /* EvaluatorTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

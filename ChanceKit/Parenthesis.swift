@@ -1,4 +1,4 @@
-enum Parenthesis: String {
+enum Parenthesis: String, CaseIterable {
   case close = ")"
   case open = "("
 }

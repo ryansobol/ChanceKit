@@ -1,4 +1,4 @@
-enum Operator: String {
+enum Operator: String, CaseIterable {
   case addition = "+"
   case division = "÷"
   case multiplication = "×"
