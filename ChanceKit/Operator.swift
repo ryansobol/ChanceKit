@@ -58,4 +58,20 @@ extension Operator {
       return try operand1.subtracted(operand2)
     }
   }
+
+  func evaluate(_ operand1: Operand2, _ operand2: Operand2) throws -> Operand2 {
+    switch self {
+    case .addition:
+      return try operand1.added(operand2)
+
+    case .division:
+      return try operand1.divided(operand2)
+
+    case .multiplication:
+      return try operand1.multiplied(operand2)
+
+    case .subtraction:
+      return try operand1.subtracted(operand2)
+    }
+  }
 }

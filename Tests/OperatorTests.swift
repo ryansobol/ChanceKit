@@ -138,4 +138,68 @@ extension OperandTests {
       }
     }
   }
+
+  func testEvaluateOperand2() {
+    typealias Fixture = (
+      operator: Operator,
+      operand1: Constant,
+      operand2: Constant,
+      expected: Constant
+    )
+
+    let fixtures: [Fixture] = [
+      (.addition, Constant(term: 1), Constant(term: 2), Constant(term: 3)),
+      (.division, Constant(term: 8), Constant(term: 2), Constant(term: 4)),
+      (.multiplication, Constant(term: 6), Constant(term: 7), Constant(term: 42)),
+      (.subtraction, Constant(term: 5), Constant(term: 4), Constant(term: 1)),
+    ]
+
+    for fixture in fixtures {
+      let `operator` = fixture.operator
+      let operand1 = fixture.operand1
+      let operand2 = fixture.operand2
+      let expected = fixture.expected
+      let actual = try! `operator`.evaluate(operand1, operand2) as! Constant
+
+      XCTAssertEqual(expected, actual, "operator: \(`operator`) operand1: \(operand1) operand2: \(operand2)")
+    }
+  }
+
+  func testEvaluateDivisionByZeroOperand2() {
+    let `operator` = Operator.division
+    let operand1 = Constant(term: 1)
+    let operand2 = Constant(term: 0)
+    let expected = ExpressionError.divisionByZero
+
+    XCTAssertThrowsError(try `operator`.evaluate(operand1, operand2)) { error in
+      XCTAssertEqual(expected, error as? ExpressionError)
+    }
+  }
+
+  func testEvaluateOperationOverflowOperand2() {
+    typealias Fixture = (
+      operator: Operator,
+      operand1: Constant,
+      operand2: Constant
+    )
+
+    let fixtures: [Fixture] = [
+      (.addition, Constant(term: Int.max), Constant(term: 1)),
+      (.division, Constant(term: Int.min), Constant(term: -1)),
+      (.multiplication, Constant(term: Int.min), Constant(term: -1)),
+      (.subtraction, Constant(term: Int.max), Constant(term: -1)),
+    ]
+
+    let expected = ExpressionError.operationOverflow
+
+    for fixture in fixtures {
+      let `operator` = fixture.operator
+      let operand1 = fixture.operand1
+      let operand2 = fixture.operand2
+
+      XCTAssertThrowsError(try `operator`.evaluate(operand1, operand2)) { error in
+        XCTAssertEqual(expected, error as? ExpressionError)
+      }
+    }
+  }
 }
