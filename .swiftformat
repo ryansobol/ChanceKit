@@ -1,0 +1,16 @@
+# file options
+
+--swiftversion 5.1
+
+# rules
+
+--disable andOperator
+--disable redundantReturn
+
+# format options
+
+--decimalgrouping ignore # for now
+--elseposition next-line
+--indent 2
+--ranges no-space
+--self insert

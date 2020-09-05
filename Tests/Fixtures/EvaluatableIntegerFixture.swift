@@ -10,6 +10,7 @@ typealias EvaluatableIntegerFixture = (
 
 let evaluatableIntegerFixtures: [EvaluatableIntegerFixture] = [
   // MARK: A
+
   (
     description: "",
     lexemes: [],
@@ -68,6 +69,7 @@ let evaluatableIntegerFixtures: [EvaluatableIntegerFixture] = [
   ),
 
   // MARK: A + B
+
   (
     description: "1 + 2",
     lexemes: ["1", "+", "2"],
@@ -131,7 +133,7 @@ let evaluatableIntegerFixtures: [EvaluatableIntegerFixture] = [
     postfixTokens: [
       Operand(rawLexeme: "5d1")!,
       Operand(rawLexeme: "6d1")!,
-      Operator(rawValue: "×")!
+      Operator(rawValue: "×")!,
     ],
     value: 30
   ),
@@ -142,7 +144,7 @@ let evaluatableIntegerFixtures: [EvaluatableIntegerFixture] = [
     postfixTokens: [
       Operand(rawLexeme: "8d1")!,
       Operand(rawLexeme: "7d1")!,
-      Operator(rawValue: "÷")!
+      Operator(rawValue: "÷")!,
     ],
     value: 1
   ),
@@ -162,6 +164,7 @@ let evaluatableIntegerFixtures: [EvaluatableIntegerFixture] = [
   ),
 
   // MARK: A + B + C
+
   (
     description: "3 - 1 + 2",
     lexemes: ["3", "-", "1", "+", "2"],
@@ -316,6 +319,7 @@ let evaluatableIntegerFixtures: [EvaluatableIntegerFixture] = [
   ),
 
   // MARK: A + B + C + D
+
   (
     description: "7 - 5 - 3 + 8",
     lexemes: ["7", "-", "5", "-", "3", "+", "8"],
@@ -594,6 +598,7 @@ let evaluatableIntegerFixtures: [EvaluatableIntegerFixture] = [
   ),
 
   // MARK: (A)
+
   (
     description: "()",
     lexemes: ["(", ")"],
@@ -652,6 +657,7 @@ let evaluatableIntegerFixtures: [EvaluatableIntegerFixture] = [
   ),
 
   // MARK: (A + B)
+
   (
     description: "(2 + 3)",
     lexemes: ["(", "2", "+", "3", ")"],
@@ -858,6 +864,7 @@ let evaluatableIntegerFixtures: [EvaluatableIntegerFixture] = [
   ),
 
   // MARK: ((A + B))
+
   (
     description: "((2 + 3))",
     lexemes: ["(", "(", "2", "+", "3", ")", ")"],
@@ -1088,6 +1095,7 @@ let evaluatableIntegerFixtures: [EvaluatableIntegerFixture] = [
   ),
 
   // MARK: (A + B) + C
+
   (
     description: "(5 - 4) + 6",
     lexemes: ["(", "5", "-", "4", ")", "+", "6"],
@@ -1426,6 +1434,7 @@ let evaluatableIntegerFixtures: [EvaluatableIntegerFixture] = [
   ),
 
   // MARK: ((A + B) + C)
+
   (
     description: "((5 - 4) + 6)",
     lexemes: ["(", "(", "5", "-", "4", ")", "+", "6", ")"],
@@ -1796,6 +1805,7 @@ let evaluatableIntegerFixtures: [EvaluatableIntegerFixture] = [
   ),
 
   // MARK: (A + B) + (C + D)
+
   (
     description: "(4 + 1) - (8 + 5)",
     lexemes: ["(", "4", "+", "1", ")", "-", "(", "8", "+", "5", ")"],
@@ -2230,6 +2240,7 @@ let evaluatableIntegerFixtures: [EvaluatableIntegerFixture] = [
   ),
 
   // MARK: (A + (B + C) + D)
+
   (
     description: "(1 + (9 - 4) - 2)",
     lexemes: ["(", "1", "+", "(", "9", "-", "4", ")", "-", "2", ")"],
@@ -2664,6 +2675,7 @@ let evaluatableIntegerFixtures: [EvaluatableIntegerFixture] = [
   ),
 
   // MARK: (A + B ÷ C × (D + E) - F)
+
   (
     description: "(1 + 2 ÷ 3 × (4 + 5) - 6)",
     lexemes: ["(", "1", "+", "2", "÷", "3", "×", "(", "4", "+", "5", ")", "-", "6", ")"],

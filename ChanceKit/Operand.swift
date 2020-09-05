@@ -224,7 +224,7 @@ extension Operand {
 
       var result = 0
 
-      // TODO - Allow users to cancel long-running loops (i.e. large times)
+      // TODO: Allow users to cancel long-running loops (i.e. large times)
       // Idea 1:
       //  - A concurrent, userInitiated dispatch queue
       //  - A concurrentPerform(iterations:) block within queue.sync(execute:)

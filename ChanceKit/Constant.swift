@@ -8,7 +8,7 @@ extension Constant: Operand2, Equatable {
   // MARK: - Tokenable
 
   var description: String {
-    return String(term)
+    return String(self.term)
   }
 
   // MARK: - Initialization
@@ -72,9 +72,9 @@ extension Constant: Operand2, Equatable {
 
     return nil
   }
-  
+
   // MARK: - Evaluation
-  
+
   func value() throws -> Int {
     return self.term
   }

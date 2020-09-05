@@ -16,7 +16,7 @@ extension Roll: Operand2, Equatable {
 
   // MARK: - Initialization
 
-  static private let regex = NSRegularExpression(#"\A(-?\d+)d(-?\d+)\Z"#)
+  private static let regex = NSRegularExpression(#"\A(-?\d+)d(-?\d+)\Z"#)
 
   init?(rawLexeme: String) {
     guard let result = Self.regex.firstMatch(in: rawLexeme) else {
@@ -122,7 +122,7 @@ extension Roll: Operand2, Equatable {
 
     var result = 0
 
-    // TODO - Allow users to cancel long-running loops (i.e. large times)
+    // TODO: Allow users to cancel long-running loops (i.e. large times)
     // Idea 1:
     //  - A concurrent, userInitiated dispatch queue
     //  - A concurrentPerform(iterations:) block within queue.sync(execute:)

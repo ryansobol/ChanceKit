@@ -43,7 +43,7 @@ extension Expression: Equatable {
 
 extension Expression: CustomStringConvertible {
   public var description: String {
-    let result = tokens.reduce("") { accumulation, token in
+    let result = self.tokens.reduce("") { accumulation, token in
       let lexeme: String
 
       if let operatorToken = token as? Operator {

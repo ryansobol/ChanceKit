@@ -24,7 +24,6 @@ extension RollNegativeSidesTests {
       (token: RollNegativeSides(times: Int.min), expected: "\(Int.min)d-"),
     ]
 
-
     for fixture in fixtures {
       let token = fixture.token
       let expected = fixture.expected
@@ -35,7 +34,7 @@ extension RollNegativeSidesTests {
   }
 }
 
-// MARK - Initialization
+// MARK: - Initialization
 
 extension RollNegativeSidesTests {
   func testInitWithValidRawLexeme() {

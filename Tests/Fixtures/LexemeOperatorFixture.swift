@@ -462,7 +462,7 @@ let lexemeOperatorFixtures: [LexemeOperatorFixture] = [
       Operand.constant(1),
       Operator.multiplication,
       Parenthesis.open,
-      Operator.subtraction
+      Operator.subtraction,
     ],
     droppedLexemes: ["1", "×", "("],
     droppedTokens: [Operand.constant(1), Operator.multiplication, Parenthesis.open]
@@ -897,7 +897,7 @@ let lexemeOperatorFixtures: [LexemeOperatorFixture] = [
       Operand.roll(1, 1),
       Operator.multiplication,
       Parenthesis.open,
-      Operator.multiplication
+      Operator.multiplication,
     ],
     droppedLexemes: ["1d1", "×", "("],
     droppedTokens: [Operand.roll(1, 1), Operator.multiplication, Parenthesis.open]
@@ -912,7 +912,7 @@ let lexemeOperatorFixtures: [LexemeOperatorFixture] = [
       Operand.roll(1, 1),
       Operator.multiplication,
       Parenthesis.open,
-      Operator.subtraction
+      Operator.subtraction,
     ],
     droppedLexemes: ["1d1", "×", "("],
     droppedTokens: [Operand.roll(1, 1), Operator.multiplication, Parenthesis.open]
@@ -927,7 +927,7 @@ let lexemeOperatorFixtures: [LexemeOperatorFixture] = [
       Operand.rollPositiveSides(1),
       Operator.multiplication,
       Parenthesis.open,
-      Operator.addition
+      Operator.addition,
     ],
     droppedLexemes: ["1d", "×", "("],
     droppedTokens: [Operand.rollPositiveSides(1), Operator.multiplication, Parenthesis.open]
@@ -942,7 +942,7 @@ let lexemeOperatorFixtures: [LexemeOperatorFixture] = [
       Operand.rollPositiveSides(1),
       Operator.multiplication,
       Parenthesis.open,
-      Operator.division
+      Operator.division,
     ],
     droppedLexemes: ["1d", "×", "("],
     droppedTokens: [Operand.rollPositiveSides(1), Operator.multiplication, Parenthesis.open]
@@ -957,7 +957,7 @@ let lexemeOperatorFixtures: [LexemeOperatorFixture] = [
       Operand.rollPositiveSides(1),
       Operator.multiplication,
       Parenthesis.open,
-      Operator.multiplication
+      Operator.multiplication,
     ],
     droppedLexemes: ["1d", "×", "("],
     droppedTokens: [Operand.rollPositiveSides(1), Operator.multiplication, Parenthesis.open]
@@ -972,7 +972,7 @@ let lexemeOperatorFixtures: [LexemeOperatorFixture] = [
       Operand.rollPositiveSides(1),
       Operator.multiplication,
       Parenthesis.open,
-      Operator.subtraction
+      Operator.subtraction,
     ],
     droppedLexemes: ["1d", "×", "("],
     droppedTokens: [Operand.rollPositiveSides(1), Operator.multiplication, Parenthesis.open]

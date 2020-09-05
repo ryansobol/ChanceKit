@@ -36,7 +36,6 @@ func parse(infixTokens: [Tokenable]) throws -> [Tokenable] {
           preconditionFailure()
         }
 
-
         if currentOperator.hasPrecedence(topOperator) {
           break
         }

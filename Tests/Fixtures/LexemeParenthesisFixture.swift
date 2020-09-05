@@ -462,7 +462,7 @@ let lexemeParenthesisFixtures: [LexemeParenthesisFixture] = [
       Operand.rollPositiveSides(1),
       Operator.multiplication,
       Parenthesis.open,
-      Parenthesis.open
+      Parenthesis.open,
     ],
     droppedLexemes: ["1d", "×", "("],
     droppedTokens: [Operand.rollPositiveSides(1), Operator.multiplication, Parenthesis.open]
@@ -477,7 +477,7 @@ let lexemeParenthesisFixtures: [LexemeParenthesisFixture] = [
       Operand.rollPositiveSides(1),
       Operator.multiplication,
       Parenthesis.open,
-      Parenthesis.close
+      Parenthesis.close,
     ],
     droppedLexemes: ["1d", "×", "("],
     droppedTokens: [Operand.rollPositiveSides(1), Operator.multiplication, Parenthesis.open]
@@ -512,7 +512,7 @@ let lexemeParenthesisFixtures: [LexemeParenthesisFixture] = [
       Operand.rollPositiveSides(1),
       Parenthesis.close,
       Operator.multiplication,
-      Parenthesis.open
+      Parenthesis.open,
     ],
     droppedLexemes: ["1d", ")", "×"],
     droppedTokens: [Operand.rollPositiveSides(1), Parenthesis.close, Operator.multiplication]

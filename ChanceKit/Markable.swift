@@ -1,3 +1,1 @@
-protocol Markable: Tokenable {
-
-}
+protocol Markable: Tokenable {}

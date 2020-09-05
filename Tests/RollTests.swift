@@ -44,7 +44,7 @@ extension RollTests {
   }
 }
 
-// MARK - Initialization
+// MARK: - Initialization
 
 extension RollTests {
   func testInitWithValidRawLexeme() {
@@ -1220,7 +1220,7 @@ extension RollTests {
 
   func testNegatedWithOverflow() {
     let operands: [Roll] = [
-      Roll(times: Int.min, sides: Int.min)
+      Roll(times: Int.min, sides: Int.min),
     ]
 
     let expected = ExpressionError.operationOverflow
@@ -1360,7 +1360,6 @@ extension RollTests {
       }
     }
   }
-
 
   func testAddedToRoll() {
     typealias Fixture = (
@@ -1601,7 +1600,6 @@ extension RollTests {
     }
   }
 
-
   func testDividedByRoll() {
     typealias Fixture = (
       operand1: Roll,
@@ -1805,7 +1803,7 @@ extension RollTests {
 
 //       Near infinite loop
 //       (operand1: Roll(times: Int.min, sides: 1), operand2: Constant(term: -1)),
-      ]
+    ]
 
     let expected = ExpressionError.operationOverflow
 

@@ -160,7 +160,7 @@ extension ExpressionTests {
     for fixture in lexemeOperandFixtures {
       let withLexemes = fixture.withLexemes
       let droppedLexemes = fixture.droppedLexemes
-      
+
       let expected = try! Expression(droppedLexemes)
       let actual = try! Expression(withLexemes).dropped()
 

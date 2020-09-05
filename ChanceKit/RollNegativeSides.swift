@@ -15,7 +15,7 @@ extension RollNegativeSides: Operand2, Equatable {
 
   // MARK: - Initialization
 
-  static private let regex = NSRegularExpression(#"\A(-?\d+)d-\Z"#)
+  private static let regex = NSRegularExpression(#"\A(-?\d+)d-\Z"#)
 
   init?(rawLexeme: String) {
     guard let result = Self.regex.firstMatch(in: rawLexeme) else {
@@ -79,9 +79,9 @@ extension RollNegativeSides: Operand2, Equatable {
   func dropped() -> Tokenable? {
     return RollPositiveSides(times: self.times)
   }
-  
+
   // MARK: - Evaluation
-  
+
   func value() throws -> Int {
     throw ExpressionError.missingOperandRollSides
   }
@@ -92,4 +92,3 @@ extension RollNegativeSides: Operand2, Equatable {
     return RollPositiveSides(times: self.times)
   }
 }
-

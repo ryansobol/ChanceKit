@@ -1,6 +1,6 @@
 protocol Operand2: Tokenable {
   // MARK: - Initialization
-  
+
   init?(rawLexeme: String)
 
   // MARK: - Inclusion

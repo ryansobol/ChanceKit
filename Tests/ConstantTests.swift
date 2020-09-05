@@ -34,7 +34,7 @@ extension ConstantTests {
   }
 }
 
-// MARK - Initialization
+// MARK: - Initialization
 
 extension ConstantTests {
   func testInitWithValidRawLexeme() {
@@ -559,7 +559,8 @@ extension ConstantTests {
       (operand: Constant(term: 0), expected: 0),
       (operand: Constant(term: -0), expected: 0),
       (operand: Constant(term: Int.max), expected: Int.max),
-      (operand: Constant(term: Int.min), expected: Int.min),    ]
+      (operand: Constant(term: Int.min), expected: Int.min),
+    ]
 
     for fixture in fixtures {
       let operand = fixture.operand

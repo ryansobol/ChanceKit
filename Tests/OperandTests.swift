@@ -3,7 +3,7 @@ import XCTest
 
 class OperandTests: XCTestCase {}
 
-// MARK - Initialization
+// MARK: - Initialization
 
 extension OperandTests {
   func testInitConstantWithValidRawLexeme() {
@@ -1310,7 +1310,6 @@ extension OperandTests {
       (operand1: .rollPositiveSides(-1), operand2: .constant(-1), expected: .roll(-1, -1)),
       (operand1: .rollPositiveSides(-9), operand2: .constant(-9), expected: .roll(-9, -9)),
       (operand1: .rollPositiveSides(-1), operand2: .constant(Int.min), expected: .roll(-1, Int.min)),
-
     ]
 
     for fixture in fixtures {
@@ -1788,7 +1787,8 @@ extension OperandTests {
       (operand: .constant(0), expected: 0),
       (operand: .constant(-0), expected: 0),
       (operand: .constant(Int.max), expected: Int.max),
-      (operand: .constant(Int.min), expected: Int.min),    ]
+      (operand: .constant(Int.min), expected: Int.min),
+    ]
 
     for fixture in fixtures {
       let operand = fixture.operand
@@ -2430,7 +2430,6 @@ extension OperandTests {
     }
   }
 
-
   func testDividedRollByRoll() {
     typealias Fixture = (
       operand1: Operand,
@@ -2644,7 +2643,7 @@ extension OperandTests {
 
 //       Near infinite loop
 //       (operand1: .roll(Int.min, 1), operand2: .constant(-1)),
-      ]
+    ]
 
     let expected = ExpressionError.operationOverflow
 
@@ -3022,7 +3021,7 @@ extension OperandTests {
 
   func testNegatedRollWithOverflow() {
     let operands: [Operand] = [
-      .roll(Int.min, Int.min)
+      .roll(Int.min, Int.min),
     ]
 
     let expected = ExpressionError.operationOverflow
