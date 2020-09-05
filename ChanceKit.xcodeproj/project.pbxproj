@@ -11,6 +11,12 @@
 		9226DC7121500B96003D024D /* NSTextCheckingResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9226DC7021500B96003D024D /* NSTextCheckingResult.swift */; };
 		9226DC7421500EA7003D024D /* NSRegularExpressionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9226DC7321500EA7003D024D /* NSRegularExpressionTests.swift */; };
 		9226DC7721500ED9003D024D /* NSTextCheckingResultTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9226DC7621500ED9003D024D /* NSTextCheckingResultTests.swift */; };
+		9233DCB22504435000B8D0A3 /* EvaluatableClosedRangeFixtureOperand2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9233DCB12504435000B8D0A3 /* EvaluatableClosedRangeFixtureOperand2.swift */; };
+		9233DCB42504440200B8D0A3 /* ParsableOnlyFixtureOperand2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9233DCB32504440200B8D0A3 /* ParsableOnlyFixtureOperand2.swift */; };
+		9233DCB62504454900B8D0A3 /* EvaluatableIntegerFixtureOperand2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9233DCB52504454900B8D0A3 /* EvaluatableIntegerFixtureOperand2.swift */; };
+		9233DCBA2504476B00B8D0A3 /* LexemeOperandFixtureOperand2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9233DCB92504476B00B8D0A3 /* LexemeOperandFixtureOperand2.swift */; };
+		9233DCBC2504489500B8D0A3 /* LexemeOperatorFixtureOperand2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9233DCBB2504489500B8D0A3 /* LexemeOperatorFixtureOperand2.swift */; };
+		9233DCBE2504495500B8D0A3 /* LexemeParenthesisFixtureOperand2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9233DCBD2504495500B8D0A3 /* LexemeParenthesisFixtureOperand2.swift */; };
 		92391F0220B130A800FE8006 /* OperandTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92391F0120B130A800FE8006 /* OperandTests.swift */; };
 		923D7FBC2146E872000E1D49 /* TokenableTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 923D7FBB2146E872000E1D49 /* TokenableTests.swift */; };
 		924105AA20B06B19009FC568 /* OperatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 924105A920B06B19009FC568 /* OperatorTests.swift */; };
@@ -70,6 +76,12 @@
 		9226DC7021500B96003D024D /* NSTextCheckingResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSTextCheckingResult.swift; sourceTree = "<group>"; };
 		9226DC7321500EA7003D024D /* NSRegularExpressionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSRegularExpressionTests.swift; sourceTree = "<group>"; };
 		9226DC7621500ED9003D024D /* NSTextCheckingResultTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSTextCheckingResultTests.swift; sourceTree = "<group>"; };
+		9233DCB12504435000B8D0A3 /* EvaluatableClosedRangeFixtureOperand2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EvaluatableClosedRangeFixtureOperand2.swift; sourceTree = "<group>"; };
+		9233DCB32504440200B8D0A3 /* ParsableOnlyFixtureOperand2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParsableOnlyFixtureOperand2.swift; sourceTree = "<group>"; };
+		9233DCB52504454900B8D0A3 /* EvaluatableIntegerFixtureOperand2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EvaluatableIntegerFixtureOperand2.swift; sourceTree = "<group>"; };
+		9233DCB92504476B00B8D0A3 /* LexemeOperandFixtureOperand2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LexemeOperandFixtureOperand2.swift; sourceTree = "<group>"; };
+		9233DCBB2504489500B8D0A3 /* LexemeOperatorFixtureOperand2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LexemeOperatorFixtureOperand2.swift; sourceTree = "<group>"; };
+		9233DCBD2504495500B8D0A3 /* LexemeParenthesisFixtureOperand2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LexemeParenthesisFixtureOperand2.swift; sourceTree = "<group>"; };
 		92391F0120B130A800FE8006 /* OperandTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OperandTests.swift; sourceTree = "<group>"; };
 		923D7FBB2146E872000E1D49 /* TokenableTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenableTests.swift; sourceTree = "<group>"; };
 		924105A920B06B19009FC568 /* OperatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OperatorTests.swift; sourceTree = "<group>"; };
@@ -220,17 +232,23 @@
 			isa = PBXGroup;
 			children = (
 				9290C1152433CBE400609A2D /* EvaluatableClosedRangeFixture.swift */,
+				9233DCB12504435000B8D0A3 /* EvaluatableClosedRangeFixtureOperand2.swift */,
 				92DE255023465169003A75A0 /* EvaluatableIntegerFixture.swift */,
+				9233DCB52504454900B8D0A3 /* EvaluatableIntegerFixtureOperand2.swift */,
 				92DE2558234652FE003A75A0 /* InvalidFixture.swift */,
 				92D04A97226A2C8700E97E06 /* LexebleOnlyFixture.swift */,
 				9271D3FA25004F9600F9FC5A /* LexemeConstantFixture.swift */,
 				92DE254E23465101003A75A0 /* LexemeOperandFixture.swift */,
+				9233DCB92504476B00B8D0A3 /* LexemeOperandFixtureOperand2.swift */,
 				92DE254A23464CF4003A75A0 /* LexemeOperatorFixture.swift */,
+				9233DCBB2504489500B8D0A3 /* LexemeOperatorFixtureOperand2.swift */,
 				92DE254C2346508F003A75A0 /* LexemeParenthesisFixture.swift */,
+				9233DCBD2504495500B8D0A3 /* LexemeParenthesisFixtureOperand2.swift */,
 				9271D3FC2500506F00F9FC5A /* LexemeRollFixture.swift */,
 				9271D4002500522000F9FC5A /* LexemeRollNegativeSidesFixture.swift */,
 				9271D4022500524D00F9FC5A /* LexemeRollPositiveSidesFixture.swift */,
 				92DE255423465244003A75A0 /* ParsableOnlyFixture.swift */,
+				9233DCB32504440200B8D0A3 /* ParsableOnlyFixtureOperand2.swift */,
 			);
 			path = Fixtures;
 			sourceTree = "<group>";
@@ -357,18 +375,24 @@
 				9286A376226700BA004D7360 /* ParserTests.swift in Sources */,
 				92CD302B20AD0EBD002462B3 /* ExpressionTests.swift in Sources */,
 				9271D4032500524D00F9FC5A /* LexemeRollPositiveSidesFixture.swift in Sources */,
+				9233DCB62504454900B8D0A3 /* EvaluatableIntegerFixtureOperand2.swift in Sources */,
 				923D7FBC2146E872000E1D49 /* TokenableTests.swift in Sources */,
+				9233DCBE2504495500B8D0A3 /* LexemeParenthesisFixtureOperand2.swift in Sources */,
 				92391F0220B130A800FE8006 /* OperandTests.swift in Sources */,
+				9233DCBA2504476B00B8D0A3 /* LexemeOperandFixtureOperand2.swift in Sources */,
 				9271D3F325004C1600F9FC5A /* ConstantTests.swift in Sources */,
 				92D513F6213DA02C00973B6F /* ParenthesisTests.swift in Sources */,
 				92DE254D2346508F003A75A0 /* LexemeParenthesisFixture.swift in Sources */,
 				92D04A98226A2C8700E97E06 /* LexebleOnlyFixture.swift in Sources */,
 				9226DC7721500ED9003D024D /* NSTextCheckingResultTests.swift in Sources */,
+				9233DCB42504440200B8D0A3 /* ParsableOnlyFixtureOperand2.swift in Sources */,
 				92DE254B23464CF4003A75A0 /* LexemeOperatorFixture.swift in Sources */,
 				9271D4012500522000F9FC5A /* LexemeRollNegativeSidesFixture.swift in Sources */,
 				92D04AA2226DB27D00E97E06 /* LexerTests.swift in Sources */,
 				924105AA20B06B19009FC568 /* OperatorTests.swift in Sources */,
 				9271D3FB25004F9600F9FC5A /* LexemeConstantFixture.swift in Sources */,
+				9233DCBC2504489500B8D0A3 /* LexemeOperatorFixtureOperand2.swift in Sources */,
+				9233DCB22504435000B8D0A3 /* EvaluatableClosedRangeFixtureOperand2.swift in Sources */,
 				9226DC7421500EA7003D024D /* NSRegularExpressionTests.swift in Sources */,
 				9271D3F925004EE100F9FC5A /* RollPositiveSidesTests.swift in Sources */,
 				9290C1162433CBE400609A2D /* EvaluatableClosedRangeFixture.swift in Sources */,
