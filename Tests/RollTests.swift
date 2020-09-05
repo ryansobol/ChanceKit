@@ -1158,7 +1158,10 @@ extension RollTests {
       let expected = fixture.expected
       let actual = try! operand.value()
 
-      XCTAssertTrue(expected.contains(actual), "expected: \(expected) actual: \(actual) operand: \(operand)")
+      XCTAssertTrue(
+        expected.contains(actual),
+        "expected: \(expected) actual: \(actual) operand: \(operand)"
+      )
     }
   }
 

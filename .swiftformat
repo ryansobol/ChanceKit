@@ -12,5 +12,6 @@
 --decimalgrouping ignore # for now
 --elseposition next-line
 --indent 2
+--maxwidth 100
 --ranges no-space
 --self insert

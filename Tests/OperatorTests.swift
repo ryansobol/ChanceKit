@@ -97,7 +97,11 @@ extension OperandTests {
       let expected = fixture.expected
       let actual = try! operation.evaluate(operand1, operand2)
 
-      XCTAssertEqual(expected, actual, "operator: \(operation) operand1: \(operand1) operand2: \(operand2)")
+      XCTAssertEqual(
+        expected,
+        actual,
+        "operator: \(operation) operand1: \(operand1) operand2: \(operand2)"
+      )
     }
   }
 
@@ -161,7 +165,11 @@ extension OperandTests {
       let expected = fixture.expected
       let actual = try! `operator`.evaluate(operand1, operand2) as! Constant
 
-      XCTAssertEqual(expected, actual, "operator: \(`operator`) operand1: \(operand1) operand2: \(operand2)")
+      XCTAssertEqual(
+        expected,
+        actual,
+        "operator: \(`operator`) operand1: \(operand1) operand2: \(operand2)"
+      )
     }
   }
 

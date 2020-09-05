@@ -258,8 +258,16 @@ extension OperandTests {
       (operand1: .constant(78), operand2: .constant(9), expected: .constant(789)),
 
       (operand1: .constant(0), operand2: .constant(Int.max), expected: .constant(Int.max)),
-      (operand1: .constant(9), operand2: .constant(223372036854775807), expected: .constant(Int.max)),
-      (operand1: .constant(922337203685477580), operand2: .constant(7), expected: .constant(Int.max)),
+      (
+        operand1: .constant(9),
+        operand2: .constant(223372036854775807),
+        expected: .constant(Int.max)
+      ),
+      (
+        operand1: .constant(922337203685477580),
+        operand2: .constant(7),
+        expected: .constant(Int.max)
+      ),
 
       (operand1: .constant(-0), operand2: .constant(0), expected: .constant(0)),
       (operand1: .constant(-1), operand2: .constant(0), expected: .constant(-10)),
@@ -274,8 +282,16 @@ extension OperandTests {
       (operand1: .constant(-78), operand2: .constant(9), expected: .constant(-789)),
 
       (operand1: .constant(-0), operand2: .constant(Int.max), expected: .constant(Int.max)),
-      (operand1: .constant(-9), operand2: .constant(223372036854775807), expected: .constant(-Int.max)),
-      (operand1: .constant(-922337203685477580), operand2: .constant(7), expected: .constant(-Int.max)),
+      (
+        operand1: .constant(-9),
+        operand2: .constant(223372036854775807),
+        expected: .constant(-Int.max)
+      ),
+      (
+        operand1: .constant(-922337203685477580),
+        operand2: .constant(7),
+        expected: .constant(-Int.max)
+      ),
 
       (operand1: .constant(0), operand2: .constant(-0), expected: .constant(0)),
       (operand1: .constant(1), operand2: .constant(-0), expected: .constant(10)),
@@ -285,8 +301,16 @@ extension OperandTests {
       (operand1: .constant(-1), operand2: .constant(-0), expected: .constant(-10)),
       (operand1: .constant(-21), operand2: .constant(-0), expected: .constant(-210)),
 
-      (operand1: .constant(-9), operand2: .constant(223372036854775808), expected: .constant(Int.min)),
-      (operand1: .constant(-922337203685477580), operand2: .constant(8), expected: .constant(Int.min)),
+      (
+        operand1: .constant(-9),
+        operand2: .constant(223372036854775808),
+        expected: .constant(Int.min)
+      ),
+      (
+        operand1: .constant(-922337203685477580),
+        operand2: .constant(8),
+        expected: .constant(Int.min)
+      ),
     ]
 
     for fixture in fixtures {
@@ -632,8 +656,16 @@ extension OperandTests {
       (operand1: .roll(9, -78), operand2: .constant(9), expected: .roll(9, -789)),
 
       (operand1: .roll(1, -0), operand2: .constant(Int.max), expected: .roll(1, Int.max)),
-      (operand1: .roll(1, -9), operand2: .constant(223372036854775808), expected: .roll(1, Int.min)),
-      (operand1: .roll(1, -922337203685477580), operand2: .constant(8), expected: .roll(1, Int.min)),
+      (
+        operand1: .roll(1, -9),
+        operand2: .constant(223372036854775808),
+        expected: .roll(1, Int.min)
+      ),
+      (
+        operand1: .roll(1, -922337203685477580),
+        operand2: .constant(8),
+        expected: .roll(1, Int.min)
+      ),
 
       (operand1: .roll(-0, 0), operand2: .constant(0), expected: .roll(-0, 0)),
       (operand1: .roll(-0, 1), operand2: .constant(0), expected: .roll(-0, 10)),
@@ -648,8 +680,16 @@ extension OperandTests {
       (operand1: .roll(-9, 78), operand2: .constant(9), expected: .roll(-9, 789)),
 
       (operand1: .roll(-1, 0), operand2: .constant(Int.max), expected: .roll(-1, Int.max)),
-      (operand1: .roll(-1, 9), operand2: .constant(223372036854775807), expected: .roll(-1, Int.max)),
-      (operand1: .roll(-1, 922337203685477580), operand2: .constant(7), expected: .roll(-1, Int.max)),
+      (
+        operand1: .roll(-1, 9),
+        operand2: .constant(223372036854775807),
+        expected: .roll(-1, Int.max)
+      ),
+      (
+        operand1: .roll(-1, 922337203685477580),
+        operand2: .constant(7),
+        expected: .roll(-1, Int.max)
+      ),
 
       (operand1: .roll(-0, -0), operand2: .constant(0), expected: .roll(-0, 0)),
       (operand1: .roll(-0, -1), operand2: .constant(0), expected: .roll(-0, -10)),
@@ -664,8 +704,16 @@ extension OperandTests {
       (operand1: .roll(-9, -78), operand2: .constant(9), expected: .roll(-9, -789)),
 
       (operand1: .roll(-1, -0), operand2: .constant(Int.max), expected: .roll(-1, Int.max)),
-      (operand1: .roll(-1, -9), operand2: .constant(223372036854775808), expected: .roll(-1, Int.min)),
-      (operand1: .roll(-1, -922337203685477580), operand2: .constant(8), expected: .roll(-1, Int.min)),
+      (
+        operand1: .roll(-1, -9),
+        operand2: .constant(223372036854775808),
+        expected: .roll(-1, Int.min)
+      ),
+      (
+        operand1: .roll(-1, -922337203685477580),
+        operand2: .constant(8),
+        expected: .roll(-1, Int.min)
+      ),
 
       (operand1: .roll(0, 0), operand2: .constant(-0), expected: .roll(0, 0)),
       (operand1: .roll(0, 1), operand2: .constant(-0), expected: .roll(0, 10)),
@@ -1049,7 +1097,11 @@ extension OperandTests {
       (operand1: .rollNegativeSides(-0), operand2: .constant(0), expected: .roll(-0, -0)),
       (operand1: .rollNegativeSides(-1), operand2: .constant(1), expected: .roll(-1, -1)),
       (operand1: .rollNegativeSides(-9), operand2: .constant(9), expected: .roll(-9, -9)),
-      (operand1: .rollNegativeSides(-1), operand2: .constant(Int.max), expected: .roll(-1, -Int.max)),
+      (
+        operand1: .rollNegativeSides(-1),
+        operand2: .constant(Int.max),
+        expected: .roll(-1, -Int.max)
+      ),
 
       (operand1: .rollNegativeSides(0), operand2: .constant(-0), expected: .roll(0, -0)),
       (operand1: .rollNegativeSides(1), operand2: .constant(-1), expected: .roll(1, 1)),
@@ -1059,7 +1111,11 @@ extension OperandTests {
       (operand1: .rollNegativeSides(-0), operand2: .constant(-0), expected: .roll(-0, -0)),
       (operand1: .rollNegativeSides(-1), operand2: .constant(-1), expected: .roll(-1, 1)),
       (operand1: .rollNegativeSides(-9), operand2: .constant(-9), expected: .roll(-9, 9)),
-      (operand1: .rollNegativeSides(-1), operand2: .constant(-Int.max), expected: .roll(-1, Int.max)),
+      (
+        operand1: .rollNegativeSides(-1),
+        operand2: .constant(-Int.max),
+        expected: .roll(-1, Int.max)
+      ),
     ]
 
     for fixture in fixtures {
@@ -1299,7 +1355,11 @@ extension OperandTests {
       (operand1: .rollPositiveSides(-0), operand2: .constant(0), expected: .roll(-0, 0)),
       (operand1: .rollPositiveSides(-1), operand2: .constant(1), expected: .roll(-1, 1)),
       (operand1: .rollPositiveSides(-9), operand2: .constant(9), expected: .roll(-9, 9)),
-      (operand1: .rollPositiveSides(-1), operand2: .constant(Int.max), expected: .roll(-1, Int.max)),
+      (
+        operand1: .rollPositiveSides(-1),
+        operand2: .constant(Int.max),
+        expected: .roll(-1, Int.max)
+      ),
 
       (operand1: .rollPositiveSides(0), operand2: .constant(-0), expected: .roll(0, 0)),
       (operand1: .rollPositiveSides(1), operand2: .constant(-1), expected: .roll(1, -1)),
@@ -1309,7 +1369,11 @@ extension OperandTests {
       (operand1: .rollPositiveSides(-0), operand2: .constant(-0), expected: .roll(-0, 0)),
       (operand1: .rollPositiveSides(-1), operand2: .constant(-1), expected: .roll(-1, -1)),
       (operand1: .rollPositiveSides(-9), operand2: .constant(-9), expected: .roll(-9, -9)),
-      (operand1: .rollPositiveSides(-1), operand2: .constant(Int.min), expected: .roll(-1, Int.min)),
+      (
+        operand1: .rollPositiveSides(-1),
+        operand2: .constant(Int.min),
+        expected: .roll(-1, Int.min)
+      ),
     ]
 
     for fixture in fixtures {
@@ -1888,7 +1952,10 @@ extension OperandTests {
       let expected = fixture.expected
       let actual = try! operand.value()
 
-      XCTAssertTrue(expected.contains(actual), "expected: \(expected) actual: \(actual) operand: \(operand)")
+      XCTAssertTrue(
+        expected.contains(actual),
+        "expected: \(expected) actual: \(actual) operand: \(operand)"
+      )
     }
   }
 

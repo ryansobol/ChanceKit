@@ -448,7 +448,12 @@ let lexemeOperatorFixtures: [LexemeOperatorFixture] = [
     lexeme: "×",
     token: Operator.multiplication,
     withLexemes: ["1", "×", "(", "×"],
-    withTokens: [Operand.constant(1), Operator.multiplication, Parenthesis.open, Operator.multiplication],
+    withTokens: [
+      Operand.constant(1),
+      Operator.multiplication,
+      Parenthesis.open,
+      Operator.multiplication,
+    ],
     droppedLexemes: ["1", "×", "("],
     droppedTokens: [Operand.constant(1), Operator.multiplication, Parenthesis.open]
   ),

@@ -78,7 +78,11 @@ extension ExpressionTests {
       let expected = try! Expression(withLexemes)
       let actual = try! Expression(withoutLexemes).pushed(lexeme)
 
-      XCTAssertEqual(expected, actual, "withoutLexemes: \(withoutLexemes), lexeme: \(lexeme), withLexemes: \(withLexemes)")
+      XCTAssertEqual(
+        expected,
+        actual,
+        "withoutLexemes: \(withoutLexemes), lexeme: \(lexeme), withLexemes: \(withLexemes)"
+      )
     }
   }
 
@@ -91,7 +95,11 @@ extension ExpressionTests {
       let expected = try! Expression(withLexemes)
       let actual = try! Expression(withoutLexemes).pushed(lexeme)
 
-      XCTAssertEqual(expected, actual, "withoutLexemes: \(withoutLexemes), lexeme: \(lexeme), withLexemes: \(withLexemes)")
+      XCTAssertEqual(
+        expected,
+        actual,
+        "withoutLexemes: \(withoutLexemes), lexeme: \(lexeme), withLexemes: \(withLexemes)"
+      )
     }
   }
 
@@ -104,7 +112,11 @@ extension ExpressionTests {
       let expected = try! Expression(withLexemes)
       let actual = try! Expression(withoutLexemes).pushed(lexeme)
 
-      XCTAssertEqual(expected, actual, "withoutLexemes: \(withoutLexemes), lexeme: \(lexeme), withLexemes: \(withLexemes)")
+      XCTAssertEqual(
+        expected,
+        actual,
+        "withoutLexemes: \(withoutLexemes), lexeme: \(lexeme), withLexemes: \(withLexemes)"
+      )
     }
   }
 
@@ -140,7 +152,11 @@ extension ExpressionTests {
       let expected = try! Expression(droppedLexemes)
       let actual = try! Expression(withLexemes).dropped()
 
-      XCTAssertEqual(expected, actual, "withLexemes: \(withLexemes), droppedLexemes: \(droppedLexemes)")
+      XCTAssertEqual(
+        expected,
+        actual,
+        "withLexemes: \(withLexemes), droppedLexemes: \(droppedLexemes)"
+      )
     }
   }
 
@@ -152,7 +168,11 @@ extension ExpressionTests {
       let expected = try! Expression(droppedLexemes)
       let actual = try! Expression(withLexemes).dropped()
 
-      XCTAssertEqual(expected, actual, "withLexemes: \(withLexemes), droppedLexemes: \(droppedLexemes)")
+      XCTAssertEqual(
+        expected,
+        actual,
+        "withLexemes: \(withLexemes), droppedLexemes: \(droppedLexemes)"
+      )
     }
   }
 
@@ -164,7 +184,11 @@ extension ExpressionTests {
       let expected = try! Expression(droppedLexemes)
       let actual = try! Expression(withLexemes).dropped()
 
-      XCTAssertEqual(expected, actual, "withLexemes: \(withLexemes), droppedLexemes: \(droppedLexemes)")
+      XCTAssertEqual(
+        expected,
+        actual,
+        "withLexemes: \(withLexemes), droppedLexemes: \(droppedLexemes)"
+      )
     }
   }
 }
