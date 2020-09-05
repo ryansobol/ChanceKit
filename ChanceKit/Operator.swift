@@ -9,7 +9,7 @@ enum Operator: String, CaseIterable {
 
 extension Operator: Markable {
   var description: String {
-    return rawValue
+    return self.rawValue
   }
 }
 

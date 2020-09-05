@@ -7,6 +7,6 @@ enum Parenthesis: String, CaseIterable {
 
 extension Parenthesis: Markable {
   var description: String {
-    return rawValue
+    return self.rawValue
   }
 }
