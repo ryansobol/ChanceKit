@@ -70,7 +70,7 @@ extension ExpressionTests {
 
 extension ExpressionTests {
   func testPushedWithLexemeParenthesisFixtures() {
-    for fixture in lexemeParenthesisFixtures {
+    for fixture in lexemeParenthesisFixturesOperand2 {
       let withoutLexemes = fixture.withoutLexemes
       let lexeme = fixture.lexeme
       let withLexemes = fixture.withLexemes
@@ -87,7 +87,7 @@ extension ExpressionTests {
   }
 
   func testPushedWithLexemeOperatorFixtures() {
-    for fixture in lexemeOperatorFixtures {
+    for fixture in lexemeOperatorFixturesOperand2 {
       let withoutLexemes = fixture.withoutLexemes
       let lexeme = fixture.lexeme
       let withLexemes = fixture.withLexemes
@@ -145,7 +145,7 @@ extension ExpressionTests {
   }
 
   func testDroppedWithLexemeParenthesisFixtures() {
-    for fixture in lexemeParenthesisFixtures {
+    for fixture in lexemeParenthesisFixturesOperand2 {
       let withLexemes = fixture.withLexemes
       let droppedLexemes = fixture.droppedLexemes
 
@@ -161,7 +161,7 @@ extension ExpressionTests {
   }
 
   func testDroppedWithLexemeOperatorFixtures() {
-    for fixture in lexemeOperatorFixtures {
+    for fixture in lexemeOperatorFixturesOperand2 {
       let withLexemes = fixture.withLexemes
       let droppedLexemes = fixture.droppedLexemes
 
@@ -197,7 +197,7 @@ extension ExpressionTests {
 
 extension ExpressionTests {
   func testInterpretWithEvaluatableIntegerFixtures() {
-    for fixture in evaluatableIntegerFixtures {
+    for fixture in evaluatableIntegerFixturesOperand2 {
       let lexemes = fixture.lexemes
       let expected = fixture.value
 
@@ -209,7 +209,7 @@ extension ExpressionTests {
   }
 
   func testInterpretWithEvaluatableClosedRangeFixtures() {
-    for fixture in evaluatableClosedRangeFixtures {
+    for fixture in evaluatableClosedRangeFixturesOperand2 {
       let lexemes = fixture.lexemes
       let expected = fixture.value
 
@@ -224,7 +224,7 @@ extension ExpressionTests {
   }
 
   func testInterpretWithParsableOnlyFixtures() {
-    for fixture in parsableOnlyFixtures {
+    for fixture in parsableOnlyFixturesOperand2 {
       let lexemes = fixture.lexemes
       let expected = fixture.error
 
