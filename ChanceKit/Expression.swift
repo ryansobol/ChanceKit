@@ -15,8 +15,20 @@ extension Expression {
         return `operator`
       }
 
-      if let operand = Operand(rawLexeme: lexeme) {
-        return operand
+      if let constant = Constant(rawLexeme: lexeme) {
+        return constant
+      }
+
+      if let roll = Roll(rawLexeme: lexeme) {
+        return roll
+      }
+
+      if let rollNegativeSides = RollNegativeSides(rawLexeme: lexeme) {
+        return rollNegativeSides
+      }
+
+      if let rollPositiveSides = RollPositiveSides(rawLexeme: lexeme) {
+        return rollPositiveSides
       }
 
       throw ExpressionError.invalidLexeme(lexeme)
@@ -76,8 +88,26 @@ extension Expression {
       return Expression(tokens)
     }
 
-    if let operand = Operand(rawLexeme: lexeme) {
-      let tokens = try lexed(operand: operand, into: self.tokens)
+    if let constant = Constant(rawLexeme: lexeme) {
+      let tokens = try lexed(operand: constant, into: self.tokens)
+
+      return Expression(tokens)
+    }
+
+    if let roll = Roll(rawLexeme: lexeme) {
+      let tokens = try lexed(operand: roll, into: self.tokens)
+
+      return Expression(tokens)
+    }
+
+    if let rollNegativeSides = RollNegativeSides(rawLexeme: lexeme) {
+      let tokens = try lexed(operand: rollNegativeSides, into: self.tokens)
+
+      return Expression(tokens)
+    }
+
+    if let rollPositiveSides = RollPositiveSides(rawLexeme: lexeme) {
+      let tokens = try lexed(operand: rollPositiveSides, into: self.tokens)
 
       return Expression(tokens)
     }
@@ -96,7 +126,7 @@ extension Expression {
       return self
     }
 
-    if let lastOperand = lastToken as? Operand, let droppedToken = lastOperand.dropped() {
+    if let lastOperand = lastToken as? Operand2, let droppedToken = lastOperand.dropped() {
       tokens.append(droppedToken)
     }
 

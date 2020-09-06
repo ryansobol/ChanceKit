@@ -3,11 +3,11 @@ func evaluate(postfixTokens: [Tokenable]) throws -> Int {
     return 0
   }
 
-  var operands = [Operand]()
+  var operands = [Operand2]()
 
   for currentToken in postfixTokens {
     switch currentToken {
-    case let currentOperand as Operand:
+    case let currentOperand as Operand2:
       operands.append(currentOperand)
 
     case let currentOperator as Operator:

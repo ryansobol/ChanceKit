@@ -31,7 +31,7 @@ extension OperatorTests {
 
 // MARK: - Comparison
 
-extension OperandTests {
+extension OperatorTests {
   func testHasPrecedence() {
     typealias Fixture = (
       operator1: String,
@@ -74,7 +74,7 @@ extension OperandTests {
 
 // MARK: - Evaluation
 
-extension OperandTests {
+extension OperatorTests {
   func testEvaluate() {
     typealias Fixture = (
       operation: Operator,

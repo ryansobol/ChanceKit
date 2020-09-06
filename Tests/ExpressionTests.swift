@@ -7,7 +7,7 @@ class ExpressionTests: XCTestCase {}
 
 extension ExpressionTests {
   func testInitWithEvaluatableIntegerFixtures() {
-    for fixture in evaluatableIntegerFixtures {
+    for fixture in evaluatableIntegerFixturesOperand2 {
       let lexemes = fixture.lexemes
       let expected = fixture.description
 
@@ -19,7 +19,7 @@ extension ExpressionTests {
   }
 
   func testInitWithEvaluatableClosedRangeFixtures() {
-    for fixture in evaluatableClosedRangeFixtures {
+    for fixture in evaluatableClosedRangeFixturesOperand2 {
       let lexemes = fixture.lexemes
       let expected = fixture.description
 
@@ -31,7 +31,7 @@ extension ExpressionTests {
   }
 
   func testInitWithParsableOnlyFixtures() {
-    for fixture in parsableOnlyFixtures {
+    for fixture in parsableOnlyFixturesOperand2 {
       let lexemes = fixture.lexemes
       let expected = fixture.description
 
@@ -104,7 +104,7 @@ extension ExpressionTests {
   }
 
   func testPushedWithLexemeOperandFixtures() {
-    for fixture in lexemeOperandFixtures {
+    for fixture in lexemeOperandFixturesOperand2 {
       let withoutLexemes = fixture.withoutLexemes
       let lexeme = fixture.lexeme
       let withLexemes = fixture.withLexemes
@@ -177,7 +177,7 @@ extension ExpressionTests {
   }
 
   func testDroppedWithLexemeOperandFixtures() {
-    for fixture in lexemeOperandFixtures {
+    for fixture in lexemeOperandFixturesOperand2 {
       let withLexemes = fixture.withLexemes
       let droppedLexemes = fixture.droppedLexemes
 
@@ -251,7 +251,7 @@ extension ExpressionTests {
 
   func testInterpretPerformance() {
     self.measure {
-      for fixture in evaluatableIntegerFixtures {
+      for fixture in evaluatableIntegerFixturesOperand2 {
         let lexemes = fixture.lexemes
         let expected = fixture.value
 
