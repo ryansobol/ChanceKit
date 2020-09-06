@@ -3,7 +3,7 @@ import XCTest
 
 class LexerTests: XCTestCase {
   func testLexedWithLexemeParenthesisFixtures() {
-    for fixture in lexemeParenthesisFixturesOperand2 {
+    for fixture in lexemeParenthesisFixtures {
       let token = fixture.token
       let tokens = fixture.withoutTokens
       let expectedTokens = fixture.withTokens
@@ -18,7 +18,7 @@ class LexerTests: XCTestCase {
   }
 
   func testLexedWithLexemeOperatorFixtures() {
-    for fixture in lexemeOperatorFixturesOperand2 {
+    for fixture in lexemeOperatorFixtures {
       let token = fixture.token
       let tokens = fixture.withoutTokens
       let expectedTokens = fixture.withTokens
@@ -33,7 +33,7 @@ class LexerTests: XCTestCase {
   }
 
   func testLexedWithLexemeOperandFixtures() {
-    for fixture in lexemeOperandFixturesOperand2 {
+    for fixture in lexemeOperandFixtures {
       let token = fixture.token
       let tokens = fixture.withoutTokens
       let expectedTokens = fixture.withTokens

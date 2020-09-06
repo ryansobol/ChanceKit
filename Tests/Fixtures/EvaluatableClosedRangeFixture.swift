@@ -1,6 +1,6 @@
 @testable import ChanceKit
 
-typealias EvaluatableClosedRangeFixtureOperand2 = (
+typealias EvaluatableClosedRangeFixture = (
   description: String,
   lexemes: [String],
   infixTokens: [Tokenable],
@@ -8,7 +8,7 @@ typealias EvaluatableClosedRangeFixtureOperand2 = (
   value: ClosedRange<Int>
 )
 
-let evaluatableClosedRangeFixturesOperand2: [EvaluatableClosedRangeFixtureOperand2] = [
+let evaluatableClosedRangeFixtures: [EvaluatableClosedRangeFixture] = [
   (
     description: "1d4",
     lexemes: ["1d4"],

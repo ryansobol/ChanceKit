@@ -43,7 +43,7 @@ extension Operator {
 // MARK: - Evaluation
 
 extension Operator {
-  func evaluate(_ operand1: Operand2, _ operand2: Operand2) throws -> Operand2 {
+  func evaluate(_ operand1: Operand, _ operand2: Operand) throws -> Operand {
     switch self {
     case .addition:
       return try operand1.added(operand2)

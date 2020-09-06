@@ -3,7 +3,7 @@ import XCTest
 
 class ParserTests: XCTestCase {
   func testParseWithEvaluatableIntegerFixtures() {
-    for fixture in evaluatableIntegerFixturesOperand2 {
+    for fixture in evaluatableIntegerFixtures {
       let tokens = fixture.infixTokens
       let expectedTokens = fixture.postfixTokens
       let actualTokens = try! parse(infixTokens: tokens)
@@ -17,7 +17,7 @@ class ParserTests: XCTestCase {
   }
 
   func testParseWithParsableOnlyFixtures() {
-    for fixture in parsableOnlyFixturesOperand2 {
+    for fixture in parsableOnlyFixtures {
       let tokens = fixture.infixTokens
       let expectedTokens = fixture.postfixTokens
       let actualTokens = try! parse(infixTokens: tokens)

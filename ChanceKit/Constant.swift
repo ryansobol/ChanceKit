@@ -2,9 +2,9 @@ struct Constant {
   let term: Int
 }
 
-// MARK: - Operand2, Equatable
+// MARK: - Operand, Equatable
 
-extension Constant: Operand2, Equatable {
+extension Constant: Operand, Equatable {
   // MARK: - Tokenable
 
   var description: String {
@@ -23,7 +23,7 @@ extension Constant: Operand2, Equatable {
 
   // MARK: - Inclusion
 
-  func combined(_ other: Constant) throws -> Operand2 {
+  func combined(_ other: Constant) throws -> Operand {
     let lexemeSelf = String(describing: self)
     let lexemeOther = String(describing: other)
 
@@ -34,21 +34,21 @@ extension Constant: Operand2, Equatable {
     return Constant(term: termResult)
   }
 
-  func combined(_ other: Roll) throws -> Operand2 {
+  func combined(_ other: Roll) throws -> Operand {
     throw ExpressionError.invalidCombinationOperands(
       String(describing: self),
       String(describing: other)
     )
   }
 
-  func combined(_ other: RollNegativeSides) throws -> Operand2 {
+  func combined(_ other: RollNegativeSides) throws -> Operand {
     throw ExpressionError.invalidCombinationOperands(
       String(describing: self),
       String(describing: other)
     )
   }
 
-  func combined(_ other: RollPositiveSides) throws -> Operand2 {
+  func combined(_ other: RollPositiveSides) throws -> Operand {
     throw ExpressionError.invalidCombinationOperands(
       String(describing: self),
       String(describing: other)
@@ -81,7 +81,7 @@ extension Constant: Operand2, Equatable {
 
   // MARK: - Operation
 
-  func negated() throws -> Operand2 {
+  func negated() throws -> Operand {
     // Because -Int.min > Int.max
     if self.term == Int.min {
       throw ExpressionError.operationOverflow

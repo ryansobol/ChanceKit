@@ -1,14 +1,14 @@
-protocol Operand2: Tokenable {
+protocol Operand: Tokenable {
   // MARK: - Initialization
 
   init?(rawLexeme: String)
 
   // MARK: - Inclusion
 
-  func combined(_ other: Constant) throws -> Operand2
-  func combined(_ other: Roll) throws -> Operand2
-  func combined(_ other: RollNegativeSides) throws -> Operand2
-  func combined(_ other: RollPositiveSides) throws -> Operand2
+  func combined(_ other: Constant) throws -> Operand
+  func combined(_ other: Roll) throws -> Operand
+  func combined(_ other: RollNegativeSides) throws -> Operand
+  func combined(_ other: RollPositiveSides) throws -> Operand
 
   // MARK: - Exclusion
 
@@ -20,13 +20,13 @@ protocol Operand2: Tokenable {
 
   // MARK: - Operation
 
-  func negated() throws -> Operand2
+  func negated() throws -> Operand
 }
 
 // MARK: - Operation
 
-extension Operand2 {
-  func added(_ other: Operand2) throws -> Constant {
+extension Operand {
+  func added(_ other: Operand) throws -> Constant {
     let selfValue = try self.value()
     let otherValue = try other.value()
     let (result, didOverflow) = selfValue.addingReportingOverflow(otherValue)
@@ -38,7 +38,7 @@ extension Operand2 {
     return Constant(term: result)
   }
 
-  func divided(_ other: Operand2) throws -> Constant {
+  func divided(_ other: Operand) throws -> Constant {
     let otherValue = try other.value()
 
     if otherValue == 0 {
@@ -55,7 +55,7 @@ extension Operand2 {
     return Constant(term: result)
   }
 
-  func multiplied(_ other: Operand2) throws -> Constant {
+  func multiplied(_ other: Operand) throws -> Constant {
     let selfValue = try self.value()
     let otherValue = try other.value()
     let (result, didOverflow) = selfValue.multipliedReportingOverflow(by: otherValue)
@@ -67,7 +67,7 @@ extension Operand2 {
     return Constant(term: result)
   }
 
-  func subtracted(_ other: Operand2) throws -> Constant {
+  func subtracted(_ other: Operand) throws -> Constant {
     let selfValue = try self.value()
     let otherValue = try other.value()
     let (result, didOverflow) = selfValue.subtractingReportingOverflow(otherValue)

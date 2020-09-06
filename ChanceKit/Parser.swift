@@ -4,7 +4,7 @@ func parse(infixTokens: [Tokenable]) throws -> [Tokenable] {
 
   for currentToken in infixTokens {
     switch currentToken {
-    case is Operand2:
+    case is Operand:
       postfixTokens.append(currentToken)
 
     case let currentParenthesis as Parenthesis:

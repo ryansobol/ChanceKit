@@ -1,17 +1,17 @@
 @testable import ChanceKit
 
-typealias LexemeOperandFixtureOperand2 = (
+typealias LexemeOperandFixture = (
   withoutLexemes: [String],
   withoutTokens: [Tokenable],
   lexeme: String,
-  token: Operand2,
+  token: Operand,
   withLexemes: [String],
   withTokens: [Tokenable],
   droppedLexemes: [String],
   droppedTokens: [Tokenable]
 )
 
-let lexemeOperandFixturesOperand2: [LexemeOperandFixtureOperand2] = [
+let lexemeOperandFixtures: [LexemeOperandFixture] = [
   (
     withoutLexemes: [],
     withoutTokens: [],

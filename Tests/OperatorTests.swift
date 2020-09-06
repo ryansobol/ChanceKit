@@ -75,7 +75,7 @@ extension OperatorTests {
 // MARK: - Evaluation
 
 extension OperatorTests {
-  func testEvaluateOperand2() {
+  func testEvaluate() {
     typealias Fixture = (
       operator: Operator,
       operand1: Constant,
@@ -105,7 +105,7 @@ extension OperatorTests {
     }
   }
 
-  func testEvaluateDivisionByZeroOperand2() {
+  func testEvaluateDivisionByZero() {
     let `operator` = Operator.division
     let operand1 = Constant(term: 1)
     let operand2 = Constant(term: 0)
@@ -116,7 +116,7 @@ extension OperatorTests {
     }
   }
 
-  func testEvaluateOperationOverflowOperand2() {
+  func testEvaluateOperationOverflow() {
     typealias Fixture = (
       operator: Operator,
       operand1: Constant,

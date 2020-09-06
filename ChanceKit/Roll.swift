@@ -5,9 +5,9 @@ struct Roll {
   let sides: Int
 }
 
-// MARK: - Operand2, Equatable
+// MARK: - Operand, Equatable
 
-extension Roll: Operand2, Equatable {
+extension Roll: Operand, Equatable {
   // MARK: - Tokenable
 
   var description: String {
@@ -46,7 +46,7 @@ extension Roll: Operand2, Equatable {
 
   // MARK: - Inclusion
 
-  func combined(_ other: Constant) throws -> Operand2 {
+  func combined(_ other: Constant) throws -> Operand {
     let lexemeOther = String(describing: other)
 
     guard let sidesResult = Int(String(self.sides) + lexemeOther) else {
@@ -56,7 +56,7 @@ extension Roll: Operand2, Equatable {
     return Roll(times: self.times, sides: sidesResult)
   }
 
-  func combined(_ other: Roll) throws -> Operand2 {
+  func combined(_ other: Roll) throws -> Operand {
     if self.sides != other.sides {
       throw ExpressionError.invalidCombinationOperands(
         String(describing: self),
@@ -76,14 +76,14 @@ extension Roll: Operand2, Equatable {
     return Roll(times: timesResult, sides: self.sides)
   }
 
-  func combined(_ other: RollNegativeSides) throws -> Operand2 {
+  func combined(_ other: RollNegativeSides) throws -> Operand {
     throw ExpressionError.invalidCombinationOperands(
       String(describing: self),
       String(describing: other)
     )
   }
 
-  func combined(_ other: RollPositiveSides) throws -> Operand2 {
+  func combined(_ other: RollPositiveSides) throws -> Operand {
     throw ExpressionError.invalidCombinationOperands(
       String(describing: self),
       String(describing: other)
@@ -185,7 +185,7 @@ extension Roll: Operand2, Equatable {
 
   // MARK: - Operation
 
-  func negated() throws -> Operand2 {
+  func negated() throws -> Operand {
     // Because -Int.min > Int.max
     if self.sides == Int.min {
       throw ExpressionError.operationOverflow

@@ -3,7 +3,7 @@ import XCTest
 
 class EvaluatorTests: XCTestCase {
   func testEvaluateWithEvaluatableIntegerFixtures() {
-    for fixture in evaluatableIntegerFixturesOperand2 {
+    for fixture in evaluatableIntegerFixtures {
       let tokens = fixture.postfixTokens
       let expected = fixture.value
       let actual = try! evaluate(postfixTokens: tokens)
@@ -13,7 +13,7 @@ class EvaluatorTests: XCTestCase {
   }
 
   func testEvaluateWithParsableOnlyFixtures() {
-    for fixture in parsableOnlyFixturesOperand2 {
+    for fixture in parsableOnlyFixtures {
       let tokens = fixture.postfixTokens
       let expected = fixture.error
 

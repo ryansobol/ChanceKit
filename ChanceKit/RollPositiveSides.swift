@@ -4,9 +4,9 @@ struct RollPositiveSides {
   let times: Int
 }
 
-// MARK: - Operand2, Equatable
+// MARK: - Operand, Equatable
 
-extension RollPositiveSides: Operand2, Equatable {
+extension RollPositiveSides: Operand, Equatable {
   // MARK: - Tokenable
 
   var description: String {
@@ -35,25 +35,25 @@ extension RollPositiveSides: Operand2, Equatable {
 
   // MARK: - Inclusion
 
-  func combined(_ other: Constant) throws -> Operand2 {
+  func combined(_ other: Constant) throws -> Operand {
     return Roll(times: self.times, sides: other.term)
   }
 
-  func combined(_ other: Roll) throws -> Operand2 {
+  func combined(_ other: Roll) throws -> Operand {
     throw ExpressionError.invalidCombinationOperands(
       String(describing: self),
       String(describing: other)
     )
   }
 
-  func combined(_ other: RollNegativeSides) throws -> Operand2 {
+  func combined(_ other: RollNegativeSides) throws -> Operand {
     throw ExpressionError.invalidCombinationOperands(
       String(describing: self),
       String(describing: other)
     )
   }
 
-  func combined(_ other: RollPositiveSides) throws -> Operand2 {
+  func combined(_ other: RollPositiveSides) throws -> Operand {
     let (timesResult, didOverflow) = self.times.addingReportingOverflow(other.times)
 
     if didOverflow {
@@ -80,7 +80,7 @@ extension RollPositiveSides: Operand2, Equatable {
 
   // MARK: - Operation
 
-  func negated() throws -> Operand2 {
+  func negated() throws -> Operand {
     return RollNegativeSides(times: self.times)
   }
 }

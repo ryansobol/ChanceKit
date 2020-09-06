@@ -10,7 +10,7 @@ func lexed(parenthesis: Parenthesis, into: [Tokenable]) -> [Tokenable] {
   if let lastParenthesis = tokens.last as? Parenthesis, lastParenthesis == .close {
     tokens.append(Operator.multiplication)
   }
-  else if tokens.last is Operand2 {
+  else if tokens.last is Operand {
     tokens.append(Operator.multiplication)
   }
 
@@ -31,7 +31,7 @@ func lexed(operator: Operator, into: [Tokenable]) -> [Tokenable] {
   return tokens
 }
 
-func lexed(operand: Operand2, into: [Tokenable]) throws -> [Tokenable] {
+func lexed(operand: Operand, into: [Tokenable]) throws -> [Tokenable] {
   var tokens = into
 
   switch tokens.last {

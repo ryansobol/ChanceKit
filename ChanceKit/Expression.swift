@@ -126,7 +126,7 @@ extension Expression {
       return self
     }
 
-    if let lastOperand = lastToken as? Operand2, let droppedToken = lastOperand.dropped() {
+    if let lastOperand = lastToken as? Operand, let droppedToken = lastOperand.dropped() {
       tokens.append(droppedToken)
     }
 
