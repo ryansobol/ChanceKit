@@ -71,7 +71,7 @@ let parsableOnlyFixtures: [ParsableOnlyFixture] = [
       Constant(term: 1),
       Operator.addition,
     ],
-    error: .operationOverflow
+    error: .overflowAddition(operandLeft: "9223372036854775807", operandRight: "1")
   ),
   (
     description: "-9223372036854775808 ÷ -1",
@@ -86,7 +86,7 @@ let parsableOnlyFixtures: [ParsableOnlyFixture] = [
       Constant(term: -1),
       Operator.division,
     ],
-    error: .operationOverflow
+    error: .overflowDivision(operandLeft: "-9223372036854775808", operandRight: "-1")
   ),
   (
     description: "-9223372036854775808 × -1",
@@ -101,7 +101,7 @@ let parsableOnlyFixtures: [ParsableOnlyFixture] = [
       Constant(term: -1),
       Operator.multiplication,
     ],
-    error: .operationOverflow
+    error: .overflowMultiplication(operandLeft: "-9223372036854775808", operandRight: "-1")
   ),
   (
     description: "9223372036854775807 - -1",
@@ -116,6 +116,6 @@ let parsableOnlyFixtures: [ParsableOnlyFixture] = [
       Constant(term: -1),
       Operator.subtraction,
     ],
-    error: .operationOverflow
+    error: .overflowSubtraction(operandLeft: "9223372036854775807", operandRight: "-1")
   ),
 ]

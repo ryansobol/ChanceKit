@@ -1166,16 +1166,29 @@ extension RollTests {
   }
 
   func testValueWithOverflow() {
-    let fixtures: [Roll] = [
-      Roll(times: 1, sides: Int.min),
-      Roll(times: Int.min, sides: 4),
-      Roll(times: Int.min, sides: Int.min),
+    typealias Fixture = (
+      operand: Roll,
+      expected: ExpressionError
+    )
+
+    let fixtures: [Fixture] = [
+      (
+        operand: Roll(times: 1, sides: Int.min),
+        expected: .overflowNegation(operand: "1d\(Int.min)")
+      ),
+      (
+        operand: Roll(times: Int.min, sides: 1),
+        expected: .overflowNegation(operand: "\(Int.min)d1")
+      ),
+      (
+        operand: Roll(times: Int.min, sides: Int.min),
+        expected: .overflowNegation(operand: "\(Int.min)d\(Int.min)")
+      ),
     ]
 
-    let expected = ExpressionError.operationOverflow
-
     for fixture in fixtures {
-      let operand = fixture
+      let operand = fixture.operand
+      let expected = fixture.expected
 
       XCTAssertThrowsError(try operand.value()) { error in
         XCTAssertEqual(expected, error as? ExpressionError)
@@ -1222,13 +1235,26 @@ extension RollTests {
   }
 
   func testNegatedWithOverflow() {
-    let operands: [Roll] = [
-      Roll(times: Int.min, sides: Int.min),
+    typealias Fixture = (
+      operand: Roll,
+      expected: ExpressionError
+    )
+
+    let fixtures: [Fixture] = [
+      (
+        operand: Roll(times: -1, sides: Int.min),
+        expected: .overflowNegation(operand: "-1d\(Int.min)")
+      ),
+      (
+        operand: Roll(times: Int.min, sides: Int.min),
+        expected: .overflowNegation(operand: "\(Int.min)d\(Int.min)")
+      ),
     ]
 
-    let expected = ExpressionError.operationOverflow
+    for fixture in fixtures {
+      let operand = fixture.operand
+      let expected = fixture.expected
 
-    for operand in operands {
       XCTAssertThrowsError(try operand.negated()) { error in
         XCTAssertEqual(expected, error as? ExpressionError)
       }
@@ -1343,20 +1369,32 @@ extension RollTests {
   func testAddedToConstantWithOverflow() {
     typealias Fixture = (
       operand1: Roll,
-      operand2: Constant
+      operand2: Constant,
+      expected: ExpressionError
     )
 
     let fixtures: [Fixture] = [
-      (operand1: Roll(times: 1, sides: 1), operand2: Constant(term: Int.max)),
-      (operand1: Roll(times: -1, sides: 1), operand2: Constant(term: Int.min)),
-      (operand1: Roll(times: 1, sides: Int.min), operand2: Constant(term: 0)),
+      (
+        operand1: Roll(times: 1, sides: 1),
+        operand2: Constant(term: Int.max),
+        expected: .overflowAddition(operandLeft: "1d1", operandRight: String(Int.max))
+      ),
+      (
+        operand1: Roll(times: -1, sides: 1),
+        operand2: Constant(term: Int.min),
+        expected: .overflowAddition(operandLeft: "-1d1", operandRight: String(Int.min))
+      ),
+      (
+        operand1: Roll(times: 1, sides: Int.min),
+        operand2: Constant(term: 0),
+        expected: .overflowNegation(operand: "1d\(Int.min)")
+      ),
     ]
-
-    let expected = ExpressionError.operationOverflow
 
     for fixture in fixtures {
       let operand1 = fixture.operand1
       let operand2 = fixture.operand2
+      let expected = fixture.expected
 
       XCTAssertThrowsError(try operand1.added(operand2)) { error in
         XCTAssertEqual(expected, error as? ExpressionError)
@@ -1613,24 +1651,12 @@ extension RollTests {
   }
 
   func testDividedByConstantWithOverflow() {
-    typealias Fixture = (
-      operand1: Roll,
-      operand2: Constant
-    )
+    let operand1 = Roll(times: 1, sides: Int.min)
+    let operand2 = Constant(term: 1)
+    let expected = ExpressionError.overflowNegation(operand: "1d\(Int.min)")
 
-    let fixtures: [Fixture] = [
-      (operand1: Roll(times: 1, sides: Int.min), operand2: Constant(term: 1)),
-    ]
-
-    let expected = ExpressionError.operationOverflow
-
-    for fixture in fixtures {
-      let operand1 = fixture.operand1
-      let operand2 = fixture.operand2
-
-      XCTAssertThrowsError(try operand1.divided(operand2)) { error in
-        XCTAssertEqual(expected, error as? ExpressionError)
-      }
+    XCTAssertThrowsError(try operand1.divided(operand2)) { error in
+      XCTAssertEqual(expected, error as? ExpressionError)
     }
   }
 
@@ -1819,31 +1845,101 @@ extension RollTests {
   func testMultipliedByConstantWithOverflow() {
     typealias Fixture = (
       operand1: Roll,
-      operand2: Constant
+      operand2: Constant,
+      expected: ExpressionError
     )
 
     let fixtures: [Fixture] = [
-      (operand1: Roll(times: 1, sides: Int.max), operand2: Constant(term: Int.max)),
-      (operand1: Roll(times: 1, sides: -Int.max), operand2: Constant(term: Int.max)),
-      (operand1: Roll(times: 1, sides: Int.max), operand2: Constant(term: -Int.max)),
-      (operand1: Roll(times: 1, sides: -Int.max), operand2: Constant(term: -Int.max)),
+      (
+        operand1: Roll(times: 1, sides: Int.max),
+        operand2: Constant(term: Int.max),
+        expected: .overflowMultiplication(
+          operandLeft: "1d\(Int.max)",
+          operandRight: String(Int.max)
+        )
+      ),
+      (
+        operand1: Roll(times: 1, sides: -Int.max),
+        operand2: Constant(term: Int.max),
+        expected: .overflowMultiplication(
+          operandLeft: "1d\(-Int.max)",
+          operandRight: String(Int.max)
+        )
+      ),
+      (
+        operand1: Roll(times: 1, sides: Int.max),
+        operand2: Constant(term: -Int.max),
+        expected: .overflowMultiplication(
+          operandLeft: "1d\(Int.max)",
+          operandRight: String(-Int.max)
+        )
+      ),
+      (
+        operand1: Roll(times: 1, sides: -Int.max),
+        operand2: Constant(term: -Int.max),
+        expected: .overflowMultiplication(
+          operandLeft: "1d\(-Int.max)",
+          operandRight: String(-Int.max)
+        )
+      ),
 
-      (operand1: Roll(times: 2, sides: 1), operand2: Constant(term: Int.max)),
-      (operand1: Roll(times: -2, sides: 1), operand2: Constant(term: Int.max)),
-      (operand1: Roll(times: 2, sides: 1), operand2: Constant(term: -Int.max)),
-      (operand1: Roll(times: -2, sides: 1), operand2: Constant(term: -Int.max)),
+      (
+        operand1: Roll(times: 2, sides: 1),
+        operand2: Constant(term: Int.max),
+        expected: .overflowMultiplication(
+          operandLeft: "2d1",
+          operandRight: String(Int.max)
+        )
+      ),
+      (
+        operand1: Roll(times: -2, sides: 1),
+        operand2: Constant(term: Int.max),
+        expected: .overflowMultiplication(
+          operandLeft: "-2d1",
+          operandRight: String(Int.max)
+        )
+      ),
+      (
+        operand1: Roll(times: 2, sides: 1),
+        operand2: Constant(term: -Int.max),
+        expected: .overflowMultiplication(
+          operandLeft: "2d1",
+          operandRight: String(-Int.max)
+        )
+      ),
+      (
+        operand1: Roll(times: -2, sides: 1),
+        operand2: Constant(term: -Int.max),
+        expected: .overflowMultiplication(
+          operandLeft: "-2d1",
+          operandRight: String(-Int.max)
+        )
+      ),
 
-      (operand1: Roll(times: -1, sides: 1), operand2: Constant(term: Int.min)),
+      (
+        operand1: Roll(times: -1, sides: 1),
+        operand2: Constant(term: Int.min),
+        expected: .overflowMultiplication(
+          operandLeft: "-1d1",
+          operandRight: String(Int.min)
+        )
+      ),
 
 //       Near infinite loop
-//       (operand1: Roll(times: Int.min, sides: 1), operand2: Constant(term: -1)),
+//       (
+//        operand1: Roll(times: Int.min, sides: 1),
+//        operand2: Constant(term: -1),
+//        expected: .overflowMultiplication(
+//          operandLeft: "\(Int.min)d1",
+//          operandRight: "-1"
+//        )
+//       ),
     ]
-
-    let expected = ExpressionError.operationOverflow
 
     for fixture in fixtures {
       let operand1 = fixture.operand1
       let operand2 = fixture.operand2
+      let expected = fixture.expected
 
       XCTAssertThrowsError(try operand1.multiplied(operand2)) { error in
         XCTAssertEqual(expected, error as? ExpressionError)
@@ -2062,21 +2158,33 @@ extension RollTests {
   func testSubtractedByConstantWithOverflow() {
     typealias Fixture = (
       operand1: Roll,
-      operand2: Constant
+      operand2: Constant,
+      expected: ExpressionError
     )
 
     let fixtures: [Fixture] = [
-      (operand1: Roll(times: -2, sides: 1), operand2: Constant(term: Int.max)),
+      (
+        operand1: Roll(times: -2, sides: 1),
+        operand2: Constant(term: Int.max),
+        expected: .overflowSubtraction(operandLeft: "-2d1", operandRight: String(Int.max))
+      ),
 
-      (operand1: Roll(times: 0, sides: 0), operand2: Constant(term: Int.min)),
-      (operand1: Roll(times: -0, sides: 0), operand2: Constant(term: Int.min)),
+      (
+        operand1: Roll(times: 0, sides: 0),
+        operand2: Constant(term: Int.min),
+        expected: .overflowSubtraction(operandLeft: "0d0", operandRight: String(Int.min))
+      ),
+      (
+        operand1: Roll(times: -0, sides: 0),
+        operand2: Constant(term: Int.min),
+        expected: .overflowSubtraction(operandLeft: "0d0", operandRight: String(Int.min))
+      ),
     ]
-
-    let expected = ExpressionError.operationOverflow
 
     for fixture in fixtures {
       let operand1 = fixture.operand1
       let operand2 = fixture.operand2
+      let expected = fixture.expected
 
       XCTAssertThrowsError(try operand1.subtracted(operand2)) { error in
         XCTAssertEqual(expected, error as? ExpressionError)

@@ -87,7 +87,7 @@ extension Constant: Operand, Equatable {
   func negated() throws -> Operand {
     // Because -Int.min > Int.max
     if self.term == Int.min {
-      throw ExpressionError.operationOverflow
+      throw ExpressionError.overflowNegation(operand: String(describing: self))
     }
 
     return Constant(term: -self.term)

@@ -119,8 +119,13 @@ extension Roll: Operand, Equatable {
     }
 
     // Because abs(Int.min) > Int.max
-    if self.times == Int.min || self.sides == Int.min {
-      throw ExpressionError.operationOverflow
+    if self.times == Int.min {
+      throw ExpressionError.overflowNegation(operand: String(describing: self))
+    }
+
+    // Because abs(Int.min) > Int.max
+    if self.sides == Int.min {
+      throw ExpressionError.overflowNegation(operand: String(describing: self))
     }
 
     var result = 0
@@ -166,7 +171,10 @@ extension Roll: Operand, Equatable {
       let (newResult, didOverflow) = result.addingReportingOverflow(nextInt)
 
       if didOverflow {
-        throw ExpressionError.operationOverflow
+        throw ExpressionError.overflowAddition(
+          operandLeft: String(result),
+          operandRight: String(nextInt)
+        )
       }
 
       result = newResult
@@ -178,7 +186,7 @@ extension Roll: Operand, Equatable {
 
     // Because Int.min.negate() > Int.max
     if result == Int.min {
-      throw ExpressionError.operationOverflow
+      throw ExpressionError.overflowNegation(operand: String(result))
     }
 
     result.negate()
@@ -191,7 +199,7 @@ extension Roll: Operand, Equatable {
   func negated() throws -> Operand {
     // Because -Int.min > Int.max
     if self.sides == Int.min {
-      throw ExpressionError.operationOverflow
+      throw ExpressionError.overflowNegation(operand: String(describing: self))
     }
 
     return Roll(times: self.times, sides: -self.sides)

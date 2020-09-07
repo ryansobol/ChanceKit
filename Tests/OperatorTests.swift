@@ -120,22 +120,42 @@ extension OperatorTests {
     typealias Fixture = (
       operator: Operator,
       operand1: Constant,
-      operand2: Constant
+      operand2: Constant,
+      expected: ExpressionError
     )
 
     let fixtures: [Fixture] = [
-      (.addition, Constant(term: Int.max), Constant(term: 1)),
-      (.division, Constant(term: Int.min), Constant(term: -1)),
-      (.multiplication, Constant(term: Int.min), Constant(term: -1)),
-      (.subtraction, Constant(term: Int.max), Constant(term: -1)),
+      (
+        .addition,
+        Constant(term: Int.max),
+        Constant(term: 1),
+        expected: .overflowAddition(operandLeft: String(Int.max), operandRight: "1")
+      ),
+      (
+        .division,
+        Constant(term: Int.min),
+        Constant(term: -1),
+        expected: .overflowDivision(operandLeft: String(Int.min), operandRight: "-1")
+      ),
+      (
+        .multiplication,
+        Constant(term: Int.min),
+        Constant(term: -1),
+        expected: .overflowMultiplication(operandLeft: String(Int.min), operandRight: "-1")
+      ),
+      (
+        .subtraction,
+        Constant(term: Int.max),
+        Constant(term: -1),
+        expected: .overflowSubtraction(operandLeft: String(Int.max), operandRight: "-1")
+      ),
     ]
-
-    let expected = ExpressionError.operationOverflow
 
     for fixture in fixtures {
       let `operator` = fixture.operator
       let operand1 = fixture.operand1
       let operand2 = fixture.operand2
+      let expected = fixture.expected
 
       XCTAssertThrowsError(try `operator`.evaluate(operand1, operand2)) { error in
         XCTAssertEqual(expected, error as? ExpressionError)
