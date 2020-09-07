@@ -12,6 +12,8 @@ typealias LexemeOperatorFixture = (
 )
 
 let lexemeOperatorFixtures: [LexemeOperatorFixture] = [
+  // MARK: - Empty
+
   (
     withoutLexemes: [],
     withoutTokens: [],
@@ -52,6 +54,9 @@ let lexemeOperatorFixtures: [LexemeOperatorFixture] = [
     droppedLexemes: [],
     droppedTokens: []
   ),
+
+  // MARK: - (
+
   (
     withoutLexemes: ["("],
     withoutTokens: [Parenthesis.open],
@@ -92,6 +97,9 @@ let lexemeOperatorFixtures: [LexemeOperatorFixture] = [
     droppedLexemes: ["("],
     droppedTokens: [Parenthesis.open]
   ),
+
+  // MARK: - )
+
   (
     withoutLexemes: [")"],
     withoutTokens: [Parenthesis.close],
@@ -132,6 +140,9 @@ let lexemeOperatorFixtures: [LexemeOperatorFixture] = [
     droppedLexemes: [")"],
     droppedTokens: [Parenthesis.close]
   ),
+
+  // MARK: - +
+
   (
     withoutLexemes: ["+"],
     withoutTokens: [Operator.addition],
@@ -172,6 +183,9 @@ let lexemeOperatorFixtures: [LexemeOperatorFixture] = [
     droppedLexemes: [],
     droppedTokens: []
   ),
+
+  // MARK: - ÷
+
   (
     withoutLexemes: ["÷"],
     withoutTokens: [Operator.division],
@@ -222,6 +236,9 @@ let lexemeOperatorFixtures: [LexemeOperatorFixture] = [
     droppedLexemes: [],
     droppedTokens: []
   ),
+
+  // MARK: - ×
+
   (
     withoutLexemes: ["×"],
     withoutTokens: [Operator.multiplication],
@@ -262,6 +279,9 @@ let lexemeOperatorFixtures: [LexemeOperatorFixture] = [
     droppedLexemes: [],
     droppedTokens: []
   ),
+
+  // MARK: - "-"
+
   (
     withoutLexemes: ["-"],
     withoutTokens: [Operator.subtraction],
@@ -302,6 +322,9 @@ let lexemeOperatorFixtures: [LexemeOperatorFixture] = [
     droppedLexemes: [],
     droppedTokens: []
   ),
+
+  // MARK: - 0
+
   (
     withoutLexemes: ["0"],
     withoutTokens: [Constant(term: 0)],
@@ -342,6 +365,9 @@ let lexemeOperatorFixtures: [LexemeOperatorFixture] = [
     droppedLexemes: ["0"],
     droppedTokens: [Constant(term: 0)]
   ),
+
+  // MARK: - 1
+
   (
     withoutLexemes: ["1"],
     withoutTokens: [Constant(term: 1)],
@@ -382,6 +408,9 @@ let lexemeOperatorFixtures: [LexemeOperatorFixture] = [
     droppedLexemes: ["1"],
     droppedTokens: [Constant(term: 1)]
   ),
+
+  // MARK: - 9
+
   (
     withoutLexemes: ["9"],
     withoutTokens: [Constant(term: 9)],
@@ -422,6 +451,9 @@ let lexemeOperatorFixtures: [LexemeOperatorFixture] = [
     droppedLexemes: ["9"],
     droppedTokens: [Constant(term: 9)]
   ),
+
+  // MARK: - 1 × (
+
   (
     withoutLexemes: ["1", "×", "("],
     withoutTokens: [Constant(term: 1), Operator.multiplication, Parenthesis.open],
@@ -472,6 +504,9 @@ let lexemeOperatorFixtures: [LexemeOperatorFixture] = [
     droppedLexemes: ["1", "×", "("],
     droppedTokens: [Constant(term: 1), Operator.multiplication, Parenthesis.open]
   ),
+
+  // MARK: - 1)
+
   (
     withoutLexemes: ["1", ")"],
     withoutTokens: [Constant(term: 1), Parenthesis.close],
@@ -512,6 +547,9 @@ let lexemeOperatorFixtures: [LexemeOperatorFixture] = [
     droppedLexemes: ["1", ")"],
     droppedTokens: [Constant(term: 1), Parenthesis.close]
   ),
+
+  // MARK: - 1 +
+
   (
     withoutLexemes: ["1", "+"],
     withoutTokens: [Constant(term: 1), Operator.addition],
@@ -543,7 +581,7 @@ let lexemeOperatorFixtures: [LexemeOperatorFixture] = [
     droppedTokens: [Constant(term: 1)]
   ),
   (
-    withoutLexemes: ["1", "÷"],
+    withoutLexemes: ["1", "+"],
     withoutTokens: [Constant(term: 1), Operator.addition],
     lexeme: "-",
     token: Operator.subtraction,
@@ -552,6 +590,9 @@ let lexemeOperatorFixtures: [LexemeOperatorFixture] = [
     droppedLexemes: ["1"],
     droppedTokens: [Constant(term: 1)]
   ),
+
+  // MARK: - 1 ÷
+
   (
     withoutLexemes: ["1", "÷"],
     withoutTokens: [Constant(term: 1), Operator.division],
@@ -592,6 +633,9 @@ let lexemeOperatorFixtures: [LexemeOperatorFixture] = [
     droppedLexemes: ["1"],
     droppedTokens: [Constant(term: 1)]
   ),
+
+  // MARK: - 1 ×
+
   (
     withoutLexemes: ["1", "×"],
     withoutTokens: [Constant(term: 1), Operator.multiplication],
@@ -632,6 +676,9 @@ let lexemeOperatorFixtures: [LexemeOperatorFixture] = [
     droppedLexemes: ["1"],
     droppedTokens: [Constant(term: 1)]
   ),
+
+  // MARK: - "1 -"
+
   (
     withoutLexemes: ["1", "-"],
     withoutTokens: [Constant(term: 1), Operator.subtraction],
@@ -672,6 +719,9 @@ let lexemeOperatorFixtures: [LexemeOperatorFixture] = [
     droppedLexemes: ["1"],
     droppedTokens: [Constant(term: 1)]
   ),
+
+  // MARK: - 10
+
   (
     withoutLexemes: ["10"],
     withoutTokens: [Constant(term: 10)],
@@ -712,6 +762,9 @@ let lexemeOperatorFixtures: [LexemeOperatorFixture] = [
     droppedLexemes: ["10"],
     droppedTokens: [Constant(term: 10)]
   ),
+
+  // MARK: - 11
+
   (
     withoutLexemes: ["11"],
     withoutTokens: [Constant(term: 11)],
@@ -752,6 +805,9 @@ let lexemeOperatorFixtures: [LexemeOperatorFixture] = [
     droppedLexemes: ["11"],
     droppedTokens: [Constant(term: 11)]
   ),
+
+  // MARK: - 19
+
   (
     withoutLexemes: ["19"],
     withoutTokens: [Constant(term: 19)],
@@ -792,86 +848,330 @@ let lexemeOperatorFixtures: [LexemeOperatorFixture] = [
     droppedLexemes: ["19"],
     droppedTokens: [Constant(term: 19)]
   ),
+
+  // MARK: - 1d0 × (
+
   (
-    withoutLexemes: ["1d1"],
-    withoutTokens: [Roll(times: 1, sides: 1)],
+    withoutLexemes: ["1d0", "×", "("],
+    withoutTokens: [Roll(times: 1, sides: 0), Operator.multiplication, Parenthesis.open],
     lexeme: "+",
     token: Operator.addition,
-    withLexemes: ["1d1", "+"],
-    withTokens: [Roll(times: 1, sides: 1), Operator.addition],
-    droppedLexemes: ["1d1"],
-    droppedTokens: [Roll(times: 1, sides: 1)]
+    withLexemes: ["1d0", "×", "(", "+"],
+    withTokens: [
+      Roll(times: 1, sides: 0),
+      Operator.multiplication,
+      Parenthesis.open,
+      Operator.addition,
+    ],
+    droppedLexemes: ["1d0", "×", "("],
+    droppedTokens: [Roll(times: 1, sides: 0), Operator.multiplication, Parenthesis.open]
   ),
   (
-    withoutLexemes: ["1d1"],
-    withoutTokens: [Roll(times: 1, sides: 1)],
+    withoutLexemes: ["1d0", "×", "("],
+    withoutTokens: [Roll(times: 1, sides: 0), Operator.multiplication, Parenthesis.open],
     lexeme: "÷",
     token: Operator.division,
-    withLexemes: ["1d1", "÷"],
-    withTokens: [Roll(times: 1, sides: 1), Operator.division],
-    droppedLexemes: ["1d1"],
-    droppedTokens: [Roll(times: 1, sides: 1)]
+    withLexemes: ["1d0", "×", "(", "÷"],
+    withTokens: [
+      Roll(times: 1, sides: 0),
+      Operator.multiplication,
+      Parenthesis.open,
+      Operator.division,
+    ],
+    droppedLexemes: ["1d0", "×", "("],
+    droppedTokens: [Roll(times: 1, sides: 0), Operator.multiplication, Parenthesis.open]
   ),
   (
-    withoutLexemes: ["1d1"],
-    withoutTokens: [Roll(times: 1, sides: 1)],
+    withoutLexemes: ["1d0", "×", "("],
+    withoutTokens: [Roll(times: 1, sides: 0), Operator.multiplication, Parenthesis.open],
     lexeme: "×",
     token: Operator.multiplication,
-    withLexemes: ["1d1", "×"],
-    withTokens: [Roll(times: 1, sides: 1), Operator.multiplication],
-    droppedLexemes: ["1d1"],
-    droppedTokens: [Roll(times: 1, sides: 1)]
+    withLexemes: ["1d0", "×", "(", "×"],
+    withTokens: [
+      Roll(times: 1, sides: 0),
+      Operator.multiplication,
+      Parenthesis.open,
+      Operator.multiplication,
+    ],
+    droppedLexemes: ["1d0", "×", "("],
+    droppedTokens: [Roll(times: 1, sides: 0), Operator.multiplication, Parenthesis.open]
   ),
   (
-    withoutLexemes: ["1d1"],
-    withoutTokens: [Roll(times: 1, sides: 1)],
+    withoutLexemes: ["1d0", "×", "("],
+    withoutTokens: [Roll(times: 1, sides: 0), Operator.multiplication, Parenthesis.open],
     lexeme: "-",
     token: Operator.subtraction,
-    withLexemes: ["1d1", "-"],
-    withTokens: [Roll(times: 1, sides: 1), Operator.subtraction],
-    droppedLexemes: ["1d1"],
-    droppedTokens: [Roll(times: 1, sides: 1)]
+    withLexemes: ["1d0", "×", "(", "-"],
+    withTokens: [
+      Roll(times: 1, sides: 0),
+      Operator.multiplication,
+      Parenthesis.open,
+      Operator.subtraction,
+    ],
+    droppedLexemes: ["1d0", "×", "("],
+    droppedTokens: [Roll(times: 1, sides: 0), Operator.multiplication, Parenthesis.open]
   ),
+
+  // MARK: - 1d0)
+
   (
-    withoutLexemes: ["1d"],
-    withoutTokens: [RollPositiveSides(times: 1)],
+    withoutLexemes: ["1d0", ")"],
+    withoutTokens: [Roll(times: 1, sides: 0), Parenthesis.close],
     lexeme: "+",
     token: Operator.addition,
-    withLexemes: ["1d", "+"],
-    withTokens: [RollPositiveSides(times: 1), Operator.addition],
-    droppedLexemes: ["1d"],
-    droppedTokens: [RollPositiveSides(times: 1)]
+    withLexemes: ["1d0", ")", "+"],
+    withTokens: [Roll(times: 1, sides: 0), Parenthesis.close, Operator.addition],
+    droppedLexemes: ["1d0", ")"],
+    droppedTokens: [Roll(times: 1, sides: 0), Parenthesis.close]
   ),
   (
-    withoutLexemes: ["1d"],
-    withoutTokens: [RollPositiveSides(times: 1)],
+    withoutLexemes: ["1d0", ")"],
+    withoutTokens: [Roll(times: 1, sides: 0), Parenthesis.close],
     lexeme: "÷",
     token: Operator.division,
-    withLexemes: ["1d", "÷"],
-    withTokens: [RollPositiveSides(times: 1), Operator.division],
-    droppedLexemes: ["1d"],
-    droppedTokens: [RollPositiveSides(times: 1)]
+    withLexemes: ["1d0", ")", "÷"],
+    withTokens: [Roll(times: 1, sides: 0), Parenthesis.close, Operator.division],
+    droppedLexemes: ["1d0", ")"],
+    droppedTokens: [Roll(times: 1, sides: 0), Parenthesis.close]
   ),
   (
-    withoutLexemes: ["1d"],
-    withoutTokens: [RollPositiveSides(times: 1)],
+    withoutLexemes: ["1d0", ")"],
+    withoutTokens: [Roll(times: 1, sides: 0), Parenthesis.close],
     lexeme: "×",
     token: Operator.multiplication,
-    withLexemes: ["1d", "×"],
-    withTokens: [RollPositiveSides(times: 1), Operator.multiplication],
-    droppedLexemes: ["1d"],
-    droppedTokens: [RollPositiveSides(times: 1)]
+    withLexemes: ["1d0", ")", "×"],
+    withTokens: [Roll(times: 1, sides: 0), Parenthesis.close, Operator.multiplication],
+    droppedLexemes: ["1d0", ")"],
+    droppedTokens: [Roll(times: 1, sides: 0), Parenthesis.close]
   ),
   (
-    withoutLexemes: ["1d"],
-    withoutTokens: [RollPositiveSides(times: 1)],
+    withoutLexemes: ["1d0", ")"],
+    withoutTokens: [Roll(times: 1, sides: 0), Parenthesis.close],
     lexeme: "-",
     token: Operator.subtraction,
-    withLexemes: ["1d", "-"],
-    withTokens: [RollPositiveSides(times: 1), Operator.subtraction],
-    droppedLexemes: ["1d"],
-    droppedTokens: [RollPositiveSides(times: 1)]
+    withLexemes: ["1d0", ")", "-"],
+    withTokens: [Roll(times: 1, sides: 0), Parenthesis.close, Operator.subtraction],
+    droppedLexemes: ["1d0", ")"],
+    droppedTokens: [Roll(times: 1, sides: 0), Parenthesis.close]
   ),
+
+  // MARK: - 1d0 +
+
+  (
+    withoutLexemes: ["1d0", "+"],
+    withoutTokens: [Roll(times: 1, sides: 0), Operator.addition],
+    lexeme: "+",
+    token: Operator.addition,
+    withLexemes: ["1d0", "+"],
+    withTokens: [Roll(times: 1, sides: 0), Operator.addition],
+    droppedLexemes: ["1d0"],
+    droppedTokens: [Roll(times: 1, sides: 0)]
+  ),
+  (
+    withoutLexemes: ["1d0", "+"],
+    withoutTokens: [Roll(times: 1, sides: 0), Operator.addition],
+    lexeme: "÷",
+    token: Operator.division,
+    withLexemes: ["1d0", "÷"],
+    withTokens: [Roll(times: 1, sides: 0), Operator.division],
+    droppedLexemes: ["1d0"],
+    droppedTokens: [Roll(times: 1, sides: 0)]
+  ),
+  (
+    withoutLexemes: ["1d0", "+"],
+    withoutTokens: [Roll(times: 1, sides: 0), Operator.addition],
+    lexeme: "×",
+    token: Operator.multiplication,
+    withLexemes: ["1d0", "×"],
+    withTokens: [Roll(times: 1, sides: 0), Operator.multiplication],
+    droppedLexemes: ["1d0"],
+    droppedTokens: [Roll(times: 1, sides: 0)]
+  ),
+  (
+    withoutLexemes: ["1d0", "+"],
+    withoutTokens: [Roll(times: 1, sides: 0), Operator.addition],
+    lexeme: "-",
+    token: Operator.subtraction,
+    withLexemes: ["1d0", "-"],
+    withTokens: [Roll(times: 1, sides: 0), Operator.subtraction],
+    droppedLexemes: ["1d0"],
+    droppedTokens: [Roll(times: 1, sides: 0)]
+  ),
+
+  // MARK: - 1d0 ÷
+
+  (
+    withoutLexemes: ["1d0", "÷"],
+    withoutTokens: [Roll(times: 1, sides: 0), Operator.division],
+    lexeme: "+",
+    token: Operator.addition,
+    withLexemes: ["1d0", "+"],
+    withTokens: [Roll(times: 1, sides: 0), Operator.addition],
+    droppedLexemes: ["1d0"],
+    droppedTokens: [Roll(times: 1, sides: 0)]
+  ),
+  (
+    withoutLexemes: ["1d0", "÷"],
+    withoutTokens: [Roll(times: 1, sides: 0), Operator.division],
+    lexeme: "÷",
+    token: Operator.division,
+    withLexemes: ["1d0", "÷"],
+    withTokens: [Roll(times: 1, sides: 0), Operator.division],
+    droppedLexemes: ["1d0"],
+    droppedTokens: [Roll(times: 1, sides: 0)]
+  ),
+  (
+    withoutLexemes: ["1d0", "÷"],
+    withoutTokens: [Roll(times: 1, sides: 0), Operator.division],
+    lexeme: "×",
+    token: Operator.multiplication,
+    withLexemes: ["1d0", "×"],
+    withTokens: [Roll(times: 1, sides: 0), Operator.multiplication],
+    droppedLexemes: ["1d0"],
+    droppedTokens: [Roll(times: 1, sides: 0)]
+  ),
+  (
+    withoutLexemes: ["1d0", "÷"],
+    withoutTokens: [Roll(times: 1, sides: 0), Operator.division],
+    lexeme: "-",
+    token: Operator.subtraction,
+    withLexemes: ["1d0", "-"],
+    withTokens: [Roll(times: 1, sides: 0), Operator.subtraction],
+    droppedLexemes: ["1d0"],
+    droppedTokens: [Roll(times: 1, sides: 0)]
+  ),
+
+  // MARK: - 1d0 ×
+
+  (
+    withoutLexemes: ["1d0", "×"],
+    withoutTokens: [Roll(times: 1, sides: 0), Operator.multiplication],
+    lexeme: "+",
+    token: Operator.addition,
+    withLexemes: ["1d0", "+"],
+    withTokens: [Roll(times: 1, sides: 0), Operator.addition],
+    droppedLexemes: ["1d0"],
+    droppedTokens: [Roll(times: 1, sides: 0)]
+  ),
+  (
+    withoutLexemes: ["1d0", "×"],
+    withoutTokens: [Roll(times: 1, sides: 0), Operator.multiplication],
+    lexeme: "÷",
+    token: Operator.division,
+    withLexemes: ["1d0", "÷"],
+    withTokens: [Roll(times: 1, sides: 0), Operator.division],
+    droppedLexemes: ["1d0"],
+    droppedTokens: [Roll(times: 1, sides: 0)]
+  ),
+  (
+    withoutLexemes: ["1d0", "×"],
+    withoutTokens: [Roll(times: 1, sides: 0), Operator.multiplication],
+    lexeme: "×",
+    token: Operator.multiplication,
+    withLexemes: ["1d0", "×"],
+    withTokens: [Roll(times: 1, sides: 0), Operator.multiplication],
+    droppedLexemes: ["1d0"],
+    droppedTokens: [Roll(times: 1, sides: 0)]
+  ),
+  (
+    withoutLexemes: ["1d0", "×"],
+    withoutTokens: [Roll(times: 1, sides: 0), Operator.multiplication],
+    lexeme: "-",
+    token: Operator.subtraction,
+    withLexemes: ["1d0", "-"],
+    withTokens: [Roll(times: 1, sides: 0), Operator.subtraction],
+    droppedLexemes: ["1d0"],
+    droppedTokens: [Roll(times: 1, sides: 0)]
+  ),
+
+  // MARK: - "1d0 -"
+
+  (
+    withoutLexemes: ["1d0", "-"],
+    withoutTokens: [Roll(times: 1, sides: 0), Operator.subtraction],
+    lexeme: "+",
+    token: Operator.addition,
+    withLexemes: ["1d0", "+"],
+    withTokens: [Roll(times: 1, sides: 0), Operator.addition],
+    droppedLexemes: ["1d0"],
+    droppedTokens: [Roll(times: 1, sides: 0)]
+  ),
+  (
+    withoutLexemes: ["1d0", "-"],
+    withoutTokens: [Roll(times: 1, sides: 0), Operator.subtraction],
+    lexeme: "÷",
+    token: Operator.division,
+    withLexemes: ["1d0", "÷"],
+    withTokens: [Roll(times: 1, sides: 0), Operator.division],
+    droppedLexemes: ["1d0"],
+    droppedTokens: [Roll(times: 1, sides: 0)]
+  ),
+  (
+    withoutLexemes: ["1d0", "-"],
+    withoutTokens: [Roll(times: 1, sides: 0), Operator.subtraction],
+    lexeme: "×",
+    token: Operator.multiplication,
+    withLexemes: ["1d0", "×"],
+    withTokens: [Roll(times: 1, sides: 0), Operator.multiplication],
+    droppedLexemes: ["1d0"],
+    droppedTokens: [Roll(times: 1, sides: 0)]
+  ),
+  (
+    withoutLexemes: ["1d0", "-"],
+    withoutTokens: [Roll(times: 1, sides: 0), Operator.subtraction],
+    lexeme: "-",
+    token: Operator.subtraction,
+    withLexemes: ["1d0", "-"],
+    withTokens: [Roll(times: 1, sides: 0), Operator.subtraction],
+    droppedLexemes: ["1d0"],
+    droppedTokens: [Roll(times: 1, sides: 0)]
+  ),
+
+  // MARK: - 1d0
+
+  (
+    withoutLexemes: ["1d0"],
+    withoutTokens: [Roll(times: 1, sides: 0)],
+    lexeme: "+",
+    token: Operator.addition,
+    withLexemes: ["1d0", "+"],
+    withTokens: [Roll(times: 1, sides: 0), Operator.addition],
+    droppedLexemes: ["1d0"],
+    droppedTokens: [Roll(times: 1, sides: 0)]
+  ),
+  (
+    withoutLexemes: ["1d0"],
+    withoutTokens: [Roll(times: 1, sides: 0)],
+    lexeme: "÷",
+    token: Operator.division,
+    withLexemes: ["1d0", "÷"],
+    withTokens: [Roll(times: 1, sides: 0), Operator.division],
+    droppedLexemes: ["1d0"],
+    droppedTokens: [Roll(times: 1, sides: 0)]
+  ),
+  (
+    withoutLexemes: ["1d0"],
+    withoutTokens: [Roll(times: 1, sides: 0)],
+    lexeme: "×",
+    token: Operator.multiplication,
+    withLexemes: ["1d0", "×"],
+    withTokens: [Roll(times: 1, sides: 0), Operator.multiplication],
+    droppedLexemes: ["1d0"],
+    droppedTokens: [Roll(times: 1, sides: 0)]
+  ),
+  (
+    withoutLexemes: ["1d0"],
+    withoutTokens: [Roll(times: 1, sides: 0)],
+    lexeme: "-",
+    token: Operator.subtraction,
+    withLexemes: ["1d0", "-"],
+    withTokens: [Roll(times: 1, sides: 0), Operator.subtraction],
+    droppedLexemes: ["1d0"],
+    droppedTokens: [Roll(times: 1, sides: 0)]
+  ),
+
+  // MARK: - 1d1 × (
+
   (
     withoutLexemes: ["1d1", "×", "("],
     withoutTokens: [Roll(times: 1, sides: 1), Operator.multiplication, Parenthesis.open],
@@ -932,6 +1232,588 @@ let lexemeOperatorFixtures: [LexemeOperatorFixture] = [
     droppedLexemes: ["1d1", "×", "("],
     droppedTokens: [Roll(times: 1, sides: 1), Operator.multiplication, Parenthesis.open]
   ),
+
+  // MARK: - 1d1)
+
+  (
+    withoutLexemes: ["1d1", ")"],
+    withoutTokens: [Roll(times: 1, sides: 1), Parenthesis.close],
+    lexeme: "+",
+    token: Operator.addition,
+    withLexemes: ["1d1", ")", "+"],
+    withTokens: [Roll(times: 1, sides: 1), Parenthesis.close, Operator.addition],
+    droppedLexemes: ["1d1", ")"],
+    droppedTokens: [Roll(times: 1, sides: 1), Parenthesis.close]
+  ),
+  (
+    withoutLexemes: ["1d1", ")"],
+    withoutTokens: [Roll(times: 1, sides: 1), Parenthesis.close],
+    lexeme: "÷",
+    token: Operator.division,
+    withLexemes: ["1d1", ")", "÷"],
+    withTokens: [Roll(times: 1, sides: 1), Parenthesis.close, Operator.division],
+    droppedLexemes: ["1d1", ")"],
+    droppedTokens: [Roll(times: 1, sides: 1), Parenthesis.close]
+  ),
+  (
+    withoutLexemes: ["1d1", ")"],
+    withoutTokens: [Roll(times: 1, sides: 1), Parenthesis.close],
+    lexeme: "×",
+    token: Operator.multiplication,
+    withLexemes: ["1d1", ")", "×"],
+    withTokens: [Roll(times: 1, sides: 1), Parenthesis.close, Operator.multiplication],
+    droppedLexemes: ["1d1", ")"],
+    droppedTokens: [Roll(times: 1, sides: 1), Parenthesis.close]
+  ),
+  (
+    withoutLexemes: ["1d1", ")"],
+    withoutTokens: [Roll(times: 1, sides: 1), Parenthesis.close],
+    lexeme: "-",
+    token: Operator.subtraction,
+    withLexemes: ["1d1", ")", "-"],
+    withTokens: [Roll(times: 1, sides: 1), Parenthesis.close, Operator.subtraction],
+    droppedLexemes: ["1d1", ")"],
+    droppedTokens: [Roll(times: 1, sides: 1), Parenthesis.close]
+  ),
+
+  // MARK: - 1d1 +
+
+  (
+    withoutLexemes: ["1d1", "+"],
+    withoutTokens: [Roll(times: 1, sides: 1), Operator.addition],
+    lexeme: "+",
+    token: Operator.addition,
+    withLexemes: ["1d1", "+"],
+    withTokens: [Roll(times: 1, sides: 1), Operator.addition],
+    droppedLexemes: ["1d1"],
+    droppedTokens: [Roll(times: 1, sides: 1)]
+  ),
+  (
+    withoutLexemes: ["1d1", "+"],
+    withoutTokens: [Roll(times: 1, sides: 1), Operator.addition],
+    lexeme: "÷",
+    token: Operator.division,
+    withLexemes: ["1d1", "÷"],
+    withTokens: [Roll(times: 1, sides: 1), Operator.division],
+    droppedLexemes: ["1d1"],
+    droppedTokens: [Roll(times: 1, sides: 1)]
+  ),
+  (
+    withoutLexemes: ["1d1", "+"],
+    withoutTokens: [Roll(times: 1, sides: 1), Operator.addition],
+    lexeme: "×",
+    token: Operator.multiplication,
+    withLexemes: ["1d1", "×"],
+    withTokens: [Roll(times: 1, sides: 1), Operator.multiplication],
+    droppedLexemes: ["1d1"],
+    droppedTokens: [Roll(times: 1, sides: 1)]
+  ),
+  (
+    withoutLexemes: ["1d1", "+"],
+    withoutTokens: [Roll(times: 1, sides: 1), Operator.addition],
+    lexeme: "-",
+    token: Operator.subtraction,
+    withLexemes: ["1d1", "-"],
+    withTokens: [Roll(times: 1, sides: 1), Operator.subtraction],
+    droppedLexemes: ["1d1"],
+    droppedTokens: [Roll(times: 1, sides: 1)]
+  ),
+
+  // MARK: - 1d1 ÷
+
+  (
+    withoutLexemes: ["1d1", "÷"],
+    withoutTokens: [Roll(times: 1, sides: 1), Operator.division],
+    lexeme: "+",
+    token: Operator.addition,
+    withLexemes: ["1d1", "+"],
+    withTokens: [Roll(times: 1, sides: 1), Operator.addition],
+    droppedLexemes: ["1d1"],
+    droppedTokens: [Roll(times: 1, sides: 1)]
+  ),
+  (
+    withoutLexemes: ["1d1", "÷"],
+    withoutTokens: [Roll(times: 1, sides: 1), Operator.division],
+    lexeme: "÷",
+    token: Operator.division,
+    withLexemes: ["1d1", "÷"],
+    withTokens: [Roll(times: 1, sides: 1), Operator.division],
+    droppedLexemes: ["1d1"],
+    droppedTokens: [Roll(times: 1, sides: 1)]
+  ),
+  (
+    withoutLexemes: ["1d1", "÷"],
+    withoutTokens: [Roll(times: 1, sides: 1), Operator.division],
+    lexeme: "×",
+    token: Operator.multiplication,
+    withLexemes: ["1d1", "×"],
+    withTokens: [Roll(times: 1, sides: 1), Operator.multiplication],
+    droppedLexemes: ["1d1"],
+    droppedTokens: [Roll(times: 1, sides: 1)]
+  ),
+  (
+    withoutLexemes: ["1d1", "÷"],
+    withoutTokens: [Roll(times: 1, sides: 1), Operator.division],
+    lexeme: "-",
+    token: Operator.subtraction,
+    withLexemes: ["1d1", "-"],
+    withTokens: [Roll(times: 1, sides: 1), Operator.subtraction],
+    droppedLexemes: ["1d1"],
+    droppedTokens: [Roll(times: 1, sides: 1)]
+  ),
+
+  // MARK: - 1d1 ×
+
+  (
+    withoutLexemes: ["1d1", "×"],
+    withoutTokens: [Roll(times: 1, sides: 1), Operator.multiplication],
+    lexeme: "+",
+    token: Operator.addition,
+    withLexemes: ["1d1", "+"],
+    withTokens: [Roll(times: 1, sides: 1), Operator.addition],
+    droppedLexemes: ["1d1"],
+    droppedTokens: [Roll(times: 1, sides: 1)]
+  ),
+  (
+    withoutLexemes: ["1d1", "×"],
+    withoutTokens: [Roll(times: 1, sides: 1), Operator.multiplication],
+    lexeme: "÷",
+    token: Operator.division,
+    withLexemes: ["1d1", "÷"],
+    withTokens: [Roll(times: 1, sides: 1), Operator.division],
+    droppedLexemes: ["1d1"],
+    droppedTokens: [Roll(times: 1, sides: 1)]
+  ),
+  (
+    withoutLexemes: ["1d1", "×"],
+    withoutTokens: [Roll(times: 1, sides: 1), Operator.multiplication],
+    lexeme: "×",
+    token: Operator.multiplication,
+    withLexemes: ["1d1", "×"],
+    withTokens: [Roll(times: 1, sides: 1), Operator.multiplication],
+    droppedLexemes: ["1d1"],
+    droppedTokens: [Roll(times: 1, sides: 1)]
+  ),
+  (
+    withoutLexemes: ["1d1", "×"],
+    withoutTokens: [Roll(times: 1, sides: 1), Operator.multiplication],
+    lexeme: "-",
+    token: Operator.subtraction,
+    withLexemes: ["1d1", "-"],
+    withTokens: [Roll(times: 1, sides: 1), Operator.subtraction],
+    droppedLexemes: ["1d1"],
+    droppedTokens: [Roll(times: 1, sides: 1)]
+  ),
+
+  // MARK: - "1d1 -"
+
+  (
+    withoutLexemes: ["1d1", "-"],
+    withoutTokens: [Roll(times: 1, sides: 1), Operator.subtraction],
+    lexeme: "+",
+    token: Operator.addition,
+    withLexemes: ["1d1", "+"],
+    withTokens: [Roll(times: 1, sides: 1), Operator.addition],
+    droppedLexemes: ["1d1"],
+    droppedTokens: [Roll(times: 1, sides: 1)]
+  ),
+  (
+    withoutLexemes: ["1d1", "-"],
+    withoutTokens: [Roll(times: 1, sides: 1), Operator.subtraction],
+    lexeme: "÷",
+    token: Operator.division,
+    withLexemes: ["1d1", "÷"],
+    withTokens: [Roll(times: 1, sides: 1), Operator.division],
+    droppedLexemes: ["1d1"],
+    droppedTokens: [Roll(times: 1, sides: 1)]
+  ),
+  (
+    withoutLexemes: ["1d1", "-"],
+    withoutTokens: [Roll(times: 1, sides: 1), Operator.subtraction],
+    lexeme: "×",
+    token: Operator.multiplication,
+    withLexemes: ["1d1", "×"],
+    withTokens: [Roll(times: 1, sides: 1), Operator.multiplication],
+    droppedLexemes: ["1d1"],
+    droppedTokens: [Roll(times: 1, sides: 1)]
+  ),
+  (
+    withoutLexemes: ["1d1", "-"],
+    withoutTokens: [Roll(times: 1, sides: 1), Operator.subtraction],
+    lexeme: "-",
+    token: Operator.subtraction,
+    withLexemes: ["1d1", "-"],
+    withTokens: [Roll(times: 1, sides: 1), Operator.subtraction],
+    droppedLexemes: ["1d1"],
+    droppedTokens: [Roll(times: 1, sides: 1)]
+  ),
+
+  // MARK: - 1d1
+
+  (
+    withoutLexemes: ["1d1"],
+    withoutTokens: [Roll(times: 1, sides: 1)],
+    lexeme: "+",
+    token: Operator.addition,
+    withLexemes: ["1d1", "+"],
+    withTokens: [Roll(times: 1, sides: 1), Operator.addition],
+    droppedLexemes: ["1d1"],
+    droppedTokens: [Roll(times: 1, sides: 1)]
+  ),
+  (
+    withoutLexemes: ["1d1"],
+    withoutTokens: [Roll(times: 1, sides: 1)],
+    lexeme: "÷",
+    token: Operator.division,
+    withLexemes: ["1d1", "÷"],
+    withTokens: [Roll(times: 1, sides: 1), Operator.division],
+    droppedLexemes: ["1d1"],
+    droppedTokens: [Roll(times: 1, sides: 1)]
+  ),
+  (
+    withoutLexemes: ["1d1"],
+    withoutTokens: [Roll(times: 1, sides: 1)],
+    lexeme: "×",
+    token: Operator.multiplication,
+    withLexemes: ["1d1", "×"],
+    withTokens: [Roll(times: 1, sides: 1), Operator.multiplication],
+    droppedLexemes: ["1d1"],
+    droppedTokens: [Roll(times: 1, sides: 1)]
+  ),
+  (
+    withoutLexemes: ["1d1"],
+    withoutTokens: [Roll(times: 1, sides: 1)],
+    lexeme: "-",
+    token: Operator.subtraction,
+    withLexemes: ["1d1", "-"],
+    withTokens: [Roll(times: 1, sides: 1), Operator.subtraction],
+    droppedLexemes: ["1d1"],
+    droppedTokens: [Roll(times: 1, sides: 1)]
+  ),
+
+  // MARK: - 1d9 × (
+
+  (
+    withoutLexemes: ["1d9", "×", "("],
+    withoutTokens: [Roll(times: 1, sides: 9), Operator.multiplication, Parenthesis.open],
+    lexeme: "+",
+    token: Operator.addition,
+    withLexemes: ["1d9", "×", "(", "+"],
+    withTokens: [
+      Roll(times: 1, sides: 9),
+      Operator.multiplication,
+      Parenthesis.open,
+      Operator.addition,
+    ],
+    droppedLexemes: ["1d9", "×", "("],
+    droppedTokens: [Roll(times: 1, sides: 9), Operator.multiplication, Parenthesis.open]
+  ),
+  (
+    withoutLexemes: ["1d9", "×", "("],
+    withoutTokens: [Roll(times: 1, sides: 9), Operator.multiplication, Parenthesis.open],
+    lexeme: "÷",
+    token: Operator.division,
+    withLexemes: ["1d9", "×", "(", "÷"],
+    withTokens: [
+      Roll(times: 1, sides: 9),
+      Operator.multiplication,
+      Parenthesis.open,
+      Operator.division,
+    ],
+    droppedLexemes: ["1d9", "×", "("],
+    droppedTokens: [Roll(times: 1, sides: 9), Operator.multiplication, Parenthesis.open]
+  ),
+  (
+    withoutLexemes: ["1d9", "×", "("],
+    withoutTokens: [Roll(times: 1, sides: 9), Operator.multiplication, Parenthesis.open],
+    lexeme: "×",
+    token: Operator.multiplication,
+    withLexemes: ["1d9", "×", "(", "×"],
+    withTokens: [
+      Roll(times: 1, sides: 9),
+      Operator.multiplication,
+      Parenthesis.open,
+      Operator.multiplication,
+    ],
+    droppedLexemes: ["1d9", "×", "("],
+    droppedTokens: [Roll(times: 1, sides: 9), Operator.multiplication, Parenthesis.open]
+  ),
+  (
+    withoutLexemes: ["1d9", "×", "("],
+    withoutTokens: [Roll(times: 1, sides: 9), Operator.multiplication, Parenthesis.open],
+    lexeme: "-",
+    token: Operator.subtraction,
+    withLexemes: ["1d9", "×", "(", "-"],
+    withTokens: [
+      Roll(times: 1, sides: 9),
+      Operator.multiplication,
+      Parenthesis.open,
+      Operator.subtraction,
+    ],
+    droppedLexemes: ["1d9", "×", "("],
+    droppedTokens: [Roll(times: 1, sides: 9), Operator.multiplication, Parenthesis.open]
+  ),
+
+  // MARK: - 1d9)
+
+  (
+    withoutLexemes: ["1d9", ")"],
+    withoutTokens: [Roll(times: 1, sides: 9), Parenthesis.close],
+    lexeme: "+",
+    token: Operator.addition,
+    withLexemes: ["1d9", ")", "+"],
+    withTokens: [Roll(times: 1, sides: 9), Parenthesis.close, Operator.addition],
+    droppedLexemes: ["1d9", ")"],
+    droppedTokens: [Roll(times: 1, sides: 9), Parenthesis.close]
+  ),
+  (
+    withoutLexemes: ["1d9", ")"],
+    withoutTokens: [Roll(times: 1, sides: 9), Parenthesis.close],
+    lexeme: "÷",
+    token: Operator.division,
+    withLexemes: ["1d9", ")", "÷"],
+    withTokens: [Roll(times: 1, sides: 9), Parenthesis.close, Operator.division],
+    droppedLexemes: ["1d9", ")"],
+    droppedTokens: [Roll(times: 1, sides: 9), Parenthesis.close]
+  ),
+  (
+    withoutLexemes: ["1d9", ")"],
+    withoutTokens: [Roll(times: 1, sides: 9), Parenthesis.close],
+    lexeme: "×",
+    token: Operator.multiplication,
+    withLexemes: ["1d9", ")", "×"],
+    withTokens: [Roll(times: 1, sides: 9), Parenthesis.close, Operator.multiplication],
+    droppedLexemes: ["1d9", ")"],
+    droppedTokens: [Roll(times: 1, sides: 9), Parenthesis.close]
+  ),
+  (
+    withoutLexemes: ["1d9", ")"],
+    withoutTokens: [Roll(times: 1, sides: 9), Parenthesis.close],
+    lexeme: "-",
+    token: Operator.subtraction,
+    withLexemes: ["1d9", ")", "-"],
+    withTokens: [Roll(times: 1, sides: 9), Parenthesis.close, Operator.subtraction],
+    droppedLexemes: ["1d9", ")"],
+    droppedTokens: [Roll(times: 1, sides: 9), Parenthesis.close]
+  ),
+
+  // MARK: - 1d9 +
+
+  (
+    withoutLexemes: ["1d9", "+"],
+    withoutTokens: [Roll(times: 1, sides: 9), Operator.addition],
+    lexeme: "+",
+    token: Operator.addition,
+    withLexemes: ["1d9", "+"],
+    withTokens: [Roll(times: 1, sides: 9), Operator.addition],
+    droppedLexemes: ["1d9"],
+    droppedTokens: [Roll(times: 1, sides: 9)]
+  ),
+  (
+    withoutLexemes: ["1d9", "+"],
+    withoutTokens: [Roll(times: 1, sides: 9), Operator.addition],
+    lexeme: "÷",
+    token: Operator.division,
+    withLexemes: ["1d9", "÷"],
+    withTokens: [Roll(times: 1, sides: 9), Operator.division],
+    droppedLexemes: ["1d9"],
+    droppedTokens: [Roll(times: 1, sides: 9)]
+  ),
+  (
+    withoutLexemes: ["1d9", "+"],
+    withoutTokens: [Roll(times: 1, sides: 9), Operator.addition],
+    lexeme: "×",
+    token: Operator.multiplication,
+    withLexemes: ["1d9", "×"],
+    withTokens: [Roll(times: 1, sides: 9), Operator.multiplication],
+    droppedLexemes: ["1d9"],
+    droppedTokens: [Roll(times: 1, sides: 9)]
+  ),
+  (
+    withoutLexemes: ["1d9", "+"],
+    withoutTokens: [Roll(times: 1, sides: 9), Operator.addition],
+    lexeme: "-",
+    token: Operator.subtraction,
+    withLexemes: ["1d9", "-"],
+    withTokens: [Roll(times: 1, sides: 9), Operator.subtraction],
+    droppedLexemes: ["1d9"],
+    droppedTokens: [Roll(times: 1, sides: 9)]
+  ),
+
+  // MARK: - 1d9 ÷
+
+  (
+    withoutLexemes: ["1d9", "÷"],
+    withoutTokens: [Roll(times: 1, sides: 9), Operator.division],
+    lexeme: "+",
+    token: Operator.addition,
+    withLexemes: ["1d9", "+"],
+    withTokens: [Roll(times: 1, sides: 9), Operator.addition],
+    droppedLexemes: ["1d9"],
+    droppedTokens: [Roll(times: 1, sides: 9)]
+  ),
+  (
+    withoutLexemes: ["1d9", "÷"],
+    withoutTokens: [Roll(times: 1, sides: 9), Operator.division],
+    lexeme: "÷",
+    token: Operator.division,
+    withLexemes: ["1d9", "÷"],
+    withTokens: [Roll(times: 1, sides: 9), Operator.division],
+    droppedLexemes: ["1d9"],
+    droppedTokens: [Roll(times: 1, sides: 9)]
+  ),
+  (
+    withoutLexemes: ["1d9", "÷"],
+    withoutTokens: [Roll(times: 1, sides: 9), Operator.division],
+    lexeme: "×",
+    token: Operator.multiplication,
+    withLexemes: ["1d9", "×"],
+    withTokens: [Roll(times: 1, sides: 9), Operator.multiplication],
+    droppedLexemes: ["1d9"],
+    droppedTokens: [Roll(times: 1, sides: 9)]
+  ),
+  (
+    withoutLexemes: ["1d9", "÷"],
+    withoutTokens: [Roll(times: 1, sides: 9), Operator.division],
+    lexeme: "-",
+    token: Operator.subtraction,
+    withLexemes: ["1d9", "-"],
+    withTokens: [Roll(times: 1, sides: 9), Operator.subtraction],
+    droppedLexemes: ["1d9"],
+    droppedTokens: [Roll(times: 1, sides: 9)]
+  ),
+
+  // MARK: - 1d9 ×
+
+  (
+    withoutLexemes: ["1d9", "×"],
+    withoutTokens: [Roll(times: 1, sides: 9), Operator.multiplication],
+    lexeme: "+",
+    token: Operator.addition,
+    withLexemes: ["1d9", "+"],
+    withTokens: [Roll(times: 1, sides: 9), Operator.addition],
+    droppedLexemes: ["1d9"],
+    droppedTokens: [Roll(times: 1, sides: 9)]
+  ),
+  (
+    withoutLexemes: ["1d9", "×"],
+    withoutTokens: [Roll(times: 1, sides: 9), Operator.multiplication],
+    lexeme: "÷",
+    token: Operator.division,
+    withLexemes: ["1d9", "÷"],
+    withTokens: [Roll(times: 1, sides: 9), Operator.division],
+    droppedLexemes: ["1d9"],
+    droppedTokens: [Roll(times: 1, sides: 9)]
+  ),
+  (
+    withoutLexemes: ["1d9", "×"],
+    withoutTokens: [Roll(times: 1, sides: 9), Operator.multiplication],
+    lexeme: "×",
+    token: Operator.multiplication,
+    withLexemes: ["1d9", "×"],
+    withTokens: [Roll(times: 1, sides: 9), Operator.multiplication],
+    droppedLexemes: ["1d9"],
+    droppedTokens: [Roll(times: 1, sides: 9)]
+  ),
+  (
+    withoutLexemes: ["1d9", "×"],
+    withoutTokens: [Roll(times: 1, sides: 9), Operator.multiplication],
+    lexeme: "-",
+    token: Operator.subtraction,
+    withLexemes: ["1d9", "-"],
+    withTokens: [Roll(times: 1, sides: 9), Operator.subtraction],
+    droppedLexemes: ["1d9"],
+    droppedTokens: [Roll(times: 1, sides: 9)]
+  ),
+
+  // MARK: - "1d9 -"
+
+  (
+    withoutLexemes: ["1d9", "-"],
+    withoutTokens: [Roll(times: 1, sides: 9), Operator.subtraction],
+    lexeme: "+",
+    token: Operator.addition,
+    withLexemes: ["1d9", "+"],
+    withTokens: [Roll(times: 1, sides: 9), Operator.addition],
+    droppedLexemes: ["1d9"],
+    droppedTokens: [Roll(times: 1, sides: 9)]
+  ),
+  (
+    withoutLexemes: ["1d9", "-"],
+    withoutTokens: [Roll(times: 1, sides: 9), Operator.subtraction],
+    lexeme: "÷",
+    token: Operator.division,
+    withLexemes: ["1d9", "÷"],
+    withTokens: [Roll(times: 1, sides: 9), Operator.division],
+    droppedLexemes: ["1d9"],
+    droppedTokens: [Roll(times: 1, sides: 9)]
+  ),
+  (
+    withoutLexemes: ["1d9", "-"],
+    withoutTokens: [Roll(times: 1, sides: 9), Operator.subtraction],
+    lexeme: "×",
+    token: Operator.multiplication,
+    withLexemes: ["1d9", "×"],
+    withTokens: [Roll(times: 1, sides: 9), Operator.multiplication],
+    droppedLexemes: ["1d9"],
+    droppedTokens: [Roll(times: 1, sides: 9)]
+  ),
+  (
+    withoutLexemes: ["1d9", "-"],
+    withoutTokens: [Roll(times: 1, sides: 9), Operator.subtraction],
+    lexeme: "-",
+    token: Operator.subtraction,
+    withLexemes: ["1d9", "-"],
+    withTokens: [Roll(times: 1, sides: 9), Operator.subtraction],
+    droppedLexemes: ["1d9"],
+    droppedTokens: [Roll(times: 1, sides: 9)]
+  ),
+
+  // MARK: - 1d9
+
+  (
+    withoutLexemes: ["1d9"],
+    withoutTokens: [Roll(times: 1, sides: 9)],
+    lexeme: "+",
+    token: Operator.addition,
+    withLexemes: ["1d9", "+"],
+    withTokens: [Roll(times: 1, sides: 9), Operator.addition],
+    droppedLexemes: ["1d9"],
+    droppedTokens: [Roll(times: 1, sides: 9)]
+  ),
+  (
+    withoutLexemes: ["1d9"],
+    withoutTokens: [Roll(times: 1, sides: 9)],
+    lexeme: "÷",
+    token: Operator.division,
+    withLexemes: ["1d9", "÷"],
+    withTokens: [Roll(times: 1, sides: 9), Operator.division],
+    droppedLexemes: ["1d9"],
+    droppedTokens: [Roll(times: 1, sides: 9)]
+  ),
+  (
+    withoutLexemes: ["1d9"],
+    withoutTokens: [Roll(times: 1, sides: 9)],
+    lexeme: "×",
+    token: Operator.multiplication,
+    withLexemes: ["1d9", "×"],
+    withTokens: [Roll(times: 1, sides: 9), Operator.multiplication],
+    droppedLexemes: ["1d9"],
+    droppedTokens: [Roll(times: 1, sides: 9)]
+  ),
+  (
+    withoutLexemes: ["1d9"],
+    withoutTokens: [Roll(times: 1, sides: 9)],
+    lexeme: "-",
+    token: Operator.subtraction,
+    withLexemes: ["1d9", "-"],
+    withTokens: [Roll(times: 1, sides: 9), Operator.subtraction],
+    droppedLexemes: ["1d9"],
+    droppedTokens: [Roll(times: 1, sides: 9)]
+  ),
+
+  // MARK: - 1d × (
+
   (
     withoutLexemes: ["1d", "×", "("],
     withoutTokens: [RollPositiveSides(times: 1), Operator.multiplication, Parenthesis.open],
@@ -992,46 +1874,9 @@ let lexemeOperatorFixtures: [LexemeOperatorFixture] = [
     droppedLexemes: ["1d", "×", "("],
     droppedTokens: [RollPositiveSides(times: 1), Operator.multiplication, Parenthesis.open]
   ),
-  (
-    withoutLexemes: ["1d1", ")"],
-    withoutTokens: [Roll(times: 1, sides: 1), Parenthesis.close],
-    lexeme: "+",
-    token: Operator.addition,
-    withLexemes: ["1d1", ")", "+"],
-    withTokens: [Roll(times: 1, sides: 1), Parenthesis.close, Operator.addition],
-    droppedLexemes: ["1d1", ")"],
-    droppedTokens: [Roll(times: 1, sides: 1), Parenthesis.close]
-  ),
-  (
-    withoutLexemes: ["1d1", ")"],
-    withoutTokens: [Roll(times: 1, sides: 1), Parenthesis.close],
-    lexeme: "÷",
-    token: Operator.division,
-    withLexemes: ["1d1", ")", "÷"],
-    withTokens: [Roll(times: 1, sides: 1), Parenthesis.close, Operator.division],
-    droppedLexemes: ["1d1", ")"],
-    droppedTokens: [Roll(times: 1, sides: 1), Parenthesis.close]
-  ),
-  (
-    withoutLexemes: ["1d1", ")"],
-    withoutTokens: [Roll(times: 1, sides: 1), Parenthesis.close],
-    lexeme: "×",
-    token: Operator.multiplication,
-    withLexemes: ["1d1", ")", "×"],
-    withTokens: [Roll(times: 1, sides: 1), Parenthesis.close, Operator.multiplication],
-    droppedLexemes: ["1d1", ")"],
-    droppedTokens: [Roll(times: 1, sides: 1), Parenthesis.close]
-  ),
-  (
-    withoutLexemes: ["1d1", ")"],
-    withoutTokens: [Roll(times: 1, sides: 1), Parenthesis.close],
-    lexeme: "-",
-    token: Operator.subtraction,
-    withLexemes: ["1d1", ")", "-"],
-    withTokens: [Roll(times: 1, sides: 1), Parenthesis.close, Operator.subtraction],
-    droppedLexemes: ["1d1", ")"],
-    droppedTokens: [Roll(times: 1, sides: 1), Parenthesis.close]
-  ),
+
+  // MARK: - 1d)
+
   (
     withoutLexemes: ["1d", ")"],
     withoutTokens: [RollPositiveSides(times: 1), Parenthesis.close],
@@ -1072,46 +1917,9 @@ let lexemeOperatorFixtures: [LexemeOperatorFixture] = [
     droppedLexemes: ["1d", ")"],
     droppedTokens: [RollPositiveSides(times: 1), Parenthesis.close]
   ),
-  (
-    withoutLexemes: ["1d1", "+"],
-    withoutTokens: [Roll(times: 1, sides: 1), Operator.addition],
-    lexeme: "+",
-    token: Operator.addition,
-    withLexemes: ["1d1", "+"],
-    withTokens: [Roll(times: 1, sides: 1), Operator.addition],
-    droppedLexemes: ["1d1"],
-    droppedTokens: [Roll(times: 1, sides: 1)]
-  ),
-  (
-    withoutLexemes: ["1d1", "+"],
-    withoutTokens: [Roll(times: 1, sides: 1), Operator.addition],
-    lexeme: "÷",
-    token: Operator.division,
-    withLexemes: ["1d1", "÷"],
-    withTokens: [Roll(times: 1, sides: 1), Operator.division],
-    droppedLexemes: ["1d1"],
-    droppedTokens: [Roll(times: 1, sides: 1)]
-  ),
-  (
-    withoutLexemes: ["1d1", "+"],
-    withoutTokens: [Roll(times: 1, sides: 1), Operator.addition],
-    lexeme: "×",
-    token: Operator.multiplication,
-    withLexemes: ["1d1", "×"],
-    withTokens: [Roll(times: 1, sides: 1), Operator.multiplication],
-    droppedLexemes: ["1d1"],
-    droppedTokens: [Roll(times: 1, sides: 1)]
-  ),
-  (
-    withoutLexemes: ["1d1", "+"],
-    withoutTokens: [Roll(times: 1, sides: 1), Operator.addition],
-    lexeme: "-",
-    token: Operator.subtraction,
-    withLexemes: ["1d1", "-"],
-    withTokens: [Roll(times: 1, sides: 1), Operator.subtraction],
-    droppedLexemes: ["1d1"],
-    droppedTokens: [Roll(times: 1, sides: 1)]
-  ),
+
+  // MARK: - 1d +
+
   (
     withoutLexemes: ["1d", "+"],
     withoutTokens: [RollPositiveSides(times: 1), Operator.addition],
@@ -1152,46 +1960,9 @@ let lexemeOperatorFixtures: [LexemeOperatorFixture] = [
     droppedLexemes: ["1d"],
     droppedTokens: [RollPositiveSides(times: 1)]
   ),
-  (
-    withoutLexemes: ["1d1", "÷"],
-    withoutTokens: [Roll(times: 1, sides: 1), Operator.division],
-    lexeme: "+",
-    token: Operator.addition,
-    withLexemes: ["1d1", "+"],
-    withTokens: [Roll(times: 1, sides: 1), Operator.addition],
-    droppedLexemes: ["1d1"],
-    droppedTokens: [Roll(times: 1, sides: 1)]
-  ),
-  (
-    withoutLexemes: ["1d1", "÷"],
-    withoutTokens: [Roll(times: 1, sides: 1), Operator.division],
-    lexeme: "÷",
-    token: Operator.division,
-    withLexemes: ["1d1", "÷"],
-    withTokens: [Roll(times: 1, sides: 1), Operator.division],
-    droppedLexemes: ["1d1"],
-    droppedTokens: [Roll(times: 1, sides: 1)]
-  ),
-  (
-    withoutLexemes: ["1d1", "÷"],
-    withoutTokens: [Roll(times: 1, sides: 1), Operator.division],
-    lexeme: "×",
-    token: Operator.multiplication,
-    withLexemes: ["1d1", "×"],
-    withTokens: [Roll(times: 1, sides: 1), Operator.multiplication],
-    droppedLexemes: ["1d1"],
-    droppedTokens: [Roll(times: 1, sides: 1)]
-  ),
-  (
-    withoutLexemes: ["1d1", "÷"],
-    withoutTokens: [Roll(times: 1, sides: 1), Operator.division],
-    lexeme: "-",
-    token: Operator.subtraction,
-    withLexemes: ["1d1", "-"],
-    withTokens: [Roll(times: 1, sides: 1), Operator.subtraction],
-    droppedLexemes: ["1d1"],
-    droppedTokens: [Roll(times: 1, sides: 1)]
-  ),
+
+  // MARK: - 1d ÷
+
   (
     withoutLexemes: ["1d", "÷"],
     withoutTokens: [RollPositiveSides(times: 1), Operator.division],
@@ -1232,46 +2003,9 @@ let lexemeOperatorFixtures: [LexemeOperatorFixture] = [
     droppedLexemes: ["1d"],
     droppedTokens: [RollPositiveSides(times: 1)]
   ),
-  (
-    withoutLexemes: ["1d1", "×"],
-    withoutTokens: [Roll(times: 1, sides: 1), Operator.multiplication],
-    lexeme: "+",
-    token: Operator.addition,
-    withLexemes: ["1d1", "+"],
-    withTokens: [Roll(times: 1, sides: 1), Operator.addition],
-    droppedLexemes: ["1d1"],
-    droppedTokens: [Roll(times: 1, sides: 1)]
-  ),
-  (
-    withoutLexemes: ["1d1", "×"],
-    withoutTokens: [Roll(times: 1, sides: 1), Operator.multiplication],
-    lexeme: "÷",
-    token: Operator.division,
-    withLexemes: ["1d1", "÷"],
-    withTokens: [Roll(times: 1, sides: 1), Operator.division],
-    droppedLexemes: ["1d1"],
-    droppedTokens: [Roll(times: 1, sides: 1)]
-  ),
-  (
-    withoutLexemes: ["1d1", "×"],
-    withoutTokens: [Roll(times: 1, sides: 1), Operator.multiplication],
-    lexeme: "×",
-    token: Operator.multiplication,
-    withLexemes: ["1d1", "×"],
-    withTokens: [Roll(times: 1, sides: 1), Operator.multiplication],
-    droppedLexemes: ["1d1"],
-    droppedTokens: [Roll(times: 1, sides: 1)]
-  ),
-  (
-    withoutLexemes: ["1d1", "×"],
-    withoutTokens: [Roll(times: 1, sides: 1), Operator.multiplication],
-    lexeme: "-",
-    token: Operator.subtraction,
-    withLexemes: ["1d1", "-"],
-    withTokens: [Roll(times: 1, sides: 1), Operator.subtraction],
-    droppedLexemes: ["1d1"],
-    droppedTokens: [Roll(times: 1, sides: 1)]
-  ),
+
+  // MARK: - 1d ×
+
   (
     withoutLexemes: ["1d", "×"],
     withoutTokens: [RollPositiveSides(times: 1), Operator.multiplication],
@@ -1312,46 +2046,9 @@ let lexemeOperatorFixtures: [LexemeOperatorFixture] = [
     droppedLexemes: ["1d"],
     droppedTokens: [RollPositiveSides(times: 1)]
   ),
-  (
-    withoutLexemes: ["1d1", "-"],
-    withoutTokens: [Roll(times: 1, sides: 1), Operator.subtraction],
-    lexeme: "+",
-    token: Operator.addition,
-    withLexemes: ["1d1", "+"],
-    withTokens: [Roll(times: 1, sides: 1), Operator.addition],
-    droppedLexemes: ["1d1"],
-    droppedTokens: [Roll(times: 1, sides: 1)]
-  ),
-  (
-    withoutLexemes: ["1d1", "-"],
-    withoutTokens: [Roll(times: 1, sides: 1), Operator.subtraction],
-    lexeme: "÷",
-    token: Operator.division,
-    withLexemes: ["1d1", "÷"],
-    withTokens: [Roll(times: 1, sides: 1), Operator.division],
-    droppedLexemes: ["1d1"],
-    droppedTokens: [Roll(times: 1, sides: 1)]
-  ),
-  (
-    withoutLexemes: ["1d1", "-"],
-    withoutTokens: [Roll(times: 1, sides: 1), Operator.subtraction],
-    lexeme: "×",
-    token: Operator.multiplication,
-    withLexemes: ["1d1", "×"],
-    withTokens: [Roll(times: 1, sides: 1), Operator.multiplication],
-    droppedLexemes: ["1d1"],
-    droppedTokens: [Roll(times: 1, sides: 1)]
-  ),
-  (
-    withoutLexemes: ["1d1", "-"],
-    withoutTokens: [Roll(times: 1, sides: 1), Operator.subtraction],
-    lexeme: "-",
-    token: Operator.subtraction,
-    withLexemes: ["1d1", "-"],
-    withTokens: [Roll(times: 1, sides: 1), Operator.subtraction],
-    droppedLexemes: ["1d1"],
-    droppedTokens: [Roll(times: 1, sides: 1)]
-  ),
+
+  // MARK: - "1d -"
+
   (
     withoutLexemes: ["1d", "-"],
     withoutTokens: [RollPositiveSides(times: 1), Operator.subtraction],
@@ -1392,5 +2089,368 @@ let lexemeOperatorFixtures: [LexemeOperatorFixture] = [
     droppedLexemes: ["1d"],
     droppedTokens: [RollPositiveSides(times: 1)]
   ),
-  // TODO: RollNegativeSides
+
+  // MARK: - 1d
+
+  (
+    withoutLexemes: ["1d"],
+    withoutTokens: [RollPositiveSides(times: 1)],
+    lexeme: "+",
+    token: Operator.addition,
+    withLexemes: ["1d", "+"],
+    withTokens: [RollPositiveSides(times: 1), Operator.addition],
+    droppedLexemes: ["1d"],
+    droppedTokens: [RollPositiveSides(times: 1)]
+  ),
+  (
+    withoutLexemes: ["1d"],
+    withoutTokens: [RollPositiveSides(times: 1)],
+    lexeme: "÷",
+    token: Operator.division,
+    withLexemes: ["1d", "÷"],
+    withTokens: [RollPositiveSides(times: 1), Operator.division],
+    droppedLexemes: ["1d"],
+    droppedTokens: [RollPositiveSides(times: 1)]
+  ),
+  (
+    withoutLexemes: ["1d"],
+    withoutTokens: [RollPositiveSides(times: 1)],
+    lexeme: "×",
+    token: Operator.multiplication,
+    withLexemes: ["1d", "×"],
+    withTokens: [RollPositiveSides(times: 1), Operator.multiplication],
+    droppedLexemes: ["1d"],
+    droppedTokens: [RollPositiveSides(times: 1)]
+  ),
+  (
+    withoutLexemes: ["1d"],
+    withoutTokens: [RollPositiveSides(times: 1)],
+    lexeme: "-",
+    token: Operator.subtraction,
+    withLexemes: ["1d-"],
+    withTokens: [RollNegativeSides(times: 1)],
+    droppedLexemes: ["1d"],
+    droppedTokens: [RollPositiveSides(times: 1)]
+  ),
+
+  // MARK: - 1d- × (
+
+  (
+    withoutLexemes: ["1d-", "×", "("],
+    withoutTokens: [RollNegativeSides(times: 1), Operator.multiplication, Parenthesis.open],
+    lexeme: "+",
+    token: Operator.addition,
+    withLexemes: ["1d-", "×", "(", "+"],
+    withTokens: [
+      RollNegativeSides(times: 1),
+      Operator.multiplication,
+      Parenthesis.open,
+      Operator.addition,
+    ],
+    droppedLexemes: ["1d-", "×", "("],
+    droppedTokens: [RollNegativeSides(times: 1), Operator.multiplication, Parenthesis.open]
+  ),
+  (
+    withoutLexemes: ["1d-", "×", "("],
+    withoutTokens: [RollNegativeSides(times: 1), Operator.multiplication, Parenthesis.open],
+    lexeme: "÷",
+    token: Operator.division,
+    withLexemes: ["1d-", "×", "(", "÷"],
+    withTokens: [
+      RollNegativeSides(times: 1),
+      Operator.multiplication,
+      Parenthesis.open,
+      Operator.division,
+    ],
+    droppedLexemes: ["1d-", "×", "("],
+    droppedTokens: [RollNegativeSides(times: 1), Operator.multiplication, Parenthesis.open]
+  ),
+  (
+    withoutLexemes: ["1d-", "×", "("],
+    withoutTokens: [RollNegativeSides(times: 1), Operator.multiplication, Parenthesis.open],
+    lexeme: "×",
+    token: Operator.multiplication,
+    withLexemes: ["1d-", "×", "(", "×"],
+    withTokens: [
+      RollNegativeSides(times: 1),
+      Operator.multiplication,
+      Parenthesis.open,
+      Operator.multiplication,
+    ],
+    droppedLexemes: ["1d-", "×", "("],
+    droppedTokens: [RollNegativeSides(times: 1), Operator.multiplication, Parenthesis.open]
+  ),
+  (
+    withoutLexemes: ["1d-", "×", "("],
+    withoutTokens: [RollNegativeSides(times: 1), Operator.multiplication, Parenthesis.open],
+    lexeme: "-",
+    token: Operator.subtraction,
+    withLexemes: ["1d-", "×", "(", "-"],
+    withTokens: [
+      RollNegativeSides(times: 1),
+      Operator.multiplication,
+      Parenthesis.open,
+      Operator.subtraction,
+    ],
+    droppedLexemes: ["1d-", "×", "("],
+    droppedTokens: [RollNegativeSides(times: 1), Operator.multiplication, Parenthesis.open]
+  ),
+
+  // MARK: - 1d-)
+
+  (
+    withoutLexemes: ["1d-", ")"],
+    withoutTokens: [RollNegativeSides(times: 1), Parenthesis.close],
+    lexeme: "+",
+    token: Operator.addition,
+    withLexemes: ["1d-", ")", "+"],
+    withTokens: [RollNegativeSides(times: 1), Parenthesis.close, Operator.addition],
+    droppedLexemes: ["1d-", ")"],
+    droppedTokens: [RollNegativeSides(times: 1), Parenthesis.close]
+  ),
+  (
+    withoutLexemes: ["1d-", ")"],
+    withoutTokens: [RollNegativeSides(times: 1), Parenthesis.close],
+    lexeme: "÷",
+    token: Operator.division,
+    withLexemes: ["1d-", ")", "÷"],
+    withTokens: [RollNegativeSides(times: 1), Parenthesis.close, Operator.division],
+    droppedLexemes: ["1d-", ")"],
+    droppedTokens: [RollNegativeSides(times: 1), Parenthesis.close]
+  ),
+  (
+    withoutLexemes: ["1d-", ")"],
+    withoutTokens: [RollNegativeSides(times: 1), Parenthesis.close],
+    lexeme: "×",
+    token: Operator.multiplication,
+    withLexemes: ["1d-", ")", "×"],
+    withTokens: [RollNegativeSides(times: 1), Parenthesis.close, Operator.multiplication],
+    droppedLexemes: ["1d-", ")"],
+    droppedTokens: [RollNegativeSides(times: 1), Parenthesis.close]
+  ),
+  (
+    withoutLexemes: ["1d-", ")"],
+    withoutTokens: [RollNegativeSides(times: 1), Parenthesis.close],
+    lexeme: "-",
+    token: Operator.subtraction,
+    withLexemes: ["1d-", ")", "-"],
+    withTokens: [RollNegativeSides(times: 1), Parenthesis.close, Operator.subtraction],
+    droppedLexemes: ["1d-", ")"],
+    droppedTokens: [RollNegativeSides(times: 1), Parenthesis.close]
+  ),
+
+  // MARK: - 1d- +
+
+  (
+    withoutLexemes: ["1d-", "+"],
+    withoutTokens: [RollNegativeSides(times: 1), Operator.addition],
+    lexeme: "+",
+    token: Operator.addition,
+    withLexemes: ["1d-", "+"],
+    withTokens: [RollNegativeSides(times: 1), Operator.addition],
+    droppedLexemes: ["1d-"],
+    droppedTokens: [RollNegativeSides(times: 1)]
+  ),
+  (
+    withoutLexemes: ["1d-", "+"],
+    withoutTokens: [RollNegativeSides(times: 1), Operator.addition],
+    lexeme: "÷",
+    token: Operator.division,
+    withLexemes: ["1d-", "÷"],
+    withTokens: [RollNegativeSides(times: 1), Operator.division],
+    droppedLexemes: ["1d-"],
+    droppedTokens: [RollNegativeSides(times: 1)]
+  ),
+  (
+    withoutLexemes: ["1d-", "+"],
+    withoutTokens: [RollNegativeSides(times: 1), Operator.addition],
+    lexeme: "×",
+    token: Operator.multiplication,
+    withLexemes: ["1d-", "×"],
+    withTokens: [RollNegativeSides(times: 1), Operator.multiplication],
+    droppedLexemes: ["1d-"],
+    droppedTokens: [RollNegativeSides(times: 1)]
+  ),
+  (
+    withoutLexemes: ["1d-", "+"],
+    withoutTokens: [RollNegativeSides(times: 1), Operator.addition],
+    lexeme: "-",
+    token: Operator.subtraction,
+    withLexemes: ["1d-", "-"],
+    withTokens: [RollNegativeSides(times: 1), Operator.subtraction],
+    droppedLexemes: ["1d-"],
+    droppedTokens: [RollNegativeSides(times: 1)]
+  ),
+
+  // MARK: - 1d- ÷
+
+  (
+    withoutLexemes: ["1d-", "÷"],
+    withoutTokens: [RollNegativeSides(times: 1), Operator.division],
+    lexeme: "+",
+    token: Operator.addition,
+    withLexemes: ["1d-", "+"],
+    withTokens: [RollNegativeSides(times: 1), Operator.addition],
+    droppedLexemes: ["1d-"],
+    droppedTokens: [RollNegativeSides(times: 1)]
+  ),
+  (
+    withoutLexemes: ["1d-", "÷"],
+    withoutTokens: [RollNegativeSides(times: 1), Operator.division],
+    lexeme: "÷",
+    token: Operator.division,
+    withLexemes: ["1d-", "÷"],
+    withTokens: [RollNegativeSides(times: 1), Operator.division],
+    droppedLexemes: ["1d-"],
+    droppedTokens: [RollNegativeSides(times: 1)]
+  ),
+  (
+    withoutLexemes: ["1d-", "÷"],
+    withoutTokens: [RollNegativeSides(times: 1), Operator.division],
+    lexeme: "×",
+    token: Operator.multiplication,
+    withLexemes: ["1d-", "×"],
+    withTokens: [RollNegativeSides(times: 1), Operator.multiplication],
+    droppedLexemes: ["1d-"],
+    droppedTokens: [RollNegativeSides(times: 1)]
+  ),
+  (
+    withoutLexemes: ["1d-", "÷"],
+    withoutTokens: [RollNegativeSides(times: 1), Operator.division],
+    lexeme: "-",
+    token: Operator.subtraction,
+    withLexemes: ["1d-", "-"],
+    withTokens: [RollNegativeSides(times: 1), Operator.subtraction],
+    droppedLexemes: ["1d-"],
+    droppedTokens: [RollNegativeSides(times: 1)]
+  ),
+
+  // MARK: - 1d- ×
+
+  (
+    withoutLexemes: ["1d-", "×"],
+    withoutTokens: [RollNegativeSides(times: 1), Operator.multiplication],
+    lexeme: "+",
+    token: Operator.addition,
+    withLexemes: ["1d-", "+"],
+    withTokens: [RollNegativeSides(times: 1), Operator.addition],
+    droppedLexemes: ["1d-"],
+    droppedTokens: [RollNegativeSides(times: 1)]
+  ),
+  (
+    withoutLexemes: ["1d-", "×"],
+    withoutTokens: [RollNegativeSides(times: 1), Operator.multiplication],
+    lexeme: "÷",
+    token: Operator.division,
+    withLexemes: ["1d-", "÷"],
+    withTokens: [RollNegativeSides(times: 1), Operator.division],
+    droppedLexemes: ["1d-"],
+    droppedTokens: [RollNegativeSides(times: 1)]
+  ),
+  (
+    withoutLexemes: ["1d-", "×"],
+    withoutTokens: [RollNegativeSides(times: 1), Operator.multiplication],
+    lexeme: "×",
+    token: Operator.multiplication,
+    withLexemes: ["1d-", "×"],
+    withTokens: [RollNegativeSides(times: 1), Operator.multiplication],
+    droppedLexemes: ["1d-"],
+    droppedTokens: [RollNegativeSides(times: 1)]
+  ),
+  (
+    withoutLexemes: ["1d-", "×"],
+    withoutTokens: [RollNegativeSides(times: 1), Operator.multiplication],
+    lexeme: "-",
+    token: Operator.subtraction,
+    withLexemes: ["1d-", "-"],
+    withTokens: [RollNegativeSides(times: 1), Operator.subtraction],
+    droppedLexemes: ["1d-"],
+    droppedTokens: [RollNegativeSides(times: 1)]
+  ),
+
+  // MARK: - "1d- -"
+
+  (
+    withoutLexemes: ["1d-", "-"],
+    withoutTokens: [RollNegativeSides(times: 1), Operator.subtraction],
+    lexeme: "+",
+    token: Operator.addition,
+    withLexemes: ["1d-", "+"],
+    withTokens: [RollNegativeSides(times: 1), Operator.addition],
+    droppedLexemes: ["1d-"],
+    droppedTokens: [RollNegativeSides(times: 1)]
+  ),
+  (
+    withoutLexemes: ["1d-", "-"],
+    withoutTokens: [RollNegativeSides(times: 1), Operator.subtraction],
+    lexeme: "÷",
+    token: Operator.division,
+    withLexemes: ["1d-", "÷"],
+    withTokens: [RollNegativeSides(times: 1), Operator.division],
+    droppedLexemes: ["1d-"],
+    droppedTokens: [RollNegativeSides(times: 1)]
+  ),
+  (
+    withoutLexemes: ["1d-", "-"],
+    withoutTokens: [RollNegativeSides(times: 1), Operator.subtraction],
+    lexeme: "×",
+    token: Operator.multiplication,
+    withLexemes: ["1d-", "×"],
+    withTokens: [RollNegativeSides(times: 1), Operator.multiplication],
+    droppedLexemes: ["1d-"],
+    droppedTokens: [RollNegativeSides(times: 1)]
+  ),
+  (
+    withoutLexemes: ["1d-", "-"],
+    withoutTokens: [RollNegativeSides(times: 1), Operator.subtraction],
+    lexeme: "-",
+    token: Operator.subtraction,
+    withLexemes: ["1d-", "-"],
+    withTokens: [RollNegativeSides(times: 1), Operator.subtraction],
+    droppedLexemes: ["1d-"],
+    droppedTokens: [RollNegativeSides(times: 1)]
+  ),
+
+  // MARK: - 1d-
+
+  (
+    withoutLexemes: ["1d-"],
+    withoutTokens: [RollNegativeSides(times: 1)],
+    lexeme: "+",
+    token: Operator.addition,
+    withLexemes: ["1d"],
+    withTokens: [RollPositiveSides(times: 1)],
+    droppedLexemes: ["1"],
+    droppedTokens: [Constant(term: 1)]
+  ),
+  (
+    withoutLexemes: ["1d-"],
+    withoutTokens: [RollNegativeSides(times: 1)],
+    lexeme: "÷",
+    token: Operator.division,
+    withLexemes: ["1d-", "÷"],
+    withTokens: [RollNegativeSides(times: 1), Operator.division],
+    droppedLexemes: ["1d-"],
+    droppedTokens: [RollNegativeSides(times: 1)]
+  ),
+  (
+    withoutLexemes: ["1d-"],
+    withoutTokens: [RollNegativeSides(times: 1)],
+    lexeme: "×",
+    token: Operator.multiplication,
+    withLexemes: ["1d-", "×"],
+    withTokens: [RollNegativeSides(times: 1), Operator.multiplication],
+    droppedLexemes: ["1d-"],
+    droppedTokens: [RollNegativeSides(times: 1)]
+  ),
+  (
+    withoutLexemes: ["1d-"],
+    withoutTokens: [RollNegativeSides(times: 1)],
+    lexeme: "-",
+    token: Operator.subtraction,
+    withLexemes: ["1d-", "-"],
+    withTokens: [RollNegativeSides(times: 1), Operator.subtraction],
+    droppedLexemes: ["1d-"],
+    droppedTokens: [RollNegativeSides(times: 1)]
+  ),
 ]
