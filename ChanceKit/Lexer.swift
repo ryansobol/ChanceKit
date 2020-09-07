@@ -65,41 +65,45 @@ func lexed(operand: Operand, into: [Tokenable]) throws -> [Tokenable] {
   case let lastConstant as Constant:
 
     switch operand {
-    case let currentOperand as Constant:
-      let nextOperand = try lastConstant.combined(currentOperand)
+    case let currentConstant as Constant:
+      let nextOperand = try lastConstant.combined(currentConstant)
 
       tokens.removeLast()
       tokens.append(nextOperand)
 
-    default:
+    case is Roll, is RollNegativeSides, is RollPositiveSides:
       tokens.append(Operator.addition)
       tokens.append(operand)
+
+    default:
+      preconditionFailure()
     }
 
   case let lastRoll as Roll:
 
     switch operand {
-    case let currentOperand as Constant:
-      let nextOperand = try lastRoll.combined(currentOperand)
+    case let currentConstant as Constant:
+      let nextOperand = try lastRoll.combined(currentConstant)
 
       tokens.removeLast()
       tokens.append(nextOperand)
 
-    case let currentRoll as Roll:
-      if lastRoll.sides == currentRoll.sides {
-        let nextOperand = try lastRoll.combined(currentRoll)
+    case let currentRoll as Roll where lastRoll.sides == currentRoll.sides:
+      let nextOperand = try lastRoll.combined(currentRoll)
 
-        tokens.removeLast()
-        tokens.append(nextOperand)
-      }
-      else {
-        tokens.append(Operator.addition)
-        tokens.append(operand)
-      }
+      tokens.removeLast()
+      tokens.append(nextOperand)
 
-    default:
+    case let currentRoll as Roll where lastRoll.sides != currentRoll.sides:
       tokens.append(Operator.addition)
       tokens.append(operand)
+
+    case is RollNegativeSides, is RollPositiveSides:
+      tokens.append(Operator.addition)
+      tokens.append(operand)
+
+    default:
+      preconditionFailure()
     }
 
   case let lastRollNegativeSides as RollNegativeSides:
@@ -117,9 +121,12 @@ func lexed(operand: Operand, into: [Tokenable]) throws -> [Tokenable] {
       tokens.removeLast()
       tokens.append(nextOperand)
 
-    default:
+    case is Roll, is RollPositiveSides:
       tokens.append(Operator.addition)
       tokens.append(operand)
+
+    default:
+      preconditionFailure()
     }
 
   case let lastRollPositiveSides as RollPositiveSides:
@@ -137,9 +144,12 @@ func lexed(operand: Operand, into: [Tokenable]) throws -> [Tokenable] {
       tokens.removeLast()
       tokens.append(nextOperand)
 
-    default:
+    case is Roll, is RollNegativeSides:
       tokens.append(Operator.addition)
       tokens.append(operand)
+
+    default:
+      preconditionFailure()
     }
 
   default:
