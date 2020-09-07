@@ -56,7 +56,7 @@ let parsableOnlyFixtures: [ParsableOnlyFixture] = [
     lexemes: ["1", "÷", "0"],
     infixTokens: [Constant(term: 1), Operator.division, Constant(term: 0)],
     postfixTokens: [Constant(term: 1), Constant(term: 0), Operator.division],
-    error: .divisionByZero
+    error: .divisionByZero(operandLeft: "1")
   ),
   (
     description: "9223372036854775807 + 1",

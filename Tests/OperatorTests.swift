@@ -109,7 +109,7 @@ extension OperatorTests {
     let `operator` = Operator.division
     let operand1 = Constant(term: 1)
     let operand2 = Constant(term: 0)
-    let expected = ExpressionError.divisionByZero
+    let expected = ExpressionError.divisionByZero(operandLeft: "1")
 
     XCTAssertThrowsError(try `operator`.evaluate(operand1, operand2)) { error in
       XCTAssertEqual(expected, error as? ExpressionError)

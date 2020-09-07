@@ -904,26 +904,58 @@ extension ConstantTests {
   func testDividedByConstantZero() {
     typealias Fixture = (
       operand1: Constant,
-      operand2: Constant
+      operand2: Constant,
+      expected: ExpressionError
     )
 
     let fixtures: [Fixture] = [
-      (operand1: Constant(term: 1), operand2: Constant(term: 0)),
-      (operand1: Constant(term: -1), operand2: Constant(term: 0)),
-      (operand1: Constant(term: 1), operand2: Constant(term: -0)),
-      (operand1: Constant(term: -1), operand2: Constant(term: -0)),
+      (
+        operand1: Constant(term: 1),
+        operand2: Constant(term: 0),
+        expected: .divisionByZero(operandLeft: "1")
+      ),
+      (
+        operand1: Constant(term: -1),
+        operand2: Constant(term: 0),
+        expected: .divisionByZero(operandLeft: "-1")
+      ),
+      (
+        operand1: Constant(term: 1),
+        operand2: Constant(term: -0),
+        expected: .divisionByZero(operandLeft: "1")
+      ),
+      (
+        operand1: Constant(term: -1),
+        operand2: Constant(term: -0),
+        expected: .divisionByZero(operandLeft: "-1")
+      ),
 
-      (operand1: Constant(term: 0), operand2: Constant(term: 0)),
-      (operand1: Constant(term: -0), operand2: Constant(term: 0)),
-      (operand1: Constant(term: 0), operand2: Constant(term: -0)),
-      (operand1: Constant(term: -0), operand2: Constant(term: -0)),
+      (
+        operand1: Constant(term: 0),
+        operand2: Constant(term: 0),
+        expected: .divisionByZero(operandLeft: "0")
+      ),
+      (
+        operand1: Constant(term: -0),
+        operand2: Constant(term: 0),
+        expected: .divisionByZero(operandLeft: "0")
+      ),
+      (
+        operand1: Constant(term: 0),
+        operand2: Constant(term: -0),
+        expected: .divisionByZero(operandLeft: "0")
+      ),
+      (
+        operand1: Constant(term: -0),
+        operand2: Constant(term: -0),
+        expected: .divisionByZero(operandLeft: "0")
+      ),
     ]
-
-    let expected = ExpressionError.divisionByZero
 
     for fixture in fixtures {
       let operand1 = fixture.operand1
       let operand2 = fixture.operand2
+      let expected = fixture.expected
 
       XCTAssertThrowsError(try operand1.divided(operand2)) { error in
         XCTAssertEqual(expected, error as? ExpressionError)

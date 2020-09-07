@@ -1,7 +1,5 @@
 public enum ExpressionError: Error, Equatable {
-//  TODO: Refactor into the following error case
-//  case divisionByZero(operandLeft: String)
-  case divisionByZero
+  case divisionByZero(operandLeft: String)
 //  TODO: Refactor into the following error case
 //  case invalidInput(lexeme: String)
   case invalidLexeme(String)

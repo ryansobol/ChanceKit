@@ -42,7 +42,7 @@ extension Operand {
     let otherValue = try other.value()
 
     if otherValue == 0 {
-      throw ExpressionError.divisionByZero
+      throw ExpressionError.divisionByZero(operandLeft: String(describing: self))
     }
 
     let selfValue = try self.value()
