@@ -214,9 +214,9 @@ extension ConstantTests {
     for fixture in fixtures {
       let operand1 = fixture.operand1
       let operand2 = fixture.operand2
-      let expected = ExpressionError.invalidCombinationOperands(
-        String(describing: operand1),
-        String(describing: operand2)
+      let expected = ExpressionError.invalidCombination(
+        operandLeft: String(describing: operand1),
+        operandRight: String(describing: operand2)
       )
 
       XCTAssertThrowsError(try operand1.combined(operand2)) { error in
@@ -370,9 +370,9 @@ extension ConstantTests {
     for fixture in fixtures {
       let operand1 = fixture.operand1
       let operand2 = fixture.operand2
-      let expected = ExpressionError.invalidCombinationOperands(
-        String(describing: operand1),
-        String(describing: operand2)
+      let expected = ExpressionError.invalidCombination(
+        operandLeft: String(describing: operand1),
+        operandRight: String(describing: operand2)
       )
 
       XCTAssertThrowsError(try operand1.combined(operand2)) { error in
@@ -412,9 +412,9 @@ extension ConstantTests {
     for fixture in fixtures {
       let operand1 = fixture.operand1
       let operand2 = fixture.operand2
-      let expected = ExpressionError.invalidCombinationOperands(
-        String(describing: operand1),
-        String(describing: operand2)
+      let expected = ExpressionError.invalidCombination(
+        operandLeft: String(describing: operand1),
+        operandRight: String(describing: operand2)
       )
 
       XCTAssertThrowsError(try operand1.combined(operand2)) { error in
@@ -454,9 +454,9 @@ extension ConstantTests {
     for fixture in fixtures {
       let operand1 = fixture.operand1
       let operand2 = fixture.operand2
-      let expected = ExpressionError.invalidCombinationOperands(
-        String(describing: operand1),
-        String(describing: operand2)
+      let expected = ExpressionError.invalidCombination(
+        operandLeft: String(describing: operand1),
+        operandRight: String(describing: operand2)
       )
 
       XCTAssertThrowsError(try operand1.combined(operand2)) { error in

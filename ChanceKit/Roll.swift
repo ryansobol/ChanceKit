@@ -50,7 +50,10 @@ extension Roll: Operand, Equatable {
     let lexemeOther = String(describing: other)
 
     guard let sidesResult = Int(String(self.sides) + lexemeOther) else {
-      throw ExpressionError.invalidCombinationOperands(String(describing: self), lexemeOther)
+      throw ExpressionError.invalidCombination(
+        operandLeft: String(describing: self),
+        operandRight: lexemeOther
+      )
     }
 
     return Roll(times: self.times, sides: sidesResult)
@@ -58,18 +61,18 @@ extension Roll: Operand, Equatable {
 
   func combined(_ other: Roll) throws -> Operand {
     if self.sides != other.sides {
-      throw ExpressionError.invalidCombinationOperands(
-        String(describing: self),
-        String(describing: other)
+      throw ExpressionError.invalidCombination(
+        operandLeft: String(describing: self),
+        operandRight: String(describing: other)
       )
     }
 
     let (timesResult, didOverflow) = self.times.addingReportingOverflow(other.times)
 
     if didOverflow {
-      throw ExpressionError.invalidCombinationOperands(
-        String(describing: self),
-        String(describing: other)
+      throw ExpressionError.invalidCombination(
+        operandLeft: String(describing: self),
+        operandRight: String(describing: other)
       )
     }
 
@@ -77,16 +80,16 @@ extension Roll: Operand, Equatable {
   }
 
   func combined(_ other: RollNegativeSides) throws -> Operand {
-    throw ExpressionError.invalidCombinationOperands(
-      String(describing: self),
-      String(describing: other)
+    throw ExpressionError.invalidCombination(
+      operandLeft: String(describing: self),
+      operandRight: String(describing: other)
     )
   }
 
   func combined(_ other: RollPositiveSides) throws -> Operand {
-    throw ExpressionError.invalidCombinationOperands(
-      String(describing: self),
-      String(describing: other)
+    throw ExpressionError.invalidCombination(
+      operandLeft: String(describing: self),
+      operandRight: String(describing: other)
     )
   }
 

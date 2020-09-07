@@ -28,30 +28,33 @@ extension Constant: Operand, Equatable {
     let lexemeOther = String(describing: other)
 
     guard let termResult = Int(lexemeSelf + lexemeOther) else {
-      throw ExpressionError.invalidCombinationOperands(lexemeSelf, lexemeOther)
+      throw ExpressionError.invalidCombination(
+        operandLeft: lexemeSelf,
+        operandRight: lexemeOther
+      )
     }
 
     return Constant(term: termResult)
   }
 
   func combined(_ other: Roll) throws -> Operand {
-    throw ExpressionError.invalidCombinationOperands(
-      String(describing: self),
-      String(describing: other)
+    throw ExpressionError.invalidCombination(
+      operandLeft: String(describing: self),
+      operandRight: String(describing: other)
     )
   }
 
   func combined(_ other: RollNegativeSides) throws -> Operand {
-    throw ExpressionError.invalidCombinationOperands(
-      String(describing: self),
-      String(describing: other)
+    throw ExpressionError.invalidCombination(
+      operandLeft: String(describing: self),
+      operandRight: String(describing: other)
     )
   }
 
   func combined(_ other: RollPositiveSides) throws -> Operand {
-    throw ExpressionError.invalidCombinationOperands(
-      String(describing: self),
-      String(describing: other)
+    throw ExpressionError.invalidCombination(
+      operandLeft: String(describing: self),
+      operandRight: String(describing: other)
     )
   }
 
