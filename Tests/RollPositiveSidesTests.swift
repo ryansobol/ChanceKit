@@ -402,24 +402,32 @@ extension RollPositiveSidesTests {
 
 extension RollPositiveSidesTests {
   func testValue() {
-    let fixtures: [RollPositiveSides] = [
-      RollPositiveSides(times: 0),
-      RollPositiveSides(times: 1),
-      RollPositiveSides(times: 9),
+    typealias Fixture = (
+      operand: RollPositiveSides,
+      expected: ExpressionError
+    )
 
-      RollPositiveSides(times: Int.max),
+    let fixtures: [Fixture] = [
+      (operand: RollPositiveSides(times: 0), expected: .missingRollSides(operand: "0d")),
+      (operand: RollPositiveSides(times: 1), expected: .missingRollSides(operand: "1d")),
+      (operand: RollPositiveSides(times: 9), expected: .missingRollSides(operand: "9d")),
+      (
+        operand: RollPositiveSides(times: Int.max),
+        expected: .missingRollSides(operand: "\(Int.max)d")
+      ),
 
-      RollPositiveSides(times: -0),
-      RollPositiveSides(times: -1),
-      RollPositiveSides(times: -9),
-
-      RollPositiveSides(times: Int.min),
+      (operand: RollPositiveSides(times: -0), expected: .missingRollSides(operand: "0d")),
+      (operand: RollPositiveSides(times: -1), expected: .missingRollSides(operand: "-1d")),
+      (operand: RollPositiveSides(times: -9), expected: .missingRollSides(operand: "-9d")),
+      (
+        operand: RollPositiveSides(times: Int.min),
+        expected: .missingRollSides(operand: "\(Int.min)d")
+      ),
     ]
 
-    let expected = ExpressionError.missingOperandRollSides
-
     for fixture in fixtures {
-      let operand = fixture
+      let operand = fixture.operand
+      let expected = fixture.expected
 
       XCTAssertThrowsError(try operand.value()) { error in
         XCTAssertEqual(expected, error as? ExpressionError)

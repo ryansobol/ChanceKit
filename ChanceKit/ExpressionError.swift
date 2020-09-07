@@ -5,9 +5,7 @@ public enum ExpressionError: Error, Equatable {
   case missingParenthesisClose
   case missingParenthesisOpen
   case missingOperand
-//  TODO: Refactor into the following error case
-//  case missingRollSides(operand: String)
-  case missingOperandRollSides
+  case missingRollSides(operand: String)
   case missingOperator
 //  TODO: Refactor into the following error cases
 //  case overflowAddition(operandLeft: String, operandRight: String)
