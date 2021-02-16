@@ -31,7 +31,7 @@ extension Expression {
         return rollPositiveSides
       }
 
-      throw ExpressionError.invalidInput(lexeme: lexeme)
+      throw ExpressionError.invalidToken(lexeme: lexeme)
     }
   }
 
@@ -112,7 +112,7 @@ extension Expression {
       return Expression(tokens)
     }
 
-    throw ExpressionError.invalidInput(lexeme: lexeme)
+    throw ExpressionError.invalidToken(lexeme: lexeme)
   }
 }
 

@@ -75,7 +75,7 @@ extension RollPositiveSides: Operand, Equatable {
   // MARK: - Evaluation
 
   func value() throws -> Int {
-    throw ExpressionError.missingRollSides(operand: String(describing: self))
+    throw ExpressionError.missingSides(operand: String(describing: self))
   }
 
   // MARK: - Operation

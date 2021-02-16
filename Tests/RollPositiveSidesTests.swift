@@ -408,20 +408,20 @@ extension RollPositiveSidesTests {
     )
 
     let fixtures: [Fixture] = [
-      (operand: RollPositiveSides(times: 0), expected: .missingRollSides(operand: "0d")),
-      (operand: RollPositiveSides(times: 1), expected: .missingRollSides(operand: "1d")),
-      (operand: RollPositiveSides(times: 9), expected: .missingRollSides(operand: "9d")),
+      (operand: RollPositiveSides(times: 0), expected: .missingSides(operand: "0d")),
+      (operand: RollPositiveSides(times: 1), expected: .missingSides(operand: "1d")),
+      (operand: RollPositiveSides(times: 9), expected: .missingSides(operand: "9d")),
       (
         operand: RollPositiveSides(times: Int.max),
-        expected: .missingRollSides(operand: "\(Int.max)d")
+        expected: .missingSides(operand: "\(Int.max)d")
       ),
 
-      (operand: RollPositiveSides(times: -0), expected: .missingRollSides(operand: "0d")),
-      (operand: RollPositiveSides(times: -1), expected: .missingRollSides(operand: "-1d")),
-      (operand: RollPositiveSides(times: -9), expected: .missingRollSides(operand: "-9d")),
+      (operand: RollPositiveSides(times: -0), expected: .missingSides(operand: "0d")),
+      (operand: RollPositiveSides(times: -1), expected: .missingSides(operand: "-1d")),
+      (operand: RollPositiveSides(times: -9), expected: .missingSides(operand: "-9d")),
       (
         operand: RollPositiveSides(times: Int.min),
-        expected: .missingRollSides(operand: "\(Int.min)d")
+        expected: .missingSides(operand: "\(Int.min)d")
       ),
     ]
 
