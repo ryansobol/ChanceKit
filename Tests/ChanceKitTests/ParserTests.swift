@@ -1,7 +1,7 @@
 @testable import ChanceKit
 import XCTest
 
-class ParserTests: XCTestCase {
+final class ParserTests: XCTestCase {
   func testParseWithEvaluatableIntegerFixtures() {
     for fixture in evaluatableIntegerFixtures {
       let tokens = fixture.infixTokens

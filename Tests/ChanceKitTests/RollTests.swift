@@ -1,7 +1,7 @@
 @testable import ChanceKit
 import XCTest
 
-class RollTests: XCTestCase {}
+final class RollTests: XCTestCase {}
 
 // MARK: - Tokenable
 

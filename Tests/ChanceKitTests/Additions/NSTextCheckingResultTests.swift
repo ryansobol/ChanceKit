@@ -1,7 +1,7 @@
 @testable import ChanceKit
 import XCTest
 
-class NSTextCheckingResultTests: XCTestCase {}
+final class NSTextCheckingResultTests: XCTestCase {}
 
 // MARK: - Extraction
 

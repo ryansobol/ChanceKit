@@ -1,7 +1,7 @@
 import ChanceKit
 import XCTest
 
-class ExpressionTests: XCTestCase {}
+final class ExpressionTests: XCTestCase {}
 
 // MARK: - Initialization
 

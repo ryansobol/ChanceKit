@@ -1,7 +1,7 @@
 @testable import ChanceKit
 import XCTest
 
-class ParenthesisTests: XCTestCase {}
+final class ParenthesisTests: XCTestCase {}
 
 // MARK: - Markable
 

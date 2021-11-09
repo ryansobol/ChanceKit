@@ -1,7 +1,7 @@
 @testable import ChanceKit
 import XCTest
 
-class NSRegularExpressionTests: XCTestCase {}
+final class NSRegularExpressionTests: XCTestCase {}
 
 // MARK: - Initialization
 

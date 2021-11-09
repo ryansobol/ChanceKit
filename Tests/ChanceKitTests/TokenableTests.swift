@@ -1,7 +1,7 @@
 @testable import ChanceKit
 import XCTest
 
-class TokenableTests: XCTestCase {
+final class TokenableTests: XCTestCase {
   enum TokenableInt: Int, Tokenable {
     case one = 1
     case two = 2

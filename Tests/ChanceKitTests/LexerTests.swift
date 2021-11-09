@@ -1,7 +1,7 @@
 @testable import ChanceKit
 import XCTest
 
-class LexerTests: XCTestCase {
+final class LexerTests: XCTestCase {
   func testLexedWithLexemeParenthesisFixtures() {
     for fixture in lexemeParenthesisFixtures {
       let token = fixture.token
