@@ -156,8 +156,8 @@ func lexed(operand: Operand, into: [Tokenable]) throws -> [Tokenable] {
       tokens.removeLast()
       tokens.append(nextOperand)
 
-    case let currentRollPositiveSidess as RollPositiveSides:
-      let nextOperand = try lastRollPositiveSides.combined(currentRollPositiveSidess)
+    case let currentRollPositiveSides as RollPositiveSides:
+      let nextOperand = try lastRollPositiveSides.combined(currentRollPositiveSides)
 
       tokens.removeLast()
       tokens.append(nextOperand)
