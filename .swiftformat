@@ -1,6 +1,6 @@
 # file options
 
---swiftversion 5.3
+--swiftversion 5.5
 
 # disabled rules
 
@@ -15,6 +15,7 @@
 
 --decimalgrouping ignore # for now
 --elseposition next-line
+--extensionacl on-declarations
 --indent 2
 --maxwidth 100
 --ranges no-space
