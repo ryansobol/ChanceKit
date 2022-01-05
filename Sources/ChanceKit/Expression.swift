@@ -11,7 +11,7 @@
 ///   print("The expression is \(expression)")
 ///   // Prints "The expression is 1d6 + 4"
 /// }
-/// catch ExpressionError.invalidLexeme(let lexeme) {
+/// catch LexemeError.invalid(let lexeme) {
 ///   print("The lexeme \(lexeme) is invalid")
 /// }
 /// ```
@@ -48,7 +48,7 @@
 ///   print("The longer expression is \(longer)")
 ///   // Prints "The longer expression is 1d6 + 2d4"
 /// }
-/// catch ExpressionError.invalidLexeme(let lexeme) {
+/// catch LexemeError.invalid(let lexeme) {
 ///   print("The lexeme \(lexeme) is invalid")
 /// }
 /// ```
@@ -63,7 +63,7 @@ extension Expression {
   ///
   /// - Parameter lexemes: The zero or more lexemes of an expression.
   ///
-  /// - Throws: ``ExpressionError/invalidLexeme(lexeme:)`` if any lexeme is invalid.
+  /// - Throws: ``LexemeError/invalid(lexeme:)`` if any lexeme is invalid.
   public init(lexemes: [String]) throws {
     self.tokens = try lexemes.map { lexeme in
       if let parenthesis = Parenthesis(rawValue: lexeme) {
@@ -90,7 +90,7 @@ extension Expression {
         return rollPositiveSides
       }
 
-      throw ExpressionError.invalidLexeme(lexeme: lexeme)
+      throw LexemeError.invalid(lexeme: lexeme)
     }
   }
 
@@ -146,7 +146,7 @@ extension Expression {
   ///
   /// - Returns: The longer expression.
   ///
-  /// - Throws: ``ExpressionError/invalidLexeme(lexeme:)`` if the lexeme is invalid.
+  /// - Throws: ``LexemeError/invalid(lexeme:)`` if the lexeme is invalid.
   public func pushed(lexeme: String) throws -> Expression {
     if let parenthesis = Parenthesis(rawValue: lexeme) {
       let tokens = lexed(parenthesis: parenthesis, into: self.tokens)
@@ -184,7 +184,7 @@ extension Expression {
       return Expression(tokens)
     }
 
-    throw ExpressionError.invalidLexeme(lexeme: lexeme)
+    throw LexemeError.invalid(lexeme: lexeme)
   }
 }
 

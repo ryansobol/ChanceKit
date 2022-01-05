@@ -60,7 +60,7 @@ extension ExpressionTests {
       let expected = fixture.error
 
       XCTAssertThrowsError(try Expression(lexemes: [lexeme])) { error in
-        XCTAssertEqual(expected, error as? ExpressionError, "lexeme: \(lexeme)")
+        XCTAssertEqual(expected, error as? LexemeError, "lexeme: \(lexeme)")
       }
     }
   }
@@ -128,7 +128,7 @@ extension ExpressionTests {
       let expression = try! Expression(lexemes: [])
 
       XCTAssertThrowsError(try expression.pushed(lexeme: lexeme)) { error in
-        XCTAssertEqual(expected, error as? ExpressionError, "lexeme: \(lexeme)")
+        XCTAssertEqual(expected, error as? LexemeError, "lexeme: \(lexeme)")
       }
     }
   }
