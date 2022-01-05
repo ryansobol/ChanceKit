@@ -1,7 +1,7 @@
 public enum ExpressionError: Error, Equatable {
   case divisionByZero(operandLeft: String)
   case invalidCombination(operandLeft: String, operandRight: String)
-  case invalidToken(lexeme: String)
+  case invalidLexeme(lexeme: String)
   case missingParenthesisClose
   case missingParenthesisOpen
   case missingOperand

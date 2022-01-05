@@ -1,3 +1,57 @@
+/// A model representing an expression.
+///
+/// An expression is initialized with zero or more lexemes using the ``init(lexemes:)`` initializer.
+///
+/// ```swift
+/// import ChanceKit
+///
+/// do {
+///   let expression = try Expression(lexemes: ["1d6", "+", "4"])
+///
+///   print("The expression is \(expression)")
+///   // Prints "The expression is 1d6 + 4"
+/// }
+/// catch ExpressionError.invalidLexeme(let lexeme) {
+///   print("The lexeme \(lexeme) is invalid")
+/// }
+/// ```
+///
+/// Interpretting an expression using the ``interpret()`` method produces a result.
+///
+/// ```swift
+/// do {
+///   let result = try expression.interpret()
+///
+///   print("The result \(result) is between 5 and 10")
+///   // Prints "The result 7 is between 5 and 10"
+/// }
+/// catch is ExpressionError {
+///   print("The expression \(expression) is invalid because \(error)")
+/// }
+/// ```
+///
+/// Dropping a character from the last lexeme of an expression using the ``dropped()`` method produces a new, shorter expression.
+///
+/// ```swift
+/// let shorter = expression.dropped()
+///
+/// print("The shorter expression is \(shorter)")
+/// // Prints "The shorter expression is 1d6 +"
+/// ```
+///
+/// Pushing a lexeme onto the end of an expression using the ``pushed(lexeme:)`` method produces a new, longer expression.
+///
+/// ```swift
+/// do {
+///   let longer = try shorter.pushed(lexeme: "2d4")
+///
+///   print("The longer expression is \(longer)")
+///   // Prints "The longer expression is 1d6 + 2d4"
+/// }
+/// catch ExpressionError.invalidLexeme(let lexeme) {
+///   print("The lexeme \(lexeme) is invalid")
+/// }
+/// ```
 public struct Expression {
   let tokens: [Tokenable]
 }
@@ -5,7 +59,12 @@ public struct Expression {
 // MARK: - Initialization
 
 extension Expression {
-  public init(_ lexemes: [String]) throws {
+  /// Initializes an expression with zero or more lexemes.
+  ///
+  /// - Parameter lexemes: The zero or more lexemes of an expression.
+  ///
+  /// - Throws: ``ExpressionError/invalidLexeme(lexeme:)`` if any lexeme is invalid.
+  public init(lexemes: [String]) throws {
     self.tokens = try lexemes.map { lexeme in
       if let parenthesis = Parenthesis(rawValue: lexeme) {
         return parenthesis
@@ -31,7 +90,7 @@ extension Expression {
         return rollPositiveSides
       }
 
-      throw ExpressionError.invalidToken(lexeme: lexeme)
+      throw ExpressionError.invalidLexeme(lexeme: lexeme)
     }
   }
 
@@ -43,6 +102,9 @@ extension Expression {
 // MARK: - Equatable
 
 extension Expression: Equatable {
+  /// Compares the lexemes of two expressions for equality.
+  ///
+  /// - Returns: `true` if the lexemes for both expressions are equivalent, otherwise `false`.
   public static func == (lhs: Expression, rhs: Expression) -> Bool {
     let lht = lhs.tokens
     let rht = rhs.tokens
@@ -54,6 +116,7 @@ extension Expression: Equatable {
 // MARK: - CustomStringConvertible
 
 extension Expression: CustomStringConvertible {
+  /// A text representation of an expression.
   public var description: String {
     let result = self.tokens.reduce("") { accumulation, token in
       let lexeme: String
@@ -75,7 +138,16 @@ extension Expression: CustomStringConvertible {
 // MARK: - Inclusion
 
 extension Expression {
-  public func pushed(_ lexeme: String) throws -> Expression {
+  /// Produces a new, longer expression with a lexeme pushed onto the end.
+  ///
+  /// The original expression remains unchanged.
+  ///
+  /// - Parameter lexeme: The lexeme to push onto the end of the original expression.
+  ///
+  /// - Returns: The longer expression.
+  ///
+  /// - Throws: ``ExpressionError/invalidLexeme(lexeme:)`` if the lexeme is invalid.
+  public func pushed(lexeme: String) throws -> Expression {
     if let parenthesis = Parenthesis(rawValue: lexeme) {
       let tokens = lexed(parenthesis: parenthesis, into: self.tokens)
 
@@ -112,13 +184,18 @@ extension Expression {
       return Expression(tokens)
     }
 
-    throw ExpressionError.invalidToken(lexeme: lexeme)
+    throw ExpressionError.invalidLexeme(lexeme: lexeme)
   }
 }
 
 // MARK: - Exclusion
 
 extension Expression {
+  /// Produces a new, shorter expression with a character dropped from the last lexeme.
+  ///
+  /// The original expression remains unchanged.
+  ///
+  /// - Returns: The shorter expression if the original contains a lexeme, otherwise the original expression.
   public func dropped() -> Expression {
     var tokens = self.tokens
 
@@ -139,6 +216,13 @@ extension Expression {
 // https://www.youtube.com/watch?v=vXPL6UavUeA
 // https://www.youtube.com/watch?v=MeRb_1bddWg
 extension Expression {
+  /// Produces a result by interpretting an expression.
+  ///
+  /// The expression remains unchanged.
+  ///
+  /// - Returns: The result of interpretting the expression.
+  ///
+  /// - Throws: ``ExpressionError`` if the expression is invalid.
   public func interpret() throws -> Int {
     let parsedTokens = try parse(infixTokens: tokens)
 

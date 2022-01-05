@@ -11,7 +11,7 @@ extension ExpressionTests {
       let lexemes = fixture.lexemes
       let expected = fixture.description
 
-      let expression = try! Expression(lexemes)
+      let expression = try! Expression(lexemes: lexemes)
       let actual = String(describing: expression)
 
       XCTAssertEqual(expected, actual, "lexemes: \(lexemes)")
@@ -23,7 +23,7 @@ extension ExpressionTests {
       let lexemes = fixture.lexemes
       let expected = fixture.description
 
-      let expression = try! Expression(lexemes)
+      let expression = try! Expression(lexemes: lexemes)
       let actual = String(describing: expression)
 
       XCTAssertEqual(expected, actual, "lexemes: \(lexemes)")
@@ -35,7 +35,7 @@ extension ExpressionTests {
       let lexemes = fixture.lexemes
       let expected = fixture.description
 
-      let expression = try! Expression(lexemes)
+      let expression = try! Expression(lexemes: lexemes)
       let actual = String(describing: expression)
 
       XCTAssertEqual(expected, actual, "lexemes: \(lexemes)")
@@ -47,7 +47,7 @@ extension ExpressionTests {
       let lexemes = fixture.lexemes
       let expected = fixture.description
 
-      let expression = try! Expression(lexemes)
+      let expression = try! Expression(lexemes: lexemes)
       let actual = String(describing: expression)
 
       XCTAssertEqual(expected, actual, "lexemes: \(lexemes)")
@@ -59,7 +59,7 @@ extension ExpressionTests {
       let lexeme = fixture.lexeme
       let expected = fixture.error
 
-      XCTAssertThrowsError(try Expression([lexeme])) { error in
+      XCTAssertThrowsError(try Expression(lexemes: [lexeme])) { error in
         XCTAssertEqual(expected, error as? ExpressionError, "lexeme: \(lexeme)")
       }
     }
@@ -75,8 +75,8 @@ extension ExpressionTests {
       let lexeme = fixture.lexeme
       let withLexemes = fixture.withLexemes
 
-      let expected = try! Expression(withLexemes)
-      let actual = try! Expression(withoutLexemes).pushed(lexeme)
+      let expected = try! Expression(lexemes: withLexemes)
+      let actual = try! Expression(lexemes: withoutLexemes).pushed(lexeme: lexeme)
 
       XCTAssertEqual(
         expected,
@@ -92,8 +92,8 @@ extension ExpressionTests {
       let lexeme = fixture.lexeme
       let withLexemes = fixture.withLexemes
 
-      let expected = try! Expression(withLexemes)
-      let actual = try! Expression(withoutLexemes).pushed(lexeme)
+      let expected = try! Expression(lexemes: withLexemes)
+      let actual = try! Expression(lexemes: withoutLexemes).pushed(lexeme: lexeme)
 
       XCTAssertEqual(
         expected,
@@ -109,8 +109,8 @@ extension ExpressionTests {
       let lexeme = fixture.lexeme
       let withLexemes = fixture.withLexemes
 
-      let expected = try! Expression(withLexemes)
-      let actual = try! Expression(withoutLexemes).pushed(lexeme)
+      let expected = try! Expression(lexemes: withLexemes)
+      let actual = try! Expression(lexemes: withoutLexemes).pushed(lexeme: lexeme)
 
       XCTAssertEqual(
         expected,
@@ -125,9 +125,9 @@ extension ExpressionTests {
       let lexeme = fixture.lexeme
       let expected = fixture.error
 
-      let expression = try! Expression([])
+      let expression = try! Expression(lexemes: [])
 
-      XCTAssertThrowsError(try expression.pushed(lexeme)) { error in
+      XCTAssertThrowsError(try expression.pushed(lexeme: lexeme)) { error in
         XCTAssertEqual(expected, error as? ExpressionError, "lexeme: \(lexeme)")
       }
     }
@@ -138,8 +138,8 @@ extension ExpressionTests {
 
 extension ExpressionTests {
   func testDroppedWithEmptyLexemes() {
-    let expected = try! Expression([])
-    let actual = try! Expression([]).dropped()
+    let expected = try! Expression(lexemes: [])
+    let actual = try! Expression(lexemes: []).dropped()
 
     XCTAssertEqual(expected, actual)
   }
@@ -149,8 +149,8 @@ extension ExpressionTests {
       let withLexemes = fixture.withLexemes
       let droppedLexemes = fixture.droppedLexemes
 
-      let expected = try! Expression(droppedLexemes)
-      let actual = try! Expression(withLexemes).dropped()
+      let expected = try! Expression(lexemes: droppedLexemes)
+      let actual = try! Expression(lexemes: withLexemes).dropped()
 
       XCTAssertEqual(
         expected,
@@ -165,8 +165,8 @@ extension ExpressionTests {
       let withLexemes = fixture.withLexemes
       let droppedLexemes = fixture.droppedLexemes
 
-      let expected = try! Expression(droppedLexemes)
-      let actual = try! Expression(withLexemes).dropped()
+      let expected = try! Expression(lexemes: droppedLexemes)
+      let actual = try! Expression(lexemes: withLexemes).dropped()
 
       XCTAssertEqual(
         expected,
@@ -181,8 +181,8 @@ extension ExpressionTests {
       let withLexemes = fixture.withLexemes
       let droppedLexemes = fixture.droppedLexemes
 
-      let expected = try! Expression(droppedLexemes)
-      let actual = try! Expression(withLexemes).dropped()
+      let expected = try! Expression(lexemes: droppedLexemes)
+      let actual = try! Expression(lexemes: withLexemes).dropped()
 
       XCTAssertEqual(
         expected,
@@ -201,7 +201,7 @@ extension ExpressionTests {
       let lexemes = fixture.lexemes
       let expected = fixture.value
 
-      let expression = try! Expression(lexemes)
+      let expression = try! Expression(lexemes: lexemes)
       let actual = try! expression.interpret()
 
       XCTAssertEqual(expected, actual, "lexemes: \(lexemes)")
@@ -213,7 +213,7 @@ extension ExpressionTests {
       let lexemes = fixture.lexemes
       let expected = fixture.value
 
-      let expression = try! Expression(lexemes)
+      let expression = try! Expression(lexemes: lexemes)
       let actual = try! expression.interpret()
 
       XCTAssertTrue(
@@ -228,7 +228,7 @@ extension ExpressionTests {
       let lexemes = fixture.lexemes
       let expected = fixture.error
 
-      let expression = try! Expression(lexemes)
+      let expression = try! Expression(lexemes: lexemes)
 
       XCTAssertThrowsError(try expression.interpret()) { error in
         XCTAssertEqual(expected, error as? ExpressionError, "lexemes: \(lexemes)")
@@ -241,7 +241,7 @@ extension ExpressionTests {
       let lexemes = fixture.lexemes
       let expected = fixture.error
 
-      let expression = try! Expression(lexemes)
+      let expression = try! Expression(lexemes: lexemes)
 
       XCTAssertThrowsError(try expression.interpret()) { error in
         XCTAssertEqual(expected, error as? ExpressionError, "lexemes: \(lexemes)")
@@ -255,7 +255,7 @@ extension ExpressionTests {
         let lexemes = fixture.lexemes
         let expected = fixture.value
 
-        let expression = try! Expression(lexemes)
+        let expression = try! Expression(lexemes: lexemes)
         let actual = try! expression.interpret()
 
         XCTAssertEqual(expected, actual, "lexemes: \(lexemes)")
