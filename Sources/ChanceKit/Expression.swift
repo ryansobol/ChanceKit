@@ -5,8 +5,10 @@
 /// ```swift
 /// import ChanceKit
 ///
+/// let expression: Expression
+///
 /// do {
-///   let expression = try Expression(lexemes: ["1d6", "+", "4"])
+///   expression = try Expression(lexemes: ["1d6", "+", "4"])
 ///
 ///   print("The expression is \(expression)")
 ///   // Prints "The expression is 1d6 + 4"
@@ -25,8 +27,8 @@
 ///   print("The result \(result) is between 5 and 10")
 ///   // Prints "The result 7 is between 5 and 10"
 /// }
-/// catch is ExpressionError {
-///   print("The expression \(expression) is invalid because \(error)")
+/// catch let error as ExpressionError {
+///   print("The expression \(expression) cannot be interpretted because \(error)")
 /// }
 /// ```
 ///
@@ -222,7 +224,7 @@ extension Expression {
   ///
   /// - Returns: The result of interpretting the expression.
   ///
-  /// - Throws: ``ExpressionError`` if the expression is invalid.
+  /// - Throws: ``ExpressionError`` if the expression cannot be interpretted for any reason.
   public func interpret() throws -> Int {
     let parsedTokens = try parse(infixTokens: tokens)
 
