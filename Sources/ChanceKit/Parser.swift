@@ -15,7 +15,7 @@ func parse(infixTokens: [Tokenable]) throws -> [Tokenable] {
       case .close:
         while true {
           guard let topMarkable = markables.popLast() else {
-            throw ExpressionError.missingParenthesisOpen
+            throw Expression.InterpretError.missingParenthesisOpen
           }
 
           if let topParenthesis = topMarkable as? Parenthesis, topParenthesis == Parenthesis.open {
@@ -57,7 +57,7 @@ func parse(infixTokens: [Tokenable]) throws -> [Tokenable] {
 
   while let topMarkable = markables.popLast() {
     if let topParenthesis = topMarkable as? Parenthesis, topParenthesis == .open {
-      throw ExpressionError.missingParenthesisClose
+      throw Expression.InterpretError.missingParenthesisClose
     }
 
     guard let topOperator = topMarkable as? Operator else {

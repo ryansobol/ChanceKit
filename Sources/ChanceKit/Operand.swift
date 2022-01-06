@@ -32,7 +32,7 @@ extension Operand {
     let (result, didOverflow) = selfValue.addingReportingOverflow(otherValue)
 
     if didOverflow {
-      throw ExpressionError.overflowAddition(
+      throw Expression.InterpretError.overflowAddition(
         operandLeft: String(describing: self),
         operandRight: String(describing: other)
       )
@@ -45,14 +45,14 @@ extension Operand {
     let otherValue = try other.value()
 
     if otherValue == 0 {
-      throw ExpressionError.divisionByZero(operandLeft: String(describing: self))
+      throw Expression.InterpretError.divisionByZero(operandLeft: String(describing: self))
     }
 
     let selfValue = try self.value()
     let (result, didOverflow) = selfValue.dividedReportingOverflow(by: otherValue)
 
     if didOverflow {
-      throw ExpressionError.overflowDivision(
+      throw Expression.InterpretError.overflowDivision(
         operandLeft: String(describing: self),
         operandRight: String(describing: other)
       )
@@ -67,7 +67,7 @@ extension Operand {
     let (result, didOverflow) = selfValue.multipliedReportingOverflow(by: otherValue)
 
     if didOverflow {
-      throw ExpressionError.overflowMultiplication(
+      throw Expression.InterpretError.overflowMultiplication(
         operandLeft: String(describing: self),
         operandRight: String(describing: other)
       )
@@ -82,7 +82,7 @@ extension Operand {
     let (result, didOverflow) = selfValue.subtractingReportingOverflow(otherValue)
 
     if didOverflow {
-      throw ExpressionError.overflowSubtraction(
+      throw Expression.InterpretError.overflowSubtraction(
         operandLeft: String(describing: self),
         operandRight: String(describing: other)
       )

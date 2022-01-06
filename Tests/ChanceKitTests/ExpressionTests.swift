@@ -54,13 +54,13 @@ extension ExpressionTests {
     }
   }
 
-  func testInitWithInvalidFixtures() {
-    for fixture in invalidFixtures {
+  func testInitWithInvalidLexemeFixtures() {
+    for fixture in invalidLexemeFixtures {
       let lexeme = fixture.lexeme
-      let expected = fixture.error
+      let expected = fixture.initError
 
       XCTAssertThrowsError(try Expression(lexemes: [lexeme])) { error in
-        XCTAssertEqual(expected, error as? LexemeError, "lexeme: \(lexeme)")
+        XCTAssertEqual(expected, error as? Expression.InitError, "lexeme: \(lexeme)")
       }
     }
   }
@@ -120,15 +120,15 @@ extension ExpressionTests {
     }
   }
 
-  func testPushedWithInvalidFixtures() {
-    for fixture in invalidFixtures {
+  func testPushedWithInvalidLexemeFixtures() {
+    for fixture in invalidLexemeFixtures {
       let lexeme = fixture.lexeme
-      let expected = fixture.error
+      let expected = fixture.pushedError
 
       let expression = try! Expression(lexemes: [])
 
       XCTAssertThrowsError(try expression.pushed(lexeme: lexeme)) { error in
-        XCTAssertEqual(expected, error as? LexemeError, "lexeme: \(lexeme)")
+        XCTAssertEqual(expected, error as? Expression.PushedError, "lexeme: \(lexeme)")
       }
     }
   }
@@ -231,7 +231,7 @@ extension ExpressionTests {
       let expression = try! Expression(lexemes: lexemes)
 
       XCTAssertThrowsError(try expression.interpret()) { error in
-        XCTAssertEqual(expected, error as? ExpressionError, "lexemes: \(lexemes)")
+        XCTAssertEqual(expected, error as? Expression.InterpretError, "lexemes: \(lexemes)")
       }
     }
   }
@@ -244,7 +244,7 @@ extension ExpressionTests {
       let expression = try! Expression(lexemes: lexemes)
 
       XCTAssertThrowsError(try expression.interpret()) { error in
-        XCTAssertEqual(expected, error as? ExpressionError, "lexemes: \(lexemes)")
+        XCTAssertEqual(expected, error as? Expression.InterpretError, "lexemes: \(lexemes)")
       }
     }
   }

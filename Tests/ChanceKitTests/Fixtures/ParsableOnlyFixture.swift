@@ -5,7 +5,7 @@ typealias ParsableOnlyFixture = (
   lexemes: [String],
   infixTokens: [Tokenable],
   postfixTokens: [Tokenable],
-  error: ExpressionError
+  error: Expression.InterpretError
 )
 
 let parsableOnlyFixtures: [ParsableOnlyFixture] = [

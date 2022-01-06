@@ -48,7 +48,7 @@ extension RollPositiveSidesTests {
   }
 
   func testInitWithInvalidRawLexeme() {
-    for fixture in invalidFixtures {
+    for fixture in invalidLexemeFixtures {
       XCTAssertNil(RollPositiveSides(rawLexeme: fixture.lexeme))
     }
 
@@ -232,13 +232,13 @@ extension RollPositiveSidesTests {
     for fixture in fixtures {
       let operand1 = fixture.operand1
       let operand2 = fixture.operand2
-      let expected = ExpressionError.invalidCombination(
+      let expected = Expression.PushedError.invalidCombination(
         operandLeft: String(describing: operand1),
         operandRight: String(describing: operand2)
       )
 
       XCTAssertThrowsError(try operand1.combined(operand2)) { error in
-        XCTAssertEqual(expected, error as? ExpressionError)
+        XCTAssertEqual(expected, error as? Expression.PushedError)
       }
     }
   }
@@ -327,13 +327,13 @@ extension RollPositiveSidesTests {
     for fixture in fixtures {
       let operand1 = fixture.operand1
       let operand2 = fixture.operand2
-      let expected = ExpressionError.invalidCombination(
+      let expected = Expression.PushedError.invalidCombination(
         operandLeft: String(describing: operand1),
         operandRight: String(describing: operand2)
       )
 
       XCTAssertThrowsError(try operand1.combined(operand2)) { error in
-        XCTAssertEqual(expected, error as? ExpressionError)
+        XCTAssertEqual(expected, error as? Expression.PushedError)
       }
     }
   }
@@ -353,13 +353,13 @@ extension RollPositiveSidesTests {
     for fixture in fixtures {
       let operand1 = fixture.operand1
       let operand2 = fixture.operand2
-      let expected = ExpressionError.invalidCombination(
+      let expected = Expression.PushedError.invalidCombination(
         operandLeft: String(describing: operand1),
         operandRight: String(describing: operand2)
       )
 
       XCTAssertThrowsError(try operand1.combined(operand2)) { error in
-        XCTAssertEqual(expected, error as? ExpressionError)
+        XCTAssertEqual(expected, error as? Expression.PushedError)
       }
     }
   }
@@ -404,7 +404,7 @@ extension RollPositiveSidesTests {
   func testValue() {
     typealias Fixture = (
       operand: RollPositiveSides,
-      expected: ExpressionError
+      expected: Expression.InterpretError
     )
 
     let fixtures: [Fixture] = [
@@ -430,7 +430,7 @@ extension RollPositiveSidesTests {
       let expected = fixture.expected
 
       XCTAssertThrowsError(try operand.value()) { error in
-        XCTAssertEqual(expected, error as? ExpressionError)
+        XCTAssertEqual(expected, error as? Expression.InterpretError)
       }
     }
   }

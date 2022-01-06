@@ -18,7 +18,7 @@ final class EvaluatorTests: XCTestCase {
       let expected = fixture.error
 
       XCTAssertThrowsError(try evaluate(postfixTokens: tokens)) { error in
-        XCTAssertEqual(expected, error as? ExpressionError)
+        XCTAssertEqual(expected, error as? Expression.InterpretError)
       }
     }
   }

@@ -13,7 +13,7 @@
 ///   print("The expression is \(expression)")
 ///   // Prints "The expression is 1d6 + 4"
 /// }
-/// catch LexemeError.invalid(let lexeme) {
+/// catch Expression.InitError.invalidLexeme(let lexeme) {
 ///   print("The lexeme \(lexeme) is invalid")
 /// }
 /// ```
@@ -27,7 +27,7 @@
 ///   print("The result \(result) is between 5 and 10")
 ///   // Prints "The result 7 is between 5 and 10"
 /// }
-/// catch let error as ExpressionError {
+/// catch let error as Expression.InterpretError {
 ///   print("The expression \(expression) cannot be interpretted because \(error)")
 /// }
 /// ```
@@ -50,7 +50,7 @@
 ///   print("The longer expression is \(longer)")
 ///   // Prints "The longer expression is 1d6 + 2d4"
 /// }
-/// catch LexemeError.invalid(let lexeme) {
+/// catch Expression.PushedError.invalidLexeme(let lexeme) {
 ///   print("The lexeme \(lexeme) is invalid")
 /// }
 /// ```
@@ -61,11 +61,17 @@ public struct Expression {
 // MARK: - Initialization
 
 extension Expression {
+  /// A model representing errors thrown when initializing an expression.
+  public enum InitError: Error, Equatable {
+    /// The error thrown when a lexeme is invalid.
+    case invalidLexeme(lexeme: String)
+  }
+
   /// Initializes an expression with zero or more lexemes.
   ///
-  /// - Parameter lexemes: The zero or more lexemes of an expression.
+  /// - Parameter lexemes: The zero or more lexemes for the expression.
   ///
-  /// - Throws: ``LexemeError/invalid(lexeme:)`` if any lexeme is invalid.
+  /// - Throws: ``InitError`` if the expression cannot be initialized.
   public init(lexemes: [String]) throws {
     self.tokens = try lexemes.map { lexeme in
       if let parenthesis = Parenthesis(rawValue: lexeme) {
@@ -92,7 +98,7 @@ extension Expression {
         return rollPositiveSides
       }
 
-      throw LexemeError.invalid(lexeme: lexeme)
+      throw InitError.invalidLexeme(lexeme: lexeme)
     }
   }
 
@@ -140,6 +146,18 @@ extension Expression: CustomStringConvertible {
 // MARK: - Inclusion
 
 extension Expression {
+  /// A model representing errors thrown when a lexeme is pushed onto the end of an expression.
+  public enum PushedError: Error, Equatable {
+    /// The error thrown when two operands cannot be combined.
+    case invalidCombination(operandLeft: String, operandRight: String)
+
+    /// The error thrown when a lexeme is invalid.
+    case invalidLexeme(lexeme: String)
+
+    /// The error thrown when an overflow occurs negating an operand.
+    case overflowNegation(operand: String)
+  }
+
   /// Produces a new, longer expression with a lexeme pushed onto the end.
   ///
   /// The original expression remains unchanged.
@@ -148,7 +166,7 @@ extension Expression {
   ///
   /// - Returns: The longer expression.
   ///
-  /// - Throws: ``LexemeError/invalid(lexeme:)`` if the lexeme is invalid.
+  /// - Throws: ``PushedError`` if the lexeme cannot be pushed.
   public func pushed(lexeme: String) throws -> Expression {
     if let parenthesis = Parenthesis(rawValue: lexeme) {
       let tokens = lexed(parenthesis: parenthesis, into: self.tokens)
@@ -186,7 +204,7 @@ extension Expression {
       return Expression(tokens)
     }
 
-    throw LexemeError.invalid(lexeme: lexeme)
+    throw PushedError.invalidLexeme(lexeme: lexeme)
   }
 }
 
@@ -218,13 +236,49 @@ extension Expression {
 // https://www.youtube.com/watch?v=vXPL6UavUeA
 // https://www.youtube.com/watch?v=MeRb_1bddWg
 extension Expression {
+  /// A model representing errors thrown when interpretting an expression.
+  public enum InterpretError: Error, Equatable {
+    /// The error thrown when an operand is divided by zero.
+    case divisionByZero(operandLeft: String)
+
+    /// The error thrown when a close parenthesis is missing from the expression.
+    case missingParenthesisClose
+
+    /// The error thrown when an open parenthesis is missing from the expression.
+    case missingParenthesisOpen
+
+    /// The error thrown when an operand is missing from the expression.
+    case missingOperand
+
+    /// The error thrown when an operator is missing from the expression.
+    case missingOperator
+
+    /// The error thrown when a dice sides value is missing from an operand.
+    case missingSides(operand: String)
+
+    /// The error thrown when an overflow occurs adding two operands.
+    case overflowAddition(operandLeft: String, operandRight: String)
+
+    /// The error thrown when an overflow occurs dividing two operands.
+    case overflowDivision(operandLeft: String, operandRight: String)
+
+    /// The error thrown when an overflow occurs multiplying two operands.
+    case overflowMultiplication(operandLeft: String, operandRight: String)
+
+    /// The error thrown when an overflow occurs negating an operand.
+    case overflowNegation(operand: String)
+
+    /// The error thrown when an overflow occurs subtracting two operands.
+    case overflowSubtraction(operandLeft: String, operandRight: String)
+  }
+
   /// Produces a result by interpretting an expression.
   ///
   /// The expression remains unchanged.
   ///
   /// - Returns: The result of interpretting the expression.
   ///
-  /// - Throws: ``ExpressionError`` if the expression cannot be interpretted for any reason.
+  /// - Throws: ``InterpretError`` if the expression cannot be interpretted.
   public func interpret() throws -> Int {
     let parsedTokens = try parse(infixTokens: tokens)
 

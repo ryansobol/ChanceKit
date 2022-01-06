@@ -12,11 +12,11 @@ func evaluate(postfixTokens: [Tokenable]) throws -> Int {
 
     case let currentOperator as Operator:
       guard let operand2 = operands.popLast() else {
-        throw ExpressionError.missingOperand
+        throw Expression.InterpretError.missingOperand
       }
 
       guard let operand1 = operands.popLast() else {
-        throw ExpressionError.missingOperand
+        throw Expression.InterpretError.missingOperand
       }
 
       let newOperand = try currentOperator.evaluate(operand1, operand2)
@@ -29,7 +29,7 @@ func evaluate(postfixTokens: [Tokenable]) throws -> Int {
   }
 
   if operands.count > 1 {
-    throw ExpressionError.missingOperator
+    throw Expression.InterpretError.missingOperator
   }
 
   return try operands[0].value()

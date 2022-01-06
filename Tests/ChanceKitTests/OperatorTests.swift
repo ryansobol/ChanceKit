@@ -109,10 +109,10 @@ extension OperatorTests {
     let `operator` = Operator.division
     let operand1 = Constant(term: 1)
     let operand2 = Constant(term: 0)
-    let expected = ExpressionError.divisionByZero(operandLeft: "1")
+    let expected = Expression.InterpretError.divisionByZero(operandLeft: "1")
 
     XCTAssertThrowsError(try `operator`.evaluate(operand1, operand2)) { error in
-      XCTAssertEqual(expected, error as? ExpressionError)
+      XCTAssertEqual(expected, error as? Expression.InterpretError)
     }
   }
 
@@ -121,7 +121,7 @@ extension OperatorTests {
       operator: Operator,
       operand1: Constant,
       operand2: Constant,
-      expected: ExpressionError
+      expected: Expression.InterpretError
     )
 
     let fixtures: [Fixture] = [
@@ -158,7 +158,7 @@ extension OperatorTests {
       let expected = fixture.expected
 
       XCTAssertThrowsError(try `operator`.evaluate(operand1, operand2)) { error in
-        XCTAssertEqual(expected, error as? ExpressionError)
+        XCTAssertEqual(expected, error as? Expression.InterpretError)
       }
     }
   }

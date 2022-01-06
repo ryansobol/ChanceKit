@@ -50,7 +50,7 @@ extension Roll: Operand, Equatable {
     let lexemeOther = String(describing: other)
 
     guard let sidesResult = Int(String(self.sides) + lexemeOther) else {
-      throw ExpressionError.invalidCombination(
+      throw Expression.PushedError.invalidCombination(
         operandLeft: String(describing: self),
         operandRight: lexemeOther
       )
@@ -61,7 +61,7 @@ extension Roll: Operand, Equatable {
 
   func combined(_ other: Roll) throws -> Operand {
     if self.sides != other.sides {
-      throw ExpressionError.invalidCombination(
+      throw Expression.PushedError.invalidCombination(
         operandLeft: String(describing: self),
         operandRight: String(describing: other)
       )
@@ -70,7 +70,7 @@ extension Roll: Operand, Equatable {
     let (timesResult, didOverflow) = self.times.addingReportingOverflow(other.times)
 
     if didOverflow {
-      throw ExpressionError.invalidCombination(
+      throw Expression.PushedError.invalidCombination(
         operandLeft: String(describing: self),
         operandRight: String(describing: other)
       )
@@ -80,14 +80,14 @@ extension Roll: Operand, Equatable {
   }
 
   func combined(_ other: RollNegativeSides) throws -> Operand {
-    throw ExpressionError.invalidCombination(
+    throw Expression.PushedError.invalidCombination(
       operandLeft: String(describing: self),
       operandRight: String(describing: other)
     )
   }
 
   func combined(_ other: RollPositiveSides) throws -> Operand {
-    throw ExpressionError.invalidCombination(
+    throw Expression.PushedError.invalidCombination(
       operandLeft: String(describing: self),
       operandRight: String(describing: other)
     )
@@ -120,12 +120,12 @@ extension Roll: Operand, Equatable {
 
     // Because abs(Int.min) > Int.max
     if self.times == Int.min {
-      throw ExpressionError.overflowNegation(operand: String(describing: self))
+      throw Expression.InterpretError.overflowNegation(operand: String(describing: self))
     }
 
     // Because abs(Int.min) > Int.max
     if self.sides == Int.min {
-      throw ExpressionError.overflowNegation(operand: String(describing: self))
+      throw Expression.InterpretError.overflowNegation(operand: String(describing: self))
     }
 
     var result = 0
@@ -171,7 +171,7 @@ extension Roll: Operand, Equatable {
       let (newResult, didOverflow) = result.addingReportingOverflow(nextInt)
 
       if didOverflow {
-        throw ExpressionError.overflowAddition(
+        throw Expression.InterpretError.overflowAddition(
           operandLeft: String(result),
           operandRight: String(nextInt)
         )
@@ -186,7 +186,7 @@ extension Roll: Operand, Equatable {
 
     // Because Int.min.negate() > Int.max
     if result == Int.min {
-      throw ExpressionError.overflowNegation(operand: String(result))
+      throw Expression.InterpretError.overflowNegation(operand: String(result))
     }
 
     result.negate()
@@ -199,7 +199,7 @@ extension Roll: Operand, Equatable {
   func negated() throws -> Operand {
     // Because -Int.min > Int.max
     if self.sides == Int.min {
-      throw ExpressionError.overflowNegation(operand: String(describing: self))
+      throw Expression.PushedError.overflowNegation(operand: String(describing: self))
     }
 
     return Roll(times: self.times, sides: -self.sides)

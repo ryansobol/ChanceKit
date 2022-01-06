@@ -4,7 +4,7 @@ typealias LexebleOnlyFixture = (
   description: String,
   lexemes: [String],
   infixTokens: [Tokenable],
-  error: ExpressionError
+  error: Expression.InterpretError
 )
 
 let lexebleOnlyFixtures: [LexebleOnlyFixture] = [

@@ -40,14 +40,14 @@ extension RollPositiveSides: Operand, Equatable {
   }
 
   func combined(_ other: Roll) throws -> Operand {
-    throw ExpressionError.invalidCombination(
+    throw Expression.PushedError.invalidCombination(
       operandLeft: String(describing: self),
       operandRight: String(describing: other)
     )
   }
 
   func combined(_ other: RollNegativeSides) throws -> Operand {
-    throw ExpressionError.invalidCombination(
+    throw Expression.PushedError.invalidCombination(
       operandLeft: String(describing: self),
       operandRight: String(describing: other)
     )
@@ -57,7 +57,7 @@ extension RollPositiveSides: Operand, Equatable {
     let (timesResult, didOverflow) = self.times.addingReportingOverflow(other.times)
 
     if didOverflow {
-      throw ExpressionError.invalidCombination(
+      throw Expression.PushedError.invalidCombination(
         operandLeft: String(describing: self),
         operandRight: String(describing: other)
       )
@@ -75,7 +75,7 @@ extension RollPositiveSides: Operand, Equatable {
   // MARK: - Evaluation
 
   func value() throws -> Int {
-    throw ExpressionError.missingSides(operand: String(describing: self))
+    throw Expression.InterpretError.missingSides(operand: String(describing: self))
   }
 
   // MARK: - Operation

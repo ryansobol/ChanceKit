@@ -36,7 +36,7 @@ final class ParserTests: XCTestCase {
       let expected = fixture.error
 
       XCTAssertThrowsError(try parse(infixTokens: tokens)) { error in
-        XCTAssertEqual(expected, error as? ExpressionError)
+        XCTAssertEqual(expected, error as? Expression.InterpretError)
       }
     }
   }

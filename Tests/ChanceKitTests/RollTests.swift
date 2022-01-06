@@ -58,7 +58,7 @@ extension RollTests {
   }
 
   func testInitWithInvalidRawLexeme() {
-    for fixture in invalidFixtures {
+    for fixture in invalidLexemeFixtures {
       XCTAssertNil(Roll(rawLexeme: fixture.lexeme))
     }
 
@@ -493,13 +493,13 @@ extension RollTests {
     for fixture in fixtures {
       let operand1 = fixture.operand1
       let operand2 = fixture.operand2
-      let expected = ExpressionError.invalidCombination(
+      let expected = Expression.PushedError.invalidCombination(
         operandLeft: String(describing: operand1),
         operandRight: String(describing: operand2)
       )
 
       XCTAssertThrowsError(try operand1.combined(operand2)) { error in
-        XCTAssertEqual(expected, error as? ExpressionError)
+        XCTAssertEqual(expected, error as? Expression.PushedError)
       }
     }
   }
@@ -807,13 +807,13 @@ extension RollTests {
     for fixture in fixtures {
       let operand1 = fixture.operand1
       let operand2 = fixture.operand2
-      let expected = ExpressionError.invalidCombination(
+      let expected = Expression.PushedError.invalidCombination(
         operandLeft: String(describing: operand1),
         operandRight: String(describing: operand2)
       )
 
       XCTAssertThrowsError(try operand1.combined(operand2)) { error in
-        XCTAssertEqual(expected, error as? ExpressionError)
+        XCTAssertEqual(expected, error as? Expression.PushedError)
       }
     }
   }
@@ -866,13 +866,13 @@ extension RollTests {
     for fixture in fixtures {
       let operand1 = fixture.operand1
       let operand2 = fixture.operand2
-      let expected = ExpressionError.invalidCombination(
+      let expected = Expression.PushedError.invalidCombination(
         operandLeft: String(describing: operand1),
         operandRight: String(describing: operand2)
       )
 
       XCTAssertThrowsError(try operand1.combined(operand2)) { error in
-        XCTAssertEqual(expected, error as? ExpressionError)
+        XCTAssertEqual(expected, error as? Expression.PushedError)
       }
     }
   }
@@ -925,13 +925,13 @@ extension RollTests {
     for fixture in fixtures {
       let operand1 = fixture.operand1
       let operand2 = fixture.operand2
-      let expected = ExpressionError.invalidCombination(
+      let expected = Expression.PushedError.invalidCombination(
         operandLeft: String(describing: operand1),
         operandRight: String(describing: operand2)
       )
 
       XCTAssertThrowsError(try operand1.combined(operand2)) { error in
-        XCTAssertEqual(expected, error as? ExpressionError)
+        XCTAssertEqual(expected, error as? Expression.PushedError)
       }
     }
   }
@@ -1168,7 +1168,7 @@ extension RollTests {
   func testValueWithOverflow() {
     typealias Fixture = (
       operand: Roll,
-      expected: ExpressionError
+      expected: Expression.InterpretError
     )
 
     let fixtures: [Fixture] = [
@@ -1191,7 +1191,7 @@ extension RollTests {
       let expected = fixture.expected
 
       XCTAssertThrowsError(try operand.value()) { error in
-        XCTAssertEqual(expected, error as? ExpressionError)
+        XCTAssertEqual(expected, error as? Expression.InterpretError)
       }
     }
   }
@@ -1237,7 +1237,7 @@ extension RollTests {
   func testNegatedWithOverflow() {
     typealias Fixture = (
       operand: Roll,
-      expected: ExpressionError
+      expected: Expression.PushedError
     )
 
     let fixtures: [Fixture] = [
@@ -1256,7 +1256,7 @@ extension RollTests {
       let expected = fixture.expected
 
       XCTAssertThrowsError(try operand.negated()) { error in
-        XCTAssertEqual(expected, error as? ExpressionError)
+        XCTAssertEqual(expected, error as? Expression.PushedError)
       }
     }
   }
@@ -1370,7 +1370,7 @@ extension RollTests {
     typealias Fixture = (
       operand1: Roll,
       operand2: Constant,
-      expected: ExpressionError
+      expected: Expression.InterpretError
     )
 
     let fixtures: [Fixture] = [
@@ -1397,7 +1397,7 @@ extension RollTests {
       let expected = fixture.expected
 
       XCTAssertThrowsError(try operand1.added(operand2)) { error in
-        XCTAssertEqual(expected, error as? ExpressionError)
+        XCTAssertEqual(expected, error as? Expression.InterpretError)
       }
     }
   }
@@ -1593,7 +1593,7 @@ extension RollTests {
     typealias Fixture = (
       operand1: Roll,
       operand2: Constant,
-      expected: ExpressionError
+      expected: Expression.InterpretError
     )
 
     let fixtures: [Fixture] = [
@@ -1645,7 +1645,7 @@ extension RollTests {
       let expected = fixture.expected
 
       XCTAssertThrowsError(try operand1.divided(operand2)) { error in
-        XCTAssertEqual(expected, error as? ExpressionError)
+        XCTAssertEqual(expected, error as? Expression.InterpretError)
       }
     }
   }
@@ -1653,10 +1653,10 @@ extension RollTests {
   func testDividedByConstantWithOverflow() {
     let operand1 = Roll(times: 1, sides: Int.min)
     let operand2 = Constant(term: 1)
-    let expected = ExpressionError.overflowNegation(operand: "1d\(Int.min)")
+    let expected = Expression.InterpretError.overflowNegation(operand: "1d\(Int.min)")
 
     XCTAssertThrowsError(try operand1.divided(operand2)) { error in
-      XCTAssertEqual(expected, error as? ExpressionError)
+      XCTAssertEqual(expected, error as? Expression.InterpretError)
     }
   }
 
@@ -1846,7 +1846,7 @@ extension RollTests {
     typealias Fixture = (
       operand1: Roll,
       operand2: Constant,
-      expected: ExpressionError
+      expected: Expression.InterpretError
     )
 
     let fixtures: [Fixture] = [
@@ -1942,7 +1942,7 @@ extension RollTests {
       let expected = fixture.expected
 
       XCTAssertThrowsError(try operand1.multiplied(operand2)) { error in
-        XCTAssertEqual(expected, error as? ExpressionError)
+        XCTAssertEqual(expected, error as? Expression.InterpretError)
       }
     }
   }
@@ -2159,7 +2159,7 @@ extension RollTests {
     typealias Fixture = (
       operand1: Roll,
       operand2: Constant,
-      expected: ExpressionError
+      expected: Expression.InterpretError
     )
 
     let fixtures: [Fixture] = [
@@ -2187,7 +2187,7 @@ extension RollTests {
       let expected = fixture.expected
 
       XCTAssertThrowsError(try operand1.subtracted(operand2)) { error in
-        XCTAssertEqual(expected, error as? ExpressionError)
+        XCTAssertEqual(expected, error as? Expression.InterpretError)
       }
     }
   }
