@@ -188,7 +188,7 @@ extension Expression {
 
   /// Produces a new, longer expression with a lexeme pushed onto the end.
   ///
-  /// Calling this method does not mutate the original expression. See the ``init(lexemes:)`` method to learn more about lexemes. 
+  /// Calling this method does not mutate the original expression. See the ``init(lexemes:)`` method to learn more about lexemes.
   ///
   /// - Parameter lexeme: The lexeme to push onto the end of the original expression.
   ///
