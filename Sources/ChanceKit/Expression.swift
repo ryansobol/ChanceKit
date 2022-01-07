@@ -1,4 +1,6 @@
-/// A model representing an expression.
+/// A model representing a mathmatical expression that supports probabilities.
+///
+/// An expression is composed of a sequence of lexemes—numbers and polyhedral dice rolls, separated by arithmetic operations and potentially organized into arithmetic groups. Interpretting an expression produces a single, probablistic result.
 ///
 /// An expression is initialized with zero or more lexemes using the ``init(lexemes:)`` initializer.
 ///
@@ -18,7 +20,7 @@
 /// }
 /// ```
 ///
-/// Interpretting an expression using the ``interpret()`` method produces a result.
+/// Interpretting an expression using the ``interpret()`` method produces a single, probablistic result.
 ///
 /// ```swift
 /// do {
@@ -68,6 +70,32 @@ extension Expression {
   }
 
   /// Initializes an expression with zero or more lexemes.
+  ///
+  /// A lexeme is a `String` that describes either a number, polyhedral dice roll, partial polyhedral dice roll, arithmetic operation, or arithmetic group.
+  ///
+  /// #### Number
+  ///
+  /// A `String` describing an `Int` value. For example, `"1"`, `"-1"`, etc.
+  ///
+  /// #### Polyhedral Dice Roll
+  ///
+  /// A `String` describing an `Int` value, followed by the `d` character, followed by another `Int` value. For example, `"3d6"`, `"-3d6"`,`"3d-6"`, `"-3d-6"`, etc.
+  ///
+  /// #### Partial Polyhedral Dice Roll
+
+  /// A `String` describing an `Int` value, followed by the `d` character, possibly followed by the `-` character. For example, `"3d"`, `"-3d"`, `"3d-"`, `"-3d-"`, etc.
+  ///
+  /// #### Arithmetic Operation
+  ///
+  /// A `String` describing the arithmetic opertion of addition, subtraction, multiplcation, or division using `"+"`, `"-"`, `"×"`, or `"÷"` respectively.
+  ///
+  /// #### Arithmetic Group
+  ///
+  /// A `String` describing an aritmetic group using matching pairs of `"("` and `")"`.
+  ///
+  /// #### Deriving Expressions
+  ///
+  /// A new, shorter expression can be derived with the ``dropped()`` method. And a new, longer expression can be derived with the ``pushed(lexeme:)`` method.
   ///
   /// - Parameter lexemes: The zero or more lexemes for the expression.
   ///
@@ -160,7 +188,7 @@ extension Expression {
 
   /// Produces a new, longer expression with a lexeme pushed onto the end.
   ///
-  /// The original expression remains unchanged.
+  /// The original expression remains unchanged. See ``init(lexemes:)`` to learn more about lexemes.
   ///
   /// - Parameter lexeme: The lexeme to push onto the end of the original expression.
   ///
@@ -272,7 +300,7 @@ extension Expression {
     case overflowSubtraction(operandLeft: String, operandRight: String)
   }
 
-  /// Produces a result by interpretting an expression.
+  /// Produces a single, probablistic result by interpretting an expression.
   ///
   /// The expression remains unchanged.
   ///
