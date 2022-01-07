@@ -71,27 +71,27 @@ extension Expression {
 
   /// Initializes an expression with zero or more lexemes.
   ///
-  /// A lexeme is a `String` that describes either a number, polyhedral dice roll, partial polyhedral dice roll, arithmetic operation, or arithmetic group.
+  /// A lexeme is text that represents either a number, polyhedral dice roll, partial polyhedral dice roll, arithmetic operation, or arithmetic group.
   ///
   /// #### Number
   ///
-  /// A `String` describing an `Int` value. For example, `"1"`, `"-1"`, etc.
+  /// Text representing an `Int` value. For example, `"1"`, `"-1"`, etc.
   ///
   /// #### Polyhedral Dice Roll
   ///
-  /// A `String` describing an `Int` value, followed by the `d` character, followed by another `Int` value. For example, `"3d6"`, `"-3d6"`,`"3d-6"`, `"-3d-6"`, etc.
+  /// Text representing an `Int` value, followed by the `d` character, followed by another `Int` value. For example, `"3d6"`, `"-3d6"`,`"3d-6"`, `"-3d-6"`, etc.
   ///
   /// #### Partial Polyhedral Dice Roll
 
-  /// A `String` describing an `Int` value, followed by the `d` character, possibly followed by the `-` character. For example, `"3d"`, `"-3d"`, `"3d-"`, `"-3d-"`, etc.
+  /// Text representing an `Int` value, followed by the `d` character, possibly followed by the `-` character. For example, `"3d"`, `"-3d"`, `"3d-"`, `"-3d-"`, etc.
   ///
   /// #### Arithmetic Operation
   ///
-  /// A `String` describing the arithmetic opertion of addition, subtraction, multiplcation, or division using `"+"`, `"-"`, `"×"`, or `"÷"` respectively.
+  /// Text representing the arithmetic opertion of addition, subtraction, multiplcation, or division using `"+"`, `"-"`, `"×"`, or `"÷"` respectively.
   ///
   /// #### Arithmetic Group
   ///
-  /// A `String` describing an aritmetic group using matching pairs of `"("` and `")"`.
+  /// Text representing an aritmetic group using matching pairs of `"("` and `")"`.
   ///
   /// #### Deriving Expressions
   ///
@@ -239,7 +239,7 @@ extension Expression {
 // MARK: - Exclusion
 
 extension Expression {
-  /// Produces a new, shorter expression with a character dropped from the last lexeme.
+  /// Produces a new, shorter expression with a character is dropped from the last lexeme.
   ///
   /// The original expression remains unchanged.
   ///
@@ -281,7 +281,7 @@ extension Expression {
     /// The error thrown when an operator is missing from the expression.
     case missingOperator
 
-    /// The error thrown when a dice sides value is missing from an operand.
+    /// The error thrown when the sides value is missing from a polyhedral dice operand.
     case missingSides(operand: String)
 
     /// The error thrown when an overflow occurs adding two operands.
