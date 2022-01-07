@@ -188,7 +188,7 @@ extension Expression {
 
   /// Produces a new, longer expression with a lexeme pushed onto the end.
   ///
-  /// Calling this method does not mutate the original expression. See the ``init(lexemes:)`` method to learn more about lexemes.
+  /// See the ``init(lexemes:)`` method to learn more about lexemes.
   ///
   /// - Parameter lexeme: The lexeme to push onto the end of the original expression.
   ///
@@ -240,8 +240,6 @@ extension Expression {
 
 extension Expression {
   /// Produces a new, shorter expression with a character is dropped from the last lexeme.
-  ///
-  ///  Calling this method does not mutate the original expression.
   ///
   /// - Returns: The shorter expression if the original contains a lexeme, otherwise the original expression.
   public func dropped() -> Expression {
@@ -302,7 +300,7 @@ extension Expression {
 
   /// Produces a single, probablistic result by interpretting an expression.
   ///
-  /// This method is referentially opaque if the expression is composed of a polyhedral dice roll. Calling this method does not mutate the expression.
+  /// This method is referentially opaque if the expression is composed of a polyhedral dice roll.
   ///
   /// - Returns: The result of interpretting the expression.
   ///
