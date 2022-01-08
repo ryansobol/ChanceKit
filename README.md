@@ -1,6 +1,6 @@
 # ChanceKit
 
-Create mathmatical expression that supports probabilities.
+Create mathmatical expressions that support probabilities.
 
 An expression is composed of a sequence of lexemes—numbers and polyhedral dice rolls, separated by arithmetic operations and potentially organized into arithmetic groups. Interpretting an expression produces a single, probablistic result.
 
