@@ -1,4 +1,4 @@
-/// A model representing a mathmatical expression that supports probabilities.
+/// A model representing a mathematical expression that supports probabilities.
 ///
 /// An expression is composed of a sequence of lexemes—numbers and polyhedral dice rolls, separated by arithmetic operations and potentially organized into arithmetic groups. Interpretting an expression produces a single, probablistic result.
 ///
