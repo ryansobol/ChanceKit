@@ -64,6 +64,13 @@ extension ExpressionTests {
       }
     }
   }
+
+  func testInitWithoutLexemes() {
+    let expected = try! Expression(lexemes: [])
+    let actual = Expression()
+
+    XCTAssertEqual(expected, actual)
+  }
 }
 
 // MARK: - Inclusion

@@ -130,6 +130,13 @@ extension Expression {
     }
   }
 
+  /// Initializes a blank expression without any lexemes.
+  ///
+  /// See the ``init(lexemes:)`` method to learn more about lexemes.
+  public init() {
+    self.tokens = []
+  }
+
   init(_ tokens: [Tokenable]) {
     self.tokens = tokens
   }

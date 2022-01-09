@@ -5,6 +5,7 @@
 ### Initializing
 
 - ``init(lexemes:)``
+- ``init()``
 
 ### Interpretting
 
