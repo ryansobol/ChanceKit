@@ -46,14 +46,16 @@
 /// Pushing a lexeme onto the end of an expression using the ``pushed(lexeme:)`` method produces a new, longer expression.
 ///
 /// ```swift
+/// let lexeme = "2d4"
+///
 /// do {
-///   let longer = try shorter.pushed(lexeme: "2d4")
+///   let longer = try shorter.pushed(lexeme: lexeme)
 ///
 ///   print("The longer expression is \(longer)")
 ///   // Prints "The longer expression is 1d6 + 2d4"
 /// }
-/// catch Expression.PushedError.invalidLexeme(let lexeme) {
-///   print("The lexeme \(lexeme) is invalid")
+/// catch let error as Expression.PushedError {
+///   print("The lexeme \(lexeme) cannot be pushed because \(error)")
 /// }
 /// ```
 public struct Expression {
