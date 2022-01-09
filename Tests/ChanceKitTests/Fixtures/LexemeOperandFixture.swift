@@ -1239,7 +1239,7 @@ let lexemeOperandFixtures: [LexemeOperandFixture] = [
     droppedTokens: [Roll(times: 1, sides: 9), Operator.multiplication, Parenthesis.open]
   ),
 
-  // MARK: - 1d9s)
+  // MARK: - 1d9)
 
   (
     withoutLexemes: ["1d9", ")"],
