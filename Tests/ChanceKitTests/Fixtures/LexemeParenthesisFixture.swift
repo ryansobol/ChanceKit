@@ -190,9 +190,9 @@ let lexemeParenthesisFixtures: [LexemeParenthesisFixture] = [
     withoutTokens: [Constant(term: 0)],
     lexeme: ")",
     token: Parenthesis.close,
-    withLexemes: ["0", ")"],
-    withTokens: [Constant(term: 0), Parenthesis.close],
-    droppedLexemes: ["0"],
+    withLexemes: ["(", "0", ")"],
+    withTokens: [Parenthesis.open, Constant(term: 0), Parenthesis.close],
+    droppedLexemes: ["(", "0"],
     droppedTokens: [Constant(term: 0)]
   ),
 
@@ -213,9 +213,9 @@ let lexemeParenthesisFixtures: [LexemeParenthesisFixture] = [
     withoutTokens: [Constant(term: 1)],
     lexeme: ")",
     token: Parenthesis.close,
-    withLexemes: ["1", ")"],
-    withTokens: [Constant(term: 1), Parenthesis.close],
-    droppedLexemes: ["1"],
+    withLexemes: ["(", "1", ")"],
+    withTokens: [Parenthesis.open, Constant(term: 1), Parenthesis.close],
+    droppedLexemes: ["(", "1"],
     droppedTokens: [Constant(term: 1)]
   ),
 
@@ -236,9 +236,9 @@ let lexemeParenthesisFixtures: [LexemeParenthesisFixture] = [
     withoutTokens: [Constant(term: 9)],
     lexeme: ")",
     token: Parenthesis.close,
-    withLexemes: ["9", ")"],
-    withTokens: [Constant(term: 9), Parenthesis.close],
-    droppedLexemes: ["9"],
+    withLexemes: ["(", "9", ")"],
+    withTokens: [Parenthesis.open, Constant(term: 9), Parenthesis.close],
+    droppedLexemes: ["(", "9"],
     droppedTokens: [Constant(term: 9)]
   ),
 
@@ -397,9 +397,9 @@ let lexemeParenthesisFixtures: [LexemeParenthesisFixture] = [
     withoutTokens: [Constant(term: 10)],
     lexeme: ")",
     token: Parenthesis.close,
-    withLexemes: ["10", ")"],
-    withTokens: [Constant(term: 10), Parenthesis.close],
-    droppedLexemes: ["10"],
+    withLexemes: ["(", "10", ")"],
+    withTokens: [Parenthesis.open, Constant(term: 10), Parenthesis.close],
+    droppedLexemes: ["(", "10"],
     droppedTokens: [Constant(term: 10)]
   ),
 
@@ -420,9 +420,9 @@ let lexemeParenthesisFixtures: [LexemeParenthesisFixture] = [
     withoutTokens: [Constant(term: 11)],
     lexeme: ")",
     token: Parenthesis.close,
-    withLexemes: ["11", ")"],
-    withTokens: [Constant(term: 11), Parenthesis.close],
-    droppedLexemes: ["11"],
+    withLexemes: ["(", "11", ")"],
+    withTokens: [Parenthesis.open, Constant(term: 11), Parenthesis.close],
+    droppedLexemes: ["(", "11"],
     droppedTokens: [Constant(term: 11)]
   ),
 
@@ -443,9 +443,9 @@ let lexemeParenthesisFixtures: [LexemeParenthesisFixture] = [
     withoutTokens: [Constant(term: 19)],
     lexeme: ")",
     token: Parenthesis.close,
-    withLexemes: ["19", ")"],
-    withTokens: [Constant(term: 19), Parenthesis.close],
-    droppedLexemes: ["19"],
+    withLexemes: ["(", "19", ")"],
+    withTokens: [Parenthesis.open, Constant(term: 19), Parenthesis.close],
+    droppedLexemes: ["(", "19"],
     droppedTokens: [Constant(term: 19)]
   ),
 
@@ -619,9 +619,9 @@ let lexemeParenthesisFixtures: [LexemeParenthesisFixture] = [
     withoutTokens: [Roll(times: 1, sides: 0)],
     lexeme: ")",
     token: Parenthesis.close,
-    withLexemes: ["1d0", ")"],
-    withTokens: [Roll(times: 1, sides: 0), Parenthesis.close],
-    droppedLexemes: ["1d0"],
+    withLexemes: ["(", "1d0", ")"],
+    withTokens: [Parenthesis.open, Roll(times: 1, sides: 0), Parenthesis.close],
+    droppedLexemes: ["(", "1d0"],
     droppedTokens: [Roll(times: 1, sides: 0)]
   ),
 
@@ -795,9 +795,9 @@ let lexemeParenthesisFixtures: [LexemeParenthesisFixture] = [
     withoutTokens: [Roll(times: 1, sides: 1)],
     lexeme: ")",
     token: Parenthesis.close,
-    withLexemes: ["1d1", ")"],
-    withTokens: [Roll(times: 1, sides: 1), Parenthesis.close],
-    droppedLexemes: ["1d1"],
+    withLexemes: ["(", "1d1", ")"],
+    withTokens: [Parenthesis.open, Roll(times: 1, sides: 1), Parenthesis.close],
+    droppedLexemes: ["(", "1d1"],
     droppedTokens: [Roll(times: 1, sides: 1)]
   ),
 
@@ -971,9 +971,9 @@ let lexemeParenthesisFixtures: [LexemeParenthesisFixture] = [
     withoutTokens: [Roll(times: 1, sides: 9)],
     lexeme: ")",
     token: Parenthesis.close,
-    withLexemes: ["1d9", ")"],
-    withTokens: [Roll(times: 1, sides: 9), Parenthesis.close],
-    droppedLexemes: ["1d9"],
+    withLexemes: ["(", "1d9", ")"],
+    withTokens: [Parenthesis.open, Roll(times: 1, sides: 9), Parenthesis.close],
+    droppedLexemes: ["(", "1d9"],
     droppedTokens: [Roll(times: 1, sides: 9)]
   ),
 
