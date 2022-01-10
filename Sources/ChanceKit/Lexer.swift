@@ -3,13 +3,13 @@ func lexed(parenthesis: Parenthesis, into: [Tokenable]) -> [Tokenable] {
 
   if parenthesis == .close {
     if !tokens.isEmpty {
-      let balance = tokens
+      let parenthesisRatio = tokens
         .filter { $0 is Parenthesis }
         .map { $0 as! Parenthesis }
         .map { $0 == .open ? 1 : -1 }
         .reduce(0, +)
 
-      if balance == 0 && (tokens.last is Constant || tokens.last is Roll) {
+      if parenthesisRatio == 0 && (tokens.last is Constant || tokens.last is Roll) {
         tokens.insert(Parenthesis.open, at: 0)
       }
     }
