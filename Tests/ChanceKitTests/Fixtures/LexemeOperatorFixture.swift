@@ -2097,10 +2097,10 @@ let lexemeOperatorFixtures: [LexemeOperatorFixture] = [
     withoutTokens: [RollPositiveSides(times: 1)],
     lexeme: "+",
     token: Operator.addition,
-    withLexemes: ["1d", "+"],
-    withTokens: [RollPositiveSides(times: 1), Operator.addition],
-    droppedLexemes: ["1d"],
-    droppedTokens: [RollPositiveSides(times: 1)]
+    withLexemes: ["1d"],
+    withTokens: [RollPositiveSides(times: 1)],
+    droppedLexemes: ["1"],
+    droppedTokens: [Constant(term: 1)]
   ),
   (
     withoutLexemes: ["1d"],

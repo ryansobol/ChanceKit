@@ -34,13 +34,19 @@ func lexed(parenthesis: Parenthesis, into: [Tokenable]) -> [Tokenable] {
 func lexed(operator: Operator, into: [Tokenable]) -> [Tokenable] {
   var tokens = into
 
-  if `operator` == .addition, let lastRollNegativeSides = tokens.last as? RollNegativeSides {
-    let rollPositiveSides = try! lastRollNegativeSides.negated()
+  if `operator` == .addition {
+    if tokens.last is RollPositiveSides {
+      return tokens
+    }
 
-    tokens.removeLast()
-    tokens.append(rollPositiveSides)
+    if let lastRollNegativeSides = tokens.last as? RollNegativeSides {
+      let rollPositiveSides = try! lastRollNegativeSides.negated()
 
-    return tokens
+      tokens.removeLast()
+      tokens.append(rollPositiveSides)
+
+      return tokens
+    }
   }
 
   if `operator` == .subtraction, let lastRollPositiveSides = tokens.last as? RollPositiveSides {
