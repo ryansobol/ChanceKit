@@ -1,11 +1,11 @@
 @testable import ChanceKit
 
-typealias LexemeConstantFixture = (
+typealias ConstantFixture = (
   lexeme: String,
   token: Constant
 )
 
-let lexemeConstantFixtures: [LexemeConstantFixture] = [
+let constantFixtures: [ConstantFixture] = [
   (lexeme: "0", token: Constant(term: 0)),
   (lexeme: "1", token: Constant(term: 1)),
   (lexeme: "9", token: Constant(term: 9)),

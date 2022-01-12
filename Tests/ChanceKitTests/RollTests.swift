@@ -62,7 +62,7 @@ extension RollTests {
       XCTAssertNil(Roll(rawLexeme: fixture.lexeme))
     }
 
-    for fixture in lexemeConstantFixtures {
+    for fixture in constantFixtures {
       XCTAssertNil(Roll(rawLexeme: fixture.lexeme))
     }
 

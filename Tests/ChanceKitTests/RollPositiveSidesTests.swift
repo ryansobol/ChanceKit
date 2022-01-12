@@ -52,7 +52,7 @@ extension RollPositiveSidesTests {
       XCTAssertNil(RollPositiveSides(rawLexeme: fixture.lexeme))
     }
 
-    for fixture in lexemeConstantFixtures {
+    for fixture in constantFixtures {
       XCTAssertNil(RollPositiveSides(rawLexeme: fixture.lexeme))
     }
 

@@ -38,7 +38,7 @@ extension ConstantTests {
 
 extension ConstantTests {
   func testInitWithValidRawLexeme() {
-    for fixture in lexemeConstantFixtures {
+    for fixture in constantFixtures {
       let rawLexeme = fixture.lexeme
       let expected = fixture.token
       let actual = Constant(rawLexeme: rawLexeme)
