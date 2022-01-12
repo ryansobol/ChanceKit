@@ -7,7 +7,11 @@ typealias InvalidLexemeFixture = (
 )
 
 let invalidLexemeFixtures: [InvalidLexemeFixture] = [
-  (lexeme: "d", initError: .invalidLexeme(lexeme: "d"), pushedError: .invalidLexeme(lexeme: "d")),
+  (
+    lexeme: "d",
+    initError: .invalidLexeme(lexeme: "d"),
+    pushedError: .invalidLexeme(lexeme: "d")
+  ),
   (
     lexeme: "-d",
     initError: .invalidLexeme(lexeme: "-d"),
@@ -193,24 +197,76 @@ let invalidLexemeFixtures: [InvalidLexemeFixture] = [
     initError: .invalidLexeme(lexeme: "0d0\n1d1"),
     pushedError: .invalidLexeme(lexeme: "0d0\n1d1")
   ),
-  (lexeme: "=", initError: .invalidLexeme(lexeme: "="), pushedError: .invalidLexeme(lexeme: "=")),
-  (lexeme: "[", initError: .invalidLexeme(lexeme: "["), pushedError: .invalidLexeme(lexeme: "[")),
-  (lexeme: "]", initError: .invalidLexeme(lexeme: "]"), pushedError: .invalidLexeme(lexeme: "]")),
-  (lexeme: "{", initError: .invalidLexeme(lexeme: "{"), pushedError: .invalidLexeme(lexeme: "{")),
-  (lexeme: "}", initError: .invalidLexeme(lexeme: "}"), pushedError: .invalidLexeme(lexeme: "}")),
-  (lexeme: "<", initError: .invalidLexeme(lexeme: "<"), pushedError: .invalidLexeme(lexeme: "<")),
-  (lexeme: ">", initError: .invalidLexeme(lexeme: ">"), pushedError: .invalidLexeme(lexeme: ">")),
-  (lexeme: ".", initError: .invalidLexeme(lexeme: "."), pushedError: .invalidLexeme(lexeme: ".")),
-  (lexeme: ",", initError: .invalidLexeme(lexeme: ","), pushedError: .invalidLexeme(lexeme: ",")),
+  (
+    lexeme: "=",
+    initError: .invalidLexeme(lexeme: "="),
+    pushedError: .invalidLexeme(lexeme: "=")
+  ),
+  (
+    lexeme: "[",
+    initError: .invalidLexeme(lexeme: "["),
+    pushedError: .invalidLexeme(lexeme: "[")
+  ),
+  (
+    lexeme: "]",
+    initError: .invalidLexeme(lexeme: "]"),
+    pushedError: .invalidLexeme(lexeme: "]")
+  ),
+  (
+    lexeme: "{",
+    initError: .invalidLexeme(lexeme: "{"),
+    pushedError: .invalidLexeme(lexeme: "{")
+  ),
+  (
+    lexeme: "}",
+    initError: .invalidLexeme(lexeme: "}"),
+    pushedError: .invalidLexeme(lexeme: "}")
+  ),
+  (
+    lexeme: "<",
+    initError: .invalidLexeme(lexeme: "<"),
+    pushedError: .invalidLexeme(lexeme: "<")
+  ),
+  (
+    lexeme: ">",
+    initError: .invalidLexeme(lexeme: ">"),
+    pushedError: .invalidLexeme(lexeme: ">")
+  ),
+  (
+    lexeme: ".",
+    initError: .invalidLexeme(lexeme: "."),
+    pushedError: .invalidLexeme(lexeme: ".")
+  ),
+  (
+    lexeme: ",",
+    initError: .invalidLexeme(lexeme: ","),
+    pushedError: .invalidLexeme(lexeme: ",")
+  ),
   (
     lexeme: "**",
     initError: .invalidLexeme(lexeme: "**"),
     pushedError: .invalidLexeme(lexeme: "**")
   ),
-  (lexeme: "&", initError: .invalidLexeme(lexeme: "&"), pushedError: .invalidLexeme(lexeme: "&")),
-  (lexeme: "|", initError: .invalidLexeme(lexeme: "|"), pushedError: .invalidLexeme(lexeme: "|")),
-  (lexeme: "!", initError: .invalidLexeme(lexeme: "!"), pushedError: .invalidLexeme(lexeme: "!")),
-  (lexeme: "~", initError: .invalidLexeme(lexeme: "~"), pushedError: .invalidLexeme(lexeme: "~")),
+  (
+    lexeme: "&",
+    initError: .invalidLexeme(lexeme: "&"),
+    pushedError: .invalidLexeme(lexeme: "&")
+  ),
+  (
+    lexeme: "|",
+    initError: .invalidLexeme(lexeme: "|"),
+    pushedError: .invalidLexeme(lexeme: "|")
+  ),
+  (
+    lexeme: "!",
+    initError: .invalidLexeme(lexeme: "!"),
+    pushedError: .invalidLexeme(lexeme: "!")
+  ),
+  (
+    lexeme: "~",
+    initError: .invalidLexeme(lexeme: "~"),
+    pushedError: .invalidLexeme(lexeme: "~")
+  ),
   (
     lexeme: "..<",
     initError: .invalidLexeme(lexeme: "..<"),
@@ -231,5 +287,9 @@ let invalidLexemeFixtures: [InvalidLexemeFixture] = [
     initError: .invalidLexeme(lexeme: ">>"),
     pushedError: .invalidLexeme(lexeme: ">>")
   ),
-  (lexeme: "%", initError: .invalidLexeme(lexeme: "%"), pushedError: .invalidLexeme(lexeme: "%")),
+  (
+    lexeme: "%",
+    initError: .invalidLexeme(lexeme: "%"),
+    pushedError: .invalidLexeme(lexeme: "%")
+  ),
 ]
