@@ -56,11 +56,11 @@ extension ConstantTests {
       XCTAssertNil(Constant(rawLexeme: fixture.lexeme))
     }
 
-    for fixture in lexemeRollNegativeSidesFixtures {
+    for fixture in rollNegativeSidesFixtures {
       XCTAssertNil(Constant(rawLexeme: fixture.lexeme))
     }
 
-    for fixture in lexemeRollPositiveSidesFixtures {
+    for fixture in rollPositiveSidesFixtures {
       XCTAssertNil(Constant(rawLexeme: fixture.lexeme))
     }
 

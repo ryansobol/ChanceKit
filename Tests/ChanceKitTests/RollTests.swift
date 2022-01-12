@@ -66,11 +66,11 @@ extension RollTests {
       XCTAssertNil(Roll(rawLexeme: fixture.lexeme))
     }
 
-    for fixture in lexemeRollNegativeSidesFixtures {
+    for fixture in rollNegativeSidesFixtures {
       XCTAssertNil(Roll(rawLexeme: fixture.lexeme))
     }
 
-    for fixture in lexemeRollPositiveSidesFixtures {
+    for fixture in rollPositiveSidesFixtures {
       XCTAssertNil(Roll(rawLexeme: fixture.lexeme))
     }
 

@@ -1,11 +1,11 @@
 @testable import ChanceKit
 
-typealias LexemeRollPositiveSidesFixture = (
+typealias RollPositiveSidesFixture = (
   lexeme: String,
   token: RollPositiveSides
 )
 
-let lexemeRollPositiveSidesFixtures: [LexemeRollPositiveSidesFixture] = [
+let rollPositiveSidesFixtures: [RollPositiveSidesFixture] = [
   (lexeme: "0d", token: RollPositiveSides(times: 0)),
   (lexeme: "1d", token: RollPositiveSides(times: 1)),
   (lexeme: "9d", token: RollPositiveSides(times: 9)),

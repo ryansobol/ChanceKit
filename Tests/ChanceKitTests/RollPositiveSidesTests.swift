@@ -38,7 +38,7 @@ extension RollPositiveSidesTests {
 
 extension RollPositiveSidesTests {
   func testInitWithValidRawLexeme() {
-    for fixture in lexemeRollPositiveSidesFixtures {
+    for fixture in rollPositiveSidesFixtures {
       let rawLexeme = fixture.lexeme
       let expected = fixture.token
       let actual = RollPositiveSides(rawLexeme: rawLexeme)
@@ -60,7 +60,7 @@ extension RollPositiveSidesTests {
       XCTAssertNil(RollPositiveSides(rawLexeme: fixture.lexeme))
     }
 
-    for fixture in lexemeRollNegativeSidesFixtures {
+    for fixture in rollNegativeSidesFixtures {
       XCTAssertNil(RollPositiveSides(rawLexeme: fixture.lexeme))
     }
 
