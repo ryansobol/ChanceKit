@@ -1,11 +1,11 @@
 @testable import ChanceKit
 
-typealias LexemeRollFixture = (
+typealias RollFixture = (
   lexeme: String,
   token: Roll
 )
 
-let lexemeRollFixtures: [LexemeRollFixture] = [
+let rollFixtures: [RollFixture] = [
   (lexeme: "0d0", token: Roll(times: 0, sides: 0)),
   (lexeme: "1d1", token: Roll(times: 1, sides: 1)),
   (lexeme: "9d9", token: Roll(times: 9, sides: 9)),

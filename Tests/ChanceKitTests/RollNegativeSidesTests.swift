@@ -56,7 +56,7 @@ extension RollNegativeSidesTests {
       XCTAssertNil(RollNegativeSides(rawLexeme: fixture.lexeme))
     }
 
-    for fixture in lexemeRollFixtures {
+    for fixture in rollFixtures {
       XCTAssertNil(RollNegativeSides(rawLexeme: fixture.lexeme))
     }
 

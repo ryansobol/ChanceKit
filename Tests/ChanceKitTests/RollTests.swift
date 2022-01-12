@@ -48,7 +48,7 @@ extension RollTests {
 
 extension RollTests {
   func testInitWithValidRawLexeme() {
-    for fixture in lexemeRollFixtures {
+    for fixture in rollFixtures {
       let rawLexeme = fixture.lexeme
       let expected = fixture.token
       let actual = Roll(rawLexeme: rawLexeme)
