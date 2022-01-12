@@ -1137,10 +1137,10 @@ let lexemeParenthesisFixtures: [LexemeParenthesisFixture] = [
     withoutTokens: [RollPositiveSides(times: 1)],
     lexeme: "(",
     token: Parenthesis.open,
-    withLexemes: ["1d", "×", "("],
-    withTokens: [RollPositiveSides(times: 1), Operator.multiplication, Parenthesis.open],
-    droppedLexemes: ["1d", "×"],
-    droppedTokens: [RollPositiveSides(times: 1), Operator.multiplication]
+    withLexemes: ["1d", "("],
+    withTokens: [RollPositiveSides(times: 1), Parenthesis.open],
+    droppedLexemes: ["1d"],
+    droppedTokens: [RollPositiveSides(times: 1)]
   ),
   (
     withoutLexemes: ["1d"],
@@ -1313,10 +1313,10 @@ let lexemeParenthesisFixtures: [LexemeParenthesisFixture] = [
     withoutTokens: [RollNegativeSides(times: 1)],
     lexeme: "(",
     token: Parenthesis.open,
-    withLexemes: ["1d-", "×", "("],
-    withTokens: [RollNegativeSides(times: 1), Operator.multiplication, Parenthesis.open],
-    droppedLexemes: ["1d-", "×"],
-    droppedTokens: [RollNegativeSides(times: 1), Operator.multiplication]
+    withLexemes: ["1d-", "("],
+    withTokens: [RollNegativeSides(times: 1), Parenthesis.open],
+    droppedLexemes: ["1d-"],
+    droppedTokens: [RollNegativeSides(times: 1)]
   ),
   (
     withoutLexemes: ["1d-"],

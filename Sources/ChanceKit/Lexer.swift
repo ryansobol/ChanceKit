@@ -22,7 +22,7 @@ func lexed(parenthesis: Parenthesis, into: [Tokenable]) -> [Tokenable] {
   if let lastParenthesis = tokens.last as? Parenthesis, lastParenthesis == .close {
     tokens.append(Operator.multiplication)
   }
-  else if tokens.last is Operand {
+  else if tokens.last is Constant || tokens.last is Roll {
     tokens.append(Operator.multiplication)
   }
 
