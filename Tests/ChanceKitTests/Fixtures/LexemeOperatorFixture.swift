@@ -2448,9 +2448,9 @@ let lexemeOperatorFixtures: [LexemeOperatorFixture] = [
     withoutTokens: [RollNegativeSides(times: 1)],
     lexeme: "-",
     token: Operator.subtraction,
-    withLexemes: ["1d-", "-"],
-    withTokens: [RollNegativeSides(times: 1), Operator.subtraction],
-    droppedLexemes: ["1d-"],
-    droppedTokens: [RollNegativeSides(times: 1)]
+    withLexemes: ["1d-"],
+    withTokens: [RollNegativeSides(times: 1)],
+    droppedLexemes: ["1d"],
+    droppedTokens: [RollPositiveSides(times: 1)]
   ),
 ]
