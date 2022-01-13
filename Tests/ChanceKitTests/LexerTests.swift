@@ -32,8 +32,8 @@ final class LexerTests: XCTestCase {
     }
   }
 
-  func testLexedWithLexemeConstantFixtures() {
-    for fixture in lexemeConstantFixtures {
+  func testLexedWithLexerConstantFixtures() {
+    for fixture in lexerConstantFixtures {
       let token = fixture.token
       let tokens = fixture.withoutTokens
       let expectedTokens = fixture.withTokens
