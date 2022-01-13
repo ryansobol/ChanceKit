@@ -50,6 +50,13 @@ func lexed(operator: Operator, into: [Tokenable]) -> [Tokenable] {
   }
 
   if `operator` == .subtraction {
+    if let lastOperator = tokens.last as? Operator, lastOperator == .subtraction {
+      tokens.append(Parenthesis.open)
+      tokens.append(`operator`)
+
+      return tokens
+    }
+
     if tokens.last is RollNegativeSides {
       return tokens
     }

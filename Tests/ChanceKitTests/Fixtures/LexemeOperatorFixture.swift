@@ -317,10 +317,10 @@ let lexemeOperatorFixtures: [LexemeOperatorFixture] = [
     withoutTokens: [Operator.subtraction],
     lexeme: "-",
     token: Operator.subtraction,
-    withLexemes: ["-"],
-    withTokens: [Operator.subtraction],
-    droppedLexemes: [],
-    droppedTokens: []
+    withLexemes: ["-", "(", "-"],
+    withTokens: [Operator.subtraction, Parenthesis.open, Operator.subtraction],
+    droppedLexemes: ["-", "("],
+    droppedTokens: [Operator.subtraction, Parenthesis.open]
   ),
 
   // MARK: - 0
@@ -714,10 +714,15 @@ let lexemeOperatorFixtures: [LexemeOperatorFixture] = [
     withoutTokens: [Constant(term: 1), Operator.subtraction],
     lexeme: "-",
     token: Operator.subtraction,
-    withLexemes: ["1", "-"],
-    withTokens: [Constant(term: 1), Operator.subtraction],
-    droppedLexemes: ["1"],
-    droppedTokens: [Constant(term: 1)]
+    withLexemes: ["1", "-", "(", "-"],
+    withTokens: [
+      Constant(term: 1),
+      Operator.subtraction,
+      Parenthesis.open,
+      Operator.subtraction
+    ],
+    droppedLexemes: ["1", "-", "("],
+    droppedTokens: [Constant(term: 1), Operator.subtraction, Parenthesis.open,]
   ),
 
   // MARK: - 10
@@ -1121,10 +1126,15 @@ let lexemeOperatorFixtures: [LexemeOperatorFixture] = [
     withoutTokens: [Roll(times: 1, sides: 0), Operator.subtraction],
     lexeme: "-",
     token: Operator.subtraction,
-    withLexemes: ["1d0", "-"],
-    withTokens: [Roll(times: 1, sides: 0), Operator.subtraction],
-    droppedLexemes: ["1d0"],
-    droppedTokens: [Roll(times: 1, sides: 0)]
+    withLexemes: ["1d0", "-", "(", "-"],
+    withTokens: [
+      Roll(times: 1, sides: 0),
+      Operator.subtraction,
+      Parenthesis.open,
+      Operator.subtraction
+    ],
+    droppedLexemes: ["1d0", "-", "("],
+    droppedTokens: [Roll(times: 1, sides: 0), Operator.subtraction, Parenthesis.open]
   ),
 
   // MARK: - 1d0
@@ -1442,10 +1452,15 @@ let lexemeOperatorFixtures: [LexemeOperatorFixture] = [
     withoutTokens: [Roll(times: 1, sides: 1), Operator.subtraction],
     lexeme: "-",
     token: Operator.subtraction,
-    withLexemes: ["1d1", "-"],
-    withTokens: [Roll(times: 1, sides: 1), Operator.subtraction],
-    droppedLexemes: ["1d1"],
-    droppedTokens: [Roll(times: 1, sides: 1)]
+    withLexemes: ["1d1", "-", "(", "-"],
+    withTokens: [
+      Roll(times: 1, sides: 1),
+      Operator.subtraction,
+      Parenthesis.open,
+      Operator.subtraction
+    ],
+    droppedLexemes: ["1d1", "-", "("],
+    droppedTokens: [Roll(times: 1, sides: 1), Operator.subtraction, Parenthesis.open]
   ),
 
   // MARK: - 1d1
@@ -1763,10 +1778,15 @@ let lexemeOperatorFixtures: [LexemeOperatorFixture] = [
     withoutTokens: [Roll(times: 1, sides: 9), Operator.subtraction],
     lexeme: "-",
     token: Operator.subtraction,
-    withLexemes: ["1d9", "-"],
-    withTokens: [Roll(times: 1, sides: 9), Operator.subtraction],
-    droppedLexemes: ["1d9"],
-    droppedTokens: [Roll(times: 1, sides: 9)]
+    withLexemes: ["1d9", "-", "(", "-"],
+    withTokens: [
+      Roll(times: 1, sides: 9),
+      Operator.subtraction,
+      Parenthesis.open,
+      Operator.subtraction
+    ],
+    droppedLexemes: ["1d9", "-", "("],
+    droppedTokens: [Roll(times: 1, sides: 9), Operator.subtraction, Parenthesis.open]
   ),
 
   // MARK: - 1d9
@@ -2084,10 +2104,15 @@ let lexemeOperatorFixtures: [LexemeOperatorFixture] = [
     withoutTokens: [RollPositiveSides(times: 1), Operator.subtraction],
     lexeme: "-",
     token: Operator.subtraction,
-    withLexemes: ["1d", "-"],
-    withTokens: [RollPositiveSides(times: 1), Operator.subtraction],
-    droppedLexemes: ["1d"],
-    droppedTokens: [RollPositiveSides(times: 1)]
+    withLexemes: ["1d", "-", "(", "-"],
+    withTokens: [
+      RollPositiveSides(times: 1),
+      Operator.subtraction,
+      Parenthesis.open,
+      Operator.subtraction,
+    ],
+    droppedLexemes: ["1d", "-", "("],
+    droppedTokens: [RollPositiveSides(times: 1), Operator.subtraction, Parenthesis.open]
   ),
 
   // MARK: - 1d
@@ -2405,10 +2430,15 @@ let lexemeOperatorFixtures: [LexemeOperatorFixture] = [
     withoutTokens: [RollNegativeSides(times: 1), Operator.subtraction],
     lexeme: "-",
     token: Operator.subtraction,
-    withLexemes: ["1d-", "-"],
-    withTokens: [RollNegativeSides(times: 1), Operator.subtraction],
-    droppedLexemes: ["1d-"],
-    droppedTokens: [RollNegativeSides(times: 1)]
+    withLexemes: ["1d-", "-", "(", "-"],
+    withTokens: [
+      RollNegativeSides(times: 1),
+      Operator.subtraction,
+      Parenthesis.open,
+      Operator.subtraction,
+    ],
+    droppedLexemes: ["1d-", "-", "("],
+    droppedTokens: [RollNegativeSides(times: 1), Operator.subtraction, Parenthesis.open]
   ),
 
   // MARK: - 1d-
