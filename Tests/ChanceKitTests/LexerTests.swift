@@ -2,8 +2,8 @@
 import XCTest
 
 final class LexerTests: XCTestCase {
-  func testLexedWithLexemeParenthesisFixtures() {
-    for fixture in lexemeParenthesisFixtures {
+  func testLexedWithLexerParenthesisFixtures() {
+    for fixture in lexerParenthesisFixtures {
       let token = fixture.token
       let tokens = fixture.withoutTokens
       let expectedTokens = fixture.withTokens

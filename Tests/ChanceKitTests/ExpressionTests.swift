@@ -76,8 +76,8 @@ extension ExpressionTests {
 // MARK: - Inclusion
 
 extension ExpressionTests {
-  func testPushedWithLexemeParenthesisFixtures() {
-    for fixture in lexemeParenthesisFixtures {
+  func testPushedWithLexerParenthesisFixtures() {
+    for fixture in lexerParenthesisFixtures {
       let withoutLexemes = fixture.withoutLexemes
       let lexeme = fixture.lexeme
       let withLexemes = fixture.withLexemes
@@ -151,8 +151,8 @@ extension ExpressionTests {
     XCTAssertEqual(expected, actual)
   }
 
-  func testDroppedWithLexemeParenthesisFixtures() {
-    for fixture in lexemeParenthesisFixtures {
+  func testDroppedWithLexerParenthesisFixtures() {
+    for fixture in lexerParenthesisFixtures {
       let withLexemes = fixture.withLexemes
       let droppedLexemes = fixture.droppedLexemes
 
