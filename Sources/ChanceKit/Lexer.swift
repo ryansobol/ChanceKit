@@ -115,6 +115,15 @@ func lexed(operand: Operand, into: [Tokenable]) throws -> [Tokenable] {
 
     switch operand {
     case let currentConstant as Constant:
+      let tokensCount = tokens.count
+
+      if tokensCount == 1 && lastConstant == Constant(term: 0) {
+        tokens.removeLast()
+        tokens.append(currentConstant)
+
+        return tokens
+      }
+
       let nextOperand = try lastConstant.combined(currentConstant)
 
       tokens.removeLast()
