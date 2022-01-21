@@ -719,10 +719,10 @@ let lexerOperatorFixtures: [LexerOperatorFixture] = [
       Constant(term: 1),
       Operator.subtraction,
       Parenthesis.open,
-      Operator.subtraction
+      Operator.subtraction,
     ],
     droppedLexemes: ["1", "-", "("],
-    droppedTokens: [Constant(term: 1), Operator.subtraction, Parenthesis.open,]
+    droppedTokens: [Constant(term: 1), Operator.subtraction, Parenthesis.open]
   ),
 
   // MARK: - 10
@@ -1131,7 +1131,7 @@ let lexerOperatorFixtures: [LexerOperatorFixture] = [
       Roll(times: 1, sides: 0),
       Operator.subtraction,
       Parenthesis.open,
-      Operator.subtraction
+      Operator.subtraction,
     ],
     droppedLexemes: ["1d0", "-", "("],
     droppedTokens: [Roll(times: 1, sides: 0), Operator.subtraction, Parenthesis.open]
@@ -1457,7 +1457,7 @@ let lexerOperatorFixtures: [LexerOperatorFixture] = [
       Roll(times: 1, sides: 1),
       Operator.subtraction,
       Parenthesis.open,
-      Operator.subtraction
+      Operator.subtraction,
     ],
     droppedLexemes: ["1d1", "-", "("],
     droppedTokens: [Roll(times: 1, sides: 1), Operator.subtraction, Parenthesis.open]
@@ -1783,7 +1783,7 @@ let lexerOperatorFixtures: [LexerOperatorFixture] = [
       Roll(times: 1, sides: 9),
       Operator.subtraction,
       Parenthesis.open,
-      Operator.subtraction
+      Operator.subtraction,
     ],
     droppedLexemes: ["1d9", "-", "("],
     droppedTokens: [Roll(times: 1, sides: 9), Operator.subtraction, Parenthesis.open]

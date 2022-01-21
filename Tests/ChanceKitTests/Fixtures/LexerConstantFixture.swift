@@ -566,7 +566,7 @@ let lexerConstantFixtures: [LexerConstantFixture] = [
       Constant(term: 1),
       Operator.multiplication,
       Parenthesis.open,
-      Operator.subtraction
+      Operator.subtraction,
     ]
   ),
   (
@@ -586,7 +586,7 @@ let lexerConstantFixtures: [LexerConstantFixture] = [
       Constant(term: 1),
       Operator.multiplication,
       Parenthesis.open,
-      Operator.subtraction
+      Operator.subtraction,
     ]
   ),
 
@@ -654,7 +654,7 @@ let lexerConstantFixtures: [LexerConstantFixture] = [
       Constant(term: 1),
       Parenthesis.close,
       Operator.multiplication,
-      Operator.subtraction
+      Operator.subtraction,
     ]
   ),
   (
@@ -674,7 +674,7 @@ let lexerConstantFixtures: [LexerConstantFixture] = [
       Constant(term: 1),
       Parenthesis.close,
       Operator.multiplication,
-      Operator.subtraction
+      Operator.subtraction,
     ]
   ),
 
@@ -1053,7 +1053,7 @@ let lexerConstantFixtures: [LexerConstantFixture] = [
       Roll(times: 1, sides: 0),
       Operator.multiplication,
       Parenthesis.open,
-      Operator.subtraction
+      Operator.subtraction,
     ]
   ),
   (
@@ -1073,7 +1073,7 @@ let lexerConstantFixtures: [LexerConstantFixture] = [
       Roll(times: 1, sides: 0),
       Operator.multiplication,
       Parenthesis.open,
-      Operator.subtraction
+      Operator.subtraction,
     ]
   ),
 
@@ -1141,7 +1141,7 @@ let lexerConstantFixtures: [LexerConstantFixture] = [
       Roll(times: 1, sides: 0),
       Parenthesis.close,
       Operator.multiplication,
-      Operator.subtraction
+      Operator.subtraction,
     ]
   ),
   (
@@ -1161,7 +1161,7 @@ let lexerConstantFixtures: [LexerConstantFixture] = [
       Roll(times: 1, sides: 0),
       Parenthesis.close,
       Operator.multiplication,
-      Operator.subtraction
+      Operator.subtraction,
     ]
   ),
 
@@ -1474,7 +1474,7 @@ let lexerConstantFixtures: [LexerConstantFixture] = [
       Roll(times: 1, sides: 1),
       Operator.multiplication,
       Parenthesis.open,
-      Operator.subtraction
+      Operator.subtraction,
     ]
   ),
   (
@@ -1494,7 +1494,7 @@ let lexerConstantFixtures: [LexerConstantFixture] = [
       Roll(times: 1, sides: 1),
       Operator.multiplication,
       Parenthesis.open,
-      Operator.subtraction
+      Operator.subtraction,
     ]
   ),
 
@@ -1562,7 +1562,7 @@ let lexerConstantFixtures: [LexerConstantFixture] = [
       Roll(times: 1, sides: 1),
       Parenthesis.close,
       Operator.multiplication,
-      Operator.subtraction
+      Operator.subtraction,
     ]
   ),
   (
@@ -1582,7 +1582,7 @@ let lexerConstantFixtures: [LexerConstantFixture] = [
       Roll(times: 1, sides: 1),
       Parenthesis.close,
       Operator.multiplication,
-      Operator.subtraction
+      Operator.subtraction,
     ]
   ),
 
@@ -1895,7 +1895,7 @@ let lexerConstantFixtures: [LexerConstantFixture] = [
       Roll(times: 1, sides: 9),
       Operator.multiplication,
       Parenthesis.open,
-      Operator.subtraction
+      Operator.subtraction,
     ]
   ),
   (
@@ -1915,7 +1915,7 @@ let lexerConstantFixtures: [LexerConstantFixture] = [
       Roll(times: 1, sides: 9),
       Operator.multiplication,
       Parenthesis.open,
-      Operator.subtraction
+      Operator.subtraction,
     ]
   ),
 
@@ -1983,7 +1983,7 @@ let lexerConstantFixtures: [LexerConstantFixture] = [
       Roll(times: 1, sides: 9),
       Parenthesis.close,
       Operator.multiplication,
-      Operator.subtraction
+      Operator.subtraction,
     ]
   ),
   (
@@ -2003,7 +2003,7 @@ let lexerConstantFixtures: [LexerConstantFixture] = [
       Roll(times: 1, sides: 9),
       Parenthesis.close,
       Operator.multiplication,
-      Operator.subtraction
+      Operator.subtraction,
     ]
   ),
 
@@ -2316,7 +2316,7 @@ let lexerConstantFixtures: [LexerConstantFixture] = [
       RollPositiveSides(times: 1),
       Operator.multiplication,
       Parenthesis.open,
-      Operator.subtraction
+      Operator.subtraction,
     ]
   ),
   (
@@ -2336,7 +2336,7 @@ let lexerConstantFixtures: [LexerConstantFixture] = [
       RollPositiveSides(times: 1),
       Operator.multiplication,
       Parenthesis.open,
-      Operator.subtraction
+      Operator.subtraction,
     ]
   ),
 
@@ -2404,7 +2404,7 @@ let lexerConstantFixtures: [LexerConstantFixture] = [
       RollPositiveSides(times: 1),
       Parenthesis.close,
       Operator.multiplication,
-      Operator.subtraction
+      Operator.subtraction,
     ]
   ),
   (
@@ -2424,7 +2424,7 @@ let lexerConstantFixtures: [LexerConstantFixture] = [
       RollPositiveSides(times: 1),
       Parenthesis.close,
       Operator.multiplication,
-      Operator.subtraction
+      Operator.subtraction,
     ]
   ),
 
@@ -2577,7 +2577,7 @@ let lexerConstantFixtures: [LexerConstantFixture] = [
     droppedTokens: [
       RollPositiveSides(times: 1),
       Operator.multiplication,
-      Operator.subtraction
+      Operator.subtraction,
     ]
   ),
   (
@@ -2591,7 +2591,7 @@ let lexerConstantFixtures: [LexerConstantFixture] = [
     droppedTokens: [
       RollPositiveSides(times: 1),
       Operator.multiplication,
-      Operator.subtraction
+      Operator.subtraction,
     ]
   ),
 
@@ -2745,7 +2745,7 @@ let lexerConstantFixtures: [LexerConstantFixture] = [
       RollNegativeSides(times: 1),
       Operator.multiplication,
       Parenthesis.open,
-      Operator.subtraction
+      Operator.subtraction,
     ]
   ),
   (
@@ -2765,7 +2765,7 @@ let lexerConstantFixtures: [LexerConstantFixture] = [
       RollNegativeSides(times: 1),
       Operator.multiplication,
       Parenthesis.open,
-      Operator.subtraction
+      Operator.subtraction,
     ]
   ),
 
@@ -2833,7 +2833,7 @@ let lexerConstantFixtures: [LexerConstantFixture] = [
       RollNegativeSides(times: 1),
       Parenthesis.close,
       Operator.multiplication,
-      Operator.subtraction
+      Operator.subtraction,
     ]
   ),
   (
@@ -2853,7 +2853,7 @@ let lexerConstantFixtures: [LexerConstantFixture] = [
       RollNegativeSides(times: 1),
       Parenthesis.close,
       Operator.multiplication,
-      Operator.subtraction
+      Operator.subtraction,
     ]
   ),
 
@@ -3006,7 +3006,7 @@ let lexerConstantFixtures: [LexerConstantFixture] = [
     droppedTokens: [
       RollNegativeSides(times: 1),
       Operator.multiplication,
-      Operator.subtraction
+      Operator.subtraction,
     ]
   ),
   (
@@ -3020,7 +3020,7 @@ let lexerConstantFixtures: [LexerConstantFixture] = [
     droppedTokens: [
       RollNegativeSides(times: 1),
       Operator.multiplication,
-      Operator.subtraction
+      Operator.subtraction,
     ]
   ),
 
