@@ -26,7 +26,7 @@ final class TokenableTests: XCTestCase {
 extension TokenableTests {
   func testDescription() {
     typealias Fixture = (
-      mock: Tokenable,
+      mock: any Tokenable,
       expected: String
     )
 
@@ -53,8 +53,8 @@ extension TokenableTests {
 extension TokenableTests {
   func testIsEqualTo() {
     typealias Fixture = (
-      mock1: Tokenable,
-      mock2: Tokenable
+      mock1: any Tokenable,
+      mock2: any Tokenable
     )
 
     let fixtures: [Fixture] = [
@@ -75,8 +75,8 @@ extension TokenableTests {
 
   func testIsNotEqualTo() {
     typealias Fixture = (
-      mock1: Tokenable,
-      mock2: Tokenable
+      mock1: any Tokenable,
+      mock2: any Tokenable
     )
 
     let fixtures: [Fixture] = [

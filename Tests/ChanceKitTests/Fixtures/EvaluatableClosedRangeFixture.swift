@@ -3,8 +3,8 @@
 typealias EvaluatableClosedRangeFixture = (
   description: String,
   lexemes: [String],
-  infixTokens: [Tokenable],
-  postfixTokens: [Tokenable],
+  infixTokens: [any Tokenable],
+  postfixTokens: [any Tokenable],
   value: ClosedRange<Int>
 )
 

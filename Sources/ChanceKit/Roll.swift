@@ -46,7 +46,7 @@ extension Roll: Operand, Equatable {
 
   // MARK: - Inclusion
 
-  func combined(_ other: Constant) throws -> Operand {
+  func combined(_ other: Constant) throws -> any Operand {
     let lexemeOther = String(describing: other)
 
     guard let sidesResult = Int(String(self.sides) + lexemeOther) else {
@@ -59,7 +59,7 @@ extension Roll: Operand, Equatable {
     return Roll(times: self.times, sides: sidesResult)
   }
 
-  func combined(_ other: Roll) throws -> Operand {
+  func combined(_ other: Roll) throws -> any Operand {
     if self.sides != other.sides {
       throw Expression.PushedError.invalidCombination(
         operandLeft: String(describing: self),
@@ -79,14 +79,14 @@ extension Roll: Operand, Equatable {
     return Roll(times: timesResult, sides: self.sides)
   }
 
-  func combined(_ other: RollNegativeSides) throws -> Operand {
+  func combined(_ other: RollNegativeSides) throws -> any Operand {
     throw Expression.PushedError.invalidCombination(
       operandLeft: String(describing: self),
       operandRight: String(describing: other)
     )
   }
 
-  func combined(_ other: RollPositiveSides) throws -> Operand {
+  func combined(_ other: RollPositiveSides) throws -> any Operand {
     throw Expression.PushedError.invalidCombination(
       operandLeft: String(describing: self),
       operandRight: String(describing: other)
@@ -95,7 +95,7 @@ extension Roll: Operand, Equatable {
 
   // MARK: - Exclusion
 
-  func dropped() -> Tokenable? {
+  func dropped() -> (any Tokenable)? {
     let quotient = self.sides / 10
 
     if quotient != 0 {
@@ -196,7 +196,7 @@ extension Roll: Operand, Equatable {
 
   // MARK: - Operation
 
-  func negated() throws -> Operand {
+  func negated() throws -> any Operand {
     // Because -Int.min > Int.max
     if self.sides == Int.min {
       throw Expression.PushedError.overflowNegation(operand: String(describing: self))

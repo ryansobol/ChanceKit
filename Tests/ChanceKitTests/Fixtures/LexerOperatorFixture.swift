@@ -2,13 +2,13 @@
 
 typealias LexerOperatorFixture = (
   withoutLexemes: [String],
-  withoutTokens: [Tokenable],
+  withoutTokens: [any Tokenable],
   lexeme: String,
   token: Operator,
   withLexemes: [String],
-  withTokens: [Tokenable],
+  withTokens: [any Tokenable],
   droppedLexemes: [String],
-  droppedTokens: [Tokenable]
+  droppedTokens: [any Tokenable]
 )
 
 let lexerOperatorFixtures: [LexerOperatorFixture] = [

@@ -3,8 +3,8 @@
 typealias ParsableOnlyFixture = (
   description: String,
   lexemes: [String],
-  infixTokens: [Tokenable],
-  postfixTokens: [Tokenable],
+  infixTokens: [any Tokenable],
+  postfixTokens: [any Tokenable],
   error: Expression.InterpretError
 )
 

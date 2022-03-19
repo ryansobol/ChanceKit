@@ -1,10 +1,10 @@
-func parse(infixTokens: [Tokenable]) throws -> [Tokenable] {
-  var markables = [Markable]()
-  var postfixTokens = [Tokenable]()
+func parse(infixTokens: [any Tokenable]) throws -> [any Tokenable] {
+  var markables = [any Markable]()
+  var postfixTokens = [any Tokenable]()
 
   for currentToken in infixTokens {
     switch currentToken {
-    case is Operand:
+    case is any Operand:
       postfixTokens.append(currentToken)
 
     case let currentParenthesis as Parenthesis:

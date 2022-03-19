@@ -3,7 +3,7 @@
 typealias LexebleOnlyFixture = (
   description: String,
   lexemes: [String],
-  infixTokens: [Tokenable],
+  infixTokens: [any Tokenable],
   error: Expression.InterpretError
 )
 

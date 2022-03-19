@@ -23,7 +23,7 @@ extension Constant: Operand, Equatable {
 
   // MARK: - Inclusion
 
-  func combined(_ other: Constant) throws -> Operand {
+  func combined(_ other: Constant) throws -> any Operand {
     let lexemeSelf = String(describing: self)
     let lexemeOther = String(describing: other)
 
@@ -37,21 +37,21 @@ extension Constant: Operand, Equatable {
     return Constant(term: termResult)
   }
 
-  func combined(_ other: Roll) throws -> Operand {
+  func combined(_ other: Roll) throws -> any Operand {
     throw Expression.PushedError.invalidCombination(
       operandLeft: String(describing: self),
       operandRight: String(describing: other)
     )
   }
 
-  func combined(_ other: RollNegativeSides) throws -> Operand {
+  func combined(_ other: RollNegativeSides) throws -> any Operand {
     throw Expression.PushedError.invalidCombination(
       operandLeft: String(describing: self),
       operandRight: String(describing: other)
     )
   }
 
-  func combined(_ other: RollPositiveSides) throws -> Operand {
+  func combined(_ other: RollPositiveSides) throws -> any Operand {
     throw Expression.PushedError.invalidCombination(
       operandLeft: String(describing: self),
       operandRight: String(describing: other)
@@ -60,7 +60,7 @@ extension Constant: Operand, Equatable {
 
   // MARK: - Exclusion
 
-  func dropped() -> Tokenable? {
+  func dropped() -> (any Tokenable)? {
     let quotient = self.term / 10
 
     if quotient != 0 {
@@ -84,7 +84,7 @@ extension Constant: Operand, Equatable {
 
   // MARK: - Operation
 
-  func negated() throws -> Operand {
+  func negated() throws -> any Operand {
     // Because -Int.min > Int.max
     if self.term == Int.min {
       throw Expression.PushedError.overflowNegation(operand: String(describing: self))

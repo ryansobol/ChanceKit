@@ -1,13 +1,13 @@
-func evaluate(postfixTokens: [Tokenable]) throws -> Int {
+func evaluate(postfixTokens: [any Tokenable]) throws -> Int {
   if postfixTokens.isEmpty {
     return 0
   }
 
-  var operands = [Operand]()
+  var operands = [any Operand]()
 
   for currentToken in postfixTokens {
     switch currentToken {
-    case let currentOperand as Operand:
+    case let currentOperand as any Operand:
       operands.append(currentOperand)
 
     case let currentOperator as Operator:

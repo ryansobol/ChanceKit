@@ -1,4 +1,4 @@
-func lexed(parenthesis: Parenthesis, into: [Tokenable]) -> [Tokenable] {
+func lexed(parenthesis: Parenthesis, into: [any Tokenable]) -> [any Tokenable] {
   var tokens = into
 
   if parenthesis == .close {
@@ -31,7 +31,7 @@ func lexed(parenthesis: Parenthesis, into: [Tokenable]) -> [Tokenable] {
   return tokens
 }
 
-func lexed(operator: Operator, into: [Tokenable]) -> [Tokenable] {
+func lexed(operator: Operator, into: [any Tokenable]) -> [any Tokenable] {
   var tokens = into
 
   if `operator` == .addition {
@@ -80,7 +80,7 @@ func lexed(operator: Operator, into: [Tokenable]) -> [Tokenable] {
   return tokens
 }
 
-func lexed(operand: Operand, into: [Tokenable]) throws -> [Tokenable] {
+func lexed(operand: any Operand, into: [any Tokenable]) throws -> [any Tokenable] {
   var tokens = into
 
   switch tokens.last {

@@ -2,13 +2,13 @@
 
 typealias LexerParenthesisFixture = (
   withoutLexemes: [String],
-  withoutTokens: [Tokenable],
+  withoutTokens: [any Tokenable],
   lexeme: String,
   token: Parenthesis,
   withLexemes: [String],
-  withTokens: [Tokenable],
+  withTokens: [any Tokenable],
   droppedLexemes: [String],
-  droppedTokens: [Tokenable]
+  droppedTokens: [any Tokenable]
 )
 
 let lexerParenthesisFixtures: [LexerParenthesisFixture] = [

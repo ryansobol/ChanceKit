@@ -35,7 +35,7 @@ extension RollNegativeSides: Operand, Equatable {
 
   // MARK: - Inclusion
 
-  func combined(_ other: Constant) throws -> Operand {
+  func combined(_ other: Constant) throws -> any Operand {
     // Because -Int.min > Int.max
     if other.term == Int.min {
       throw Expression.PushedError.invalidCombination(
@@ -47,14 +47,14 @@ extension RollNegativeSides: Operand, Equatable {
     return Roll(times: self.times, sides: -other.term)
   }
 
-  func combined(_ other: Roll) throws -> Operand {
+  func combined(_ other: Roll) throws -> any Operand {
     throw Expression.PushedError.invalidCombination(
       operandLeft: String(describing: self),
       operandRight: String(describing: other)
     )
   }
 
-  func combined(_ other: RollNegativeSides) throws -> Operand {
+  func combined(_ other: RollNegativeSides) throws -> any Operand {
     let (timesResult, didOverflow) = self.times.addingReportingOverflow(other.times)
 
     if didOverflow {
@@ -67,7 +67,7 @@ extension RollNegativeSides: Operand, Equatable {
     return RollNegativeSides(times: timesResult)
   }
 
-  func combined(_ other: RollPositiveSides) throws -> Operand {
+  func combined(_ other: RollPositiveSides) throws -> any Operand {
     throw Expression.PushedError.invalidCombination(
       operandLeft: String(describing: self),
       operandRight: String(describing: other)
@@ -76,7 +76,7 @@ extension RollNegativeSides: Operand, Equatable {
 
   // MARK: - Exclusion
 
-  func dropped() -> Tokenable? {
+  func dropped() -> (any Tokenable)? {
     return RollPositiveSides(times: self.times)
   }
 
@@ -88,7 +88,7 @@ extension RollNegativeSides: Operand, Equatable {
 
   // MARK: - Operation
 
-  func negated() throws -> Operand {
+  func negated() throws -> any Operand {
     return RollPositiveSides(times: self.times)
   }
 }

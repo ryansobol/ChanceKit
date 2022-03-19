@@ -2,13 +2,13 @@
 
 typealias LexerConstantFixture = (
   withoutLexemes: [String],
-  withoutTokens: [Tokenable],
+  withoutTokens: [any Tokenable],
   lexeme: String,
   token: Constant,
   withLexemes: [String],
-  withTokens: [Tokenable],
+  withTokens: [any Tokenable],
   droppedLexemes: [String],
-  droppedTokens: [Tokenable]
+  droppedTokens: [any Tokenable]
 )
 
 let lexerConstantFixtures: [LexerConstantFixture] = [

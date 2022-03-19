@@ -59,7 +59,7 @@
 /// }
 /// ```
 public struct Expression {
-  let tokens: [Tokenable]
+  let tokens: [any Tokenable]
 }
 
 // MARK: - Initialization
@@ -139,7 +139,7 @@ extension Expression {
     self.tokens = []
   }
 
-  init(_ tokens: [Tokenable]) {
+  init(_ tokens: [any Tokenable]) {
     self.tokens = tokens
   }
 }
@@ -258,7 +258,7 @@ extension Expression {
       return self
     }
 
-    if let lastOperand = lastToken as? Operand, let remainingToken = lastOperand.dropped() {
+    if let lastOperand = lastToken as? any Operand, let remainingToken = lastOperand.dropped() {
       tokens.append(remainingToken)
     }
 
