@@ -255,18 +255,4 @@ extension ExpressionTests {
       }
     }
   }
-
-  func testInterpretPerformance() {
-    self.measure {
-      for fixture in evaluatableIntegerFixtures {
-        let lexemes = fixture.lexemes
-        let expected = fixture.value
-
-        let expression = try! Expression(lexemes: lexemes)
-        let actual = try! expression.interpret()
-
-        XCTAssertEqual(expected, actual, "lexemes: \(lexemes)")
-      }
-    }
-  }
 }
