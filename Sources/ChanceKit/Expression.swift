@@ -1,6 +1,6 @@
 /// A model representing a mathematical expression that supports probabilities.
 ///
-/// An expression is composed of a sequence of lexemes—numbers and polyhedral dice rolls, separated by arithmetic operations and potentially organized into arithmetic groups. When interpretted, an expression produces a single, probablistic result. New expressions that are longer or shorter in length can be derived from older ones.
+/// An expression is composed of a sequence of lexemes, which are numbers and polyhedral dice rolls that are separated by arithmetic operations, and optionally organized into arithmetic groups. When interpretted, an expression produces a single, probablistic result. New expressions that are longer or shorter in length can be derived from older ones.
 ///
 /// An empty expression is initialized with no lexemes using the ``init()`` initializer.
 ///
