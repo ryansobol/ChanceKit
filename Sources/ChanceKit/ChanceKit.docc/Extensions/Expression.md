@@ -4,8 +4,8 @@
 
 ### Initializing
 
-- ``init(lexemes:)``
 - ``init()``
+- ``init(lexemes:)``
 
 ### Interpretting
 

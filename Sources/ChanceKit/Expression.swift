@@ -2,13 +2,20 @@
 ///
 /// An expression is composed of a sequence of lexemes—numbers and polyhedral dice rolls, separated by arithmetic operations and potentially organized into arithmetic groups. When interpretted, an expression produces a single, probablistic result. New expressions that are longer or shorter in length can be derived from older ones.
 ///
-/// An expression is initialized with zero or more lexemes using the ``init(lexemes:)`` initializer.
+/// An empty expression is initialized with no lexemes using the ``init()`` initializer.
 ///
 /// ```swift
 /// import ChanceKit
 ///
-/// let expression: Expression
+/// var expression = Expression()
 ///
+/// print("The expression is \(expression)")
+/// // Prints "The expression is "
+/// ```
+///
+/// Alternatively, an expression can be initialized with a sequence of lexemes using the ``init(lexemes:)`` initializer.
+///
+/// ```swift
 /// do {
 ///   expression = try Expression(lexemes: ["1d6", "+", "4"])
 ///
@@ -65,13 +72,20 @@ public struct Expression {
 // MARK: - Initialization
 
 extension Expression {
+  /// Initializes an empty expression with no lexemes.
+  ///
+  /// See the ``init(lexemes:)`` method to learn more about lexemes.
+  public init() {
+    self.tokens = []
+  }
+
   /// A model representing errors thrown when initializing an expression.
   public enum InitError: Error, Equatable {
     /// The error thrown when a lexeme is invalid.
     case invalidLexeme(lexeme: String)
   }
 
-  /// Initializes an expression with zero or more lexemes.
+  /// Initializes an expression with a sequence of lexemes.
   ///
   /// A lexeme is text that represents either a number, polyhedral dice roll, partial polyhedral dice roll, arithmetic operation, or arithmetic group.
   ///
@@ -130,13 +144,6 @@ extension Expression {
 
       throw InitError.invalidLexeme(lexeme: lexeme)
     }
-  }
-
-  /// Initializes a blank expression without any lexemes.
-  ///
-  /// See the ``init(lexemes:)`` method to learn more about lexemes.
-  public init() {
-    self.tokens = []
   }
 
   init(_ tokens: [any Tokenable]) {
