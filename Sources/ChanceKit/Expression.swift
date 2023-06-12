@@ -87,6 +87,10 @@ extension Expression {
 
   /// Initializes an expression with a sequence of lexemes.
   ///
+  /// - Parameter lexemes: The zero or more lexemes for the expression.
+  ///
+  /// - Throws: ``InitError`` if the expression cannot be initialized.
+  ///
   /// A lexeme is text that represents either a number, polyhedral dice roll, partial polyhedral dice roll, arithmetic operation, or arithmetic group.
   ///
   /// #### Number
@@ -98,7 +102,7 @@ extension Expression {
   /// Text representing an `Int` value, followed by the `d` character, followed by another `Int` value. For example, `"3d6"`, `"-3d6"`,`"3d-6"`, `"-3d-6"`, etc.
   ///
   /// #### Partial Polyhedral Dice Roll
-
+  ///
   /// Text representing an `Int` value, followed by the `d` character, possibly followed by the `-` character. For example, `"3d"`, `"-3d"`, `"3d-"`, `"-3d-"`, etc.
   ///
   /// #### Arithmetic Operation
@@ -112,10 +116,6 @@ extension Expression {
   /// #### Deriving Expressions
   ///
   /// A new, shorter expression can be derived with the ``dropped()`` method. And a new, longer expression can be derived with the ``pushed(lexeme:)`` method.
-  ///
-  /// - Parameter lexemes: The zero or more lexemes for the expression.
-  ///
-  /// - Throws: ``InitError`` if the expression cannot be initialized.
   public init(lexemes: [String]) throws {
     self.tokens = try lexemes.map { lexeme in
       if let parenthesis = Parenthesis(rawValue: lexeme) {
