@@ -8,6 +8,9 @@ ChanceKit provides an ``Expression`` structure for initializing, interpretting, 
 
 ## Topics
 
-### Structures
+### Essentials
 
+- <doc:GettingStarted>
+- <doc:ExpressionPushedInteractions>
 - ``Expression``
+
