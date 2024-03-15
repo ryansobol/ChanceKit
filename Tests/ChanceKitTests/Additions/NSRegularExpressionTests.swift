@@ -6,31 +6,31 @@ final class NSRegularExpressionTests: XCTestCase {}
 // MARK: - Initialization
 
 extension NSRegularExpressionTests {
-  func testInitWithLegalPattern() {
-    let actual = NSRegularExpression("42")
-    let expected = try! NSRegularExpression(pattern: "42")
+	func testInitWithLegalPattern() {
+		let actual = NSRegularExpression("42")
+		let expected = try! NSRegularExpression(pattern: "42")
 
-    XCTAssertEqual(expected, actual)
-  }
+		XCTAssertEqual(expected, actual)
+	}
 }
 
 // MARK: - Extraction
 
 extension NSRegularExpressionTests {
-  func testFirstMatch() {
-    let regex = NSRegularExpression("ab")
-    let string = "abc"
+	func testFirstMatch() {
+		let regex = NSRegularExpression("ab")
+		let string = "abc"
 
-    let actual = regex.firstMatch(in: string)!
+		let actual = regex.firstMatch(in: string)!
 
-    let expected = regex.firstMatch(
-      in: string,
-      options: [],
-      range: NSRange(location: 0, length: string.utf16.count)
-    )!
+		let expected = regex.firstMatch(
+			in: string,
+			options: [],
+			range: NSRange(location: 0, length: string.utf16.count)
+		)!
 
-    XCTAssertEqual(expected.range, actual.range)
-    XCTAssertEqual(expected.resultType, actual.resultType)
-    XCTAssertEqual(expected.numberOfRanges, actual.numberOfRanges)
-  }
+		XCTAssertEqual(expected.range, actual.range)
+		XCTAssertEqual(expected.resultType, actual.resultType)
+		XCTAssertEqual(expected.numberOfRanges, actual.numberOfRanges)
+	}
 }

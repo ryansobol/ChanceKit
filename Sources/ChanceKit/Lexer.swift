@@ -1,218 +1,218 @@
 func lexed(parenthesis: Parenthesis, into: [any Tokenable]) -> [any Tokenable] {
-  var tokens = into
+	var tokens = into
 
-  if parenthesis == .close {
-    if !tokens.isEmpty {
-      let parenthesisRatio = tokens
-        .filter { $0 is Parenthesis }
-        .map { $0 as! Parenthesis }
-        .map { $0 == .open ? 1 : -1 }
-        .reduce(0, +)
+	if parenthesis == .close {
+		if !tokens.isEmpty {
+			let parenthesisRatio = tokens
+				.filter { $0 is Parenthesis }
+				.map { $0 as! Parenthesis }
+				.map { $0 == .open ? 1 : -1 }
+				.reduce(0, +)
 
-      if parenthesisRatio == 0 && (tokens.last is Constant || tokens.last is Roll) {
-        tokens.insert(Parenthesis.open, at: 0)
-      }
-    }
+			if parenthesisRatio == 0 && (tokens.last is Constant || tokens.last is Roll) {
+				tokens.insert(Parenthesis.open, at: 0)
+			}
+		}
 
-    tokens.append(parenthesis)
+		tokens.append(parenthesis)
 
-    return tokens
-  }
+		return tokens
+	}
 
-  if let lastParenthesis = tokens.last as? Parenthesis, lastParenthesis == .close {
-    tokens.append(Operator.multiplication)
-  }
-  else if tokens.last is Constant || tokens.last is Roll {
-    tokens.append(Operator.multiplication)
-  }
+	if let lastParenthesis = tokens.last as? Parenthesis, lastParenthesis == .close {
+		tokens.append(Operator.multiplication)
+	}
+	else if tokens.last is Constant || tokens.last is Roll {
+		tokens.append(Operator.multiplication)
+	}
 
-  tokens.append(parenthesis)
+	tokens.append(parenthesis)
 
-  return tokens
+	return tokens
 }
 
 func lexed(operator: Operator, into: [any Tokenable]) -> [any Tokenable] {
-  var tokens = into
+	var tokens = into
 
-  if `operator` == .addition {
-    if tokens.last is RollPositiveSides {
-      return tokens
-    }
+	if `operator` == .addition {
+		if tokens.last is RollPositiveSides {
+			return tokens
+		}
 
-    if let lastRollNegativeSides = tokens.last as? RollNegativeSides {
-      let rollPositiveSides = try! lastRollNegativeSides.negated()
+		if let lastRollNegativeSides = tokens.last as? RollNegativeSides {
+			let rollPositiveSides = try! lastRollNegativeSides.negated()
 
-      tokens.removeLast()
-      tokens.append(rollPositiveSides)
+			tokens.removeLast()
+			tokens.append(rollPositiveSides)
 
-      return tokens
-    }
-  }
+			return tokens
+		}
+	}
 
-  if `operator` == .subtraction {
-    if let lastOperator = tokens.last as? Operator, lastOperator == .subtraction {
-      tokens.append(Parenthesis.open)
-      tokens.append(`operator`)
+	if `operator` == .subtraction {
+		if let lastOperator = tokens.last as? Operator, lastOperator == .subtraction {
+			tokens.append(Parenthesis.open)
+			tokens.append(`operator`)
 
-      return tokens
-    }
+			return tokens
+		}
 
-    if tokens.last is RollNegativeSides {
-      return tokens
-    }
+		if tokens.last is RollNegativeSides {
+			return tokens
+		}
 
-    if let lastRollPositiveSides = tokens.last as? RollPositiveSides {
-      let rollNegativeSides = try! lastRollPositiveSides.negated()
+		if let lastRollPositiveSides = tokens.last as? RollPositiveSides {
+			let rollNegativeSides = try! lastRollPositiveSides.negated()
 
-      tokens.removeLast()
-      tokens.append(rollNegativeSides)
+			tokens.removeLast()
+			tokens.append(rollNegativeSides)
 
-      return tokens
-    }
-  }
+			return tokens
+		}
+	}
 
-  if tokens.last is Operator {
-    tokens.removeLast()
-  }
+	if tokens.last is Operator {
+		tokens.removeLast()
+	}
 
-  tokens.append(`operator`)
+	tokens.append(`operator`)
 
-  return tokens
+	return tokens
 }
 
 func lexed(operand: any Operand, into: [any Tokenable]) throws -> [any Tokenable] {
-  var tokens = into
+	var tokens = into
 
-  switch tokens.last {
-  case nil:
-    tokens.append(operand)
+	switch tokens.last {
+	case nil:
+		tokens.append(operand)
 
-  case let lastParenthesis as Parenthesis:
-    if lastParenthesis == .close {
-      tokens.append(Operator.multiplication)
-    }
+	case let lastParenthesis as Parenthesis:
+		if lastParenthesis == .close {
+			tokens.append(Operator.multiplication)
+		}
 
-    tokens.append(operand)
+		tokens.append(operand)
 
-  case let lastOperator as Operator:
-    let tokensCount = tokens.count
+	case let lastOperator as Operator:
+		let tokensCount = tokens.count
 
-    if tokensCount == 1 && lastOperator == .addition {
-      tokens.removeLast()
-    }
+		if tokensCount == 1 && lastOperator == .addition {
+			tokens.removeLast()
+		}
 
-    var operand = operand
+		var operand = operand
 
-    if tokensCount == 1 && lastOperator == .subtraction {
-      tokens.removeLast()
+		if tokensCount == 1 && lastOperator == .subtraction {
+			tokens.removeLast()
 
-      operand = try operand.negated()
-    }
+			operand = try operand.negated()
+		}
 
-    tokens.append(operand)
+		tokens.append(operand)
 
-  case let lastConstant as Constant:
+	case let lastConstant as Constant:
 
-    switch operand {
-    case let currentConstant as Constant:
-      let tokensCount = tokens.count
+		switch operand {
+		case let currentConstant as Constant:
+			let tokensCount = tokens.count
 
-      if tokensCount == 1 && lastConstant == Constant(term: 0) {
-        tokens.removeLast()
-        tokens.append(currentConstant)
+			if tokensCount == 1 && lastConstant == Constant(term: 0) {
+				tokens.removeLast()
+				tokens.append(currentConstant)
 
-        return tokens
-      }
+				return tokens
+			}
 
-      let nextOperand = try lastConstant.combined(currentConstant)
+			let nextOperand = try lastConstant.combined(currentConstant)
 
-      tokens.removeLast()
-      tokens.append(nextOperand)
+			tokens.removeLast()
+			tokens.append(nextOperand)
 
-    case is Roll, is RollNegativeSides, is RollPositiveSides:
-      tokens.append(Operator.addition)
-      tokens.append(operand)
+		case is Roll, is RollNegativeSides, is RollPositiveSides:
+			tokens.append(Operator.addition)
+			tokens.append(operand)
 
-    default:
-      preconditionFailure()
-    }
+		default:
+			preconditionFailure()
+		}
 
-  case let lastRoll as Roll:
+	case let lastRoll as Roll:
 
-    switch operand {
-    case let currentConstant as Constant:
-      let nextOperand = try lastRoll.combined(currentConstant)
+		switch operand {
+		case let currentConstant as Constant:
+			let nextOperand = try lastRoll.combined(currentConstant)
 
-      tokens.removeLast()
-      tokens.append(nextOperand)
+			tokens.removeLast()
+			tokens.append(nextOperand)
 
-    case let currentRoll as Roll where lastRoll.sides == currentRoll.sides:
-      let nextOperand = try lastRoll.combined(currentRoll)
+		case let currentRoll as Roll where lastRoll.sides == currentRoll.sides:
+			let nextOperand = try lastRoll.combined(currentRoll)
 
-      tokens.removeLast()
-      tokens.append(nextOperand)
+			tokens.removeLast()
+			tokens.append(nextOperand)
 
-    case let currentRoll as Roll where lastRoll.sides != currentRoll.sides:
-      tokens.append(Operator.addition)
-      tokens.append(operand)
+		case let currentRoll as Roll where lastRoll.sides != currentRoll.sides:
+			tokens.append(Operator.addition)
+			tokens.append(operand)
 
-    case is RollNegativeSides, is RollPositiveSides:
-      tokens.append(Operator.addition)
-      tokens.append(operand)
+		case is RollNegativeSides, is RollPositiveSides:
+			tokens.append(Operator.addition)
+			tokens.append(operand)
 
-    default:
-      preconditionFailure()
-    }
+		default:
+			preconditionFailure()
+		}
 
-  case let lastRollNegativeSides as RollNegativeSides:
+	case let lastRollNegativeSides as RollNegativeSides:
 
-    switch operand {
-    case let currentConstant as Constant:
-      let nextOperand = try lastRollNegativeSides.combined(currentConstant)
+		switch operand {
+		case let currentConstant as Constant:
+			let nextOperand = try lastRollNegativeSides.combined(currentConstant)
 
-      tokens.removeLast()
-      tokens.append(nextOperand)
+			tokens.removeLast()
+			tokens.append(nextOperand)
 
-    case let currentRollNegativeSides as RollNegativeSides:
-      let nextOperand = try lastRollNegativeSides.combined(currentRollNegativeSides)
+		case let currentRollNegativeSides as RollNegativeSides:
+			let nextOperand = try lastRollNegativeSides.combined(currentRollNegativeSides)
 
-      tokens.removeLast()
-      tokens.append(nextOperand)
+			tokens.removeLast()
+			tokens.append(nextOperand)
 
-    case is Roll, is RollPositiveSides:
-      tokens.append(Operator.addition)
-      tokens.append(operand)
+		case is Roll, is RollPositiveSides:
+			tokens.append(Operator.addition)
+			tokens.append(operand)
 
-    default:
-      preconditionFailure()
-    }
+		default:
+			preconditionFailure()
+		}
 
-  case let lastRollPositiveSides as RollPositiveSides:
+	case let lastRollPositiveSides as RollPositiveSides:
 
-    switch operand {
-    case let currentConstant as Constant:
-      let nextOperand = try lastRollPositiveSides.combined(currentConstant)
+		switch operand {
+		case let currentConstant as Constant:
+			let nextOperand = try lastRollPositiveSides.combined(currentConstant)
 
-      tokens.removeLast()
-      tokens.append(nextOperand)
+			tokens.removeLast()
+			tokens.append(nextOperand)
 
-    case let currentRollPositiveSides as RollPositiveSides:
-      let nextOperand = try lastRollPositiveSides.combined(currentRollPositiveSides)
+		case let currentRollPositiveSides as RollPositiveSides:
+			let nextOperand = try lastRollPositiveSides.combined(currentRollPositiveSides)
 
-      tokens.removeLast()
-      tokens.append(nextOperand)
+			tokens.removeLast()
+			tokens.append(nextOperand)
 
-    case is Roll, is RollNegativeSides:
-      tokens.append(Operator.addition)
-      tokens.append(operand)
+		case is Roll, is RollNegativeSides:
+			tokens.append(Operator.addition)
+			tokens.append(operand)
 
-    default:
-      preconditionFailure()
-    }
+		default:
+			preconditionFailure()
+		}
 
-  default:
-    preconditionFailure()
-  }
+	default:
+		preconditionFailure()
+	}
 
-  return tokens
+	return tokens
 }

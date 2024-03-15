@@ -1,5 +1,5 @@
 protocol Tokenable: CustomStringConvertible {
-  func isEqualTo(_ other: any Tokenable) -> Bool
+	func isEqualTo(_ other: any Tokenable) -> Bool
 }
 
 // MARK: - where Self: Equatable
@@ -9,11 +9,11 @@ protocol Tokenable: CustomStringConvertible {
 // https://www.youtube.com/watch?v=g2LwFZatfTI?t=2236
 // https://khawerkhaliq.com/blog/swift-protocols-equatable-part-one/
 extension Tokenable where Self: Equatable {
-  func isEqualTo(_ other: any Tokenable) -> Bool {
-    if let other = other as? Self {
-      return self == other
-    }
+	func isEqualTo(_ other: any Tokenable) -> Bool {
+		if let other = other as? Self {
+			return self == other
+		}
 
-    return false
-  }
+		return false
+	}
 }

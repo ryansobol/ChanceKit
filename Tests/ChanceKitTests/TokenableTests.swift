@@ -2,108 +2,108 @@
 import XCTest
 
 final class TokenableTests: XCTestCase {
-  enum TokenableInt: Int, Tokenable {
-    case one = 1
-    case two = 2
+	enum TokenableInt: Int, Tokenable {
+		case one = 1
+		case two = 2
 
-    var description: String {
-      return String(rawValue)
-    }
-  }
+		var description: String {
+			return String(rawValue)
+		}
+	}
 
-  enum TokenableString: String, Tokenable {
-    case one = "1"
-    case two = "2"
+	enum TokenableString: String, Tokenable {
+		case one = "1"
+		case two = "2"
 
-    var description: String {
-      return rawValue
-    }
-  }
+		var description: String {
+			return rawValue
+		}
+	}
 }
 
 // MARK: - CustomStringConvertible
 
 extension TokenableTests {
-  func testDescription() {
-    typealias Fixture = (
-      mock: any Tokenable,
-      expected: String
-    )
+	func testDescription() {
+		typealias Fixture = (
+			mock: any Tokenable,
+			expected: String
+		)
 
-    let fixtures: [Fixture] = [
-      (mock: TokenableInt.one, expected: "1"),
-      (mock: TokenableInt.two, expected: "2"),
+		let fixtures: [Fixture] = [
+			(mock: TokenableInt.one, expected: "1"),
+			(mock: TokenableInt.two, expected: "2"),
 
-      (mock: TokenableString.one, expected: "1"),
-      (mock: TokenableString.two, expected: "2"),
-    ]
+			(mock: TokenableString.one, expected: "1"),
+			(mock: TokenableString.two, expected: "2"),
+		]
 
-    for fixture in fixtures {
-      let mock = fixture.mock
-      let expected = fixture.expected
-      let actual = String(describing: mock)
+		for fixture in fixtures {
+			let mock = fixture.mock
+			let expected = fixture.expected
+			let actual = String(describing: mock)
 
-      XCTAssertEqual(expected, actual)
-    }
-  }
+			XCTAssertEqual(expected, actual)
+		}
+	}
 }
 
 // MARK: - where Self: Equatable
 
 extension TokenableTests {
-  func testIsEqualTo() {
-    typealias Fixture = (
-      mock1: any Tokenable,
-      mock2: any Tokenable
-    )
+	func testIsEqualTo() {
+		typealias Fixture = (
+			mock1: any Tokenable,
+			mock2: any Tokenable
+		)
 
-    let fixtures: [Fixture] = [
-      (mock1: TokenableInt.one, mock2: TokenableInt.one),
-      (mock1: TokenableInt.two, mock2: TokenableInt.two),
+		let fixtures: [Fixture] = [
+			(mock1: TokenableInt.one, mock2: TokenableInt.one),
+			(mock1: TokenableInt.two, mock2: TokenableInt.two),
 
-      (mock1: TokenableString.one, mock2: TokenableString.one),
-      (mock1: TokenableString.two, mock2: TokenableString.two),
-    ]
+			(mock1: TokenableString.one, mock2: TokenableString.one),
+			(mock1: TokenableString.two, mock2: TokenableString.two),
+		]
 
-    for fixture in fixtures {
-      let mock1 = fixture.mock1
-      let mock2 = fixture.mock2
+		for fixture in fixtures {
+			let mock1 = fixture.mock1
+			let mock2 = fixture.mock2
 
-      XCTAssertTrue(mock1.isEqualTo(mock2))
-    }
-  }
+			XCTAssertTrue(mock1.isEqualTo(mock2))
+		}
+	}
 
-  func testIsNotEqualTo() {
-    typealias Fixture = (
-      mock1: any Tokenable,
-      mock2: any Tokenable
-    )
+	func testIsNotEqualTo() {
+		typealias Fixture = (
+			mock1: any Tokenable,
+			mock2: any Tokenable
+		)
 
-    let fixtures: [Fixture] = [
-      (mock1: TokenableInt.one, mock2: TokenableInt.two),
-      (mock1: TokenableInt.two, mock2: TokenableInt.one),
+		let fixtures: [Fixture] = [
+			(mock1: TokenableInt.one, mock2: TokenableInt.two),
+			(mock1: TokenableInt.two, mock2: TokenableInt.one),
 
-      (mock1: TokenableString.one, mock2: TokenableString.two),
-      (mock1: TokenableString.two, mock2: TokenableString.one),
+			(mock1: TokenableString.one, mock2: TokenableString.two),
+			(mock1: TokenableString.two, mock2: TokenableString.one),
 
-      (mock1: TokenableInt.one, mock2: TokenableString.one),
-      (mock1: TokenableInt.two, mock2: TokenableString.two),
+			(mock1: TokenableInt.one, mock2: TokenableString.one),
+			(mock1: TokenableInt.two, mock2: TokenableString.two),
 
-      (mock1: TokenableString.one, mock2: TokenableInt.one),
-      (mock1: TokenableString.two, mock2: TokenableInt.two),
+			(mock1: TokenableString.one, mock2: TokenableInt.one),
+			(mock1: TokenableString.two, mock2: TokenableInt.two),
 
-      (mock1: TokenableInt.one, mock2: TokenableString.two),
-      (mock1: TokenableInt.two, mock2: TokenableString.one),
+			(mock1: TokenableInt.one, mock2: TokenableString.two),
+			(mock1: TokenableInt.two, mock2: TokenableString.one),
 
-      (mock1: TokenableString.one, mock2: TokenableInt.two),
-      (mock1: TokenableString.two, mock2: TokenableInt.one),
-    ]
+			(mock1: TokenableString.one, mock2: TokenableInt.two),
+			(mock1: TokenableString.two, mock2: TokenableInt.one),
+		]
 
-    for fixture in fixtures {
-      let mock1 = fixture.mock1
-      let mock2 = fixture.mock2
+		for fixture in fixtures {
+			let mock1 = fixture.mock1
+			let mock2 = fixture.mock2
 
-      XCTAssertFalse(mock1.isEqualTo(mock2))
-    }
-  }
+			XCTAssertFalse(mock1.isEqualTo(mock2))
+		}
+	}
 }
