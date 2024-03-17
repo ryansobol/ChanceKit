@@ -171,13 +171,11 @@ extension Expression: CustomStringConvertible {
 	/// A text representation of an expression.
 	public var description: String {
 		let result = self.tokens.reduce("") { accumulation, token in
-			let lexeme: String
-
-			if let operatorToken = token as? Operator {
-				lexeme = " \(String(describing: operatorToken)) "
+			let lexeme = if let operatorToken = token as? Operator {
+				" \(String(describing: operatorToken)) "
 			}
 			else {
-				lexeme = String(describing: token)
+				String(describing: token)
 			}
 
 			return accumulation + lexeme
