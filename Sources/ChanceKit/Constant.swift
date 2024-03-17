@@ -11,7 +11,7 @@ extension Constant: Operand, Equatable {
 		return String(self.term)
 	}
 
-	// MARK: - Initialization	
+	// MARK: - Initialization
 
 	init?(rawLexeme: String) {
 		guard let term = Int(rawLexeme) else {

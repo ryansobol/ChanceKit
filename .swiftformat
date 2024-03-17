@@ -6,6 +6,7 @@
 
 --disable andOperator
 --disable redundantReturn
+--disable wrapSingleLineComments
 
 # enabled rules
 
@@ -16,7 +17,7 @@
 --decimalgrouping ignore # for now
 --elseposition next-line
 --extensionacl on-declarations
---indent 2
+--indent tab
 --maxwidth 100
 --ranges no-space
 --self insert
